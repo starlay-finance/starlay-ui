@@ -1,0 +1,25 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "import/no-anonymous-default-export": "off",
+    "react/display-name": "off",
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "TSEnumDeclaration",
+        "message": "Don't declare enums. See: https://www.typescriptlang.org/docs/handbook/enums.html#const-enum-pitfalls"
+      }
+    ],
+    "no-restricted-globals": [
+      "error",
+      {
+        "name": "open",
+        "message": "Use local parameter or 'window.open' instead."
+      },
+      {
+        "name": "close",
+        "message": "Use local parameter or 'window.close' instead."
+      }
+    ]
+  }
+}

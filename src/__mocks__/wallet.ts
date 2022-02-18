@@ -1,0 +1,5 @@
+export const MOCK_LATEST_BLOCK = 270307
+
+export const MOCK_BALANCE = 13899
+
+export const MOCK_ACCOUNT = '0xCdfc500F7f0FCe1278aECb0340b523cD55b3EBbb'
