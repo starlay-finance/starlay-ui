@@ -14,328 +14,337 @@ msgstr ""
 "Plural-Forms: \n"
 
 #: src/components/parts/Footer/AppFooter.tsx
-#~ msgid "Latest Block: {blockNumber}"
-#~ msgstr "Latest Block: {blockNumber}"
+msgid "Latest Block: {blockNumber}"
+msgstr "Latest Block: {blockNumber}"
 
 #: src/components/parts/Footer/AppFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
-#~ msgid "Governance"
-#~ msgstr "Governance"
+msgid "Governance"
+msgstr "Governance"
 
 #: src/components/parts/Footer/AppFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
-#~ msgid "Starlay"
-#~ msgstr "Starlay"
+msgid "Starlay"
+msgstr "Starlay"
 
 #: src/components/parts/Footer/AppFooter.tsx
-#~ msgid "Support"
-#~ msgstr "Support"
+msgid "Support"
+msgstr "Support"
 
 #: src/components/parts/Footer/AppFooter.tsx
-#~ msgid "Terms"
-#~ msgstr "Terms"
-
-#: src/components/parts/Footer/AppFooter.tsx
-#~ msgid "STARLAY"
-#~ msgstr "STARLAY"
+msgid "Terms"
+msgstr "Terms"
 
 #: src/components/parts/Footer/TopFooter.tsx
-#~ msgid "Starlay Finance is the world's first Astar native lending protocol."
-#~ msgstr "Starlay Finance is the world's first Astar native lending protocol."
+msgid "Starlay Finance is the world's first Astar native lending protocol."
+msgstr "Starlay Finance is the world's first Astar native lending protocol."
 
 #: src/components/parts/Footer/TopFooter.tsx
-#~ msgid "Github"
-#~ msgstr "Github"
+msgid "Github"
+msgstr "Github"
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
-#~ msgid "Discord"
-#~ msgstr "Discord"
+msgid "Discord"
+msgstr "Discord"
 
 #: src/components/parts/Footer/TopFooter.tsx
-#~ msgid "Twitter"
-#~ msgstr "Twitter"
+msgid "Twitter"
+msgstr "Twitter"
 
 #: src/components/parts/Footer/TopFooter.tsx
-#~ msgid "Protocol"
-#~ msgstr "Protocol"
+msgid "Protocol"
+msgstr "Protocol"
 
 #: src/components/parts/Footer/TopFooter.tsx
-#~ msgid "Developers"
-#~ msgstr "Developers"
+msgid "Developers"
+msgstr "Developers"
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
-#~ msgid "Docs"
-#~ msgstr "Docs"
+msgid "Docs"
+msgstr "Docs"
 
 #: src/components/parts/Footer/TopFooter.tsx
-#~ msgid "Overview"
-#~ msgstr "Overview"
+msgid "Overview"
+msgstr "Overview"
 
 #: src/components/parts/Footer/TopFooter.tsx
-#~ msgid "Community"
-#~ msgstr "Community"
-
-#: src/components/parts/Footer/TopFooter.tsx
-#~ msgid "STARLAY is the world's first Astar native lending protocol."
-#~ msgstr "STARLAY is the world's first Astar native lending protocol."
+msgid "Community"
+msgstr "Community"
 
 #: src/components/parts/Header/AppHeader.tsx
-#~ msgid "Dashboard"
-#~ msgstr "Dashboard"
+msgid "Dashboard"
+msgstr "Dashboard"
 
 #: src/components/parts/Header/AppHeader.tsx
-#~ msgid "Connect"
-#~ msgstr "Connect"
+msgid "Connect"
+msgstr "Connect"
 
 #: src/components/parts/Header/TopHeader.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
-#~ msgid "Launch App"
-#~ msgstr "Launch App"
+msgid "Launch App"
+msgstr "Launch App"
 
 #: src/components/parts/Header/TopHeader.tsx
-#~ msgid "Bug Bounty"
-#~ msgstr "Bug Bounty"
+msgid "Bug Bounty"
+msgstr "Bug Bounty"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#~ msgid "Wallet Balance"
-#~ msgstr "Wallet Balance"
+msgid "Wallet Balance"
+msgstr "Wallet Balance"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
-#~ msgid "Unclaimed Balance"
-#~ msgstr "Unclaimed Balance"
+msgid "Unclaimed Balance"
+msgstr "Unclaimed Balance"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
-#~ msgid "Price"
-#~ msgstr "Price"
+msgid "Price"
+msgstr "Price"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
-#~ msgid "Connect Wallet"
-#~ msgstr "Connect Wallet"
+msgid "Connect Wallet"
+msgstr "Connect Wallet"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
-#~ msgid "Connecting the wallet..."
-#~ msgstr "Connecting the wallet..."
+msgid "Connecting the wallet..."
+msgstr "Connecting the wallet..."
 
 #: src/components/parts/Modal/WalletModal/index.tsx
-#~ msgid "We currently supports Metamask only."
-#~ msgstr "We currently supports Metamask only."
+msgid "We currently supports Metamask only."
+msgstr "We currently supports Metamask only."
 
 #: src/components/parts/Modal/WalletModal/index.tsx
-#~ msgid "Metamask"
-#~ msgstr "Metamask"
+msgid "Metamask"
+msgstr "Metamask"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
-#~ msgid "By connecting, I accept Starlay's <0>Terms of Service</0>"
-#~ msgstr "By connecting, I accept Starlay's <0>Terms of Service</0>"
+msgid "By connecting, I accept Starlay's <0>Terms of Service</0>"
+msgstr "By connecting, I accept Starlay's <0>Terms of Service</0>"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
-#~ msgid "Borrow"
-#~ msgstr "Borrow"
+msgid "Borrow"
+msgstr "Borrow"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
-#~ msgid "Repay"
-#~ msgstr "Repay"
+msgid "Repay"
+msgstr "Repay"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Top/parts/Assets.tsx
-#~ msgid "Borrow APY"
-#~ msgstr "Borrow APY"
+msgid "Borrow APY"
+msgstr "Borrow APY"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
-#~ msgid "Borrow APR"
-#~ msgstr "Borrow APR"
+msgid "Borrow APR"
+msgstr "Borrow APR"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
-#~ msgid "Borrowed"
-#~ msgstr "Borrowed"
+msgid "Borrowed"
+msgstr "Borrowed"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#~ msgid "Borrow Limit Used"
-#~ msgstr "Borrow Limit Used"
+msgid "Borrow Limit Used"
+msgstr "Borrow Limit Used"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
-#~ msgid "Borrowing limit reached"
-#~ msgstr "Borrowing limit reached"
-
-#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
-#~ msgid "No balance to repay"
-#~ msgstr "No balance to repay"
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Health Factor"
+msgstr "Health Factor"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#~ msgid "Deposit"
-#~ msgstr "Deposit"
+msgid "Deposit"
+msgstr "Deposit"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#~ msgid "Withdraw"
-#~ msgstr "Withdraw"
+msgid "Withdraw"
+msgstr "Withdraw"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Top/parts/Assets.tsx
-#~ msgid "Deposit APY"
-#~ msgstr "Deposit APY"
+msgid "Deposit APY"
+msgstr "Deposit APY"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#~ msgid "Deposit APR"
-#~ msgstr "Deposit APR"
+msgid "Deposit APR"
+msgstr "Deposit APR"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#~ msgid "Borrow Available"
-#~ msgstr "Borrow Available"
+msgid "Borrow Available"
+msgstr "Borrow Available"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#~ msgid "No balance to deposit"
-#~ msgstr "No balance to deposit"
-
-#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#~ msgid "No balance to withdraw"
-#~ msgstr "No balance to withdraw"
-
-#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#~ msgid "Deposited"
-#~ msgstr "Deposited"
+msgid "Deposited"
+msgstr "Deposited"
 
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
-#~ msgid "Max"
-#~ msgstr "Max"
+msgid "Max"
+msgstr "Max"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
-#~ msgid "Deposit Markets"
-#~ msgstr "Deposit Markets"
+msgid "Deposit Markets"
+msgstr "Deposit Markets"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
-#~ msgid "Borrow Markets"
-#~ msgstr "Borrow Markets"
+msgid "Borrow Markets"
+msgstr "Borrow Markets"
 
 #: src/components/screens/Dashboard/parts/Summary/BorrowLimit.tsx
-#~ msgid "Borrow Limit"
-#~ msgstr "Borrow Limit"
+msgid "Borrow Limit"
+msgstr "Borrow Limit"
 
 #: src/components/screens/Dashboard/parts/Summary/NetAPY.tsx
-#~ msgid "Net APY"
-#~ msgstr "Net APY"
+msgid "Net APY"
+msgstr "Net APY"
 
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
-#~ msgid "Deposit Balance"
-#~ msgstr "Deposit Balance"
+msgid "Deposit Balance"
+msgstr "Deposit Balance"
 
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
-#~ msgid "Borrow Balance"
-#~ msgstr "Borrow Balance"
+msgid "Borrow Balance"
+msgstr "Borrow Balance"
 
 #: src/components/screens/Sorry/index.tsx
-#~ msgid "Go Back"
-#~ msgstr "Go Back"
+msgid "Go Back"
+msgstr "Go Back"
 
 #: src/components/screens/Sorry/reasons.ts
-#~ msgid "The Starlay Protocol front-end system does not support mobile access, so please access the site from a PC."
-#~ msgstr "The Starlay Protocol front-end system does not support mobile access, so please access the site from a PC."
+msgid "The Starlay Protocol front-end system does not support mobile access, so please access the site from a PC."
+msgstr "The Starlay Protocol front-end system does not support mobile access, so please access the site from a PC."
 
 #: src/components/screens/Sorry/reasons.ts
-#~ msgid "Something went wrong. Please go back."
-#~ msgstr "Something went wrong. Please go back."
-
-#: src/components/screens/Top/FirstView.tsx
-#~ msgid "STARLAY is the world's first Aster native lending protocol"
-#~ msgstr "STARLAY is the world's first Aster native lending protocol"
+msgid "Something went wrong. Please go back."
+msgstr "Something went wrong. Please go back."
 
 #: src/components/screens/Top/parts/Backers.tsx
-#~ msgid "Backers"
-#~ msgstr "Backers"
+msgid "Backers"
+msgstr "Backers"
 
 #: src/components/screens/Top/parts/Backers.tsx
-#~ msgid "We are supported by the most amazing backers"
-#~ msgstr "We are supported by the most amazing backers"
+msgid "We are supported by the most amazing backers"
+msgstr "We are supported by the most amazing backers"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
-#~ msgid "Current Markets"
-#~ msgstr "Current Markets"
+msgid "Current Markets"
+msgstr "Current Markets"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
-#~ msgid "The market is always changing and you can earn"
-#~ msgstr "The market is always changing and you can earn"
+msgid "The market is always changing and you can earn"
+msgstr "The market is always changing and you can earn"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
-#~ msgid "Total Market Size"
-#~ msgstr "Total Market Size"
+msgid "Total Market Size"
+msgstr "Total Market Size"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
-#~ msgid "Total Borrowed"
-#~ msgstr "Total Borrowed"
+msgid "Total Borrowed"
+msgstr "Total Borrowed"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-#~ msgid "Lending on Astar Reaches Perfection"
-#~ msgstr "Lending on Astar Reaches Perfection"
+msgid "Lending on Astar Reaches Perfection"
+msgstr "Lending on Astar Reaches Perfection"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-#~ msgid "Starlay Finance is the world's first Aster native lending protocol"
-#~ msgstr "Starlay Finance is the world's first Aster native lending protocol"
+msgid "Starlay Finance is the world's first Aster native lending protocol"
+msgstr "Starlay Finance is the world's first Aster native lending protocol"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-#~ msgid "Explore the docs"
-#~ msgstr "Explore the docs"
+msgid "Explore the docs"
+msgstr "Explore the docs"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-#~ msgid "Powered by"
-#~ msgstr "Powered by"
+msgid "Powered by"
+msgstr "Powered by"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-#~ msgid "ASTAR"
-#~ msgstr "ASTAR"
+msgid "ASTAR"
+msgstr "ASTAR"
 
 #: src/hooks/useLendingPool/txHandler.ts
-#~ msgid "Waiting for transaction to be ready..."
-#~ msgstr "Waiting for transaction to be ready..."
+msgid "Waiting for transaction to be ready..."
+msgstr "Waiting for transaction to be ready..."
 
 #: src/hooks/useLendingPool/txHandler.ts
-#~ msgid "Approve sending the ERC-20 asset to the pool."
-#~ msgstr "Approve sending the ERC-20 asset to the pool."
+msgid "Approve sending the ERC-20 asset to the pool."
+msgstr "Approve sending the ERC-20 asset to the pool."
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
-#~ msgid "Waiting for the transaction to be confirmed..."
-#~ msgstr "Waiting for the transaction to be confirmed..."
+msgid "Waiting for the transaction to be confirmed..."
+msgstr "Waiting for the transaction to be confirmed..."
 
 #: src/hooks/useLendingPool/txHandler.ts
-#~ msgid "Confirm the transaction."
-#~ msgstr "Confirm the transaction."
+msgid "Confirm the transaction."
+msgstr "Confirm the transaction."
 
 #: src/hooks/useLendingPool/txHandler.ts
-#~ msgid "You transaction confirmed!"
-#~ msgstr "You transaction confirmed!"
+msgid "You transaction confirmed!"
+msgstr "You transaction confirmed!"
 
 #: src/hooks/useLendingPool/txHandler.ts
-#~ msgid "You have canceled the transaction."
-#~ msgstr "You have canceled the transaction."
+msgid "You have canceled the transaction."
+msgstr "You have canceled the transaction."
 
 #: src/hooks/useLendingPool/txHandler.ts
-#~ msgid "Something went wrong..."
-#~ msgstr "Something went wrong..."
+msgid "Something went wrong..."
+msgstr "Something went wrong..."
 
 #: src/hooks/useUnsupportedChainAlert.ts
 #: src/hooks/useUnsupportedChainAlert.ts
-#~ msgid "You need to change to a supported chain"
-#~ msgstr "You need to change to a supported chain"
+msgid "You need to change to a supported chain"
+msgstr "You need to change to a supported chain"
 
 #: src/hooks/useUnsupportedChainAlert.ts
-#~ msgid "Please switch the chain with your wallet."
-#~ msgstr "Please switch the chain with your wallet."
+msgid "Please switch the chain with your wallet."
+msgstr "Please switch the chain with your wallet."
 
 #: src/hooks/useUnsupportedChainAlert.ts
-#~ msgid "Please switch the chain with your wallet..."
-#~ msgstr "Please switch the chain with your wallet..."
+msgid "Please switch the chain with your wallet..."
+msgstr "Please switch the chain with your wallet..."
 
 #: src/hooks/useUnsupportedChainAlert.ts
-#~ msgid "Failed to switch the chain"
-#~ msgstr "Failed to switch the chain"
+msgid "Failed to switch the chain"
+msgstr "Failed to switch the chain"
+
+#: src/utils/calculator.ts
+msgid "Enter amount"
+msgstr "Enter amount"
+
+#: src/utils/calculator.ts
+msgid "No balance to deposit"
+msgstr "No balance to deposit"
+
+#: src/utils/calculator.ts
+#: src/utils/calculator.ts
+#: src/utils/calculator.ts
+msgid "Enter Amount"
+msgstr "Enter Amount"
+
+#: src/utils/calculator.ts
+#: src/utils/calculator.ts
+msgid "No balance to withdraw"
+msgstr "No balance to withdraw"
+
+#: src/utils/calculator.ts
+#: src/utils/calculator.ts
+msgid "Health factor too low"
+msgstr "Health factor too low"
+
+#: src/utils/calculator.ts
+msgid "Borrowing limit reached"
+msgstr "Borrowing limit reached"
+
+#: src/utils/calculator.ts
+msgid "No balance to repay"
+msgstr "No balance to repay"
