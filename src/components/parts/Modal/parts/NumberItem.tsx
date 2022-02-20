@@ -22,7 +22,7 @@ export const NumberItem = asStyled<NumberItemProps>(
 type NumberItemWithDiffProps = {
   label: string
   current?: BigNumber
-  after?: BigNumber
+  after?: BigNumber | string
   formatter: (num: BigNumber) => string
 }
 export const NumberItemWithDiff = asStyled<NumberItemWithDiffProps>(
@@ -38,7 +38,7 @@ export const NumberItemWithDiff = asStyled<NumberItemWithDiffProps>(
               <IconArrowRight />
               <IconArrowRight />
             </ArrowsSpan>
-            <span>{formatter(after)}</span>
+            <span>{typeof after === 'string' ? after : formatter(after)}</span>
           </>
         ) : (
           <></>
