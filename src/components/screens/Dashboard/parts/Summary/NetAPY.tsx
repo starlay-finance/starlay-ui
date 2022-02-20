@@ -12,7 +12,7 @@ import { formatPct } from 'src/utils/number'
 import styled, { css } from 'styled-components'
 
 type NetAPYProps = {
-  openWalletModal: VoidFunction
+  openWalletModal?: VoidFunction
   netAPY: BigNumber | undefined
 }
 export const NetAPY = asStyled<NetAPYProps>(({ netAPY, openWalletModal }) => {
@@ -27,8 +27,8 @@ export const NetAPY = asStyled<NetAPYProps>(({ netAPY, openWalletModal }) => {
     >
       <IconButton
         $loading={!displayValue}
-        disabled={!!displayValue}
-        onClick={() => openWalletModal()}
+        disabled={!openWalletModal}
+        onClick={() => openWalletModal!()}
       >
         <LoadingProtocolIcon />
         <span>Connect</span>
@@ -78,6 +78,7 @@ const IconButton = styled.button<{ $loading?: boolean }>`
     transition: all 0.3s ease-in-out;
   }
   :hover {
+    cursor: pointer;
     span {
       opacity: 1;
       filter: blur(0px);

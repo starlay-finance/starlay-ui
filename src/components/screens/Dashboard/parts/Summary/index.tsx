@@ -2,6 +2,7 @@ import { t } from '@lingui/macro'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { useUserData } from 'src/hooks/useUserData'
+import { useWallet } from 'src/hooks/useWallet'
 import { blue, lightYellow } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { UserSummary } from 'src/types/models'
@@ -11,6 +12,7 @@ import { BorrowLimit } from './BorrowLimit'
 import { NetAPY } from './NetAPY'
 
 export const Summary = asStyled(({ className }) => {
+  const { account } = useWallet()
   const { data: user } = useUserData()
   const { open } = useWalletModal()
   const summary: Partial<UserSummary> = user?.summary || {}
@@ -22,7 +24,10 @@ export const Summary = asStyled(({ className }) => {
           label={t`Deposit Balance`}
           valueInUSD={summary.totalDepositedInUSD}
         />
-        <NetAPY netAPY={summary.netAPY} openWalletModal={open} />
+        <NetAPY
+          netAPY={summary.netAPY}
+          openWalletModal={!account ? open : undefined}
+        />
         <BalanceItem
           color={lightYellow}
           label={t`Borrow Balance`}
