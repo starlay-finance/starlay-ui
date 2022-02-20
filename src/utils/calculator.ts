@@ -184,7 +184,10 @@ export const estimateRepayment = ({
   marketReferenceCurrencyPriceInUSD,
 }: EstimationParam): EstimationResult => {
   const { borrowed: currentBorrowed, inWallet } = userAssetStatus
-  const maxAmount = BigNumber.min(currentBorrowed, inWallet)
+  const maxAmount = BigNumber.min(
+    currentBorrowed.multipliedBy('1.0025'),
+    inWallet,
+  )
   if (!amount || amount.isNaN() || amount.lte(BN_ZERO))
     return { isAvailable: false, maxAmount }
 
