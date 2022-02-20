@@ -7,6 +7,7 @@ import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { Table } from 'src/components/parts/Table'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
+import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { blue, darkPurple, lightYellow, secondary } from 'src/styles/colors'
 import {
@@ -23,6 +24,7 @@ import { useBorrowModal } from '../modals/BorrowModal'
 import { useDepositModal } from '../modals/DepositModal'
 
 export const Market = asStyled(({ className }) => {
+  const { account } = useWallet()
   const { data: marketData } = useMarketData()
   const markets = (marketData?.assets || []).sort(symbolSorter)
   const marketReferenceCurrencyPriceInUSD =
@@ -67,7 +69,7 @@ export const Market = asStyled(({ className }) => {
           columns={[
             { id: 'asset', name: 'Asset', widthRatio: 6 },
             { id: 'apy', name: 'APY', widthRatio: 4 },
-            { id: 'wallet', name: 'Deposited', widthRatio: 4 },
+            { id: 'deposited', name: 'Deposited', widthRatio: 4 },
           ]}
           placeholderLength={3}
           rows={markets.map((asset) => {
@@ -79,12 +81,14 @@ export const Market = asStyled(({ className }) => {
               data: {
                 asset: <AssetTd icon={icon} name={name} />,
                 apy: <BlinkWrapper value={apy}>{apy}</BlinkWrapper>,
-                wallet: user
+                deposited: !account
+                  ? '-'
+                  : user
                   ? formatAmt(user.balanceByAsset[asset.symbol].deposited, {
                       symbol,
                       shorteningThreshold: 6,
                     })
-                  : '-',
+                  : undefined,
               },
             }
           })}
@@ -97,7 +101,7 @@ export const Market = asStyled(({ className }) => {
           columns={[
             { id: 'asset', name: 'Asset', widthRatio: 6 },
             { id: 'apy', name: 'APY', widthRatio: 2 },
-            { id: 'wallet', name: 'Borrowed', widthRatio: 4 },
+            { id: 'borrowed', name: 'Borrowed', widthRatio: 4 },
             { id: 'liquidity', name: 'Liquidity', widthRatio: 4 },
           ]}
           placeholderLength={3}
@@ -111,12 +115,14 @@ export const Market = asStyled(({ className }) => {
               data: {
                 asset: <AssetTd icon={icon} name={name} />,
                 apy: <BlinkWrapper value={apy}>{apy}</BlinkWrapper>,
-                wallet: user
+                borrowed: !account
+                  ? '-'
+                  : user
                   ? formatAmt(user.balanceByAsset[asset.symbol].borrowed, {
                       symbol,
                       shorteningThreshold: 6,
                     })
-                  : '-',
+                  : undefined,
                 liquidity: formatUSDShort(liquidityInUSD),
               },
             }
