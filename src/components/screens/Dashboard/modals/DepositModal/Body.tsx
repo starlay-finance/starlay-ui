@@ -13,6 +13,7 @@ import {
   EstimationParam,
 } from 'src/utils/calculator'
 import {
+  formatAmt,
   formatAmtShort,
   formatPct,
   formattedToBigNumber,
@@ -65,7 +66,7 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
         <AmountInput
           value={depositAmount}
           onChange={setDepositAmount}
-          setMaxValue={() => setDepositAmount(estimation.maxAmount.toString())}
+          setMaxValue={() => setDepositAmount(formatAmt(estimation.maxAmount))}
           significantDigits={asset.decimals}
         />
       ) : (
@@ -73,7 +74,7 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
           value={withdrawalAmount}
           onChange={setWithdrawalAmount}
           setMaxValue={() =>
-            setWithdrawalAmount(estimation.maxAmount.toString())
+            setWithdrawalAmount(formatAmt(estimation.maxAmount))
           }
           significantDigits={asset.decimals}
         />

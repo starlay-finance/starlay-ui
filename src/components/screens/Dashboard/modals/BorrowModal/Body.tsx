@@ -13,6 +13,7 @@ import {
   EstimationParam,
 } from 'src/utils/calculator'
 import {
+  formatAmt,
   formatAmtShort,
   formatPct,
   formattedToBigNumber,
@@ -76,7 +77,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
           value={borrowingAmount}
           onChange={setBorrowingAmount}
           setMaxValue={() =>
-            setBorrowingAmount(estimation.maxAmount.toString())
+            setBorrowingAmount(formatAmt(estimation.maxAmount))
           }
           significantDigits={decimals}
         />
@@ -85,7 +86,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
           value={repaymentAmount}
           onChange={setRepaymentAmount}
           setMaxValue={() =>
-            setRepaymentAmount(estimation.maxAmount.toString())
+            setRepaymentAmount(formatAmt(estimation.maxAmount))
           }
           significantDigits={decimals}
         />
