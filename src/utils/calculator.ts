@@ -35,7 +35,8 @@ export const estimateDeposit = ({
   amount,
   userAssetStatus,
   userSummary,
-  asset: { baseLTVasCollateral },
+  marketReferenceCurrencyPriceInUSD,
+  asset: { baseLTVasCollateral, priceInMarketReferenceCurrency },
 }: EstimationParam): EstimationResult => {
   const maxAmount = userAssetStatus.inWallet
 
@@ -47,9 +48,14 @@ export const estimateDeposit = ({
     totalBorrowedInUSD: currentBorrowed,
     totalCollateralInMarketReferenceCurrency,
   } = userSummary
-  const availableBorrowsInUSD = currentBorrowable.plus(
-    baseLTVasCollateral.multipliedBy(amount),
+  const ltvInMarketReferenceCurrenry = amount
+    .multipliedBy(baseLTVasCollateral)
+    .multipliedBy(priceInMarketReferenceCurrency)
+  const ltvInUSD = ltvInMarketReferenceCurrenry.multipliedBy(
+    marketReferenceCurrencyPriceInUSD,
   )
+
+  const availableBorrowsInUSD = currentBorrowable.plus(ltvInUSD)
   const borrowLimitInUSD = availableBorrowsInUSD.plus(currentBorrowed)
   const borrowLimitUsed = borrowLimitInUSD.gt(0)
     ? currentBorrowed.dividedBy(borrowLimitInUSD)
@@ -59,7 +65,7 @@ export const estimateDeposit = ({
     ...userSummary,
     totalCollateralInMarketReferenceCurrency:
       totalCollateralInMarketReferenceCurrency.plus(
-        amount.multipliedBy(baseLTVasCollateral),
+        ltvInMarketReferenceCurrenry,
       ),
   })
   return {
@@ -83,7 +89,8 @@ export const estimateWithdrawal = (
     asset,
     marketReferenceCurrencyPriceInUSD,
   } = params
-  const { baseLTVasCollateral, liquidity } = asset
+  const { baseLTVasCollateral, liquidity, priceInMarketReferenceCurrency } =
+    asset
   const maxAmount = BigNumber.min(
     userAssetStatus.deposited,
     liquidity,
@@ -108,15 +115,14 @@ export const estimateWithdrawal = (
     borrowLimitInUSD: currentLimit,
     totalCollateralInMarketReferenceCurrency,
   } = userSummary
-  const borrowLimitInUSD = currentLimit.minus(
-    baseLTVasCollateral.multipliedBy(
-      convertToUSD(
-        asset.priceInMarketReferenceCurrency,
-        marketReferenceCurrencyPriceInUSD,
-        valueToBigNumber(amount),
-      ),
-    ),
+  const ltvInMarketReferenceCurrenry = amount
+    .multipliedBy(baseLTVasCollateral)
+    .multipliedBy(priceInMarketReferenceCurrency)
+  const ltvInUSD = ltvInMarketReferenceCurrenry.multipliedBy(
+    marketReferenceCurrencyPriceInUSD,
   )
+
+  const borrowLimitInUSD = currentLimit.minus(ltvInUSD)
   const availableBorrowsInUSD = BigNumber.max(
     borrowLimitInUSD.minus(currentBorrowed),
     BN_ZERO,
@@ -129,7 +135,7 @@ export const estimateWithdrawal = (
     ...userSummary,
     totalCollateralInMarketReferenceCurrency:
       totalCollateralInMarketReferenceCurrency.minus(
-        amount.multipliedBy(baseLTVasCollateral),
+        ltvInMarketReferenceCurrenry,
       ),
   })
   return {
@@ -193,13 +199,14 @@ export const estimateBorrow = ({
   if (!amount || amount.isNaN() || amount.lte(BN_ZERO))
     return { unavailableReason: t`Enter Amount`, maxAmount }
 
-  const totalBorrowedInUSD = currentBorrowed.plus(
-    convertFromUSD(
-      priceInMarketReferenceCurrency,
-      marketReferenceCurrencyPriceInUSD,
-      valueToBigNumber(amount),
-    ),
+  const amountInMarketReferenceCurrenry = amount.multipliedBy(
+    priceInMarketReferenceCurrency,
   )
+  const amountInUSD = amountInMarketReferenceCurrenry.multipliedBy(
+    marketReferenceCurrencyPriceInUSD,
+  )
+
+  const totalBorrowedInUSD = currentBorrowed.plus(amountInUSD)
   const borrowLimitUsed = borrowLimitInUSD.gt(0)
     ? totalBorrowedInUSD.dividedBy(borrowLimitInUSD)
     : undefined
@@ -208,7 +215,7 @@ export const estimateBorrow = ({
     ...userSummary,
     totalBorrowedInMarketReferenceCurrency:
       totalBorrowedInMarketReferenceCurrency.plus(
-        amount.multipliedBy(priceInMarketReferenceCurrency),
+        amountInMarketReferenceCurrenry,
       ),
   })
   return {
@@ -244,13 +251,14 @@ export const estimateRepayment = ({
     borrowLimitInUSD,
     totalBorrowedInMarketReferenceCurrency,
   } = userSummary
-  const totalBorrowedInUSD = currentBorrowedInUSD.minus(
-    convertToUSD(
-      priceInMarketReferenceCurrency,
-      marketReferenceCurrencyPriceInUSD,
-      valueToBigNumber(amount),
-    ),
+  const amountInMarketReferenceCurrenry = amount.multipliedBy(
+    priceInMarketReferenceCurrency,
   )
+  const amountInUSD = amountInMarketReferenceCurrenry.multipliedBy(
+    marketReferenceCurrencyPriceInUSD,
+  )
+
+  const totalBorrowedInUSD = currentBorrowedInUSD.minus(amountInUSD)
   const borrowLimitUsed = borrowLimitInUSD.gt(0)
     ? totalBorrowedInUSD.dividedBy(borrowLimitInUSD)
     : valueToBigNumber(1)
@@ -259,7 +267,7 @@ export const estimateRepayment = ({
     ...userSummary,
     totalBorrowedInMarketReferenceCurrency:
       totalBorrowedInMarketReferenceCurrency.plus(
-        amount.multipliedBy(priceInMarketReferenceCurrency),
+        amountInMarketReferenceCurrenry,
       ),
   })
   return {

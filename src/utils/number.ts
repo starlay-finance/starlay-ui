@@ -15,14 +15,17 @@ export const BN_ZERO = valueToBigNumber('0')
 type FormatOption = Partial<{
   decimalPlaces: number
   shorteningThreshold: number
+  roundingMode: BigNumber.RoundingMode
 }>
 const formatNum = (
   num: BigNumber,
-  { decimalPlaces, shorteningThreshold }: FormatOption = {},
+  { decimalPlaces, shorteningThreshold, roundingMode }: FormatOption = {},
 ) => {
   const int = num.integerValue(BigNumber.ROUND_FLOOR)
   if (!int.isZero() || num.isZero()) {
-    const formatted = `${num.toFormat(decimalPlaces)}`
+    const formatted = decimalPlaces
+      ? `${num.toFormat(decimalPlaces, roundingMode)}`
+      : `${num.toFormat(decimalPlaces)}`
     if (!shorteningThreshold || formatted.length < shorteningThreshold)
       return formatted
     const [int, decimals] = formatted.split('.')

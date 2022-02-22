@@ -74,7 +74,12 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
           value={withdrawalAmount}
           onChange={setWithdrawalAmount}
           setMaxValue={() =>
-            setWithdrawalAmount(formatAmt(estimation.maxAmount))
+            setWithdrawalAmount(
+              formatAmt(estimation.maxAmount, {
+                decimalPlaces: asset.decimals,
+                roundingMode: BigNumber.ROUND_FLOOR,
+              }),
+            )
           }
           significantDigits={asset.decimals}
         />

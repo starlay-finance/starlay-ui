@@ -77,7 +77,12 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
           value={borrowingAmount}
           onChange={setBorrowingAmount}
           setMaxValue={() =>
-            setBorrowingAmount(formatAmt(estimation.maxAmount))
+            setBorrowingAmount(
+              formatAmt(estimation.maxAmount, {
+                decimalPlaces: decimals,
+                roundingMode: BigNumber.ROUND_FLOOR,
+              }),
+            )
           }
           significantDigits={decimals}
         />
