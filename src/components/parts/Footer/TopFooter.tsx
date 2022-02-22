@@ -18,6 +18,7 @@ import {
   GITHUB,
   GOVERNANCE_OVERVIEW,
   GOVERNANCE_STARLAY,
+  TELEGRAM,
   TWITTER,
 } from 'src/utils/routes'
 import styled from 'styled-components'
@@ -55,6 +56,7 @@ export const TopFooter = asStyled(({ className }) => (
         <LinksHeading>{t`Community`}</LinksHeading>
         <TextLinks>
           <Link href={DISCORD}>{t`Discord`}</Link>
+          <Link href={TELEGRAM}>{t`Telegram`}</Link>
         </TextLinks>
       </NavItem>
     </Nav>

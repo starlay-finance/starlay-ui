@@ -75,6 +75,10 @@ msgstr "Overview"
 msgid "Community"
 msgstr "Community"
 
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Telegram"
+msgstr "Telegram"
+
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Dashboard"
 msgstr "Dashboard"
