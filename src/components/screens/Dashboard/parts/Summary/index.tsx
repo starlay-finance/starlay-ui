@@ -48,7 +48,7 @@ export const Summary = asStyled(({ className }) => {
         borrowLimitUsed={summary.borrowLimitUsed}
         borrowLimitInUSD={summary.borrowLimitInUSD}
       />
-      {summary.healthFactor && (
+      {summary.healthFactor?.isPositive() && (
         <Barometer
           label={t`Health Factor`}
           value={formatAmtShort(summary.healthFactor)}
