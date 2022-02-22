@@ -157,7 +157,7 @@ msgstr "Borrow Limit Used"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#: src/components/screens/Dashboard/parts/Summary/index.tsx
+#: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
 msgid "Health Factor"
 msgstr "Health Factor"
 
