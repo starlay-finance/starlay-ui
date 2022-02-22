@@ -5,7 +5,7 @@ import { Color } from 'src/styles/types'
 import { pickColorInGradient } from 'src/utils/color'
 import styled, { css } from 'styled-components'
 
-type BarometerProps = {
+export type BarometerProps = {
   label: string
   value: string
   ratio: number
@@ -19,7 +19,7 @@ export const Barometer = asStyled<BarometerProps>(
         className={className}
         colors={colors}
         currentColor={currentColor}
-        ratio={ratio}
+        ratio={Math.max(Math.min(ratio, 1), 0)}
       >
         <figcaption>{label}</figcaption>
         <div />
@@ -52,11 +52,9 @@ const BarometerFigure = styled.figure<BarometerFigureProps>`
       content: '';
       position: absolute;
       top: 50%;
-      left: ${({ ratio }) => Math.floor(ratio * 100)}%;
       transform: translate(-50%, -50%);
       width: 16px;
       height: 16px;
-      background-color: ${({ ratio }) => Math.floor(ratio * 100)}%;
       border: 4px solid ${trueBlack};
       border-radius: 50%;
     }
@@ -68,8 +66,9 @@ const BarometerFigure = styled.figure<BarometerFigureProps>`
     > div {
       background: linear-gradient(to right, ${colors.join(',')});
       ::after {
-        left: ${Math.floor(ratio * 100)}%;
+        left: ${ratio * 100}%;
         background-color: ${currentColor};
+        transition: all 1s ease-in;
       }
     }
   `}
