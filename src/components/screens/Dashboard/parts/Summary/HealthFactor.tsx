@@ -21,7 +21,7 @@ export const HealthFactor = asStyled<{
   const [show, setShow] = useState(false)
   useEffect(() => {
     setTimeout(() => {
-      setShow(!!healthFactor)
+      setShow(!!healthFactor?.isPositive())
     }, 100)
   }, [healthFactor])
   return (
