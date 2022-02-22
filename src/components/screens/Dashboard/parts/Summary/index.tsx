@@ -52,9 +52,4 @@ const BalanceDiv = styled.div`
   }
 `
 
-const BalanceSection = styled.section`
-  ${BorrowLimit} {
-    margin: 80px auto 0;
-    padding: 24px 80px;
-  }
-`
+const BalanceSection = styled.section``

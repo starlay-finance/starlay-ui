@@ -3,6 +3,7 @@ import { BigNumber } from '@starlay-finance/math-utils'
 import { useEffect, useState } from 'react'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { Barometer } from 'src/components/parts/Chart/Barometer'
+import { Reel } from 'src/components/parts/Reel'
 import { blue, darkRed, lightYellow } from 'src/styles/colors'
 import { formatAmtShort } from 'src/utils/number'
 import styled, { css } from 'styled-components'
@@ -28,7 +29,7 @@ export const HealthFactor = asStyled<{
       {healthFactor && (
         <Barometer
           label={t`Health Factor`}
-          value={formatAmtShort(healthFactor)}
+          value={<Reel text={formatAmtShort(healthFactor)} />}
           ratio={healthFactorRatio(healthFactor)}
           colors={BAROMETER_COLORS}
         />
@@ -37,7 +38,9 @@ export const HealthFactor = asStyled<{
   )
 })``
 const HealthFactorDiv = styled.div<{ show: boolean }>`
+  transition: all 0.2s ease-out;
   padding: 24px 104px;
+  height: 0;
   > figure {
     transition: all 1s ease-in;
     opacity: 0;
@@ -45,13 +48,16 @@ const HealthFactorDiv = styled.div<{ show: boolean }>`
       transition: all 1s ease-in;
       clip-path: inset(0% 50%);
       ::after {
-        transition: all 0.5s 1s ease-out;
+        transition: all 0.75s 1s ease-out;
         clip-path: circle(0%);
       }
     }
-    ${({ show }) =>
-      show &&
-      css`
+  }
+  ${({ show }) =>
+    show &&
+    css`
+      height: unset;
+      > figure {
         opacity: 1;
         > div {
           clip-path: inset(-100% -50%);
@@ -59,6 +65,6 @@ const HealthFactorDiv = styled.div<{ show: boolean }>`
             clip-path: circle(100%);
           }
         }
-      `}
-  }
+      }
+    `}
 `

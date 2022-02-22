@@ -1,3 +1,4 @@
+import { ReactNode } from 'react'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { trueBlack } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
@@ -7,7 +8,7 @@ import styled, { css } from 'styled-components'
 
 export type BarometerProps = {
   label: string
-  value: string
+  value: ReactNode
   ratio: number
   colors: Color[]
 }
