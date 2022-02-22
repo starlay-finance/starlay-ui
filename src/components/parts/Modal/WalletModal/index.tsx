@@ -7,7 +7,7 @@ import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useWallet } from 'src/hooks/useWallet'
 import { WalletType } from 'src/libs/wallet-provider'
-import { blue, darkPurple, trueBlack } from 'src/styles/colors'
+import { darkPurple, purple, trueBlack } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { TERMS } from 'src/utils/routes'
@@ -72,7 +72,7 @@ const TermsP = styled.div`
   text-align: center;
   font-size: 14px;
   a {
-    color: ${blue};
+    color: ${purple};
   }
 `
 const WalletsDiv = styled.div`

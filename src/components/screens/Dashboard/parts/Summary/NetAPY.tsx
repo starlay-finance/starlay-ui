@@ -5,7 +5,7 @@ import { BlinkWrapper } from 'src/components/parts/Blink'
 import { DonutChart2 } from 'src/components/parts/Chart'
 import { LoadingProtocolIcon } from 'src/components/parts/Loading'
 import { Reel } from 'src/components/parts/Reel'
-import { blue, lightYellow, secondary } from 'src/styles/colors'
+import { lightYellow, purple, secondary } from 'src/styles/colors'
 import { fontWeightBold, fontWeightSemiBold } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { formatPct } from 'src/utils/number'
@@ -21,7 +21,7 @@ export const NetAPY = asStyled<NetAPYProps>(({ netAPY, openWalletModal }) => {
   return (
     <NetAPYDonutChart
       elements={[
-        { ratio: ratio.deposit, color: blue },
+        { ratio: ratio.deposit, color: purple },
         { ratio: ratio.borrow, color: lightYellow },
       ]}
     >

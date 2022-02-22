@@ -1,7 +1,7 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { IconArrowRight } from 'src/assets/svgs'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { blue, darkPurple, trueBlack } from 'src/styles/colors'
+import { darkPurple, purple, trueBlack } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import styled from 'styled-components'
 import { ItemLabel, ItemLabelProps } from './ItemLabel'
@@ -54,7 +54,7 @@ const ArrowsSpan = styled.span`
   svg {
     width: 8px;
     height: 8px;
-    fill: ${blue};
+    fill: ${purple};
   }
 `
 

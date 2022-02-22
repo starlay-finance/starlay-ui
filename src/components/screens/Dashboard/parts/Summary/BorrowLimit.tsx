@@ -4,11 +4,11 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { BarChart, BarChartStyleProps } from 'src/components/parts/Chart'
 import { Reel } from 'src/components/parts/Reel'
 import {
-  blue,
   darkPurple,
   darkRed,
   lightYellow,
   primary,
+  purple,
   secondary,
 } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
@@ -48,7 +48,7 @@ export const BorrowLimit = asStyled<BorrowLimitProps>(
 )``
 
 const CHART_COMPOSITION: BarChartStyleProps['filled'] = [
-  { gte: 0, color: blue },
+  { gte: 0, color: purple },
   { gte: 50, color: lightYellow },
   { gte: 80, color: darkRed },
 ]

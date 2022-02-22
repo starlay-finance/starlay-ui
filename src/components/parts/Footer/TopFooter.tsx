@@ -8,7 +8,7 @@ import {
 import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { IconLink } from 'src/components/parts/Link'
-import { blue, secondary, trueWhite } from 'src/styles/colors'
+import { purple, secondary, trueWhite } from 'src/styles/colors'
 import { fontWeightMedium, fontWeightSemiBold } from 'src/styles/font'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
 import {
@@ -78,7 +78,7 @@ const IconLinks = styled.div`
   a {
     color: ${trueWhite};
     :hover {
-      color: ${blue};
+      color: ${purple};
     }
   }
 `

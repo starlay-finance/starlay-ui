@@ -9,7 +9,7 @@ import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
-import { blue, darkPurple, lightYellow, secondary } from 'src/styles/colors'
+import { darkPurple, lightYellow, purple, secondary } from 'src/styles/colors'
 import {
   fontWeightHeavy,
   fontWeightMedium,
@@ -64,7 +64,7 @@ export const Market = asStyled(({ className }) => {
     <MarketSecion className={className}>
       <MarketSummary>
         <MarketSummaryTable
-          color={blue}
+          color={purple}
           caption={t`Deposit Markets`}
           columns={[
             { id: 'asset', name: 'Asset', widthRatio: 6 },

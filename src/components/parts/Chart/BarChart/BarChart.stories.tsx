@@ -1,10 +1,10 @@
 import { number, withKnobs } from '@storybook/addon-knobs'
 import {
-  blue,
   darkPurple,
   darkRed,
   lightYellow,
   primary,
+  purple,
 } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import styled from 'styled-components'
@@ -22,7 +22,7 @@ export const BarChartComponent = () => {
     <Style>
       <BarChart
         filled={[
-          { gte: 0, color: blue },
+          { gte: 0, color: purple },
           { gte: 50, color: lightYellow },
           { gte: 80, color: darkRed },
         ]}

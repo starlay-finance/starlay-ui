@@ -1,5 +1,5 @@
 import { ICON_PROTOCL_ROTATED_DATA_URI } from 'src/assets/images/icon_protocol_rotated'
-import { blue, lightYellow, trueWhite } from 'src/styles/colors'
+import { lightYellow, purple, trueWhite } from 'src/styles/colors'
 import styled, { keyframes } from 'styled-components'
 
 export const LoadingProtocolIcon = () => (
@@ -47,11 +47,11 @@ const IconDiv = styled.div`
     :nth-child(3) {
       background: linear-gradient(
         90deg,
-        ${blue},
-        ${blue}bb 25%,
-        ${blue}00 50%,
-        ${blue}bb 75%,
-        ${blue}
+        ${purple},
+        ${purple}bb 25%,
+        ${purple}00 50%,
+        ${purple}bb 75%,
+        ${purple}
       );
       background-size: 1000%;
       animation: ${bgKeyframes} 40s infinite linear;

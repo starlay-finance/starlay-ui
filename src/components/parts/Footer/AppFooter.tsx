@@ -2,7 +2,7 @@ import { t } from '@lingui/macro'
 import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { useBlockNumber } from 'src/hooks/useBlockNumber'
-import { blue } from 'src/styles/colors'
+import { purple } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
 import {
@@ -47,7 +47,7 @@ const LatestBlock = styled.p`
     margin: auto;
     padding: 4px;
     border-radius: 50%;
-    background: ${blue};
+    background: ${purple};
   }
 `
 
