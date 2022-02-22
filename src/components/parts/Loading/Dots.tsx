@@ -1,6 +1,6 @@
 import { VFC } from 'react'
 import { IconLoading } from 'src/assets/svgs'
-import { blue } from 'src/styles/colors'
+import { purple } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import styled, { keyframes } from 'styled-components'
 
@@ -59,7 +59,7 @@ const IconDiv = styled.div`
     > circle {
       transform-box: fill-box;
       transform-origin: 50% 50%;
-      fill: ${blue};
+      fill: ${purple};
       :nth-child(1) {
         animation: ${scale} 3s infinite;
       }

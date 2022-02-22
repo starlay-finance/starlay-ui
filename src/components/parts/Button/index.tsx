@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, VFC } from 'react'
 import { IconArrowBottom } from 'src/assets/svgs'
-import { blue } from 'src/styles/colors'
+import { purple } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import styled from 'styled-components'
 
@@ -18,5 +18,5 @@ const Button = styled.button`
   column-gap: 8px;
   padding: 8px 16px;
   border-radius: 4px;
-  background: ${blue}3d;
+  background: ${purple}3d;
 `

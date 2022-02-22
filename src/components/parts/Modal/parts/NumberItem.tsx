@@ -1,7 +1,7 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { IconArrowRight } from 'src/assets/svgs'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { blue, darkPurple, trueBlack } from 'src/styles/colors'
+import { darkPurple, purple, trueBlack } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import styled from 'styled-components'
 import { ItemLabel, ItemLabelProps } from './ItemLabel'
@@ -22,7 +22,7 @@ export const NumberItem = asStyled<NumberItemProps>(
 type NumberItemWithDiffProps = {
   label: string
   current?: BigNumber
-  after?: BigNumber
+  after?: BigNumber | string
   formatter: (num: BigNumber) => string
 }
 export const NumberItemWithDiff = asStyled<NumberItemWithDiffProps>(
@@ -38,7 +38,7 @@ export const NumberItemWithDiff = asStyled<NumberItemWithDiffProps>(
               <IconArrowRight />
               <IconArrowRight />
             </ArrowsSpan>
-            <span>{formatter(after)}</span>
+            <span>{typeof after === 'string' ? after : formatter(after)}</span>
           </>
         ) : (
           <></>
@@ -54,7 +54,7 @@ const ArrowsSpan = styled.span`
   svg {
     width: 8px;
     height: 8px;
-    fill: ${blue};
+    fill: ${purple};
   }
 `
 

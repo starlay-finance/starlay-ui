@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { createGlobalStyle } from 'styled-components'
-import { blue, primary, trueBlack } from './colors'
+import { primary, purple, trueBlack } from './colors'
 import { fontFamily, fontWeightRegular } from './font'
 import { contentMaxWidthCssVar, noScrollbar } from './mixins'
 
@@ -42,7 +42,7 @@ const Styles = createGlobalStyle<{ ready: boolean }>`
     a {
       transition: all 0.15s ease-in;
       :hover {
-        color: ${blue};
+        color: ${purple};
       }
     }
   }

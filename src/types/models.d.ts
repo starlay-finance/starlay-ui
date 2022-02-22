@@ -55,9 +55,11 @@ export type UserSummary = {
   totalDepositedInUSD: BigNumber
   totalBorrowedInMarketReferenceCurrency: BigNumber
   totalBorrowedInUSD: BigNumber
+  totalCollateralInMarketReferenceCurrency: BigNumber
   availableBorrowsInUSD: BigNumber
   borrowLimitInUSD: BigNumber
   borrowLimitUsed?: BigNumber
+  currentLiquidationThreshold: BigNumber
   healthFactor: BigNumber
   netAPY: BigNumber
 }

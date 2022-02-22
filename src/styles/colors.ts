@@ -3,7 +3,8 @@ export const trueWhite = '#FFFFFF' as const
 export const lightYellow = '#EDF67D' as const
 export const darkPurple = '#575C7F' as const
 export const lightPurple = '#AEB8FE' as const
-export const blue = '#758BFD' as const
+export const purple = '#758BFD' as const
+export const blue = '#0070EB' as const
 export const skyBlue = '#0AE2FF' as const
 export const darkRed = '#A40056' as const
 

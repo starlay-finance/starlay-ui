@@ -1,5 +1,5 @@
 import { AsStyledProps } from 'src/components/hoc/asStyled'
-import { blue, secondary } from 'src/styles/colors'
+import { purple, secondary } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import styled, { css } from 'styled-components'
 
@@ -57,7 +57,7 @@ const TabButton = styled.button<{ isActive: boolean }>`
   ${({ isActive }) =>
     isActive &&
     css`
-      color: ${blue};
+      color: ${purple};
       ::after {
         content: '';
         position: absolute;

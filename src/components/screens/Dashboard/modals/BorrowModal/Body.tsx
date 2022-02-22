@@ -12,7 +12,13 @@ import {
   estimateRepayment,
   EstimationParam,
 } from 'src/utils/calculator'
-import { formatPct, formattedToBigNumber, formatUSD } from 'src/utils/number'
+import {
+  formatAmt,
+  formatAmtShort,
+  formatPct,
+  formattedToBigNumber,
+  formatUSD,
+} from 'src/utils/number'
 import {
   Action,
   AmountInput,
@@ -46,7 +52,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
     icon,
     name,
   } = asset
-  const { totalBorrowedInUSD, borrowLimitUsed } = userSummary
+  const { totalBorrowedInUSD, borrowLimitUsed, healthFactor } = userSummary
   const { inWallet, borrowed } = userAssetStatus
 
   const borrowable = borrowingEnabled && !isFrozen
@@ -71,7 +77,12 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
           value={borrowingAmount}
           onChange={setBorrowingAmount}
           setMaxValue={() =>
-            setBorrowingAmount(estimation.maxAmount.toString())
+            setBorrowingAmount(
+              formatAmt(estimation.maxAmount, {
+                decimalPlaces: decimals,
+                roundingMode: BigNumber.ROUND_FLOOR,
+              }),
+            )
           }
           significantDigits={decimals}
         />
@@ -80,7 +91,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
           value={repaymentAmount}
           onChange={setRepaymentAmount}
           setMaxValue={() =>
-            setRepaymentAmount(estimation.maxAmount.toString())
+            setRepaymentAmount(formatAmt(estimation.maxAmount))
           }
           significantDigits={decimals}
         />
@@ -120,20 +131,32 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
             after={estimation.borrowLimitUsed}
             formatter={formatPct}
           />
+          <NumberItemWithDiff
+            label={t`Health Factor`}
+            current={healthFactor.isPositive() ? healthFactor : undefined}
+            after={
+              !estimation.healthFactor
+                ? undefined
+                : estimation.healthFactor.isPositive()
+                ? estimation.healthFactor
+                : '-'
+            }
+            formatter={formatAmtShort}
+          />
         </NumberItems>
         {activeTab === 'borrow' ? (
           <SimpleCtaButton
             onClick={() => borrow(valueToBigNumber(borrowingAmountBn!))}
-            disabled={!estimation.isAvailable}
+            disabled={!!estimation.unavailableReason}
           >
-            {estimation.isAvailable ? t`Borrow` : t`Borrowing limit reached`}
+            {estimation.unavailableReason || t`Borrow`}
           </SimpleCtaButton>
         ) : (
           <SimpleCtaButton
             onClick={() => repay(valueToBigNumber(repaymentAmountBn!))}
-            disabled={!estimation.isAvailable}
+            disabled={!!estimation.unavailableReason}
           >
-            {estimation.isAvailable ? t`Repay` : t`No balance to repay`}
+            {estimation.unavailableReason || t`Repay`}
           </SimpleCtaButton>
         )}
         {activeTab === 'borrow' ? (

@@ -49,7 +49,7 @@ const getUserData = async (
 const toUser = (
   userReserves: FormatUserSummaryResponse,
   { assets, marketReferenceCurrencyPriceInUSD }: MarketData,
-) => {
+): User => {
   const totalDepositedInUSD = valueToBigNumber(userReserves.totalLiquidityUSD)
   const totalBorrowedInUSD = valueToBigNumber(userReserves.totalBorrowsUSD)
   const availableBorrowsInUSD = valueToBigNumber(
@@ -71,11 +71,17 @@ const toUser = (
         userReserves.totalBorrowsMarketReferenceCurrency,
       ),
       totalBorrowedInUSD,
+      totalCollateralInMarketReferenceCurrency: valueToBigNumber(
+        userReserves.totalCollateralMarketReferenceCurrency,
+      ),
       availableBorrowsInUSD,
       borrowLimitInUSD,
       borrowLimitUsed: borrowLimitInUSD.gt(BN_ZERO)
         ? totalBorrowedInUSD.dividedBy(borrowLimitInUSD)
         : undefined,
+      currentLiquidationThreshold: valueToBigNumber(
+        userReserves.currentLiquidationThreshold,
+      ),
       healthFactor: valueToBigNumber(userReserves.healthFactor),
       netAPY,
     },

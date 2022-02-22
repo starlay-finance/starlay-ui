@@ -30,11 +30,8 @@ export const NumberItems = styled.div`
   margin: -24px 0;
   > {
     :last-child {
-      border-bottom-width: 0px;
-      :nth-child(4) {
-        border-bottom-width: 3px;
-        margin-bottom: 24px;
-      }
+      border-bottom-width: 3px;
+      margin-bottom: 24px;
     }
   }
 `

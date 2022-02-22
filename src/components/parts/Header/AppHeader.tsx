@@ -8,7 +8,7 @@ import { useStakeData } from 'src/hooks/useStakeData'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
-import { blue, trueWhite } from 'src/styles/colors'
+import { purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
@@ -66,7 +66,7 @@ const Menu = styled.div`
 `
 
 const activeStyle = css`
-  color: ${blue};
+  color: ${purple};
   pointer-events: none;
   :after {
     content: '';

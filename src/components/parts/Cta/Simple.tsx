@@ -1,6 +1,6 @@
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, VFC } from 'react'
 import { Link } from 'src/components/elements/Link'
-import { blue, darkPurple, trueWhite } from 'src/styles/colors'
+import { darkPurple, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import styled, { css } from 'styled-components'
 
@@ -17,7 +17,7 @@ const ctaStyle = css`
   height: 64px;
   border-radius: 8px;
 
-  background: ${blue};
+  background: ${purple};
   color: ${trueWhite};
 
   font-size: 18px;

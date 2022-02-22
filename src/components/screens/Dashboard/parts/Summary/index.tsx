@@ -2,15 +2,18 @@ import { t } from '@lingui/macro'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { useUserData } from 'src/hooks/useUserData'
-import { blue, lightYellow } from 'src/styles/colors'
+import { useWallet } from 'src/hooks/useWallet'
+import { lightYellow, purple } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { UserSummary } from 'src/types/models'
 import styled from 'styled-components'
 import { BalanceItem } from './BalanceItem'
 import { BorrowLimit } from './BorrowLimit'
+import { HealthFactor } from './HealthFactor'
 import { NetAPY } from './NetAPY'
 
 export const Summary = asStyled(({ className }) => {
+  const { account } = useWallet()
   const { data: user } = useUserData()
   const { open } = useWalletModal()
   const summary: Partial<UserSummary> = user?.summary || {}
@@ -18,11 +21,14 @@ export const Summary = asStyled(({ className }) => {
     <BalanceSection className={className}>
       <BalanceDiv>
         <BalanceItem
-          color={blue}
+          color={purple}
           label={t`Deposit Balance`}
           valueInUSD={summary.totalDepositedInUSD}
         />
-        <NetAPY netAPY={summary.netAPY} openWalletModal={open} />
+        <NetAPY
+          netAPY={summary.netAPY}
+          openWalletModal={!account ? open : undefined}
+        />
         <BalanceItem
           color={lightYellow}
           label={t`Borrow Balance`}
@@ -33,6 +39,7 @@ export const Summary = asStyled(({ className }) => {
         borrowLimitUsed={summary.borrowLimitUsed}
         borrowLimitInUSD={summary.borrowLimitInUSD}
       />
+      <HealthFactor healthFactor={summary.healthFactor} />
     </BalanceSection>
   )
 })``
@@ -45,9 +52,4 @@ const BalanceDiv = styled.div`
   }
 `
 
-const BalanceSection = styled.section`
-  ${BorrowLimit} {
-    margin: 80px auto 0;
-    padding: 24px 80px;
-  }
-`
+const BalanceSection = styled.section``

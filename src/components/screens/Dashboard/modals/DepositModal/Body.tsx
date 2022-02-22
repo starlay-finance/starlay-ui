@@ -12,7 +12,13 @@ import {
   estimateWithdrawal,
   EstimationParam,
 } from 'src/utils/calculator'
-import { formatPct, formattedToBigNumber, formatUSD } from 'src/utils/number'
+import {
+  formatAmt,
+  formatAmtShort,
+  formatPct,
+  formattedToBigNumber,
+  formatUSD,
+} from 'src/utils/number'
 import {
   Action,
   AmountInput,
@@ -37,7 +43,7 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
 }) => {
   const { asset, userSummary, userAssetStatus } = estimationParams
   const { symbol, depositAPY, depositIncentiveAPR, isFrozen } = asset
-  const { availableBorrowsInUSD, borrowLimitUsed } = userSummary
+  const { availableBorrowsInUSD, borrowLimitUsed, healthFactor } = userSummary
   const { inWallet, deposited } = userAssetStatus
 
   const [activeTab, setActiveTab] = useState<TabType>(
@@ -60,7 +66,7 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
         <AmountInput
           value={depositAmount}
           onChange={setDepositAmount}
-          setMaxValue={() => setDepositAmount(estimation.maxAmount.toString())}
+          setMaxValue={() => setDepositAmount(formatAmt(estimation.maxAmount))}
           significantDigits={asset.decimals}
         />
       ) : (
@@ -68,7 +74,12 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
           value={withdrawalAmount}
           onChange={setWithdrawalAmount}
           setMaxValue={() =>
-            setWithdrawalAmount(estimation.maxAmount.toString())
+            setWithdrawalAmount(
+              formatAmt(estimation.maxAmount, {
+                decimalPlaces: asset.decimals,
+                roundingMode: BigNumber.ROUND_FLOOR,
+              }),
+            )
           }
           significantDigits={asset.decimals}
         />
@@ -108,20 +119,32 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
             after={estimation.borrowLimitUsed}
             formatter={formatPct}
           />
+          <NumberItemWithDiff
+            label={t`Health Factor`}
+            current={healthFactor.isPositive() ? healthFactor : undefined}
+            after={
+              !estimation.healthFactor
+                ? undefined
+                : estimation.healthFactor.isPositive()
+                ? estimation.healthFactor
+                : '-'
+            }
+            formatter={formatAmtShort}
+          />
         </NumberItems>
         {activeTab === 'deposit' ? (
           <SimpleCtaButton
             onClick={() => deposit(depositAmountBn!)}
-            disabled={!estimation.isAvailable}
+            disabled={!!estimation.unavailableReason}
           >
-            {estimation.isAvailable ? t`Deposit` : t`No balance to deposit`}
+            {estimation.unavailableReason || t`Deposit`}
           </SimpleCtaButton>
         ) : (
           <SimpleCtaButton
             onClick={() => withdraw(withdrawalAmountBn!)}
-            disabled={!estimation.isAvailable}
+            disabled={!!estimation.unavailableReason}
           >
-            {estimation.isAvailable ? t`Withdraw` : t`No balance to withdraw`}
+            {estimation.unavailableReason || t`Withdraw`}
           </SimpleCtaButton>
         )}
         {activeTab === 'deposit' ? (

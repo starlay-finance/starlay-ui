@@ -13,7 +13,7 @@ export type TableFC = <T extends string>(
     }[]
     rows: {
       id: string
-      data: { [key in T]: ReactNode }
+      data: { [key in T]: ReactNode | undefined }
       onClick?: VoidFunction
       disabled?: boolean
     }[]
@@ -70,9 +70,10 @@ export const Table: TableFC = ({
             $disabled={disabled}
             disabledStyle={rowDisabledStyle}
           >
-            {columns.map(({ id }) => (
-              <td key={id}>{data[id as keyof typeof data]}</td>
-            ))}
+            {columns.map(({ id }) => {
+              const node = data[id as keyof typeof data]
+              return <td key={id}>{node || <ShimmerPlaceholder />}</td>
+            })}
           </StyledTr>
         ))}
       </tbody>

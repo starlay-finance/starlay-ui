@@ -1,4 +1,9 @@
-import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
+import { t } from '@lingui/macro'
+import {
+  BigNumber,
+  calculateHealthFactorFromBalancesBigUnits,
+  valueToBigNumber,
+} from '@starlay-finance/math-utils'
 import {
   AssetMarketData,
   User,
@@ -7,12 +12,15 @@ import {
 } from 'src/types/models'
 import { BN_ZERO } from './number'
 
+const HEALTH_FACTOR_THRESHOLD = 1
+
 type EstimationResult = {
   availableBorrowsInUSD?: BigNumber
   totalBorrowedInUSD?: BigNumber
   borrowLimitUsed?: BigNumber
+  healthFactor?: BigNumber
   maxAmount: BigNumber
-  isAvailable: boolean
+  unavailableReason?: string
 }
 
 export type EstimationParam = {
@@ -27,29 +35,47 @@ export const estimateDeposit = ({
   amount,
   userAssetStatus,
   userSummary,
-  asset: { baseLTVasCollateral },
+  marketReferenceCurrencyPriceInUSD,
+  asset: { baseLTVasCollateral, priceInMarketReferenceCurrency },
 }: EstimationParam): EstimationResult => {
   const maxAmount = userAssetStatus.inWallet
 
   if (!amount || amount.isNaN() || amount.lte(BN_ZERO))
-    return { isAvailable: false, maxAmount }
+    return { unavailableReason: t`Enter amount`, maxAmount }
 
   const {
     availableBorrowsInUSD: currentBorrowable,
     totalBorrowedInUSD: currentBorrowed,
+    totalCollateralInMarketReferenceCurrency,
   } = userSummary
-  const availableBorrowsInUSD = currentBorrowable.plus(
-    baseLTVasCollateral.multipliedBy(amount),
+  const ltvInMarketReferenceCurrenry = amount
+    .multipliedBy(baseLTVasCollateral)
+    .multipliedBy(priceInMarketReferenceCurrency)
+  const ltvInUSD = ltvInMarketReferenceCurrenry.multipliedBy(
+    marketReferenceCurrencyPriceInUSD,
   )
+
+  const availableBorrowsInUSD = currentBorrowable.plus(ltvInUSD)
   const borrowLimitInUSD = availableBorrowsInUSD.plus(currentBorrowed)
   const borrowLimitUsed = borrowLimitInUSD.gt(0)
     ? currentBorrowed.dividedBy(borrowLimitInUSD)
     : undefined
+
+  const healthFactor = calculateHealthFactor({
+    ...userSummary,
+    totalCollateralInMarketReferenceCurrency:
+      totalCollateralInMarketReferenceCurrency.plus(
+        ltvInMarketReferenceCurrenry,
+      ),
+  })
   return {
-    isAvailable: maxAmount.gte(amount),
+    unavailableReason: amount.gt(maxAmount)
+      ? t`No balance to deposit`
+      : undefined,
     maxAmount,
     availableBorrowsInUSD,
     borrowLimitUsed,
+    healthFactor,
   }
 }
 
@@ -63,7 +89,8 @@ export const estimateWithdrawal = (
     asset,
     marketReferenceCurrencyPriceInUSD,
   } = params
-  const { baseLTVasCollateral, liquidity } = asset
+  const { baseLTVasCollateral, liquidity, priceInMarketReferenceCurrency } =
+    asset
   const maxAmount = BigNumber.min(
     userAssetStatus.deposited,
     liquidity,
@@ -71,12 +98,13 @@ export const estimateWithdrawal = (
   )
 
   if (!amount || amount.isNaN() || amount.lte(BN_ZERO))
-    return { isAvailable: false, maxAmount }
+    return { unavailableReason: t`Enter Amount`, maxAmount }
 
-  const isAvailable = maxAmount.gte(amount)
   if (!userAssetStatus.usageAsCollateralEnabled)
     return {
-      isAvailable,
+      unavailableReason: amount.gt(maxAmount)
+        ? t`No balance to withdraw`
+        : undefined,
       maxAmount,
       availableBorrowsInUSD: userSummary.availableBorrowsInUSD,
       borrowLimitUsed: userSummary.borrowLimitUsed,
@@ -85,16 +113,16 @@ export const estimateWithdrawal = (
   const {
     totalBorrowedInUSD: currentBorrowed,
     borrowLimitInUSD: currentLimit,
+    totalCollateralInMarketReferenceCurrency,
   } = userSummary
-  const borrowLimitInUSD = currentLimit.minus(
-    baseLTVasCollateral.multipliedBy(
-      convertToUSD(
-        asset.priceInMarketReferenceCurrency,
-        marketReferenceCurrencyPriceInUSD,
-        valueToBigNumber(amount),
-      ),
-    ),
+  const ltvInMarketReferenceCurrenry = amount
+    .multipliedBy(baseLTVasCollateral)
+    .multipliedBy(priceInMarketReferenceCurrency)
+  const ltvInUSD = ltvInMarketReferenceCurrenry.multipliedBy(
+    marketReferenceCurrencyPriceInUSD,
   )
+
+  const borrowLimitInUSD = currentLimit.minus(ltvInUSD)
   const availableBorrowsInUSD = BigNumber.max(
     borrowLimitInUSD.minus(currentBorrowed),
     BN_ZERO,
@@ -102,11 +130,24 @@ export const estimateWithdrawal = (
   const borrowLimitUsed = borrowLimitInUSD.gt(0)
     ? currentBorrowed.dividedBy(borrowLimitInUSD)
     : valueToBigNumber(1)
+
+  const healthFactor = calculateHealthFactor({
+    ...userSummary,
+    totalCollateralInMarketReferenceCurrency:
+      totalCollateralInMarketReferenceCurrency.minus(
+        ltvInMarketReferenceCurrenry,
+      ),
+  })
   return {
-    isAvailable,
+    unavailableReason: amount.gt(maxAmount)
+      ? t`No balance to withdraw`
+      : healthFactor.isPositive() && healthFactor.lt(HEALTH_FACTOR_THRESHOLD)
+      ? t`Health factor too low`
+      : undefined,
     maxAmount,
     availableBorrowsInUSD,
     borrowLimitUsed,
+    healthFactor,
   }
 }
 
@@ -145,6 +186,7 @@ export const estimateBorrow = ({
     availableBorrowsInUSD: currentBorrowable,
     totalBorrowedInUSD: currentBorrowed,
     borrowLimitInUSD,
+    totalBorrowedInMarketReferenceCurrency,
   } = userSummary
   const maxAmount = BigNumber.min(
     convertFromUSD(
@@ -155,24 +197,37 @@ export const estimateBorrow = ({
     liquidity,
   )
   if (!amount || amount.isNaN() || amount.lte(BN_ZERO))
-    return { isAvailable: false, maxAmount }
+    return { unavailableReason: t`Enter Amount`, maxAmount }
 
-  const isAvailable = maxAmount.gte(amount)
-  const totalBorrowedInUSD = currentBorrowed.plus(
-    convertFromUSD(
-      priceInMarketReferenceCurrency,
-      marketReferenceCurrencyPriceInUSD,
-      valueToBigNumber(amount),
-    ),
+  const amountInMarketReferenceCurrenry = amount.multipliedBy(
+    priceInMarketReferenceCurrency,
   )
+  const amountInUSD = amountInMarketReferenceCurrenry.multipliedBy(
+    marketReferenceCurrencyPriceInUSD,
+  )
+
+  const totalBorrowedInUSD = currentBorrowed.plus(amountInUSD)
   const borrowLimitUsed = borrowLimitInUSD.gt(0)
     ? totalBorrowedInUSD.dividedBy(borrowLimitInUSD)
     : undefined
+
+  const healthFactor = calculateHealthFactor({
+    ...userSummary,
+    totalBorrowedInMarketReferenceCurrency:
+      totalBorrowedInMarketReferenceCurrency.plus(
+        amountInMarketReferenceCurrenry,
+      ),
+  })
   return {
-    isAvailable,
+    unavailableReason: amount.gt(maxAmount)
+      ? t`Borrowing limit reached`
+      : healthFactor.isPositive() && healthFactor.lt(HEALTH_FACTOR_THRESHOLD)
+      ? t`Health factor too low`
+      : undefined,
     maxAmount,
     totalBorrowedInUSD,
     borrowLimitUsed,
+    healthFactor,
   }
 }
 
@@ -180,7 +235,7 @@ export const estimateRepayment = ({
   amount,
   userAssetStatus,
   userSummary,
-  asset,
+  asset: { priceInMarketReferenceCurrency },
   marketReferenceCurrencyPriceInUSD,
 }: EstimationParam): EstimationResult => {
   const { borrowed: currentBorrowed, inWallet } = userAssetStatus
@@ -189,28 +244,58 @@ export const estimateRepayment = ({
     inWallet,
   )
   if (!amount || amount.isNaN() || amount.lte(BN_ZERO))
-    return { isAvailable: false, maxAmount }
+    return { unavailableReason: t`Enter Amount`, maxAmount }
 
-  const isAvailable = maxAmount.gte(amount)
-  const { totalBorrowedInUSD: currentBorrowedInUSD, borrowLimitInUSD } =
-    userSummary
-  const totalBorrowedInUSD = currentBorrowedInUSD.minus(
-    convertToUSD(
-      asset.priceInMarketReferenceCurrency,
-      marketReferenceCurrencyPriceInUSD,
-      valueToBigNumber(amount),
-    ),
+  const {
+    totalBorrowedInUSD: currentBorrowedInUSD,
+    borrowLimitInUSD,
+    totalBorrowedInMarketReferenceCurrency,
+  } = userSummary
+  const amountInMarketReferenceCurrenry = amount.multipliedBy(
+    priceInMarketReferenceCurrency,
   )
+  const amountInUSD = amountInMarketReferenceCurrenry.multipliedBy(
+    marketReferenceCurrencyPriceInUSD,
+  )
+
+  const totalBorrowedInUSD = currentBorrowedInUSD.minus(amountInUSD)
   const borrowLimitUsed = borrowLimitInUSD.gt(0)
     ? totalBorrowedInUSD.dividedBy(borrowLimitInUSD)
     : valueToBigNumber(1)
+
+  const healthFactor = calculateHealthFactor({
+    ...userSummary,
+    totalBorrowedInMarketReferenceCurrency:
+      totalBorrowedInMarketReferenceCurrency.plus(
+        amountInMarketReferenceCurrenry,
+      ),
+  })
   return {
-    isAvailable,
+    unavailableReason: amount.gt(maxAmount)
+      ? t`No balance to repay`
+      : undefined,
     maxAmount,
     totalBorrowedInUSD,
     borrowLimitUsed,
+    healthFactor,
   }
 }
+
+const calculateHealthFactor = (
+  params: Pick<
+    UserSummary,
+    | 'totalCollateralInMarketReferenceCurrency'
+    | 'totalBorrowedInMarketReferenceCurrency'
+    | 'currentLiquidationThreshold'
+  >,
+) =>
+  calculateHealthFactorFromBalancesBigUnits({
+    collateralBalanceMarketReferenceCurrency:
+      params.totalCollateralInMarketReferenceCurrency,
+    borrowBalanceMarketReferenceCurrency:
+      params.totalBorrowedInMarketReferenceCurrency,
+    currentLiquidationThreshold: params.currentLiquidationThreshold,
+  })
 
 export const calculateNetAPY = (
   balanceByAsset: User['balanceByAsset'],

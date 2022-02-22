@@ -1,19 +1,20 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
+import { useEffect, useState } from 'react'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { BarChart, BarChartStyleProps } from 'src/components/parts/Chart'
 import { Reel } from 'src/components/parts/Reel'
 import {
-  blue,
   darkPurple,
   darkRed,
   lightYellow,
   primary,
+  purple,
   secondary,
 } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { formatUSD } from 'src/utils/number'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 type BorrowLimitProps = {
   borrowLimitUsed: BigNumber | undefined
@@ -21,8 +22,14 @@ type BorrowLimitProps = {
 }
 export const BorrowLimit = asStyled<BorrowLimitProps>(
   ({ borrowLimitUsed, borrowLimitInUSD, className }) => {
+    const [show, setShow] = useState(false)
+    useEffect(() => {
+      setTimeout(() => {
+        setShow(!!borrowLimitInUSD?.isPositive())
+      }, 100)
+    }, [borrowLimitInUSD])
     return (
-      <BorrowLimitFigure className={className}>
+      <BorrowLimitFigure className={className} show={show}>
         <figcaption>{t`Borrow Limit`}</figcaption>
         <BarChart
           ratio={borrowLimitUsed?.toNumber() || 0}
@@ -48,12 +55,15 @@ export const BorrowLimit = asStyled<BorrowLimitProps>(
 )``
 
 const CHART_COMPOSITION: BarChartStyleProps['filled'] = [
-  { gte: 0, color: blue },
+  { gte: 0, color: purple },
   { gte: 50, color: lightYellow },
   { gte: 80, color: darkRed },
 ]
 
-const BorrowLimitFigure = styled.figure`
+const BorrowLimitFigure = styled.figure<{ show: boolean }>`
+  transition: all 0.2s ease-in;
+  margin: 80px auto 0;
+  padding: 24px 80px;
   ${flexCenter};
   position: relative;
   width: 100%;
@@ -68,4 +78,11 @@ const BorrowLimitFigure = styled.figure`
     height: 3px;
     color: ${primary};
   }
+  ${({ show }) =>
+    !show &&
+    css`
+      opacity: 0;
+      height: 0;
+      margin: 0;
+    `}
 `

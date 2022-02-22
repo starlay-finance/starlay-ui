@@ -1,5 +1,5 @@
 import { number, withKnobs } from '@storybook/addon-knobs'
-import { blue, darkRed, lightYellow, success } from 'src/styles/colors'
+import { darkRed, lightYellow, purple, success } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import styled from 'styled-components'
 import { DonutChart, DonutChart2 } from '.'
@@ -19,7 +19,7 @@ export const DonutChartComponent = () => {
     <Style>
       <DonutChart
         elements={[
-          { ratio: ratio1 / 100, color: blue },
+          { ratio: ratio1 / 100, color: purple },
           { ratio: ratio2 / 100, color: lightYellow },
           { ratio: ratio3 / 100, color: darkRed },
           { ratio: ratio4 / 100, color: success },
@@ -37,7 +37,7 @@ export const DonutChart2Component = () => {
     <Style>
       <DonutChart2
         elements={[
-          { ratio: ratio1 / 100, color: blue },
+          { ratio: ratio1 / 100, color: purple },
           { ratio: ratio2 / 100, color: lightYellow },
         ]}
       >
