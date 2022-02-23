@@ -69,9 +69,13 @@ const ImageContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  max-height: 77px;
   ${flexCenter};
-  padding: 24px;
   margin: 24px;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `
 
 const ImageDiv = styled.div`
