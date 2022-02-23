@@ -2,6 +2,8 @@ import { t } from '@lingui/macro'
 import {
   IconDiscord,
   IconGithub,
+  IconMedium,
+  IconTelegram,
   IconTwitter,
   LogoProtocol,
 } from 'src/assets/svgs'
@@ -18,6 +20,8 @@ import {
   GITHUB,
   GOVERNANCE_OVERVIEW,
   GOVERNANCE_STARLAY,
+  MEDIUM,
+  TELEGRAM,
   TWITTER,
 } from 'src/utils/routes'
 import styled from 'styled-components'
@@ -32,9 +36,15 @@ export const TopFooter = asStyled(({ className }) => (
         </LogoDiv>
         <Note>{t`Starlay Finance is the world's first Astar native lending protocol.`}</Note>
         <IconLinks>
-          <IconLink Icon={IconGithub} href={GITHUB} aria-label={t`Github`} />
-          <IconLink Icon={IconDiscord} href={DISCORD} aria-label={t`Discord`} />
           <IconLink Icon={IconTwitter} href={TWITTER} aria-label={t`Twitter`} />
+          <IconLink Icon={IconDiscord} href={DISCORD} aria-label={t`Discord`} />
+          <IconLink
+            Icon={IconTelegram}
+            href={TELEGRAM}
+            aria-label={t`Telegram`}
+          />
+          <IconLink Icon={IconMedium} href={MEDIUM} aria-label={t`Medium`} />
+          <IconLink Icon={IconGithub} href={GITHUB} aria-label={t`Github`} />
         </IconLinks>
       </NavItem>
       <NavItem>
@@ -55,6 +65,7 @@ export const TopFooter = asStyled(({ className }) => (
         <LinksHeading>{t`Community`}</LinksHeading>
         <TextLinks>
           <Link href={DISCORD}>{t`Discord`}</Link>
+          <Link href={TELEGRAM}>{t`Telegram`}</Link>
         </TextLinks>
       </NavItem>
     </Nav>
