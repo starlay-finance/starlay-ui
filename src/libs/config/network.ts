@@ -3,7 +3,7 @@ import { EthereumAddress } from 'src/types/web3'
 import { ValueOf } from 'type-fest'
 
 export const CHAIN_ID = {
-  shiden: 336,
+  astar: 592,
 } as const
 
 export type ChainId = ValueOf<typeof CHAIN_ID>
@@ -42,27 +42,26 @@ export type NetworkConfig = {
 }
 
 export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
-  [CHAIN_ID.shiden]: {
-    name: 'Shiden Network',
-    publicJsonRPCUrl: ['https://rpc.shiden.astar.network:8545'],
+  [CHAIN_ID.astar]: {
+    name: 'Astar Network',
+    publicJsonRPCUrl: ['https://rpc.astar.network:8545'],
     addresses: {
-      walletBalanceProvider: '0x40Ea75a8cCa05606870a13463bc7d05508780f9B',
-      uiPoolDataProvider: '0x80012814a73F0b500f69E6367CeF7717928B26a9',
-      uiIncentiveDataProvider: '0x6294bDe73FB179172C91338cD426786465a89c73',
-      stakeUiHelper: '0x7D0e655722E280b03dbFA4235f1ba593f87DF113',
+      walletBalanceProvider: '0x64064C72E3174466661b7d201074a7266A7c364B',
+      uiPoolDataProvider: '0xa5b24DaF2164745BC5282efdddd275d4489c555d',
+      uiIncentiveDataProvider: '0x0E8026a0554B1eBB8fDBAdCbf89531337500576C',
+      stakeUiHelper: '0xCD821F1B938beB2EeD757ad34C3a53F220E968Fa',
       priceAggregatorAdapterAddress:
-        '0xf09C187d39A4998F25d6C3Bf2d693D355f563363',
+        '0x533ECB70ed59ceDBfcC67A27e1D533f43bEed108',
     },
     baseAsset: {
-      symbol: 'SDN',
-      wrapperAddress: '0x44a26AE046a01d99eBAbecc24B4d61B388656871',
+      symbol: 'ASTR',
+      wrapperAddress: '0xAeaaf0e2c81Af264101B9129C00F4440cCF0F720',
     },
     rewardToken: {
       symbol: 'LAY',
-      address: '0x75AC15EbCA4e93D61bCc878ded9Ba338FD23E761',
+      address: '0x026734Fb820F072a0FbA1D49A60E4f545F9804a1',
       decimals: 18,
     },
-    explorerLinks: ['https://blockscout.com/shiden'],
-    isTestnet: true,
+    explorerLinks: ['https://blockscout.com/astar'],
   },
 }

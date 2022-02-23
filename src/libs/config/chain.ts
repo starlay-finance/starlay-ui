@@ -9,15 +9,15 @@ const toChainIdHex = (chainId: number) =>
   `0x${(+BigNumber.from(chainId)).toString(16)}`
 
 const CHIAN_INFO: Record<ChainId, AddEthereumChainParameter> = {
-  [CHAIN_ID.shiden]: {
-    chainId: toChainIdHex(CHAIN_ID.shiden),
-    chainName: NETWORK_CONFIG[CHAIN_ID.shiden].name,
+  [CHAIN_ID.astar]: {
+    chainId: toChainIdHex(CHAIN_ID.astar),
+    chainName: NETWORK_CONFIG[CHAIN_ID.astar].name,
     nativeCurrency: {
-      name: 'Shiden',
-      symbol: NETWORK_CONFIG[CHAIN_ID.shiden].baseAsset.symbol,
+      name: 'Astar',
+      symbol: NETWORK_CONFIG[CHAIN_ID.astar].baseAsset.symbol,
       decimals: 18,
     },
-    rpcUrls: [...NETWORK_CONFIG[CHAIN_ID.shiden].publicJsonRPCUrl],
-    blockExplorerUrls: NETWORK_CONFIG[CHAIN_ID.shiden].explorerLinks,
+    rpcUrls: [...NETWORK_CONFIG[CHAIN_ID.astar].publicJsonRPCUrl],
+    blockExplorerUrls: NETWORK_CONFIG[CHAIN_ID.astar].explorerLinks,
   },
 }

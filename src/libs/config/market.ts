@@ -3,7 +3,7 @@ import { ValueOf } from 'type-fest'
 import { ChainId, CHAIN_ID } from './network'
 
 export const CUSTOM_MARKET = {
-  proto_shiden: 'proto_shiden',
+  proto_astar: 'proto_astar',
 } as const
 export type CustomMarket = ValueOf<typeof CUSTOM_MARKET>
 
@@ -32,16 +32,16 @@ export type MarketDataType = {
 export const MARKET_CONFIGS: {
   [key in CustomMarket]: MarketDataType
 } = {
-  [CUSTOM_MARKET.proto_shiden]: {
-    chainId: CHAIN_ID.shiden,
+  [CUSTOM_MARKET.proto_astar]: {
+    chainId: CHAIN_ID.astar,
     enabledFeatures: {
       incentives: true,
     },
     addresses: {
       LENDING_POOL_ADDRESS_PROVIDER:
-        '0xD7d6a1e58579d3a71f8cF95ABF957c3148cCd051',
-      LENDING_POOL: '0x05De09054438FEf452525b3728D688e2DcE33c89',
-      WETH_GATEWAY: '0x794b7D365044b83187983AF3C1789C789061f9b6',
+        '0x6F540CdF68a913e64E5E271d2B7CaaEddd99e72A',
+      LENDING_POOL: '0x39aa77Aa50dDC4a1d77074891E761f5B73092c79',
+      WETH_GATEWAY: '0x6b73da0dE9CE461132fD4B1f2d0eA41E9bBf9Bd5',
     },
   },
 } as const
@@ -49,5 +49,5 @@ export const MARKET_CONFIGS: {
 export const CHAIN_MARKET_CONFIG: {
   [key in ChainId]: MarketDataType
 } = {
-  [CHAIN_ID.shiden]: MARKET_CONFIGS.proto_shiden,
+  [CHAIN_ID.astar]: MARKET_CONFIGS.proto_astar,
 } as const
