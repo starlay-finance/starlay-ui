@@ -6,14 +6,20 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { secondary } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
 import { contentMaxWidthCssVar, flexCenter } from 'src/styles/mixins'
-import styled, { css } from 'styled-components'
+import styled, { css, CSSProperties } from 'styled-components'
+import { RequireExactlyOne } from 'type-fest'
 import { backersAnimation } from './animation'
 
+type Backer = {
+  name: string
+  containerStyle?: CSSProperties
+} & RequireExactlyOne<{
+  image: StaticImageData
+  Svg: SvgrComponent
+}>
+
 export type BackersProps = {
-  backers: {
-    name: string
-    image: StaticImageData
-  }[]
+  backers: Backer[]
 }
 
 export const Backers = asStyled<BackersProps>(({ backers, className }) => {
@@ -26,7 +32,7 @@ export const Backers = asStyled<BackersProps>(({ backers, className }) => {
       <h2>{t`Backers`}</h2>
       <p>{t`We are supported by the most amazing backers`}</p>
       <BackersList ref={ref} $touched={touched} $appeared={appeared}>
-        {backers.map(({ name, image }, idx, arr) => {
+        {backers.map(({ name, image, containerStyle, Svg }, idx, arr) => {
           const isLast = idx === arr.length - 1
           return (
             <li
@@ -36,12 +42,18 @@ export const Backers = asStyled<BackersProps>(({ backers, className }) => {
               }
             >
               <ImageDiv>
-                <Image
-                  src={image}
-                  alt={name}
-                  layout="fill"
-                  objectFit="scale-down"
-                />
+                <ImageContainer style={containerStyle}>
+                  {Svg ? (
+                    <Svg />
+                  ) : (
+                    <Image
+                      src={image!}
+                      alt={name}
+                      layout="fill"
+                      objectFit="scale-down"
+                    />
+                  )}
+                </ImageContainer>
               </ImageDiv>
               <p>{name}</p>
             </li>
@@ -52,6 +64,15 @@ export const Backers = asStyled<BackersProps>(({ backers, className }) => {
     </BackersSection>
   )
 })``
+
+const ImageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  ${flexCenter};
+  padding: 24px;
+  margin: 24px;
+`
 
 const ImageDiv = styled.div`
   ${flexCenter};
