@@ -41,8 +41,8 @@ msgid "Starlay Finance is the world's first Astar native lending protocol."
 msgstr "Starlay Finance is the world's first Astar native lending protocol."
 
 #: src/components/parts/Footer/TopFooter.tsx
-msgid "Github"
-msgstr "Github"
+msgid "Twitter"
+msgstr "Twitter"
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
@@ -51,8 +51,17 @@ msgid "Discord"
 msgstr "Discord"
 
 #: src/components/parts/Footer/TopFooter.tsx
-msgid "Twitter"
-msgstr "Twitter"
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Telegram"
+msgstr "Telegram"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Medium"
+msgstr "Medium"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Github"
+msgstr "Github"
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Protocol"
@@ -74,10 +83,6 @@ msgstr "Overview"
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Community"
 msgstr "Community"
-
-#: src/components/parts/Footer/TopFooter.tsx
-msgid "Telegram"
-msgstr "Telegram"
 
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Dashboard"
