@@ -33,11 +33,11 @@ const formatNum = (
       ? `${num.toFormat(decimalPlaces, roundingMode)}`
       : `${num.toFormat(decimalPlaces)}`
     if (!shorteningThreshold || formatted.length < shorteningThreshold)
-      return formatted
+      return `${prefix}${formatted}`
     const [int, decimals] = formatted.split('.')
     const intLengthWithDot = int.length + 1
     if (decimals && intLengthWithDot < shorteningThreshold)
-      return `${int}.${decimals.slice(
+      return `${prefix}${int}.${decimals.slice(
         0,
         shorteningThreshold - intLengthWithDot,
       )}`
@@ -47,12 +47,13 @@ const formatNum = (
         shorteningThreshold - int.toString().length - 1,
         Math.min(shorteningThreshold - 4, 2),
       ),
+      prefix,
     )
   }
 
   const formatted = `${num.toFormat(decimalPlaces)}`
   if (!shorteningThreshold || formatted.length < shorteningThreshold)
-    return formatted
+    return `${prefix}${formatted}`
 
   const adjustedDecimalPlaces = Math.min(
     (shorteningThreshold || Number.MAX_SAFE_INTEGER) - 2,
@@ -65,7 +66,7 @@ const formatNum = (
     return `> ${prefix}${BN_ONE.shiftedBy(-adjustedDecimalPlaces).toFormat(
       adjustedDecimalPlaces,
     )}`
-  return num.toFormat(adjustedDecimalPlaces)
+  return `${prefix}${num.toFormat(adjustedDecimalPlaces)}`
 }
 
 export const formatAmt = (
