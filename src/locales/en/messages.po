@@ -37,8 +37,8 @@ msgid "Terms"
 msgstr "Terms"
 
 #: src/components/parts/Footer/TopFooter.tsx
-msgid "Starlay Finance is the world's first Astar native lending protocol."
-msgstr "Starlay Finance is the world's first Astar native lending protocol."
+msgid "Starlay Finance is the first lending protocol backed by Astar Network"
+msgstr "Starlay Finance is the first lending protocol backed by Astar Network"
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Twitter"
@@ -242,16 +242,16 @@ msgid "Backers"
 msgstr "Backers"
 
 #: src/components/screens/Top/parts/Backers.tsx
-msgid "We are supported by the most amazing backers"
-msgstr "We are supported by the most amazing backers"
+msgid "We're supported by leading teams and organizations"
+msgstr "We're supported by leading teams and organizations"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "Current Markets"
 msgstr "Current Markets"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "The market is always changing and you can earn"
-msgstr "The market is always changing and you can earn"
+msgid "The more funds that will be borrowed, the higher the interest rate will be"
+msgstr "The more funds that will be borrowed, the higher the interest rate will be"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "Total Market Size"
@@ -262,12 +262,12 @@ msgid "Total Borrowed"
 msgstr "Total Borrowed"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "Lending on Astar Reaches Perfection"
-msgstr "Lending on Astar Reaches Perfection"
+msgid "Low Risk Farming on Astar Network"
+msgstr "Low Risk Farming on Astar Network"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "Starlay Finance is the world's first Aster native lending protocol"
-msgstr "Starlay Finance is the world's first Aster native lending protocol"
+msgid "Starlay Finance is the first lending protocol backed by Astar Network"
+msgstr "Starlay Finance is the first lending protocol backed by Astar Network"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"
