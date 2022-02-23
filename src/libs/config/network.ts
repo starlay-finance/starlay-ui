@@ -46,12 +46,12 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
     name: 'Shiden Network',
     publicJsonRPCUrl: ['https://rpc.shiden.astar.network:8545'],
     addresses: {
-      walletBalanceProvider: '0x40Ea75a8cCa05606870a13463bc7d05508780f9B',
-      uiPoolDataProvider: '0x80012814a73F0b500f69E6367CeF7717928B26a9',
-      uiIncentiveDataProvider: '0x6294bDe73FB179172C91338cD426786465a89c73',
-      stakeUiHelper: '0x7D0e655722E280b03dbFA4235f1ba593f87DF113',
+      walletBalanceProvider: '0x8f8bc2b26ed0917B6cCCE31f56ad6285f736eD2b',
+      uiPoolDataProvider: '0x5ee008fBfDd911A88a8F79f28236Af82C4e9D362',
+      uiIncentiveDataProvider: '0x9bF9780695736cD44EFcEEFF51Acc823377cb81F',
+      stakeUiHelper: '0xe612C6C60FFbbE63e5822a9E7A098761b08D3C08',
       priceAggregatorAdapterAddress:
-        '0xf09C187d39A4998F25d6C3Bf2d693D355f563363',
+        '0xBE38fe6439269d18190024DA4f2Cfc35323A8384',
     },
     baseAsset: {
       symbol: 'SDN',
@@ -59,7 +59,7 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
     },
     rewardToken: {
       symbol: 'LAY',
-      address: '0x75AC15EbCA4e93D61bCc878ded9Ba338FD23E761',
+      address: '0xb163716cb6c8b0a56e4f57c394A50F173E34181b',
       decimals: 18,
     },
     explorerLinks: ['https://blockscout.com/shiden'],
