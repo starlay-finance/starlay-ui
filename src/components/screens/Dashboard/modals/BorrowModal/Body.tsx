@@ -41,7 +41,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
   repay,
   ...estimationParams
 }) => {
-  const { asset, userSummary, userAssetStatus } = estimationParams
+  const { asset, userSummary, userAssetBalance } = estimationParams
   const {
     symbol,
     variableBorrowAPY,
@@ -54,7 +54,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
     name,
   } = asset
   const { totalBorrowedInUSD, borrowLimitUsed, healthFactor } = userSummary
-  const { borrowed } = userAssetStatus
+  const { inWallet, borrowed } = userAssetBalance
 
   const borrowable = borrowingEnabled && !isFrozen
   const [activeTab, setActiveTab] = useState<TabType>(

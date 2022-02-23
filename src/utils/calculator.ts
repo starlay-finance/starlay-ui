@@ -27,18 +27,18 @@ export type EstimationParam = {
   amount: BigNumber | undefined
   asset: AssetMarketData
   userSummary: UserSummary
-  userAssetStatus: UserAssetBalance
+  userAssetBalance: UserAssetBalance
   marketReferenceCurrencyPriceInUSD: BigNumber
 }
 
 export const estimateDeposit = ({
   amount,
-  userAssetStatus,
+  userAssetBalance,
   userSummary,
   marketReferenceCurrencyPriceInUSD,
   asset: { baseLTVasCollateral, priceInMarketReferenceCurrency },
 }: EstimationParam): EstimationResult => {
-  const maxAmount = userAssetStatus.inWallet
+  const maxAmount = userAssetBalance.inWallet
 
   if (!amount || amount.isNaN() || amount.lte(BN_ZERO))
     return { unavailableReason: t`Enter amount`, maxAmount }
@@ -84,7 +84,7 @@ export const estimateWithdrawal = (
 ): EstimationResult => {
   const {
     amount,
-    userAssetStatus,
+    userAssetBalance,
     userSummary,
     asset,
     marketReferenceCurrencyPriceInUSD,
@@ -92,7 +92,7 @@ export const estimateWithdrawal = (
   const { baseLTVasCollateral, liquidity, priceInMarketReferenceCurrency } =
     asset
   const maxAmount = BigNumber.min(
-    userAssetStatus.deposited,
+    userAssetBalance.deposited,
     liquidity,
     totalCollateralToWithdrawInMarketReferenceCurrency(params),
   )
@@ -100,7 +100,7 @@ export const estimateWithdrawal = (
   if (!amount || amount.isNaN() || amount.lte(BN_ZERO))
     return { unavailableReason: t`Enter Amount`, maxAmount }
 
-  if (!userAssetStatus.usageAsCollateralEnabled)
+  if (!userAssetBalance.usageAsCollateralEnabled)
     return {
       unavailableReason: amount.gt(maxAmount)
         ? t`No balance to withdraw`
@@ -154,10 +154,10 @@ export const estimateWithdrawal = (
 const totalCollateralToWithdrawInMarketReferenceCurrency = ({
   asset,
   userSummary,
-  userAssetStatus,
+  userAssetBalance,
 }: EstimationParam) => {
   if (
-    !userAssetStatus.usageAsCollateralEnabled ||
+    !userAssetBalance.usageAsCollateralEnabled ||
     !asset.usageAsCollateralEnabled ||
     userSummary.totalBorrowedInMarketReferenceCurrency.eq(BN_ZERO)
   )
@@ -233,12 +233,12 @@ export const estimateBorrow = ({
 
 export const estimateRepayment = ({
   amount,
-  userAssetStatus,
+  userAssetBalance,
   userSummary,
   asset: { priceInMarketReferenceCurrency },
   marketReferenceCurrencyPriceInUSD,
 }: EstimationParam): EstimationResult => {
-  const { borrowed: currentBorrowed, inWallet } = userAssetStatus
+  const { borrowed: currentBorrowed, inWallet } = userAssetBalance
   const maxAmount = BigNumber.min(
     currentBorrowed.multipliedBy('1.0025'),
     inWallet,
