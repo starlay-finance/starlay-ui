@@ -1,4 +1,4 @@
-import { LogoArthSwap, LogoAstar } from 'src/assets/images/backers'
+import { LogoArthSwap, LogoAstar, LogoDIA } from 'src/assets/images/backers'
 import { TopProps } from 'src/components/screens/Top'
 import { ASSETS_DICT } from './assets'
 
@@ -24,6 +24,7 @@ export const TOP_ASSETS = [
 export const TOP_BACKERS: TopProps['backers'] = [
   { name: 'Astar Network', Svg: LogoAstar },
   { name: 'ArthSwap', image: LogoArthSwap },
+  { name: 'DIA', Svg: LogoDIA, containerStyle: { maxHeight: '108px' } },
 ]
 
 export const TOP_PROPS: TopProps = {
