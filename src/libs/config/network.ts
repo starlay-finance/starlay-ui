@@ -32,8 +32,9 @@ export type NetworkConfig = {
     wrapperAddress: EthereumAddress
   }
   rewardToken?: {
-    symbol: AssetSymbol
+    symbol: string
     address: EthereumAddress
+    underlyingAsset: EthereumAddress
     decimals: number
   }
   explorerLinks?: string[]
@@ -56,11 +57,6 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
     baseAsset: {
       symbol: 'ASTR',
       wrapperAddress: '0xAeaaf0e2c81Af264101B9129C00F4440cCF0F720',
-    },
-    rewardToken: {
-      symbol: 'LAY',
-      address: '0x026734Fb820F072a0FbA1D49A60E4f545F9804a1',
-      decimals: 18,
     },
     explorerLinks: ['https://blockscout.com/astar'],
   },
