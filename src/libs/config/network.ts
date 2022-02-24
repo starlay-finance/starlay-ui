@@ -51,7 +51,7 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
       uiIncentiveDataProvider: '0x9bF9780695736cD44EFcEEFF51Acc823377cb81F',
       stakeUiHelper: '0xe612C6C60FFbbE63e5822a9E7A098761b08D3C08',
       priceAggregatorAdapterAddress:
-        '0xBE38fe6439269d18190024DA4f2Cfc35323A8384',
+        '0x1722dcd654c9c2C62753480D12d389497A541e75',
     },
     baseAsset: {
       symbol: 'SDN',
