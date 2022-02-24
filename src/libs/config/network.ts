@@ -59,8 +59,9 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
       wrapperAddress: '0x44a26AE046a01d99eBAbecc24B4d61B388656871',
     },
     rewardToken: {
-      symbol: 'LAY',
-      address: '0xb163716cb6c8b0a56e4f57c394A50F173E34181b',
+      symbol: 'stkLAY',
+      address: '0x4cff3b5f6ba3d64083963de201089f3267490c65',
+      underlyingAsset: '0xb163716cb6c8b0a56e4f57c394A50F173E34181b',
       decimals: 18,
     },
     explorerLinks: ['https://blockscout.com/shiden'],
