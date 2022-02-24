@@ -17,6 +17,7 @@ export const formatReserves = (
   reserveIncentives: ReserveIncentiveWithFeedsResponse[],
   currentTimestamp: number,
   baseAsset: NetworkConfig['baseAsset'],
+  rewardUndelyingAssetDict?: Record<string, string>,
 ) => {
   const {
     reservesData,
@@ -52,6 +53,7 @@ export const formatReserves = (
         : { ...each, underlyingAsset: BASE_ASSET_DUMMY_ADDRESS },
     ),
     reserves: formattedReserves,
+    underlyingAsserDict: rewardUndelyingAssetDict,
   })
   return {
     reservesData: formattedReserves,

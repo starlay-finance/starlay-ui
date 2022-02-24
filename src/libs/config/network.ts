@@ -32,8 +32,9 @@ export type NetworkConfig = {
     wrapperAddress: EthereumAddress
   }
   rewardToken?: {
-    symbol: AssetSymbol
+    symbol: string
     address: EthereumAddress
+    underlyingAsset: EthereumAddress
     decimals: number
   }
   explorerLinks?: string[]

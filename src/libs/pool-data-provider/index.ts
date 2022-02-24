@@ -14,7 +14,7 @@ export const getPoolDataProvider = ({
   chainId,
   provider,
 }: StaticRPCProvider): PoolDataProvider => {
-  const { addresses, baseAsset } = getNetworkConfig(chainId)
+  const { addresses, baseAsset, rewardToken } = getNetworkConfig(chainId)
   const {
     addresses: { LENDING_POOL_ADDRESS_PROVIDER },
   } = getMarketConfig(chainId)
@@ -32,6 +32,12 @@ export const getPoolDataProvider = ({
       lendingPoolAddressProvider: LENDING_POOL_ADDRESS_PROVIDER,
       baseAsset,
       provider,
+      rewardUndelyingAssetDict: rewardToken
+        ? {
+            [rewardToken.address.toLowerCase()]:
+              rewardToken.underlyingAsset.toLowerCase(),
+          }
+        : undefined,
     }),
   }
 }

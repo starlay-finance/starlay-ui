@@ -16,10 +16,16 @@ type FormatOption = Partial<{
   decimalPlaces: number
   shorteningThreshold: number
   roundingMode: BigNumber.RoundingMode
+  prefix?: string
 }>
 const formatNum = (
   num: BigNumber,
-  { decimalPlaces, shorteningThreshold, roundingMode }: FormatOption = {},
+  {
+    decimalPlaces,
+    shorteningThreshold,
+    roundingMode,
+    prefix = '',
+  }: FormatOption = {},
 ) => {
   const int = num.integerValue(BigNumber.ROUND_FLOOR)
   if (!int.isZero() || num.isZero()) {
@@ -27,11 +33,11 @@ const formatNum = (
       ? `${num.toFormat(decimalPlaces, roundingMode)}`
       : `${num.toFormat(decimalPlaces)}`
     if (!shorteningThreshold || formatted.length < shorteningThreshold)
-      return formatted
+      return `${prefix}${formatted}`
     const [int, decimals] = formatted.split('.')
     const intLengthWithDot = int.length + 1
     if (decimals && intLengthWithDot < shorteningThreshold)
-      return `${int}.${decimals.slice(
+      return `${prefix}${int}.${decimals.slice(
         0,
         shorteningThreshold - intLengthWithDot,
       )}`
@@ -41,12 +47,13 @@ const formatNum = (
         shorteningThreshold - int.toString().length - 1,
         Math.min(shorteningThreshold - 4, 2),
       ),
+      prefix,
     )
   }
 
   const formatted = `${num.toFormat(decimalPlaces)}`
   if (!shorteningThreshold || formatted.length < shorteningThreshold)
-    return formatted
+    return `${prefix}${formatted}`
 
   const adjustedDecimalPlaces = Math.min(
     (shorteningThreshold || Number.MAX_SAFE_INTEGER) - 2,
@@ -56,8 +63,10 @@ const formatNum = (
     .shiftedBy(adjustedDecimalPlaces)
     .integerValue(BigNumber.ROUND_FLOOR)
   if (shifted.integerValue().isZero())
-    return `> ${BN_ONE.shiftedBy(-adjustedDecimalPlaces)}`
-  return num.toFormat(adjustedDecimalPlaces)
+    return `> ${prefix}${BN_ONE.shiftedBy(-adjustedDecimalPlaces).toFormat(
+      adjustedDecimalPlaces,
+    )}`
+  return `${prefix}${num.toFormat(adjustedDecimalPlaces)}`
 }
 
 export const formatAmt = (
@@ -65,20 +74,24 @@ export const formatAmt = (
   { symbol, ...opts }: FormatOption & { symbol?: AssetSymbol } = {},
 ) => `${formatNum(num, opts)}${symbol ? ` ${symbol}` : ''}`
 
-export const formatAmtShort = (num: BigNumber, decimalPlaces = 2) => {
+export const formatAmtShort = (
+  num: BigNumber,
+  decimalPlaces = 2,
+  prefix = '',
+) => {
   const scaleIdx =
     Math.min(Math.ceil(num.toFixed(0).length / 3), SCALES.length) - 1
   const scaledNum = num.shiftedBy(-(scaleIdx || 0) * 3)
-  return `${scaledNum.toFormat(decimalPlaces)}${SCALES[scaleIdx]}`
+  return `${prefix}${scaledNum.toFormat(decimalPlaces)}${SCALES[scaleIdx]}`
 }
 
 export const formatUSD = (
   num: BigNumberValue,
   option: FormatOption = { shorteningThreshold: 8, decimalPlaces: 2 },
-) => `$${formatNum(valueToBigNumber(num), option)}`
+) => `${formatNum(valueToBigNumber(num), { ...option, prefix: '$' })}`
 
-export const formatUSDShort: typeof formatAmtShort = (...args) =>
-  `$${formatAmtShort(...args)}`
+export const formatUSDShort: typeof formatAmtShort = (num, decimalPlaces) =>
+  `${formatAmtShort(num, decimalPlaces, '$')}`
 
 export const formatPct = (
   num: BigNumberValue,
