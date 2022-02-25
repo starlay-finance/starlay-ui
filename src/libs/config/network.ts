@@ -47,12 +47,12 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
     name: 'Shiden Network',
     publicJsonRPCUrl: ['https://rpc.shiden.astar.network:8545'],
     addresses: {
-      walletBalanceProvider: '0x8f8bc2b26ed0917B6cCCE31f56ad6285f736eD2b',
-      uiPoolDataProvider: '0x5ee008fBfDd911A88a8F79f28236Af82C4e9D362',
-      uiIncentiveDataProvider: '0x9bF9780695736cD44EFcEEFF51Acc823377cb81F',
-      stakeUiHelper: '0xe612C6C60FFbbE63e5822a9E7A098761b08D3C08',
+      walletBalanceProvider: '0x03416c018C7202A1aE7e27d8D1D16f989F347f06',
+      uiPoolDataProvider: '0xC649aA738A2677Cca93a6a3bD5a1cF18D11815E5',
+      uiIncentiveDataProvider: '0x07CAaB4baD2856109C3bdbc9E396e42E53E9D988',
+      stakeUiHelper: '0x4Bf59A3F1D9419cb2234BbDFD8cb5f3654a79e9a',
       priceAggregatorAdapterAddress:
-        '0x1722dcd654c9c2C62753480D12d389497A541e75',
+        '0xA762C9B14600bD3583069E5fc4a4090AabaDA13e',
     },
     baseAsset: {
       symbol: 'SDN',
