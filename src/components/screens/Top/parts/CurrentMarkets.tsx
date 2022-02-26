@@ -45,7 +45,7 @@ export const CurrentMarketsComponent = forwardRef<
   <CurrentMarketsSection className={className}>
     <div>
       <h2>{t`Current Markets`}</h2>
-      <p>{t`The market is always changing and you can earn`}</p>
+      <p>{t`The more funds that will be borrowed, the higher the interest rate will be`}</p>
       <MarketViewDiv ref={ref}>
         <MarketView
           title={t`Total Market Size`}

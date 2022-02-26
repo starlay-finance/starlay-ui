@@ -37,8 +37,8 @@ msgid "Terms"
 msgstr "Terms"
 
 #: src/components/parts/Footer/TopFooter.tsx
-msgid "Starlay Finance is the first lending protocol backed by Astar Network"
-msgstr "Starlay Finance is the first lending protocol backed by Astar Network"
+msgid "Starlay Finance is the first lending protocol backed by Astar Network."
+msgstr "Starlay Finance is the first lending protocol backed by Astar Network."
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Twitter"

@@ -5,5 +5,5 @@ export const COMMON_SEO_DATA: SEOProps = {
   author: 'Starlay Finance',
   siteUrl: 'https://starlay.finance',
   image: 'assets/images/ogimage.png',
-  description: `Lending on Astar Reaches Perfection - Starlay is the world's first Aster native lending protocol`,
+  description: `Low Risk Farming on Astar Network - Starlay Finance is the first lending protocol backed by Astar Network`,
 }
