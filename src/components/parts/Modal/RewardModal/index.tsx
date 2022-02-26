@@ -1,12 +1,12 @@
 import { t } from '@lingui/macro'
-import { valueToBigNumber } from '@starlay-finance/math-utils'
+import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
-import { useStakeData } from 'src/hooks/useStakeData'
+import { useUserData } from 'src/hooks/useUserData'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { trueBlack } from 'src/styles/colors'
 import { fontWeightMedium, fontWeightSemiBold } from 'src/styles/font'
@@ -26,10 +26,10 @@ const Reward: VFC<ModalContentProps> = ({ close }) => {
 
 const RewardModalBody = () => {
   const { data: marketData } = useMarketData()
-  const { data: stakeData } = useStakeData()
+  const { data: user } = useUserData()
   const { data: balance } = useWalletBalance()
   const { icon, name, symbol } = ASSETS_DICT.LAY
-  const unclaimed = stakeData.userIncentivesToClaim
+  const unclaimed = user?.rewards.unclaimedBalance || BN_ZERO
   const inWallet = balance?.LAY || BN_ZERO
   const total = unclaimed.plus(inWallet)
   const priceInUSD = (
@@ -44,23 +44,26 @@ const RewardModalBody = () => {
     <BodyDiv>
       <SummaryDiv>
         <Image src={icon} alt={name} width={80} height={80} />
-        <p>{formatAmt(total)}</p>
+        <p>{formatter(total)}</p>
         <p>{formatUSD(totalInUSD)}</p>
       </SummaryDiv>
       <NumberItem
         label={t`Wallet Balance`}
         num={valueToBigNumber(inWallet)}
-        format={formatAmt}
+        format={formatter}
       />
       <NumberItem
         label={t`Unclaimed Balance`}
         num={valueToBigNumber(unclaimed)}
-        format={formatAmt}
+        format={formatter}
       />
       <NumberItem label={t`Price`} num={priceInUSD} format={formatUSD} />
     </BodyDiv>
   )
 }
+
+const formatter = (num: BigNumber) =>
+  formatAmt(num, { shorteningThreshold: 8, decimalPlaces: 2 })
 
 const SummaryDiv = styled.div`
   display: flex;

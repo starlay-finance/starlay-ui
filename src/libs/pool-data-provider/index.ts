@@ -32,12 +32,11 @@ export const getPoolDataProvider = ({
       lendingPoolAddressProvider: LENDING_POOL_ADDRESS_PROVIDER,
       baseAsset,
       provider,
-      rewardUndelyingAssetDict: rewardToken
-        ? {
-            [rewardToken.address.toLowerCase()]:
-              rewardToken.underlyingAsset.toLowerCase(),
-          }
-        : undefined,
+      rewardToken: rewardToken.address,
+      rewardUndelyingAssetDict: {
+        [rewardToken.address.toLowerCase()]:
+          rewardToken.underlyingAsset.toLowerCase(),
+      },
     }),
   }
 }

@@ -31,7 +31,7 @@ export type NetworkConfig = {
     symbol: AssetSymbol
     wrapperAddress: EthereumAddress
   }
-  rewardToken?: {
+  rewardToken: {
     symbol: string
     address: EthereumAddress
     underlyingAsset: EthereumAddress
