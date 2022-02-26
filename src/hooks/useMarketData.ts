@@ -18,6 +18,7 @@ import { EthereumAddress } from 'src/types/web3'
 import { assetFromSymbol, onlyListed } from 'src/utils/assets'
 import { convertToUSDBulk } from 'src/utils/calculator'
 import useSWR from 'swr'
+import { ValueOf } from 'type-fest'
 import { usePoolDataProvider } from './usePoolDataProvider'
 
 export type MarketData = {
@@ -37,6 +38,11 @@ export const useMarketData = () => {
     { dedupingInterval: 10000, refreshInterval: 15000 },
   )
 }
+const EMPTY_INCENTIVE: ValueOf<ReserveIncentiveDict> = {
+  lIncentives: { incentiveAPR: '0', rewardTokenAddress: '' },
+  vdIncentives: { incentiveAPR: '0', rewardTokenAddress: '' },
+  sdIncentives: { incentiveAPR: '0', rewardTokenAddress: '' },
+}
 
 const getMarketData = async (
   provider: PoolDataProviderInterface,
@@ -55,7 +61,7 @@ const getMarketData = async (
     .map((each) =>
       toAssetMarketData(
         each,
-        incentivesByUnderlyingAsset,
+        incentivesByUnderlyingAsset[each.underlyingAsset] || EMPTY_INCENTIVE,
         marketReferenceCurrencyPriceInUSD,
       ),
     )
@@ -70,11 +76,9 @@ const getMarketData = async (
 
 const toAssetMarketData = (
   reserve: Omit<FormattedReserveData, 'symbol'> & { symbol: AssetSymbol },
-  incentivesByUnderlyingAsset: ReserveIncentiveDict,
+  incentive: ValueOf<ReserveIncentiveDict>,
   marketReferenceCurrencyPriceInUSD: BigNumber,
 ): AssetMarketData => {
-  const incentive =
-    incentivesByUnderlyingAsset[reserve.underlyingAsset.toLowerCase()]
   const [liquidityInUSD, marketSizeInUSD, totalBorrowedInUSD] =
     convertToUSDBulk(
       valueToBigNumber(reserve.priceInMarketReferenceCurrency),
