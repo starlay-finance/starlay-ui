@@ -4,7 +4,6 @@ import { LogoProtocol } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
-import { useStakeData } from 'src/hooks/useStakeData'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
@@ -22,11 +21,9 @@ import { HeaderWrapper } from './common'
 export const AppHeader = () => {
   const { account } = useWallet()
   const { data: user } = useUserData()
-  const { data: stakeData, error } = useStakeData()
   const { data: balance } = useWalletBalance()
   const { open } = useRewardModal()
   const { open: openWalletModal } = useWalletModal()
-  const layUnclaimed = stakeData.userIncentivesToClaim
   const layInWallet = balance?.LAY || BN_ZERO
   return (
     <AppHeaderWrapper>
@@ -38,7 +35,7 @@ export const AppHeader = () => {
         <MenuButton onClick={user ? () => open() : undefined}>
           <Image src={SymbolLay} alt="Starlay" width={20} height={20} />
           {user
-            ? formatAmt(layInWallet.plus(layUnclaimed), {
+            ? formatAmt(layInWallet.plus(user.rewards.unclaimedBalance), {
                 shorteningThreshold: 8,
               })
             : '-'}

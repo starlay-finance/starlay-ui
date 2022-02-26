@@ -1,6 +1,7 @@
 import {
   PoolBaseCurrencyHumanized,
   ReserveDataHumanized,
+  ReserveIncentiveWithFeedsResponse,
 } from '@starlay-finance/contract-helpers'
 import {
   BigNumber,
@@ -21,16 +22,25 @@ export type PoolDataProviderInterface = {
     marketReferenceCurrencyPriceInUSD: BigNumber
     rawReservesData: ReserveDataHumanized[]
     rawBaseCurrencyData: PoolBaseCurrencyHumanized
+    rawReserveIncentivesData: ReserveIncentiveWithFeedsResponse[]
   }>
-  getUserReserves: (
+  getUserReservesWithIncentive: (
     account: EthereumAddress,
     poolReservesData: PoolReservesData,
-  ) => Promise<FormatUserSummaryResponse>
+  ) => Promise<{
+    reserves: FormatUserSummaryResponse
+    incentive: {
+      address: EthereumAddress
+      underlyingAsset: EthereumAddress
+      unclaimedBalance: BigNumber
+    }
+  }>
 }
 
 export type PoolReservesData = {
   reservesData: ReserveDataHumanized[]
   baseCurrencyData: PoolBaseCurrencyHumanized
+  reserveIncentivesData: ReserveIncentiveWithFeedsResponse[]
   timestamp: number
 }
 

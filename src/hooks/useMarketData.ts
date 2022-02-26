@@ -1,6 +1,7 @@
 import {
   PoolBaseCurrencyHumanized,
   ReserveDataHumanized,
+  ReserveIncentiveWithFeedsResponse,
 } from '@starlay-finance/contract-helpers'
 import {
   BigNumber,
@@ -28,6 +29,7 @@ export type MarketData = {
   chainId: ChainId
   rawReservesData: ReserveDataHumanized[]
   rawBaseCurrencyData: PoolBaseCurrencyHumanized
+  rawReserveIncentivesData: ReserveIncentiveWithFeedsResponse[]
 }
 
 export const useMarketData = () => {

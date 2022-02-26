@@ -49,6 +49,11 @@ export type User = {
   balanceByAsset: {
     [key in AssetSymbol]: Omit<UserAssetBalance, 'inWallet'>
   }
+  rewards: {
+    address: EthereumAddress
+    underlyingAsset: EthereumAddress
+    unclaimedBalance: BigNumber
+  }
 }
 
 export type UserSummary = {

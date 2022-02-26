@@ -1,4 +1,5 @@
 import {
+  BigNumber,
   ComputedUserReserve,
   FormatUserSummaryResponse,
   valueToBigNumber,
@@ -38,16 +39,25 @@ const getUserData = async (
   account: EthereumAddress,
   marketData: MarketData,
 ): Promise<User> => {
-  const userReserves = await provider.getUserReserves(account, {
-    reservesData: marketData.rawReservesData,
-    baseCurrencyData: marketData.rawBaseCurrencyData,
-    timestamp: marketData.marketTimestamp,
-  })
-  return toUser(userReserves, marketData)
+  const { reserves, incentive } = await provider.getUserReservesWithIncentive(
+    account,
+    {
+      reservesData: marketData.rawReservesData,
+      baseCurrencyData: marketData.rawBaseCurrencyData,
+      reserveIncentivesData: marketData.rawReserveIncentivesData,
+      timestamp: marketData.marketTimestamp,
+    },
+  )
+  return toUser(reserves, incentive, marketData)
 }
 
 const toUser = (
   userReserves: FormatUserSummaryResponse,
+  incentive: {
+    address: EthereumAddress
+    underlyingAsset: EthereumAddress
+    unclaimedBalance: BigNumber
+  },
   { assets, marketReferenceCurrencyPriceInUSD }: MarketData,
 ): User => {
   const totalDepositedInUSD = valueToBigNumber(userReserves.totalLiquidityUSD)
@@ -64,6 +74,7 @@ const toUser = (
     marketReferenceCurrencyPriceInUSD,
     totalDepositedInUSD,
   )
+
   return {
     summary: {
       totalDepositedInUSD,
@@ -86,6 +97,7 @@ const toUser = (
       netAPY,
     },
     balanceByAsset,
+    rewards: incentive,
   }
 }
 
