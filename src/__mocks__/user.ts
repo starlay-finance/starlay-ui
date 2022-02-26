@@ -14,6 +14,8 @@ export const MOCK_USER_SUMMARY: UserSummary = {
   healthFactor: valueToBigNumber(0),
   totalBorrowedInMarketReferenceCurrency: valueToBigNumber(0),
   netAPY: valueToBigNumber(0),
+  currentLiquidationThreshold: valueToBigNumber(1),
+  totalCollateralInMarketReferenceCurrency: valueToBigNumber(0),
 }
 
 export const MOCK_USER_ASSET_BALANCE: UserAssetBalance = {

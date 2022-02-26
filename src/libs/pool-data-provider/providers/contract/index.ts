@@ -16,6 +16,7 @@ export class RPCClient implements PoolDataProviderInterface {
     private uiIncentiveDataProvider: UiIncentiveDataProviderInterface,
     private lendingPoolAddressProvider: EthereumAddress,
     private baseAsset: NetworkConfig['baseAsset'],
+    private rewardUndelyingAssetDict: Record<string, string> | undefined,
   ) {}
 
   static new = (params: {
@@ -25,6 +26,7 @@ export class RPCClient implements PoolDataProviderInterface {
     priceAggregatorAdapterAddress: EthereumAddress
     baseAsset: NetworkConfig['baseAsset']
     provider: ethers.providers.Provider
+    rewardUndelyingAssetDict?: Record<string, string>
   }) =>
     new RPCClient(
       new UiPoolDataProvider({
@@ -38,6 +40,7 @@ export class RPCClient implements PoolDataProviderInterface {
       }),
       params.lendingPoolAddressProvider,
       params.baseAsset,
+      params.rewardUndelyingAssetDict,
     )
 
   getReservesWithIncentives = async (currentTimestamp: number) => {
@@ -46,6 +49,7 @@ export class RPCClient implements PoolDataProviderInterface {
       uiIncentiveDataProvider,
       lendingPoolAddressProvider,
       baseAsset,
+      rewardUndelyingAssetDict,
     } = this
     const [poolData, reservesIncentives] = await Promise.all([
       uiPoolDataProvider.getReservesHumanized(lendingPoolAddressProvider),
@@ -59,6 +63,7 @@ export class RPCClient implements PoolDataProviderInterface {
         reservesIncentives,
         currentTimestamp,
         baseAsset,
+        rewardUndelyingAssetDict,
       ),
       rawReservesData: poolData.reservesData,
       rawBaseCurrencyData: poolData.baseCurrencyData,
