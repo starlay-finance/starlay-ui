@@ -5,6 +5,7 @@ import {
 import {
   calculateAllReserveIncentives,
   formatReserve,
+  getComputedReserveFields,
   normalize,
   normalizeBN,
 } from '@starlay-finance/math-utils'
@@ -46,15 +47,32 @@ export const formatReserves = (
       underlyingAsset: BASE_ASSET_DUMMY_ADDRESS,
     }
   })
+
   const incentivesByUnderlyingAsset = calculateAllReserveIncentives({
     reserveIncentives: reserveIncentives.map((each) =>
       !equals(each.underlyingAsset, baseAsset.wrapperAddress)
         ? each
         : { ...each, underlyingAsset: BASE_ASSET_DUMMY_ADDRESS },
     ),
-    reserves: formattedReserves,
+    reserves: reservesData.map((reserve) => {
+      const computed = getComputedReserveFields({ reserve, currentTimestamp })
+      return {
+        underlyingAsset: reserve.underlyingAsset,
+        symbol: reserve.symbol.toLowerCase(),
+        totalLiquidity: computed.totalLiquidity.toString(),
+        totalVariableDebt: computed.totalVariableDebt.toString(),
+        totalStableDebt: computed.totalStableDebt.toString(),
+        priceInMarketReferenceCurrency: normalize(
+          reserve.priceInMarketReferenceCurrency,
+          marketReferenceCurrencyDecimals,
+        ),
+        decimals: reserve.decimals,
+        marketReferenceCurrencyDecimals,
+      }
+    }),
     underlyingAsserDict: rewardUndelyingAssetDict,
   })
+
   return {
     reservesData: formattedReserves,
     incentivesByUnderlyingAsset,
