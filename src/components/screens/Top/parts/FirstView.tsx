@@ -19,10 +19,10 @@ export const FirstView = asStyled<FirstViewProps>(({ assets, className }) => (
   <FirstViewSection className={className}>
     <Content>
       <h1>
-        <div>{t`Lending on Astar Reaches Perfection`}</div>
+        <div>{t`Low Risk Farming on Astar Network`}</div>
       </h1>
       <div>
-        <SubTitle>{t`Starlay Finance is the world's first Aster native lending protocol`}</SubTitle>
+        <SubTitle>{t`Starlay Finance is the first lending protocol backed by Astar Network`}</SubTitle>
         <Control>
           <GradientCtaLink href={APP}> {t`Launch App`}</GradientCtaLink>
           <Link href={DOCS}>

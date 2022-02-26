@@ -34,7 +34,7 @@ export const TopFooter = asStyled(({ className }) => (
         <LogoDiv>
           <LogoProtocol />
         </LogoDiv>
-        <Note>{t`Starlay Finance is the world's first Astar native lending protocol.`}</Note>
+        <Note>{t`Starlay Finance is the first lending protocol backed by Astar Network.`}</Note>
         <IconLinks>
           <IconLink Icon={IconTwitter} href={TWITTER} aria-label={t`Twitter`} />
           <IconLink Icon={IconDiscord} href={DISCORD} aria-label={t`Discord`} />

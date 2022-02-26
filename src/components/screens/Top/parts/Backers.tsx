@@ -24,7 +24,7 @@ export const Backers = asStyled<BackersProps>(({ backers, className }) => {
   return (
     <BackersSection className={className}>
       <h2>{t`Backers`}</h2>
-      <p>{t`We are supported by the most amazing backers`}</p>
+      <p>{t`We're supported by leading teams and organizations`}</p>
       <BackersList ref={ref} $touched={touched} $appeared={appeared}>
         {backers.map(({ name, image }, idx, arr) => {
           const isLast = idx === arr.length - 1
