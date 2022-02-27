@@ -27,9 +27,10 @@ export const ContentDiv = styled.div`
 `
 
 export const NumberItems = styled.div`
+  position: relative;
   margin: -24px 0;
   > {
-    :last-child {
+    div:last-of-type {
       border-bottom-width: 3px;
       margin-bottom: 24px;
     }

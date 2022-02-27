@@ -197,6 +197,14 @@ msgid "Borrow Available"
 msgstr "Borrow Available"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "This asset can't be used as collateral."
+msgstr "This asset can't be used as collateral."
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "For more information, please <0>see our docs</0>."
+msgstr "For more information, please <0>see our docs</0>."
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Deposited"
 msgstr "Deposited"
 

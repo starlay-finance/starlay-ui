@@ -1,12 +1,15 @@
 import { t } from '@lingui/macro'
+import { Trans } from '@lingui/react'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { useState, VFC } from 'react'
+import { Link } from 'src/components/elements/Link'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import {
   NumberItem,
   NumberItemWithDiff,
 } from 'src/components/parts/Modal/parts'
 import { ASSETS_DICT } from 'src/constants/assets'
+import { flexCenter } from 'src/styles/mixins'
 import {
   estimateDeposit,
   estimateWithdrawal,
@@ -19,6 +22,8 @@ import {
   formattedToBigNumber,
   formatUSD,
 } from 'src/utils/number'
+import { DOCS_RISK } from 'src/utils/routes'
+import styled from 'styled-components'
 import {
   Action,
   AmountInput,
@@ -131,6 +136,17 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
             }
             formatter={formatAmtShort}
           />
+          {!asset.usageAsCollateralEnabled && (
+            <NoCollateralMessage>
+              <p>
+                <p>{t`This asset can't be used as collateral.`}</p>
+                <Trans
+                  id="For more information, please <0>see our docs</0>."
+                  components={[<Link key="0" href={DOCS_RISK} />]}
+                />
+              </p>
+            </NoCollateralMessage>
+          )}
         </NumberItems>
         {activeTab === 'deposit' ? (
           <SimpleCtaButton
@@ -160,5 +176,20 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
     </ContentDiv>
   )
 }
+
+const NoCollateralMessage = styled.p`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 214px;
+  ${flexCenter};
+  background-color: rgba(255, 255, 255, 0.96);
+  padding: 24px;
+  p {
+    text-align: center;
+    line-height: 1.5;
+  }
+`
 
 const ActionTab: TabFC = Tab
