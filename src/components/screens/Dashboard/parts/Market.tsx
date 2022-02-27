@@ -18,7 +18,7 @@ import {
 import { Color } from 'src/styles/types'
 import { Asset, AssetMarketData, User } from 'src/types/models'
 import { symbolSorter } from 'src/utils/market'
-import { BN_ZERO, formatAmt, formatPct, formatUSDShort } from 'src/utils/number'
+import { BN_ZERO, formatAmt, formatPct } from 'src/utils/number'
 import styled, { css, keyframes } from 'styled-components'
 import { useBorrowModal } from '../modals/BorrowModal'
 import { useDepositModal } from '../modals/DepositModal'
@@ -68,18 +68,22 @@ export const Market = asStyled(({ className }) => {
           caption={t`Deposit Markets`}
           columns={[
             { id: 'asset', name: 'Asset', widthRatio: 6 },
-            { id: 'apy', name: 'APY', widthRatio: 4 },
-            { id: 'deposited', name: 'Deposited', widthRatio: 4 },
+            { id: 'apr', name: 'Reward APR', widthRatio: 3 },
+            { id: 'apy', name: 'APY', widthRatio: 3 },
+            { id: 'deposited', name: 'Deposited', widthRatio: 6 },
           ]}
           placeholderLength={3}
           rows={markets.map((asset) => {
-            const { symbol, name, icon, depositAPY } = asset
+            const { symbol, name, icon, depositAPY, depositIncentiveAPR } =
+              asset
             const apy = formatPct(depositAPY)
+            const apr = formatPct(depositIncentiveAPR)
             return {
               id: symbol,
               onClick: user ? () => deposit(user, asset) : openWalletModal,
               data: {
                 asset: <AssetTd icon={icon} name={name} />,
+                apr: <BlinkWrapper value={apr}>{apr}</BlinkWrapper>,
                 apy: <BlinkWrapper value={apy}>{apy}</BlinkWrapper>,
                 deposited: !account
                   ? '-'
@@ -100,9 +104,9 @@ export const Market = asStyled(({ className }) => {
           caption={t`Borrow Markets`}
           columns={[
             { id: 'asset', name: 'Asset', widthRatio: 6 },
+            { id: 'apr', name: 'Reward APR', widthRatio: 3 },
             { id: 'apy', name: 'APY', widthRatio: 3 },
-            { id: 'borrowed', name: 'Borrowed', widthRatio: 4 },
-            { id: 'liquidity', name: 'Liquidity', widthRatio: 4 },
+            { id: 'borrowed', name: 'Borrowed', widthRatio: 6 },
           ]}
           placeholderLength={3}
           rowDisabledStyle={rowDisabledStyle}
@@ -112,17 +116,23 @@ export const Market = asStyled(({ className }) => {
               name,
               icon,
               variableBorrowAPY,
-              liquidityInUSD,
+              variableBorrowIncentiveAPR,
               borrowUnsupported,
             } = asset
             const apy = formatPct(variableBorrowAPY)
+            const apr = formatPct(variableBorrowIncentiveAPR)
             return {
               id: symbol,
               onClick: user ? () => borrow(user, asset) : openWalletModal,
               data: {
                 asset: <AssetTd icon={icon} name={name} />,
-                apy: borrowUnsupported ? (
+                apr: borrowUnsupported ? (
                   'Coming soon'
+                ) : (
+                  <BlinkWrapper value={apr}>{apr}</BlinkWrapper>
+                ),
+                apy: borrowUnsupported ? (
+                  '-'
                 ) : (
                   <BlinkWrapper value={apy}>{apy}</BlinkWrapper>
                 ),
@@ -135,9 +145,6 @@ export const Market = asStyled(({ className }) => {
                         shorteningThreshold: 6,
                       })
                     : undefined,
-                liquidity: borrowUnsupported
-                  ? '-'
-                  : formatUSDShort(liquidityInUSD),
               },
               disabled: borrowUnsupported,
             }
