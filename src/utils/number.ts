@@ -79,6 +79,7 @@ export const formatAmtShort = (
   decimalPlaces = 2,
   prefix = '',
 ) => {
+  if (!num.isFinite()) return num.toString()
   const scaleIdx =
     Math.min(Math.ceil(num.toFixed(0).length / 3), SCALES.length) - 1
   const scaledNum = num.shiftedBy(-(scaleIdx || 0) * 3)

@@ -4,6 +4,9 @@ import { LogoProtocol } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
+import { useRewardModal } from 'src/components/parts/Modal/RewardModal'
+import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
+import { Reel } from 'src/components/parts/Reel'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
@@ -14,8 +17,6 @@ import { shortenAddress } from 'src/utils/address'
 import { BN_ZERO, formatAmt } from 'src/utils/number'
 import { APP, TOP } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
-import { useRewardModal } from '../Modal/RewardModal'
-import { useWalletModal } from '../Modal/WalletModal'
 import { HeaderWrapper } from './common'
 
 export const AppHeader = () => {
@@ -34,11 +35,15 @@ export const AppHeader = () => {
       <Menu>
         <MenuButton onClick={user ? () => open() : undefined}>
           <Image src={SymbolLay} alt="Starlay" width={20} height={20} />
-          {user
-            ? formatAmt(layInWallet.plus(user.rewards.unclaimedBalance), {
+          {user ? (
+            <Reel
+              text={formatAmt(layInWallet.plus(user.rewards.unclaimedBalance), {
                 shorteningThreshold: 8,
-              })
-            : '-'}
+              })}
+            />
+          ) : (
+            '-'
+          )}
         </MenuButton>
         <MenuButton onClick={() => openWalletModal()} disabled={!!account}>
           {account ? shortenAddress(account) : t`Connect`}

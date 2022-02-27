@@ -1,5 +1,5 @@
 import { valueToBigNumber } from '@starlay-finance/math-utils'
-import { formatAmt } from './number'
+import { formatAmt, formatAmtShort } from './number'
 
 describe('number', () => {
   describe('formatAmt', () => {
@@ -54,6 +54,9 @@ describe('number', () => {
       ).toBe('0.00')
       expect(formatAmt(valueToBigNumber(0.00009))).toBe('0.00009')
       expect(formatAmt(valueToBigNumber(0), { decimalPlaces: 2 })).toBe('0.00')
+    })
+    test('return if infinity', () => {
+      expect(formatAmtShort(valueToBigNumber('Infinity'))).toBe('Infinity')
     })
   })
 })
