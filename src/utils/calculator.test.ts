@@ -5,6 +5,7 @@ import { PartialDeep } from 'type-fest'
 import {
   estimateBorrow,
   estimateDeposit,
+  estimateRepayment,
   estimateWithdrawal,
   EstimationParam,
 } from './calculator'
@@ -430,6 +431,108 @@ describe('calculartor', () => {
           }),
         )
         expect(result.unavailableReason).toBe('Health factor too low')
+      })
+    })
+  })
+
+  describe('estimateRepayment', () => {
+    describe('max amount should be the min amount of borrowed or in wallet', () => {
+      test('should be equal to the borrowed(with margin', () => {
+        const borrowed = BN_ONE
+        const result = estimateRepayment(
+          param({ userAssetBalance: { borrowed, inWallet: BN_HUNDRED } }),
+        )
+        expect(result.maxAmount.eq(borrowed.multipliedBy('1.025'))).toBeTruthy()
+      })
+      test('should be equal to in wallet', () => {
+        const inWallet = BN_ONE
+        const result = estimateRepayment(
+          param({ userAssetBalance: { borrowed: BN_HUNDRED, inWallet } }),
+        )
+        expect(result.maxAmount.eq(inWallet)).toBeTruthy()
+      })
+    })
+    test('totalBorrowedInUSD should be equal to subtraction of repayment from the current', () => {
+      const result = estimateRepayment(
+        param({
+          userSummary: { totalBorrowedInUSD: BN_HUNDRED },
+          amount: BN_ONE,
+          asset: { priceInMarketReferenceCurrency: valueToBigNumber('1.5') },
+          marketReferenceCurrencyPriceInUSD: valueToBigNumber('2'),
+        }),
+      )
+      expect(result.unavailableReason).toBeUndefined()
+      expect(result.totalBorrowedInUSD?.toFixed(0)).toBe('97')
+    })
+    test('borrowLimitUsed should be equal to subtraction of the repayment from the current', () => {
+      const borrowLimitInUSD = BN_HUNDRED.multipliedBy(BN_HUNDRED)
+      const result = estimateRepayment(
+        param({
+          userSummary: {
+            borrowLimitInUSD,
+            totalBorrowedInUSD: borrowLimitInUSD.div('2'),
+            availableBorrowsInUSD: borrowLimitInUSD.div('2'),
+          },
+          amount: BN_HUNDRED,
+          asset: {
+            priceInMarketReferenceCurrency: valueToBigNumber('1.5'),
+          },
+          marketReferenceCurrencyPriceInUSD: valueToBigNumber('2'),
+        }),
+      )
+      expect(result.unavailableReason).toBeUndefined()
+      expect(result.borrowLimitUsed?.toFixed(2)).toBe('0.47')
+    })
+    test('healthFactor should be equal to division between sum of collateral multiplied by liquidation threshold and borrowed amount', () => {
+      const totalCollateralInMarketReferenceCurrency = BN_HUNDRED
+      const currentLiquidationThreshold = valueToBigNumber('0.9')
+      const reserveLiquidationThreshold = 0.7
+      const amount = BN_ONE
+      const result = estimateRepayment(
+        param({
+          userSummary: {
+            totalBorrowedInMarketReferenceCurrency: BN_ONE,
+            totalCollateralInMarketReferenceCurrency,
+            availableBorrowsInUSD: BN_HUNDRED,
+            currentLiquidationThreshold,
+            healthFactor: valueToBigNumber('2'),
+          },
+          amount,
+          asset: {
+            liquidity: BN_HUNDRED,
+            priceInMarketReferenceCurrency: BN_ONE,
+            reserveLiquidationThreshold,
+          },
+          marketReferenceCurrencyPriceInUSD: BN_ONE,
+        }),
+      )
+      expect(result.unavailableReason).toBeUndefined()
+      expect(result.healthFactor?.toFixed(2)).toBe('90.70')
+    })
+    describe('unavailable reason', () => {
+      test('should return "Enter amount" if the amount not valid', () => {
+        const result = estimateRepayment(param({ amount: undefined }))
+        expect(result.unavailableReason).toBe('Enter amount')
+      })
+      test('should return "No balance to repay" if the amount gt inWallet', () => {
+        const inWallet = BN_ONE
+        const result = estimateRepayment(
+          param({
+            userAssetBalance: { borrowed: BN_HUNDRED, inWallet },
+            amount: BN_HUNDRED,
+          }),
+        )
+        expect(result.unavailableReason).toBe('No balance to repay')
+      })
+      test('should return "No balance to repay" if the amount gt borrowed(with margin', () => {
+        const borrowed = BN_ONE
+        const result = estimateRepayment(
+          param({
+            userAssetBalance: { borrowed, inWallet: BN_HUNDRED },
+            amount: borrowed.multipliedBy('1.026'),
+          }),
+        )
+        expect(result.unavailableReason).toBe('No balance to repay')
       })
     })
   })

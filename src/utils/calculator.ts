@@ -10,7 +10,7 @@ import {
   UserAssetBalance,
   UserSummary,
 } from 'src/types/models'
-import { BN_ZERO } from './number'
+import { BN_ONE, BN_ZERO } from './number'
 
 const HEALTH_FACTOR_THRESHOLD = 1
 
@@ -242,40 +242,38 @@ export const estimateRepayment = ({
   amount,
   userAssetBalance,
   userSummary,
-  asset: { priceInMarketReferenceCurrency },
+  asset: { priceInMarketReferenceCurrency, reserveLiquidationThreshold },
   marketReferenceCurrencyPriceInUSD,
 }: EstimationParam): EstimationResult => {
   const { borrowed: currentBorrowed, inWallet } = userAssetBalance
   const maxAmount = BigNumber.min(
-    currentBorrowed.multipliedBy('1.0025'),
+    currentBorrowed.multipliedBy('1.025'),
     inWallet,
   )
   if (!validEstimationInput(amount))
     return { unavailableReason: t`Enter amount`, maxAmount }
 
-  const {
-    totalBorrowedInUSD: currentBorrowedInUSD,
-    borrowLimitInUSD,
-    totalBorrowedInMarketReferenceCurrency,
-  } = userSummary
+  const { totalBorrowedInUSD: currentBorrowedInUSD, borrowLimitInUSD } =
+    userSummary
   const amountInMarketReferenceCurrency = amount.multipliedBy(
     priceInMarketReferenceCurrency,
   )
-  const amountInUSD = amountInMarketReferenceCurrency.multipliedBy(
-    marketReferenceCurrencyPriceInUSD,
+  const totalBorrowedInUSD = currentBorrowedInUSD.minus(
+    amountInMarketReferenceCurrency.multipliedBy(
+      marketReferenceCurrencyPriceInUSD,
+    ),
   )
 
-  const totalBorrowedInUSD = currentBorrowedInUSD.minus(amountInUSD)
-  const borrowLimitUsed = borrowLimitInUSD.gt(0)
-    ? totalBorrowedInUSD.dividedBy(borrowLimitInUSD)
-    : valueToBigNumber(1)
+  const borrowLimitUsed = calcBorrowLimitUsed(
+    borrowLimitInUSD,
+    totalBorrowedInUSD,
+    BN_ONE,
+  )
 
   const healthFactor = calculateHealthFactor({
-    ...userSummary,
-    totalBorrowedInMarketReferenceCurrency:
-      totalBorrowedInMarketReferenceCurrency.plus(
-        amountInMarketReferenceCurrency,
-      ),
+    userSummary,
+    amountInMarketReferenceCurrency,
+    reserveLiquidationThreshold,
   })
   return {
     unavailableReason: amount.gt(maxAmount)
@@ -290,8 +288,11 @@ export const estimateRepayment = ({
 const calcBorrowLimitUsed = (
   borrowLimitInUSD: BigNumber,
   totalBorrowed: BigNumber,
+  defaultValue?: BigNumber,
 ) =>
-  borrowLimitInUSD.gt(0) ? totalBorrowed.dividedBy(borrowLimitInUSD) : undefined
+  borrowLimitInUSD.gt(0)
+    ? totalBorrowed.dividedBy(borrowLimitInUSD)
+    : defaultValue
 
 const calculateHealthFactor = (param: {
   userSummary: UserSummary
