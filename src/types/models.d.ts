@@ -8,6 +8,7 @@ export type Asset = {
   symbol: AssetSymbol
   icon: string | StaticImageData
   name: string
+  borrowUnsupported?: boolean
 }
 
 export type AssetMarketData = Asset & {

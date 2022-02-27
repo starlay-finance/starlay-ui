@@ -19,7 +19,7 @@ import { Color } from 'src/styles/types'
 import { Asset, AssetMarketData, User } from 'src/types/models'
 import { symbolSorter } from 'src/utils/market'
 import { BN_ZERO, formatAmt, formatPct, formatUSDShort } from 'src/utils/number'
-import styled, { keyframes } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 import { useBorrowModal } from '../modals/BorrowModal'
 import { useDepositModal } from '../modals/DepositModal'
 
@@ -100,31 +100,46 @@ export const Market = asStyled(({ className }) => {
           caption={t`Borrow Markets`}
           columns={[
             { id: 'asset', name: 'Asset', widthRatio: 6 },
-            { id: 'apy', name: 'APY', widthRatio: 2 },
+            { id: 'apy', name: 'APY', widthRatio: 3 },
             { id: 'borrowed', name: 'Borrowed', widthRatio: 4 },
             { id: 'liquidity', name: 'Liquidity', widthRatio: 4 },
           ]}
           placeholderLength={3}
+          rowDisabledStyle={rowDisabledStyle}
           rows={markets.map((asset) => {
-            const { symbol, name, icon, variableBorrowAPY, liquidityInUSD } =
-              asset
+            const {
+              symbol,
+              name,
+              icon,
+              variableBorrowAPY,
+              liquidityInUSD,
+              borrowUnsupported,
+            } = asset
             const apy = formatPct(variableBorrowAPY)
             return {
               id: symbol,
               onClick: user ? () => borrow(user, asset) : openWalletModal,
               data: {
                 asset: <AssetTd icon={icon} name={name} />,
-                apy: <BlinkWrapper value={apy}>{apy}</BlinkWrapper>,
-                borrowed: !account
+                apy: borrowUnsupported ? (
+                  'Coming soon'
+                ) : (
+                  <BlinkWrapper value={apy}>{apy}</BlinkWrapper>
+                ),
+                borrowed:
+                  borrowUnsupported || !account
+                    ? '-'
+                    : user
+                    ? formatAmt(user.balanceByAsset[asset.symbol].borrowed, {
+                        symbol,
+                        shorteningThreshold: 6,
+                      })
+                    : undefined,
+                liquidity: borrowUnsupported
                   ? '-'
-                  : user
-                  ? formatAmt(user.balanceByAsset[asset.symbol].borrowed, {
-                      symbol,
-                      shorteningThreshold: 6,
-                    })
-                  : undefined,
-                liquidity: formatUSDShort(liquidityInUSD),
+                  : formatUSDShort(liquidityInUSD),
               },
+              disabled: borrowUnsupported,
             }
           })}
         />
@@ -132,7 +147,10 @@ export const Market = asStyled(({ className }) => {
     </MarketSecion>
   )
 })``
-
+const rowDisabledStyle = css`
+  opacity: 0.32;
+  pointer-events: none;
+`
 const AssetTd: VFC<Pick<Asset, 'icon' | 'name'>> = ({ icon, name }) => (
   <AssetDiv>
     <Image src={icon} alt={name} width={32} height={32} />
@@ -168,6 +186,7 @@ const MarketSummaryTable = styled(Table)<{ color: Color }>`
   td {
     font-size: 16px;
     font-weight: ${fontWeightSemiBold};
+    white-space: nowrap;
   }
   th,
   td {
