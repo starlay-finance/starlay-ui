@@ -22,9 +22,14 @@ export const TOP_ASSETS = [
 ]
 
 export const TOP_BACKERS: TopProps['backers'] = [
-  { name: 'Astar Network', Svg: LogoAstar },
-  { name: 'ArthSwap', image: LogoArthSwap },
-  { name: 'DIA', Svg: LogoDIA, containerStyle: { maxHeight: '108px' } },
+  { name: 'Astar Network', Svg: LogoAstar, url: 'https://astar.network' },
+  { name: 'ArthSwap', image: LogoArthSwap, url: 'https://app.arthswap.org' },
+  {
+    name: 'DIA',
+    Svg: LogoDIA,
+    url: 'https://www.diadata.org',
+    containerStyle: { maxHeight: '108px' },
+  },
 ]
 
 export const TOP_PROPS: TopProps = {

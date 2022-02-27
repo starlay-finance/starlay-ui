@@ -2,6 +2,7 @@ import { t } from '@lingui/macro'
 import { useState } from 'react'
 import { useInView } from 'react-hook-inview'
 import { Image } from 'src/components/elements/Image'
+import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { secondary } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
@@ -13,6 +14,7 @@ import { backersAnimation } from './animation'
 type Backer = {
   name: string
   containerStyle?: CSSProperties
+  url: string
 } & RequireExactlyOne<{
   image: StaticImageData
   Svg: SvgrComponent
@@ -32,7 +34,7 @@ export const Backers = asStyled<BackersProps>(({ backers, className }) => {
       <h2>{t`Backers`}</h2>
       <p>{t`We're supported by leading teams and organizations`}</p>
       <BackersList ref={ref} $touched={touched} $appeared={appeared}>
-        {backers.map(({ name, image, containerStyle, Svg }, idx, arr) => {
+        {backers.map(({ name, image, url, containerStyle, Svg }, idx, arr) => {
           const isLast = idx === arr.length - 1
           return (
             <li
@@ -41,21 +43,23 @@ export const Backers = asStyled<BackersProps>(({ backers, className }) => {
                 !appeared && isLast ? () => setAppeared(true) : undefined
               }
             >
-              <ImageDiv>
-                <ImageContainer style={containerStyle}>
-                  {Svg ? (
-                    <Svg />
-                  ) : (
-                    <Image
-                      src={image!}
-                      alt={name}
-                      layout="fill"
-                      objectFit="scale-down"
-                    />
-                  )}
-                </ImageContainer>
-              </ImageDiv>
-              <p>{name}</p>
+              <Link href={url}>
+                <ImageDiv>
+                  <ImageContainer style={containerStyle}>
+                    {Svg ? (
+                      <Svg />
+                    ) : (
+                      <Image
+                        src={image!}
+                        alt={name}
+                        layout="fill"
+                        objectFit="scale-down"
+                      />
+                    )}
+                  </ImageContainer>
+                </ImageDiv>
+                <p>{name}</p>
+              </Link>
             </li>
           )
         })}
