@@ -28,7 +28,9 @@ export const calculateNetAPY = (
       return {
         profitInUSD: prev.profitInUSD.plus(profitInUSD),
         lossInUSD: prev.lossInUSD.plus(lossInUSD),
-        rewardInUSD: prev.rewardInUSD.plus(rewardInUSD),
+        rewardInUSD: prev.rewardInUSD.plus(
+          rewardInUSD.isFinite() ? rewardInUSD : BN_ZERO,
+        ),
       }
     },
     {
