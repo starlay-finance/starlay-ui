@@ -182,14 +182,17 @@ const totalCollateralToWithdrawInMarketReferenceCurrency = ({
 export const estimateBorrow = ({
   amount,
   userSummary,
-  asset: { priceInMarketReferenceCurrency, liquidity },
+  asset: {
+    priceInMarketReferenceCurrency,
+    liquidity,
+    reserveLiquidationThreshold,
+  },
   marketReferenceCurrencyPriceInUSD,
 }: EstimationParam): EstimationResult => {
   const {
     availableBorrowsInUSD: currentBorrowable,
     totalBorrowedInUSD: currentBorrowed,
     borrowLimitInUSD,
-    totalBorrowedInMarketReferenceCurrency,
   } = userSummary
   const maxAmount = BigNumber.min(
     convertFromUSD(
@@ -200,26 +203,27 @@ export const estimateBorrow = ({
     liquidity,
   )
   if (!validEstimationInput(amount))
-    return { unavailableReason: t`Enter Amount`, maxAmount }
+    return { unavailableReason: t`Enter amount`, maxAmount }
 
   const amountInMarketReferenceCurrency = amount.multipliedBy(
     priceInMarketReferenceCurrency,
   )
-  const amountInUSD = amountInMarketReferenceCurrency.multipliedBy(
-    marketReferenceCurrencyPriceInUSD,
+  const totalBorrowedInUSD = currentBorrowed.plus(
+    amountInMarketReferenceCurrency.multipliedBy(
+      marketReferenceCurrencyPriceInUSD,
+    ),
   )
 
-  const totalBorrowedInUSD = currentBorrowed.plus(amountInUSD)
-  const borrowLimitUsed = borrowLimitInUSD.gt(0)
-    ? totalBorrowedInUSD.dividedBy(borrowLimitInUSD)
-    : undefined
+  const borrowLimitUsed = calcBorrowLimitUsed(
+    borrowLimitInUSD,
+    totalBorrowedInUSD,
+  )
 
   const healthFactor = calculateHealthFactor({
-    ...userSummary,
-    totalBorrowedInMarketReferenceCurrency:
-      totalBorrowedInMarketReferenceCurrency.plus(
-        amountInMarketReferenceCurrency,
-      ),
+    userSummary,
+    amountInMarketReferenceCurrency,
+    reserveLiquidationThreshold,
+    isNegative: true,
   })
   return {
     unavailableReason: amount.gt(maxAmount)
