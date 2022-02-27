@@ -1,4 +1,5 @@
-import { TOP_PROPS } from 'src/__mocks__/top'
+import { LogoArthSwap, LogoAstar, LogoDIA } from 'src/assets/images/backers'
+import { TopProps } from 'src/components/screens/Top'
 import { ASSETS_DICT } from './assets'
 
 // TODO fix display assets
@@ -19,5 +20,13 @@ export const TOP_ASSETS = [
   ASSETS_DICT.LAY,
   ASSETS_DICT.WSDN,
 ]
-// TODO replace mock
-export const TOP_BACKERS = TOP_PROPS.backers
+
+export const TOP_BACKERS: TopProps['backers'] = [
+  { name: 'Astar Network', Svg: LogoAstar },
+  { name: 'ArthSwap', image: LogoArthSwap },
+  { name: 'DIA', Svg: LogoDIA, containerStyle: { maxHeight: '108px' } },
+]
+
+export const TOP_PROPS: TopProps = {
+  backers: TOP_BACKERS,
+}
