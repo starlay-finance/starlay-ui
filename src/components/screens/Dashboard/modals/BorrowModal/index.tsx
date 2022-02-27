@@ -8,8 +8,12 @@ import { useWallet } from 'src/hooks/useWallet'
 import { BorrowModalBody, BorrowModalBodyProps } from './Body'
 
 export const Borrow: VFC<
-  ModalContentProps<Omit<BorrowModalBodyProps, 'borrow' | 'repay'>>
-> = ({ close, ...props }) => {
+  ModalContentProps<
+    Omit<BorrowModalBodyProps, 'borrow' | 'repay'> & {
+      openSuggestModal: VoidFunction
+    }
+  >
+> = ({ close, openSuggestModal, ...props }) => {
   const { account, signer } = useWallet()
   const { borrow, repay } = useLendingPool(account, signer)
 
@@ -21,7 +25,12 @@ export const Borrow: VFC<
         <BorrowModalBody
           {...props}
           borrow={(amount) =>
-            borrow(amount, asset.underlyingAsset, asset.vdTokenAddress)
+            borrow(
+              amount,
+              asset.underlyingAsset,
+              asset.vdTokenAddress,
+              openSuggestModal,
+            )
           }
           repay={(amount) => repay(amount, asset.underlyingAsset)}
         />
