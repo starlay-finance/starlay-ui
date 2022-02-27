@@ -102,7 +102,6 @@ msgid "Bug Bounty"
 msgstr "Bug Bounty"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
-#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "Wallet Balance"
@@ -169,6 +168,10 @@ msgstr "Borrow Limit Used"
 #: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
 msgid "Health Factor"
 msgstr "Health Factor"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Liquidity"
+msgstr "Liquidity"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
@@ -327,34 +330,30 @@ msgstr "Please switch the chain with your wallet..."
 msgid "Failed to switch the chain"
 msgstr "Failed to switch the chain"
 
-#: src/utils/calculator.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Enter amount"
 msgstr "Enter amount"
 
-#: src/utils/calculator.ts
+#: src/utils/estimationHelper.ts
 msgid "No balance to deposit"
 msgstr "No balance to deposit"
 
-#: src/utils/calculator.ts
-#: src/utils/calculator.ts
-#: src/utils/calculator.ts
-msgid "Enter Amount"
-msgstr "Enter Amount"
+#: src/utils/estimationHelper.ts
+msgid "No balance or liquidity to withdraw"
+msgstr "No balance or liquidity to withdraw"
 
-#: src/utils/calculator.ts
-#: src/utils/calculator.ts
-msgid "No balance to withdraw"
-msgstr "No balance to withdraw"
-
-#: src/utils/calculator.ts
-#: src/utils/calculator.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Health factor too low"
 msgstr "Health factor too low"
 
-#: src/utils/calculator.ts
+#: src/utils/estimationHelper.ts
 msgid "Borrowing limit reached"
 msgstr "Borrowing limit reached"
 
-#: src/utils/calculator.ts
+#: src/utils/estimationHelper.ts
 msgid "No balance to repay"
 msgstr "No balance to repay"
