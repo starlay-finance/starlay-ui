@@ -46,6 +46,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
     symbol,
     variableBorrowAPY,
     variableBorrowIncentiveAPR,
+    liquidity,
     borrowingEnabled,
     isFrozen,
     decimals,
@@ -53,7 +54,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
     name,
   } = asset
   const { totalBorrowedInUSD, borrowLimitUsed, healthFactor } = userSummary
-  const { inWallet, borrowed } = userAssetStatus
+  const { borrowed } = userAssetStatus
 
   const borrowable = borrowingEnabled && !isFrozen
   const [activeTab, setActiveTab] = useState<TabType>(
@@ -160,13 +161,9 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
           </SimpleCtaButton>
         )}
         {activeTab === 'borrow' ? (
-          <Balance label={t`Borrowed`} balance={borrowed} symbol={symbol} />
+          <Balance label={t`Liquidity`} balance={liquidity} symbol={symbol} />
         ) : (
-          <Balance
-            label={t`Wallet Balance`}
-            balance={inWallet}
-            symbol={symbol}
-          />
+          <Balance label={t`Borrowed`} balance={borrowed} symbol={symbol} />
         )}
       </Action>
     </ContentDiv>
