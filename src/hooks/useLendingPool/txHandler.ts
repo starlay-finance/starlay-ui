@@ -25,6 +25,7 @@ export const useTxHandler = () => {
   const handleTx = async (
     txsPromise: Promise<EthereumTransactionTypeExtended[]>,
     signer: ethers.providers.JsonRpcSigner,
+    onSucceeded?: VoidFunction,
   ) => {
     // TODO fix messages
     open({
@@ -75,6 +76,7 @@ export const useTxHandler = () => {
           type: 'Success',
           title: 'Succeeded!',
           message: t`You transaction confirmed!`,
+          onClose: onSucceeded,
         })
       }
     } catch (e) {

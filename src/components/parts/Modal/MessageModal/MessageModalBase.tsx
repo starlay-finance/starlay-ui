@@ -12,6 +12,7 @@ export type MessageModalBaseProps = {
   children?: ReactNode
   iconColor?: Color
   messageDelay?: number
+  onClose?: VoidFunction
 }
 
 export const MessageModalBase: VFC<ModalContentProps<MessageModalBaseProps>> =
@@ -19,7 +20,10 @@ export const MessageModalBase: VFC<ModalContentProps<MessageModalBaseProps>> =
     <DefaultModalContent
       headerNode={title}
       bodyNode={<Body {...props} />}
-      closeModal={close}
+      closeModal={() => {
+        close()
+        props.onClose && props.onClose()
+      }}
     />
   )
 
@@ -28,10 +32,11 @@ const Body: VFC<Omit<MessageModalBaseProps, 'title'>> = ({
   iconColor,
   children,
   messageDelay,
+  onClose,
 }) => (
   <BodyDiv iconColor={iconColor} messageDelay={messageDelay}>
     {children}
-    <p>{message}</p>
+    <p onAnimationEnd={() => onClose && setTimeout(onClose, 500)}>{message}</p>
   </BodyDiv>
 )
 

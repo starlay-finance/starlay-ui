@@ -4,6 +4,7 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { darkPurple, purple, trueBlack } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import styled from 'styled-components'
+import { ItemLabelAstarPair } from '.'
 import { ItemLabel, ItemLabelProps } from './ItemLabel'
 
 type NumberItemProps = ItemLabelProps & {
@@ -14,6 +15,14 @@ export const NumberItem = asStyled<NumberItemProps>(
   ({ num, format, className, ...props }) => (
     <ItemDiv className={className}>
       <ItemLabel {...props} />
+      <Calculation>{format(num)}</Calculation>
+    </ItemDiv>
+  ),
+)``
+export const NumberItemAstarPair = asStyled<NumberItemProps>(
+  ({ num, format, className, ...props }) => (
+    <ItemDiv className={className}>
+      <ItemLabelAstarPair {...props} />
       <Calculation>{format(num)}</Calculation>
     </ItemDiv>
   ),

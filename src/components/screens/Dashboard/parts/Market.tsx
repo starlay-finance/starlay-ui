@@ -9,6 +9,7 @@ import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
+import { hoveredRow } from 'src/styles/animation'
 import { darkPurple, lightYellow, purple, secondary } from 'src/styles/colors'
 import {
   fontWeightHeavy,
@@ -19,9 +20,10 @@ import { Color } from 'src/styles/types'
 import { Asset, AssetMarketData, User } from 'src/types/models'
 import { symbolSorter } from 'src/utils/market'
 import { BN_ZERO, formatAmt, formatPct } from 'src/utils/number'
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useBorrowModal } from '../modals/BorrowModal'
 import { useDepositModal } from '../modals/DepositModal'
+import { useSuggestModal } from '../modals/SuggestModal'
 
 export const Market = asStyled(({ className }) => {
   const { account } = useWallet()
@@ -34,6 +36,7 @@ export const Market = asStyled(({ className }) => {
   const { data: balance } = useWalletBalance()
   const { open: openDepositModal } = useDepositModal()
   const { open: openBorrowModal } = useBorrowModal()
+  const { open: openSuggestModal } = useSuggestModal()
   const { open: openWalletModal } = useWalletModal()
 
   const deposit = (user: User, asset: AssetMarketData) => {
@@ -57,6 +60,12 @@ export const Market = asStyled(({ className }) => {
         inWallet: balance[asset.symbol],
       },
       marketReferenceCurrencyPriceInUSD,
+      openSuggestModal: () =>
+        openSuggestModal({
+          asset,
+          inWallet: balance[asset.symbol],
+          openDeposit: () => deposit(user, asset),
+        }),
     })
   }
 
@@ -165,15 +174,6 @@ const AssetTd: VFC<Pick<Asset, 'icon' | 'name'>> = ({ icon, name }) => (
   </AssetDiv>
 )
 
-const hoverBackgroundKeyframes = keyframes`
-  0% {
-    background-position: 0%;
-  }
-  100% {
-    background-position: -300%;
-  }
-`
-
 const MarketSummaryTable = styled(Table)<{ color: Color }>`
   caption {
     padding: 24px 32px 0;
@@ -212,10 +212,7 @@ const MarketSummaryTable = styled(Table)<{ color: Color }>`
   }
   tbody > tr {
     :hover {
-      background: ${({ color }) =>
-        `linear-gradient(90deg, ${color}00, ${color}52, ${color}00)`};
-      background-size: 300%;
-      animation: ${hoverBackgroundKeyframes} 5s infinite linear;
+      ${({ color }) => hoveredRow(color)};
     }
   }
 `

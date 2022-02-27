@@ -52,6 +52,7 @@ export const useLendingPool = (
     amount: BigNumber,
     underlyingAsset: EthereumAddress,
     vdTokenAddress: EthereumAddress,
+    onSucceeded?: VoidFunction,
   ) => {
     if (!lendingPool || !account || !signer) throw new Error('Unexpected state')
     return handleTx(
@@ -63,6 +64,7 @@ export const useLendingPool = (
         debtTokenAddress: vdTokenAddress,
       }),
       signer,
+      onSucceeded,
     )
   }
   const repay = async (amount: BigNumber, underlyingAsset: EthereumAddress) => {
