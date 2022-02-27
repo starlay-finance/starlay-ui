@@ -1,4 +1,9 @@
-import { LogoArthSwap, LogoAstar, LogoDIA } from 'src/assets/images/backers'
+import {
+  LogoArthSwap,
+  LogoAstar,
+  LogoDFG,
+  LogoDIA,
+} from 'src/assets/images/backers'
 import { TopProps } from 'src/components/screens/Top'
 import { ASSETS_DICT } from './assets'
 
@@ -22,9 +27,15 @@ export const TOP_ASSETS = [
 ]
 
 export const TOP_BACKERS: TopProps['backers'] = [
-  { name: 'Astar Network', Svg: LogoAstar },
-  { name: 'ArthSwap', image: LogoArthSwap },
-  { name: 'DIA', Svg: LogoDIA, containerStyle: { maxHeight: '108px' } },
+  { name: 'Astar Network', Svg: LogoAstar, url: 'https://astar.network' },
+  { name: 'ArthSwap', image: LogoArthSwap, url: 'https://app.arthswap.org' },
+  {
+    name: 'DIA',
+    Svg: LogoDIA,
+    url: 'https://www.diadata.org',
+    containerStyle: { maxHeight: '108px' },
+  },
+  { name: 'DFG', Svg: LogoDFG, url: 'https://www.dfg.group' },
 ]
 
 export const TOP_PROPS: TopProps = {
