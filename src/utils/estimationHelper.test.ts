@@ -8,7 +8,7 @@ import {
   estimateRepayment,
   estimateWithdrawal,
   EstimationParam,
-} from './calculator'
+} from './estimationHelper'
 import { BN_HUNDRED, BN_ONE } from './number'
 
 describe('calculartor', () => {

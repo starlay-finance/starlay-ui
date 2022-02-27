@@ -11,7 +11,7 @@ import {
   estimateDeposit,
   estimateWithdrawal,
   EstimationParam,
-} from 'src/utils/calculator'
+} from 'src/utils/estimationHelper'
 import {
   formatAmt,
   formatAmtShort,

@@ -11,7 +11,7 @@ import {
   estimateBorrow,
   estimateRepayment,
   EstimationParam,
-} from 'src/utils/calculator'
+} from 'src/utils/estimationHelper'
 import {
   formatAmt,
   formatAmtShort,
@@ -54,7 +54,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
     name,
   } = asset
   const { totalBorrowedInUSD, borrowLimitUsed, healthFactor } = userSummary
-  const { inWallet, borrowed } = userAssetBalance
+  const { borrowed } = userAssetBalance
 
   const borrowable = borrowingEnabled && !isFrozen
   const [activeTab, setActiveTab] = useState<TabType>(
