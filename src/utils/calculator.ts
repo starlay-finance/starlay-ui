@@ -36,37 +36,52 @@ export const estimateDeposit = ({
   userAssetBalance,
   userSummary,
   marketReferenceCurrencyPriceInUSD,
-  asset: { baseLTVasCollateral, priceInMarketReferenceCurrency },
+  asset: {
+    baseLTVasCollateral,
+    priceInMarketReferenceCurrency,
+    reserveLiquidationThreshold,
+  },
 }: EstimationParam): EstimationResult => {
   const maxAmount = userAssetBalance.inWallet
-
   if (!amount || amount.isNaN() || amount.lte(BN_ZERO))
     return { unavailableReason: t`Enter amount`, maxAmount }
 
   const {
     availableBorrowsInUSD: currentBorrowable,
     totalBorrowedInUSD: currentBorrowed,
-    totalCollateralInMarketReferenceCurrency,
+    totalCollateralInMarketReferenceCurrency:
+      currentCollateralInMarketReferenceCurrency,
+    currentLiquidationThreshold,
   } = userSummary
-  const ltvInMarketReferenceCurrenry = amount
-    .multipliedBy(baseLTVasCollateral)
-    .multipliedBy(priceInMarketReferenceCurrency)
-  const ltvInUSD = ltvInMarketReferenceCurrenry.multipliedBy(
-    marketReferenceCurrencyPriceInUSD,
+  const amountInMarketReferenceCurrenry = amount.multipliedBy(
+    priceInMarketReferenceCurrency,
   )
+  const ltvInUSD = amountInMarketReferenceCurrenry
+    .multipliedBy(marketReferenceCurrencyPriceInUSD)
+    .multipliedBy(baseLTVasCollateral)
 
   const availableBorrowsInUSD = currentBorrowable.plus(ltvInUSD)
   const borrowLimitInUSD = availableBorrowsInUSD.plus(currentBorrowed)
   const borrowLimitUsed = borrowLimitInUSD.gt(0)
     ? currentBorrowed.dividedBy(borrowLimitInUSD)
     : undefined
+  const totalCollateralInMarketReferenceCurrency =
+    currentCollateralInMarketReferenceCurrency.plus(
+      amountInMarketReferenceCurrenry,
+    )
+
+  const liquidationThreshold = currentLiquidationThreshold
+    .multipliedBy(currentCollateralInMarketReferenceCurrency)
+    .plus(
+      amountInMarketReferenceCurrenry.multipliedBy(reserveLiquidationThreshold),
+    )
+    .div(totalCollateralInMarketReferenceCurrency)
 
   const healthFactor = calculateHealthFactor({
-    ...userSummary,
-    totalCollateralInMarketReferenceCurrency:
-      totalCollateralInMarketReferenceCurrency.plus(
-        ltvInMarketReferenceCurrenry,
-      ),
+    totalBorrowedInMarketReferenceCurrency:
+      userSummary.totalBorrowedInMarketReferenceCurrency,
+    totalCollateralInMarketReferenceCurrency,
+    liquidationThreshold,
   })
   return {
     unavailableReason: amount.gt(maxAmount)
@@ -286,15 +301,14 @@ const calculateHealthFactor = (
     UserSummary,
     | 'totalCollateralInMarketReferenceCurrency'
     | 'totalBorrowedInMarketReferenceCurrency'
-    | 'currentLiquidationThreshold'
-  >,
+  > & { liquidationThreshold: BigNumber },
 ) =>
   calculateHealthFactorFromBalancesBigUnits({
     collateralBalanceMarketReferenceCurrency:
       params.totalCollateralInMarketReferenceCurrency,
     borrowBalanceMarketReferenceCurrency:
       params.totalBorrowedInMarketReferenceCurrency,
-    currentLiquidationThreshold: params.currentLiquidationThreshold,
+    currentLiquidationThreshold: params.liquidationThreshold,
   })
 
 export const calculateNetAPY = (
