@@ -11,7 +11,7 @@ import {
   estimateDeposit,
   estimateWithdrawal,
   EstimationParam,
-} from 'src/utils/calculator'
+} from 'src/utils/estimationHelper'
 import {
   formatAmt,
   formatAmtShort,
@@ -41,10 +41,10 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
   withdraw,
   ...estimationParams
 }) => {
-  const { asset, userSummary, userAssetStatus } = estimationParams
+  const { asset, userSummary, userAssetBalance } = estimationParams
   const { symbol, depositAPY, depositIncentiveAPR, isFrozen } = asset
   const { availableBorrowsInUSD, borrowLimitUsed, healthFactor } = userSummary
-  const { inWallet, deposited } = userAssetStatus
+  const { inWallet, deposited } = userAssetBalance
 
   const [activeTab, setActiveTab] = useState<TabType>(
     !isFrozen ? 'deposit' : 'withdraw',

@@ -40,7 +40,7 @@ export const Market = asStyled(({ className }) => {
     openDepositModal({
       asset,
       userSummary: user.summary,
-      userAssetStatus: {
+      userAssetBalance: {
         ...user.balanceByAsset[asset.symbol],
         inWallet: balance[asset.symbol],
       },
@@ -52,7 +52,7 @@ export const Market = asStyled(({ className }) => {
     openBorrowModal({
       asset,
       userSummary: user.summary,
-      userAssetStatus: {
+      userAssetBalance: {
         ...user.balanceByAsset[asset.symbol],
         inWallet: balance[asset.symbol],
       },
