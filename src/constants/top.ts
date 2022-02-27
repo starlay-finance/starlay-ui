@@ -1,4 +1,9 @@
-import { LogoArthSwap, LogoAstar, LogoDIA } from 'src/assets/images/backers'
+import {
+  LogoArthSwap,
+  LogoAstar,
+  LogoDFG,
+  LogoDIA,
+} from 'src/assets/images/backers'
 import { TopProps } from 'src/components/screens/Top'
 import { ASSETS_DICT } from './assets'
 
@@ -30,6 +35,7 @@ export const TOP_BACKERS: TopProps['backers'] = [
     url: 'https://www.diadata.org',
     containerStyle: { maxHeight: '108px' },
   },
+  { name: 'DFG', Svg: LogoDFG, url: 'https://www.dfg.group' },
 ]
 
 export const TOP_PROPS: TopProps = {
