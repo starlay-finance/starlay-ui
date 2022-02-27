@@ -58,6 +58,12 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
       symbol: 'ASTR',
       wrapperAddress: '0xAeaaf0e2c81Af264101B9129C00F4440cCF0F720',
     },
+    rewardToken: {
+      address: '0x00',
+      decimals: 18,
+      symbol: '',
+      underlyingAsset: '0x00',
+    },
     explorerLinks: ['https://blockscout.com/astar'],
   },
 }
