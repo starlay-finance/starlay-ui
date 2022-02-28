@@ -31,7 +31,7 @@ export const FirstView = asStyled<FirstViewProps>(({ assets, className }) => (
         </Control>
         <PoweredBy>
           <span>{t`Powered by`}</span>
-          <Image src={LogoAstar} alt={t`ASTAR`} layout="fixed" />
+          <Image src={LogoAstar} alt={t`ASTAR`} height={32} width={101} />
         </PoweredBy>
       </div>
       <Assets assets={assets} />
