@@ -77,7 +77,6 @@ const FirstViewSection = styled.section`
   h1 {
     max-width: 720px;
     height: 2.4em;
-    overflow: hidden;
     div {
       ${headingAnimation};
     }
