@@ -20,6 +20,7 @@ export const MOCK_ASSET_MARKET: AssetMarketData = {
   decimals: 18,
   lTokenAddress: '0x0000000000000000000000000000000000000000',
   vdTokenAddress: '0x0000000000000000000000000000000000000000',
+  isActive: true,
   isFrozen: false,
   borrowingEnabled: true,
 }

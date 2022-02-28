@@ -41,5 +41,7 @@ jobs:
       - name: workaround for detached HEAD
         run: |
           git checkout ${GITHUB_HEAD_REF} || git checkout -b ${GITHUB_HEAD_REF} && git pull
+      - name: check types
+        run: yarn tsc
       - name: run test
         run: yarn test:once

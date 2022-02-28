@@ -32,7 +32,10 @@ export const Assets = asStyled<AssetsProps>((props) => {
 
 type AssetsComponentProps = {
   assets: Asset[]
-  markets: AssetMarketData[]
+  markets: Pick<
+    AssetMarketData,
+    'symbol' | 'depositAPY' | 'variableBorrowAPY'
+  >[]
 }
 export const AssetsComponent: VFC<AssetsComponentProps & AsStyledProps> = ({
   assets,
