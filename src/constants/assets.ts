@@ -62,7 +62,7 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
   },
   USDT: {
     symbol: 'USDT',
-    name: 'Thether USD',
+    name: 'Tether USD',
     icon: SymbolUsdt,
   },
   ARSW: {
