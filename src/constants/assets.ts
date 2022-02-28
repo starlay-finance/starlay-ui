@@ -69,11 +69,13 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     symbol: 'ARSW',
     name: 'ArthSwap Token',
     icon: SymbolArsw,
+    borrowUnsupported: true,
   },
   LAY: {
     symbol: 'LAY',
     name: 'Starlay Token',
     icon: SymbolLay,
+    borrowUnsupported: true,
   },
 } as const
 
