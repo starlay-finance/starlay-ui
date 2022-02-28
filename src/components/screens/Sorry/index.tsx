@@ -6,7 +6,7 @@ import {
   BackgroundOverlay,
 } from 'src/components/parts/Background'
 import { GradientCtaButton } from 'src/components/parts/Cta'
-import { fontWeightThin } from 'src/styles/font'
+import { fontWeightLight } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { FromQuery, SorryReason } from 'src/types/page'
 import styled from 'styled-components'
@@ -53,7 +53,7 @@ const Content = styled.div`
   }
   p {
     font-size: 16px;
-    font-weight: ${fontWeightThin};
+    font-weight: ${fontWeightLight};
     line-height: 1.5;
     letter-spacing: 0.064em;
     text-align: center;
