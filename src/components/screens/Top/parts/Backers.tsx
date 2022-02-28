@@ -73,9 +73,9 @@ const ImageContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  max-height: 77px;
   ${flexCenter};
-  margin: 24px;
+  padding: 40px 72px;
+  max-height: 176px;
   svg {
     width: 100%;
     height: 100%;
