@@ -64,8 +64,6 @@ const toUserSummary = (
           equals(reserve.underlyingAsset, userReserve.underlyingAsset),
         )
         if (!reserve) return
-        // TODO see use of rawUserReservesWithBase
-        // userReserves.push(reserveWithBase)
         const reserveWithBase = {
           ...userReserve,
           reserve,

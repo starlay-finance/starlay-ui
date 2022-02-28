@@ -7,7 +7,6 @@ import {
 import { TopProps } from 'src/components/screens/Top'
 import { ASSETS_DICT } from './assets'
 
-// TODO fix display assets
 export const TOP_ASSETS = [
   ASSETS_DICT.ASTR,
   ASSETS_DICT.WSDN,

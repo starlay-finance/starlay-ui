@@ -26,7 +26,7 @@ export const AppFooter = asStyled(({ className }) => {
           <Link href={TERMS}>{t`Terms`}</Link>
         </Nav>
         <Control>
-          {/* TODO show these buttons if supported */}
+          {/* show these buttons if supported */}
           {/* <DropdownButton>{t`$USD`}</DropdownButton> */}
           {/* <DropdownButton>{t`English`}</DropdownButton> */}
         </Control>

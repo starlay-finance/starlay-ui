@@ -17,16 +17,19 @@ export type LendingPoolTxs = {
 
 export const useTxHandler = () => {
   const { open } = useMessageModal()
-  // TODO fix revalidate
   const { mutate: mutateMarketData } = useMarketData()
   const { mutate: mutateUserData } = useUserData()
   const { mutate: mutateWalletBalance } = useWalletBalance()
+  const revalidate = () => {
+    mutateMarketData()
+    mutateUserData()
+    mutateWalletBalance()
+  }
 
   const handleTx = async (
     txsPromise: Promise<EthereumTransactionTypeExtended[]>,
     signer: ethers.providers.JsonRpcSigner,
   ) => {
-    // TODO fix messages
     open({
       type: 'Loading',
       title: 'Transaction Preparing',
@@ -68,9 +71,7 @@ export const useTxHandler = () => {
           message: t`Waiting for the transaction to be confirmed...`,
         })
         await depostRes.wait(1)
-        mutateMarketData()
-        mutateUserData()
-        mutateWalletBalance()
+        revalidate()
         open({
           type: 'Success',
           title: 'Succeeded!',
@@ -79,7 +80,6 @@ export const useTxHandler = () => {
       }
     } catch (e) {
       const error = serializeError(e)
-      // TODO handle error
       if (error.code === 4001) {
         open({
           type: 'Alert',
