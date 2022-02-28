@@ -23,7 +23,7 @@ export const AppHeader = () => {
   const { account } = useWallet()
   const { data: user } = useUserData()
   const { data: balance } = useWalletBalance()
-  const { open } = useRewardModal()
+  const { open: openRewardModal } = useRewardModal()
   const { open: openWalletModal } = useWalletModal()
   const layInWallet = balance?.LAY || BN_ZERO
   return (
@@ -33,7 +33,7 @@ export const AppHeader = () => {
         <Tab href={APP} $active>{t`Dashboard`}</Tab>
       </Nav>
       <Menu>
-        <MenuButton onClick={user ? () => open() : undefined}>
+        <MenuButton onClick={() => openRewardModal()} disabled={!user}>
           <Image src={SymbolLay} alt="Starlay" width={20} height={20} />
           {user ? (
             <Reel
