@@ -10,7 +10,7 @@ import {
 import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { IconLink } from 'src/components/parts/Link'
-import { purple, secondary, trueWhite } from 'src/styles/colors'
+import { primary, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightMedium, fontWeightSemiBold } from 'src/styles/font'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
 import {
@@ -20,6 +20,7 @@ import {
   GITHUB,
   GOVERNANCE_OVERVIEW,
   GOVERNANCE_STARLAY,
+  MEDIA_KIT,
   MEDIUM,
   TELEGRAM,
   TWITTER,
@@ -68,6 +69,12 @@ export const TopFooter = asStyled(({ className }) => (
           <Link href={TELEGRAM}>{t`Telegram`}</Link>
         </TextLinks>
       </NavItem>
+      <NavItem>
+        <LinksHeading>{t`Brand`}</LinksHeading>
+        <TextLinks>
+          <Link href={MEDIA_KIT}>{t`Media Kit`}</Link>
+        </TextLinks>
+      </NavItem>
     </Nav>
   </StyledFooter>
 ))``
@@ -99,7 +106,6 @@ const TextLinks = styled.div`
     display: block;
     width: fit-content;
     margin-top: 16px;
-    color: ${secondary};
   }
 `
 
@@ -113,7 +119,7 @@ const LinksHeading = styled.p`
   }
 `
 const NavItem = styled.div`
-  color: ${secondary};
+  color: ${primary}cc;
   a,
   ${Note} {
     font-size: 14px;
