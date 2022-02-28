@@ -48,7 +48,7 @@ export const CurrentMarketsComponent = forwardRef<
       <p>{t`The more funds that will be borrowed, the higher the interest rate will be`}</p>
       <MarketViewDiv ref={ref}>
         <MarketView
-          title={t`Total Market Size`}
+          title={t`Total Deposited`}
           market={deposit}
           touched={touched}
         />
