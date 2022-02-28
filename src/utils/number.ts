@@ -3,7 +3,6 @@ import {
   BigNumberValue,
   valueToBigNumber,
 } from '@starlay-finance/math-utils'
-import { AssetSymbol } from 'src/types/models'
 
 const SCALES = ['', 'K', 'M', 'B', 'T', 'P', 'E', 'Z', 'Y'] as const
 
@@ -71,7 +70,7 @@ const formatNum = (
 
 export const formatAmt = (
   num: BigNumber,
-  { symbol, ...opts }: FormatOption & { symbol?: AssetSymbol } = {},
+  { symbol, ...opts }: FormatOption & { symbol?: string } = {},
 ) => `${formatNum(num, opts)}${symbol ? ` ${symbol}` : ''}`
 
 export const formatAmtShort = (

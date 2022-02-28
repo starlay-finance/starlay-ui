@@ -47,7 +47,8 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
   ...estimationParams
 }) => {
   const { asset, userSummary, userAssetBalance } = estimationParams
-  const { symbol, depositAPY, depositIncentiveAPR, isFrozen } = asset
+  const { symbol, displaySymbol, depositAPY, depositIncentiveAPR, isFrozen } =
+    asset
   const { availableBorrowsInUSD, borrowLimitUsed, healthFactor } = userSummary
   const { inWallet, deposited } = userAssetBalance
 
@@ -167,10 +168,14 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
           <Balance
             label={t`Wallet Balance`}
             balance={inWallet}
-            symbol={symbol}
+            symbol={displaySymbol || symbol}
           />
         ) : (
-          <Balance label={t`Deposited`} balance={deposited} symbol={symbol} />
+          <Balance
+            label={t`Deposited`}
+            balance={deposited}
+            symbol={displaySymbol || symbol}
+          />
         )}
       </Action>
     </ContentDiv>

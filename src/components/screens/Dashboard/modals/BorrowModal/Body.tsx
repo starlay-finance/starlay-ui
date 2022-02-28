@@ -44,6 +44,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
   const { asset, userSummary, userAssetBalance } = estimationParams
   const {
     symbol,
+    displaySymbol,
     variableBorrowAPY,
     variableBorrowIncentiveAPR,
     liquidity,
@@ -161,9 +162,17 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
           </SimpleCtaButton>
         )}
         {activeTab === 'borrow' ? (
-          <Balance label={t`Liquidity`} balance={liquidity} symbol={symbol} />
+          <Balance
+            label={t`Liquidity`}
+            balance={liquidity}
+            symbol={displaySymbol || symbol}
+          />
         ) : (
-          <Balance label={t`Borrowed`} balance={borrowed} symbol={symbol} />
+          <Balance
+            label={t`Borrowed`}
+            balance={borrowed}
+            symbol={displaySymbol || symbol}
+          />
         )}
       </Action>
     </ContentDiv>
