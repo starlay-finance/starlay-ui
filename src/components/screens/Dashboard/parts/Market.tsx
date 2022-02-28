@@ -26,7 +26,9 @@ import { useDepositModal } from '../modals/DepositModal'
 export const Market = asStyled(({ className }) => {
   const { account } = useWallet()
   const { data: marketData } = useMarketData()
-  const markets = (marketData?.assets || []).sort(symbolSorter)
+  const markets = (marketData?.assets || [])
+    .filter((each) => each.isActive)
+    .sort(symbolSorter)
   const marketReferenceCurrencyPriceInUSD =
     marketData?.marketReferenceCurrencyPriceInUSD || BN_ZERO
 
