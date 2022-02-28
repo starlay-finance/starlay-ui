@@ -15,7 +15,7 @@ export const sorryFor = (reason: SorryReason) => `${SORRY}?reason=${reason}`
 export const DEVELOPERS = 'https://docs.starlay.finance/development/repository'
 export const DOCS = 'https://docs.starlay.finance'
 export const DOCS_RISK = 'https://docs.starlay.finance/asset/risk-parameters'
-export const DISCORD = 'http://discord.gg/d7FVntK6'
+export const DISCORD = 'https://discord.gg/M4NjBJZ94b'
 export const GITHUB = 'https://github.com/starlay-finance'
 export const TWITTER = 'https://twitter.com/starlay_fi'
 export const TELEGRAM = 'https://t.me/starlay_fi'
