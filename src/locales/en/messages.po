@@ -241,8 +241,8 @@ msgid "Go Back"
 msgstr "Go Back"
 
 #: src/components/screens/Sorry/reasons.ts
-msgid "The Starlay Protocol front-end system does not support mobile access, so please access the site from a PC."
-msgstr "The Starlay Protocol front-end system does not support mobile access, so please access the site from a PC."
+msgid "Starlay Finance does not support mobile access. Please connect to this website using your PC."
+msgstr "Starlay Finance does not support mobile access. Please connect to this website using your PC."
 
 #: src/components/screens/Sorry/reasons.ts
 msgid "Something went wrong. Please go back."
