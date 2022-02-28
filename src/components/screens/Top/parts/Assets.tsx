@@ -11,6 +11,7 @@ import { darkRed, primary, secondary, skyBlue } from 'src/styles/colors'
 import {
   fontWeightBlack,
   fontWeightMedium,
+  fontWeightRegular,
   fontWeightSemiBold,
 } from 'src/styles/font'
 import { Asset, AssetMarketData } from 'src/types/models'
@@ -31,10 +32,7 @@ export const Assets = asStyled<AssetsProps>((props) => {
 
 type AssetsComponentProps = {
   assets: Asset[]
-  markets: Pick<
-    AssetMarketData,
-    'symbol' | 'depositAPY' | 'variableBorrowAPY'
-  >[]
+  markets: AssetMarketData[]
 }
 export const AssetsComponent: VFC<AssetsComponentProps & AsStyledProps> = ({
   assets,
@@ -71,14 +69,22 @@ export const AssetsComponent: VFC<AssetsComponentProps & AsStyledProps> = ({
               <span>{each.name}</span>
             </Symbol>
             <Rates>
-              <Rate
-                label={t`Deposit APY`}
-                value={market ? formatPct(market.depositAPY) : undefined}
-              />
-              <Rate
-                label={t`Borrow APY`}
-                value={market ? formatPct(market.variableBorrowAPY) : undefined}
-              />
+              {!each.borrowUnsupported ? (
+                <>
+                  <Rate
+                    label={t`Deposit APY`}
+                    value={market ? formatPct(market.depositAPY) : undefined}
+                  />
+                  <Rate
+                    label={t`Borrow APY`}
+                    value={
+                      market ? formatPct(market.variableBorrowAPY) : undefined
+                    }
+                  />
+                </>
+              ) : (
+                <ComingSoon>Coming Soon</ComingSoon>
+              )}
             </Rates>
           </AssetItem>
         )
@@ -121,7 +127,12 @@ const Rates = styled.div`
   display: flex;
   column-gap: 16px;
 `
-
+const ComingSoon = styled.p`
+  font-size: 20px;
+  font-weight: ${fontWeightRegular};
+  font-style: italic;
+  color: ${secondary};
+`
 const Symbol = styled.div`
   position: relative;
   display: flex;
