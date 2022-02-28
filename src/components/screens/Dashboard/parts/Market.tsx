@@ -74,8 +74,14 @@ export const Market = asStyled(({ className }) => {
           ]}
           placeholderLength={3}
           rows={markets.map((asset) => {
-            const { symbol, name, icon, depositAPY, depositIncentiveAPR } =
-              asset
+            const {
+              symbol,
+              displaySymbol,
+              name,
+              icon,
+              depositAPY,
+              depositIncentiveAPR,
+            } = asset
             const apy = formatPct(depositAPY)
             const apr = formatPct(depositIncentiveAPR)
             return {
@@ -89,7 +95,7 @@ export const Market = asStyled(({ className }) => {
                   ? '-'
                   : user
                   ? formatAmt(user.balanceByAsset[asset.symbol].deposited, {
-                      symbol,
+                      symbol: displaySymbol || symbol,
                       shorteningThreshold: 6,
                     })
                   : undefined,
@@ -113,6 +119,7 @@ export const Market = asStyled(({ className }) => {
           rows={markets.map((asset) => {
             const {
               symbol,
+              displaySymbol,
               name,
               icon,
               variableBorrowAPY,
@@ -141,7 +148,7 @@ export const Market = asStyled(({ className }) => {
                     ? '-'
                     : user
                     ? formatAmt(user.balanceByAsset[asset.symbol].borrowed, {
-                        symbol,
+                        symbol: displaySymbol || symbol,
                         shorteningThreshold: 6,
                       })
                     : undefined,

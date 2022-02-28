@@ -6,6 +6,7 @@ export type AssetSymbol = typeof LISTED_ASSET_SYMBOLS[number]
 
 export type Asset = {
   symbol: AssetSymbol
+  displaySymbol?: string
   icon: string | StaticImageData
   name: string
   borrowUnsupported?: boolean

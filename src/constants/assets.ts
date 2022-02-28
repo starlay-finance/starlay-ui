@@ -16,7 +16,7 @@ export const LISTED_ASSET_SYMBOLS = [
   'USDT',
   'WETH',
   'WBTC',
-  'WSDN',
+  'SDN',
   'ARSW',
   'LAY',
 ] as const
@@ -27,7 +27,7 @@ export const SYMBOL_ORDER: Record<AssetSymbol, number> = {
   USDT: 2,
   WETH: 3,
   WBTC: 4,
-  WSDN: 5,
+  SDN: 5,
   ARSW: 6,
   LAY: 7,
 }
@@ -49,8 +49,9 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     name: 'Wrapped BTC',
     icon: SymbolWbtc,
   },
-  WSDN: {
-    symbol: 'WSDN',
+  SDN: {
+    symbol: 'SDN',
+    displaySymbol: 'WSDN',
     name: 'Wrapped SDN',
     icon: SymbolWsdn,
   },

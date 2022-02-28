@@ -9,7 +9,7 @@ import { ASSETS_DICT } from './assets'
 
 export const TOP_ASSETS = [
   ASSETS_DICT.ASTR,
-  ASSETS_DICT.WSDN,
+  ASSETS_DICT.SDN,
   ASSETS_DICT.USDT,
   //
   ASSETS_DICT.USDC,
@@ -22,7 +22,7 @@ export const TOP_ASSETS = [
   //
   ASSETS_DICT.WETH,
   ASSETS_DICT.LAY,
-  ASSETS_DICT.WSDN,
+  ASSETS_DICT.SDN,
 ]
 
 export const TOP_BACKERS: TopProps['backers'] = [
