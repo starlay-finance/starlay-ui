@@ -57,7 +57,12 @@ export const formatReserves = (
     reserves: reservesData.map((reserve) => {
       const computed = getComputedReserveFields({ reserve, currentTimestamp })
       return {
-        underlyingAsset: reserve.underlyingAsset,
+        underlyingAsset: !equals(
+          reserve.underlyingAsset,
+          baseAsset.wrapperAddress,
+        )
+          ? reserve.underlyingAsset
+          : BASE_ASSET_DUMMY_ADDRESS,
         symbol: reserve.symbol.toLowerCase(),
         totalLiquidity: computed.totalLiquidity.toString(),
         totalVariableDebt: computed.totalVariableDebt.toString(),
