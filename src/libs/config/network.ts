@@ -48,7 +48,7 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
     publicJsonRPCUrl: ['https://rpc.astar.network:8545'],
     addresses: {
       walletBalanceProvider: '0x449b5A2c9c75d77283253625C03aE6336c957a0c',
-      uiPoolDataProvider: '0x2692b7E66cE6093F45f0212C8B8c61bebefd4D2B',
+      uiPoolDataProvider: '0x97Fc9e6aFB9d7A9C9898a2b6F97Da43EB5f56331',
       uiIncentiveDataProvider: '0x08ba69145938dD3CB0EE94c0D59EF6364059956B',
       stakeUiHelper: '0xa6FAB9Dfd104a6582c049266E7eCCB0b908c55E4',
       priceAggregatorAdapterAddress:

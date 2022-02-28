@@ -29,6 +29,7 @@ export type AssetMarketData = Asset & {
   decimals: number
   lTokenAddress: EthereumAddress
   vdTokenAddress: EthereumAddress
+  isActive: boolean
   isFrozen: boolean
   borrowingEnabled: boolean
 }

@@ -59,7 +59,6 @@ const getMarketData = async (
   } = await provider.getReservesWithIncentives(currentTimestamp)
   const assets = reservesData
     .filter(onlyListed)
-    .filter((each) => each.isActive)
     .map((each) =>
       toAssetMarketData(
         each,
@@ -111,6 +110,7 @@ const toAssetMarketData = (
     decimals: reserve.decimals,
     lTokenAddress: reserve.lTokenAddress as EthereumAddress,
     vdTokenAddress: reserve.variableDebtTokenAddress as EthereumAddress,
+    isActive: reserve.isActive,
     isFrozen: reserve.isFrozen,
     borrowingEnabled: reserve.borrowingEnabled,
   }
