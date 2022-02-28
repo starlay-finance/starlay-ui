@@ -1,10 +1,12 @@
 import {
   LogoArthSwap,
   LogoAstar,
+  LogoAstarDegens,
   LogoAu21,
   LogoDFG,
   LogoDIA,
   LogoNextWebCapital,
+  LogoTRGC,
 } from 'src/assets/images/backers'
 import { TopProps } from 'src/components/screens/Top'
 import { ASSETS_DICT } from './assets'
@@ -29,25 +31,36 @@ export const TOP_ASSETS = [
 
 export const TOP_BACKERS: TopProps['backers'] = [
   { name: 'Astar Network', Svg: LogoAstar, url: 'https://astar.network' },
-  { name: 'ArthSwap', image: LogoArthSwap, url: 'https://app.arthswap.org' },
+  { name: 'ArthSwap', Svg: LogoArthSwap, url: 'https://app.arthswap.org' },
+  {
+    name: 'Artar Degens',
+    Svg: LogoAstarDegens,
+    url: 'https://www.astardegens.com',
+  },
   {
     name: 'DIA',
     Svg: LogoDIA,
     url: 'https://www.diadata.org',
-    containerStyle: { maxHeight: '108px' },
+    containerStyle: { maxHeight: '140px' },
   },
   {
     name: 'Next Web Capital',
-    image: LogoNextWebCapital,
+    Svg: LogoNextWebCapital,
     url: 'https://nextweb.capital',
-    containerStyle: { maxHeight: '144px' },
+    containerStyle: { maxHeight: '200px' },
   },
-  { name: 'DFG', Svg: LogoDFG, url: 'https://www.dfg.group' },
+  { name: 'TRGC', Svg: LogoTRGC, url: 'https://trgc.io' },
+  {
+    name: 'DFG',
+    Svg: LogoDFG,
+    url: 'https://www.dfg.group',
+    containerStyle: { maxHeight: '140px' },
+  },
   {
     name: 'AU21 Capital',
-    image: LogoAu21,
+    Svg: LogoAu21,
     url: 'https://au21.capital',
-    containerStyle: { maxHeight: '144px' },
+    containerStyle: { maxHeight: '140px' },
   },
 ]
 
