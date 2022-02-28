@@ -265,8 +265,8 @@ msgid "The more funds that will be borrowed, the higher the interest rate will b
 msgstr "The more funds that will be borrowed, the higher the interest rate will be"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "Total Market Size"
-msgstr "Total Market Size"
+msgid "Total Deposited"
+msgstr "Total Deposited"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "Total Borrowed"

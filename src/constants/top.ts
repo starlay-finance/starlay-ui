@@ -33,7 +33,7 @@ export const TOP_BACKERS: TopProps['backers'] = [
   { name: 'Astar Network', Svg: LogoAstar, url: 'https://astar.network' },
   { name: 'ArthSwap', Svg: LogoArthSwap, url: 'https://app.arthswap.org' },
   {
-    name: 'Artar Degens',
+    name: 'Astar Degens',
     Svg: LogoAstarDegens,
     url: 'https://www.astardegens.com',
   },
