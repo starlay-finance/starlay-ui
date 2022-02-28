@@ -1,8 +1,10 @@
 import {
   LogoArthSwap,
   LogoAstar,
+  LogoAu21,
   LogoDFG,
   LogoDIA,
+  LogoNextWebCapital,
 } from 'src/assets/images/backers'
 import { TopProps } from 'src/components/screens/Top'
 import { ASSETS_DICT } from './assets'
@@ -34,7 +36,19 @@ export const TOP_BACKERS: TopProps['backers'] = [
     url: 'https://www.diadata.org',
     containerStyle: { maxHeight: '108px' },
   },
+  {
+    name: 'Next Web Capital',
+    image: LogoNextWebCapital,
+    url: 'https://nextweb.capital',
+    containerStyle: { maxHeight: '144px' },
+  },
   { name: 'DFG', Svg: LogoDFG, url: 'https://www.dfg.group' },
+  {
+    name: 'AU21 Capital',
+    image: LogoAu21,
+    url: 'https://au21.capital',
+    containerStyle: { maxHeight: '144px' },
+  },
 ]
 
 export const TOP_PROPS: TopProps = {
