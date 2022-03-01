@@ -21,10 +21,9 @@ export const generateSymbolDict = <T>(value: T): { [key in AssetSymbol]: T } =>
     {},
   ) as { [key in AssetSymbol]: T }
 
-export const EMPTY_STATUS_BY_ASSET: User['balanceByAsset'] = generateSymbolDict(
-  {
+export const EMPTY_BALANCE_BY_ASSET: User['balanceByAsset'] =
+  generateSymbolDict({
     deposited: BN_ZERO,
     borrowed: BN_ZERO,
     usageAsCollateralEnabled: false,
-  },
-)
+  })
