@@ -348,7 +348,6 @@ describe('estimationHelper', () => {
           marketReferenceCurrencyPriceInUSD: valueToBigNumber('2'),
         }),
       )
-      expect(result.unavailableReason).toBeUndefined()
       expect(result.totalBorrowedInUSD?.toFixed(0)).toBe('400')
     })
     test('borrowLimitUsed should be equal to sum the current and new usage', () => {
@@ -367,13 +366,11 @@ describe('estimationHelper', () => {
           marketReferenceCurrencyPriceInUSD: valueToBigNumber('2'),
         }),
       )
-      expect(result.unavailableReason).toBeUndefined()
       expect(result.borrowLimitUsed?.toFixed(2)).toBe('0.04')
     })
     test('healthFactor should be equal to division between sum of collateral multiplied by liquidation threshold and borrowed amount', () => {
       const totalCollateralInMarketReferenceCurrency = BN_HUNDRED
       const currentLiquidationThreshold = valueToBigNumber('0.9')
-      const reserveLiquidationThreshold = 0.7
       const amount = BN_ONE
       const result = estimateBorrow(
         param({
@@ -388,27 +385,29 @@ describe('estimationHelper', () => {
           asset: {
             liquidity: BN_HUNDRED,
             priceInMarketReferenceCurrency: BN_ONE,
-            reserveLiquidationThreshold,
           },
           marketReferenceCurrencyPriceInUSD: BN_ONE,
         }),
       )
       expect(result.unavailableReason).toBeUndefined()
-      expect(result.healthFactor?.toFixed(2)).toBe('89.30')
+      expect(result.healthFactor?.toFixed(2)).toBe('45.00')
     })
     describe('unavailable reason', () => {
       test('should return "Enter amount" if the amount not valid', () => {
         const result = estimateBorrow(param({ amount: undefined }))
         expect(result.unavailableReason).toBe('Enter amount')
       })
-      test('should return "Borrowing limit reached" if the amount gt liquidity', () => {
+      test('should return "No liquidity to borrow" if the amount gt liquidity', () => {
         const result = estimateBorrow(
           param({
+            userSummary: {
+              availableBorrowsInUSD: valueToBigNumber('99999999999'),
+            },
             amount: BN_ONE.plus(BN_ONE),
             asset: { liquidity: BN_ONE },
           }),
         )
-        expect(result.unavailableReason).toBe('Borrowing limit reached')
+        expect(result.unavailableReason).toBe('No liquidity to borrow')
       })
       test('should return "Borrowing limit reached" if the amount gt unused collateral', () => {
         const result = estimateBorrow(
@@ -500,28 +499,26 @@ describe('estimationHelper', () => {
     test('healthFactor should be equal to division between sum of collateral multiplied by liquidation threshold and borrowed amount', () => {
       const totalCollateralInMarketReferenceCurrency = BN_HUNDRED
       const currentLiquidationThreshold = valueToBigNumber('0.9')
-      const reserveLiquidationThreshold = 0.7
       const amount = BN_ONE
       const result = estimateRepayment(
         param({
           userSummary: {
-            totalBorrowedInMarketReferenceCurrency: BN_ONE,
+            totalBorrowedInMarketReferenceCurrency: BN_HUNDRED,
             totalCollateralInMarketReferenceCurrency,
             availableBorrowsInUSD: BN_HUNDRED,
             currentLiquidationThreshold,
-            healthFactor: valueToBigNumber('2'),
+            healthFactor: valueToBigNumber('0.9'),
           },
           amount,
           asset: {
             liquidity: BN_HUNDRED,
             priceInMarketReferenceCurrency: BN_ONE,
-            reserveLiquidationThreshold,
           },
           marketReferenceCurrencyPriceInUSD: BN_ONE,
         }),
       )
       expect(result.unavailableReason).toBeUndefined()
-      expect(result.healthFactor?.toFixed(2)).toBe('90.70')
+      expect(result.healthFactor?.toFixed(2)).toBe('0.91')
     })
     describe('unavailable reason', () => {
       test('should return "Enter amount" if the amount not valid', () => {
