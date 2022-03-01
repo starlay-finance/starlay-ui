@@ -221,10 +221,7 @@ export const estimateRepayment = ({
   marketReferenceCurrencyPriceInUSD,
 }: EstimationParam): EstimationResult => {
   const { borrowed: currentBorrowed, inWallet } = userAssetBalance
-  const maxAmount = BigNumber.min(
-    currentBorrowed.multipliedBy('1.025'),
-    inWallet,
-  )
+  const maxAmount = BigNumber.min(currentBorrowed, inWallet)
   if (!validEstimationInput(amount))
     return { unavailableReason: t`Enter amount`, maxAmount }
 

@@ -438,7 +438,7 @@ describe('estimationHelper', () => {
         const result = estimateRepayment(
           param({ userAssetBalance: { borrowed, inWallet: BN_HUNDRED } }),
         )
-        expect(result.maxAmount.eq(borrowed.multipliedBy('1.025'))).toBeTruthy()
+        expect(result.maxAmount.eq(borrowed)).toBeTruthy()
       })
       test('should be equal to in wallet', () => {
         const inWallet = BN_ONE
