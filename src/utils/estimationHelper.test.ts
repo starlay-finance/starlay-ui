@@ -219,6 +219,7 @@ describe('estimationHelper', () => {
         const result = estimateWithdrawal(
           param({
             userSummary: {
+              totalBorrowedInUSD: BN_ONE,
               totalBorrowedInMarketReferenceCurrency: BN_ONE,
               totalCollateralInMarketReferenceCurrency,
               currentLiquidationThreshold,
@@ -242,7 +243,7 @@ describe('estimationHelper', () => {
         const result = estimateWithdrawal(param({ amount: undefined }))
         expect(result.unavailableReason).toBe('Enter amount')
       })
-      test('should return "No balance or liquidity to withdraw" if the amount gt deposited', () => {
+      test('should return "No balance to withdraw" if the amount gt deposited', () => {
         const result = estimateWithdrawal(
           param({
             amount: BN_ONE.plus(BN_ONE),
@@ -250,11 +251,9 @@ describe('estimationHelper', () => {
             asset: { liquidity: BN_HUNDRED },
           }),
         )
-        expect(result.unavailableReason).toBe(
-          'No balance or liquidity to withdraw',
-        )
+        expect(result.unavailableReason).toBe('No balance to withdraw')
       })
-      test('should return "No balance or liquidity to withdraw" if the amount gt liquidity', () => {
+      test('should return "No liquidity to withdraw" if the amount gt liquidity', () => {
         const result = estimateWithdrawal(
           param({
             amount: BN_ONE.plus(BN_ONE),
@@ -262,14 +261,13 @@ describe('estimationHelper', () => {
             asset: { liquidity: BN_ONE },
           }),
         )
-        expect(result.unavailableReason).toBe(
-          'No balance or liquidity to withdraw',
-        )
+        expect(result.unavailableReason).toBe('No liquidity to withdraw')
       })
       test('should return "Health factor too low" if health factor lt threshold', () => {
         const result = estimateWithdrawal(
           param({
             userSummary: {
+              totalBorrowedInUSD: BN_ONE,
               totalBorrowedInMarketReferenceCurrency: BN_ONE,
               totalCollateralInMarketReferenceCurrency: BN_HUNDRED,
               currentLiquidationThreshold: valueToBigNumber('0.01'),
@@ -407,9 +405,10 @@ describe('estimationHelper', () => {
         expect(result.unavailableReason).toBe('Borrowing limit reached')
       })
       test('should return "Health factor too low" if health factor lt threshold', () => {
-        const result = estimateWithdrawal(
+        const result = estimateBorrow(
           param({
             userSummary: {
+              totalBorrowedInUSD: BN_ONE,
               totalBorrowedInMarketReferenceCurrency: BN_ONE,
               totalCollateralInMarketReferenceCurrency: BN_HUNDRED,
               currentLiquidationThreshold: valueToBigNumber('0.01'),

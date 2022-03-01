@@ -104,18 +104,15 @@ export const estimateWithdrawal = (
   if (!validEstimationInput(amount))
     return { unavailableReason: t`Enter amount`, maxAmount }
 
-  if (amount.gt(maxAmount))
+  if (amount.gt(userAssetBalance.deposited))
     return {
-      unavailableReason: t`No balance or liquidity to withdraw`,
+      unavailableReason: t`No balance to withdraw`,
       maxAmount,
     }
-
-  if (!userAssetBalance.usageAsCollateralEnabled)
+  if (amount.gt(liquidity))
     return {
+      unavailableReason: t`No liquidity to withdraw`,
       maxAmount,
-      availableBorrowsInUSD: userSummary.availableBorrowsInUSD,
-      borrowLimitUsed: userSummary.borrowLimitUsed,
-      healthFactor: userSummary.healthFactor,
     }
 
   const {
