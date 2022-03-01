@@ -36,13 +36,14 @@ export const useLendingPool = (
     amount: BigNumber,
     underlyingAsset: EthereumAddress,
     lTokenAddress: EthereumAddress,
+    all?: boolean,
   ) => {
     if (!lendingPool || !account || !signer) throw new Error('Unexpected state')
     return handleTx(
       lendingPool.withdraw({
         user: account,
         reserve: underlyingAsset,
-        amount: amount.toString(),
+        amount: all ? '-1' : amount.toString(),
         lTokenAddress,
       }),
       signer,
@@ -65,13 +66,17 @@ export const useLendingPool = (
       signer,
     )
   }
-  const repay = async (amount: BigNumber, underlyingAsset: EthereumAddress) => {
+  const repay = async (
+    amount: BigNumber,
+    underlyingAsset: EthereumAddress,
+    all?: boolean,
+  ) => {
     if (!lendingPool || !account || !signer) throw new Error('Unexpected state')
     return handleTx(
       lendingPool.repay({
         user: account,
         reserve: underlyingAsset,
-        amount: amount.toString(),
+        amount: all ? '-1' : amount.toString(),
         interestRateMode: InterestRate.Variable,
       }),
       signer,

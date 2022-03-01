@@ -23,7 +23,7 @@ export const Borrow: VFC<
           borrow={(amount) =>
             borrow(amount, asset.underlyingAsset, asset.vdTokenAddress)
           }
-          repay={(amount) => repay(amount, asset.underlyingAsset)}
+          repay={(amount, all) => repay(amount, asset.underlyingAsset, all)}
         />
       }
       closeModal={close}

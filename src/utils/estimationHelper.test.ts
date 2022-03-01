@@ -11,16 +11,12 @@ import {
 } from './estimationHelper'
 import { BN_HUNDRED, BN_ONE } from './number'
 
-describe('calculartor', () => {
+describe('estimationHelper', () => {
   describe('estimateDeposit', () => {
-    describe('max amount', () => {
-      test('should be equal to the amount in wallet', () => {
-        const inWallet = valueToBigNumber(BN_ONE)
-        const result = estimateDeposit(
-          param({ userAssetBalance: { inWallet } }),
-        )
-        expect(result.maxAmount.eq(inWallet)).toBeTruthy()
-      })
+    test('max amount should be equal to the amount in wallet', () => {
+      const inWallet = valueToBigNumber(BN_ONE)
+      const result = estimateDeposit(param({ userAssetBalance: { inWallet } }))
+      expect(result.maxAmount.eq(inWallet)).toBeTruthy()
     })
     test('availableBorowsInUSD should be equal to sum of current and ltv of the amount to deposit', () => {
       const result = estimateDeposit(
@@ -193,7 +189,6 @@ describe('calculartor', () => {
             marketReferenceCurrencyPriceInUSD: valueToBigNumber('2'),
           }),
         )
-        expect(result.unavailableReason).toBeUndefined()
         expect(result.availableBorrowsInUSD?.toFixed(0)).toBe('60')
       })
       test('borrowLimitUsed should be equal to division between borrwed amount and new borrow limit', () => {
@@ -212,7 +207,6 @@ describe('calculartor', () => {
             marketReferenceCurrencyPriceInUSD: BN_ONE,
           }),
         )
-        expect(result.unavailableReason).toBeUndefined()
         expect(result.borrowLimitUsed?.toFixed(2)).toBe('0.33')
       })
       test('healthFactor should be equal to division between sum of collateral multiplied by liquidation threshold and borrowed amount', () => {
@@ -223,6 +217,7 @@ describe('calculartor', () => {
         const result = estimateWithdrawal(
           param({
             userSummary: {
+              totalBorrowedInUSD: BN_ONE,
               totalBorrowedInMarketReferenceCurrency: BN_ONE,
               totalCollateralInMarketReferenceCurrency,
               currentLiquidationThreshold,
@@ -246,7 +241,7 @@ describe('calculartor', () => {
         const result = estimateWithdrawal(param({ amount: undefined }))
         expect(result.unavailableReason).toBe('Enter amount')
       })
-      test('should return "No balance or liquidity to withdraw" if the amount gt deposited', () => {
+      test('should return "No balance to withdraw" if the amount gt deposited', () => {
         const result = estimateWithdrawal(
           param({
             amount: BN_ONE.plus(BN_ONE),
@@ -254,11 +249,31 @@ describe('calculartor', () => {
             asset: { liquidity: BN_HUNDRED },
           }),
         )
-        expect(result.unavailableReason).toBe(
-          'No balance or liquidity to withdraw',
-        )
+        expect(result.unavailableReason).toBe('No balance to withdraw')
       })
-      test('should return "No balance or liquidity to withdraw" if the amount gt liquidity', () => {
+      test('should return "Insufficient collateral" if the amount gt unused collateral', () => {
+        const result = estimateWithdrawal(
+          param({
+            amount: BN_ONE.plus(BN_ONE),
+            userSummary: {
+              totalBorrowedInMarketReferenceCurrency: BN_HUNDRED,
+              healthFactor: valueToBigNumber('1.1'),
+            },
+            userAssetBalance: {
+              deposited: BN_HUNDRED,
+              usageAsCollateralEnabled: true,
+            },
+            asset: {
+              liquidity: BN_ONE,
+              usageAsCollateralEnabled: true,
+              priceInMarketReferenceCurrency: BN_HUNDRED,
+              reserveLiquidationThreshold: 1,
+            },
+          }),
+        )
+        expect(result.unavailableReason).toBe('Insufficient collateral')
+      })
+      test('should return "No liquidity to withdraw" if the amount gt liquidity', () => {
         const result = estimateWithdrawal(
           param({
             amount: BN_ONE.plus(BN_ONE),
@@ -266,14 +281,13 @@ describe('calculartor', () => {
             asset: { liquidity: BN_ONE },
           }),
         )
-        expect(result.unavailableReason).toBe(
-          'No balance or liquidity to withdraw',
-        )
+        expect(result.unavailableReason).toBe('No liquidity to withdraw')
       })
       test('should return "Health factor too low" if health factor lt threshold', () => {
         const result = estimateWithdrawal(
           param({
             userSummary: {
+              totalBorrowedInUSD: BN_ONE,
               totalBorrowedInMarketReferenceCurrency: BN_ONE,
               totalCollateralInMarketReferenceCurrency: BN_HUNDRED,
               currentLiquidationThreshold: valueToBigNumber('0.01'),
@@ -411,7 +425,7 @@ describe('calculartor', () => {
         expect(result.unavailableReason).toBe('Borrowing limit reached')
       })
       test('should return "Health factor too low" if health factor lt threshold', () => {
-        const result = estimateWithdrawal(
+        const result = estimateBorrow(
           param({
             userSummary: {
               totalBorrowedInMarketReferenceCurrency: BN_ONE,
@@ -442,7 +456,7 @@ describe('calculartor', () => {
         const result = estimateRepayment(
           param({ userAssetBalance: { borrowed, inWallet: BN_HUNDRED } }),
         )
-        expect(result.maxAmount.eq(borrowed.multipliedBy('1.025'))).toBeTruthy()
+        expect(result.maxAmount.eq(borrowed)).toBeTruthy()
       })
       test('should be equal to in wallet', () => {
         const inWallet = BN_ONE

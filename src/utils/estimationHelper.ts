@@ -95,22 +95,38 @@ export const estimateWithdrawal = (
     priceInMarketReferenceCurrency,
     reserveLiquidationThreshold,
   } = asset
+  const unusedCollateral = unusedCollateralOnWithdraw(params)
   const maxAmount = BigNumber.min(
     userAssetBalance.deposited,
     liquidity,
-    totalCollateralToWithdrawInMarketReferenceCurrency(params),
+    unusedCollateral,
   )
 
   if (!validEstimationInput(amount))
     return { unavailableReason: t`Enter amount`, maxAmount }
 
-  if (amount.gt(maxAmount))
+  if (amount.gt(userAssetBalance.deposited))
     return {
-      unavailableReason: t`No balance or liquidity to withdraw`,
+      unavailableReason: t`No balance to withdraw`,
+      maxAmount,
+    }
+  if (amount.gt(unusedCollateral))
+    return {
+      unavailableReason: t`Insufficient collateral`,
+      maxAmount,
+    }
+  if (amount.gt(liquidity))
+    return {
+      unavailableReason: t`No liquidity to withdraw`,
       maxAmount,
     }
 
-  if (!userAssetBalance.usageAsCollateralEnabled)
+  const {
+    totalBorrowedInUSD: currentBorrowed,
+    borrowLimitInUSD: currentLimit,
+  } = userSummary
+
+  if (!userAssetBalance.usageAsCollateralEnabled || currentBorrowed.isZero())
     return {
       maxAmount,
       availableBorrowsInUSD: userSummary.availableBorrowsInUSD,
@@ -118,10 +134,6 @@ export const estimateWithdrawal = (
       healthFactor: userSummary.healthFactor,
     }
 
-  const {
-    totalBorrowedInUSD: currentBorrowed,
-    borrowLimitInUSD: currentLimit,
-  } = userSummary
   const amountInMarketReferenceCurrency = amount.multipliedBy(
     priceInMarketReferenceCurrency,
   )
@@ -143,10 +155,9 @@ export const estimateWithdrawal = (
     isNegative: true,
   })
   return {
-    unavailableReason:
-      healthFactor.isPositive() && healthFactor.lt(HEALTH_FACTOR_THRESHOLD)
-        ? t`Health factor too low`
-        : undefined,
+    unavailableReason: healthFactor.gte(HEALTH_FACTOR_THRESHOLD)
+      ? undefined
+      : t`Health factor too low`,
     maxAmount,
     availableBorrowsInUSD,
     borrowLimitUsed,
@@ -221,10 +232,7 @@ export const estimateRepayment = ({
   marketReferenceCurrencyPriceInUSD,
 }: EstimationParam): EstimationResult => {
   const { borrowed: currentBorrowed, inWallet } = userAssetBalance
-  const maxAmount = BigNumber.min(
-    currentBorrowed.multipliedBy('1.025'),
-    inWallet,
-  )
+  const maxAmount = BigNumber.min(currentBorrowed, inWallet)
   if (!validEstimationInput(amount))
     return { unavailableReason: t`Enter amount`, maxAmount }
 
@@ -261,7 +269,7 @@ export const estimateRepayment = ({
   }
 }
 
-const totalCollateralToWithdrawInMarketReferenceCurrency = ({
+const unusedCollateralOnWithdraw = ({
   asset,
   userSummary,
   userAssetBalance,
@@ -269,13 +277,11 @@ const totalCollateralToWithdrawInMarketReferenceCurrency = ({
   if (
     !userAssetBalance.usageAsCollateralEnabled ||
     !asset.usageAsCollateralEnabled ||
-    userSummary.totalBorrowedInMarketReferenceCurrency.eq(BN_ZERO)
+    userSummary.totalBorrowedInMarketReferenceCurrency.isZero()
   )
     return valueToBigNumber(Infinity)
-  // if we have any borrowings we should check how much we can withdraw without liquidation
-  // with 0.5% gap to avoid reverting of tx
   const excessHF = userSummary.healthFactor.minus('1')
-  if (!excessHF.gt('0')) return BN_ZERO
+  if (!excessHF.isPositive()) return BN_ZERO
   return (
     excessHF
       .multipliedBy(userSummary.totalBorrowedInMarketReferenceCurrency)
@@ -330,13 +336,15 @@ const calculateHealthFactor = (param: {
     .plus(isNegative ? delta.negated() : delta)
     .div(totalCollateralInMarketReferenceCurrency)
 
-  return calculateHealthFactorFromBalancesBigUnits({
+  const result = calculateHealthFactorFromBalancesBigUnits({
     collateralBalanceMarketReferenceCurrency:
       totalCollateralInMarketReferenceCurrency,
     borrowBalanceMarketReferenceCurrency:
       totalBorrowedInMarketReferenceCurrency,
     currentLiquidationThreshold: liquidationThreshold,
   })
+  if (totalBorrowedInMarketReferenceCurrency.isZero()) return result
+  return result.isPositive() ? result : BN_ZERO
 }
 
 const validEstimationInput = (
