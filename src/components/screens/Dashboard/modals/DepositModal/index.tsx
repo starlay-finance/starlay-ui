@@ -21,8 +21,8 @@ export const Deposit: VFC<
         <DepositModalBody
           {...props}
           deposit={(amount) => deposit(amount, asset.underlyingAsset)}
-          withdraw={(amount) =>
-            withdraw(amount, asset.underlyingAsset, asset.lTokenAddress)
+          withdraw={(amount, all) =>
+            withdraw(amount, asset.underlyingAsset, asset.lTokenAddress, all)
           }
         />
       }

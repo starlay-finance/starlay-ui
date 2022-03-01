@@ -24,6 +24,7 @@ import {
   AmountInput,
   Balance,
   ContentDiv,
+  Note,
   NumberItems,
   Tab,
   TabFC,
@@ -34,7 +35,7 @@ type TabType = typeof TABS[number]
 
 export type BorrowModalBodyProps = Omit<EstimationParam, 'amount'> & {
   borrow: (amount: BigNumber) => void
-  repay: (amount: BigNumber) => void
+  repay: (amount: BigNumber, all?: boolean) => void
 }
 export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
   borrow,
@@ -63,6 +64,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
   )
   const [borrowingAmount, setBorrowingAmount] = useState('')
   const [repaymentAmount, setRepaymentAmount] = useState('')
+  const [all, setAll] = useState(false)
 
   const borrowingAmountBn = formattedToBigNumber(borrowingAmount)
   const repaymentAmountBn = formattedToBigNumber(repaymentAmount)
@@ -96,6 +98,11 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
             setRepaymentAmount(formatAmt(estimation.maxAmount))
           }
           significantDigits={decimals}
+          setAll={(all: boolean) => {
+            setAll(all)
+            if (all) setRepaymentAmount(formatAmt(userAssetBalance.borrowed))
+          }}
+          all={all}
         />
       )}
       <ActionTab
@@ -146,6 +153,11 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
             formatter={formatAmtShort}
           />
         </NumberItems>
+        {all && (
+          <Note>
+            {t`To repay all, you will pay more than the amount shown because of the interest charged per second.`}
+          </Note>
+        )}
         {activeTab === 'borrow' ? (
           <SimpleCtaButton
             onClick={() => borrow(valueToBigNumber(borrowingAmountBn!))}
@@ -155,7 +167,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
           </SimpleCtaButton>
         ) : (
           <SimpleCtaButton
-            onClick={() => repay(valueToBigNumber(repaymentAmountBn!))}
+            onClick={() => repay(valueToBigNumber(repaymentAmountBn!), all)}
             disabled={!!estimation.unavailableReason}
           >
             {estimation.unavailableReason || t`Repay`}

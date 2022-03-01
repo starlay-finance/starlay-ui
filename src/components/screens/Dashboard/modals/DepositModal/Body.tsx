@@ -39,7 +39,7 @@ type TabType = typeof TABS[number]
 
 export type DepositModalBodyProps = Omit<EstimationParam, 'amount'> & {
   deposit: (amount: BigNumber) => void
-  withdraw: (amount: BigNumber) => void
+  withdraw: (amount: BigNumber, all?: boolean) => void
 }
 export const DepositModalBody: VFC<DepositModalBodyProps> = ({
   deposit,
@@ -57,6 +57,7 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
   )
   const [depositAmount, setDepositAmount] = useState('')
   const [withdrawalAmount, setWithdrawalAmount] = useState('')
+  const [all, setAll] = useState(false)
 
   const depositAmountBn = formattedToBigNumber(depositAmount)
   const withdrawalAmountBn = formattedToBigNumber(withdrawalAmount)
@@ -88,6 +89,11 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
             )
           }
           significantDigits={asset.decimals}
+          setAll={(all) => {
+            setAll(all)
+            if (all) setWithdrawalAmount(formatAmt(userAssetBalance.deposited))
+          }}
+          all={all}
         />
       )}
       <ActionTab
@@ -158,7 +164,7 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
           </SimpleCtaButton>
         ) : (
           <SimpleCtaButton
-            onClick={() => withdraw(withdrawalAmountBn!)}
+            onClick={() => withdraw(withdrawalAmountBn!, all)}
             disabled={!!estimation.unavailableReason}
           >
             {estimation.unavailableReason || t`Withdraw`}
