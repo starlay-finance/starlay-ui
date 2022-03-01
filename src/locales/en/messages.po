@@ -84,6 +84,14 @@ msgstr "Overview"
 msgid "Community"
 msgstr "Community"
 
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Brand"
+msgstr "Brand"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Media Kit"
+msgstr "Media Kit"
+
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Dashboard"
 msgstr "Dashboard"
@@ -170,6 +178,10 @@ msgid "Health Factor"
 msgstr "Health Factor"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "To repay all, you will pay more than the amount shown because of the interest charged per second."
+msgstr "To repay all, you will pay more than the amount shown because of the interest charged per second."
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Liquidity"
 msgstr "Liquidity"
 
@@ -211,6 +223,10 @@ msgstr "Deposited"
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
 msgid "Max"
 msgstr "Max"
+
+#: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
+msgid "All"
+msgstr "All"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Deposit Markets"
@@ -350,8 +366,16 @@ msgid "No balance to deposit"
 msgstr "No balance to deposit"
 
 #: src/utils/estimationHelper.ts
-msgid "No balance or liquidity to withdraw"
-msgstr "No balance or liquidity to withdraw"
+msgid "No balance to withdraw"
+msgstr "No balance to withdraw"
+
+#: src/utils/estimationHelper.ts
+msgid "Insufficient collateral"
+msgstr "Insufficient collateral"
+
+#: src/utils/estimationHelper.ts
+msgid "No liquidity to withdraw"
+msgstr "No liquidity to withdraw"
 
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
