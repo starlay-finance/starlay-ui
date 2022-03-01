@@ -1,4 +1,5 @@
 import { ChainId, getMarketConfig, getNetworkConfig } from 'src/libs/config'
+import { EthereumAddress } from 'src/types/web3'
 import { RPCClient } from './providers'
 import { PoolDataProviderInterface, StaticRPCProvider } from './types'
 
@@ -23,6 +24,8 @@ export const getPoolDataProvider = ({
     uiIncentiveDataProvider,
     priceAggregatorAdapterAddress,
   } = addresses
+  const rewardTokenAddress =
+    rewardToken.address.toLowerCase() as EthereumAddress
   return {
     chainId,
     provider: RPCClient.new({
@@ -32,10 +35,9 @@ export const getPoolDataProvider = ({
       lendingPoolAddressProvider: LENDING_POOL_ADDRESS_PROVIDER,
       baseAsset,
       provider,
-      rewardToken: rewardToken.address,
+      rewardToken: rewardTokenAddress,
       rewardUndelyingAssetDict: {
-        [rewardToken.address.toLowerCase()]:
-          rewardToken.underlyingAsset.toLowerCase(),
+        [rewardTokenAddress]: rewardToken.underlyingAsset.toLowerCase(),
       },
     }),
   }

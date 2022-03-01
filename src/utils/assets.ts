@@ -1,5 +1,6 @@
 import { ASSETS, ASSETS_DICT, LISTED_ASSET_SYMBOLS } from 'src/constants/assets'
-import { Asset, AssetSymbol } from 'src/types/models'
+import { Asset, AssetSymbol, User } from 'src/types/models'
+import { BN_ZERO } from './number'
 
 export const isListed = (symbol: any): symbol is AssetSymbol =>
   LISTED_ASSET_SYMBOLS.includes(symbol)
@@ -19,3 +20,11 @@ export const generateSymbolDict = <T>(value: T): { [key in AssetSymbol]: T } =>
     }),
     {},
   ) as { [key in AssetSymbol]: T }
+
+export const EMPTY_STATUS_BY_ASSET: User['balanceByAsset'] = generateSymbolDict(
+  {
+    deposited: BN_ZERO,
+    borrowed: BN_ZERO,
+    usageAsCollateralEnabled: false,
+  },
+)
