@@ -16,7 +16,7 @@ describe('calculator', () => {
       borrowed: BN_ZERO,
       usageAsCollateralEnabled: true,
     }
-    test('profit should be sum of deposited amount multiplied by apy', () => {
+    test('profit should be deposited amount multiplied by apy', () => {
       const balance: ValueOf<User['balanceByAsset']> = {
         ...mockBalance,
         deposited: BN_HUNDRED,
@@ -35,7 +35,7 @@ describe('calculator', () => {
       )
       expect(result.profitInUSD.toString()).toBe('200')
     })
-    test('loss should be sum of borrowed amount multiplied by apy', () => {
+    test('loss should be borrowed amount multiplied by apy', () => {
       const balance: ValueOf<User['balanceByAsset']> = {
         ...mockBalance,
         borrowed: BN_HUNDRED,
