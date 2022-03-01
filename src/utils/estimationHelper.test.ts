@@ -11,16 +11,12 @@ import {
 } from './estimationHelper'
 import { BN_HUNDRED, BN_ONE } from './number'
 
-describe('calculartor', () => {
+describe('estimationHelper', () => {
   describe('estimateDeposit', () => {
-    describe('max amount', () => {
-      test('should be equal to the amount in wallet', () => {
-        const inWallet = valueToBigNumber(BN_ONE)
-        const result = estimateDeposit(
-          param({ userAssetBalance: { inWallet } }),
-        )
-        expect(result.maxAmount.eq(inWallet)).toBeTruthy()
-      })
+    test('max amount should be equal to the amount in wallet', () => {
+      const inWallet = valueToBigNumber(BN_ONE)
+      const result = estimateDeposit(param({ userAssetBalance: { inWallet } }))
+      expect(result.maxAmount.eq(inWallet)).toBeTruthy()
     })
     test('availableBorowsInUSD should be equal to sum of current and ltv of the amount to deposit', () => {
       const result = estimateDeposit(
