@@ -36,13 +36,14 @@ export const useLendingPool = (
     amount: BigNumber,
     underlyingAsset: EthereumAddress,
     lTokenAddress: EthereumAddress,
+    all?: boolean,
   ) => {
     if (!lendingPool || !account || !signer) throw new Error('Unexpected state')
     return handleTx(
       lendingPool.withdraw({
         user: account,
         reserve: underlyingAsset,
-        amount: amount.toString(),
+        amount: all ? '-1' : amount.toString(),
         lTokenAddress,
       }),
       signer,

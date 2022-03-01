@@ -189,7 +189,6 @@ describe('estimationHelper', () => {
             marketReferenceCurrencyPriceInUSD: valueToBigNumber('2'),
           }),
         )
-        expect(result.unavailableReason).toBeUndefined()
         expect(result.availableBorrowsInUSD?.toFixed(0)).toBe('60')
       })
       test('borrowLimitUsed should be equal to division between borrwed amount and new borrow limit', () => {
@@ -208,7 +207,6 @@ describe('estimationHelper', () => {
             marketReferenceCurrencyPriceInUSD: BN_ONE,
           }),
         )
-        expect(result.unavailableReason).toBeUndefined()
         expect(result.borrowLimitUsed?.toFixed(2)).toBe('0.33')
       })
       test('healthFactor should be equal to division between sum of collateral multiplied by liquidation threshold and borrowed amount', () => {
@@ -252,6 +250,28 @@ describe('estimationHelper', () => {
           }),
         )
         expect(result.unavailableReason).toBe('No balance to withdraw')
+      })
+      test('should return "Insufficient collateral" if the amount gt unused collateral', () => {
+        const result = estimateWithdrawal(
+          param({
+            amount: BN_ONE.plus(BN_ONE),
+            userSummary: {
+              totalBorrowedInMarketReferenceCurrency: BN_HUNDRED,
+              healthFactor: valueToBigNumber('1.1'),
+            },
+            userAssetBalance: {
+              deposited: BN_HUNDRED,
+              usageAsCollateralEnabled: true,
+            },
+            asset: {
+              liquidity: BN_ONE,
+              usageAsCollateralEnabled: true,
+              priceInMarketReferenceCurrency: BN_HUNDRED,
+              reserveLiquidationThreshold: 1,
+            },
+          }),
+        )
+        expect(result.unavailableReason).toBe('Insufficient collateral')
       })
       test('should return "No liquidity to withdraw" if the amount gt liquidity', () => {
         const result = estimateWithdrawal(
@@ -408,7 +428,6 @@ describe('estimationHelper', () => {
         const result = estimateBorrow(
           param({
             userSummary: {
-              totalBorrowedInUSD: BN_ONE,
               totalBorrowedInMarketReferenceCurrency: BN_ONE,
               totalCollateralInMarketReferenceCurrency: BN_HUNDRED,
               currentLiquidationThreshold: valueToBigNumber('0.01'),

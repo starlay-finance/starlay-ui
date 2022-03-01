@@ -1,5 +1,6 @@
 import { SimpleCtaButton } from 'src/components/parts/Cta'
-import { fontWeightSemiBold } from 'src/styles/font'
+import { trueBlack } from 'src/styles/colors'
+import { fontWeightRegular, fontWeightSemiBold } from 'src/styles/font'
 import styled from 'styled-components'
 import { Balance } from './Balance'
 import { Tab } from './Tab'
@@ -35,4 +36,11 @@ export const NumberItems = styled.div`
       margin-bottom: 24px;
     }
   }
+`
+
+export const Note = styled.p`
+  padding-top: 24px;
+  color: ${trueBlack};
+  text-align: center;
+  font-weight: ${fontWeightRegular};
 `
