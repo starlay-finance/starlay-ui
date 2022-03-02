@@ -31,7 +31,6 @@ describe('calculator', () => {
         balance,
         asset,
         marketReferenceCurrencyPriceInUSD,
-        rewardPriceInMarketReferenceCurrency,
       )
       expect(result.profitInUSD.toString()).toBe('200')
     })
@@ -50,7 +49,6 @@ describe('calculator', () => {
         balance,
         asset,
         marketReferenceCurrencyPriceInUSD,
-        rewardPriceInMarketReferenceCurrency,
       )
       expect(result.lossInUSD.toString()).toBe('200')
     })
@@ -63,6 +61,7 @@ describe('calculator', () => {
       const asset: AssetMarketData = {
         ...MOCK_ASSET_MARKET,
         symbol: 'ASTR',
+        priceInMarketReferenceCurrency: valueToBigNumber('20'),
         depositIncentiveAPR: valueToBigNumber('0.1'),
         variableBorrowIncentiveAPR: valueToBigNumber('0.2'),
       }
@@ -70,7 +69,6 @@ describe('calculator', () => {
         balance,
         asset,
         marketReferenceCurrencyPriceInUSD,
-        rewardPriceInMarketReferenceCurrency,
       )
       expect(result.rewardInUSD.toString()).toBe('2040')
     })
@@ -90,7 +88,6 @@ describe('calculator', () => {
         balance,
         asset,
         marketReferenceCurrencyPriceInUSD,
-        rewardPriceInMarketReferenceCurrency,
       )
       expect(result.rewardInUSD.toString()).toBe('0')
     })
@@ -107,6 +104,7 @@ describe('calculator', () => {
         ASTR: balance,
         USDC: balance,
       }
+      const marketReferenceCurrencyPriceInUSD = valueToBigNumber('10')
       const astrPriceInMarketReferenceCurrency = valueToBigNumber('2')
       const usdcPriceInMarketReferenceCurrency = valueToBigNumber('4')
       const asset: AssetMarketData = {
@@ -125,8 +123,6 @@ describe('calculator', () => {
           priceInMarketReferenceCurrency: usdcPriceInMarketReferenceCurrency,
         },
       ]
-      const marketReferenceCurrencyPriceInUSD = valueToBigNumber('10')
-      const rewardPriceInMarketReferenceCurrency = valueToBigNumber('20')
       const totalDepositedInUSD = balanceByAsset.ASTR.deposited
         .multipliedBy(astrPriceInMarketReferenceCurrency)
         .multipliedBy(marketReferenceCurrencyPriceInUSD)
@@ -139,10 +135,9 @@ describe('calculator', () => {
         balanceByAsset,
         assets,
         marketReferenceCurrencyPriceInUSD,
-        rewardPriceInMarketReferenceCurrency,
         totalDepositedInUSD,
       )
-      expect(result.toFixed(4)).toBe('0.7780')
+      expect(result.toFixed(4)).toBe('0.2000')
     })
   })
 })

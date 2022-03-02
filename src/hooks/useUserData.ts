@@ -8,7 +8,6 @@ import { ChainId } from 'src/libs/config'
 import { PoolDataProviderInterface } from 'src/libs/pool-data-provider/types'
 import { User } from 'src/types/models'
 import { EthereumAddress } from 'src/types/web3'
-import { equals } from 'src/utils/address'
 import { EMPTY_BALANCE_BY_ASSET } from 'src/utils/assets'
 import { calculateNetAPY } from 'src/utils/calculator'
 import { BN_ZERO } from 'src/utils/number'
@@ -69,14 +68,10 @@ const toUser = (
 
   const borrowLimitInUSD = totalBorrowedInUSD.plus(availableBorrowsInUSD)
   const balanceByAsset = toBalanceByAsset(userReserves.userReservesData)
-  const rewardMarketData = assets.find((each) =>
-    equals(each.underlyingAsset, incentive.underlyingAsset),
-  )
   const netAPY = calculateNetAPY(
     balanceByAsset,
     assets,
     marketReferenceCurrencyPriceInUSD,
-    rewardMarketData?.priceInMarketReferenceCurrency || BN_ZERO,
     totalDepositedInUSD,
   )
 

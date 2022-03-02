@@ -7,7 +7,6 @@ export const calculateNetAPY = (
   balanceByAsset: User['balanceByAsset'],
   assets: AssetMarketData[],
   marketReferenceCurrencyPriceInUSD: BigNumber,
-  rewardPriceInMarketReferenceCurrency: BigNumber,
   totalDepositedInUSD: BigNumber,
 ) => {
   if (totalDepositedInUSD.lte(BN_ZERO)) return BN_ZERO
@@ -21,7 +20,6 @@ export const calculateNetAPY = (
         balance,
         asset,
         marketReferenceCurrencyPriceInUSD,
-        rewardPriceInMarketReferenceCurrency,
       )
       return {
         profitInUSD: prev.profitInUSD.plus(pl.profitInUSD),
@@ -45,7 +43,6 @@ export const calculateAssetPL = (
   { deposited, borrowed }: ValueOf<User['balanceByAsset']>,
   asset: AssetMarketData,
   marketReferenceCurrencyPriceInUSD: BigNumber,
-  rewardPriceInMarketReferenceCurrency: BigNumber,
 ) => {
   const {
     priceInMarketReferenceCurrency,
@@ -55,30 +52,25 @@ export const calculateAssetPL = (
     variableBorrowIncentiveAPR,
   } = asset
 
-  const [profitInUSD, lossInUSD] = convertToUSDBulk(
-    priceInMarketReferenceCurrency,
+  const assetPriceInUSD = priceInMarketReferenceCurrency.multipliedBy(
     marketReferenceCurrencyPriceInUSD,
-    deposited.multipliedBy(depositAPY),
-    borrowed.multipliedBy(variableBorrowAPY),
   )
-  const rewardInUSD = convertToUSD(
-    rewardPriceInMarketReferenceCurrency,
-    marketReferenceCurrencyPriceInUSD,
-    deposited
-      .multipliedBy(
-        depositIncentiveAPR.isFinite() ? asset.depositIncentiveAPR : BN_ZERO,
-      )
-      .plus(
-        borrowed.multipliedBy(
-          variableBorrowIncentiveAPR.isFinite()
-            ? asset.variableBorrowIncentiveAPR
-            : BN_ZERO,
-        ),
+  const depositedInUSD = deposited.multipliedBy(assetPriceInUSD)
+  const borrowedInUSD = borrowed.multipliedBy(assetPriceInUSD)
+  const rewardInUSD = depositedInUSD
+    .multipliedBy(
+      depositIncentiveAPR.isFinite() ? asset.depositIncentiveAPR : BN_ZERO,
+    )
+    .plus(
+      borrowedInUSD.multipliedBy(
+        variableBorrowIncentiveAPR.isFinite()
+          ? asset.variableBorrowIncentiveAPR
+          : BN_ZERO,
       ),
-  )
+    )
   return {
-    profitInUSD,
-    lossInUSD,
+    profitInUSD: depositedInUSD.multipliedBy(depositAPY),
+    lossInUSD: borrowedInUSD.multipliedBy(variableBorrowAPY),
     rewardInUSD,
   }
 }
