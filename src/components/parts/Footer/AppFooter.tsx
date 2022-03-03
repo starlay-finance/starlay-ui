@@ -5,12 +5,7 @@ import { useBlockNumber } from 'src/hooks/useBlockNumber'
 import { purple } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
-import {
-  GOVERNANCE,
-  GOVERNANCE_STARLAY,
-  SUPPORT,
-  TERMS,
-} from 'src/utils/routes'
+import { GOVERNANCE, SUPPORT } from 'src/utils/routes'
 import styled from 'styled-components'
 
 export const AppFooter = asStyled(({ className }) => {
@@ -21,9 +16,7 @@ export const AppFooter = asStyled(({ className }) => {
         <Nav>
           <LatestBlock>{t`Latest Block: ${blockNumber}`}</LatestBlock>
           <Link href={GOVERNANCE}>{t`Governance`}</Link>
-          <Link href={GOVERNANCE_STARLAY}>{t`Starlay`}</Link>
           <Link href={SUPPORT}>{t`Support`}</Link>
-          <Link href={TERMS}>{t`Terms`}</Link>
         </Nav>
         <Control>
           {/* show these buttons if supported */}

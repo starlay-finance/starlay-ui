@@ -79,6 +79,7 @@ const FirstViewSection = styled.section`
     height: 2.4em;
     div {
       ${headingAnimation};
+      white-space: pre-wrap;
     }
   }
   ${Content} {

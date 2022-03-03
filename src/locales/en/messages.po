@@ -24,21 +24,8 @@ msgid "Governance"
 msgstr "Governance"
 
 #: src/components/parts/Footer/AppFooter.tsx
-#: src/components/parts/Footer/TopFooter.tsx
-msgid "Starlay"
-msgstr "Starlay"
-
-#: src/components/parts/Footer/AppFooter.tsx
 msgid "Support"
 msgstr "Support"
-
-#: src/components/parts/Footer/AppFooter.tsx
-msgid "Terms"
-msgstr "Terms"
-
-#: src/components/parts/Footer/AppFooter.tsx
-msgid "Japanese"
-msgstr "Japanese"
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Starlay Finance is the first lending protocol backed by Astar Network."
@@ -149,14 +136,6 @@ msgstr "Metamask"
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
 msgstr "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
-
-#: src/components/parts/Modal/WalletModal/index.tsx
-#~ msgid "By connecting, I understood <0>how Starlay Finance works</0> and agreed to use it at my own risk."
-#~ msgstr "By connecting, I understood <0>how Starlay Finance works</0> and agreed to use it at my own risk."
-
-#: src/components/parts/Modal/WalletModal/index.tsx
-#~ msgid "By connecting, I accept Starlay's <0>Terms of Service</0>"
-#~ msgstr "By connecting, I accept Starlay's <0>Terms of Service</0>"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
@@ -280,11 +259,6 @@ msgstr "Borrow Markets"
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "APY_Borrow"
 msgstr "APY"
-
-#: src/components/screens/Dashboard/parts/Market.tsx
-#: src/components/screens/Dashboard/parts/Market.tsx
-#~ msgid "APY"
-#~ msgstr "APY"
 
 #: src/components/screens/Dashboard/parts/Summary/BorrowLimit.tsx
 msgid "Borrow Limit"

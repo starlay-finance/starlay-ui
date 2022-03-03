@@ -21,28 +21,15 @@ msgstr ""
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
 msgid "Governance"
-msgstr ""
-
-#: src/components/parts/Footer/AppFooter.tsx
-#: src/components/parts/Footer/TopFooter.tsx
-msgid "Starlay"
-msgstr ""
+msgstr "ガバナンス"
 
 #: src/components/parts/Footer/AppFooter.tsx
 msgid "Support"
-msgstr ""
-
-#: src/components/parts/Footer/AppFooter.tsx
-msgid "Terms"
-msgstr ""
-
-#: src/components/parts/Footer/AppFooter.tsx
-msgid "Japanese"
-msgstr ""
+msgstr "サポート"
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Starlay Finance is the first lending protocol backed by Astar Network."
-msgstr ""
+msgstr "Starlay Finance は Astar インキュベーションプログラムに採択された唯一のレンディングプロトコルです。"
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Twitter"
@@ -69,32 +56,32 @@ msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Protocol"
-msgstr ""
+msgstr "プロトコル"
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Developers"
-msgstr ""
+msgstr "リポジトリ"
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
 msgid "Docs"
-msgstr ""
+msgstr "ドキュメント"
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Overview"
-msgstr ""
+msgstr "概要"
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Community"
-msgstr ""
+msgstr "コミュニティ"
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Brand"
-msgstr ""
+msgstr "ブランド"
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Media Kit"
-msgstr ""
+msgstr "メディアキット"
 
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Dashboard"
@@ -107,11 +94,11 @@ msgstr "ウォレット接続"
 #: src/components/parts/Header/TopHeader.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Launch App"
-msgstr ""
+msgstr "取引開始"
 
 #: src/components/parts/Header/TopHeader.tsx
 msgid "Bug Bounty"
-msgstr ""
+msgstr "バウンティ"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 msgid "LAY Balance"
@@ -273,11 +260,6 @@ msgstr "借入金利"
 msgid "APY_Borrow"
 msgstr "借入APY"
 
-#: src/components/screens/Dashboard/parts/Market.tsx
-#: src/components/screens/Dashboard/parts/Market.tsx
-#~ msgid "APY"
-#~ msgstr "預入APY"
-
 #: src/components/screens/Dashboard/parts/Summary/BorrowLimit.tsx
 msgid "Borrow Limit"
 msgstr "借入上限額"
@@ -300,47 +282,49 @@ msgstr ""
 
 #: src/components/screens/Sorry/reasons.ts
 msgid "Starlay Finance does not support mobile access. Please connect to this website using your PC."
-msgstr "Starlay FinanceはPCからのアクセスのみサポートしています。"
+msgstr "Starlay Finance はPCからのアクセスのみサポートしています。"
 
 #: src/components/screens/Sorry/reasons.ts
 msgid "Something went wrong. Please go back."
-msgstr ""
+msgstr "予期せぬエラーが発生しました。前の画面に戻ってください。"
 
 #: src/components/screens/Top/parts/Backers.tsx
 msgid "Backers"
-msgstr ""
+msgstr "ステークホルダー"
 
 #: src/components/screens/Top/parts/Backers.tsx
 msgid "We're supported by leading teams and organizations"
-msgstr ""
+msgstr "グローバルな投資家及びAstarコミュニティの支援を受けています"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "Current Markets"
-msgstr ""
+msgstr "マーケット"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "The more funds that will be borrowed, the higher the interest rate will be"
-msgstr ""
+msgstr "Astar Network最大の流動性を誇るレンディングマーケット"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "Total Deposited"
-msgstr ""
+msgstr "預入総額"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "Total Borrowed"
-msgstr ""
+msgstr "借入総額"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Low Risk Farming on Astar Network"
 msgstr ""
+"Astar Networkの\n"
+"流動性を創出する"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Starlay Finance is the first lending protocol backed by Astar Network"
-msgstr ""
+msgstr "Astar Network が支援する唯一のレンディングプロトコル"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"
-msgstr ""
+msgstr "Starlay について知る"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Powered by"
