@@ -35,7 +35,7 @@ const MyApp: VFC<Omit<AppProps, 'pageProps'> & { pageProps: PageStaticProps }> =
         <GlobalStyles />
         <Favicons />
         <Head>
-          <link href={notoSansJpPath} />
+          <link rel="stylesheet" href={notoSansJpPath} />
         </Head>
         <SWRConfig value={{ fallback: swrFallback(pageProps) }}>
           <Web3ReactProvider getLibrary={getLibrary}>
