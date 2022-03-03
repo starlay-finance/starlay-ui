@@ -1,10 +1,13 @@
+import { useRouter } from 'next/router'
 import { VFC } from 'react'
+import { GradientCtaLink } from 'src/components/parts/Cta'
 import { TopFooter } from 'src/components/parts/Footer'
 import { TopHeader } from 'src/components/parts/Header'
 import { TOP_ASSETS } from 'src/constants/top'
+import { Locale } from 'src/locales'
 import { secondary } from 'src/styles/colors'
 import { fontWeightHeavy, fontWeightRegular } from 'src/styles/font'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Backers, BackersProps } from './parts/Backers'
 import { Background } from './parts/Background'
 import { CurrentMarkets } from './parts/CurrentMarkets'
@@ -12,10 +15,11 @@ import { FirstView } from './parts/FirstView'
 export type TopProps = BackersProps
 
 export const Top: VFC<TopProps> = ({ backers }) => {
+  const { locale } = useRouter()
   return (
     <>
       <TopHeader />
-      <Main>
+      <Main $locale={locale as Locale}>
         <Background />
         <FirstView assets={TOP_ASSETS} />
         <CurrentMarkets />
@@ -26,7 +30,7 @@ export const Top: VFC<TopProps> = ({ backers }) => {
   )
 }
 
-const Main = styled.main`
+const Main = styled.main<{ $locale?: Locale }>`
   position: relative;
   width: 100%;
   padding-bottom: 240px;
@@ -54,4 +58,15 @@ const Main = styled.main`
     font-weight: ${fontWeightRegular};
     color: ${secondary};
   }
+  ${({ $locale }) =>
+    $locale === 'ja' &&
+    css`
+      &,
+      * {
+        font-style: normal;
+      }
+      ${GradientCtaLink} {
+        font-size: 18px;
+      }
+    `}
 `

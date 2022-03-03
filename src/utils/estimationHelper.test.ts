@@ -535,16 +535,6 @@ describe('estimationHelper', () => {
         )
         expect(result.unavailableReason).toBe('No balance to repay')
       })
-      test('should return "No balance to repay" if the amount gt borrowed(with margin', () => {
-        const borrowed = BN_ONE
-        const result = estimateRepayment(
-          param({
-            userAssetBalance: { borrowed, inWallet: BN_HUNDRED },
-            amount: borrowed.multipliedBy('1.026'),
-          }),
-        )
-        expect(result.unavailableReason).toBe('No balance to repay')
-      })
     })
   })
 })

@@ -42,7 +42,7 @@ const BarometerFigure = styled.figure<BarometerFigureProps>`
   column-gap: 16px;
   backdrop-filter: blur(8px) brightness(0.8);
   figcaption {
-    width: 104px;
+    width: 128px;
   }
   > div {
     position: relative;

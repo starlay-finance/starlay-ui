@@ -19,7 +19,6 @@ import {
   DOCS,
   GITHUB,
   GOVERNANCE_OVERVIEW,
-  GOVERNANCE_STARLAY,
   MEDIA_KIT,
   MEDIUM,
   TELEGRAM,
@@ -59,7 +58,6 @@ export const TopFooter = asStyled(({ className }) => (
         <LinksHeading>{t`Governance`}</LinksHeading>
         <TextLinks>
           <Link href={GOVERNANCE_OVERVIEW}>{t`Overview`}</Link>
-          <Link href={GOVERNANCE_STARLAY}>{t`Starlay`}</Link>
         </TextLinks>
       </NavItem>
       <NavItem>
@@ -109,7 +107,9 @@ const TextLinks = styled.div`
   }
 `
 
-const Note = styled.p``
+const Note = styled.p`
+  line-height: 1.33;
+`
 
 const LinksHeading = styled.p`
   && {
@@ -125,14 +125,14 @@ const NavItem = styled.div`
     font-size: 14px;
     font-weight: ${fontWeightMedium};
   }
-  p,
-  div {
-    :not(:first-child) {
-      margin-top: 24px;
-    }
-  }
   > svg > path {
     fill: ${trueWhite};
+  }
+  ${Note} {
+    margin-top: 12px;
+  }
+  ${TextLinks} ,${IconLinks} {
+    margin-top: 24px;
   }
 `
 const Nav = styled.nav`

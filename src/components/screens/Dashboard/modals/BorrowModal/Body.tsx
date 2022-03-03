@@ -89,6 +89,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
             )
           }
           significantDigits={decimals}
+          allLabel={t`All`}
         />
       ) : (
         <AmountInput
@@ -103,6 +104,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
             if (all) setRepaymentAmount(formatAmt(userAssetBalance.borrowed))
           }}
           all={all}
+          allLabel={t`All_Repay`}
         />
       )}
       <ActionTab

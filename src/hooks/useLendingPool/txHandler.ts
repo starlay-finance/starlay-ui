@@ -32,7 +32,7 @@ export const useTxHandler = () => {
   ) => {
     open({
       type: 'Loading',
-      title: 'Transaction Preparing',
+      title: t`Transaction Preparing`,
       message: t`Waiting for transaction to be ready...`,
     })
     const { actionTx, erc20ApprovalTx } = pickLendingPoolTxs(await txsPromise)
@@ -41,7 +41,7 @@ export const useTxHandler = () => {
       if (erc20ApprovalTx) {
         open({
           type: 'Loading',
-          title: 'Confirm Transaction',
+          title: t`Confirm Transaction`,
           message: t`Approve sending the ERC-20 asset to the pool.`,
         })
         const approveRes = await signer.sendTransaction(
@@ -49,7 +49,7 @@ export const useTxHandler = () => {
         )
         open({
           type: 'Loading',
-          title: 'Transaction Pending',
+          title: t`Transaction Pending`,
           message: t`Waiting for the transaction to be confirmed...`,
         })
         await approveRes.wait(1)
@@ -57,7 +57,7 @@ export const useTxHandler = () => {
       if (actionTx) {
         open({
           type: 'Loading',
-          title: 'Confirm Transaction',
+          title: t`Confirm Transaction`,
           message: t`Confirm the transaction.`,
         })
         const tx = await actionTx.tx()
@@ -67,14 +67,14 @@ export const useTxHandler = () => {
         })
         open({
           type: 'Loading',
-          title: 'Transaction Pending',
+          title: t`Transaction Pending`,
           message: t`Waiting for the transaction to be confirmed...`,
         })
         await depostRes.wait(1)
         revalidate()
         open({
           type: 'Success',
-          title: 'Succeeded!',
+          title: t`Succeeded!`,
           message: t`You transaction confirmed!`,
         })
       }
@@ -83,14 +83,14 @@ export const useTxHandler = () => {
       if (error.code === 4001) {
         open({
           type: 'Alert',
-          title: 'Transaction Canceled',
+          title: t`Transaction Canceled`,
           message: t`You have canceled the transaction.`,
         })
         return
       }
       open({
         type: 'Alert',
-        title: 'Error',
+        title: t`Error`,
         message: t`Something went wrong...`,
       })
       console.error(e)

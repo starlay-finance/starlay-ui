@@ -1,12 +1,13 @@
-import { AnchorHTMLAttributes, ButtonHTMLAttributes, VFC } from 'react'
-import { Link } from 'src/components/elements/Link'
+import { ButtonHTMLAttributes, VFC } from 'react'
+import { Link, LinkFC } from 'src/components/elements/Link'
 import { darkPurple, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import styled, { css } from 'styled-components'
 
-export const SimpleCtaLink = styled<
-  VFC<AnchorHTMLAttributes<HTMLAnchorElement>>
->(({ children, ...props }) => <CtaLink {...props}>{children}</CtaLink>)``
+export const SimpleCtaLink = styled<LinkFC>(({ children, ...props }) => (
+  // @ts-ignore
+  <CtaLink {...props}>{children}</CtaLink>
+))``
 
 export const SimpleCtaButton = styled<
   VFC<ButtonHTMLAttributes<HTMLButtonElement>>

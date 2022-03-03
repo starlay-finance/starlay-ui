@@ -1,5 +1,6 @@
 import { Web3ReactProvider } from '@web3-react/core'
 import type { AppProps } from 'next/app'
+import Head from 'next/head'
 import { useEffect, VFC } from 'react'
 import { isMobile } from 'react-device-detect'
 import TagManager from 'react-gtm-module'
@@ -8,8 +9,10 @@ import { SEO } from 'src/components/parts/SEO'
 import { COMMON_SEO_DATA } from 'src/constants/seo'
 import { swrFallback } from 'src/hooks/swrFallback'
 import { ModalPortal } from 'src/hooks/useModal'
-import { I18nProvider } from 'src/libs/i18n-provider'
+import { I18nProvider, loadSync } from 'src/libs/i18n-provider'
 import { getLibrary } from 'src/libs/wallet-provider'
+import { Locale } from 'src/locales'
+import { notoSansJpPath } from 'src/styles/font'
 import { GlobalStyles } from 'src/styles/global-styles'
 import 'src/styles/globals.css'
 import 'src/styles/lato_fonts.css'
@@ -26,10 +29,14 @@ const MyApp: VFC<Omit<AppProps, 'pageProps'> & { pageProps: PageStaticProps }> =
       if (GTM_ID) TagManager.initialize({ gtmId: GTM_ID })
       if (jumpToSorry) router.replace(sorryFor('mobile-not-supported'))
     }, [])
+    loadSync(router.locale as Locale)
     return (
       <>
         <GlobalStyles />
         <Favicons />
+        <Head>
+          <link rel="stylesheet" href={notoSansJpPath} />
+        </Head>
         <SWRConfig value={{ fallback: swrFallback(pageProps) }}>
           <Web3ReactProvider getLibrary={getLibrary}>
             <I18nProvider>

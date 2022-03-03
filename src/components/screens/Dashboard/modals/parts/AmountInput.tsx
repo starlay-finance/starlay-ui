@@ -15,6 +15,7 @@ type AmountInputProps = {
   significantDigits: number
   maxLabel?: string
   setAll?: (all: boolean) => void
+  allLabel?: string
   all?: boolean
 }
 export const AmountInput: VFC<AmountInputProps> = ({
@@ -24,12 +25,13 @@ export const AmountInput: VFC<AmountInputProps> = ({
   maxLabel,
   significantDigits,
   setAll,
+  allLabel = 'label',
   all,
 }) => {
   return (
     <InputDiv>
       <ScalingInput
-        width={320}
+        width={360}
         maxFontSize={40}
         value={value}
         placeholder={'0'}
@@ -63,7 +65,7 @@ export const AmountInput: VFC<AmountInputProps> = ({
               checked={all}
               onChange={() => setAll(!all)}
             />
-            <span>{t`All`}</span>
+            <span>{allLabel}</span>
           </label>
         )}
       </Control>
@@ -112,7 +114,6 @@ const InputDiv = styled.div`
     font-weight: ${fontWeightBold};
     text-align: center;
     color: ${trueBlack};
-    transition: all 0.5s ease-in;
     :disabled {
       cursor: not-allowed;
     }

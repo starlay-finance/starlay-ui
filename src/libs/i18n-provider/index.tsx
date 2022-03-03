@@ -5,9 +5,10 @@ import { ReactNode, VFC } from 'react'
 import {
   DEFAULT_LOCALE,
   isSupportedLocale,
+  Locale,
+  MESSAGES,
   SUPPORTED_LOCALES,
 } from 'src/locales'
-import { messages as messagesEn } from 'src/locales/en/messages.po'
 
 export const I18nProvider: VFC<{
   children: ReactNode
@@ -22,13 +23,11 @@ export const load = async (locale: string) => {
   i18n.activate(locale)
 }
 
-export const loadSync = (locale: string, messages: any) => {
-  i18n.load(locale, messages)
+export const loadSync = (locale: Locale = DEFAULT_LOCALE) => {
+  i18n.load(locale, MESSAGES[locale])
   i18n.activate(locale)
 }
 
 SUPPORTED_LOCALES.forEach((locale) => {
   i18n.loadLocaleData(locale, { plurals: plurals[locale] })
 })
-
-loadSync(DEFAULT_LOCALE, messagesEn)

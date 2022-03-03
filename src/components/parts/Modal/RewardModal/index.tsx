@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
+import { useRouter } from 'next/router'
 import { VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
@@ -17,7 +18,7 @@ import { NumberItem } from '../parts'
 const Reward: VFC<ModalContentProps> = ({ close }) => {
   return (
     <DefaultModalContent
-      headerNode="LAY Balance"
+      headerNode={t`LAY Balance`}
       bodyNode={<RewardModalBody />}
       closeModal={close}
     />
@@ -25,6 +26,7 @@ const Reward: VFC<ModalContentProps> = ({ close }) => {
 }
 
 const RewardModalBody = () => {
+  const { locale } = useRouter()
   const { data: marketData } = useMarketData()
   const { data: user } = useUserData()
   const { data: balance } = useWalletBalance()
@@ -45,7 +47,9 @@ const RewardModalBody = () => {
       <SummaryDiv>
         <Image src={icon} alt={name} width={80} height={80} />
         <p>{formatter(total)}</p>
-        <p>{formatUSD(totalInUSD)}</p>
+        {locale !== 'ja' && (
+          <p>{formatUSD(totalInUSD, { shorteningThreshold: 8 })}</p>
+        )}
       </SummaryDiv>
       <NumberItem
         label={t`Wallet Balance`}
@@ -57,13 +61,14 @@ const RewardModalBody = () => {
         num={valueToBigNumber(unclaimed)}
         format={formatter}
       />
-      <NumberItem label={t`Price`} num={priceInUSD} format={formatUSD} />
+      {locale !== 'ja' && (
+        <NumberItem label={t`Price`} num={priceInUSD} format={formatUSD} />
+      )}
     </BodyDiv>
   )
 }
 
-const formatter = (num: BigNumber) =>
-  formatAmt(num, { shorteningThreshold: 8, decimalPlaces: 2 })
+const formatter = (num: BigNumber) => formatAmt(num, { decimalPlaces: 18 })
 
 const SummaryDiv = styled.div`
   display: flex;
@@ -87,6 +92,9 @@ const BodyDiv = styled.div`
   padding: 32px;
   font-size: 18px;
   font-weight: ${fontWeightSemiBold};
+  ${SummaryDiv} {
+    margin-bottom: 16px;
+  }
 `
 
 export const useRewardModal = () => useModalDialog(Reward)

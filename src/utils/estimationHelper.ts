@@ -323,9 +323,7 @@ export const estimateRepayment = ({
   })
 
   return {
-    unavailableReason: amount.gt(maxAmount)
-      ? t`No balance to repay`
-      : undefined,
+    unavailableReason: amount.gt(inWallet) ? t`No balance to repay` : undefined,
     maxAmount,
     totalBorrowedInUSD,
     borrowLimitUsed,

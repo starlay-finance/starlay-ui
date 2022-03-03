@@ -213,8 +213,8 @@ const AssetsDiv = styled.div<{ $appeared: boolean }>`
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
-  max-width: 1500px;
-  transform: translateX(480px);
+  max-width: 1400px;
+  transform: translateX(380px);
   ${AssetItem} {
     transition: all 0.2s;
     :nth-child(-n + 3) {

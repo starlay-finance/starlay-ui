@@ -114,7 +114,7 @@ const AssetsWithPlaceholder: VFC<{
             ? Math.min(asset.amountInUSD.dividedBy(totalInUSD).toNumber(), 1)
             : 0
         }
-        filled={skyBlue}
+        filledStyles={{ bgColor: skyBlue }}
         unfilled={`${skyBlue}3d`}
       />
     </Asset>

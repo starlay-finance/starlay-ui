@@ -14,7 +14,7 @@ export const ScalingInput = asStyled<ScalingInputProps>(
       const point = (value || '').length * fontSize
       if (fontSize !== minFontSize && point > width * 1.3)
         setFontSize(Math.max(fontSize * 0.8, minFontSize))
-      if (point < width * 1.2)
+      if (point < width * 1.1)
         setFontSize(Math.min(fontSize / 0.8, maxFontSize))
     }, [value])
     return <input {...props} value={value} style={{ width, fontSize }} />
