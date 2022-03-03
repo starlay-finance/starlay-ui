@@ -145,6 +145,7 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
           />
           {!asset.usageAsCollateralEnabled && (
             <NoCollateralMessage>
+              <div />
               <p>
                 <p>{t`This asset can't be used as collateral.`}</p>
                 <Trans
@@ -195,11 +196,24 @@ const NoCollateralMessage = styled.p`
   left: 0;
   height: 214px;
   ${flexCenter};
-  background-color: rgba(255, 255, 255, 0.96);
+  background-color: ${trueWhite};
   padding: 24px;
+  > div {
+    position: absolute;
+    inset: 0;
+    background-color: ${darkPurple}80;
+  }
   p {
+    color: ${trueWhite};
+    position: relative;
     text-align: center;
     line-height: 1.5;
+    a {
+      text-decoration: underline;
+      :hover {
+        color: ${purple};
+      }
+    }
   }
 `
 
