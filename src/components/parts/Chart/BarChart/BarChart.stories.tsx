@@ -5,6 +5,7 @@ import {
   lightYellow,
   primary,
   purple,
+  trueBlack,
 } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import styled from 'styled-components'
@@ -21,10 +22,10 @@ export const BarChartComponent = () => {
   return (
     <Style>
       <BarChart
-        filled={[
-          { gte: 0, color: purple },
-          { gte: 50, color: lightYellow },
-          { gte: 80, color: darkRed },
+        filledStyles={[
+          { gte: 0, bgColor: purple },
+          { gte: 50, bgColor: lightYellow, color: trueBlack },
+          { gte: 80, bgColor: darkRed },
         ]}
         unfilled={`${darkPurple}a3`}
         ratio={ratio / 100}
