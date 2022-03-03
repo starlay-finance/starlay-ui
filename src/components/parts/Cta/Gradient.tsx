@@ -1,13 +1,12 @@
-import { AnchorHTMLAttributes, ButtonHTMLAttributes, VFC } from 'react'
-import { Link } from 'src/components/elements/Link'
+import { ButtonHTMLAttributes, VFC } from 'react'
+import { Link, LinkFC } from 'src/components/elements/Link'
 import { darkRed, skyBlue, trueWhite } from 'src/styles/colors'
 import { fontWeightBlack } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import styled, { css, keyframes } from 'styled-components'
 
-export const GradientCtaLink = styled<
-  VFC<AnchorHTMLAttributes<HTMLAnchorElement>>
->(({ children, ...props }) => (
+export const GradientCtaLink = styled<LinkFC>(({ children, ...props }) => (
+  // @ts-ignore
   <CtaLink {...props}>
     <Content>{children}</Content>
   </CtaLink>
