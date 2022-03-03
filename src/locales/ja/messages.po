@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2022-01-28 13:45+0900\n"
+"POT-Creation-Date: 2022-03-03 12:37+0900\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: en\n"
+"Language: ja\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
@@ -15,388 +15,388 @@ msgstr ""
 
 #: src/components/parts/Footer/AppFooter.tsx
 msgid "Latest Block: {blockNumber}"
-msgstr "Latest Block: {blockNumber}"
+msgstr ""
 
 #: src/components/parts/Footer/AppFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
 msgid "Governance"
-msgstr "Governance"
+msgstr ""
 
 #: src/components/parts/Footer/AppFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Starlay"
-msgstr "Starlay"
+msgstr ""
 
 #: src/components/parts/Footer/AppFooter.tsx
 msgid "Support"
-msgstr "Support"
+msgstr ""
 
 #: src/components/parts/Footer/AppFooter.tsx
 msgid "Terms"
-msgstr "Terms"
+msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Starlay Finance is the first lending protocol backed by Astar Network."
-msgstr "Starlay Finance is the first lending protocol backed by Astar Network."
+msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Twitter"
-msgstr "Twitter"
+msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
 msgid "Discord"
-msgstr "Discord"
+msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Telegram"
-msgstr "Telegram"
+msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Medium"
-msgstr "Medium"
+msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Github"
-msgstr "Github"
+msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Protocol"
-msgstr "Protocol"
+msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Developers"
-msgstr "Developers"
+msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
 msgid "Docs"
-msgstr "Docs"
+msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Overview"
-msgstr "Overview"
+msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Community"
-msgstr "Community"
+msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Brand"
-msgstr "Brand"
+msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Media Kit"
-msgstr "Media Kit"
+msgstr ""
 
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Dashboard"
-msgstr "Dashboard"
+msgstr ""
 
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Connect"
-msgstr "Connect"
+msgstr ""
 
 #: src/components/parts/Header/TopHeader.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Launch App"
-msgstr "Launch App"
+msgstr ""
 
 #: src/components/parts/Header/TopHeader.tsx
 msgid "Bug Bounty"
-msgstr "Bug Bounty"
+msgstr ""
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Wallet Balance"
-msgstr "Wallet Balance"
+msgstr ""
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 msgid "Unclaimed Balance"
-msgstr "Unclaimed Balance"
+msgstr ""
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 msgid "Price"
-msgstr "Price"
+msgstr ""
 
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "Connect Wallet"
-msgstr "Connect Wallet"
+msgstr "ウォレットに接続する"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "Connecting the wallet..."
-msgstr "Connecting the wallet..."
+msgstr "ウォレットに接続しています..."
 
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "We currently supports Metamask only."
-msgstr "We currently supports Metamask only."
+msgstr "現在Metamaskのみサポートしています。"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "Metamask"
-msgstr "Metamask"
+msgstr ""
 
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "By connecting, I accept Starlay's <0>Terms of Service</0>"
-msgstr "By connecting, I accept Starlay's <0>Terms of Service</0>"
+msgstr "ウォレットを接続することで、Starlayの<0>利用規約</0>に同意したことになります。"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Borrow"
-msgstr "Borrow"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Repay"
-msgstr "Repay"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Borrow APY"
-msgstr "Borrow APY"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Borrow APR"
-msgstr "Borrow APR"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Borrowed"
-msgstr "Borrowed"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Borrow Limit Used"
-msgstr "Borrow Limit Used"
+msgstr "担保利用率"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
 msgid "Health Factor"
-msgstr "Health Factor"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "To repay all, you will pay more than the amount shown because of the interest charged per second."
-msgstr "To repay all, you will pay more than the amount shown because of the interest charged per second."
+msgstr "利息は1秒ごとに発生するため、全額返済には表示より多くの額が支払われます。"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Liquidity"
-msgstr "Liquidity"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Deposit"
-msgstr "Deposit"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Withdraw"
-msgstr "Withdraw"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Deposit APY"
-msgstr "Deposit APY"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Deposit APR"
-msgstr "Deposit APR"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Borrow Available"
-msgstr "Borrow Available"
+msgstr "借入可能額"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "This asset can't be used as collateral."
-msgstr "This asset can't be used as collateral."
+msgstr "このトークンは担保利用できません。"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "For more information, please <0>see our docs</0>."
-msgstr "For more information, please <0>see our docs</0>."
+msgstr "詳細は<0>ドキュメント</0>を参照してください。"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Deposited"
-msgstr "Deposited"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
 msgid "Max"
-msgstr "Max"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
 msgid "All"
-msgstr "All"
+msgstr ""
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Deposit Markets"
-msgstr "Deposit Markets"
+msgstr ""
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Borrow Markets"
-msgstr "Borrow Markets"
+msgstr ""
 
 #: src/components/screens/Dashboard/parts/Summary/BorrowLimit.tsx
 msgid "Borrow Limit"
-msgstr "Borrow Limit"
+msgstr ""
 
 #: src/components/screens/Dashboard/parts/Summary/NetAPY.tsx
 msgid "Net APY"
-msgstr "Net APY"
+msgstr ""
 
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
 msgid "Deposit Balance"
-msgstr "Deposit Balance"
+msgstr ""
 
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
 msgid "Borrow Balance"
-msgstr "Borrow Balance"
+msgstr ""
 
 #: src/components/screens/Sorry/index.tsx
 msgid "Go Back"
-msgstr "Go Back"
+msgstr ""
 
 #: src/components/screens/Sorry/reasons.ts
 msgid "Starlay Finance does not support mobile access. Please connect to this website using your PC."
-msgstr "Starlay Finance does not support mobile access. Please connect to this website using your PC."
+msgstr "Starlay FinanceはPCからのアクセスのみサポートしています。"
 
 #: src/components/screens/Sorry/reasons.ts
 msgid "Something went wrong. Please go back."
-msgstr "Something went wrong. Please go back."
+msgstr ""
 
 #: src/components/screens/Top/parts/Backers.tsx
 msgid "Backers"
-msgstr "Backers"
+msgstr ""
 
 #: src/components/screens/Top/parts/Backers.tsx
 msgid "We're supported by leading teams and organizations"
-msgstr "We're supported by leading teams and organizations"
+msgstr ""
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "Current Markets"
-msgstr "Current Markets"
+msgstr ""
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "The more funds that will be borrowed, the higher the interest rate will be"
-msgstr "The more funds that will be borrowed, the higher the interest rate will be"
+msgstr ""
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "Total Deposited"
-msgstr "Total Deposited"
+msgstr ""
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "Total Borrowed"
-msgstr "Total Borrowed"
+msgstr ""
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Low Risk Farming on Astar Network"
-msgstr "Low Risk Farming on Astar Network"
+msgstr ""
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Starlay Finance is the first lending protocol backed by Astar Network"
-msgstr "Starlay Finance is the first lending protocol backed by Astar Network"
+msgstr ""
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"
-msgstr "Explore the docs"
+msgstr ""
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Powered by"
-msgstr "Powered by"
+msgstr ""
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "ASTAR"
-msgstr "ASTAR"
+msgstr ""
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Waiting for transaction to be ready..."
-msgstr "Waiting for transaction to be ready..."
+msgstr "トランザクションの準備中です..."
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Approve sending the ERC-20 asset to the pool."
-msgstr "Approve sending the ERC-20 asset to the pool."
+msgstr "ERC20トークンの送金を許可してください"
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Waiting for the transaction to be confirmed..."
-msgstr "Waiting for the transaction to be confirmed..."
+msgstr "トランザクションの承認を待っています..."
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Confirm the transaction."
-msgstr "Confirm the transaction."
+msgstr "トランザクションを承認してください"
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "You transaction confirmed!"
-msgstr "You transaction confirmed!"
+msgstr "トランザクションが承認されました"
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "You have canceled the transaction."
-msgstr "You have canceled the transaction."
+msgstr "トランザクションを拒否しました"
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Something went wrong..."
-msgstr "Something went wrong..."
+msgstr "エラーが発生しました"
 
 #: src/hooks/useUnsupportedChainAlert.ts
 #: src/hooks/useUnsupportedChainAlert.ts
 msgid "You need to change to a supported chain"
-msgstr "You need to change to a supported chain"
+msgstr "接続先チェーンを変更してください"
 
 #: src/hooks/useUnsupportedChainAlert.ts
 msgid "Please switch the chain with your wallet."
-msgstr "Please switch the chain with your wallet."
+msgstr "接続先チェーンを変更してください"
 
 #: src/hooks/useUnsupportedChainAlert.ts
 msgid "Please switch the chain with your wallet..."
-msgstr "Please switch the chain with your wallet..."
+msgstr "接続先チェーンを変更してください"
 
 #: src/hooks/useUnsupportedChainAlert.ts
 msgid "Failed to switch the chain"
-msgstr "Failed to switch the chain"
+msgstr "接続先チェーンの変更に失敗しました"
 
 #: src/libs/wallet-provider/providers/metamask.ts
 #: src/libs/wallet-provider/providers/metamask.ts
 #: src/libs/wallet-provider/providers/metamask.ts
 #: src/libs/wallet-provider/providers/metamask.ts
 msgid "Your wallet needs to switch networks manually."
-msgstr "Your wallet needs to switch networks manually."
+msgstr "ウォレットから接続先チェーンを変更してください"
 
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 msgid "Enter amount"
-msgstr "Enter amount"
+msgstr ""
 
 #: src/utils/estimationHelper.ts
 msgid "No balance to deposit"
-msgstr "No balance to deposit"
+msgstr "ウォレットの残高が不足しています"
 
 #: src/utils/estimationHelper.ts
 msgid "No balance to withdraw"
-msgstr "No balance to withdraw"
+msgstr "預入残高が不足しています"
 
 #: src/utils/estimationHelper.ts
 msgid "Insufficient collateral"
-msgstr "Insufficient collateral"
+msgstr "担保額が不足しています"
 
 #: src/utils/estimationHelper.ts
 msgid "No liquidity to withdraw"
-msgstr "No liquidity to withdraw"
+msgstr "リクイディティがありません"
 
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 msgid "Health factor too low"
-msgstr "Health factor too low"
+msgstr "ヘルスファクターが閾値を下回っています"
 
 #: src/utils/estimationHelper.ts
 msgid "Borrowing limit reached"
-msgstr "Borrowing limit reached"
+msgstr "借入上限額を超えています"
 
 #: src/utils/estimationHelper.ts
 msgid "No liquidity to borrow"
-msgstr "No liquidity to borrow"
+msgstr "リクイディティがありません"
 
 #: src/utils/estimationHelper.ts
 msgid "No balance to repay"
-msgstr "No balance to repay"
+msgstr "ウォレットの残高が不足しています"
