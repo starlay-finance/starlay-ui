@@ -9,6 +9,7 @@ import {
   NumberItemWithDiff,
 } from 'src/components/parts/Modal/parts'
 import { ASSETS_DICT } from 'src/constants/assets'
+import { darkPurple, purple, trueWhite } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import {
   estimateDeposit,
@@ -75,6 +76,7 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
           onChange={setDepositAmount}
           setMaxValue={() => setDepositAmount(formatAmt(estimation.maxAmount))}
           significantDigits={asset.decimals}
+          allLabel={t`All`}
         />
       ) : (
         <AmountInput
@@ -94,6 +96,7 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
             if (all) setWithdrawalAmount(formatAmt(userAssetBalance.deposited))
           }}
           all={all}
+          allLabel={t`All_Withdraw`}
         />
       )}
       <ActionTab

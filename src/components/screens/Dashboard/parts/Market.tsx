@@ -69,10 +69,10 @@ export const Market = asStyled(({ className }) => {
           color={purple}
           caption={t`Deposit Markets`}
           columns={[
-            { id: 'asset', name: 'Asset', widthRatio: 6 },
-            { id: 'apr', name: 'Reward APR', widthRatio: 3 },
-            { id: 'apy', name: 'APY', widthRatio: 3 },
-            { id: 'deposited', name: 'Deposited', widthRatio: 6 },
+            { id: 'asset', name: t`Asset`, widthRatio: 6 },
+            { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
+            { id: 'apy', name: t`APY_Deposit`, widthRatio: 3 },
+            { id: 'deposited', name: t`Deposited`, widthRatio: 6 },
           ]}
           placeholderLength={3}
           rows={markets.map((asset) => {
@@ -111,10 +111,10 @@ export const Market = asStyled(({ className }) => {
           color={lightYellow}
           caption={t`Borrow Markets`}
           columns={[
-            { id: 'asset', name: 'Asset', widthRatio: 6 },
-            { id: 'apr', name: 'Reward APR', widthRatio: 3 },
-            { id: 'apy', name: 'APY', widthRatio: 3 },
-            { id: 'borrowed', name: 'Borrowed', widthRatio: 6 },
+            { id: 'asset', name: t`Asset`, widthRatio: 6 },
+            { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
+            { id: 'apy', name: t`APY_Borrow`, widthRatio: 3 },
+            { id: 'borrowed', name: t`Borrowed`, widthRatio: 6 },
           ]}
           placeholderLength={3}
           rowDisabledStyle={rowDisabledStyle}

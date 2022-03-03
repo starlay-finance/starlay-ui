@@ -10,7 +10,12 @@ export const DEFAULT_LOCALE: Locale = 'en'
 export const isSupportedLocale = (arg: any): arg is Locale =>
   SUPPORTED_LOCALES.includes(arg)
 
-export const MESSAGES = {
+export const MESSAGES: Record<Locale, any> = {
   en: messagesEn,
   ja: messagesJa,
+}
+
+export const LOCALES_DICT: Record<Locale, string> = {
+  en: 'English',
+  ja: '日本語',
 }

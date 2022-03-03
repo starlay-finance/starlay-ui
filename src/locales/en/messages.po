@@ -36,6 +36,10 @@ msgstr "Support"
 msgid "Terms"
 msgstr "Terms"
 
+#: src/components/parts/Footer/AppFooter.tsx
+msgid "Japanese"
+msgstr "Japanese"
+
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Starlay Finance is the first lending protocol backed by Astar Network."
 msgstr "Starlay Finance is the first lending protocol backed by Astar Network."
@@ -110,6 +114,10 @@ msgid "Bug Bounty"
 msgstr "Bug Bounty"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
+msgid "LAY Balance"
+msgstr "LAY Balance"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "Wallet Balance"
@@ -139,8 +147,25 @@ msgid "Metamask"
 msgstr "Metamask"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
-msgid "By connecting, I accept Starlay's <0>Terms of Service</0>"
-msgstr "By connecting, I accept Starlay's <0>Terms of Service</0>"
+msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
+msgstr "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+#~ msgid "By connecting, I understood <0>how Starlay Finance works</0> and agreed to use it at my own risk."
+#~ msgstr "By connecting, I understood <0>how Starlay Finance works</0> and agreed to use it at my own risk."
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+#~ msgid "By connecting, I accept Starlay's <0>Terms of Service</0>"
+#~ msgstr "By connecting, I accept Starlay's <0>Terms of Service</0>"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "All"
+msgstr "All"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "All_Repay"
+msgstr "All"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
@@ -163,6 +188,7 @@ msgstr "Borrow APR"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Borrowed"
 msgstr "Borrowed"
 
@@ -184,6 +210,10 @@ msgstr "To repay all, you will pay more than the amount shown because of the int
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Liquidity"
 msgstr "Liquidity"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "All_Withdraw"
+msgstr "All"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
@@ -217,6 +247,7 @@ msgid "For more information, please <0>see our docs</0>."
 msgstr "For more information, please <0>see our docs</0>."
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Deposited"
 msgstr "Deposited"
 
@@ -224,17 +255,36 @@ msgstr "Deposited"
 msgid "Max"
 msgstr "Max"
 
-#: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
-msgid "All"
-msgstr "All"
-
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Deposit Markets"
 msgstr "Deposit Markets"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Asset"
+msgstr "Asset"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Reward APR"
+msgstr "Reward APR"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "APY_Deposit"
+msgstr "APY"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Borrow Markets"
 msgstr "Borrow Markets"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "APY_Borrow"
+msgstr "APY"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+#~ msgid "APY"
+#~ msgstr "APY"
 
 #: src/components/screens/Dashboard/parts/Summary/BorrowLimit.tsx
 msgid "Borrow Limit"
@@ -309,12 +359,26 @@ msgid "ASTAR"
 msgstr "ASTAR"
 
 #: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Preparing"
+msgstr "Transaction Preparing"
+
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Waiting for transaction to be ready..."
 msgstr "Waiting for transaction to be ready..."
 
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Confirm Transaction"
+msgstr "Confirm Transaction"
+
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Approve sending the ERC-20 asset to the pool."
 msgstr "Approve sending the ERC-20 asset to the pool."
+
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Pending"
+msgstr "Transaction Pending"
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
@@ -326,12 +390,24 @@ msgid "Confirm the transaction."
 msgstr "Confirm the transaction."
 
 #: src/hooks/useLendingPool/txHandler.ts
+msgid "Succeeded!"
+msgstr "Succeeded!"
+
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "You transaction confirmed!"
 msgstr "You transaction confirmed!"
 
 #: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Canceled"
+msgstr "Transaction Canceled"
+
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "You have canceled the transaction."
 msgstr "You have canceled the transaction."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Error"
+msgstr "Error"
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Something went wrong..."

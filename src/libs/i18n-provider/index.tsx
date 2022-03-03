@@ -2,7 +2,13 @@ import { i18n } from '@lingui/core'
 import { I18nProvider as LinguijsProvider } from '@lingui/react'
 import * as plurals from 'make-plural/plurals'
 import { ReactNode, VFC } from 'react'
-import { isSupportedLocale, MESSAGES, SUPPORTED_LOCALES } from 'src/locales'
+import {
+  DEFAULT_LOCALE,
+  isSupportedLocale,
+  Locale,
+  MESSAGES,
+  SUPPORTED_LOCALES,
+} from 'src/locales'
 
 export const I18nProvider: VFC<{
   children: ReactNode
@@ -17,12 +23,11 @@ export const load = async (locale: string) => {
   i18n.activate(locale)
 }
 
-export const loadSync = (locale: string, messages: any) => {
-  i18n.load(locale, messages)
+export const loadSync = (locale: Locale = DEFAULT_LOCALE) => {
+  i18n.load(locale, MESSAGES[locale])
   i18n.activate(locale)
 }
 
 SUPPORTED_LOCALES.forEach((locale) => {
   i18n.loadLocaleData(locale, { plurals: plurals[locale] })
-  loadSync(locale, MESSAGES[locale])
 })
