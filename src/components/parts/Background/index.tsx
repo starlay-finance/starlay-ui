@@ -4,6 +4,13 @@ import { darkRed, skyBlue, trueBlack } from 'src/styles/colors'
 import styled from 'styled-components'
 import { HEADER_HEIGHT } from '../Header'
 
+export const AppBackground = () => (
+  <>
+    <BackgroundDotsApp />
+    <BackgroundOverlay top={HEADER_HEIGHT} />
+  </>
+)
+
 export const BackgroundGradient = styled.div`
   position: absolute;
   left: 0;
