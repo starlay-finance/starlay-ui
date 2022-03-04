@@ -1,20 +1,18 @@
 import { t } from '@lingui/macro'
 import { forwardRef, VFC } from 'react'
 import { useInView } from 'react-hook-inview'
+import { AssetBarChartWithPlaceholder } from 'src/components/compositions/Markets/MarketBarChart'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { BlinkWrapper } from 'src/components/parts/Blink'
-import { BarChart } from 'src/components/parts/Chart'
-import { SHIMMER_DARA_URI } from 'src/components/parts/Loading'
 import { Reel } from 'src/components/parts/Reel'
 import { useMarketData } from 'src/hooks/useMarketData'
-import { darkRed, secondary, skyBlue } from 'src/styles/colors'
+import { darkRed, skyBlue } from 'src/styles/colors'
 import { fontWeightBlack, fontWeightSemiBold } from 'src/styles/font'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
 import { MarketComposition } from 'src/types/models'
 import { amountByAssetsSorter, toMarketCompositions } from 'src/utils/market'
-import { BN_ZERO, formatPct, formatUSD } from 'src/utils/number'
+import { BN_ZERO, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
-import { IterableElement } from 'type-fest'
 
 export const CurrentMarkets = asStyled(({ className }) => {
   const { data } = useMarketData()
@@ -82,7 +80,7 @@ const MarketView: VFC<{
           ? Array.from(new Array(3))
           : amountByAssets.sort(amountByAssetsSorter).slice(0, 3)
         ).map((each, idx) => (
-          <AssetsWithPlaceholder
+          <AssetBarChartWithPlaceholder
             key={idx}
             totalInUSD={totalInUSD}
             asset={each}
@@ -93,72 +91,8 @@ const MarketView: VFC<{
   )
 }
 
-const AssetsWithPlaceholder: VFC<{
-  totalInUSD: MarketComposition['totalInUSD']
-  asset?: IterableElement<MarketComposition['amountByAssets']>
-}> = ({ totalInUSD, asset }) => {
-  const isValid = totalInUSD.gt(BN_ZERO) && asset
-  return (
-    <Asset>
-      <LabelWithPlaceholder
-        label={asset?.symbol}
-        value={
-          isValid
-            ? formatPct(asset.amountInUSD.dividedBy(totalInUSD))
-            : formatPct(0)
-        }
-      />
-      <BarChart
-        ratio={
-          isValid
-            ? Math.min(asset.amountInUSD.dividedBy(totalInUSD).toNumber(), 1)
-            : 0
-        }
-        filledStyles={{ bgColor: skyBlue }}
-        unfilled={`${skyBlue}3d`}
-      />
-    </Asset>
-  )
-}
-const LabelWithPlaceholder: VFC<{
-  label?: string
-  value: string
-}> = ({ label, value }) => (
-  <p>
-    <span data-label={label || ''}>{label}</span>
-    <span>{value}</span>
-  </p>
-)
-
-const Asset = styled.div`
-  p {
-    display: flex;
-    justify-content: space-between;
-    color: ${secondary};
-    span:first-child {
-      font-size: 16px;
-      font-weight: ${fontWeightBlack};
-      line-height: 1.2;
-    }
-    span[data-label=''] {
-      background: url('${SHIMMER_DARA_URI}');
-      width: 6em;
-      height: 1.2em;
-      border-radius: 0.5em;
-    }
-    span:last-child {
-      font-size: 14px;
-      font-weight: ${fontWeightSemiBold};
-    }
-  }
-  ${BarChart} {
-    margin-top: 14px;
-    height: 8px;
-  }
-`
-
 const Composition = styled.div`
-  ${Asset} {
+  ${AssetBarChartWithPlaceholder} {
     margin-top: 16px;
   }
 `
