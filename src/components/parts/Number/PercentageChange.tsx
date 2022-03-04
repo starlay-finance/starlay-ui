@@ -10,6 +10,7 @@ export type PercentageChangeProps = {
 }
 export const PercentageChange = asStyled<PercentageChangeProps>(
   ({ current, previous, className }) => {
+    if (previous.isZero()) return <span className={className}>-</span>
     const change = current.minus(previous).div(previous)
     if (change.isZero()) return <span className={className}>-</span>
     const isNegative = change.isNegative()
