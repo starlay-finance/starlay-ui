@@ -1,3 +1,4 @@
+import { t } from '@lingui/macro'
 import { ReactNode } from 'react'
 import { AsStyledProps } from 'src/components/hoc/asStyled'
 import styled, { css, SimpleInterpolation } from 'styled-components'
@@ -8,7 +9,7 @@ export type TableFC = <T extends string>(
     caption?: string
     columns: {
       id: T
-      name?: string
+      name: string
       widthRatio: number
     }[]
     rows: {
@@ -46,7 +47,7 @@ export const Table: TableFC = ({
                 width: `${Math.floor((widthRatio / widthRatioSum) * 100)}%`,
               }}
             >
-              {name || id}
+              {t({ id: name })}
             </th>
           ))}
         </tr>
