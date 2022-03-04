@@ -3,8 +3,8 @@ import { VFC } from 'react'
 import { AssetBarChartWithPlaceholder } from 'src/components/compositions/Markets/MarketBarChart'
 import { TableContainer } from 'src/components/compositions/Markets/MarketTable'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { BlinkWrapper } from 'src/components/parts/Blink'
-import { Reel } from 'src/components/parts/Reel'
+import { BlinkWrapper } from 'src/components/parts/Number/Blink'
+import { Reel } from 'src/components/parts/Number/Reel'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { secondary } from 'src/styles/colors'
 import { fontWeightBold } from 'src/styles/font'
@@ -49,6 +49,7 @@ const OverViewItem: VFC<{
         <BlinkWrapper value={displayTotal}>
           <Reel text={displayTotal} />
         </BlinkWrapper>
+        <span></span>
       </AmountDiv>
       <Composition>
         <p>{chartCaption}</p>

@@ -1,6 +1,6 @@
 import { VFC } from 'react'
 import { AsStyledProps } from 'src/components/hoc/asStyled'
-import { Reel } from 'src/components/parts/Reel'
+import { Reel } from 'src/components/parts/Number/Reel'
 import { trueWhite } from 'src/styles/colors'
 import { Color } from 'src/styles/types'
 import { formatPct } from 'src/utils/number'

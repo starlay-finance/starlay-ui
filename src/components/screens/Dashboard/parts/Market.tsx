@@ -5,8 +5,8 @@ import {
   TableContainer,
 } from 'src/components/compositions/Markets/MarketTable'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { BlinkWrapper } from 'src/components/parts/Blink'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
+import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
