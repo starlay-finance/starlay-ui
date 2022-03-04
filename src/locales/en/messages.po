@@ -88,6 +88,11 @@ msgid "Dashboard"
 msgstr "Dashboard"
 
 #: src/components/parts/Header/AppHeader.tsx
+#: src/components/screens/Markets/Details.tsx
+msgid "Markets"
+msgstr "Markets"
+
+#: src/components/parts/Header/AppHeader.tsx
 msgid "Connect"
 msgstr "Connect"
 
@@ -235,11 +240,8 @@ msgid "Max"
 msgstr "Max"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
-msgid "Deposit Markets"
-msgstr "Deposit Markets"
-
 #: src/components/screens/Dashboard/parts/Market.tsx
-#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Markets/Details.tsx
 msgid "Asset"
 msgstr "Asset"
 
@@ -249,14 +251,20 @@ msgid "Reward APR"
 msgstr "Reward APR"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Markets/Details.tsx
 msgid "APY_Deposit"
 msgstr "APY"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Deposit Markets"
+msgstr "Deposit Markets"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Borrow Markets"
 msgstr "Borrow Markets"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Markets/Details.tsx
 msgid "APY_Borrow"
 msgstr "APY"
 
@@ -275,6 +283,30 @@ msgstr "Deposit Balance"
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
 msgid "Borrow Balance"
 msgstr "Borrow Balance"
+
+#: src/components/screens/Markets/Details.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Deposited"
+msgstr "Total Deposited"
+
+#: src/components/screens/Markets/Details.tsx
+msgid "Deposit Reward APR"
+msgstr "Deposit Reward APR"
+
+#: src/components/screens/Markets/Details.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Borrowed"
+msgstr "Total Borrowed"
+
+#: src/components/screens/Markets/Details.tsx
+msgid "Borrow Reward APR"
+msgstr "Borrow Reward APR"
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Top3 Markets"
+msgstr "Top3 Markets"
 
 #: src/components/screens/Sorry/index.tsx
 msgid "Go Back"
@@ -303,14 +335,6 @@ msgstr "Current Markets"
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "The more funds that will be borrowed, the higher the interest rate will be"
 msgstr "The more funds that will be borrowed, the higher the interest rate will be"
-
-#: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "Total Deposited"
-msgstr "Total Deposited"
-
-#: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "Total Borrowed"
-msgstr "Total Borrowed"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Low Risk Farming on Astar Network"
