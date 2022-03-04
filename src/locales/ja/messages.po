@@ -305,8 +305,12 @@ msgid "Borrow Reward APR"
 msgstr "借入ボーナスAPR"
 
 #: src/components/screens/Markets/Overview.tsx
-msgid "Top3 Markets"
-msgstr "預入額TOP3"
+msgid "Deposit_Top3 Markets"
+msgstr "預入額 TOP3"
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Borrow_Top3 Markets"
+msgstr "借入額 TOP3"
 
 #: src/components/screens/Sorry/index.tsx
 msgid "Go Back"

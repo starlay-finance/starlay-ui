@@ -305,7 +305,11 @@ msgid "Borrow Reward APR"
 msgstr "Borrow Reward APR"
 
 #: src/components/screens/Markets/Overview.tsx
-msgid "Top3 Markets"
+msgid "Deposit_Top3 Markets"
+msgstr "Top3 Markets"
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Borrow_Top3 Markets"
 msgstr "Top3 Markets"
 
 #: src/components/screens/Sorry/index.tsx

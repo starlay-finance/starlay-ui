@@ -19,16 +19,25 @@ export const Overview = asStyled(({ className }) => {
   const { deposit, borrow } = toMarketCompositions(markets)
   return (
     <OverviewSection className={className}>
-      <OverViewItem caption={t`Total Deposited`} market={deposit} />
-      <OverViewItem caption={t`Total Borrowed`} market={borrow} />
+      <OverViewItem
+        caption={t`Total Deposited`}
+        chartCaption={t`Deposit_Top3 Markets`}
+        market={deposit}
+      />
+      <OverViewItem
+        caption={t`Total Borrowed`}
+        chartCaption={t`Borrow_Top3 Markets`}
+        market={borrow}
+      />
     </OverviewSection>
   )
 })``
 
 const OverViewItem: VFC<{
   caption: string
+  chartCaption: string
   market: MarketComposition
-}> = ({ caption, market: { totalInUSD, amountByAssets } }) => {
+}> = ({ caption, chartCaption, market: { totalInUSD, amountByAssets } }) => {
   const displayTotal = formatUSD(totalInUSD, {
     decimalPlaces: 2,
     shorteningThreshold: 16,
@@ -42,7 +51,7 @@ const OverViewItem: VFC<{
         </BlinkWrapper>
       </AmountDiv>
       <Composition>
-        <p>{t`Top3 Markets`}</p>
+        <p>{chartCaption}</p>
         {(amountByAssets.length === 0
           ? Array.from(new Array(3))
           : amountByAssets.sort(amountByAssetsSorter).slice(0, 3)
