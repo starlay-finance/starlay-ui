@@ -1,14 +1,19 @@
 import { t } from '@lingui/macro'
+import { VFC } from 'react'
 import {
   AssetTd,
   MarketTable,
   TableContainer,
 } from 'src/components/compositions/Markets/MarketTable'
 import { asStyled } from 'src/components/hoc/asStyled'
+import {
+  PercentageChange,
+  PercentageChangeProps,
+} from 'src/components/parts/Number/PercentageChange'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { AssetMarketData } from 'src/types/models'
 import { symbolSorter } from 'src/utils/market'
-import { formatPct, formatUSDShort } from 'src/utils/number'
+import { BN_HUNDRED, BN_ONE, formatPct, formatUSDShort } from 'src/utils/number'
 import styled from 'styled-components'
 
 const DETAILS_COLUMNS = [
@@ -52,22 +57,82 @@ const detailsRow = (asset: AssetMarketData) => {
     variableBorrowAPY,
     variableBorrowIncentiveAPR,
   } = asset
+  const depositedInUSD = liquidityInUSD.plus(totalBorrowedInUSD)
   return {
     id: symbol,
     data: {
       asset: <AssetTd icon={icon} name={name} />,
-      totalDeposited: formatUSDShort(liquidityInUSD.plus(totalBorrowedInUSD)),
-      depositAPY: formatPct(depositAPY),
-      depositAPR: formatPct(depositIncentiveAPR),
-      totalBorrowed: borrowUnsupported
-        ? 'Coming soon'
-        : formatUSDShort(totalBorrowedInUSD),
-      borrowAPY: borrowUnsupported ? '-' : formatPct(variableBorrowAPY),
-      borrowAPR: borrowUnsupported
-        ? '-'
-        : formatPct(variableBorrowIncentiveAPR),
+      totalDeposited: (
+        <ValueWithPercentageChange
+          value={formatUSDShort(depositedInUSD)}
+          current={depositedInUSD}
+          // TODO replace mock
+          previous={BN_HUNDRED}
+        />
+      ),
+      depositAPY: (
+        <ValueWithPercentageChange
+          value={formatPct(depositAPY)}
+          current={depositAPY}
+          // TODO replace mock
+          previous={BN_ONE}
+        />
+      ),
+      depositAPR: (
+        <ValueWithPercentageChange
+          value={formatPct(depositIncentiveAPR)}
+          current={depositIncentiveAPR}
+          // TODO replace mock
+          previous={BN_ONE}
+        />
+      ),
+      totalBorrowed: borrowUnsupported ? (
+        'Coming soon'
+      ) : (
+        <ValueWithPercentageChange
+          value={formatUSDShort(totalBorrowedInUSD)}
+          current={totalBorrowedInUSD}
+          // TODO replace mock
+          previous={BN_HUNDRED.pow(BN_HUNDRED)}
+        />
+      ),
+      borrowAPY: borrowUnsupported ? (
+        '-'
+      ) : (
+        <ValueWithPercentageChange
+          value={formatPct(variableBorrowAPY)}
+          current={variableBorrowAPY}
+          // TODO replace mock
+          previous={BN_ONE}
+        />
+      ),
+      borrowAPR: borrowUnsupported ? (
+        '-'
+      ) : (
+        <ValueWithPercentageChange
+          value={formatPct(variableBorrowIncentiveAPR)}
+          current={variableBorrowIncentiveAPR}
+          // TODO replace mock
+          previous={variableBorrowIncentiveAPR}
+        />
+      ),
     },
   }
 }
+
+const ValueWithPercentageChange: VFC<
+  { value: string } & PercentageChangeProps
+> = ({ value, ...props }) => {
+  return (
+    <ValuesTd>
+      {value}
+      <PercentageChange {...props} />
+    </ValuesTd>
+  )
+}
+const ValuesTd = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
 const DetailsSection = styled.section``

@@ -4,13 +4,14 @@ import { AssetBarChartWithPlaceholder } from 'src/components/compositions/Market
 import { TableContainer } from 'src/components/compositions/Markets/MarketTable'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { BlinkWrapper } from 'src/components/parts/Number/Blink'
+import { PercentageChange } from 'src/components/parts/Number/PercentageChange'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { secondary } from 'src/styles/colors'
-import { fontWeightBold } from 'src/styles/font'
+import { fontWeightBold, fontWeightRegular } from 'src/styles/font'
 import { MarketComposition } from 'src/types/models'
 import { amountByAssetsSorter, toMarketCompositions } from 'src/utils/market'
-import { formatUSD } from 'src/utils/number'
+import { BN_HUNDRED, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
 
 export const Overview = asStyled(({ className }) => {
@@ -49,7 +50,11 @@ const OverViewItem: VFC<{
         <BlinkWrapper value={displayTotal}>
           <Reel text={displayTotal} />
         </BlinkWrapper>
-        <span></span>
+        <PercentageChange
+          current={totalInUSD}
+          // TODO replace mock
+          previous={BN_HUNDRED}
+        />
       </AmountDiv>
       <Composition>
         <p>{chartCaption}</p>
@@ -82,8 +87,15 @@ const Composition = styled.div`
 `
 
 const AmountDiv = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
   font-size: 24px;
   font-weight: ${fontWeightBold};
+  ${PercentageChange} {
+    font-size: 18px;
+    font-weight: ${fontWeightRegular};
+  }
 `
 
 const OverviewItemContainer = styled(TableContainer)`
