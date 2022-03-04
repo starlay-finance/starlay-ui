@@ -8,6 +8,9 @@ export const blue = '#0070EB' as const
 export const skyBlue = '#0AE2FF' as const
 export const darkRed = '#A40056' as const
 
+export const positive = '#0297FB' as const
+export const negative = '#E6007A' as const
+
 export const attention = '#E54F6D' as const
 export const success = '#16B57F' as const
 

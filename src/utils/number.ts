@@ -93,10 +93,14 @@ export const formatUSD = (
 export const formatUSDShort: typeof formatAmtShort = (num, decimalPlaces) =>
   `${formatAmtShort(num, decimalPlaces, '$')}`
 
-export const formatPct = (
-  num: BigNumberValue,
-  option: FormatOption = { shorteningThreshold: 5, decimalPlaces: 2 },
-) => `${formatNum(BN_HUNDRED.multipliedBy(num), option)}%`
+export const formatPct = (num: BigNumberValue, option: FormatOption = {}) => {
+  const { shorteningThreshold = 5, decimalPlaces = 2 } = option
+  return `${formatNum(BN_HUNDRED.multipliedBy(num), {
+    ...option,
+    shorteningThreshold,
+    decimalPlaces,
+  })}%`
+}
 
 export const formattedToBigNumber = (
   formattedAmount: string,
