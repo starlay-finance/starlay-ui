@@ -11,6 +11,7 @@ import {
   PercentageChangeProps,
 } from 'src/components/parts/Number/PercentageChange'
 import { useMarketData } from 'src/hooks/useMarketData'
+import { fontWeightMedium } from 'src/styles/font'
 import { AssetMarketData } from 'src/types/models'
 import { symbolSorter } from 'src/utils/market'
 import { BN_HUNDRED, BN_ONE, formatPct, formatUSDShort } from 'src/utils/number'
@@ -133,6 +134,10 @@ const ValueWithPercentageChange: VFC<
 const ValuesTd = styled.div`
   display: flex;
   flex-direction: column;
+  ${PercentageChange} {
+    font-size: 14px;
+    font-weight: ${fontWeightMedium};
+  }
 `
 
 const DetailsSection = styled.section``
