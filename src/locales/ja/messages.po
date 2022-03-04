@@ -162,6 +162,7 @@ msgid "Repay"
 msgstr "返済"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Markets/Details.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Borrow APY"
 msgstr "借入APY"
@@ -210,6 +211,7 @@ msgid "Withdraw"
 msgstr "出金"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Markets/Details.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Deposit APY"
 msgstr "預入APY"
@@ -251,7 +253,6 @@ msgid "Reward APR"
 msgstr "ボーナスAPR"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
-#: src/components/screens/Markets/Details.tsx
 msgid "APY_Deposit"
 msgstr "預入APY"
 
@@ -264,7 +265,6 @@ msgid "Borrow Markets"
 msgstr "借入金利"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
-#: src/components/screens/Markets/Details.tsx
 msgid "APY_Borrow"
 msgstr "借入APY"
 

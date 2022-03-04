@@ -20,10 +20,10 @@ import styled from 'styled-components'
 const DETAILS_COLUMNS = [
   { id: 'asset', name: t`Asset`, widthRatio: 4 },
   { id: 'totalDeposited', name: t`Total Deposited`, widthRatio: 2 },
-  { id: 'depositAPY', name: t`APY_Deposit`, widthRatio: 2 },
+  { id: 'depositAPY', name: t`Deposit APY`, widthRatio: 2 },
   { id: 'depositAPR', name: t`Deposit Reward APR`, widthRatio: 3 },
   { id: 'totalBorrowed', name: t`Total Borrowed`, widthRatio: 2 },
-  { id: 'borrowAPY', name: t`APY_Borrow`, widthRatio: 2 },
+  { id: 'borrowAPY', name: t`Borrow APY`, widthRatio: 2 },
   { id: 'borrowAPR', name: t`Borrow Reward APR`, widthRatio: 3 },
 ]
 

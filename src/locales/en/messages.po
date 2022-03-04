@@ -162,6 +162,7 @@ msgid "Repay"
 msgstr "Repay"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Markets/Details.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Borrow APY"
 msgstr "Borrow APY"
@@ -210,6 +211,7 @@ msgid "Withdraw"
 msgstr "Withdraw"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Markets/Details.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Deposit APY"
 msgstr "Deposit APY"
@@ -251,7 +253,6 @@ msgid "Reward APR"
 msgstr "Reward APR"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
-#: src/components/screens/Markets/Details.tsx
 msgid "APY_Deposit"
 msgstr "APY"
 
@@ -264,7 +265,6 @@ msgid "Borrow Markets"
 msgstr "Borrow Markets"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
-#: src/components/screens/Markets/Details.tsx
 msgid "APY_Borrow"
 msgstr "APY"
 
