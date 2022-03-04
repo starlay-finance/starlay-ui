@@ -12,6 +12,7 @@ export const MEDIUM = 'http://medium.com/@starlay_fi'
 
 export const TOP = '/'
 export const APP = '/app'
+export const MARKETS = '/app/markets'
 export const GOVERNANCE = ''
 export const GOVERNANCE_OVERVIEW = ''
 export const BUG_BOUNTY = ''
