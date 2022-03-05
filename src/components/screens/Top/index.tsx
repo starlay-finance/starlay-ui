@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { VFC } from 'react'
+import { useState, VFC } from 'react'
 import { GradientCtaLink } from 'src/components/parts/Cta'
 import { TopFooter } from 'src/components/parts/Footer'
 import { TopHeader } from 'src/components/parts/Header'
@@ -8,6 +8,7 @@ import { Locale } from 'src/locales'
 import { secondary } from 'src/styles/colors'
 import { fontWeightHeavy, fontWeightRegular } from 'src/styles/font'
 import styled, { css } from 'styled-components'
+import { MobileMenu } from './Menu'
 import { Backers, BackersProps } from './parts/Backers'
 import { Background } from './parts/Background'
 import { CurrentMarkets } from './parts/CurrentMarkets'
@@ -16,14 +17,16 @@ export type TopProps = BackersProps
 
 export const Top: VFC<TopProps> = ({ backers }) => {
   const { locale } = useRouter()
+  const [isMenuOpen, setMenuOpen] = useState(false)
   return (
     <>
-      <TopHeader />
+      <TopHeader openMenu={() => setMenuOpen(true)} />
       <Main $locale={locale as Locale}>
         <Background />
         <FirstView assets={TOP_ASSETS} />
         <CurrentMarkets />
         {backers.length > 0 && <Backers backers={backers} />}
+        <MobileMenu isOpen={isMenuOpen} close={() => setMenuOpen(false)} />
       </Main>
       <TopFooter />
     </>

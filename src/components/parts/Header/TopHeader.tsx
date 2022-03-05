@@ -1,15 +1,20 @@
 import { t } from '@lingui/macro'
-import { LogoProtocol } from 'src/assets/svgs'
+import { VFC } from 'react'
+import { IconMenu, LogoProtocol } from 'src/assets/svgs'
 import { Link } from 'src/components/elements/Link'
+import { breakpoint } from 'src/styles/mixins'
 import { APP, BUG_BOUNTY, DISCORD, DOCS, GOVERNANCE } from 'src/utils/routes'
 import styled from 'styled-components'
 import { HeaderWrapper } from './common'
 
-export const TopHeader = () => (
-  <HeaderWrapper>
+export const TopHeader: VFC<{ openMenu: VoidFunction }> = ({ openMenu }) => (
+  <StyledHeaderWrapper>
     <LogoDiv>
       <LogoProtocol />
     </LogoDiv>
+    <button onClick={openMenu}>
+      <IconMenu />
+    </button>
     <Nav>
       <Link href={APP}>{t`Launch App`}</Link>
       <Link href={DISCORD}>{t`Discord`}</Link>
@@ -17,7 +22,7 @@ export const TopHeader = () => (
       <Link href={GOVERNANCE}>{t`Governance`}</Link>
       <Link href={BUG_BOUNTY}>{t`Bug Bounty`}</Link>
     </Nav>
-  </HeaderWrapper>
+  </StyledHeaderWrapper>
 )
 
 const LogoDiv = styled.div`
@@ -31,5 +36,21 @@ const LogoDiv = styled.div`
 const Nav = styled.nav`
   a {
     margin-left: 32px;
+  }
+`
+
+const StyledHeaderWrapper = styled(HeaderWrapper)`
+  padding: 0 24px;
+  ${Nav} {
+    display: none;
+  }
+  @media ${breakpoint.xl} {
+    padding: unset;
+    > button {
+      display: none;
+    }
+    ${Nav} {
+      display: visible;
+    }
   }
 `
