@@ -365,7 +365,7 @@ const calcBorrowLimitUsed = (
 
 const calcLiquidationThreshold = (
   current: { threshold: BigNumber; collateral: BigNumber },
-  delta: { threshold: number; collateral: BigNumber },
+  delta: { threshold: BigNumber; collateral: BigNumber },
 ) =>
   current.collateral
     .multipliedBy(current.threshold)
