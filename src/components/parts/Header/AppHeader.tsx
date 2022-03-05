@@ -16,7 +16,7 @@ import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
 import { BN_ZERO, formatAmt } from 'src/utils/number'
-import { APP, MARKETS, TOP } from 'src/utils/routes'
+import { APP, MARKETS } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import { HeaderWrapper } from './common'
 
@@ -30,7 +30,7 @@ export const AppHeader = () => {
   const layInWallet = balance?.LAY || BN_ZERO
   return (
     <AppHeaderWrapper>
-      <LogoLink href={TOP} Icon={LogoProtocol} aria-label="Top" />
+      <LogoLink href={APP} Icon={LogoProtocol} aria-label="App" />
       <Nav>
         <Tab href={APP} $active={pathname === APP}>{t`Dashboard`}</Tab>
         <Tab href={MARKETS} $active={pathname === MARKETS}>{t`Markets`}</Tab>

@@ -6,7 +6,6 @@ import { Balance } from './Balance'
 import { Tab } from './Tab'
 
 export const Action = styled.div`
-  padding: 32px;
   backdrop-filter: blur(16px) brightness(1.04);
   background-color: rgba(255, 255, 255, 0.04);
   font-size: 18px;
@@ -24,6 +23,9 @@ export const ContentDiv = styled.div`
   }
   ${SimpleCtaButton} {
     text-transform: uppercase;
+  }
+  ${Action} {
+    padding: 32px;
   }
 `
 

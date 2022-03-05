@@ -12,10 +12,22 @@ import { Asset } from 'src/types/models'
 import styled, { css, keyframes } from 'styled-components'
 
 type StyleProps = {
-  hoverColor?: Color
+  hoverGradient?: string
 }
-export const MarketTable = (props: Parameters<TableFC>[0] & StyleProps) => (
-  <StyledTable {...props} />
+export const MarketTable = ({
+  hoverGradient,
+  hoverColor,
+  ...props
+}: Parameters<TableFC>[0] & StyleProps & { hoverColor?: Color }) => (
+  <StyledTable
+    {...props}
+    hoverGradient={
+      hoverGradient ||
+      (hoverColor
+        ? `${hoverColor}00, ${hoverColor}52, ${hoverColor}00`
+        : undefined)
+    }
+  />
 )
 
 const StyledTable = styled(Table)<StyleProps>`
@@ -25,9 +37,16 @@ const StyledTable = styled(Table)<StyleProps>`
     font-weight: ${fontWeightHeavy};
     margin-bottom: 24px;
   }
+  thead > tr {
+    height: 56px !important;
+  }
   tr {
     border-top: 1px solid ${darkPurple}3d;
     height: 64px;
+    :last-child {
+      height: 72px;
+      padding-bottom: 8px;
+    }
   }
   th {
     color: ${secondary};
@@ -54,15 +73,17 @@ const StyledTable = styled(Table)<StyleProps>`
       margin-left: auto;
     }
   }
-  ${({ hoverColor }) => css`
-    tbody > tr {
-      :hover {
-        background: linear-gradient(90deg, ${hoverColor}00, ${hoverColor}52, ${hoverColor}00));
-        background-size: 300%;
-        animation: ${hoverBackgroundKeyframes} 5s infinite linear;
+  ${({ hoverGradient }) =>
+    hoverGradient &&
+    css`
+      tbody > tr {
+        :hover {
+          background: linear-gradient(90deg, ${hoverGradient});
+          background-size: 300%;
+          animation: ${hoverBackgroundKeyframes} 5s infinite linear;
+        }
       }
-    }
-  `}
+    `}
   // temporary
   tr:first-child {
     td:nth-child(n + 5) {
@@ -94,7 +115,6 @@ const AssetDiv = styled.div`
 `
 
 export const TableContainer = styled.div`
-  padding-bottom: 8px;
   border-radius: 8px;
   backdrop-filter: blur(8px) brightness(1.16);
   background-color: rgba(255, 255, 255, 0.16);

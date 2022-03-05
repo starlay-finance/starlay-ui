@@ -11,6 +11,7 @@ import {
   PercentageChangeProps,
 } from 'src/components/parts/Number/PercentageChange'
 import { useMarketData } from 'src/hooks/useMarketData'
+import { darkRed, skyBlue } from 'src/styles/colors'
 import { fontWeightMedium } from 'src/styles/font'
 import { AssetMarketData } from 'src/types/models'
 import { symbolSorter } from 'src/utils/market'
@@ -43,6 +44,7 @@ export const Assets = asStyled(({ className }) => {
           rows={markets.map((asset) =>
             detailsRow(asset, () => open({ asset })),
           )}
+          hoverGradient={`${darkRed}3d,${skyBlue}3d,${darkRed}3d`}
         />
       </TableContainer>
     </DetailsSection>

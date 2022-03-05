@@ -7,7 +7,7 @@ import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { PercentageChange } from 'src/components/parts/Number/PercentageChange'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { useMarketData } from 'src/hooks/useMarketData'
-import { secondary } from 'src/styles/colors'
+import { darkPurple, secondary } from 'src/styles/colors'
 import { fontWeightBold, fontWeightRegular } from 'src/styles/font'
 import { MarketComposition } from 'src/types/models'
 import { amountByAssetsSorter, toMarketCompositions } from 'src/utils/market'
@@ -92,16 +92,18 @@ const AmountDiv = styled.div`
   column-gap: 12px;
   font-size: 24px;
   font-weight: ${fontWeightBold};
-  ${PercentageChange} {
+  > span:last-child {
     font-size: 18px;
     font-weight: ${fontWeightRegular};
   }
 `
 
 const OverviewItemContainer = styled(TableContainer)`
-  padding: 24px 32px;
+  padding: 24px 32px 32px;
   h2 {
-    margin-bottom: 56px;
+    padding: 0 32px 24px;
+    margin: 0 -32px 32px;
+    border-bottom: 1px solid ${darkPurple}3d;
   }
   ${Composition} {
     margin-top: 32px;
