@@ -77,6 +77,7 @@ export const TopFooter = asStyled(({ className }) => (
     </Content>
   </StyledFooter>
 ))``
+
 const LogoDiv = styled.div`
   color: ${trueWhite};
   > svg {
@@ -109,14 +110,20 @@ const TextLinks = styled.div`
 `
 
 const Note = styled.p`
-  line-height: 1.33;
+  line-height: 1.75;
+  @media ${breakpoint.xl} {
+    line-height: 1.33;
+  }
 `
 
 const LinksHeading = styled.p`
   && {
     color: ${trueWhite};
-    font-size: 20px;
+    font-size: 16;
     font-weight: ${fontWeightSemiBold};
+  }
+  @media ${breakpoint.xl} {
+    font-size: 20px;
   }
 `
 const NavItem = styled.div`
@@ -132,8 +139,16 @@ const NavItem = styled.div`
   ${Note} {
     margin-top: 12px;
   }
-  ${TextLinks} ,${IconLinks} {
+  ${IconLinks} {
     margin-top: 24px;
+  }
+  ${TextLinks} {
+    margin-top: 16px;
+  }
+  @media ${breakpoint.xl} {
+    ${TextLinks} {
+      margin-top: 24px;
+    }
   }
 `
 const Nav = styled.nav`
@@ -145,7 +160,6 @@ const Content = styled.div``
 const StyledFooter = styled.footer`
   padding: 40px 24px;
   backdrop-filter: blur(48px) brightness(1.08);
-  background-color: rgba(0, 0, 0, 0.08);
   ${Content} {
     max-width: var(${contentMaxWidthCssVar});
     margin: 0 auto;
@@ -158,6 +172,8 @@ const StyledFooter = styled.footer`
     }
   }
   @media ${breakpoint.xl} {
+    backdrop-filter: blur(48px) brightness(1.08);
+    background-color: rgba(0, 0, 0, 0.08);
     padding: 64px 0 80px;
     ${Content} {
       display: flex;

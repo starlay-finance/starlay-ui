@@ -4,7 +4,8 @@ import { IconArrowRight } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { GradientCtaLink } from 'src/components/parts/Cta'
+import { GradientCtaButton, GradientCtaLink } from 'src/components/parts/Cta'
+import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
 import { ASSETS } from 'src/constants/assets'
 import { TOP_ASSETS } from 'src/constants/top'
 import { secondary } from 'src/styles/colors'
@@ -13,35 +14,45 @@ import { breakpoint, contentMaxWidthCssVar } from 'src/styles/mixins'
 import { APP, DOCS } from 'src/utils/routes'
 import styled from 'styled-components'
 import { contentAnimation, headingAnimation } from './animation'
-import { Assets, AssetsProps } from './Assets'
+import { Assets } from './Assets'
 import { AssetsMobile } from './AssetsMobile'
 
-export type FirstViewProps = AssetsProps
-
-export const FirstView = asStyled<FirstViewProps>(({ assets, className }) => (
-  <FirstViewSection className={className}>
-    <Content>
-      <h1>
-        <div>{t`Low Risk Farming on Astar Network`}</div>
-      </h1>
-      <div>
-        <SubTitle>{t`Starlay Finance is the first lending protocol backed by Astar Network`}</SubTitle>
-        <Control>
-          <GradientCtaLink href={APP}> {t`Launch App`}</GradientCtaLink>
-          <Link href={DOCS}>
-            {t`Explore the docs`} <IconArrowRight />
-          </Link>
-        </Control>
-        <PoweredBy>
-          <span>{t`Powered by`}</span>
-          <Image src={LogoAstar} alt={t`ASTAR`} height={32} width={101} />
-        </PoweredBy>
-      </div>
-      <AssetsMobile assets={ASSETS} />
-      <Assets assets={TOP_ASSETS} />
-    </Content>
-  </FirstViewSection>
-))``
+export const FirstView = asStyled(({ className }) => {
+  const { open } = useMessageModal()
+  return (
+    <FirstViewSection className={className}>
+      <Content>
+        <h1>
+          <div>{t`Low Risk Farming on Astar Network`}</div>
+        </h1>
+        <div>
+          <SubTitle>{t`Starlay Finance is the first lending protocol backed by Astar Network`}</SubTitle>
+          <Control>
+            <GradientCtaLink href={APP}>{t`Launch App`}</GradientCtaLink>
+            <GradientCtaButton
+              onClick={() =>
+                open({
+                  type: '',
+                  title: t`Sorry...`,
+                  message: t`Starlay Finance does not support mobile access currently. Please connect to this website using your PC.`,
+                })
+              }
+            >{t`Launch App`}</GradientCtaButton>
+            <Link href={DOCS}>
+              {t`Explore the docs`} <IconArrowRight />
+            </Link>
+          </Control>
+          <PoweredBy>
+            <span>{t`Powered by`}</span>
+            <Image src={LogoAstar} alt={t`ASTAR`} height={32} width={101} />
+          </PoweredBy>
+        </div>
+        <AssetsMobile assets={ASSETS} />
+        <Assets assets={TOP_ASSETS} />
+      </Content>
+    </FirstViewSection>
+  )
+})``
 
 const PoweredBy = styled.p`
   display: flex;
@@ -61,6 +72,9 @@ const Control = styled.div`
     font-weight: ${fontWeightSemiBold};
     :last-child {
       font-size: 16px;
+      svg {
+        height: 0.75em;
+      }
     }
   }
 `
@@ -92,6 +106,13 @@ const FirstViewSection = styled.section`
       white-space: pre-wrap;
     }
   }
+  ${GradientCtaLink} {
+    display: none;
+  }
+  ${SubTitle} {
+    line-height: 1.75;
+    padding: 0 24px;
+  }
   ${Content} {
     display: flex;
     flex-direction: column;
@@ -115,8 +136,15 @@ const FirstViewSection = styled.section`
       padding: 0;
     }
     text-align: left;
+    ${GradientCtaLink} {
+      display: block;
+    }
+    ${GradientCtaButton} {
+      display: none;
+    }
     ${SubTitle} {
       font-size: 20px;
+      padding: 0;
     }
     ${Control} {
       margin-top: 32px;

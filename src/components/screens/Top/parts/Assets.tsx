@@ -94,7 +94,7 @@ export const AssetItem: VFC<AssetItemProps> = ({
     onAnimationEnd={onAnimationEnd}
   >
     <Symbol style={symbolStyle}>
-      <Image src={asset.icon} alt={asset.name} width={29} height={29} />
+      <Image src={asset.icon} alt={asset.name} width={32} height={32} />
       <span>{asset.name}</span>
     </Symbol>
     <Rates>
@@ -131,19 +131,28 @@ const Rate: VFC<{ label: string; value: string | undefined }> = ({
 const RateDiv = styled.div`
   p:first-child {
     color: ${secondary};
-    font-size: 14px;
+    font-size: 12px;
     font-weight: ${fontWeightMedium};
   }
   p:last-child {
     margin-top: 4px;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: ${fontWeightSemiBold};
     line-height: 1.2;
+    text-align: left;
   }
   p[data-value=''] {
     height: 1.2em;
     border-radius: 0.5em;
     background: url('${SHIMMER_DARA_URI}');
+  }
+  @media ${breakpoint.xl} {
+    p:first-child {
+      font-size: 14px;
+    }
+    p:last-child {
+      font-size: 20px;
+    }
   }
 `
 
@@ -162,16 +171,24 @@ const Symbol = styled.div`
   display: flex;
   align-items: center;
   column-gap: 8px;
-  padding: 12px;
-  border-radius: 15px;
+  padding: 8px;
+  border-radius: 12px;
   overflow: hidden;
   backdrop-filter: blur(16px) brightness(1.16);
   background: linear-gradient(90deg, ${darkRed}29, ${skyBlue}29);
 
   span:last-child {
-    font-size: 20px;
-    font-weight: ${fontWeightBlack};
-    font-style: italic;
+    display: none;
+  }
+  @media ${breakpoint.xl} {
+    padding: 12px;
+    border-radius: 16px;
+    span:last-child {
+      display: unset;
+      font-size: 20px;
+      font-weight: ${fontWeightBlack};
+      font-style: italic;
+    }
   }
 `
 
@@ -191,8 +208,9 @@ const AssetItemLink = styled(Link)<{ $appeared: boolean }>`
   display: flex;
   align-items: center;
   width: fit-content;
-  padding: 24px;
-  border-radius: 15px;
+  padding: 10px;
+  padding-right: 24px;
+  border-radius: 16px;
   backdrop-filter: blur(8px) brightness(1.08);
   background-color: rgba(255, 255, 255, 0.08);
   ${Rates} {
@@ -219,6 +237,9 @@ const AssetItemLink = styled(Link)<{ $appeared: boolean }>`
           backdrop-filter: none;
         }
       `}
+  }
+  @media ${breakpoint.xl} {
+    padding: 24px;
   }
 `
 const appearingAnimation = css`

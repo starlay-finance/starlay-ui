@@ -142,6 +142,11 @@ const BackersSection = styled.section`
     text-align: center;
   }
   ${BackersList} {
-    margin-top: 56px;
+    margin-top: 40px;
+  }
+  @media ${breakpoint.xl} {
+    ${BackersList} {
+      margin-top: 56px;
+    }
   }
 `

@@ -6,7 +6,7 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { useMarketData } from 'src/hooks/useMarketData'
-import { darkRed, skyBlue } from 'src/styles/colors'
+import { darkRed, skyBlue, trueWhite } from 'src/styles/colors'
 import { fontWeightBlack, fontWeightSemiBold } from 'src/styles/font'
 import { breakpoint, contentMaxWidthCssVar } from 'src/styles/mixins'
 import { MarketComposition } from 'src/types/models'
@@ -118,9 +118,9 @@ const MarketViewDiv = styled.div`
   }
   ${MarketView} {
     padding: 32px 24px 40px;
-    border-radius: 24px;
+    border-radius: 16px;
     overflow: hidden;
-    background: linear-gradient(15deg, ${darkRed}3d, ${skyBlue}3d);
+    background: linear-gradient(15deg, ${darkRed}29, ${skyBlue}3d);
     backdrop-filter: blur(16px) brightness(1.08);
   }
 
@@ -148,17 +148,17 @@ const CurrentMarketsSection = styled.section`
   max-width: var(${contentMaxWidthCssVar});
   margin: 0 auto;
   ${MarketViewDiv} {
-    margin-top: 56px;
+    margin-top: 40px;
   }
   h2,
   h2 + p {
     text-align: center;
   }
   h3 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: ${fontWeightSemiBold};
     padding-bottom: 16px;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid ${trueWhite}52;
   }
   h3 + * {
     display: block;
@@ -168,6 +168,9 @@ const CurrentMarketsSection = styled.section`
   }
 
   @media ${breakpoint.xl} {
+    ${MarketViewDiv} {
+      margin-top: 56px;
+    }
     h3 + * {
       margin-top: 16px;
       font-size: 36px;

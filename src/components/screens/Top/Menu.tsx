@@ -117,7 +117,7 @@ const BgIcon = styled.div`
 const MenuContainer = styled.div<{ isOpen: boolean }>`
   position: fixed;
   inset: 0;
-  padding: 22px 24px 64px;
+  padding: 22px 24px 24px;
   z-index: ${Z_MODAL};
 
   display: flex;

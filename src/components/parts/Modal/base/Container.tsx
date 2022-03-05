@@ -56,6 +56,7 @@ const LoadingOverlay = styled(Overlay)`
 const Contents = styled.div`
   max-width: 640px;
   max-height: 90vh;
+  margin: 0 24px;
   width: 100%;
   position: relative;
   overflow: auto;

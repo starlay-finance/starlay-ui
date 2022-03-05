@@ -3,7 +3,6 @@ import { useState, VFC } from 'react'
 import { GradientCtaLink } from 'src/components/parts/Cta'
 import { TopFooter } from 'src/components/parts/Footer'
 import { TopHeader } from 'src/components/parts/Header'
-import { TOP_ASSETS } from 'src/constants/top'
 import { Locale } from 'src/locales'
 import { secondary } from 'src/styles/colors'
 import { fontWeightHeavy, fontWeightRegular } from 'src/styles/font'
@@ -24,7 +23,7 @@ export const Top: VFC<TopProps> = ({ backers }) => {
       <TopHeader openMenu={() => setMenuOpen(true)} />
       <Main $locale={locale as Locale}>
         <Background />
-        <FirstView assets={TOP_ASSETS} />
+        <FirstView />
         <CurrentMarkets />
         {backers.length > 0 && <Backers backers={backers} />}
         <MobileMenu isOpen={isMenuOpen} close={() => setMenuOpen(false)} />
@@ -55,9 +54,11 @@ const Main = styled.main<{ $locale?: Locale }>`
   }
   h2 + p {
     margin-top: 16px;
+    padding: 0 24px;
     font-size: 14px;
     font-weight: ${fontWeightRegular};
     color: ${secondary};
+    line-height: 1.75;
   }
   @media ${breakpoint.xl} {
     padding: 0 0 240px;
@@ -80,6 +81,7 @@ const Main = styled.main<{ $locale?: Locale }>`
       font-weight: ${fontWeightHeavy};
     }
     h2 + p {
+      padding: 0;
       font-size: 16px;
     }
   }
