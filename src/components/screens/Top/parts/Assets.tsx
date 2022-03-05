@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { useState, VFC } from 'react'
+import { CSSProperties, useState, VFC } from 'react'
 import { useDeviceSelectors } from 'react-device-detect'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
@@ -14,6 +14,7 @@ import {
   fontWeightRegular,
   fontWeightSemiBold,
 } from 'src/styles/font'
+import { breakpoint } from 'src/styles/mixins'
 import { Asset, AssetMarketData } from 'src/types/models'
 import { formatPct } from 'src/utils/number'
 import { APP } from 'src/utils/routes'
@@ -52,49 +53,69 @@ export const AssetsComponent: VFC<AssetsComponentProps & AsStyledProps> = ({
         return (
           <AssetItem
             key={idx}
-            href={APP}
-            $appeared={appeared}
+            asset={each}
+            market={market}
+            appeared={appeared}
             onAnimationEnd={
               !appeared && isLast ? () => setAppeared(true) : undefined
             }
-          >
-            <Symbol
-              style={{
-                // Heavy use of backdrop-filter in chrome on mac will slow down performance.
-                ...(selectors?.isChrome &&
-                  selectors?.isMacOs && {
-                    backdropFilter: 'none',
-                    WebkitBackdropFilter: 'none',
-                  }),
-              }}
-            >
-              <Image src={each.icon} alt={each.name} width={29} height={29} />
-              <span>{each.name}</span>
-            </Symbol>
-            <Rates>
-              {!each.borrowUnsupported ? (
-                <>
-                  <Rate
-                    label={t`Deposit APY`}
-                    value={market ? formatPct(market.depositAPY) : undefined}
-                  />
-                  <Rate
-                    label={t`Borrow APY`}
-                    value={
-                      market ? formatPct(market.variableBorrowAPY) : undefined
-                    }
-                  />
-                </>
-              ) : (
-                <ComingSoon>Coming Soon</ComingSoon>
-              )}
-            </Rates>
-          </AssetItem>
+            symbolStyle={{
+              // Heavy use of backdrop-filter in chrome on mac will slow down performance.
+              ...(selectors?.isChrome &&
+                selectors?.isMacOs && {
+                  backdropFilter: 'none',
+                  WebkitBackdropFilter: 'none',
+                }),
+            }}
+          />
         )
       })}
     </AssetsDiv>
   )
 }
+
+type AssetItemProps = {
+  appeared: boolean
+  onAnimationEnd?: VoidFunction
+  symbolStyle?: CSSProperties
+  asset: Asset
+  market?: Pick<AssetMarketData, 'symbol' | 'depositAPY' | 'variableBorrowAPY'>
+}
+export const AssetItem: VFC<AssetItemProps> = ({
+  appeared,
+  onAnimationEnd,
+  symbolStyle,
+  asset,
+  market,
+}) => (
+  <AssetItemLink
+    href={APP}
+    $appeared={appeared}
+    onAnimationEnd={onAnimationEnd}
+  >
+    <Symbol style={symbolStyle}>
+      <Image src={asset.icon} alt={asset.name} width={29} height={29} />
+      <span>{asset.name}</span>
+    </Symbol>
+    <Rates>
+      {!asset.borrowUnsupported ? (
+        <>
+          <Rate
+            label={t`Deposit APY`}
+            value={market ? formatPct(market.depositAPY) : undefined}
+          />
+          <Rate
+            label={t`Borrow APY`}
+            value={market ? formatPct(market.variableBorrowAPY) : undefined}
+          />
+        </>
+      ) : (
+        <ComingSoon>Coming Soon</ComingSoon>
+      )}
+    </Rates>
+  </AssetItemLink>
+)
+
 const Rate: VFC<{ label: string; value: string | undefined }> = ({
   label,
   value = '',
@@ -165,7 +186,7 @@ const hoverBackgroundKeyframes = keyframes`
   }
 `
 
-const AssetItem = styled(Link)<{ $appeared: boolean }>`
+const AssetItemLink = styled(Link)<{ $appeared: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -215,7 +236,7 @@ const AssetsDiv = styled.div<{ $appeared: boolean }>`
   gap: 24px;
   max-width: 1400px;
   transform: translateX(380px);
-  ${AssetItem} {
+  ${AssetItemLink} {
     transition: all 0.2s;
     :nth-child(-n + 3) {
       transform: translateX(120px);
@@ -236,8 +257,12 @@ const AssetsDiv = styled.div<{ $appeared: boolean }>`
       }
     }
   }
-  ${AssetItem} {
+  ${AssetItemLink} {
     opacity: 1;
     ${({ $appeared }) => !$appeared && appearingAnimation};
+  }
+  display: none;
+  @media ${breakpoint.xl} {
+    display: flex;
   }
 `

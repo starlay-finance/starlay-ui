@@ -5,13 +5,16 @@ import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { GradientCtaLink } from 'src/components/parts/Cta'
+import { ASSETS } from 'src/constants/assets'
+import { TOP_ASSETS } from 'src/constants/top'
 import { secondary } from 'src/styles/colors'
 import { fontWeightRegular, fontWeightSemiBold } from 'src/styles/font'
-import { contentMaxWidthCssVar } from 'src/styles/mixins'
+import { breakpoint, contentMaxWidthCssVar } from 'src/styles/mixins'
 import { APP, DOCS } from 'src/utils/routes'
 import styled from 'styled-components'
 import { contentAnimation, headingAnimation } from './animation'
 import { Assets, AssetsProps } from './Assets'
+import { AssetsMobile } from './AssetsMobile'
 
 export type FirstViewProps = AssetsProps
 
@@ -34,7 +37,8 @@ export const FirstView = asStyled<FirstViewProps>(({ assets, className }) => (
           <Image src={LogoAstar} alt={t`ASTAR`} height={32} width={101} />
         </PoweredBy>
       </div>
-      <Assets assets={assets} />
+      <AssetsMobile assets={ASSETS} />
+      <Assets assets={TOP_ASSETS} />
     </Content>
   </FirstViewSection>
 ))``
@@ -50,10 +54,14 @@ const PoweredBy = styled.p`
 const Control = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
+  row-gap: 24px;
   a {
-    margin-right: 32px;
     font-size: 20px;
     font-weight: ${fontWeightSemiBold};
+    :last-child {
+      font-size: 16px;
+    }
   }
 `
 
@@ -61,19 +69,21 @@ const Content = styled.div`
   position: relative;
   max-width: var(${contentMaxWidthCssVar});
   margin: 0 auto;
+  padding: 0 24px;
 `
 const SubTitle = styled.p`
   margin-top: 16px;
-  font-size: 20px;
+  font-size: 14px;
   font-weight: ${fontWeightRegular};
   color: ${secondary};
 `
 
 const FirstViewSection = styled.section`
   position: relative;
-  width: 100%;
   padding: 32px 0;
+  margin: 0 -24px;
   overflow: hidden;
+  text-align: center;
   h1 {
     max-width: 720px;
     height: 2.4em;
@@ -83,14 +93,43 @@ const FirstViewSection = styled.section`
     }
   }
   ${Content} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     > div:nth-child(2) {
       ${contentAnimation};
     }
   }
   ${Control} {
-    margin-top: 32px;
+    margin-top: 56px;
   }
   ${PoweredBy} {
-    margin-top: 96px;
+    width: fit-content;
+    margin: 56px auto 0;
+  }
+  @media ${breakpoint.xl} {
+    width: 100%;
+    margin: 0;
+    ${Content} {
+      display: block;
+      padding: 0;
+    }
+    text-align: left;
+    ${SubTitle} {
+      font-size: 20px;
+    }
+    ${Control} {
+      margin-top: 32px;
+      flex-direction: row;
+      a {
+        margin-right: 32px;
+        :last-child {
+          font-size: 20px;
+        }
+      }
+    }
+    ${PoweredBy} {
+      margin: 96px 0 0;
+    }
   }
 `
