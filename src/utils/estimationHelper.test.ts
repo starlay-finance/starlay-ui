@@ -64,7 +64,7 @@ describe('estimationHelper', () => {
           amount: BN_ONE,
           asset: {
             priceInMarketReferenceCurrency: BN_ONE,
-            reserveLiquidationThreshold: 0.7,
+            reserveLiquidationThreshold: valueToBigNumber('0.7'),
           },
         }),
       )
@@ -141,7 +141,7 @@ describe('estimationHelper', () => {
             },
             asset: {
               liquidity: BN_HUNDRED,
-              reserveLiquidationThreshold: 0.8,
+              reserveLiquidationThreshold: valueToBigNumber('0.8'),
               priceInMarketReferenceCurrency: valueToBigNumber('1'),
             },
           }),
@@ -212,7 +212,7 @@ describe('estimationHelper', () => {
       test('healthFactor should be equal to division between sum of collateral multiplied by liquidation threshold and borrowed amount', () => {
         const totalCollateralInMarketReferenceCurrency = BN_HUNDRED
         const currentLiquidationThreshold = valueToBigNumber('0.9')
-        const reserveLiquidationThreshold = 0.7
+        const reserveLiquidationThreshold = valueToBigNumber('0.7')
         const amount = BN_ONE
         const result = estimateWithdrawal(
           param({
@@ -267,7 +267,7 @@ describe('estimationHelper', () => {
               liquidity: BN_ONE,
               usageAsCollateralEnabled: true,
               priceInMarketReferenceCurrency: BN_HUNDRED,
-              reserveLiquidationThreshold: 1,
+              reserveLiquidationThreshold: valueToBigNumber('1'),
             },
           }),
         )
@@ -298,7 +298,7 @@ describe('estimationHelper', () => {
             asset: {
               liquidity: BN_HUNDRED,
               priceInMarketReferenceCurrency: BN_ONE,
-              reserveLiquidationThreshold: 0.9,
+              reserveLiquidationThreshold: valueToBigNumber('0.9'),
             },
           }),
         )
@@ -438,7 +438,7 @@ describe('estimationHelper', () => {
             asset: {
               liquidity: BN_HUNDRED,
               priceInMarketReferenceCurrency: BN_ONE,
-              reserveLiquidationThreshold: 0.9,
+              reserveLiquidationThreshold: valueToBigNumber('0.9'),
             },
             marketReferenceCurrencyPriceInUSD: BN_ONE,
           }),

@@ -105,7 +105,9 @@ const toAssetMarketData = (
     priceInMarketReferenceCurrency: valueToBigNumber(
       reserve.priceInMarketReferenceCurrency,
     ),
-    reserveLiquidationThreshold: +reserve.reserveLiquidationThreshold,
+    reserveLiquidationThreshold: valueToBigNumber(
+      reserve.reserveLiquidationThreshold,
+    ),
     usageAsCollateralEnabled: reserve.usageAsCollateralEnabled,
     decimals: reserve.decimals,
     lTokenAddress: reserve.lTokenAddress as EthereumAddress,

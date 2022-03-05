@@ -23,7 +23,7 @@ export type AssetMarketData = Asset & {
   totalBorrowedInUSD: BigNumber
   baseLTVasCollateral: BigNumber
   priceInMarketReferenceCurrency: BigNumber
-  reserveLiquidationThreshold: number
+  reserveLiquidationThreshold: BigNumber
   usageAsCollateralEnabled: boolean
   underlyingAsset: EthereumAddress
   decimals: number

@@ -348,7 +348,7 @@ const unusedCollateralOnWithdraw = ({
     excessHF
       .multipliedBy(userSummary.totalBorrowedInMarketReferenceCurrency)
       // because of the rounding issue on the contracts side this value still can be incorrect
-      .div(asset.reserveLiquidationThreshold + 0.01)
+      .div(asset.reserveLiquidationThreshold.plus('0.01'))
       .multipliedBy('0.99')
       .dividedBy(asset.priceInMarketReferenceCurrency)
   )

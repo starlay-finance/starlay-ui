@@ -1,6 +1,7 @@
 import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { AssetMarketData } from 'src/types/models'
+import { BN_ZERO } from 'src/utils/number'
 
 export const MOCK_ASSET_MARKET: AssetMarketData = {
   ...ASSETS_DICT.ASTR,
@@ -15,6 +16,8 @@ export const MOCK_ASSET_MARKET: AssetMarketData = {
   baseLTVasCollateral: valueToBigNumber(0.8),
   priceInMarketReferenceCurrency: valueToBigNumber(100),
   reserveLiquidationThreshold: 0,
+  liquidationPenalty: BN_ZERO,
+  reserveFactor: BN_ZERO,
   usageAsCollateralEnabled: true,
   underlyingAsset: '0x0000000000000000000000000000000000000000',
   decimals: 18,
