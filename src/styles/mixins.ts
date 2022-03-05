@@ -64,7 +64,7 @@ const size = {
   s: 428,
   m: 680,
   l: 960,
-  xl: 1280,
+  xl: 1224,
 }
 
 export const breakpoint = {

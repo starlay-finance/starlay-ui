@@ -50,7 +50,7 @@ const StyledHeaderWrapper = styled(HeaderWrapper)`
       display: none;
     }
     ${Nav} {
-      display: visible;
+      display: unset;
     }
   }
 `

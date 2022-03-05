@@ -86,7 +86,7 @@ const FirstViewSection = styled.section`
   text-align: center;
   h1 {
     max-width: 720px;
-    height: 2.4em;
+    min-height: 2.4em;
     div {
       ${headingAnimation};
       white-space: pre-wrap;

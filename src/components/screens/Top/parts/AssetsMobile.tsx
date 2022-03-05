@@ -62,7 +62,7 @@ const AssetsDiv = styled.div<{ $appeared: boolean }>`
   display: flex;
   justify-content: flex-start;
   width: max-content;
-  overflow-x: hidden;
+  overflow: hidden;
   margin: 0 -24px;
   gap: 24px;
   animation: ${assetsSlideKeyframes} 200s infinite linear;
