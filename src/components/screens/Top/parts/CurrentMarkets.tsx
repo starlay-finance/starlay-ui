@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { forwardRef, VFC } from 'react'
+import { forwardRef } from 'react'
 import { useInView } from 'react-hook-inview'
 import { AssetBarChartWithPlaceholder } from 'src/components/compositions/Markets/MarketBarChart'
 import { asStyled } from 'src/components/hoc/asStyled'
@@ -8,7 +8,7 @@ import { Reel } from 'src/components/parts/Number/Reel'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { darkRed, skyBlue } from 'src/styles/colors'
 import { fontWeightBlack, fontWeightSemiBold } from 'src/styles/font'
-import { contentMaxWidthCssVar } from 'src/styles/mixins'
+import { breakpoint, contentMaxWidthCssVar } from 'src/styles/mixins'
 import { MarketComposition } from 'src/types/models'
 import { amountByAssetsSorter, toMarketCompositions } from 'src/utils/market'
 import { BN_ZERO, formatUSD } from 'src/utils/number'
@@ -44,33 +44,35 @@ export const CurrentMarketsComponent = forwardRef<
     <div>
       <h2>{t`Current Markets`}</h2>
       <p>{t`The more funds that will be borrowed, the higher the interest rate will be`}</p>
-      <MarketViewDiv ref={ref}>
-        <MarketView
-          title={t`Total Deposited`}
-          market={deposit}
-          touched={touched}
-        />
-        <MarketView
-          title={t`Total Borrowed`}
-          market={borrow}
-          touched={touched}
-        />
-      </MarketViewDiv>
+      <div ref={ref}>
+        <MarketViewDiv>
+          <MarketView
+            title={t`Total Deposited`}
+            market={deposit}
+            touched={touched}
+          />
+          <MarketView
+            title={t`Total Borrowed`}
+            market={borrow}
+            touched={touched}
+          />
+        </MarketViewDiv>
+      </div>
     </div>
   </CurrentMarketsSection>
 ))
 
-const MarketView: VFC<{
+const MarketView = asStyled<{
   title: string
   market: MarketComposition
   touched: boolean
-}> = ({ title, market: { totalInUSD, amountByAssets }, touched }) => {
+}>(({ title, market: { totalInUSD, amountByAssets }, touched, className }) => {
   const value = formatUSD(touched ? totalInUSD : BN_ZERO, {
     decimalPlaces: 2,
     shorteningThreshold: 30,
   })
   return (
-    <ViewDiv>
+    <ViewDiv className={className}>
       <h3>{title}</h3>
       <BlinkWrapper value={value}>
         <Reel text={value} />
@@ -89,7 +91,7 @@ const MarketView: VFC<{
       </Composition>
     </ViewDiv>
   )
-}
+})``
 
 const Composition = styled.div`
   ${AssetBarChartWithPlaceholder} {
@@ -106,23 +108,43 @@ const ViewDiv = styled.div`
 
 const MarketViewDiv = styled.div`
   position: relative;
-  padding: 32px;
-  border-radius: 24px;
-  overflow: hidden;
-  background: linear-gradient(90deg, ${darkRed}3d, ${skyBlue}3d);
-  backdrop-filter: blur(16px) brightness(1.08);
 
   display: flex;
+  flex-direction: column;
   column-gap: 48px;
+  row-gap: 24px;
   > * {
     flex: 1;
+  }
+  ${MarketView} {
+    padding: 32px 24px 40px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: linear-gradient(15deg, ${darkRed}3d, ${skyBlue}3d);
+    backdrop-filter: blur(16px) brightness(1.08);
+  }
+
+  @media ${breakpoint.xl} {
+    flex-direction: row;
+
+    padding: 32px;
+    border-radius: 24px;
+    overflow: hidden;
+    background: linear-gradient(90deg, ${darkRed}3d, ${skyBlue}3d);
+    backdrop-filter: blur(16px) brightness(1.08);
+    ${MarketView} {
+      padding: 0;
+      border-radius: 0;
+      overflow: visible;
+      background: none;
+      backdrop-filter: none;
+    }
   }
 `
 
 const CurrentMarketsSection = styled.section`
   position: relative;
   width: 100%;
-  height: 504px;
   max-width: var(${contentMaxWidthCssVar});
   margin: 0 auto;
   ${MarketViewDiv} {
@@ -140,8 +162,15 @@ const CurrentMarketsSection = styled.section`
   }
   h3 + * {
     display: block;
-    margin-top: 16px;
-    font-size: 36px;
+    margin-top: 24px;
+    font-size: 24px;
     font-weight: ${fontWeightBlack};
+  }
+
+  @media ${breakpoint.xl} {
+    h3 + * {
+      margin-top: 16px;
+      font-size: 36px;
+    }
   }
 `
