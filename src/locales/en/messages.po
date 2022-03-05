@@ -88,7 +88,7 @@ msgid "Dashboard"
 msgstr "Dashboard"
 
 #: src/components/parts/Header/AppHeader.tsx
-#: src/components/screens/Markets/Details.tsx
+#: src/components/screens/Markets/Assets.tsx
 msgid "Markets"
 msgstr "Markets"
 
@@ -162,7 +162,7 @@ msgid "Repay"
 msgstr "Repay"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
-#: src/components/screens/Markets/Details.tsx
+#: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Borrow APY"
 msgstr "Borrow APY"
@@ -211,7 +211,7 @@ msgid "Withdraw"
 msgstr "Withdraw"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#: src/components/screens/Markets/Details.tsx
+#: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Deposit APY"
 msgstr "Deposit APY"
@@ -243,7 +243,7 @@ msgstr "Max"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
-#: src/components/screens/Markets/Details.tsx
+#: src/components/screens/Markets/Assets.tsx
 msgid "Asset"
 msgstr "Asset"
 
@@ -284,23 +284,23 @@ msgstr "Deposit Balance"
 msgid "Borrow Balance"
 msgstr "Borrow Balance"
 
-#: src/components/screens/Markets/Details.tsx
+#: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Markets/Overview.tsx
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "Total Deposited"
 msgstr "Total Deposited"
 
-#: src/components/screens/Markets/Details.tsx
+#: src/components/screens/Markets/Assets.tsx
 msgid "Deposit Reward APR"
 msgstr "Deposit Reward APR"
 
-#: src/components/screens/Markets/Details.tsx
+#: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Markets/Overview.tsx
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "Total Borrowed"
 msgstr "Total Borrowed"
 
-#: src/components/screens/Markets/Details.tsx
+#: src/components/screens/Markets/Assets.tsx
 msgid "Borrow Reward APR"
 msgstr "Borrow Reward APR"
 
@@ -311,6 +311,40 @@ msgstr "Top3 Markets"
 #: src/components/screens/Markets/Overview.tsx
 msgid "Borrow_Top3 Markets"
 msgstr "Top3 Markets"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Borrowing"
+msgstr "Borrowing"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Yes"
+msgstr "Yes"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "No"
+msgstr "No"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Reserve Factor"
+msgstr "Reserve Factor"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Used as Collateral"
+msgstr "Used as Collateral"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Loan to Value"
+msgstr "Loan to Value"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Threshold"
+msgstr "Liquidation Threshold"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Penalty"
+msgstr "Liquidation Penalty"
 
 #: src/components/screens/Sorry/index.tsx
 msgid "Go Back"
