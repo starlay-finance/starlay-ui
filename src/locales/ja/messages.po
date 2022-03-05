@@ -20,6 +20,7 @@ msgstr ""
 #: src/components/parts/Footer/AppFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Governance"
 msgstr "ガバナンス"
 
@@ -32,25 +33,31 @@ msgid "Starlay Finance is the first lending protocol backed by Astar Network."
 msgstr "Starlay Finance は Astar インキュベーションプログラムに採択された唯一のレンディングプロトコルです。"
 
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Twitter"
 msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Discord"
 msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Telegram"
 msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Medium"
 msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Github"
 msgstr ""
 
@@ -64,6 +71,7 @@ msgstr "リポジトリ"
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Docs"
 msgstr "ドキュメント"
 
@@ -97,11 +105,13 @@ msgid "Connect"
 msgstr "ウォレット接続"
 
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Launch App"
 msgstr "取引開始"
 
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Bug Bounty"
 msgstr "バウンティ"
 
@@ -358,6 +368,10 @@ msgstr "Starlay Finance はPCからのアクセスのみサポートしていま
 #: src/components/screens/Sorry/reasons.ts
 msgid "Something went wrong. Please go back."
 msgstr "予期せぬエラーが発生しました。前の画面に戻ってください。"
+
+#: src/components/screens/Top/Menu.tsx
+msgid "Menu"
+msgstr ""
 
 #: src/components/screens/Top/parts/Backers.tsx
 msgid "Backers"

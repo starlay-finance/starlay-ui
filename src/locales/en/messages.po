@@ -20,6 +20,7 @@ msgstr "Latest Block: {blockNumber}"
 #: src/components/parts/Footer/AppFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Governance"
 msgstr "Governance"
 
@@ -32,25 +33,31 @@ msgid "Starlay Finance is the first lending protocol backed by Astar Network."
 msgstr "Starlay Finance is the first lending protocol backed by Astar Network."
 
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Twitter"
 msgstr "Twitter"
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Discord"
 msgstr "Discord"
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Telegram"
 msgstr "Telegram"
 
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Medium"
 msgstr "Medium"
 
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Github"
 msgstr "Github"
 
@@ -64,6 +71,7 @@ msgstr "Developers"
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Docs"
 msgstr "Docs"
 
@@ -97,11 +105,13 @@ msgid "Connect"
 msgstr "Connect"
 
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Launch App"
 msgstr "Launch App"
 
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Bug Bounty"
 msgstr "Bug Bounty"
 
@@ -358,6 +368,10 @@ msgstr "Starlay Finance does not support mobile access. Please connect to this w
 #: src/components/screens/Sorry/reasons.ts
 msgid "Something went wrong. Please go back."
 msgstr "Something went wrong. Please go back."
+
+#: src/components/screens/Top/Menu.tsx
+msgid "Menu"
+msgstr "Menu"
 
 #: src/components/screens/Top/parts/Backers.tsx
 msgid "Backers"
