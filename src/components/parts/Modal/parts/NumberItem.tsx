@@ -4,19 +4,15 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { darkPurple, purple, trueBlack } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import styled from 'styled-components'
-import { ItemLabel, ItemLabelProps } from './ItemLabel'
+import { Item } from './Item'
+import { ItemLabelProps } from './ItemLabel'
 
 type NumberItemProps = ItemLabelProps & {
   num: BigNumber
   format: (num: BigNumber) => string
 }
 export const NumberItem = asStyled<NumberItemProps>(
-  ({ num, format, className, ...props }) => (
-    <ItemDiv className={className}>
-      <ItemLabel {...props} />
-      <Calculation>{format(num)}</Calculation>
-    </ItemDiv>
-  ),
+  ({ num, format, ...props }) => <Item value={format(num)} {...props} />,
 )``
 
 type NumberItemWithDiffProps = {

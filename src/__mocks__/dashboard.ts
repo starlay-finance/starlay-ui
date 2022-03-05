@@ -15,7 +15,7 @@ export const MOCK_ASSET_MARKET: AssetMarketData = {
   totalBorrowedInUSD: valueToBigNumber(4000000),
   baseLTVasCollateral: valueToBigNumber(0.8),
   priceInMarketReferenceCurrency: valueToBigNumber(100),
-  reserveLiquidationThreshold: 0,
+  reserveLiquidationThreshold: BN_ZERO,
   liquidationPenalty: BN_ZERO,
   reserveFactor: BN_ZERO,
   usageAsCollateralEnabled: true,

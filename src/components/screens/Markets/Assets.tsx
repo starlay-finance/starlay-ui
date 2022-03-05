@@ -16,6 +16,7 @@ import { AssetMarketData } from 'src/types/models'
 import { symbolSorter } from 'src/utils/market'
 import { BN_HUNDRED, BN_ONE, formatPct, formatUSDShort } from 'src/utils/number'
 import styled from 'styled-components'
+import { useAssetMarketDetailsModal } from './modals/AssetMarketDetailsModal'
 
 const DETAILS_COLUMNS = [
   { id: 'asset', name: t`Asset`, widthRatio: 4 },
@@ -27,25 +28,28 @@ const DETAILS_COLUMNS = [
   { id: 'borrowAPR', name: t`Borrow Reward APR`, widthRatio: 3 },
 ]
 
-export const Details = asStyled(({ className }) => {
+export const Assets = asStyled(({ className }) => {
   const { data: marketData } = useMarketData()
   const markets = (marketData?.assets || [])
     .filter((each) => each.isActive)
     .sort(symbolSorter)
+  const { open } = useAssetMarketDetailsModal()
   return (
     <DetailsSection className={className}>
       <TableContainer>
         <MarketTable
           caption={t`Markets`}
           columns={DETAILS_COLUMNS}
-          rows={markets.map(detailsRow)}
+          rows={markets.map((asset) =>
+            detailsRow(asset, () => open({ asset })),
+          )}
         />
       </TableContainer>
     </DetailsSection>
   )
 })``
 
-const detailsRow = (asset: AssetMarketData) => {
+const detailsRow = (asset: AssetMarketData, onClick: VoidFunction) => {
   const {
     symbol,
     icon,
@@ -61,6 +65,7 @@ const detailsRow = (asset: AssetMarketData) => {
   const depositedInUSD = liquidityInUSD.plus(totalBorrowedInUSD)
   return {
     id: symbol,
+    onClick,
     data: {
       asset: <AssetTd icon={icon} name={name} />,
       totalDeposited: (

@@ -109,6 +109,8 @@ const toAssetMarketData = (
       reserve.reserveLiquidationThreshold,
     ),
     usageAsCollateralEnabled: reserve.usageAsCollateralEnabled,
+    reserveFactor: valueToBigNumber(reserve.reserveFactor),
+    liquidationPenalty: valueToBigNumber(reserve.reserveLiquidationBonus),
     decimals: reserve.decimals,
     lTokenAddress: reserve.lTokenAddress as EthereumAddress,
     vdTokenAddress: reserve.variableDebtTokenAddress as EthereumAddress,

@@ -4,7 +4,7 @@ import { AppHeader } from 'src/components/parts/Header/AppHeader'
 import { fontWeightHeavy } from 'src/styles/font'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
 import styled from 'styled-components'
-import { Details } from './Details'
+import { Assets } from './Assets'
 import { Overview } from './Overview'
 
 export const Markets = () => (
@@ -13,7 +13,7 @@ export const Markets = () => (
     <Main>
       <AppBackground />
       <Overview />
-      <Details />
+      <Assets />
     </Main>
     <AppFooter />
   </>
@@ -31,7 +31,7 @@ const Main = styled.main`
   ${Overview} {
     margin-top: 80px;
   }
-  ${Details} {
+  ${Assets} {
     margin-top: 24px;
   }
 `

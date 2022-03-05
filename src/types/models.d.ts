@@ -25,6 +25,8 @@ export type AssetMarketData = Asset & {
   priceInMarketReferenceCurrency: BigNumber
   reserveLiquidationThreshold: BigNumber
   usageAsCollateralEnabled: boolean
+  reserveFactor: BigNumber
+  liquidationPenalty: BigNumber
   underlyingAsset: EthereumAddress
   decimals: number
   lTokenAddress: EthereumAddress
