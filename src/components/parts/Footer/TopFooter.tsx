@@ -12,7 +12,7 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { IconLink } from 'src/components/parts/Link'
 import { primary, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightMedium, fontWeightSemiBold } from 'src/styles/font'
-import { contentMaxWidthCssVar } from 'src/styles/mixins'
+import { breakpoint, contentMaxWidthCssVar } from 'src/styles/mixins'
 import {
   DEVELOPERS,
   DISCORD,
@@ -25,11 +25,10 @@ import {
   TWITTER,
 } from 'src/utils/routes'
 import styled from 'styled-components'
-import { FOOTER_HEIGHT } from './common'
 
 export const TopFooter = asStyled(({ className }) => (
   <StyledFooter className={className}>
-    <Nav>
+    <Content>
       <NavItem>
         <LogoDiv>
           <LogoProtocol />
@@ -47,33 +46,35 @@ export const TopFooter = asStyled(({ className }) => (
           <IconLink Icon={IconGithub} href={GITHUB} aria-label={t`Github`} />
         </IconLinks>
       </NavItem>
-      <NavItem>
-        <LinksHeading>{t`Protocol`}</LinksHeading>
-        <TextLinks>
-          <Link href={DEVELOPERS}>{t`Developers`}</Link>
-          <Link href={DOCS}>{t`Docs`}</Link>
-        </TextLinks>
-      </NavItem>
-      <NavItem>
-        <LinksHeading>{t`Governance`}</LinksHeading>
-        <TextLinks>
-          <Link href={GOVERNANCE_OVERVIEW}>{t`Overview`}</Link>
-        </TextLinks>
-      </NavItem>
-      <NavItem>
-        <LinksHeading>{t`Community`}</LinksHeading>
-        <TextLinks>
-          <Link href={DISCORD}>{t`Discord`}</Link>
-          <Link href={TELEGRAM}>{t`Telegram`}</Link>
-        </TextLinks>
-      </NavItem>
-      <NavItem>
-        <LinksHeading>{t`Brand`}</LinksHeading>
-        <TextLinks>
-          <Link href={MEDIA_KIT}>{t`Media Kit`}</Link>
-        </TextLinks>
-      </NavItem>
-    </Nav>
+      <Nav>
+        <NavItem>
+          <LinksHeading>{t`Protocol`}</LinksHeading>
+          <TextLinks>
+            <Link href={DEVELOPERS}>{t`Developers`}</Link>
+            <Link href={DOCS}>{t`Docs`}</Link>
+          </TextLinks>
+        </NavItem>
+        <NavItem>
+          <LinksHeading>{t`Governance`}</LinksHeading>
+          <TextLinks>
+            <Link href={GOVERNANCE_OVERVIEW}>{t`Overview`}</Link>
+          </TextLinks>
+        </NavItem>
+        <NavItem>
+          <LinksHeading>{t`Community`}</LinksHeading>
+          <TextLinks>
+            <Link href={DISCORD}>{t`Discord`}</Link>
+            <Link href={TELEGRAM}>{t`Telegram`}</Link>
+          </TextLinks>
+        </NavItem>
+        <NavItem>
+          <LinksHeading>{t`Brand`}</LinksHeading>
+          <TextLinks>
+            <Link href={MEDIA_KIT}>{t`Media Kit`}</Link>
+          </TextLinks>
+        </NavItem>
+      </Nav>
+    </Content>
   </StyledFooter>
 ))``
 const LogoDiv = styled.div`
@@ -137,19 +138,41 @@ const NavItem = styled.div`
 `
 const Nav = styled.nav`
   display: flex;
-  column-gap: 80px;
-  > * {
-    flex: 1;
-  }
+  row-gap: 32px;
 `
+const Content = styled.div``
 
 const StyledFooter = styled.footer`
-  padding: 64px 0 80px;
-  min-height: ${FOOTER_HEIGHT};
+  padding: 40px 24px;
   backdrop-filter: blur(48px) brightness(1.08);
   background-color: rgba(0, 0, 0, 0.08);
-  ${Nav} {
+  ${Content} {
     max-width: var(${contentMaxWidthCssVar});
     margin: 0 auto;
+  }
+  ${Nav} {
+    margin-top: 40px;
+    flex-wrap: wrap;
+    ${NavItem} {
+      min-width: 160px;
+    }
+  }
+  @media ${breakpoint.xl} {
+    padding: 64px 0 80px;
+    ${Content} {
+      display: flex;
+      column-gap: 80px;
+      > ${NavItem} {
+        max-width: 240px;
+      }
+    }
+    ${Nav} {
+      margin-top: 0;
+      flex-wrap: nowrap;
+      column-gap: 80px;
+      > * {
+        flex: 1;
+      }
+    }
   }
 `
