@@ -6,7 +6,11 @@ import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { secondary } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
-import { contentMaxWidthCssVar, flexCenter } from 'src/styles/mixins'
+import {
+  breakpoint,
+  contentMaxWidthCssVar,
+  flexCenter,
+} from 'src/styles/mixins'
 import styled, { css, CSSProperties } from 'styled-components'
 import { RequireExactlyOne } from 'type-fest'
 import { backersAnimation } from './animation'
@@ -45,18 +49,20 @@ export const Backers = asStyled<BackersProps>(({ backers, className }) => {
             >
               <Link href={url}>
                 <ImageDiv>
-                  <ImageContainer style={containerStyle}>
-                    {Svg ? (
-                      <Svg />
-                    ) : (
-                      <Image
-                        src={image!}
-                        alt={name}
-                        layout="fill"
-                        objectFit="scale-down"
-                      />
-                    )}
-                  </ImageContainer>
+                  <div>
+                    <ImageContainer style={containerStyle}>
+                      {Svg ? (
+                        <Svg />
+                      ) : (
+                        <Image
+                          src={image!}
+                          alt={name}
+                          layout="fill"
+                          objectFit="scale-down"
+                        />
+                      )}
+                    </ImageContainer>
+                  </div>
                 </ImageDiv>
                 <p>{name}</p>
               </Link>
@@ -86,17 +92,22 @@ const ImageDiv = styled.div`
   ${flexCenter};
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  padding-top: 56.25%;
   border-radius: 24px;
   overflow: hidden;
   backdrop-filter: blur(8px) brightness(1.08);
   background-color: rgba(255, 255, 255, 0.08);
+  > div {
+    position: absolute;
+    inset: 0;
+    ${flexCenter};
+  }
 `
 
 const BackersList = styled.ul<{ $touched: boolean; $appeared: boolean }>`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   gap: 32px 24px;
   > li {
     ${({ $touched, $appeared }) =>
@@ -105,13 +116,18 @@ const BackersList = styled.ul<{ $touched: boolean; $appeared: boolean }>`
         opacity: 0;
         ${$touched && backersAnimation};
       `};
-    width: 384px;
+    width: 342px;
     p {
       margin-top: 16px;
       color: ${secondary};
       font-size: 16px;
       font-weight: ${fontWeightSemiBold};
       text-align: center;
+    }
+  }
+  @media ${breakpoint.xl} {
+    > li {
+      width: 384px;
     }
   }
 `

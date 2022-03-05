@@ -37,15 +37,12 @@ export const Top: VFC<TopProps> = ({ backers }) => {
 const Main = styled.main<{ $locale?: Locale }>`
   position: relative;
   width: 100%;
-  padding: 0 24px;
+  padding: 0 24px 120px;
   ${FirstView} {
     padding-top: 40px;
   }
-  ${CurrentMarkets} {
+  ${CurrentMarkets},${Backers} {
     margin-top: 80px;
-  }
-  ${Backers} {
-    margin-top: 240px;
   }
   h1 {
     font-size: 40px;
@@ -58,7 +55,7 @@ const Main = styled.main<{ $locale?: Locale }>`
   }
   h2 + p {
     margin-top: 16px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: ${fontWeightRegular};
     color: ${secondary};
   }
@@ -83,10 +80,7 @@ const Main = styled.main<{ $locale?: Locale }>`
       font-weight: ${fontWeightHeavy};
     }
     h2 + p {
-      margin-top: 16px;
       font-size: 16px;
-      font-weight: ${fontWeightRegular};
-      color: ${secondary};
     }
   }
   ${({ $locale }) =>
