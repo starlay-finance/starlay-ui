@@ -10,54 +10,11 @@ export const noScrollbar = css`
   scrollbar-width: none;
 `
 
-export const absoluteFill = css`
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-`
-
 export const flexCenter = css`
   display: flex;
   justify-content: center;
   align-items: center;
 `
-
-export const bgClipText = css`
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-`
-
-const maxWidthSize = {
-  s: '744px', // 680 + 32 * 2
-  m: '1024px', // 960 + 32 * 2
-  l: '1344px', // 1280 + 32 * 2
-}
-
-const marginAuto = css`
-  margin-right: auto;
-  margin-left: auto;
-  width: 100%;
-`
-
-export const limitWidth = {
-  s: css`
-    max-width: ${maxWidthSize.s};
-    ${marginAuto};
-  `,
-  m: css`
-    max-width: ${maxWidthSize.m};
-    ${marginAuto};
-  `,
-  l: css`
-    max-width: ${maxWidthSize.l};
-    ${marginAuto};
-  `,
-}
 
 const size = {
   xs: 375,
