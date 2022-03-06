@@ -46,6 +46,7 @@ export const CurrentMarketsComponent = forwardRef<
       <p>{t`The more funds that will be borrowed, the higher the interest rate will be`}</p>
       <div ref={ref}>
         <MarketViewDiv>
+          <Background />
           <MarketView
             title={t`Total Deposited`}
             market={deposit}
@@ -73,6 +74,7 @@ const MarketView = asStyled<{
   })
   return (
     <ViewDiv className={className}>
+      <Background />
       <h3>{title}</h3>
       <BlinkWrapper value={value}>
         <Reel text={value} />
@@ -98,9 +100,15 @@ const Composition = styled.div`
     margin-top: 16px;
   }
 `
-
+const Background = styled.div`
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, ${darkRed}3d, ${skyBlue}3d);
+`
 const ViewDiv = styled.div`
   position: relative;
+  backdrop-filter: blur(16px) brightness(1.08);
+  background: rgba(255, 255, 255, 0.08);
   ${Composition} {
     margin-top: 24px;
   }
@@ -120,24 +128,31 @@ const MarketViewDiv = styled.div`
     padding: 32px 24px 40px;
     border-radius: 16px;
     overflow: hidden;
-    background: linear-gradient(15deg, ${darkRed}29, ${skyBlue}3d);
-    backdrop-filter: blur(16px) brightness(1.08);
   }
 
+  > ${Background} {
+    display: none;
+  }
   @media ${breakpoint.xl} {
     flex-direction: row;
 
     padding: 32px;
     border-radius: 24px;
     overflow: hidden;
-    background: linear-gradient(90deg, ${darkRed}3d, ${skyBlue}3d);
     backdrop-filter: blur(16px) brightness(1.08);
+    background: rgba(255, 255, 255, 0.08);
     ${MarketView} {
       padding: 0;
       border-radius: 0;
       overflow: visible;
       background: none;
       backdrop-filter: none;
+      ${Background} {
+        display: none;
+      }
+    }
+    > ${Background} {
+      display: block;
     }
   }
 `
