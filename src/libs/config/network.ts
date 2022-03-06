@@ -37,6 +37,10 @@ export type NetworkConfig = {
     underlyingAsset: EthereumAddress
     decimals: number
   }
+  snapshotProvider?: {
+    endpoint: string
+    apiKey?: string
+  }
   explorerLinks?: string[]
   rpcOnly?: boolean
   isTestnet?: boolean
@@ -63,6 +67,11 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
       address: '0x6FD65f71B3FB5Aa9d794f010AFc65F174012994F',
       underlyingAsset: '0xc4335B1b76fA6d52877b3046ECA68F6E708a27dd',
       decimals: 18,
+    },
+    snapshotProvider: {
+      endpoint:
+        'https://xok6alsasvgthgl5ozss7upnuu.appsync-api.us-east-1.amazonaws.com/graphql',
+      apiKey: 'da2-qvw2m7hf6jhonms4rhtqgix7ri',
     },
     explorerLinks: ['https://blockscout.com/astar'],
   },

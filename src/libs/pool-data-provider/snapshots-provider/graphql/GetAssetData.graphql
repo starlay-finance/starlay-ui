@@ -1,0 +1,83 @@
+query GetAssetData($date: String!) {
+  getAssetData(date: $date) {
+    id
+    timestamp
+    poolData {
+      baseCurrencyData {
+        ...BaseCurrencyData
+      }
+      reservesData {
+        ...ReservesData
+      }
+    }
+    reservesIncentives {
+      underlyingAsset
+      lIncentiveData {
+        ...IncentivesWithFeeds
+      }
+      sdIncentiveData {
+        ...IncentivesWithFeeds
+      }
+      vdIncentiveData {
+        ...IncentivesWithFeeds
+      }
+    }
+  }
+}
+
+fragment BaseCurrencyData on BaseCurrencyData {
+  marketReferenceCurrencyDecimals
+  marketReferenceCurrencyPriceInUsd
+  networkBaseTokenPriceDecimals
+  networkBaseTokenPriceInUsd
+}
+
+fragment ReservesData on ReservesData {
+  availableLiquidity
+  averageStableRate
+  baseLTVasCollateral
+  borrowingEnabled
+  decimals
+  id
+  interestRateStrategyAddress
+  isActive
+  isFrozen
+  lTokenAddress
+  lastUpdateTimestamp
+  liquidityIndex
+  liquidityRate
+  name
+  priceInMarketReferenceCurrency
+  reserveFactor
+  reserveLiquidationBonus
+  reserveLiquidationThreshold
+  stableBorrowRate
+  stableBorrowRateEnabled
+  stableDebtLastUpdateTimestamp
+  stableDebtTokenAddress
+  stableRateSlope1
+  stableRateSlope2
+  symbol
+  totalPrincipalStableDebt
+  totalScaledVariableDebt
+  underlyingAsset
+  usageAsCollateralEnabled
+  variableBorrowIndex
+  variableBorrowRate
+  variableDebtTokenAddress
+  variableRateSlope1
+  variableRateSlope2
+}
+
+fragment IncentivesWithFeeds on IncentivesWithFeeds {
+  emissionEndTimestamp
+  emissionPerSecond
+  incentiveControllerAddress
+  incentivesLastUpdateTimestamp
+  precision
+  priceFeed
+  rewardTokenAddress
+  rewardTokenDecimals
+  tokenAddress
+  tokenIncentivesIndex
+}

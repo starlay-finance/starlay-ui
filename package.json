@@ -18,7 +18,8 @@
     "run-storycap": "storycap http://localhost:6006 --serverCmd \"yarn storybook\" --serverTimeout 60000",
     "remove-caps-default-vewport": "cd __screenshots__ && grep -rl . | grep -v '_' | xargs -d '\\n' rm -f && cd ..",
     "vrt": "yarn run-storycap && yarn remove-caps-default-vewport && reg-suit run",
-    "codegen:caching-server": "graphql-codegen --config caching-server-graphql-codegen.yml"
+    "codegen:caching-server": "graphql-codegen --config caching-server-graphql-codegen.yml",
+    "codegen:pool-snapshots": "graphql-codegen --config pool-snapshots-codegen.yml"
   },
   "dependencies": {
     "@lingui/macro": "^3.13.0",
@@ -46,11 +47,11 @@
     "web3": "^1.7.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.4.0",
+    "@graphql-codegen/cli": "^2.6.2",
     "@graphql-codegen/schema-ast": "^2.4.1",
-    "@graphql-codegen/typescript": "^2.4.2",
-    "@graphql-codegen/typescript-graphql-request": "^4.3.3",
-    "@graphql-codegen/typescript-operations": "^2.2.3",
+    "@graphql-codegen/typescript": "^2.4.5",
+    "@graphql-codegen/typescript-graphql-request": "^4.3.7",
+    "@graphql-codegen/typescript-operations": "^2.3.2",
     "@lingui/cli": "^3.13.0",
     "@lingui/core": "^3.13.0",
     "@lingui/loader": "^3.13.0",
