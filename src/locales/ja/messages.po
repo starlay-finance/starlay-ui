@@ -594,5 +594,9 @@ msgid "No balance to repay"
 msgstr "ウォレットの残高が不足しています"
 
 #: src/utils/estimationHelper.ts
+msgid "Enter leverage"
+msgstr "レバレッジを設定してください"
+
+#: src/utils/estimationHelper.ts
 msgid "No balance to loop"
 msgstr "ウォレットの残高が不足しています"

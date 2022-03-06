@@ -340,6 +340,12 @@ type LoopingEstimationResult = {
   unavailableReason?: string
   healthFactor?: BigNumber
 }
+const EMPTY_ESTIMATION = {
+  depositAPY: BN_ZERO,
+  borrowAPY: BN_ZERO,
+  rewardAPR: BN_ZERO,
+  netAPY: BN_ZERO,
+}
 export const estimateLooping = ({
   amount,
   userAssetBalance,
@@ -360,10 +366,13 @@ export const estimateLooping = ({
     return {
       unavailableReason: t`Enter amount`,
       maxAmount,
-      depositAPY: BN_ZERO,
-      borrowAPY: BN_ZERO,
-      rewardAPR: BN_ZERO,
-      netAPY: BN_ZERO,
+      ...EMPTY_ESTIMATION,
+    }
+  if (!leverage || leverage.isNaN() || leverage.eq(BN_ONE))
+    return {
+      unavailableReason: t`Enter leverage`,
+      maxAmount,
+      ...EMPTY_ESTIMATION,
     }
   const {
     totalCollateralInMarketReferenceCurrency:

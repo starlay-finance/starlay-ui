@@ -590,5 +590,9 @@ msgid "No balance to repay"
 msgstr "No balance to repay"
 
 #: src/utils/estimationHelper.ts
+msgid "Enter leverage"
+msgstr "Enter leverage"
+
+#: src/utils/estimationHelper.ts
 msgid "No balance to loop"
 msgstr "No balance to loop"
