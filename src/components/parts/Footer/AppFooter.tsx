@@ -8,7 +8,7 @@ import { DEFAULT_LOCALE, Locale, LOCALES_DICT } from 'src/locales'
 import { purple } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
-import { GOVERNANCE, SUPPORT } from 'src/utils/routes'
+import { DOCS, GOVERNANCE, SUPPORT } from 'src/utils/routes'
 import styled from 'styled-components'
 import { DropdownButton } from '../Button'
 import { LocaleSelect } from './LocaleSelect'
@@ -25,6 +25,7 @@ export const AppFooter = asStyled(({ className }) => {
       <Content>
         <Nav>
           <LatestBlock>{t`Latest Block: ${blockNumber}`}</LatestBlock>
+          <Link href={DOCS}>{t`Docs`}</Link>
           <Link href={GOVERNANCE}>{t`Governance`}</Link>
           <Link href={SUPPORT}>{t`Support`}</Link>
         </Nav>
