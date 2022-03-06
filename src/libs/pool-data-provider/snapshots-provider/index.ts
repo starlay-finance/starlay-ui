@@ -19,7 +19,8 @@ export const getPoolDataSnapshot = async (chainId: ChainId, date: Dayjs) => {
     snapshotProvider.apiKey,
   )
   const res = await client.GetAssetData({ date: date.toISOString() })
-  const { poolData, reservesIncentives, timestamp } = res.getAssetData!
+  if (!res.getAssetData) return undefined
+  const { poolData, reservesIncentives, timestamp } = res.getAssetData
   return formatReserves(
     {
       baseCurrencyData: poolData.baseCurrencyData,
