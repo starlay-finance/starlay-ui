@@ -10,6 +10,7 @@ export const BN_ONE: BigNumber = valueToBigNumber('1')
 export const BN_HUNDRED: BigNumber = valueToBigNumber('100')
 
 export const BN_ZERO = valueToBigNumber('0')
+export const BN_NAN = valueToBigNumber('NaN')
 
 type FormatOption = Partial<{
   decimalPlaces: number

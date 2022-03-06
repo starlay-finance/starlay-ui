@@ -7,28 +7,33 @@ import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { PercentageChange } from 'src/components/parts/Number/PercentageChange'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { useMarketData } from 'src/hooks/useMarketData'
+import { useMarketDataSnapshot } from 'src/hooks/useMarketData/useMarketDataSnaphost'
 import { darkPurple, secondary } from 'src/styles/colors'
 import { fontWeightBold, fontWeightRegular } from 'src/styles/font'
 import { MarketComposition } from 'src/types/models'
 import { amountByAssetsSorter, toMarketCompositions } from 'src/utils/market'
-import { BN_HUNDRED, formatUSD } from 'src/utils/number'
+import { formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
 
 export const Overview = asStyled(({ className }) => {
   const { data } = useMarketData()
+  const { data: marketDataSnapshot } = useMarketDataSnapshot()
   const markets = data?.assets || []
   const { deposit, borrow } = toMarketCompositions(markets)
+  const snapshot = toMarketCompositions(marketDataSnapshot?.assets || [])
   return (
     <OverviewSection className={className}>
       <OverViewItem
         caption={t`Total Deposited`}
         chartCaption={t`Deposit_Top3 Markets`}
         market={deposit}
+        snapshot={snapshot.deposit}
       />
       <OverViewItem
         caption={t`Total Borrowed`}
         chartCaption={t`Borrow_Top3 Markets`}
         market={borrow}
+        snapshot={snapshot.borrow}
       />
     </OverviewSection>
   )
@@ -38,7 +43,13 @@ const OverViewItem: VFC<{
   caption: string
   chartCaption: string
   market: MarketComposition
-}> = ({ caption, chartCaption, market: { totalInUSD, amountByAssets } }) => {
+  snapshot?: MarketComposition
+}> = ({
+  caption,
+  chartCaption,
+  market: { totalInUSD, amountByAssets },
+  snapshot,
+}) => {
   const displayTotal = formatUSD(totalInUSD, {
     decimalPlaces: 2,
     shorteningThreshold: 16,
@@ -52,8 +63,7 @@ const OverViewItem: VFC<{
         </BlinkWrapper>
         <PercentageChange
           current={totalInUSD}
-          // TODO replace mock
-          previous={BN_HUNDRED}
+          previous={snapshot?.totalInUSD}
         />
       </AmountDiv>
       <Composition>

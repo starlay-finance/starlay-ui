@@ -11,11 +11,12 @@ import {
   PercentageChangeProps,
 } from 'src/components/parts/Number/PercentageChange'
 import { useMarketData } from 'src/hooks/useMarketData'
+import { useMarketDataSnapshot } from 'src/hooks/useMarketData/useMarketDataSnaphost'
 import { darkRed, skyBlue } from 'src/styles/colors'
 import { fontWeightMedium } from 'src/styles/font'
 import { AssetMarketData } from 'src/types/models'
 import { symbolSorter } from 'src/utils/market'
-import { BN_HUNDRED, BN_ONE, formatPct, formatUSDShort } from 'src/utils/number'
+import { formatPct, formatUSDShort } from 'src/utils/number'
 import styled from 'styled-components'
 import { useAssetMarketDetailsModal } from './modals/AssetMarketDetailsModal'
 
@@ -31,6 +32,7 @@ const DETAILS_COLUMNS = [
 
 export const Assets = asStyled(({ className }) => {
   const { data: marketData } = useMarketData()
+  const { data: marketDataSnapshot, error } = useMarketDataSnapshot()
   const markets = (marketData?.assets || [])
     .filter((each) => each.isActive)
     .sort(symbolSorter)
@@ -42,7 +44,13 @@ export const Assets = asStyled(({ className }) => {
           caption={t`Markets`}
           columns={DETAILS_COLUMNS}
           rows={markets.map((asset) =>
-            detailsRow(asset, () => open({ asset })),
+            detailsRow({
+              asset,
+              snapshot: marketDataSnapshot?.assets.find(
+                (each) => each.symbol === asset.symbol,
+              ),
+              onClick: () => open({ asset }),
+            }),
           )}
           hoverGradient={`${darkRed}3d,${skyBlue}3d,${darkRed}3d`}
         />
@@ -51,7 +59,15 @@ export const Assets = asStyled(({ className }) => {
   )
 })``
 
-const detailsRow = (asset: AssetMarketData, onClick: VoidFunction) => {
+const detailsRow = ({
+  asset,
+  snapshot = {},
+  onClick,
+}: {
+  asset: AssetMarketData
+  snapshot?: Partial<AssetMarketData>
+  onClick: VoidFunction
+}) => {
   const {
     symbol,
     icon,
@@ -59,12 +75,12 @@ const detailsRow = (asset: AssetMarketData, onClick: VoidFunction) => {
     liquidityInUSD,
     depositAPY,
     depositIncentiveAPR,
+    totalDepositedInUSD,
     borrowUnsupported,
     totalBorrowedInUSD,
     variableBorrowAPY,
     variableBorrowIncentiveAPR,
   } = asset
-  const depositedInUSD = liquidityInUSD.plus(totalBorrowedInUSD)
   return {
     id: symbol,
     onClick,
@@ -72,26 +88,25 @@ const detailsRow = (asset: AssetMarketData, onClick: VoidFunction) => {
       asset: <AssetTd icon={icon} name={name} />,
       totalDeposited: (
         <ValueWithPercentageChange
-          value={formatUSDShort(depositedInUSD)}
-          current={depositedInUSD}
-          // TODO replace mock
-          previous={BN_HUNDRED}
+          value={formatUSDShort(totalDepositedInUSD)}
+          current={totalDepositedInUSD}
+          previous={snapshot.totalDepositedInUSD}
         />
       ),
       depositAPY: (
         <ValueWithPercentageChange
           value={formatPct(depositAPY)}
           current={depositAPY}
-          // TODO replace mock
-          previous={BN_ONE}
+          previous={snapshot.depositAPY}
+          isPercentage
         />
       ),
       depositAPR: (
         <ValueWithPercentageChange
           value={formatPct(depositIncentiveAPR)}
           current={depositIncentiveAPR}
-          // TODO replace mock
-          previous={BN_ONE}
+          previous={snapshot.depositIncentiveAPR}
+          isPercentage
         />
       ),
       totalBorrowed: borrowUnsupported ? (
@@ -100,8 +115,7 @@ const detailsRow = (asset: AssetMarketData, onClick: VoidFunction) => {
         <ValueWithPercentageChange
           value={formatUSDShort(totalBorrowedInUSD)}
           current={totalBorrowedInUSD}
-          // TODO replace mock
-          previous={BN_HUNDRED.pow(BN_HUNDRED)}
+          previous={snapshot.totalBorrowedInUSD}
         />
       ),
       borrowAPY: borrowUnsupported ? (
@@ -110,8 +124,8 @@ const detailsRow = (asset: AssetMarketData, onClick: VoidFunction) => {
         <ValueWithPercentageChange
           value={formatPct(variableBorrowAPY)}
           current={variableBorrowAPY}
-          // TODO replace mock
-          previous={BN_ONE}
+          previous={snapshot.variableBorrowAPY}
+          isPercentage
         />
       ),
       borrowAPR: borrowUnsupported ? (
@@ -120,8 +134,8 @@ const detailsRow = (asset: AssetMarketData, onClick: VoidFunction) => {
         <ValueWithPercentageChange
           value={formatPct(variableBorrowIncentiveAPR)}
           current={variableBorrowIncentiveAPR}
-          // TODO replace mock
-          previous={variableBorrowIncentiveAPR}
+          previous={snapshot.variableBorrowIncentiveAPR}
+          isPercentage
         />
       ),
     },
