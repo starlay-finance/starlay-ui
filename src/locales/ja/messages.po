@@ -102,6 +102,10 @@ msgid "Markets"
 msgstr "マーケット"
 
 #: src/components/parts/Header/AppHeader.tsx
+msgid "Makai"
+msgstr ""
+
+#: src/components/parts/Header/AppHeader.tsx
 msgid "Connect"
 msgstr "ウォレット接続"
 
@@ -127,6 +131,7 @@ msgstr "LAY 残高"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "ウォレット残高"
 
@@ -179,6 +184,7 @@ msgid "Repay"
 msgstr "返済"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Borrow APY"
@@ -202,6 +208,7 @@ msgstr "担保利用率"
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Health Factor"
 msgstr "ヘルスファクター"
 
@@ -228,6 +235,7 @@ msgid "Withdraw"
 msgstr "出金"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Deposit APY"
@@ -260,12 +268,14 @@ msgstr "最大"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/MakaiMarkets.tsx
 #: src/components/screens/Markets/Assets.tsx
 msgid "Asset"
 msgstr "トークン"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Reward APR"
 msgstr "ボーナスAPR"
 
@@ -300,6 +310,42 @@ msgstr "合計預入残高"
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
 msgid "Borrow Balance"
 msgstr "合計借入残高"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai APR"
+msgstr ""
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Wallet_Balance"
+msgstr "ウォレット残高"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai Markets"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Makai Loops"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Estimated Net APY"
+msgstr "概算Net APY"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Start loops"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Leverage"
+msgstr "レバレッジ"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom"
+msgstr "カスタム"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom Leverage"
+msgstr "カスタムレバレッジ"
 
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Markets/Overview.tsx
@@ -371,7 +417,9 @@ msgstr ""
 #: src/components/screens/Top/Menu.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
-msgstr "Starlay Finance は現在モバイル端末からのアクセスをサポートしていません。\nPCからアクセスしてください。"
+msgstr ""
+"Starlay Finance は現在モバイル端末からのアクセスをサポートしていません。\n"
+"PCからアクセスしてください。"
 
 #: src/components/screens/Sorry/reasons.ts
 msgid "Something went wrong. Please go back."
@@ -507,6 +555,7 @@ msgstr "ウォレットから接続先チェーンを変更してください"
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Enter amount"
 msgstr "金額を入力してください"
 
@@ -528,6 +577,7 @@ msgstr "流動性がありません"
 
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Health factor too low"
 msgstr "ヘルスファクターが閾値を下回っています"
 
@@ -541,4 +591,8 @@ msgstr "流動性がありません"
 
 #: src/utils/estimationHelper.ts
 msgid "No balance to repay"
+msgstr "ウォレットの残高が不足しています"
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to loop"
 msgstr "ウォレットの残高が不足しています"

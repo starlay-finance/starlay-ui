@@ -9,7 +9,7 @@ import {
   UserAssetBalance,
   UserSummary,
 } from 'src/types/models'
-import { convertFromUSD } from './calculator'
+import { calculateLoopingAPR, convertFromUSD } from './calculator'
 import { BN_ONE, BN_ZERO } from './number'
 
 const HEALTH_FACTOR_THRESHOLD = 1
@@ -327,6 +327,100 @@ export const estimateRepayment = ({
     maxAmount,
     totalBorrowedInUSD,
     borrowLimitUsed,
+    healthFactor,
+  }
+}
+
+type LoopingEstimationResult = {
+  maxAmount: BigNumber
+  depositAPY: BigNumber
+  borrowAPY: BigNumber
+  rewardAPR: BigNumber
+  netAPY: BigNumber
+  unavailableReason?: string
+  healthFactor?: BigNumber
+}
+export const estimateLooping = ({
+  amount,
+  userAssetBalance,
+  userSummary,
+  asset: {
+    priceInMarketReferenceCurrency,
+    depositAPY,
+    variableBorrowAPY,
+    depositIncentiveAPR,
+    variableBorrowIncentiveAPR,
+    reserveLiquidationThreshold,
+  },
+  leverage,
+}: EstimationParam & { leverage: BigNumber }): LoopingEstimationResult => {
+  const { inWallet } = userAssetBalance
+  const maxAmount = inWallet
+  if (!amount || amount.isNaN() || amount.isZero())
+    return {
+      unavailableReason: t`Enter amount`,
+      maxAmount,
+      depositAPY: BN_ZERO,
+      borrowAPY: BN_ZERO,
+      rewardAPR: BN_ZERO,
+      netAPY: BN_ZERO,
+    }
+  const {
+    totalCollateralInMarketReferenceCurrency:
+      currentCollateralInMarketReferenceCurrency,
+    totalBorrowedInMarketReferenceCurrency:
+      currentBorrowedInMarketReferenceCurrency,
+    currentLiquidationThreshold,
+  } = userSummary
+  const totalDeposit = amount.multipliedBy(leverage)
+  const totalBorrow = totalDeposit.minus(amount)
+  const apr = calculateLoopingAPR({
+    ltv: BN_ONE.minus(BN_ONE.div(leverage)),
+    depositIncentiveAPR,
+    variableBorrowIncentiveAPR,
+  })
+  const totalProfit = totalDeposit.multipliedBy(depositAPY)
+  const totalLoss = totalBorrow.multipliedBy(variableBorrowAPY)
+  const totalReward = amount.multipliedBy(apr)
+
+  const totalDepositInMarketReferenceCurrency = totalDeposit.multipliedBy(
+    priceInMarketReferenceCurrency,
+  )
+  const totalBorrowInMarketReferenceCurrency = totalBorrow.multipliedBy(
+    priceInMarketReferenceCurrency,
+  )
+  const liquidationThreshold = calcLiquidationThreshold(
+    {
+      threshold: currentLiquidationThreshold,
+      collateral: currentCollateralInMarketReferenceCurrency,
+    },
+    {
+      threshold: reserveLiquidationThreshold,
+      collateral: totalDepositInMarketReferenceCurrency,
+    },
+  )
+  const healthFactor = calculateHealthFactor({
+    totalCollateralInMarketReferenceCurrency:
+      currentCollateralInMarketReferenceCurrency.plus(
+        totalDepositInMarketReferenceCurrency,
+      ),
+    totalBorrowedInMarketReferenceCurrency:
+      currentBorrowedInMarketReferenceCurrency.plus(
+        totalBorrowInMarketReferenceCurrency,
+      ),
+    liquidationThreshold,
+  })
+  return {
+    unavailableReason: amount.gt(maxAmount)
+      ? t`No balance to loop`
+      : !healthFactor.gte(HEALTH_FACTOR_THRESHOLD)
+      ? t`Health factor too low`
+      : undefined,
+    maxAmount,
+    depositAPY: totalProfit.div(amount),
+    borrowAPY: totalLoss.div(amount),
+    rewardAPR: apr,
+    netAPY: totalProfit.plus(totalReward).minus(totalLoss).div(amount),
     healthFactor,
   }
 }

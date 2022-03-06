@@ -1,7 +1,7 @@
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import { AssetMarketData, User } from 'src/types/models'
 import { ValueOf } from 'type-fest'
-import { BN_ZERO } from './number'
+import { BN_ONE, BN_ZERO } from './number'
 
 export const calculateNetAPY = (
   balanceByAsset: User['balanceByAsset'],
@@ -73,6 +73,20 @@ export const calculateAssetPL = (
     lossInUSD: borrowedInUSD.multipliedBy(variableBorrowAPY),
     rewardInUSD,
   }
+}
+
+export const calculateLoopingAPR = (params: {
+  ltv: BigNumber
+  depositIncentiveAPR: BigNumber
+  variableBorrowIncentiveAPR: BigNumber
+}) => {
+  const base = BN_ONE
+  const maxDeposit = base.div(BN_ONE.minus(params.ltv))
+  const maxBorrow = maxDeposit.minus(base)
+  return maxDeposit
+    .multipliedBy(params.depositIncentiveAPR)
+    .plus(maxBorrow.multipliedBy(params.variableBorrowIncentiveAPR))
+    .div(base)
 }
 
 export const convertToUSD = (

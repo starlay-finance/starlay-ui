@@ -3,13 +3,16 @@ import { AssetMarketData, User } from 'src/types/models'
 import { MOCK_ASSET_MARKET } from 'src/__mocks__/dashboard'
 import { ValueOf } from 'type-fest'
 import { EMPTY_BALANCE_BY_ASSET } from './assets'
-import { calculateAssetPL, calculateNetAPY } from './calculator'
+import {
+  calculateAssetPL,
+  calculateLoopingAPR,
+  calculateNetAPY,
+} from './calculator'
 import { BN_HUNDRED, BN_ONE, BN_ZERO } from './number'
 
 describe('calculator', () => {
   describe('calculateAssetPL', () => {
     const marketReferenceCurrencyPriceInUSD = valueToBigNumber('10')
-    const rewardPriceInMarketReferenceCurrency = valueToBigNumber('20')
 
     const mockBalance: ValueOf<User['balanceByAsset']> = {
       deposited: BN_ZERO,
@@ -138,6 +141,17 @@ describe('calculator', () => {
         totalDepositedInUSD,
       )
       expect(result.toFixed(4)).toBe('0.2000')
+    })
+  })
+  describe('calculateLoopingAPR', () => {
+    test('should be calculated the deposit amount as the sum of infinite geometric series with a ratio of the ltv', () => {
+      expect(
+        calculateLoopingAPR({
+          ltv: valueToBigNumber(0.5),
+          depositIncentiveAPR: valueToBigNumber(1),
+          variableBorrowIncentiveAPR: valueToBigNumber(2),
+        }).toString(),
+      ).toBe('4')
     })
   })
 })

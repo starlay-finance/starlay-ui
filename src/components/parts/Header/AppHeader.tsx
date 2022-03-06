@@ -11,12 +11,12 @@ import { Reel } from 'src/components/parts/Number/Reel'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
-import { purple, trueWhite } from 'src/styles/colors'
+import { darkRed, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
 import { BN_ZERO, formatAmt } from 'src/utils/number'
-import { APP, MARKETS } from 'src/utils/routes'
+import { APP, MAKAI, MARKETS } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import { HeaderWrapper } from './common'
 
@@ -34,6 +34,7 @@ export const AppHeader = () => {
       <Nav>
         <Tab href={APP} $active={pathname === APP}>{t`Dashboard`}</Tab>
         <Tab href={MARKETS} $active={pathname === MARKETS}>{t`Markets`}</Tab>
+        <Tab href={MAKAI} $active={pathname === MAKAI}>{t`Makai`}</Tab>
       </Nav>
       <Menu>
         <MenuButton onClick={() => openRewardModal()} disabled={!user}>
@@ -82,12 +83,19 @@ const activeStyle = css`
     height: 1px;
     border-bottom: 1px solid;
   }
+  :last-child {
+    color: ${darkRed};
+  }
 `
 const Tab = styled(Link)<{ $active?: boolean }>`
   position: relative;
   font-size: 16px;
   font-weight: ${fontWeightHeavy};
   ${({ $active }) => $active && activeStyle}
+
+  :last-child:hover {
+    color: ${darkRed};
+  }
 `
 
 const Nav = styled.nav`

@@ -1,39 +1,75 @@
-import { ReactNode } from 'react'
+import { InputHTMLAttributes, ReactNode } from 'react'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { trueBlack } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { Color } from 'src/styles/types'
 import { pickColorInGradient } from 'src/utils/color'
-import styled, { css } from 'styled-components'
+import styled, { css, SimpleInterpolation } from 'styled-components'
 
 export type BarometerProps = {
-  label: string
-  value: ReactNode
+  label?: string
+  value?: ReactNode
   ratio: number
   colors: Color[]
+  styles?: {
+    barometer?: SimpleInterpolation
+    thumb?: SimpleInterpolation
+  }
+  rangeInputProps?: InputHTMLAttributes<HTMLInputElement>
 }
 export const Barometer = asStyled<BarometerProps>(
-  ({ label, value, ratio, colors, className }) => {
+  ({ label, value, ratio, colors, styles, rangeInputProps, className }) => {
     const currentColor = pickColorInGradient(ratio, ...colors)
+    const adjustedRatio = Math.max(Math.min(ratio, 1), 0)
     return (
       <BarometerFigure
         className={className}
         colors={colors}
         currentColor={currentColor}
-        ratio={Math.max(Math.min(ratio, 1), 0)}
+        ratio={adjustedRatio}
+        styles={styles}
       >
-        <figcaption>{label}</figcaption>
+        {label && (
+          <figcaption style={{ color: currentColor }}>{label}</figcaption>
+        )}
         <div />
-        <figcaption>{value}</figcaption>
+        <BarometerThumb
+          style={{
+            left: `min(max(${adjustedRatio * 100}%, 4px), calc(100% - 4px))`,
+            backgroundColor: currentColor,
+            transition: !!rangeInputProps ? 'none' : undefined,
+          }}
+        />
+        {value && (
+          <figcaption style={{ color: currentColor }}>{value}</figcaption>
+        )}
+        {rangeInputProps && <input type="range" {...rangeInputProps} />}
       </BarometerFigure>
     )
   },
 )``
 
+const BarometerThumb = styled.span`
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border: 4px solid ${trueBlack};
+  border-radius: 50%;
+  transition: all 1s ease-in;
+`
+
 type BarometerFigureProps = {
   ratio: number
   colors: Color[]
   currentColor: string
+  styles?: {
+    barometer?: SimpleInterpolation
+    thumb?: SimpleInterpolation
+  }
 }
 const BarometerFigure = styled.figure<BarometerFigureProps>`
   ${flexCenter};
@@ -41,6 +77,13 @@ const BarometerFigure = styled.figure<BarometerFigureProps>`
   width: 100%;
   column-gap: 16px;
   backdrop-filter: blur(8px) brightness(0.8);
+  input {
+    position: absolute;
+    inset: 0;
+    margin-top: -6px;
+    height: 16px;
+    cursor: pointer;
+  }
   figcaption {
     width: 128px;
   }
@@ -49,28 +92,15 @@ const BarometerFigure = styled.figure<BarometerFigureProps>`
     flex: 1;
     height: 3px;
     border-radius: 4px;
-    ::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 16px;
-      height: 16px;
-      border: 4px solid ${trueBlack};
-      border-radius: 50%;
-    }
   }
-  ${({ colors, currentColor, ratio }) => css`
-    figcaption {
-      color: ${currentColor};
-    }
+
+  ${({ colors, styles: { barometer, thumb } = {} }) => css`
     > div {
       background: linear-gradient(to right, ${colors.join(',')});
-      ::after {
-        left: ${ratio * 100}%;
-        background-color: ${currentColor};
-        transition: all 1s ease-in;
-      }
+      ${barometer};
+    }
+    > span {
+      ${thumb};
     }
   `}
 `
