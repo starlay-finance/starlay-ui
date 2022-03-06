@@ -5,7 +5,7 @@ import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { GradientCtaButton, GradientCtaLink } from 'src/components/parts/Cta'
-import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
+import { useMessageModalGradient } from 'src/components/parts/Modal/MessageModalGradient'
 import { ASSETS } from 'src/constants/assets'
 import { TOP_ASSETS } from 'src/constants/top'
 import { secondary } from 'src/styles/colors'
@@ -18,7 +18,7 @@ import { Assets } from './Assets'
 import { AssetsMobile } from './AssetsMobile'
 
 export const FirstView = asStyled(({ className }) => {
-  const { open } = useMessageModal()
+  const { open } = useMessageModalGradient()
   return (
     <FirstViewSection className={className}>
       <Content>
@@ -32,8 +32,7 @@ export const FirstView = asStyled(({ className }) => {
             <GradientCtaButton
               onClick={() =>
                 open({
-                  type: '',
-                  title: t`Sorry...`,
+                  title: t`Sorry`,
                   message: t`Starlay Finance does not support mobile access currently. Please connect to this website using your PC.`,
                 })
               }

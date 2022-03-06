@@ -11,7 +11,7 @@ export const DefaultModalContent: VFC<{
   bodyNode: ReactNode
   closeModal?: VoidFunction
 }> = ({ headerNode, headerStyle, bodyNode, closeModal }) => (
-  <>
+  <Content>
     {headerNode && (
       <Header headerStyle={headerStyle}>
         {headerNode}
@@ -23,8 +23,18 @@ export const DefaultModalContent: VFC<{
       </Header>
     )}
     <Body>{bodyNode}</Body>
-  </>
+  </Content>
 )
+
+const Content = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  backdrop-filter: blur(24px) brightness(1.48);
+  background-color: rgba(255, 255, 255, 0.88);
+  color: ${darkPurple}8f;
+`
 
 const Header = styled.div<{ headerStyle?: SimpleInterpolation }>`
   position: relative;

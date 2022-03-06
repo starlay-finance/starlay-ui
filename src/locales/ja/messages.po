@@ -21,6 +21,13 @@ msgstr ""
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
 #: src/components/screens/Top/Menu.tsx
+msgid "Docs"
+msgstr "ドキュメント"
+
+#: src/components/parts/Footer/AppFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Governance"
 msgstr "ガバナンス"
 
@@ -70,12 +77,6 @@ msgid "Developers"
 msgstr "リポジトリ"
 
 #: src/components/parts/Footer/TopFooter.tsx
-#: src/components/parts/Header/TopHeader.tsx
-#: src/components/screens/Top/Menu.tsx
-msgid "Docs"
-msgstr "ドキュメント"
-
-#: src/components/parts/Footer/TopFooter.tsx
 msgid "Overview"
 msgstr "概要"
 
@@ -106,6 +107,7 @@ msgstr "ウォレット接続"
 
 #: src/components/parts/Header/TopHeader.tsx
 #: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Launch App"
 msgstr "取引開始"
@@ -398,6 +400,14 @@ msgstr ""
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Starlay Finance is the first lending protocol backed by Astar Network"
 msgstr "Astar Network が支援する唯一のレンディングプロトコル"
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Sorry..."
+msgstr ""
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
+msgstr ""
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"

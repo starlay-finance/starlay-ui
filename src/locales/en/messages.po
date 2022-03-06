@@ -21,6 +21,13 @@ msgstr "Latest Block: {blockNumber}"
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
 #: src/components/screens/Top/Menu.tsx
+msgid "Docs"
+msgstr "Docs"
+
+#: src/components/parts/Footer/AppFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Governance"
 msgstr "Governance"
 
@@ -70,12 +77,6 @@ msgid "Developers"
 msgstr "Developers"
 
 #: src/components/parts/Footer/TopFooter.tsx
-#: src/components/parts/Header/TopHeader.tsx
-#: src/components/screens/Top/Menu.tsx
-msgid "Docs"
-msgstr "Docs"
-
-#: src/components/parts/Footer/TopFooter.tsx
 msgid "Overview"
 msgstr "Overview"
 
@@ -106,6 +107,7 @@ msgstr "Connect"
 
 #: src/components/parts/Header/TopHeader.tsx
 #: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Launch App"
 msgstr "Launch App"
@@ -396,6 +398,14 @@ msgstr "Low Risk Farming on Astar Network"
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Starlay Finance is the first lending protocol backed by Astar Network"
 msgstr "Starlay Finance is the first lending protocol backed by Astar Network"
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Sorry..."
+msgstr "Sorry..."
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
+msgstr "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"

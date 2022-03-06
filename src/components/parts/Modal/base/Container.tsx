@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 import { ModalContainerProps, ModalHandler } from 'src/hooks/useModal'
-import { darkPurple, trueBlack } from 'src/styles/colors'
+import { trueBlack } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { Color } from 'src/styles/types'
 import { Z_MODAL } from 'src/utils/zIndex'
@@ -12,9 +12,7 @@ export const DefaultModalContainer = forwardRef<
 >(({ isOpen, close, children }) => {
   return (
     <Overlay onClick={close} isOpen={isOpen}>
-      <Contents onClick={(e) => e.stopPropagation()}>
-        <div>{children}</div>
-      </Contents>
+      <Contents onClick={(e) => e.stopPropagation()}>{children}</Contents>
     </Overlay>
   )
 })
@@ -60,13 +58,4 @@ const Contents = styled.div`
   width: 100%;
   position: relative;
   overflow: auto;
-  > div {
-    width: 100%;
-    margin: 0 auto;
-    border-radius: 8px;
-    overflow: hidden;
-    backdrop-filter: blur(24px) brightness(1.48);
-    background-color: rgba(255, 255, 255, 0.88);
-    color: ${darkPurple}8f;
-  }
 `
