@@ -1,0 +1,134 @@
+"""
+Tells the service this field/object has access authorized by an API key.
+"""
+directive @aws_api_key on FIELD_DEFINITION | OBJECT
+
+"""Directs the schema to enforce authorization on a field"""
+directive @aws_auth(
+  """List of cognito user pool groups which have access on this field"""
+  cognito_groups: [String]
+) on FIELD_DEFINITION
+
+"""
+Tells the service this field/object has access authorized by a Cognito User Pools token.
+"""
+directive @aws_cognito_user_pools(
+  """List of cognito user pool groups which have access on this field"""
+  cognito_groups: [String]
+) on FIELD_DEFINITION | OBJECT
+
+"""
+Tells the service this field/object has access authorized by sigv4 signing.
+"""
+directive @aws_iam on FIELD_DEFINITION | OBJECT
+
+"""
+Tells the service this field/object has access authorized by a Lambda Authorizer.
+"""
+directive @aws_lambda on FIELD_DEFINITION | OBJECT
+
+"""
+Tells the service this field/object has access authorized by an OIDC token.
+"""
+directive @aws_oidc on FIELD_DEFINITION | OBJECT
+
+"""
+Tells the service which subscriptions will be published to when this mutation is called. This directive is deprecated use @aws_susbscribe directive instead.
+"""
+directive @aws_publish(
+  """
+  List of subscriptions which will be published to when this mutation is called.
+  """
+  subscriptions: [String]
+) on FIELD_DEFINITION
+
+"""Tells the service which mutation triggers this subscription."""
+directive @aws_subscribe(
+  """
+  List of mutations which will trigger this subscription when they are called.
+  """
+  mutations: [String]
+) on FIELD_DEFINITION
+
+"""This directive allows results to be deferred during execution"""
+directive @defer on FIELD
+
+type AssetData {
+  id: ID!
+  poolData: PoolData!
+  reservesIncentives: [ReservesIncentivesData!]!
+  timestamp: String!
+}
+
+type BaseCurrencyData {
+  marketReferenceCurrencyDecimals: Int!
+  marketReferenceCurrencyPriceInUsd: String!
+  networkBaseTokenPriceDecimals: Int!
+  networkBaseTokenPriceInUsd: String!
+}
+
+type IncentivesWithFeeds {
+  emissionEndTimestamp: Int!
+  emissionPerSecond: String!
+  incentiveControllerAddress: String!
+  incentivesLastUpdateTimestamp: Int!
+  precision: Int!
+  priceFeed: String!
+  rewardTokenAddress: String!
+  rewardTokenDecimals: Int!
+  tokenAddress: String!
+  tokenIncentivesIndex: String!
+}
+
+type PoolData {
+  baseCurrencyData: BaseCurrencyData!
+  reservesData: [ReservesData!]!
+}
+
+type Query {
+  getAssetData(date: String!): AssetData
+}
+
+type ReservesData {
+  availableLiquidity: String!
+  averageStableRate: String!
+  baseLTVasCollateral: String!
+  borrowingEnabled: Boolean!
+  decimals: Int!
+  id: String!
+  interestRateStrategyAddress: String!
+  isActive: Boolean!
+  isFrozen: Boolean!
+  lTokenAddress: String!
+  lastUpdateTimestamp: Int!
+  liquidityIndex: String!
+  liquidityRate: String!
+  name: String!
+  priceInMarketReferenceCurrency: String!
+  reserveFactor: String!
+  reserveLiquidationBonus: String!
+  reserveLiquidationThreshold: String!
+  stableBorrowRate: String!
+  stableBorrowRateEnabled: Boolean!
+  stableDebtLastUpdateTimestamp: Int!
+  stableDebtTokenAddress: String!
+  stableRateSlope1: String!
+  stableRateSlope2: String!
+  symbol: String!
+  totalPrincipalStableDebt: String!
+  totalScaledVariableDebt: String!
+  underlyingAsset: String!
+  usageAsCollateralEnabled: Boolean!
+  variableBorrowIndex: String!
+  variableBorrowRate: String!
+  variableDebtTokenAddress: String!
+  variableRateSlope1: String!
+  variableRateSlope2: String!
+}
+
+type ReservesIncentivesData {
+  lIncentiveData: IncentivesWithFeeds!
+  sdIncentiveData: IncentivesWithFeeds!
+  underlyingAsset: String!
+  vdIncentiveData: IncentivesWithFeeds!
+}

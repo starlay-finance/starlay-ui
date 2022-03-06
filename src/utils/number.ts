@@ -10,6 +10,7 @@ export const BN_ONE: BigNumber = valueToBigNumber('1')
 export const BN_HUNDRED: BigNumber = valueToBigNumber('100')
 
 export const BN_ZERO = valueToBigNumber('0')
+export const BN_NAN = valueToBigNumber('NaN')
 
 type FormatOption = Partial<{
   decimalPlaces: number
@@ -93,10 +94,14 @@ export const formatUSD = (
 export const formatUSDShort: typeof formatAmtShort = (num, decimalPlaces) =>
   `${formatAmtShort(num, decimalPlaces, '$')}`
 
-export const formatPct = (
-  num: BigNumberValue,
-  option: FormatOption = { shorteningThreshold: 5, decimalPlaces: 2 },
-) => `${formatNum(BN_HUNDRED.multipliedBy(num), option)}%`
+export const formatPct = (num: BigNumberValue, option: FormatOption = {}) => {
+  const { shorteningThreshold = 5, decimalPlaces = 2 } = option
+  return `${formatNum(BN_HUNDRED.multipliedBy(num), {
+    ...option,
+    shorteningThreshold,
+    decimalPlaces,
+  })}%`
+}
 
 export const formattedToBigNumber = (
   formattedAmount: string,

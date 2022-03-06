@@ -70,7 +70,6 @@ const TabButton = styled.button<{ isActive: boolean }>`
 `
 const Tabs = styled.div`
   display: flex;
-  margin-bottom: 1px;
   ${TabButton} {
     flex: 1;
   }

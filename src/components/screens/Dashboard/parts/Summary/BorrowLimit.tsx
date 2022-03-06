@@ -3,7 +3,7 @@ import { BigNumber } from '@starlay-finance/math-utils'
 import { useEffect, useState } from 'react'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { BarChart, BarChartProps } from 'src/components/parts/Chart'
-import { Reel } from 'src/components/parts/Reel'
+import { Reel } from 'src/components/parts/Number/Reel'
 import {
   darkPurple,
   darkRed,

@@ -5,7 +5,6 @@ import { SEOProps } from 'src/components/parts/SEO'
 export type Page<T = {}> = NextPage<T & { router: NextRouter }>
 
 export type PageStaticProps<T = {}> = T & {
-  loading?: boolean
   seoProps?: SEOProps
 }
 export type FromQuery<T> = T | string | string[] | undefined

@@ -19,12 +19,14 @@ export type AssetMarketData = Asset & {
   variableBorrowIncentiveAPR: BigNumber
   liquidity: BigNumber
   liquidityInUSD: BigNumber
-  marketSizeInUSD: BigNumber
+  totalDepositedInUSD: BigNumber
   totalBorrowedInUSD: BigNumber
   baseLTVasCollateral: BigNumber
   priceInMarketReferenceCurrency: BigNumber
-  reserveLiquidationThreshold: number
+  reserveLiquidationThreshold: BigNumber
   usageAsCollateralEnabled: boolean
+  reserveFactor: BigNumber
+  liquidationPenalty: BigNumber
   underlyingAsset: EthereumAddress
   decimals: number
   lTokenAddress: EthereumAddress

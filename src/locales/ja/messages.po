@@ -88,6 +88,11 @@ msgid "Dashboard"
 msgstr "ダッシュボード"
 
 #: src/components/parts/Header/AppHeader.tsx
+#: src/components/screens/Markets/Assets.tsx
+msgid "Markets"
+msgstr "マーケット"
+
+#: src/components/parts/Header/AppHeader.tsx
 msgid "Connect"
 msgstr "ウォレット接続"
 
@@ -114,8 +119,9 @@ msgid "Unclaimed Balance"
 msgstr "未請求残高"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Price"
-msgstr ""
+msgstr "価格"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "Connect Wallet"
@@ -157,6 +163,7 @@ msgid "Repay"
 msgstr "返済"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Borrow APY"
 msgstr "借入APY"
@@ -205,6 +212,7 @@ msgid "Withdraw"
 msgstr "出金"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Deposit APY"
 msgstr "預入APY"
@@ -235,11 +243,8 @@ msgid "Max"
 msgstr "最大"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
-msgid "Deposit Markets"
-msgstr "預入金利"
-
 #: src/components/screens/Dashboard/parts/Market.tsx
-#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Markets/Assets.tsx
 msgid "Asset"
 msgstr "トークン"
 
@@ -251,6 +256,10 @@ msgstr "ボーナスAPR"
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "APY_Deposit"
 msgstr "預入APY"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Deposit Markets"
+msgstr "預入金利"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Borrow Markets"
@@ -275,6 +284,68 @@ msgstr "合計預入残高"
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
 msgid "Borrow Balance"
 msgstr "合計借入残高"
+
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Deposited"
+msgstr "預入総額"
+
+#: src/components/screens/Markets/Assets.tsx
+msgid "Deposit Reward APR"
+msgstr "預入ボーナスAPR"
+
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Borrowed"
+msgstr "借入総額"
+
+#: src/components/screens/Markets/Assets.tsx
+msgid "Borrow Reward APR"
+msgstr "借入ボーナスAPR"
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Deposit_Top3 Markets"
+msgstr "預入額 TOP3"
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Borrow_Top3 Markets"
+msgstr "借入額 TOP3"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Borrowing"
+msgstr "借入可否"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Yes"
+msgstr "可"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "No"
+msgstr "不可"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Reserve Factor"
+msgstr "リザーブファクター"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Used as Collateral"
+msgstr "担保利用可否"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Loan to Value"
+msgstr "担保評価率"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Threshold"
+msgstr "清算閾値"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Penalty"
+msgstr "清算ペナルティ"
 
 #: src/components/screens/Sorry/index.tsx
 msgid "Go Back"
@@ -303,14 +374,6 @@ msgstr "マーケット"
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "The more funds that will be borrowed, the higher the interest rate will be"
 msgstr "Astar Network最大の流動性を誇るレンディングマーケット"
-
-#: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "Total Deposited"
-msgstr "預入総額"
-
-#: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "Total Borrowed"
-msgstr "借入総額"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Low Risk Farming on Astar Network"

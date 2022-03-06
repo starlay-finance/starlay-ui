@@ -3,16 +3,17 @@ import { IconClose } from 'src/assets/svgs'
 import { darkPurple, trueBlack, trueWhite } from 'src/styles/colors'
 import { fontWeightBold } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
-import styled from 'styled-components'
+import styled, { SimpleInterpolation } from 'styled-components'
 
 export const DefaultModalContent: VFC<{
   headerNode?: ReactNode
+  headerStyle?: SimpleInterpolation
   bodyNode: ReactNode
   closeModal?: VoidFunction
-}> = ({ headerNode, bodyNode, closeModal }) => (
+}> = ({ headerNode, headerStyle, bodyNode, closeModal }) => (
   <>
     {headerNode && (
-      <Header>
+      <Header headerStyle={headerStyle}>
         {headerNode}
         {closeModal && (
           <button onClick={closeModal}>
@@ -25,7 +26,7 @@ export const DefaultModalContent: VFC<{
   </>
 )
 
-const Header = styled.div`
+const Header = styled.div<{ headerStyle?: SimpleInterpolation }>`
   position: relative;
   padding: 32px 32px 24px;
   border-bottom: 1px solid ${darkPurple}7a;
@@ -53,6 +54,7 @@ const Header = styled.div`
       height: 16px;
     }
   }
+  ${({ headerStyle }) => headerStyle};
 `
 
 const Body = styled.div``

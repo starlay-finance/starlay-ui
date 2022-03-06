@@ -88,6 +88,11 @@ msgid "Dashboard"
 msgstr "Dashboard"
 
 #: src/components/parts/Header/AppHeader.tsx
+#: src/components/screens/Markets/Assets.tsx
+msgid "Markets"
+msgstr "Markets"
+
+#: src/components/parts/Header/AppHeader.tsx
 msgid "Connect"
 msgstr "Connect"
 
@@ -114,6 +119,7 @@ msgid "Unclaimed Balance"
 msgstr "Unclaimed Balance"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Price"
 msgstr "Price"
 
@@ -157,6 +163,7 @@ msgid "Repay"
 msgstr "Repay"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Borrow APY"
 msgstr "Borrow APY"
@@ -205,6 +212,7 @@ msgid "Withdraw"
 msgstr "Withdraw"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Deposit APY"
 msgstr "Deposit APY"
@@ -235,11 +243,8 @@ msgid "Max"
 msgstr "Max"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
-msgid "Deposit Markets"
-msgstr "Deposit Markets"
-
 #: src/components/screens/Dashboard/parts/Market.tsx
-#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Markets/Assets.tsx
 msgid "Asset"
 msgstr "Asset"
 
@@ -251,6 +256,10 @@ msgstr "Reward APR"
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "APY_Deposit"
 msgstr "APY"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Deposit Markets"
+msgstr "Deposit Markets"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Borrow Markets"
@@ -275,6 +284,68 @@ msgstr "Deposit Balance"
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
 msgid "Borrow Balance"
 msgstr "Borrow Balance"
+
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Deposited"
+msgstr "Total Deposited"
+
+#: src/components/screens/Markets/Assets.tsx
+msgid "Deposit Reward APR"
+msgstr "Deposit Reward APR"
+
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Borrowed"
+msgstr "Total Borrowed"
+
+#: src/components/screens/Markets/Assets.tsx
+msgid "Borrow Reward APR"
+msgstr "Borrow Reward APR"
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Deposit_Top3 Markets"
+msgstr "Top3 Markets"
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Borrow_Top3 Markets"
+msgstr "Top3 Markets"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Borrowing"
+msgstr "Borrowing"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Yes"
+msgstr "Yes"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "No"
+msgstr "No"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Reserve Factor"
+msgstr "Reserve Factor"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Used as Collateral"
+msgstr "Used as Collateral"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Loan to Value"
+msgstr "Loan to Value"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Threshold"
+msgstr "Liquidation Threshold"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Penalty"
+msgstr "Liquidation Penalty"
 
 #: src/components/screens/Sorry/index.tsx
 msgid "Go Back"
@@ -303,14 +374,6 @@ msgstr "Current Markets"
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "The more funds that will be borrowed, the higher the interest rate will be"
 msgstr "The more funds that will be borrowed, the higher the interest rate will be"
-
-#: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "Total Deposited"
-msgstr "Total Deposited"
-
-#: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "Total Borrowed"
-msgstr "Total Borrowed"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Low Risk Farming on Astar Network"

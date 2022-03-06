@@ -1,4 +1,5 @@
 import { t } from '@lingui/macro'
+import { useRouter } from 'next/router'
 import { SymbolLay } from 'src/assets/images'
 import { LogoProtocol } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
@@ -6,7 +7,7 @@ import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
 import { useRewardModal } from 'src/components/parts/Modal/RewardModal'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
-import { Reel } from 'src/components/parts/Reel'
+import { Reel } from 'src/components/parts/Number/Reel'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
@@ -15,11 +16,12 @@ import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
 import { BN_ZERO, formatAmt } from 'src/utils/number'
-import { APP, TOP } from 'src/utils/routes'
+import { APP, MARKETS } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import { HeaderWrapper } from './common'
 
 export const AppHeader = () => {
+  const { pathname } = useRouter()
   const { account } = useWallet()
   const { data: user } = useUserData()
   const { data: balance } = useWalletBalance()
@@ -28,9 +30,10 @@ export const AppHeader = () => {
   const layInWallet = balance?.LAY || BN_ZERO
   return (
     <AppHeaderWrapper>
-      <LogoLink href={TOP} Icon={LogoProtocol} aria-label="Top" />
+      <LogoLink href={APP} Icon={LogoProtocol} aria-label="App" />
       <Nav>
-        <Tab href={APP} $active>{t`Dashboard`}</Tab>
+        <Tab href={APP} $active={pathname === APP}>{t`Dashboard`}</Tab>
+        <Tab href={MARKETS} $active={pathname === MARKETS}>{t`Markets`}</Tab>
       </Nav>
       <Menu>
         <MenuButton onClick={() => openRewardModal()} disabled={!user}>
