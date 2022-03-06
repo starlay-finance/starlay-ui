@@ -28,7 +28,7 @@ export const FirstView = asStyled(({ className }) => {
         <div>
           <SubTitle>{t`Starlay Finance is the first lending protocol backed by Astar Network`}</SubTitle>
           <Control>
-            <GradientCtaLink href={APP}>{t`Launch App`}</GradientCtaLink>
+            <GradientCtaLink href={APP} newTab>{t`Launch App`}</GradientCtaLink>
             <GradientCtaButton
               onClick={() =>
                 open({

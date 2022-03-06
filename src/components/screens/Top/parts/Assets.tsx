@@ -92,6 +92,7 @@ export const AssetItem: VFC<AssetItemProps> = ({
     href={APP}
     $appeared={appeared}
     onAnimationEnd={onAnimationEnd}
+    newTab
   >
     <Symbol style={symbolStyle}>
       <Image src={asset.icon} alt={asset.name} width={32} height={32} />
