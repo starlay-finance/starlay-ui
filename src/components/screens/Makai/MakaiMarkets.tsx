@@ -6,6 +6,7 @@ import {
   TableContainer,
 } from 'src/components/compositions/Markets/MarketTable'
 import { asStyled } from 'src/components/hoc/asStyled'
+import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
@@ -28,7 +29,8 @@ export const MakaiMarkets = asStyled(({ className }) => {
   const { data: marketData } = useMarketData()
   const { data: userData } = useUserData()
   const { data: balances } = useWalletBalance()
-  const { open } = useLoopingModal()
+  const { open: openWalletModal } = useWalletModal()
+  const { open: openLoopingModal } = useLoopingModal()
   const { assets, marketReferenceCurrencyPriceInUSD = BN_ZERO } =
     marketData || {}
   const markets = (assets || [])
@@ -45,16 +47,17 @@ export const MakaiMarkets = asStyled(({ className }) => {
               asset,
               balance: balances[asset.symbol],
               onClick: () =>
-                userData &&
-                open({
-                  asset,
-                  marketReferenceCurrencyPriceInUSD,
-                  userSummary: userData.summary,
-                  userAssetBalance: {
-                    ...userData.balanceByAsset[asset.symbol],
-                    inWallet: balances[asset.symbol],
-                  },
-                }),
+                userData
+                  ? openLoopingModal({
+                      asset,
+                      marketReferenceCurrencyPriceInUSD,
+                      userSummary: userData.summary,
+                      userAssetBalance: {
+                        ...userData.balanceByAsset[asset.symbol],
+                        inWallet: balances[asset.symbol],
+                      },
+                    })
+                  : openWalletModal,
             }),
           )}
           hoverColor={darkRed}

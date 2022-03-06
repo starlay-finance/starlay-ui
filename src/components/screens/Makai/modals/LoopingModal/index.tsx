@@ -10,8 +10,8 @@ export const Looping: VFC<ModalContentProps<LoopingModalBodyProps>> = ({
   close,
   ...props
 }) => {
+  // TODO call contract
   const { account, signer } = useWallet()
-
   const { asset } = props
   return (
     <DefaultModalContent
