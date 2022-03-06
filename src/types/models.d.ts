@@ -19,7 +19,7 @@ export type AssetMarketData = Asset & {
   variableBorrowIncentiveAPR: BigNumber
   liquidity: BigNumber
   liquidityInUSD: BigNumber
-  marketSizeInUSD: BigNumber
+  totalDepositedInUSD: BigNumber
   totalBorrowedInUSD: BigNumber
   baseLTVasCollateral: BigNumber
   priceInMarketReferenceCurrency: BigNumber
