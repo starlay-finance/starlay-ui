@@ -119,6 +119,7 @@ msgid "Unclaimed Balance"
 msgstr "Unclaimed Balance"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Price"
 msgstr "Price"
 

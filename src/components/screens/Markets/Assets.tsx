@@ -32,8 +32,9 @@ const DETAILS_COLUMNS = [
 
 export const Assets = asStyled(({ className }) => {
   const { data: marketData } = useMarketData()
-  const { data: marketDataSnapshot, error } = useMarketDataSnapshot()
-  const markets = (marketData?.assets || [])
+  const { data: marketDataSnapshot } = useMarketDataSnapshot()
+  const { assets, marketReferenceCurrencyPriceInUSD } = marketData || {}
+  const markets = (assets || [])
     .filter((each) => each.isActive)
     .sort(symbolSorter)
   const { open } = useAssetMarketDetailsModal()
@@ -49,7 +50,7 @@ export const Assets = asStyled(({ className }) => {
               snapshot: marketDataSnapshot?.assets.find(
                 (each) => each.symbol === asset.symbol,
               ),
-              onClick: () => open({ asset }),
+              onClick: () => open({ asset, marketReferenceCurrencyPriceInUSD }),
             }),
           )}
           hoverGradient={`${darkRed}3d,${skyBlue}3d,${darkRed}3d`}

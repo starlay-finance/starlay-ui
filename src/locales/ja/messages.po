@@ -119,8 +119,9 @@ msgid "Unclaimed Balance"
 msgstr "未請求残高"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Price"
-msgstr ""
+msgstr "価格"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "Connect Wallet"
