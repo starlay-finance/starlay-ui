@@ -4,7 +4,6 @@ import { VFC } from 'react'
 import { ItemLabel } from 'src/components/parts/Modal/parts'
 import { Item } from 'src/components/parts/Modal/parts/Item'
 import { Action } from 'src/components/screens/Dashboard/modals/parts'
-import { trueBlack } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
 import { AssetMarketData } from 'src/types/models'
 import { formatPct, formatUSD } from 'src/utils/number'
@@ -80,9 +79,6 @@ const ContentDiv = styled.div`
   ${Item} {
     :last-child {
       border-bottom: none;
-    }
-    > div:last-child {
-      color: ${trueBlack};
     }
   }
   ${Action} {

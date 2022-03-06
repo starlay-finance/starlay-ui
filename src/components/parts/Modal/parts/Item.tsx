@@ -1,5 +1,5 @@
 import { asStyled } from 'src/components/hoc/asStyled'
-import { darkPurple } from 'src/styles/colors'
+import { darkPurple, trueBlack } from 'src/styles/colors'
 import styled from 'styled-components'
 import { ItemLabel, ItemLabelProps } from './ItemLabel'
 
@@ -19,4 +19,7 @@ const ItemDiv = styled.div`
   align-items: center;
   padding: 24px 0;
   border-bottom: 1px solid ${darkPurple}3a;
+  > div:last-child {
+    color: ${trueBlack};
+  }
 `
