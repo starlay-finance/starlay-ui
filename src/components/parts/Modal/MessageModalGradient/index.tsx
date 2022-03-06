@@ -45,6 +45,7 @@ const Button = styled.button`
 
 const MessageContent = styled(GradientModalContent)`
   text-align: center;
+  white-space: pre-wrap;
   ${Title} {
     margin-bottom: 16px;
   }

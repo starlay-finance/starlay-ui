@@ -117,6 +117,10 @@ msgstr "Launch App"
 msgid "Bug Bounty"
 msgstr "Bug Bounty"
 
+#: src/components/parts/Modal/MessageModalGradient/index.tsx
+msgid "Close"
+msgstr "Close"
+
 #: src/components/parts/Modal/RewardModal/index.tsx
 msgid "LAY Balance"
 msgstr "LAY Balance"
@@ -364,8 +368,10 @@ msgid "Go Back"
 msgstr "Go Back"
 
 #: src/components/screens/Sorry/reasons.ts
-msgid "Starlay Finance does not support mobile access. Please connect to this website using your PC."
-msgstr "Starlay Finance does not support mobile access. Please connect to this website using your PC."
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
+msgstr "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
 
 #: src/components/screens/Sorry/reasons.ts
 msgid "Something went wrong. Please go back."
@@ -374,6 +380,11 @@ msgstr "Something went wrong. Please go back."
 #: src/components/screens/Top/Menu.tsx
 msgid "Menu"
 msgstr "Menu"
+
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Sorry"
+msgstr "Sorry"
 
 #: src/components/screens/Top/parts/Backers.tsx
 msgid "Backers"
@@ -398,14 +409,6 @@ msgstr "Low Risk Farming on Astar Network"
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Starlay Finance is the first lending protocol backed by Astar Network"
 msgstr "Starlay Finance is the first lending protocol backed by Astar Network"
-
-#: src/components/screens/Top/parts/FirstView.tsx
-msgid "Sorry..."
-msgstr "Sorry..."
-
-#: src/components/screens/Top/parts/FirstView.tsx
-msgid "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
-msgstr "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"
