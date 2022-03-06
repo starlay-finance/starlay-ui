@@ -11,11 +11,12 @@ import {
 } from 'src/assets/svgs'
 import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
+import { useMessageModalGradient } from 'src/components/parts/Modal/MessageModalGradient'
+import { sequentialFadeIn } from 'src/styles/animation'
 import { purple, trueWhite } from 'src/styles/colors'
 import { fontWeightBold, fontWeightRegular } from 'src/styles/font'
 import { disableScroll, enableScroll } from 'src/utils/handleScroll'
 import {
-  APP,
   BUG_BOUNTY,
   DISCORD,
   DOCS,
@@ -32,15 +33,13 @@ export const MobileMenu: VFC<{
   isOpen: boolean
   close: VoidFunction
 }> = ({ isOpen, close }) => {
+  const { open } = useMessageModalGradient()
   useEffect(() => {
     if (isOpen) disableScroll()
     else enableScroll()
   }, [isOpen])
   return (
     <MenuContainer isOpen={isOpen}>
-      <BgIcon>
-        <IconProtocol />
-      </BgIcon>
       <MenuHeaderDiv>
         <h3>{t`Menu`}</h3>
         <button onClick={close}>
@@ -48,7 +47,14 @@ export const MobileMenu: VFC<{
         </button>
       </MenuHeaderDiv>
       <Nav>
-        <Link href={APP}>{t`Launch App`}</Link>
+        <button
+          onClick={() =>
+            open({
+              title: t`Sorry`,
+              message: t`Starlay Finance does not support mobile access currently. Please connect to this website using your PC.`,
+            })
+          }
+        >{t`Launch App`}</button>
         <Link href={DISCORD}>{t`Discord`}</Link>
         <Link href={DOCS}>{t`Docs`}</Link>
         <Link href={GOVERNANCE}>{t`Governance`}</Link>
@@ -65,6 +71,9 @@ export const MobileMenu: VFC<{
         <IconLink Icon={IconMedium} href={MEDIUM} aria-label={t`Medium`} />
         <IconLink Icon={IconGithub} href={GITHUB} aria-label={t`Github`} />
       </IconLinks>
+      <BgIcon>
+        <IconProtocol />
+      </BgIcon>
     </MenuContainer>
   )
 }
@@ -132,16 +141,29 @@ const MenuContainer = styled.div<{ isOpen: boolean }>`
     font-size: 24px;
     font-weight: ${fontWeightBold};
   }
+  button:hover {
+    color: ${purple};
+  }
 
   background-color: rgba(0, 0, 0, 0.64);
   backdrop-filter: blur(24px) brightness(0.76);
 
   transition: all 0.2s ease-out;
-  clip-path: inset(0);
+  opacity: 1;
   ${({ isOpen }) =>
-    !isOpen &&
-    css`
-      clip-path: inset(0 0 100%);
-      visibility: hidden;
-    `}
+    isOpen
+      ? css`
+          > * {
+            ${sequentialFadeIn({
+              numOfItems: 3,
+              duration: 0.25,
+              sequenceDelay: 0.3,
+              initialDelay: 0.4,
+            })};
+          }
+        `
+      : css`
+          opacity: 0;
+          visibility: hidden;
+        `}
 `

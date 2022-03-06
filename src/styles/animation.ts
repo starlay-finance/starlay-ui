@@ -17,6 +17,7 @@ export const sequentialFadeIn = (opt: {
   ${Array.from(new Array(opt.numOfItems)).map((_, idx) => {
     return css`
       :nth-child(${idx + 1}) {
+        opacity: 0;
         animation: ${fadeIn} ${opt.duration}s
           ${idx * opt.sequenceDelay + (opt.initialDelay || 0)}s ease-in forwards;
       }

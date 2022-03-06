@@ -2,6 +2,7 @@ import { t } from '@lingui/macro'
 import { VFC } from 'react'
 import { IconMenu, LogoProtocol } from 'src/assets/svgs'
 import { Link } from 'src/components/elements/Link'
+import { purple } from 'src/styles/colors'
 import { breakpoint } from 'src/styles/mixins'
 import { APP, BUG_BOUNTY, DISCORD, DOCS, GOVERNANCE } from 'src/utils/routes'
 import styled from 'styled-components'
@@ -43,6 +44,9 @@ const StyledHeaderWrapper = styled(HeaderWrapper)`
   padding: 0 24px;
   ${Nav} {
     display: none;
+  }
+  button:hover {
+    color: ${purple};
   }
   @media ${breakpoint.xl} {
     padding: unset;
