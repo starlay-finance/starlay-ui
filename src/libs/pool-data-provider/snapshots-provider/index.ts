@@ -26,7 +26,7 @@ export const getPoolDataSnapshot = async (chainId: ChainId, date: Dayjs) => {
       reservesData: poolData.reservesData,
     },
     reservesIncentives,
-    timestamp,
+    +timestamp,
     baseAsset,
     {
       [rewardToken.address.toLowerCase()]:

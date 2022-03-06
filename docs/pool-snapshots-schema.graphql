@@ -103,7 +103,7 @@ type ReservesData {
   lastUpdateTimestamp: Int!
   liquidityIndex: String!
   liquidityRate: String!
-  name: String
+  name: String!
   priceInMarketReferenceCurrency: String!
   reserveFactor: String!
   reserveLiquidationBonus: String!
@@ -118,7 +118,7 @@ type ReservesData {
   totalPrincipalStableDebt: String!
   totalScaledVariableDebt: String!
   underlyingAsset: String!
-  usageAsCollateralEnabled: String!
+  usageAsCollateralEnabled: Boolean!
   variableBorrowIndex: String!
   variableBorrowRate: String!
   variableDebtTokenAddress: String!
