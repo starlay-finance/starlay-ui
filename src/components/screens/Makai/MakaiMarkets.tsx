@@ -46,9 +46,9 @@ export const MakaiMarkets = asStyled(({ className }) => {
             marketRow({
               asset,
               balance: balances[asset.symbol],
-              onClick: () =>
-                userData
-                  ? openLoopingModal({
+              onClick: userData
+                ? () =>
+                    openLoopingModal({
                       asset,
                       marketReferenceCurrencyPriceInUSD,
                       userSummary: userData.summary,
@@ -57,7 +57,7 @@ export const MakaiMarkets = asStyled(({ className }) => {
                         inWallet: balances[asset.symbol],
                       },
                     })
-                  : openWalletModal,
+                : openWalletModal,
             }),
           )}
           hoverColor={darkRed}
