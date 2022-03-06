@@ -21,7 +21,9 @@ export const PercentageChange = asStyled<PercentageChangeProps>(
       >
         {change.isNaN()
           ? '-'
-          : formatPct(change, { prefix: isNegative ? '' : '+' })}
+          : formatPct(change, {
+              prefix: change.isZero() ? '±' : isNegative ? '' : '+',
+            })}
       </StyledSpan>
     )
   },
