@@ -66,8 +66,11 @@ const AssetsDiv = styled.div<{ $appeared: boolean }>`
   margin: 0 -24px;
   gap: 24px;
   animation: ${assetsSlideKeyframes} 200s infinite linear;
+  :nth-child(1) {
+    animation-delay: -7s;
+  }
   :nth-child(2) {
-    animation-delay: -110s;
+    animation-delay: -117s;
   }
 `
 

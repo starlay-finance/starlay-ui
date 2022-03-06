@@ -224,7 +224,6 @@ const AssetItemLink = styled(Link)<{ $appeared: boolean }>`
     ${({ $appeared }) =>
       $appeared &&
       css`
-        transform: translateY(2px);
         background: linear-gradient(
           90deg,
           ${darkRed}3d,
@@ -236,6 +235,9 @@ const AssetItemLink = styled(Link)<{ $appeared: boolean }>`
         ${Symbol} {
           background: transparent;
           backdrop-filter: none;
+        }
+        @media ${breakpoint.xl} {
+          transform: translateY(2px);
         }
       `}
   }
