@@ -94,7 +94,7 @@ const marketRow = ({
     variableBorrowIncentiveAPR,
   })
   const displayMakaiAPR = formatPct(makaiAPR, {
-    shorteningThreshold: undefined,
+    shorteningThreshold: 99,
     decimalPlaces: 2,
   })
   return {
