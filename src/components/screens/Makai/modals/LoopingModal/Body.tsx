@@ -216,7 +216,7 @@ const barometerStyle = css`
   height: 4px;
 `
 const thumbStyle = css`
-  border: 4px solid ${trueWhite};
+  border: 4px solid #fbfbfb;
   width: 20px;
   height: 20px;
 `

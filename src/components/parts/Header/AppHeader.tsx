@@ -11,7 +11,7 @@ import { Reel } from 'src/components/parts/Number/Reel'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
-import { darkRed, purple, trueWhite } from 'src/styles/colors'
+import { purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
@@ -83,19 +83,12 @@ const activeStyle = css`
     height: 1px;
     border-bottom: 1px solid;
   }
-  :last-child {
-    color: ${darkRed};
-  }
 `
 const Tab = styled(Link)<{ $active?: boolean }>`
   position: relative;
   font-size: 16px;
   font-weight: ${fontWeightHeavy};
   ${({ $active }) => $active && activeStyle}
-
-  :last-child:hover {
-    color: ${darkRed};
-  }
 `
 
 const Nav = styled.nav`

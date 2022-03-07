@@ -99,9 +99,9 @@ const BarometerFigure = styled.figure<BarometerFigureProps>`
     > div {
       background: linear-gradient(to right, ${colors.join(',')});
       ${barometer};
-    }
-    > span {
-      ${thumb};
+      > span {
+        ${thumb};
+      }
     }
   `}
 `

@@ -11,7 +11,7 @@ import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
-import { darkRed } from 'src/styles/colors'
+import { darkRed, lightYellow, purple, skyBlue } from 'src/styles/colors'
 import { AssetMarketData } from 'src/types/models'
 import { calculateLoopingAPR, ltvToLoopingLeverage } from 'src/utils/calculator'
 import { symbolSorter } from 'src/utils/market'
@@ -64,7 +64,15 @@ export const MakaiMarkets = asStyled(({ className }) => {
                 : openWalletModal,
             }),
           )}
-          hoverColor={darkRed}
+          hoverGradients={[
+            `${darkRed}3d`,
+            `${skyBlue}3d`,
+            `${lightYellow}3d`,
+            `${purple}3d`,
+            `${lightYellow}3d`,
+            `${skyBlue}3d`,
+            `${darkRed}3d`,
+          ]}
           rowDisabledStyle={rowDisabledStyle}
         />
       </TableContainer>
