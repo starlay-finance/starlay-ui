@@ -1,0 +1,578 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2022-01-28 13:45+0900\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/components/parts/Footer/AppFooter.tsx
+msgid "Latest Block: {blockNumber}"
+msgstr "최신 블록: {blockNumber}"
+
+#: src/components/parts/Footer/AppFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Docs"
+msgstr "공식문서"
+
+#: src/components/parts/Footer/AppFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Governance"
+msgstr "거버넌스"
+
+#: src/components/parts/Footer/AppFooter.tsx
+msgid "Support"
+msgstr "고객지원"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
+msgstr ""
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Twitter"
+msgstr "Twitter"
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Discord"
+msgstr "Discord"
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Telegram"
+msgstr "Telegram"
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Medium"
+msgstr ""
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Github"
+msgstr "Github"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Protocol"
+msgstr "프로토콜"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Developers"
+msgstr "개발자들"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Overview"
+msgstr "개요"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Community"
+msgstr "커뮤니티"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Brand"
+msgstr "브랜드"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Media Kit"
+msgstr "미디어 키트"
+
+#: src/components/parts/Header/AppHeader.tsx
+msgid "Dashboard"
+msgstr "대시보드"
+
+#: src/components/parts/Header/AppHeader.tsx
+#: src/components/screens/Markets/Assets.tsx
+msgid "Markets"
+msgstr ""
+
+#: src/components/parts/Header/AppHeader.tsx
+msgid "Connect"
+msgstr "연결하기"
+
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Launch App"
+msgstr "앱 시작하기"
+
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Bug Bounty"
+msgstr "버그 바운티"
+
+#: src/components/parts/Modal/MessageModalGradient/index.tsx
+msgid "Close"
+msgstr ""
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+msgid "LAY Balance"
+msgstr "LAY 자산내역"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Wallet Balance"
+msgstr "지갑 자산내역"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+msgid "Unclaimed Balance"
+msgstr "클레임 필요한 자산내역"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Price"
+msgstr "가격"
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "Connect Wallet"
+msgstr "지갑 연결하기"
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "Connecting the wallet..."
+msgstr "지갑 연결중..."
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "We currently supports Metamask only."
+msgstr "현재 Metamask만 지원하고 있습니다."
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "Metamask"
+msgstr "Metamask"
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
+msgstr "지갑을 연결함으로서, 본인은 <0>Starlay Finance의 사용법과 잠재적 리스크<의 존재에 대해 인지하고 있으며/0> 사용자 리스크를 부담하는 것에 동의합니다."
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "All"
+msgstr "전체보기"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "All_Repay"
+msgstr "전체 상환"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Borrow"
+msgstr "대출"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Repay"
+msgstr "상환"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Top/parts/Assets.tsx
+msgid "Borrow APY"
+msgstr "대출 APY"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Borrow APR"
+msgstr "대출 APR"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Borrowed"
+msgstr "대출 내역"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Borrow Limit Used"
+msgstr "대출 한도 초과"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
+msgid "Health Factor"
+msgstr "대출 위험성 지수"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "To repay all, you will pay more than the amount shown because of the interest charged per second."
+msgstr "이자가 초마다 책정이 되기 때문에, 전체 상환을 위해서는 화면에 보이는 수량보다 더 많은 금액을 지불하셔야 합니다."
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Liquidity"
+msgstr "유동성"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "ON"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "OFF"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Collateral_Config"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Collateral_Amount"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Borrow Available"
+msgstr "대출 가능"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Disable"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Enable"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Deposited"
+msgstr "예치됨"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "All_Withdraw"
+msgstr "전체 출금"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Deposit"
+msgstr "예치"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Withdraw"
+msgstr "출금"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Top/parts/Assets.tsx
+msgid "Deposit APY"
+msgstr "예치 APY"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Deposit APR"
+msgstr "예치 APR"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "This asset can't be used as collateral."
+msgstr "해당 자산을 담보로 사용하실 수 없습니다."
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "For more information, please <0>see our docs</0>."
+msgstr "더 많은 정보를 습득하시기 위해<0>저희 공식 문서 페이지로 이동해주세요</0>."
+
+#: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
+msgid "Max"
+msgstr "최대"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Markets/Assets.tsx
+msgid "Asset"
+msgstr "자산"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Reward APR"
+msgstr "리워드 APR"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "APY_Deposit"
+msgstr "APY"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Collateral"
+msgstr ""
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "APY_Borrow"
+msgstr "APY"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Deposit Markets"
+msgstr "예치 마켓"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Borrow Markets"
+msgstr "대출 마켓"
+
+#: src/components/screens/Dashboard/parts/Summary/BorrowLimit.tsx
+msgid "Borrow Limit"
+msgstr "대출 한도"
+
+#: src/components/screens/Dashboard/parts/Summary/NetAPY.tsx
+msgid "Net APY"
+msgstr "최종 APY"
+
+#: src/components/screens/Dashboard/parts/Summary/index.tsx
+msgid "Deposit Balance"
+msgstr "자산 예치"
+
+#: src/components/screens/Dashboard/parts/Summary/index.tsx
+msgid "Borrow Balance"
+msgstr "자산 대출"
+
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Deposited"
+msgstr "전체 예치 내역"
+
+#: src/components/screens/Markets/Assets.tsx
+msgid "Deposit Reward APR"
+msgstr ""
+
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Borrowed"
+msgstr "전체 대출 내역"
+
+#: src/components/screens/Markets/Assets.tsx
+msgid "Borrow Reward APR"
+msgstr ""
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Deposit_Top3 Markets"
+msgstr ""
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Borrow_Top3 Markets"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Borrowing"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Yes"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "No"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Reserve Factor"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Used as Collateral"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Loan to Value"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Threshold"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Penalty"
+msgstr ""
+
+#: src/components/screens/Sorry/index.tsx
+msgid "Go Back"
+msgstr "뒤로가기"
+
+#: src/components/screens/Sorry/reasons.ts
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
+msgstr ""
+
+#: src/components/screens/Sorry/reasons.ts
+msgid "Something went wrong. Please go back."
+msgstr "잘못된 정보가 감지됐습니다. 뒤로가기를 통해 다시 시도해주세요."
+
+#: src/components/screens/Top/Menu.tsx
+msgid "Menu"
+msgstr ""
+
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Sorry"
+msgstr ""
+
+#: src/components/screens/Top/parts/Backers.tsx
+msgid "Backers"
+msgstr "배커"
+
+#: src/components/screens/Top/parts/Backers.tsx
+msgid "We're supported by leading teams and organizations"
+msgstr "최고의 팀과 기관들에서 저희를 지지해주고 있습니다. "
+
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Current Markets"
+msgstr "현재 마켓정보"
+
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "The more funds that will be borrowed, the higher the interest rate will be"
+msgstr "더 많은 자산을 대출받을수록, 더 높은 이자율을 받으실 수 있습니다."
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Low Risk Farming on Astar Network"
+msgstr "Astar Network의 저위험 파밍 플랫폼"
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "The largest lending protocol in the Polkadot ecosystem"
+msgstr ""
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Explore the docs"
+msgstr "공식문서 둘러보기"
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Powered by"
+msgstr "Powered by"
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "ASTAR"
+msgstr "ASTAR"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Preparing"
+msgstr "트랜잭션 준비중"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Waiting for transaction to be ready..."
+msgstr "트랜잭션이 대기중..."
+
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Confirm Transaction"
+msgstr "전송 완료"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Approve sending the ERC-20 asset to the pool."
+msgstr "풀에 ERC-20 자산 전송하기 동의여부."
+
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Pending"
+msgstr "트랜잭션 펜딩중"
+
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Waiting for the transaction to be confirmed..."
+msgstr "트랜잭션이 검증되길 기다리는중..."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Confirm the transaction."
+msgstr "트랜잭션 확인."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Succeeded!"
+msgstr "성공!"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "You transaction confirmed!"
+msgstr "트랜잭션이 성공했습니다!"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Canceled"
+msgstr "트랜잭션 취소됨"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "You have canceled the transaction."
+msgstr "트랜잭션을 취소했습니다."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Error"
+msgstr "에러 발생"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Something went wrong..."
+msgstr "잘못된 정보를 감지했습니다..."
+
+#: src/hooks/useUnsupportedChainAlert.ts
+#: src/hooks/useUnsupportedChainAlert.ts
+msgid "You need to change to a supported chain"
+msgstr "적합한 네트워크로 재설정 필요"
+
+#: src/hooks/useUnsupportedChainAlert.ts
+msgid "Please switch the chain with your wallet."
+msgstr "지갑 내 네트워크 전환 필요."
+
+#: src/hooks/useUnsupportedChainAlert.ts
+msgid "Please switch the chain with your wallet..."
+msgstr "지갑 내 네트워크 전환 필요..."
+
+#: src/hooks/useUnsupportedChainAlert.ts
+msgid "Failed to switch the chain"
+msgstr "네트워크 전환 실패"
+
+#: src/libs/wallet-provider/providers/metamask.ts
+#: src/libs/wallet-provider/providers/metamask.ts
+#: src/libs/wallet-provider/providers/metamask.ts
+#: src/libs/wallet-provider/providers/metamask.ts
+msgid "Your wallet needs to switch networks manually."
+msgstr "지갑 내 수동으로 네트워크 전환 필요."
+
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+msgid "Enter amount"
+msgstr "수량 입력"
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to deposit"
+msgstr "예치할 자산이 없습니다."
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to withdraw"
+msgstr "출금할 자산이 없습니다."
+
+#: src/utils/estimationHelper.ts
+msgid "Insufficient collateral"
+msgstr "담보자산이 부족합니다."
+
+#: src/utils/estimationHelper.ts
+msgid "No liquidity to withdraw"
+msgstr "대출받을 유동성이 부족합니다."
+
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+msgid "Health factor too low"
+msgstr "위험 지수가 매우 낮습니다"
+
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+msgid "Borrowing limit reached"
+msgstr "대출 한도 초과"
+
+#: src/utils/estimationHelper.ts
+msgid "No liquidity to borrow"
+msgstr "대출받을 유동성이 부족합니다."
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to repay"
+msgstr "상환가능한 자산이 부족합니다."

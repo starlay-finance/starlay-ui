@@ -1,0 +1,578 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2022-01-28 13:45+0900\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/components/parts/Footer/AppFooter.tsx
+msgid "Latest Block: {blockNumber}"
+msgstr "Blok Terbaru: {blockNumber}"
+
+#: src/components/parts/Footer/AppFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Docs"
+msgstr "Dokumen"
+
+#: src/components/parts/Footer/AppFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Governance"
+msgstr "Pemerintahan"
+
+#: src/components/parts/Footer/AppFooter.tsx
+msgid "Support"
+msgstr "Bantuan"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
+msgstr ""
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Twitter"
+msgstr "Twitter"
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Discord"
+msgstr "Discord"
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Telegram"
+msgstr "Telegram"
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Medium"
+msgstr "Medium"
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Github"
+msgstr "Github"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Protocol"
+msgstr "Protokol"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Developers"
+msgstr "Pengembang"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Overview"
+msgstr "Ringkasan"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Community"
+msgstr "Komunitas"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Brand"
+msgstr "Merek"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Media Kit"
+msgstr "Perangkat Media"
+
+#: src/components/parts/Header/AppHeader.tsx
+msgid "Dashboard"
+msgstr "Dasbor"
+
+#: src/components/parts/Header/AppHeader.tsx
+#: src/components/screens/Markets/Assets.tsx
+msgid "Markets"
+msgstr ""
+
+#: src/components/parts/Header/AppHeader.tsx
+msgid "Connect"
+msgstr "Menghubungkan"
+
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Launch App"
+msgstr "Luncurkan Aplikasi"
+
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Bug Bounty"
+msgstr "Hadiah Bug"
+
+#: src/components/parts/Modal/MessageModalGradient/index.tsx
+msgid "Close"
+msgstr ""
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+msgid "LAY Balance"
+msgstr "Saldo LAY"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Wallet Balance"
+msgstr "Saldo Dompet"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+msgid "Unclaimed Balance"
+msgstr "Saldo tidak diklaim"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Price"
+msgstr "Harga"
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "Connect Wallet"
+msgstr "Hubungkan Dompet"
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "Connecting the wallet..."
+msgstr "Menghubungkan ke dompet..."
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "We currently supports Metamask only."
+msgstr "Saat ini kami hanya mendukung Metamask."
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "Metamask"
+msgstr "Metamask"
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
+msgstr "Dengan Menghubungkan, Saya memahami <0>bagaimana cara kerja Starlay Finance dan risiko yang terlibat</0> dan setuju menggunakannya dengan risiko saya sendiri."
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "All"
+msgstr "Semua"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "All_Repay"
+msgstr "Melunasi_Semua"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Borrow"
+msgstr "Pinjam"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Repay"
+msgstr "Melunasi"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Top/parts/Assets.tsx
+msgid "Borrow APY"
+msgstr "Pinjaman APY"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Borrow APR"
+msgstr "Pinjaman APR"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Borrowed"
+msgstr "Dipinjamkan"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Borrow Limit Used"
+msgstr "Batas Pinjaman Digunakan"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
+msgid "Health Factor"
+msgstr "Faktor Kesehatan"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "To repay all, you will pay more than the amount shown because of the interest charged per second."
+msgstr "Untuk melunasi semua, Anda akan membayar lebih dari jumlah yang ditampilkan karena bunga yang dikenakan berubah per detik."
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Liquidity"
+msgstr "Likuiditas"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "ON"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "OFF"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Collateral_Config"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Collateral_Amount"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Borrow Available"
+msgstr "Pinjaman Tersedia"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Disable"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Enable"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Deposited"
+msgstr "Disetorkan"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "All_Withdraw"
+msgstr "Tarik_Semua"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Deposit"
+msgstr "Setor"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Withdraw"
+msgstr "Tarik"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Top/parts/Assets.tsx
+msgid "Deposit APY"
+msgstr "Setor APY"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Deposit APR"
+msgstr "Setor APR"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "This asset can't be used as collateral."
+msgstr "Aset ini tidak dapat digunakan sebagai jaminan."
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "For more information, please <0>see our docs</0>."
+msgstr "Untuk Informasi lebih lanjut, silahkan <0>lihat dokumen kami</0>."
+
+#: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
+msgid "Max"
+msgstr "Maks"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Markets/Assets.tsx
+msgid "Asset"
+msgstr "Aset"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Reward APR"
+msgstr "Hadiah APR"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "APY_Deposit"
+msgstr "APY_Setor"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Collateral"
+msgstr ""
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "APY_Borrow"
+msgstr "APY_Pinjam"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Deposit Markets"
+msgstr "Pasar Setor"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Borrow Markets"
+msgstr "Pasar Pinjam"
+
+#: src/components/screens/Dashboard/parts/Summary/BorrowLimit.tsx
+msgid "Borrow Limit"
+msgstr "Batas Pinjam"
+
+#: src/components/screens/Dashboard/parts/Summary/NetAPY.tsx
+msgid "Net APY"
+msgstr "APY Bersih"
+
+#: src/components/screens/Dashboard/parts/Summary/index.tsx
+msgid "Deposit Balance"
+msgstr "Saldo Setoran"
+
+#: src/components/screens/Dashboard/parts/Summary/index.tsx
+msgid "Borrow Balance"
+msgstr "Saldo Pinjaman"
+
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Deposited"
+msgstr "Total Setoran"
+
+#: src/components/screens/Markets/Assets.tsx
+msgid "Deposit Reward APR"
+msgstr ""
+
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Borrowed"
+msgstr "Total Pinjaman"
+
+#: src/components/screens/Markets/Assets.tsx
+msgid "Borrow Reward APR"
+msgstr ""
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Deposit_Top3 Markets"
+msgstr ""
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Borrow_Top3 Markets"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Borrowing"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Yes"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "No"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Reserve Factor"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Used as Collateral"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Loan to Value"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Threshold"
+msgstr ""
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Penalty"
+msgstr ""
+
+#: src/components/screens/Sorry/index.tsx
+msgid "Go Back"
+msgstr "Kembali"
+
+#: src/components/screens/Sorry/reasons.ts
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
+msgstr ""
+
+#: src/components/screens/Sorry/reasons.ts
+msgid "Something went wrong. Please go back."
+msgstr "Ada yang salah. Silakan kembali."
+
+#: src/components/screens/Top/Menu.tsx
+msgid "Menu"
+msgstr ""
+
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Sorry"
+msgstr ""
+
+#: src/components/screens/Top/parts/Backers.tsx
+msgid "Backers"
+msgstr "Pendukung"
+
+#: src/components/screens/Top/parts/Backers.tsx
+msgid "We're supported by leading teams and organizations"
+msgstr "Kami didukung oleh tim dan organisasi terkemuka"
+
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Current Markets"
+msgstr "Pasar Saat Ini"
+
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "The more funds that will be borrowed, the higher the interest rate will be"
+msgstr "Semakin banyak dana yang akan dipinjam, semakin tinggi tingkat bunganya"
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Low Risk Farming on Astar Network"
+msgstr "Farming dengan Risiko Rendah di Astar Network"
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "The largest lending protocol in the Polkadot ecosystem"
+msgstr ""
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Explore the docs"
+msgstr "Jelajahi dokumen"
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Powered by"
+msgstr "Dipersembahkan oleh"
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "ASTAR"
+msgstr "ASTAR"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Preparing"
+msgstr "Persiapan Transaksi"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Waiting for transaction to be ready..."
+msgstr "Menunggu transaksi siap..."
+
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Confirm Transaction"
+msgstr "Konfirmasi Transaksi"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Approve sending the ERC-20 asset to the pool."
+msgstr "Setujui pengiriman aset ERC-20 ke pool."
+
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Pending"
+msgstr "Transaksi Tertunda"
+
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Waiting for the transaction to be confirmed..."
+msgstr "Menunggu transaksi dikonfirmasi..."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Confirm the transaction."
+msgstr "Konfirmasi Transaksi."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Succeeded!"
+msgstr "Berhasil!"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "You transaction confirmed!"
+msgstr "Transaksi Anda dikonfirmasi!!"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Canceled"
+msgstr "Transaksi Dibatalkan"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "You have canceled the transaction."
+msgstr "Anda telah membatalkan transaksi."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Error"
+msgstr "Kesalahan"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Something went wrong..."
+msgstr "Ada yang salah..."
+
+#: src/hooks/useUnsupportedChainAlert.ts
+#: src/hooks/useUnsupportedChainAlert.ts
+msgid "You need to change to a supported chain"
+msgstr "Anda perlu mengubah ke jaringan yang didukung"
+
+#: src/hooks/useUnsupportedChainAlert.ts
+msgid "Please switch the chain with your wallet."
+msgstr "Silakan ganti jaringan dengan dompet Anda."
+
+#: src/hooks/useUnsupportedChainAlert.ts
+msgid "Please switch the chain with your wallet..."
+msgstr "Silakan ganti jaringan dengan dompet Anda..."
+
+#: src/hooks/useUnsupportedChainAlert.ts
+msgid "Failed to switch the chain"
+msgstr "Gagal mengganti jaringan"
+
+#: src/libs/wallet-provider/providers/metamask.ts
+#: src/libs/wallet-provider/providers/metamask.ts
+#: src/libs/wallet-provider/providers/metamask.ts
+#: src/libs/wallet-provider/providers/metamask.ts
+msgid "Your wallet needs to switch networks manually."
+msgstr "Dompet Anda perlu berpindah jaringan secara manual."
+
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+msgid "Enter amount"
+msgstr "Masukan jumlah"
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to deposit"
+msgstr "Tidak ada saldo untuk disetor"
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to withdraw"
+msgstr "Tidak ada saldo untuk ditarik"
+
+#: src/utils/estimationHelper.ts
+msgid "Insufficient collateral"
+msgstr "Jaminan tidak mencukupi"
+
+#: src/utils/estimationHelper.ts
+msgid "No liquidity to withdraw"
+msgstr "Tidak ada likuiditas untuk ditarik"
+
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+msgid "Health factor too low"
+msgstr "Faktor kesehatan terlalu rendah"
+
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+msgid "Borrowing limit reached"
+msgstr "Batas pinjaman tercapai"
+
+#: src/utils/estimationHelper.ts
+msgid "No liquidity to borrow"
+msgstr "Tidak ada likuiditas untuk dipinjam"
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to repay"
+msgstr "Tidak ada saldo untuk melunasi"
