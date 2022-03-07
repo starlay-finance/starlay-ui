@@ -12,7 +12,7 @@ import {
 import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
 import { useMessageModalGradient } from 'src/components/parts/Modal/MessageModalGradient'
-import { sequentialFadeIn } from 'src/styles/animation'
+import { fadeIn, sequentialFadeIn } from 'src/styles/animation'
 import { purple, trueWhite } from 'src/styles/colors'
 import { fontWeightBold, fontWeightRegular } from 'src/styles/font'
 import { disableScroll, enableScroll } from 'src/utils/handleScroll'
@@ -27,7 +27,7 @@ import {
   TWITTER,
 } from 'src/utils/routes'
 import { Z_MODAL } from 'src/utils/zIndex'
-import styled, { css } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 export const MobileMenu: VFC<{
   isOpen: boolean
@@ -123,6 +123,38 @@ const BgIcon = styled.div`
     }
   }
 `
+const bgiconFadeIn = keyframes`
+0% {
+   opacity: 0;
+}  
+100% {
+   opacity: 0.02;
+}
+`
+
+const contentFadeInAnimation = css`
+  ${MenuHeaderDiv} {
+    opacity: 0;
+    animation: ${fadeIn} 0.25s 0.5s ease-in forwards;
+  }
+  ${Nav} > * {
+    ${sequentialFadeIn({
+      numOfItems: 5,
+      duration: 0.25,
+      sequenceDelay: 0.05,
+      initialDelay: 0.6,
+    })};
+  }
+  ${IconLinks} {
+    opacity: 0;
+    animation: ${fadeIn} 0.25s 1.05s ease-in forwards;
+  }
+  ${BgIcon} {
+    opacity: 0;
+    animation: ${bgiconFadeIn} 1.75s linear forwards;
+  }
+`
+
 const MenuContainer = styled.div<{ isOpen: boolean }>`
   position: fixed;
   inset: 0;
@@ -152,16 +184,7 @@ const MenuContainer = styled.div<{ isOpen: boolean }>`
   opacity: 1;
   ${({ isOpen }) =>
     isOpen
-      ? css`
-          > * {
-            ${sequentialFadeIn({
-              numOfItems: 3,
-              duration: 0.25,
-              sequenceDelay: 0.3,
-              initialDelay: 0.4,
-            })};
-          }
-        `
+      ? contentFadeInAnimation
       : css`
           opacity: 0;
           visibility: hidden;
