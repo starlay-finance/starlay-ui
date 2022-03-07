@@ -5,6 +5,7 @@ import { PartialDeep } from 'type-fest'
 import {
   estimateBorrow,
   estimateDeposit,
+  estimateLooping,
   estimateRepayment,
   estimateWithdrawal,
   EstimationParam,
@@ -534,6 +535,193 @@ describe('estimationHelper', () => {
           }),
         )
         expect(result.unavailableReason).toBe('No balance to repay')
+      })
+    })
+  })
+  describe('estimateLooping', () => {
+    test('max amount should be equal to the balance in the wallet', () => {
+      const inWallet = BN_ONE
+      const result = estimateLooping({
+        ...param({ amount: undefined, userAssetBalance: { inWallet } }),
+        leverage: BN_ONE,
+      })
+      expect(result.maxAmount).toBe(inWallet)
+    })
+    test('deposit APY should be division between looped deposit and the amount ', () => {
+      const leverage = valueToBigNumber('5')
+      const depositAPY = valueToBigNumber('0.1')
+      const result = estimateLooping({
+        ...param({
+          amount: BN_ONE,
+          userAssetBalance: { inWallet: BN_HUNDRED },
+          asset: { depositAPY },
+        }),
+        leverage,
+      })
+      expect(result.depositAPY.toFixed(2)).toBe(
+        depositAPY.multipliedBy(leverage).toFixed(2),
+      )
+    })
+    test('borrow APY should be division between looped borrow(leverage - 1) and the amount ', () => {
+      const leverage = valueToBigNumber('5')
+      const variableBorrowAPY = valueToBigNumber('0.2')
+      const result = estimateLooping({
+        ...param({
+          amount: BN_ONE,
+          userAssetBalance: { inWallet: BN_HUNDRED },
+          asset: { variableBorrowAPY },
+        }),
+        leverage,
+      })
+      expect(result.borrowAPY.toFixed(2)).toBe(
+        variableBorrowAPY.multipliedBy(leverage.minus(BN_ONE)).toFixed(2),
+      )
+    })
+    test('reward APR should be sum of deposited amount and borrowed amount multiplied by the respective incentive apr', () => {
+      const leverage = valueToBigNumber('5')
+      const depositIncentiveAPR = valueToBigNumber('1')
+      const variableBorrowIncentiveAPR = valueToBigNumber('2')
+      const result = estimateLooping({
+        ...param({
+          amount: BN_ONE,
+          userAssetBalance: { inWallet: BN_HUNDRED },
+          asset: { depositIncentiveAPR, variableBorrowIncentiveAPR },
+        }),
+        leverage,
+      })
+      expect(result.rewardAPR.toFixed(2)).toBe(
+        depositIncentiveAPR
+          .multipliedBy(leverage)
+          .plus(variableBorrowIncentiveAPR.multipliedBy(leverage.minus(BN_ONE)))
+          .toFixed(2),
+      )
+    })
+    test('net APY should be sum of looped APYs and Reward APR', () => {
+      const leverage = valueToBigNumber('5')
+      const depositAPY = valueToBigNumber('0.1')
+      const variableBorrowAPY = valueToBigNumber('0.2')
+      const depositIncentiveAPR = valueToBigNumber('1')
+      const variableBorrowIncentiveAPR = valueToBigNumber('2')
+      const result = estimateLooping({
+        ...param({
+          amount: BN_ONE,
+          userAssetBalance: { inWallet: BN_HUNDRED },
+          asset: {
+            depositAPY,
+            variableBorrowAPY,
+            depositIncentiveAPR,
+            variableBorrowIncentiveAPR,
+          },
+        }),
+        leverage,
+      })
+      expect(result.netAPY.toFixed(2)).toBe(
+        depositAPY
+          .multipliedBy(leverage)
+          .minus(variableBorrowAPY.multipliedBy(leverage.minus(BN_ONE)))
+          .plus(depositIncentiveAPR.multipliedBy(leverage))
+          .plus(variableBorrowIncentiveAPR.multipliedBy(leverage.minus(BN_ONE)))
+          .toFixed(2),
+      )
+    })
+    test('health factor should be calculated from looped deposit and borrow', () => {
+      const amount = valueToBigNumber('2')
+      const leverage = valueToBigNumber('5')
+      const totalCollateralInMarketReferenceCurrency = valueToBigNumber('50')
+      const totalBorrowedInMarketReferenceCurrency = valueToBigNumber('20')
+      const currentLiquidationThreshold = valueToBigNumber('0.8')
+      const reserveLiquidationThreshold = valueToBigNumber('0.5')
+      const priceInMarketReferenceCurrency = valueToBigNumber('10')
+      const result = estimateLooping({
+        ...param({
+          amount,
+          userSummary: {
+            currentLiquidationThreshold,
+            totalCollateralInMarketReferenceCurrency,
+            totalBorrowedInMarketReferenceCurrency,
+          },
+          userAssetBalance: { inWallet: BN_HUNDRED },
+          asset: {
+            reserveLiquidationThreshold,
+            priceInMarketReferenceCurrency,
+          },
+        }),
+        leverage,
+      })
+
+      const leveragedCollateral = amount
+        .multipliedBy(leverage)
+        .multipliedBy(priceInMarketReferenceCurrency)
+      const newTotalCollateral =
+        totalCollateralInMarketReferenceCurrency.plus(leveragedCollateral)
+      const newTotalBorrow = totalBorrowedInMarketReferenceCurrency.plus(
+        amount
+          .multipliedBy(leverage.minus(BN_ONE))
+          .multipliedBy(priceInMarketReferenceCurrency),
+      )
+      const newLiquidationThreshold = currentLiquidationThreshold
+        .multipliedBy(totalCollateralInMarketReferenceCurrency)
+        .plus(leveragedCollateral.multipliedBy(reserveLiquidationThreshold))
+        .div(newTotalCollateral)
+
+      expect(result.healthFactor?.toFixed(2)).toBe(
+        newTotalCollateral
+          .multipliedBy(newLiquidationThreshold)
+          .div(newTotalBorrow)
+          .toFixed(2),
+      )
+    })
+    describe('unavailable reason', () => {
+      test('should return "Enter amount" if the amount not valid', () => {
+        const result = estimateLooping({
+          ...param({ amount: undefined }),
+          leverage: BN_HUNDRED,
+        })
+        expect(result.unavailableReason).toBe('Enter amount')
+      })
+      test('should return "Enter leverage" if the leverage not valid', () => {
+        const result = estimateLooping({
+          ...param({ amount: BN_ONE }),
+          leverage: BN_ONE,
+        })
+        expect(result.unavailableReason).toBe('Enter leverage')
+      })
+      test('should return "No balance to looping" if the amount gt inWallet', () => {
+        const inWallet = BN_ONE
+        const result = estimateLooping({
+          ...param({
+            amount: inWallet.plus(BN_ONE),
+            userAssetBalance: { inWallet },
+          }),
+          leverage: BN_HUNDRED,
+        })
+        expect(result.unavailableReason).toBe('No balance to loop')
+      })
+      test('should return "Health factor too low" if the health factro lt the threshold', () => {
+        const inWallet = BN_ONE
+        const result = estimateLooping({
+          ...param({
+            amount: inWallet,
+            userAssetBalance: { inWallet },
+          }),
+          leverage: BN_HUNDRED,
+        })
+        expect(result.unavailableReason).toBe('Health factor too low')
+      })
+      test('should be undefined if valid', () => {
+        const inWallet = BN_ONE
+        const result = estimateLooping({
+          ...param({
+            amount: valueToBigNumber('0.1'),
+            userSummary: {
+              totalCollateralInMarketReferenceCurrency: BN_HUNDRED,
+            },
+            userAssetBalance: { inWallet },
+            asset: { reserveLiquidationThreshold: BN_ONE },
+          }),
+          leverage: BN_HUNDRED,
+        })
+        expect(result.unavailableReason).toBeUndefined()
       })
     })
   })

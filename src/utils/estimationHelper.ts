@@ -362,7 +362,7 @@ export const estimateLooping = ({
 }: EstimationParam & { leverage: BigNumber }): LoopingEstimationResult => {
   const { inWallet } = userAssetBalance
   const maxAmount = inWallet
-  if (!amount || amount.isNaN() || amount.isZero())
+  if (!validEstimationInput(amount))
     return {
       unavailableReason: t`Enter amount`,
       maxAmount,
