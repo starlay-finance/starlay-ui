@@ -80,6 +80,7 @@ type AssetItemProps = {
   symbolStyle?: CSSProperties
   asset: Asset
   market?: Pick<AssetMarketData, 'symbol' | 'depositAPY' | 'variableBorrowAPY'>
+  disabled?: boolean
 }
 export const AssetItem: VFC<AssetItemProps> = ({
   appeared,
@@ -87,12 +88,14 @@ export const AssetItem: VFC<AssetItemProps> = ({
   symbolStyle,
   asset,
   market,
+  disabled,
 }) => (
   <AssetItemLink
     href={APP}
     $appeared={appeared}
     onAnimationEnd={onAnimationEnd}
     newTab
+    $disabled={disabled}
   >
     <Symbol style={symbolStyle}>
       <Image src={asset.icon} alt={asset.name} width={32} height={32} />
@@ -204,7 +207,7 @@ const hoverBackgroundKeyframes = keyframes`
   }
 `
 
-const AssetItemLink = styled(Link)<{ $appeared: boolean }>`
+const AssetItemLink = styled(Link)<{ $appeared: boolean; $disabled?: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -224,6 +227,7 @@ const AssetItemLink = styled(Link)<{ $appeared: boolean }>`
     ${({ $appeared }) =>
       $appeared &&
       css`
+        transform: translateY(2px);
         background: linear-gradient(
           90deg,
           ${darkRed}3d,
@@ -236,14 +240,16 @@ const AssetItemLink = styled(Link)<{ $appeared: boolean }>`
           background: transparent;
           backdrop-filter: none;
         }
-        @media ${breakpoint.xl} {
-          transform: translateY(2px);
-        }
       `}
   }
   @media ${breakpoint.xl} {
     padding: 24px;
   }
+  ${({ $disabled }) =>
+    $disabled &&
+    css`
+      pointer-events: none;
+    `}
 `
 const appearingAnimation = css`
   opacity: 0;
