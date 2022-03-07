@@ -5,13 +5,17 @@ import { fontWeightHeavy } from 'src/styles/font'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
 import styled from 'styled-components'
 import { MakaiMarkets } from './MakaiMarkets'
+import { UnclaimedReward } from './UnclaimedReward'
 
 export const Makai = () => (
   <>
     <AppHeader />
     <Main>
       <AppBackground />
-      <MakaiMarkets />
+      <div>
+        <MakaiMarkets />
+        <UnclaimedReward />
+      </div>
     </Main>
     <AppFooter />
   </>
@@ -26,7 +30,16 @@ const Main = styled.main`
     font-size: 20px;
     font-weight: ${fontWeightHeavy};
   }
-  ${MakaiMarkets} {
+  > div {
     margin-top: 80px;
+    display: flex;
+    column-gap: 24px;
+    ${MakaiMarkets} {
+      flex: 1;
+    }
+    ${UnclaimedReward} {
+      width: 400px;
+      max-height: 294px;
+    }
   }
 `
