@@ -383,14 +383,15 @@ export const estimateLooping = ({
   } = userSummary
   const totalDeposit = amount.multipliedBy(leverage)
   const totalBorrow = totalDeposit.minus(amount)
-  const apr = calculateLoopingAPR({
+  const loopedRewardAPR = calculateLoopingAPR({
     ltv: BN_ONE.minus(BN_ONE.div(leverage)),
     depositIncentiveAPR,
     variableBorrowIncentiveAPR,
   })
-  const totalProfit = totalDeposit.multipliedBy(depositAPY)
-  const totalLoss = totalBorrow.multipliedBy(variableBorrowAPY)
-  const totalReward = amount.multipliedBy(apr)
+  const loopedDepositAPY = totalDeposit.multipliedBy(depositAPY).div(amount)
+  const loopedBorrowAPY = totalBorrow
+    .multipliedBy(variableBorrowAPY)
+    .div(amount)
 
   const totalDepositInMarketReferenceCurrency = totalDeposit.multipliedBy(
     priceInMarketReferenceCurrency,
@@ -426,10 +427,10 @@ export const estimateLooping = ({
       ? t`Health factor too low`
       : undefined,
     maxAmount,
-    depositAPY: totalProfit.div(amount),
-    borrowAPY: totalLoss.div(amount),
-    rewardAPR: apr,
-    netAPY: totalProfit.plus(totalReward).minus(totalLoss).div(amount),
+    depositAPY: loopedDepositAPY,
+    borrowAPY: loopedBorrowAPY,
+    rewardAPR: loopedRewardAPR,
+    netAPY: loopedDepositAPY.plus(loopedRewardAPR).minus(loopedBorrowAPY),
     healthFactor,
   }
 }
