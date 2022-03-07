@@ -396,7 +396,7 @@ export const estimateLooping = ({
   const totalDeposit = amount.multipliedBy(leverage)
   const totalBorrow = totalDeposit.minus(amount)
   const loopedRewardAPR = calculateLoopingAPR({
-    ltv: BN_ONE.minus(BN_ONE.div(leverage)),
+    leverage,
     depositIncentiveAPR,
     variableBorrowIncentiveAPR,
   })

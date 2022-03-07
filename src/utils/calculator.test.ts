@@ -147,7 +147,7 @@ describe('calculator', () => {
     test('should be calculated the deposit amount as the sum of infinite geometric series with a ratio of the ltv', () => {
       expect(
         calculateLoopingAPR({
-          ltv: valueToBigNumber(0.5),
+          leverage: valueToBigNumber(2),
           depositIncentiveAPR: valueToBigNumber(1),
           variableBorrowIncentiveAPR: valueToBigNumber(2),
         }).toString(),

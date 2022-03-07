@@ -17,6 +17,7 @@ import {
   purple,
   trueWhite,
 } from 'src/styles/colors'
+import { ltvToLoopingLeverage } from 'src/utils/calculator'
 import { estimateLooping, EstimationParam } from 'src/utils/estimationHelper'
 import {
   BN_ONE,
@@ -54,7 +55,9 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
   const { inWallet } = userAssetBalance
   const { healthFactor } = userSummary
   const [depositAmount, setDepositAmount] = useState('')
-  const [leverage, setLeverage] = useState<BigNumber>(BN_ONE)
+  const [leverage, setLeverage] = useState<BigNumber>(
+    initialLeverage(ltvToLoopingLeverage(asset.baseLTVasCollateral)),
+  )
   const estimation = estimateLooping({
     amount: formattedToBigNumber(depositAmount),
     asset,
@@ -140,6 +143,16 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
 }
 
 const RATIO_LIST = [1.5, 2, 3, 4, 5] as const
+
+const initialLeverage = (max: BigNumber) => {
+  const numMax = max.toNumber()
+  const leverage = RATIO_LIST.reduce((prev, current) => {
+    if (numMax >= current) return current
+    return prev
+  }, 1)
+  return valueToBigNumber(leverage)
+}
+
 const Leverage = asStyled<{
   setLeverage: (ratio: BigNumber) => void
   current: BigNumber

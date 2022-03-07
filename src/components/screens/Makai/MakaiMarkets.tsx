@@ -13,7 +13,7 @@ import { useUserData } from 'src/hooks/useUserData'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { darkRed } from 'src/styles/colors'
 import { AssetMarketData } from 'src/types/models'
-import { calculateLoopingAPR } from 'src/utils/calculator'
+import { calculateLoopingAPR, ltvToLoopingLeverage } from 'src/utils/calculator'
 import { symbolSorter } from 'src/utils/market'
 import { BN_ZERO, formatAmt, formatPct } from 'src/utils/number'
 import styled, { css } from 'styled-components'
@@ -93,7 +93,7 @@ const marketRow = ({
     borrowUnsupported,
   } = asset
   const makaiAPR = calculateLoopingAPR({
-    ltv: baseLTVasCollateral,
+    leverage: ltvToLoopingLeverage(baseLTVasCollateral),
     depositIncentiveAPR,
     variableBorrowIncentiveAPR,
   })

@@ -76,18 +76,20 @@ export const calculateAssetPL = (
 }
 
 export const calculateLoopingAPR = (params: {
-  ltv: BigNumber
+  leverage: BigNumber
   depositIncentiveAPR: BigNumber
   variableBorrowIncentiveAPR: BigNumber
 }) => {
   const base = BN_ONE
-  const maxDeposit = base.div(BN_ONE.minus(params.ltv))
+  const maxDeposit = base.multipliedBy(params.leverage)
   const maxBorrow = maxDeposit.minus(base)
   return maxDeposit
     .multipliedBy(params.depositIncentiveAPR)
     .plus(maxBorrow.multipliedBy(params.variableBorrowIncentiveAPR))
     .div(base)
 }
+export const ltvToLoopingLeverage = (ltv: BigNumber) =>
+  BN_ONE.div(BN_ONE.minus(ltv))
 
 export const convertToUSD = (
   priceInMarketReferenceCurrency: BigNumber,
