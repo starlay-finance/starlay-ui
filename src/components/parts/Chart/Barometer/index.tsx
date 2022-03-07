@@ -32,14 +32,15 @@ export const Barometer = asStyled<BarometerProps>(
         {label && (
           <figcaption style={{ color: currentColor }}>{label}</figcaption>
         )}
-        <div />
-        <BarometerThumb
-          style={{
-            left: `min(max(${adjustedRatio * 100}%, 4px), calc(100% - 4px))`,
-            backgroundColor: currentColor,
-            transition: !!rangeInputProps ? 'none' : undefined,
-          }}
-        />
+        <div>
+          <BarometerThumb
+            style={{
+              left: `min(max(${adjustedRatio * 100}%, 4px), calc(100% - 4px))`,
+              backgroundColor: currentColor,
+              transition: !!rangeInputProps ? 'none' : undefined,
+            }}
+          />
+        </div>
         {value && (
           <figcaption style={{ color: currentColor }}>{value}</figcaption>
         )}
