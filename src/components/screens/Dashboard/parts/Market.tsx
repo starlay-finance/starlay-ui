@@ -124,7 +124,9 @@ export const Market = asStyled(({ className }) => {
                       shorteningThreshold: 6,
                     })
                   : undefined,
-                collateral: user ? (
+                collateral: !account ? (
+                  '-'
+                ) : user ? (
                   user.balanceByAsset[asset.symbol].deposited.isZero() ? (
                     <CollateralToggle enabled={false} />
                   ) : (
