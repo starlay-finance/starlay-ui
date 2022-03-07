@@ -227,11 +227,11 @@ msgstr "OFF"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "Collateral_Config"
-msgstr "Collateral_Config"
+msgstr "Collateral"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "Collateral_Amount"
-msgstr "Collateral_Amount"
+msgstr "Collateral"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
