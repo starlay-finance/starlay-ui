@@ -24,7 +24,7 @@ export const useLendingPool = (
   ) => {
     if (!lendingPool || !account || !signer) throw new Error('Unexpected state')
     return handleTx(
-      lendingPool.deposit({
+      await lendingPool.deposit({
         user: account,
         reserve: underlyingAsset,
         amount: amount.toString(),
@@ -40,7 +40,7 @@ export const useLendingPool = (
   ) => {
     if (!lendingPool || !account || !signer) throw new Error('Unexpected state')
     return handleTx(
-      lendingPool.withdraw({
+      await lendingPool.withdraw({
         user: account,
         reserve: underlyingAsset,
         amount: all ? '-1' : amount.toString(),
@@ -56,7 +56,7 @@ export const useLendingPool = (
   ) => {
     if (!lendingPool || !account || !signer) throw new Error('Unexpected state')
     return handleTx(
-      lendingPool.borrow({
+      await lendingPool.borrow({
         user: account,
         reserve: underlyingAsset,
         amount: amount.toString(),
@@ -73,7 +73,7 @@ export const useLendingPool = (
   ) => {
     if (!lendingPool || !account || !signer) throw new Error('Unexpected state')
     return handleTx(
-      lendingPool.repay({
+      await lendingPool.repay({
         user: account,
         reserve: underlyingAsset,
         amount: all ? '-1' : amount.toString(),
@@ -82,6 +82,20 @@ export const useLendingPool = (
       signer,
     )
   }
+  const setUsageAsCollateral = async (
+    usageAsCollateral: boolean,
+    underlyingAsset: EthereumAddress,
+  ) => {
+    if (!lendingPool || !account || !signer) throw new Error('Unexpected state')
+    return handleTx(
+      lendingPool.setUsageAsCollateral({
+        user: account,
+        reserve: underlyingAsset,
+        usageAsCollateral,
+      }),
+      signer,
+    )
+  }
 
-  return { deposit, withdraw, borrow, repay }
+  return { deposit, withdraw, borrow, repay, setUsageAsCollateral }
 }

@@ -60,6 +60,7 @@ const StyledTable = styled(Table)<StyleProps>`
   }
   th,
   td {
+    position: relative;
     padding: 16px 0;
     vertical-align: middle;
     :first-child {

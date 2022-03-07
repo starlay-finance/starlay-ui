@@ -331,6 +331,71 @@ export const estimateRepayment = ({
   }
 }
 
+export const estimateUsageAsCollateral = ({
+  userAssetBalance,
+  userSummary,
+  marketReferenceCurrencyPriceInUSD,
+  asset: {
+    baseLTVasCollateral,
+    priceInMarketReferenceCurrency,
+    reserveLiquidationThreshold,
+  },
+  usageAsCollateralEnabled,
+}: Omit<EstimationParam, 'amount'> & {
+  usageAsCollateralEnabled: boolean
+}): Omit<EstimationResult, 'maxAmount'> => {
+  const {
+    availableBorrowsInUSD: currentBorrowable,
+    totalBorrowedInUSD: currentBorrowed,
+    totalBorrowedInMarketReferenceCurrency,
+    totalCollateralInMarketReferenceCurrency:
+      currentCollateralInMarketReferenceCurrency,
+    currentLiquidationThreshold,
+  } = userSummary
+  const { deposited } = userAssetBalance
+
+  const amountInMarketReferenceCurrency = deposited
+    .multipliedBy(priceInMarketReferenceCurrency)
+    .multipliedBy(usageAsCollateralEnabled ? BN_ONE : BN_ONE.negated())
+  const ltvInUSD = amountInMarketReferenceCurrency
+    .multipliedBy(marketReferenceCurrencyPriceInUSD)
+    .multipliedBy(baseLTVasCollateral)
+
+  const availableBorrowsInUSD = currentBorrowable.plus(ltvInUSD)
+  const borrowLimitInUSD = availableBorrowsInUSD.plus(currentBorrowed)
+  const borrowLimitUsed = calcBorrowLimitUsed(borrowLimitInUSD, currentBorrowed)
+
+  const liquidationThreshold = calcLiquidationThreshold(
+    {
+      threshold: currentLiquidationThreshold,
+      collateral: currentCollateralInMarketReferenceCurrency,
+    },
+    {
+      threshold: reserveLiquidationThreshold,
+      collateral: amountInMarketReferenceCurrency,
+    },
+  )
+  const healthFactor = calculateHealthFactor({
+    totalBorrowedInMarketReferenceCurrency,
+    totalCollateralInMarketReferenceCurrency:
+      currentCollateralInMarketReferenceCurrency.plus(
+        amountInMarketReferenceCurrency,
+      ),
+    liquidationThreshold,
+  })
+  return {
+    unavailableReason: borrowLimitUsed
+      ? t`Borrow limit reached`
+      : currentBorrowed.isPositive() &&
+        !healthFactor.gte(HEALTH_FACTOR_THRESHOLD)
+      ? t`Health factor too low`
+      : undefined,
+    availableBorrowsInUSD: BigNumber.max(availableBorrowsInUSD, BN_ZERO),
+    borrowLimitUsed,
+    healthFactor,
+  }
+}
+
 const unusedCollateralOnWithdraw = ({
   asset,
   userSummary,

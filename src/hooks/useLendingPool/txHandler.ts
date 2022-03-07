@@ -27,7 +27,7 @@ export const useTxHandler = () => {
   }
 
   const handleTx = async (
-    txsPromise: Promise<EthereumTransactionTypeExtended[]>,
+    txs: EthereumTransactionTypeExtended[],
     signer: ethers.providers.JsonRpcSigner,
   ) => {
     open({
@@ -35,7 +35,7 @@ export const useTxHandler = () => {
       title: t`Transaction Preparing`,
       message: t`Waiting for transaction to be ready...`,
     })
-    const { actionTx, erc20ApprovalTx } = pickLendingPoolTxs(await txsPromise)
+    const { actionTx, erc20ApprovalTx } = pickLendingPoolTxs(txs)
 
     try {
       if (erc20ApprovalTx) {
