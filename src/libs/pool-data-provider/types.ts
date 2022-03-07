@@ -20,6 +20,7 @@ export type PoolDataProviderInterface = {
     reservesData: FormattedReserveData[]
     incentivesByUnderlyingAsset: ReserveIncentiveDict
     marketReferenceCurrencyPriceInUSD: BigNumber
+    marketReferenceCurrencyDecimals: number
     rawReservesData: ReserveDataHumanized[]
     rawBaseCurrencyData: PoolBaseCurrencyHumanized
     rawReserveIncentivesData: ReserveIncentiveWithFeedsResponse[]

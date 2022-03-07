@@ -85,5 +85,6 @@ export const formatReserves = (
       marketReferenceCurrencyPriceInUsd,
       networkBaseTokenPriceDecimals,
     ),
+    marketReferenceCurrencyDecimals,
   }
 }

@@ -60,6 +60,7 @@ const StyledTable = styled(Table)<StyleProps>`
   }
   th,
   td {
+    position: relative;
     padding: 16px 0;
     vertical-align: middle;
     :first-child {
@@ -84,12 +85,6 @@ const StyledTable = styled(Table)<StyleProps>`
         }
       }
     `}
-  // temporary
-  tr:first-child {
-    td:nth-child(n + 5) {
-      opacity: 0.5;
-    }
-  }
 `
 
 const hoverBackgroundKeyframes = keyframes`
