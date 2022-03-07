@@ -41,6 +41,7 @@ const BodyDiv = styled.div<{ iconColor?: Color; messageDelay?: number }>`
   row-gap: 24px;
   padding: 96px 48px;
   text-align: center;
+  line-height: 1.5;
   p {
     ${({ messageDelay }) =>
       messageDelay &&

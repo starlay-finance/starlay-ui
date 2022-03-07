@@ -20,6 +20,14 @@ msgstr ""
 #: src/components/parts/Footer/AppFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Docs"
+msgstr "ドキュメント"
+
+#: src/components/parts/Footer/AppFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Governance"
 msgstr "ガバナンス"
 
@@ -28,29 +36,35 @@ msgid "Support"
 msgstr "サポート"
 
 #: src/components/parts/Footer/TopFooter.tsx
-msgid "Starlay Finance is the first lending protocol backed by Astar Network."
-msgstr "Starlay Finance は Astar インキュベーションプログラムに採択された唯一のレンディングプロトコルです。"
+msgid "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
+msgstr "Starlay Finance は Polkadot エコシステム最大のレンディングプロトコルです。"
 
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Twitter"
 msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Discord"
 msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Telegram"
 msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Medium"
 msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Github"
 msgstr ""
 
@@ -61,11 +75,6 @@ msgstr "プロトコル"
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Developers"
 msgstr "リポジトリ"
-
-#: src/components/parts/Footer/TopFooter.tsx
-#: src/components/parts/Header/TopHeader.tsx
-msgid "Docs"
-msgstr "ドキュメント"
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Overview"
@@ -97,13 +106,20 @@ msgid "Connect"
 msgstr "ウォレット接続"
 
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Launch App"
 msgstr "取引開始"
 
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Bug Bounty"
 msgstr "バウンティ"
+
+#: src/components/parts/Modal/MessageModalGradient/index.tsx
+msgid "Close"
+msgstr "閉じる"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 msgid "LAY Balance"
@@ -352,12 +368,25 @@ msgid "Go Back"
 msgstr ""
 
 #: src/components/screens/Sorry/reasons.ts
-msgid "Starlay Finance does not support mobile access. Please connect to this website using your PC."
-msgstr "Starlay Finance はPCからのアクセスのみサポートしています。"
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
+msgstr ""
+"Starlay Finance は現在モバイル端末からのアクセスをサポートしていません。\n"
+"PCからアクセスしてください。"
 
 #: src/components/screens/Sorry/reasons.ts
 msgid "Something went wrong. Please go back."
 msgstr "予期せぬエラーが発生しました。前の画面に戻ってください。"
+
+#: src/components/screens/Top/Menu.tsx
+msgid "Menu"
+msgstr ""
+
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Sorry"
+msgstr ""
 
 #: src/components/screens/Top/parts/Backers.tsx
 msgid "Backers"
@@ -382,8 +411,8 @@ msgstr ""
 "流動性を創出する"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "Starlay Finance is the first lending protocol backed by Astar Network"
-msgstr "Astar Network が支援する唯一のレンディングプロトコル"
+msgid "The largest lending protocol in the Polkadot ecosystem"
+msgstr "Polkadot エコシステム最大のレンディングプロトコル"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"

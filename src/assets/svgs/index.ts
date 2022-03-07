@@ -6,6 +6,7 @@ import IconDiscord from 'public/assets/svgs/icon_discord.svg'
 import IconGithub from 'public/assets/svgs/icon_github.svg'
 import IconLoading from 'public/assets/svgs/icon_loading.svg'
 import IconMedium from 'public/assets/svgs/icon_medium.svg'
+import IconMenu from 'public/assets/svgs/icon_menu.svg'
 import IconMetamask from 'public/assets/svgs/icon_metamask.svg'
 import IconProtocol from 'public/assets/svgs/icon_protocol.svg'
 import IconSuccess from 'public/assets/svgs/icon_success.svg'
@@ -22,6 +23,7 @@ export {
   IconGithub,
   IconLoading,
   IconMetamask,
+  IconMenu,
   IconMedium,
   IconProtocol,
   IconSuccess,

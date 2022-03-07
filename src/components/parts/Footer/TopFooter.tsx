@@ -12,7 +12,7 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { IconLink } from 'src/components/parts/Link'
 import { primary, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightMedium, fontWeightSemiBold } from 'src/styles/font'
-import { contentMaxWidthCssVar } from 'src/styles/mixins'
+import { breakpoint, contentMaxWidthCssVar } from 'src/styles/mixins'
 import {
   DEVELOPERS,
   DISCORD,
@@ -25,16 +25,15 @@ import {
   TWITTER,
 } from 'src/utils/routes'
 import styled from 'styled-components'
-import { FOOTER_HEIGHT } from './common'
 
 export const TopFooter = asStyled(({ className }) => (
   <StyledFooter className={className}>
-    <Nav>
+    <Content>
       <NavItem>
         <LogoDiv>
           <LogoProtocol />
         </LogoDiv>
-        <Note>{t`Starlay Finance is the first lending protocol backed by Astar Network.`}</Note>
+        <Note>{t`Starlay Finance is the largest lending protocol in the Polkadot ecosystem.`}</Note>
         <IconLinks>
           <IconLink Icon={IconTwitter} href={TWITTER} aria-label={t`Twitter`} />
           <IconLink Icon={IconDiscord} href={DISCORD} aria-label={t`Discord`} />
@@ -47,35 +46,38 @@ export const TopFooter = asStyled(({ className }) => (
           <IconLink Icon={IconGithub} href={GITHUB} aria-label={t`Github`} />
         </IconLinks>
       </NavItem>
-      <NavItem>
-        <LinksHeading>{t`Protocol`}</LinksHeading>
-        <TextLinks>
-          <Link href={DEVELOPERS}>{t`Developers`}</Link>
-          <Link href={DOCS}>{t`Docs`}</Link>
-        </TextLinks>
-      </NavItem>
-      <NavItem>
-        <LinksHeading>{t`Governance`}</LinksHeading>
-        <TextLinks>
-          <Link href={GOVERNANCE_OVERVIEW}>{t`Overview`}</Link>
-        </TextLinks>
-      </NavItem>
-      <NavItem>
-        <LinksHeading>{t`Community`}</LinksHeading>
-        <TextLinks>
-          <Link href={DISCORD}>{t`Discord`}</Link>
-          <Link href={TELEGRAM}>{t`Telegram`}</Link>
-        </TextLinks>
-      </NavItem>
-      <NavItem>
-        <LinksHeading>{t`Brand`}</LinksHeading>
-        <TextLinks>
-          <Link href={MEDIA_KIT}>{t`Media Kit`}</Link>
-        </TextLinks>
-      </NavItem>
-    </Nav>
+      <Nav>
+        <NavItem>
+          <LinksHeading>{t`Protocol`}</LinksHeading>
+          <TextLinks>
+            <Link href={DEVELOPERS}>{t`Developers`}</Link>
+            <Link href={DOCS}>{t`Docs`}</Link>
+          </TextLinks>
+        </NavItem>
+        <NavItem>
+          <LinksHeading>{t`Governance`}</LinksHeading>
+          <TextLinks>
+            <Link href={GOVERNANCE_OVERVIEW}>{t`Overview`}</Link>
+          </TextLinks>
+        </NavItem>
+        <NavItem>
+          <LinksHeading>{t`Community`}</LinksHeading>
+          <TextLinks>
+            <Link href={DISCORD}>{t`Discord`}</Link>
+            <Link href={TELEGRAM}>{t`Telegram`}</Link>
+          </TextLinks>
+        </NavItem>
+        <NavItem>
+          <LinksHeading>{t`Brand`}</LinksHeading>
+          <TextLinks>
+            <Link href={MEDIA_KIT}>{t`Media Kit`}</Link>
+          </TextLinks>
+        </NavItem>
+      </Nav>
+    </Content>
   </StyledFooter>
 ))``
+
 const LogoDiv = styled.div`
   color: ${trueWhite};
   > svg {
@@ -108,14 +110,20 @@ const TextLinks = styled.div`
 `
 
 const Note = styled.p`
-  line-height: 1.33;
+  line-height: 1.75;
+  @media ${breakpoint.xl} {
+    line-height: 1.33;
+  }
 `
 
 const LinksHeading = styled.p`
   && {
     color: ${trueWhite};
-    font-size: 20px;
+    font-size: 16;
     font-weight: ${fontWeightSemiBold};
+  }
+  @media ${breakpoint.xl} {
+    font-size: 20px;
   }
 `
 const NavItem = styled.div`
@@ -131,25 +139,56 @@ const NavItem = styled.div`
   ${Note} {
     margin-top: 12px;
   }
-  ${TextLinks} ,${IconLinks} {
+  ${IconLinks} {
     margin-top: 24px;
+  }
+  ${TextLinks} {
+    margin-top: 16px;
+  }
+  @media ${breakpoint.xl} {
+    ${TextLinks} {
+      margin-top: 24px;
+    }
   }
 `
 const Nav = styled.nav`
   display: flex;
-  column-gap: 80px;
-  > * {
-    flex: 1;
-  }
+  row-gap: 32px;
 `
+const Content = styled.div``
 
 const StyledFooter = styled.footer`
-  padding: 64px 0 80px;
-  min-height: ${FOOTER_HEIGHT};
+  padding: 40px 24px;
   backdrop-filter: blur(48px) brightness(1.08);
-  background-color: rgba(0, 0, 0, 0.08);
-  ${Nav} {
+  ${Content} {
     max-width: var(${contentMaxWidthCssVar});
     margin: 0 auto;
+  }
+  ${Nav} {
+    margin-top: 40px;
+    flex-wrap: wrap;
+    ${NavItem} {
+      min-width: 160px;
+    }
+  }
+  @media ${breakpoint.xl} {
+    backdrop-filter: blur(48px) brightness(1.08);
+    background-color: rgba(0, 0, 0, 0.08);
+    padding: 64px 0 80px;
+    ${Content} {
+      display: flex;
+      column-gap: 80px;
+      > ${NavItem} {
+        max-width: 240px;
+      }
+    }
+    ${Nav} {
+      margin-top: 0;
+      flex-wrap: nowrap;
+      column-gap: 80px;
+      > * {
+        flex: 1;
+      }
+    }
   }
 `

@@ -18,11 +18,11 @@ import 'src/styles/lato_fonts.css'
 import 'src/styles/reset.css'
 import { PageStaticProps } from 'src/types/page'
 import { GTM_ID } from 'src/utils/env'
-import { SORRY, sorryFor } from 'src/utils/routes'
+import { isMobileSupported, sorryFor } from 'src/utils/routes'
 
 const MyApp: VFC<Omit<AppProps, 'pageProps'> & { pageProps: PageStaticProps }> =
   ({ Component, pageProps, router }) => {
-    const jumpToSorry = isMobile && router.pathname !== SORRY
+    const jumpToSorry = isMobile && !isMobileSupported(router.pathname)
     useEffect(() => {
       if (GTM_ID) TagManager.initialize({ gtmId: GTM_ID })
       if (jumpToSorry) router.replace(sorryFor('mobile-not-supported'))
@@ -33,6 +33,10 @@ const MyApp: VFC<Omit<AppProps, 'pageProps'> & { pageProps: PageStaticProps }> =
         <GlobalStyles />
         <Favicons />
         <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
           <link rel="stylesheet" href={notoSansJpPath} />
         </Head>
         <Web3ReactProvider getLibrary={getLibrary}>

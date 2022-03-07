@@ -4,7 +4,9 @@ import styled, { css } from 'styled-components'
 
 export type InternalLink = '/' | `/${string}`
 
-type ExternalLinkProps = AnchorHTMLAttributes<HTMLAnchorElement>
+type ExternalLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+  newTab?: boolean
+}
 
 type InternalLinkProps = { href: InternalLink } & LinkProps & ExternalLinkProps
 
@@ -13,7 +15,7 @@ export type LinkFC = {
   (props: InternalLinkProps): JSX.Element
 }
 export const Link: LinkFC = styled(({ children, ...props }) => {
-  if (!props.href?.startsWith('/'))
+  if (props.newTab || !props.href?.startsWith('/'))
     return (
       <StyledAnchor
         {...props}
