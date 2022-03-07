@@ -27,7 +27,7 @@ export const CollateralModalBody: VFC<CollateralModalBodyProps> = ({
   ...estimationParams
 }) => {
   const {
-    asset,
+    asset: { priceInMarketReferenceCurrency },
     userSummary,
     userAssetBalance: { deposited, usageAsCollateralEnabled },
   } = estimationParams
@@ -52,7 +52,11 @@ export const CollateralModalBody: VFC<CollateralModalBodyProps> = ({
       />
       <Action>
         <NumberItems>
-          <NumberItem label={t`Deposited`} num={deposited} format={formatUSD} />
+          <NumberItem
+            label={t`Deposited`}
+            num={deposited.multipliedBy(priceInMarketReferenceCurrency)}
+            format={formatUSD}
+          />
           <NumberItemWithDiff
             label={t`Borrow Available`}
             current={availableBorrowsInUSD}
