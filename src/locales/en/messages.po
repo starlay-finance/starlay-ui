@@ -195,11 +195,13 @@ msgid "Borrowed"
 msgstr "Borrowed"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Borrow Limit Used"
 msgstr "Borrow Limit Used"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
 msgid "Health Factor"
@@ -212,6 +214,43 @@ msgstr "To repay all, you will pay more than the amount shown because of the int
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Liquidity"
 msgstr "Liquidity"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "ON"
+msgstr "ON"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "OFF"
+msgstr "OFF"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Collateral_Config"
+msgstr "Collateral_Config"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Collateral_Amount"
+msgstr "Collateral_Amount"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Borrow Available"
+msgstr "Borrow Available"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Disable"
+msgstr "Disable"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Enable"
+msgstr "Enable"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Deposited"
+msgstr "Deposited"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "All_Withdraw"
@@ -238,21 +277,12 @@ msgid "Deposit APR"
 msgstr "Deposit APR"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-msgid "Borrow Available"
-msgstr "Borrow Available"
-
-#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "This asset can't be used as collateral."
 msgstr "This asset can't be used as collateral."
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "For more information, please <0>see our docs</0>."
 msgstr "For more information, please <0>see our docs</0>."
-
-#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#: src/components/screens/Dashboard/parts/Market.tsx
-msgid "Deposited"
-msgstr "Deposited"
 
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
 msgid "Max"
@@ -274,16 +304,20 @@ msgid "APY_Deposit"
 msgstr "APY"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Collateral"
+msgstr "Collateral"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "APY_Borrow"
+msgstr "APY"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Deposit Markets"
 msgstr "Deposit Markets"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Borrow Markets"
 msgstr "Borrow Markets"
-
-#: src/components/screens/Dashboard/parts/Market.tsx
-msgid "APY_Borrow"
-msgstr "APY"
 
 #: src/components/screens/Dashboard/parts/Summary/BorrowLimit.tsx
 msgid "Borrow Limit"
@@ -526,9 +560,11 @@ msgstr "No liquidity to withdraw"
 
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Health factor too low"
 msgstr "Health factor too low"
 
+#: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 msgid "Borrowing limit reached"
 msgstr "Borrowing limit reached"
