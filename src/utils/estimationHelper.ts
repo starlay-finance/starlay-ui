@@ -384,9 +384,9 @@ export const estimateUsageAsCollateral = ({
     liquidationThreshold,
   })
   return {
-    unavailableReason: borrowLimitUsed
+    unavailableReason: borrowLimitUsed?.gt(BN_ONE)
       ? t`Borrow limit reached`
-      : currentBorrowed.isPositive() &&
+      : currentBorrowed.gt(BN_ZERO) &&
         !healthFactor.gte(HEALTH_FACTOR_THRESHOLD)
       ? t`Health factor too low`
       : undefined,

@@ -82,7 +82,9 @@ export const CollateralModalBody: VFC<CollateralModalBodyProps> = ({
           onClick={() => setUsageAsCollateral(!usageAsCollateralEnabled)}
           disabled={!!estimation.unavailableReason}
         >
-          {estimation.unavailableReason || t`Deposit`}
+          {estimation.unavailableReason || usageAsCollateralEnabled
+            ? t`Disable`
+            : t`Enable`}
         </SimpleCtaButton>
       </Action>
     </ContentDiv>

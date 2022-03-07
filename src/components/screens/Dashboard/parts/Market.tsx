@@ -122,7 +122,7 @@ export const Market = asStyled(({ className }) => {
                   : undefined,
                 collateral: user ? (
                   user.balanceByAsset[asset.symbol].deposited.isZero() ? (
-                    <CollateralToggle enabled={false} onClick={() => {}} />
+                    <CollateralToggle enabled={false} />
                   ) : (
                     <ClickDisableWrapper onClick={(e) => e.stopPropagation()}>
                       <CollateralToggle
@@ -204,10 +204,10 @@ const ClickDisableWrapper = styled.div`
 
 type CollateralToggleProps = {
   enabled: boolean
-  onClick: VoidFunction
+  onClick?: VoidFunction
 }
 const CollateralToggle: VFC<CollateralToggleProps> = ({ enabled, onClick }) => (
-  <Button $checked={enabled} onClick={onClick} />
+  <Button $checked={enabled} disabled={!onClick} onClick={onClick} />
 )
 
 const checkedStyle = css`
@@ -232,6 +232,9 @@ const Button = styled.button<{ $checked: boolean }>`
     top: 3px;
     left: 3px;
     transition: all 0.5s;
+  }
+  :disabled {
+    opacity: 0.5;
   }
   ${({ $checked }) => $checked && checkedStyle};
 `
