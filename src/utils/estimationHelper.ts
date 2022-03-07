@@ -1,7 +1,9 @@
 import { t } from '@lingui/macro'
 import {
   BigNumber,
-  calculateHealthFactorFromBalancesBigUnits,
+  calculateHealthFactorFromBalances,
+  LTV_PRECISION,
+  normalizeBN,
   valueToBigNumber,
 } from '@starlay-finance/math-utils'
 import {
@@ -29,6 +31,7 @@ export type EstimationParam = {
   userSummary: UserSummary
   userAssetBalance: UserAssetBalance
   marketReferenceCurrencyPriceInUSD: BigNumber
+  marketReferenceCurrencyDecimals: number
 }
 
 export const estimateDeposit = ({
@@ -36,6 +39,7 @@ export const estimateDeposit = ({
   userAssetBalance,
   userSummary,
   marketReferenceCurrencyPriceInUSD,
+  marketReferenceCurrencyDecimals,
   asset: {
     baseLTVasCollateral,
     priceInMarketReferenceCurrency,
@@ -83,6 +87,7 @@ export const estimateDeposit = ({
         amountInMarketReferenceCurrency,
       ),
     liquidationThreshold,
+    marketReferenceCurrencyDecimals,
   })
 
   return {
@@ -105,6 +110,7 @@ export const estimateWithdrawal = (
     userSummary,
     asset,
     marketReferenceCurrencyPriceInUSD,
+    marketReferenceCurrencyDecimals,
   } = params
   const {
     baseLTVasCollateral,
@@ -173,6 +179,7 @@ export const estimateWithdrawal = (
         amountInMarketReferenceCurrency,
       ),
     liquidationThreshold,
+    marketReferenceCurrencyDecimals,
   })
 
   const unavailableReason = withdrawUnavailableReason(
@@ -210,6 +217,7 @@ export const estimateBorrow = ({
   userSummary,
   asset: { priceInMarketReferenceCurrency, liquidity },
   marketReferenceCurrencyPriceInUSD,
+  marketReferenceCurrencyDecimals,
 }: EstimationParam): EstimationResult => {
   const {
     availableBorrowsInUSD: currentBorrowableInUSD,
@@ -250,6 +258,7 @@ export const estimateBorrow = ({
       ),
     totalCollateralInMarketReferenceCurrency,
     liquidationThreshold: currentLiquidationThreshold,
+    marketReferenceCurrencyDecimals,
   })
   const unavailableReason = borrowUnavailableReason(
     amount,
@@ -284,6 +293,7 @@ export const estimateRepayment = ({
   userSummary,
   asset: { priceInMarketReferenceCurrency },
   marketReferenceCurrencyPriceInUSD,
+  marketReferenceCurrencyDecimals,
 }: EstimationParam): EstimationResult => {
   const { borrowed: currentBorrowed, inWallet } = userAssetBalance
   const maxAmount = BigNumber.min(currentBorrowed, inWallet)
@@ -320,6 +330,7 @@ export const estimateRepayment = ({
       ),
     totalCollateralInMarketReferenceCurrency,
     liquidationThreshold: currentLiquidationThreshold,
+    marketReferenceCurrencyDecimals,
   })
 
   return {
@@ -341,6 +352,7 @@ export const estimateUsageAsCollateral = ({
     reserveLiquidationThreshold,
   },
   usageAsCollateralEnabled,
+  marketReferenceCurrencyDecimals,
 }: Omit<EstimationParam, 'amount'> & {
   usageAsCollateralEnabled: boolean
 }): Omit<EstimationResult, 'maxAmount'> => {
@@ -382,6 +394,7 @@ export const estimateUsageAsCollateral = ({
         amountInMarketReferenceCurrency,
       ),
     liquidationThreshold,
+    marketReferenceCurrencyDecimals,
   })
   return {
     unavailableReason: borrowLimitUsed?.gt(BN_ONE)
@@ -441,13 +454,21 @@ const calculateHealthFactor = (param: {
   totalCollateralInMarketReferenceCurrency: BigNumber
   totalBorrowedInMarketReferenceCurrency: BigNumber
   liquidationThreshold: BigNumber
+  marketReferenceCurrencyDecimals: number
 }) => {
-  const result = calculateHealthFactorFromBalancesBigUnits({
-    collateralBalanceMarketReferenceCurrency:
+  const result = calculateHealthFactorFromBalances({
+    collateralBalanceMarketReferenceCurrency: normalizeBN(
       param.totalCollateralInMarketReferenceCurrency,
-    borrowBalanceMarketReferenceCurrency:
+      -param.marketReferenceCurrencyDecimals,
+    ),
+    borrowBalanceMarketReferenceCurrency: normalizeBN(
       param.totalBorrowedInMarketReferenceCurrency,
-    currentLiquidationThreshold: param.liquidationThreshold,
+      -param.marketReferenceCurrencyDecimals,
+    ),
+    currentLiquidationThreshold: normalizeBN(
+      param.liquidationThreshold,
+      -LTV_PRECISION,
+    ),
   })
   if (param.totalBorrowedInMarketReferenceCurrency.isZero()) return result
   return result.isPositive() ? result : BN_ZERO

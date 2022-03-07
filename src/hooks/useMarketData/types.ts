@@ -10,6 +10,7 @@ import { AssetMarketData } from 'src/types/models'
 export type MarketData = {
   assets: AssetMarketData[]
   marketReferenceCurrencyPriceInUSD: BigNumber
+  marketReferenceCurrencyDecimals: number
   marketTimestamp: number
   chainId: ChainId
 } & MarketDataRaw

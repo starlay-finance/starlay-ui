@@ -39,11 +39,12 @@ const BORROW_MARKET_COLUMNS = [
 export const Market = asStyled(({ className }) => {
   const { account } = useWallet()
   const { data: marketData } = useMarketData()
-  const markets = (marketData?.assets || [])
-    .filter((each) => each.isActive)
-    .sort(symbolSorter)
-  const marketReferenceCurrencyPriceInUSD =
-    marketData?.marketReferenceCurrencyPriceInUSD || BN_ZERO
+  const {
+    assets = [],
+    marketReferenceCurrencyPriceInUSD = BN_ZERO,
+    marketReferenceCurrencyDecimals = 0,
+  } = marketData || {}
+  const markets = assets.filter((each) => each.isActive).sort(symbolSorter)
 
   const { data: user } = useUserData()
   const { data: balance } = useWalletBalance()
@@ -61,6 +62,7 @@ export const Market = asStyled(({ className }) => {
         inWallet: balance[asset.symbol],
       },
       marketReferenceCurrencyPriceInUSD,
+      marketReferenceCurrencyDecimals,
     })
   }
 
@@ -73,6 +75,7 @@ export const Market = asStyled(({ className }) => {
         inWallet: balance[asset.symbol],
       },
       marketReferenceCurrencyPriceInUSD,
+      marketReferenceCurrencyDecimals,
     })
   }
   const setUsageAsCollateral = (user: User, asset: AssetMarketData) => {
@@ -84,6 +87,7 @@ export const Market = asStyled(({ className }) => {
         inWallet: balance[asset.symbol],
       },
       marketReferenceCurrencyPriceInUSD,
+      marketReferenceCurrencyDecimals,
     })
   }
 

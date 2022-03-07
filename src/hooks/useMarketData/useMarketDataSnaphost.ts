@@ -20,12 +20,12 @@ const getMarketDataSnapshot = async (
 ): Promise<Omit<MarketData, keyof MarketDataRaw> | undefined> => {
   const timestamp = utcStartOfDate()
   const res = await getPoolDataSnapshot(chainId, timestamp)
-  console.log(res)
   if (!res) return
   const {
     reservesData,
     incentivesByUnderlyingAsset,
     marketReferenceCurrencyPriceInUSD,
+    marketReferenceCurrencyDecimals,
   } = res
   const assets = reservesData
     .filter(onlyListed)
@@ -39,6 +39,7 @@ const getMarketDataSnapshot = async (
   return {
     assets,
     marketReferenceCurrencyPriceInUSD,
+    marketReferenceCurrencyDecimals,
     marketTimestamp: timestamp.unix(),
     chainId,
   }

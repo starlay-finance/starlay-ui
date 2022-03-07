@@ -33,6 +33,7 @@ const DepositModal = () => (
       userSummary={MOCK_USER_SUMMARY}
       userAssetBalance={MOCK_USER_ASSET_BALANCE}
       marketReferenceCurrencyPriceInUSD={BN_ZERO}
+      marketReferenceCurrencyDecimals={0}
       close={() => {}}
     />
   </DefaultModalContainer>
@@ -45,6 +46,7 @@ const BorrowModal = () => (
       userSummary={MOCK_USER_SUMMARY}
       userAssetBalance={MOCK_USER_ASSET_BALANCE}
       marketReferenceCurrencyPriceInUSD={BN_ZERO}
+      marketReferenceCurrencyDecimals={0}
       close={() => {}}
     />
   </DefaultModalContainer>
