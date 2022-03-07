@@ -1,20 +1,18 @@
 import { t } from '@lingui/macro'
 import { VFC } from 'react'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
-import {
-  NumberItem,
-  NumberItemWithDiff,
-} from 'src/components/parts/Modal/parts'
+import { NumberItemWithDiff } from 'src/components/parts/Modal/parts'
 import { ItemWithDiff } from 'src/components/parts/Modal/parts/Item'
 import { fontWeightSemiBold } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
+import { convertToUSD } from 'src/utils/calculator'
 import {
   estimateUsageAsCollateral,
   EstimationParam,
 } from 'src/utils/estimationHelper'
 import { formatAmtShort, formatPct, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
-import { Action, ContentDiv, NumberItems, Tab, TabFC } from '../parts'
+import { Action, Balance, ContentDiv, NumberItems, Tab, TabFC } from '../parts'
 
 const TABS = ['collateral'] as const
 
@@ -27,17 +25,32 @@ export const CollateralModalBody: VFC<CollateralModalBodyProps> = ({
   ...estimationParams
 }) => {
   const {
-    asset,
-    userSummary,
+    asset: { priceInMarketReferenceCurrency, symbol, displaySymbol },
     userAssetBalance: { deposited, usageAsCollateralEnabled },
+    userSummary,
+    marketReferenceCurrencyPriceInUSD,
   } = estimationParams
-  const { availableBorrowsInUSD, borrowLimitUsed, healthFactor } = userSummary
+  const {
+    totalCollateralInMarketReferenceCurrency,
+    availableBorrowsInUSD,
+    borrowLimitUsed,
+    healthFactor,
+  } = userSummary
 
   const estimation = estimateUsageAsCollateral({
     ...estimationParams,
     usageAsCollateralEnabled: !usageAsCollateralEnabled,
   })
 
+  const totalCollateralInUSD =
+    totalCollateralInMarketReferenceCurrency.multipliedBy(
+      marketReferenceCurrencyPriceInUSD,
+    )
+  const assetCollateralInUSD = convertToUSD(
+    priceInMarketReferenceCurrency,
+    marketReferenceCurrencyPriceInUSD,
+    deposited,
+  )
   return (
     <ContentDiv>
       <CollateralItemDiff
@@ -46,13 +59,22 @@ export const CollateralModalBody: VFC<CollateralModalBodyProps> = ({
       />
       <ActionTab
         tabs={TABS}
-        contents={{ collateral: { label: t`Collateral` } }}
+        contents={{ collateral: { label: t`Collateral_Config` } }}
         activeTab="collateral"
         onChangeActiveTab={() => {}}
       />
       <Action>
         <NumberItems>
-          <NumberItem label={t`Deposited`} num={deposited} format={formatUSD} />
+          <NumberItemWithDiff
+            label={t`Collateral_Amount`}
+            current={totalCollateralInUSD}
+            after={totalCollateralInUSD.plus(
+              usageAsCollateralEnabled
+                ? assetCollateralInUSD.negated()
+                : assetCollateralInUSD,
+            )}
+            formatter={formatUSD}
+          />
           <NumberItemWithDiff
             label={t`Borrow Available`}
             current={availableBorrowsInUSD}
@@ -82,10 +104,14 @@ export const CollateralModalBody: VFC<CollateralModalBodyProps> = ({
           onClick={() => setUsageAsCollateral(!usageAsCollateralEnabled)}
           disabled={!!estimation.unavailableReason}
         >
-          {estimation.unavailableReason || usageAsCollateralEnabled
-            ? t`Disable`
-            : t`Enable`}
+          {estimation.unavailableReason ||
+            (usageAsCollateralEnabled ? t`Disable` : t`Enable`)}
         </SimpleCtaButton>
+        <Balance
+          label={t`Deposited`}
+          balance={deposited}
+          symbol={displaySymbol || symbol}
+        />
       </Action>
     </ContentDiv>
   )

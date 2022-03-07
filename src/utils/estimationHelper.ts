@@ -398,7 +398,7 @@ export const estimateUsageAsCollateral = ({
   })
   return {
     unavailableReason: borrowLimitUsed?.gt(BN_ONE)
-      ? t`Borrow limit reached`
+      ? t`Borrowing limit reached`
       : currentBorrowed.gt(BN_ZERO) &&
         !healthFactor.gte(HEALTH_FACTOR_THRESHOLD)
       ? t`Health factor too low`

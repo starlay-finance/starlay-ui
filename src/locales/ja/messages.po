@@ -195,11 +195,13 @@ msgid "Borrowed"
 msgstr "借入残高"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Borrow Limit Used"
 msgstr "担保利用率"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
 msgid "Health Factor"
@@ -212,6 +214,43 @@ msgstr "利息は1秒ごとに発生するため、全額返済には表示よ�
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Liquidity"
 msgstr "流動性"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "ON"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "OFF"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Collateral_Config"
+msgstr "担保利用設定"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Collateral_Amount"
+msgstr "担保額"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Borrow Available"
+msgstr "借入可能額"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Disable"
+msgstr "担保利用を停止する"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Enable"
+msgstr "担保利用する"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Deposited"
+msgstr "預入残高"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "All_Withdraw"
@@ -238,21 +277,12 @@ msgid "Deposit APR"
 msgstr "ボーナスAPR"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-msgid "Borrow Available"
-msgstr "借入可能額"
-
-#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "This asset can't be used as collateral."
 msgstr "このトークンは担保利用できません。"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "For more information, please <0>see our docs</0>."
 msgstr "詳細は<0>ドキュメント</0>を参照してください。"
-
-#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#: src/components/screens/Dashboard/parts/Market.tsx
-msgid "Deposited"
-msgstr "預入残高"
 
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
 msgid "Max"
@@ -274,16 +304,20 @@ msgid "APY_Deposit"
 msgstr "預入APY"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Collateral"
+msgstr "担保額"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "APY_Borrow"
+msgstr "借入APY"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Deposit Markets"
 msgstr "預入金利"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Borrow Markets"
 msgstr "借入金利"
-
-#: src/components/screens/Dashboard/parts/Market.tsx
-msgid "APY_Borrow"
-msgstr "借入APY"
 
 #: src/components/screens/Dashboard/parts/Summary/BorrowLimit.tsx
 msgid "Borrow Limit"
@@ -353,7 +387,7 @@ msgstr "担保利用可否"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Loan to Value"
-msgstr "担保評価率"
+msgstr "融資比率"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Liquidation Threshold"
@@ -530,9 +564,11 @@ msgstr "流動性がありません"
 
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Health factor too low"
 msgstr "ヘルスファクターが閾値を下回っています"
 
+#: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 msgid "Borrowing limit reached"
 msgstr "借入上限額を超えています"
