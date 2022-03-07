@@ -36,8 +36,8 @@ msgid "Support"
 msgstr "サポート"
 
 #: src/components/parts/Footer/TopFooter.tsx
-msgid "Starlay Finance is the first lending protocol backed by Astar Network."
-msgstr "Starlay Finance は Astar インキュベーションプログラムに採択された唯一のレンディングプロトコルです。"
+msgid "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
+msgstr "Starlay Finance は Polkadot エコシステム最大のレンディングプロトコルです。"
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/screens/Top/Menu.tsx
@@ -371,7 +371,9 @@ msgstr ""
 #: src/components/screens/Top/Menu.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
-msgstr "Starlay Finance は現在モバイル端末からのアクセスをサポートしていません。\nPCからアクセスしてください。"
+msgstr ""
+"Starlay Finance は現在モバイル端末からのアクセスをサポートしていません。\n"
+"PCからアクセスしてください。"
 
 #: src/components/screens/Sorry/reasons.ts
 msgid "Something went wrong. Please go back."
@@ -409,8 +411,8 @@ msgstr ""
 "流動性を創出する"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "Starlay Finance is the first lending protocol backed by Astar Network"
-msgstr "Astar Network が支援する唯一のレンディングプロトコル"
+msgid "The largest lending protocol in the Polkadot ecosystem"
+msgstr "Polkadot エコシステム最大のレンディングプロトコル"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"
