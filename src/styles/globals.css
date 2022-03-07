@@ -44,3 +44,9 @@ input[type='checkbox'] {
 input[type='range']::-webkit-slider-thumb {
   opacity: 0;
 }
+
+input[type='radio'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

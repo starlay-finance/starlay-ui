@@ -26,7 +26,7 @@ export const FirstView = asStyled(({ className }) => {
           <div>{t`Low Risk Farming on Astar Network`}</div>
         </h1>
         <div>
-          <SubTitle>{t`Starlay Finance is the first lending protocol backed by Astar Network`}</SubTitle>
+          <SubTitle>{t`The largest lending protocol in the Polkadot ecosystem`}</SubTitle>
           <Control>
             <GradientCtaLink href={APP} newTab>{t`Launch App`}</GradientCtaLink>
             <GradientCtaButton

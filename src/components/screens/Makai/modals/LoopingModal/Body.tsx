@@ -48,6 +48,7 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
     userSummary,
     userAssetBalance,
     marketReferenceCurrencyPriceInUSD,
+    marketReferenceCurrencyDecimals,
   } = estimationParams
   const { symbol, displaySymbol, baseLTVasCollateral } = asset
   const { inWallet } = userAssetBalance
@@ -60,6 +61,7 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
     userSummary,
     userAssetBalance,
     marketReferenceCurrencyPriceInUSD,
+    marketReferenceCurrencyDecimals,
     leverage,
   })
   const formatter = (num: BigNumber) =>

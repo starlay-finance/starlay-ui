@@ -162,4 +162,11 @@ const ValuesTd = styled.div`
   }
 `
 
-const DetailsSection = styled.section``
+const DetailsSection = styled.section`
+  // temporary
+  tr:first-child {
+    td:nth-child(n + 5) {
+      opacity: 0.5;
+    }
+  }
+`

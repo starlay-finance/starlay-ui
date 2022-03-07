@@ -31,8 +31,11 @@ export const MakaiMarkets = asStyled(({ className }) => {
   const { data: balances } = useWalletBalance()
   const { open: openWalletModal } = useWalletModal()
   const { open: openLoopingModal } = useLoopingModal()
-  const { assets, marketReferenceCurrencyPriceInUSD = BN_ZERO } =
-    marketData || {}
+  const {
+    assets,
+    marketReferenceCurrencyPriceInUSD = BN_ZERO,
+    marketReferenceCurrencyDecimals = 0,
+  } = marketData || {}
   const markets = (assets || [])
     .filter((each) => each.isActive)
     .sort(symbolSorter)
@@ -51,6 +54,7 @@ export const MakaiMarkets = asStyled(({ className }) => {
                     openLoopingModal({
                       asset,
                       marketReferenceCurrencyPriceInUSD,
+                      marketReferenceCurrencyDecimals,
                       userSummary: userData.summary,
                       userAssetBalance: {
                         ...userData.balanceByAsset[asset.symbol],

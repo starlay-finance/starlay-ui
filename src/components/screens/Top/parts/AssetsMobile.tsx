@@ -36,15 +36,21 @@ export const AssetsComponent: VFC<AssetsComponentProps & AsStyledProps> = ({
   <AssetsDiv className={className} $appeared>
     {assets.map((each, idx) => {
       const market = markets.find(({ symbol }) => symbol === each.symbol)
-      return <AssetItem key={idx} asset={each} market={market} appeared />
+      return (
+        <AssetItem key={idx} asset={each} market={market} appeared disabled />
+      )
     })}
     {assets.map((each, idx) => {
       const market = markets.find(({ symbol }) => symbol === each.symbol)
-      return <AssetItem key={idx} asset={each} market={market} appeared />
+      return (
+        <AssetItem key={idx} asset={each} market={market} appeared disabled />
+      )
     })}
     {assets.map((each, idx) => {
       const market = markets.find(({ symbol }) => symbol === each.symbol)
-      return <AssetItem key={idx} asset={each} market={market} appeared />
+      return (
+        <AssetItem key={idx} asset={each} market={market} appeared disabled />
+      )
     })}
   </AssetsDiv>
 )
@@ -67,10 +73,10 @@ const AssetsDiv = styled.div<{ $appeared: boolean }>`
   gap: 24px;
   animation: ${assetsSlideKeyframes} 200s infinite linear;
   :nth-child(1) {
-    animation-delay: -7s;
+    animation-delay: -14s;
   }
   :nth-child(2) {
-    animation-delay: -117s;
+    animation-delay: -124s;
   }
 `
 

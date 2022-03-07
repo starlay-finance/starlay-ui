@@ -4,14 +4,14 @@ import { useInView } from 'react-hook-inview'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { secondary } from 'src/styles/colors'
+import { darkRed, secondary, skyBlue } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
 import {
   breakpoint,
   contentMaxWidthCssVar,
   flexCenter,
 } from 'src/styles/mixins'
-import styled, { css, CSSProperties } from 'styled-components'
+import styled, { css, CSSProperties, keyframes } from 'styled-components'
 import { RequireExactlyOne } from 'type-fest'
 import { backersAnimation } from './animation'
 
@@ -88,6 +88,17 @@ const ImageContainer = styled.div`
   }
 `
 
+const hoverBackgroundKeyframes = keyframes`
+  0% {
+    opacity: 1;
+    background-position: 0%;
+  }
+  100% {
+    opacity: 1;
+    background-position: -300%;
+  }
+`
+
 const ImageDiv = styled.div`
   ${flexCenter};
   position: relative;
@@ -101,6 +112,18 @@ const ImageDiv = styled.div`
     position: absolute;
     inset: 0;
     ${flexCenter};
+  }
+  transition: transform 0.1s ease-in;
+  :hover {
+    transform: translateY(2px);
+    background: linear-gradient(
+      90deg,
+      ${darkRed}3d,
+      ${skyBlue}3d,
+      ${darkRed}3d
+    );
+    background-size: 300%;
+    animation: ${hoverBackgroundKeyframes} 10s infinite linear;
   }
 `
 

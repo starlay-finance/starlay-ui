@@ -36,8 +36,8 @@ msgid "Support"
 msgstr "Support"
 
 #: src/components/parts/Footer/TopFooter.tsx
-msgid "Starlay Finance is the first lending protocol backed by Astar Network."
-msgstr "Starlay Finance is the first lending protocol backed by Astar Network."
+msgid "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
+msgstr "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/screens/Top/Menu.tsx
@@ -453,8 +453,8 @@ msgid "Low Risk Farming on Astar Network"
 msgstr "Low Risk Farming on Astar Network"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "Starlay Finance is the first lending protocol backed by Astar Network"
-msgstr "Starlay Finance is the first lending protocol backed by Astar Network"
+msgid "The largest lending protocol in the Polkadot ecosystem"
+msgstr "The largest lending protocol in the Polkadot ecosystem"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"

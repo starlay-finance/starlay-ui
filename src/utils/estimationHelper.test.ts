@@ -734,6 +734,7 @@ const BN_NEGATIVE = valueToBigNumber('-1')
 const BASE_PARAMS: EstimationParam = {
   asset: MOCK_ASSET_MARKET,
   marketReferenceCurrencyPriceInUSD: BN_HUNDRED,
+  marketReferenceCurrencyDecimals: 18,
   userSummary: MOCK_USER_SUMMARY,
   userAssetBalance: MOCK_USER_ASSET_BALANCE,
 }
@@ -747,6 +748,7 @@ const param = (diff: PartialDeep<EstimationParam>): EstimationParam => ({
   marketReferenceCurrencyPriceInUSD:
     diff.marketReferenceCurrencyPriceInUSD ||
     BASE_PARAMS.marketReferenceCurrencyPriceInUSD,
+  marketReferenceCurrencyDecimals: BASE_PARAMS.marketReferenceCurrencyDecimals,
   // @ts-ignore
   userAssetBalance: {
     ...BASE_PARAMS.userAssetBalance,
