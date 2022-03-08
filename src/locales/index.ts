@@ -4,10 +4,19 @@ import { messages as messagesJa } from 'src/locales/ja/messages.po'
 import { messages as messagesKo } from 'src/locales/ko/messages.po'
 import { messages as messagesTr } from 'src/locales/tr/messages.po'
 import { messages as messagesVi } from 'src/locales/vi/messages.po'
+import { messages as messagesZh } from 'src/locales/zh/messages.po'
 
 export type Locale = typeof SUPPORTED_LOCALES[number]
 
-export const SUPPORTED_LOCALES = ['en', 'id', 'ja', 'ko', 'tr', 'vi'] as const
+export const SUPPORTED_LOCALES = [
+  'en',
+  'id',
+  'ja',
+  'ko',
+  'tr',
+  'vi',
+  'zh',
+] as const
 
 export const DEFAULT_LOCALE: Locale = 'en'
 
@@ -21,6 +30,7 @@ export const MESSAGES: Record<Locale, any> = {
   ko: messagesKo,
   tr: messagesTr,
   vi: messagesVi,
+  zh: messagesZh,
 }
 
 export const LOCALES_DICT: Record<Locale, string> = {
@@ -30,4 +40,5 @@ export const LOCALES_DICT: Record<Locale, string> = {
   ko: '한국어',
   tr: 'Türkçe',
   vi: 'Tiếng Việt',
+  zh: '中文（简体）',
 }
