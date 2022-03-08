@@ -20,9 +20,9 @@ import styled, { css } from 'styled-components'
 import { useLoopingModal } from './modals/LoopingModal'
 
 const COLUMNS = [
-  { id: 'asset', name: t`Asset`, widthRatio: 1 },
-  { id: 'makaiAPR', name: t`Makai APR`, widthRatio: 1 },
-  { id: 'wallet', name: t`Wallet_Balance`, widthRatio: 1 },
+  { id: 'asset', name: t`Asset`, widthRatio: 2 },
+  { id: 'makaiAPR', name: t`Makai APR`, widthRatio: 5 },
+  { id: 'wallet', name: t`Wallet_Balance`, widthRatio: 5 },
 ]
 
 export const MakaiMarkets = asStyled(({ className }) => {
@@ -122,7 +122,7 @@ const marketRow = ({
       ) : (
         <BlinkWrapper value={displayMakaiAPR}>{displayMakaiAPR}</BlinkWrapper>
       ),
-      wallet: formatAmt(balance, { symbol: asset.symbol }),
+      wallet: formatAmt(balance, { symbol: asset.symbol, decimalPlaces: 2 }),
     },
   }
 }
