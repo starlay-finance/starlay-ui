@@ -11,10 +11,12 @@ import {
 import { ASSETS_DICT } from 'src/constants/assets'
 import {
   blue,
+  cream,
   darkPurple,
   darkRed,
   lightYellow,
   purple,
+  trueBlack,
   trueWhite,
 } from 'src/styles/colors'
 import { ltvToLoopingLeverage } from 'src/utils/calculator'
@@ -85,15 +87,14 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
       />
       <Action>
         <NumberItems>
-          <NumberItem
-            label={t`Deposit APY`}
-            num={estimation.depositAPY}
-            image={{ src: asset.icon, alt: asset.name }}
-            format={formatter}
+          <Leverage
+            setLeverage={setLeverage}
+            current={leverage}
+            max={BN_ONE.div(BN_ONE.minus(baseLTVasCollateral))}
           />
           <NumberItem
-            label={t`Borrow APY`}
-            num={estimation.borrowAPY}
+            label={t`Net APY`}
+            num={estimation.depositAPY.minus(estimation.borrowAPY)}
             image={{ src: asset.icon, alt: asset.name }}
             format={formatter}
           />
@@ -101,6 +102,11 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
             label={t`Reward APR`}
             num={estimation.rewardAPR}
             image={{ src: ASSETS_DICT.LAY.icon, alt: ASSETS_DICT.LAY.name }}
+            format={formatter}
+          />
+          <NumberItem
+            label={t`Estimated Net APY`}
+            num={estimation.netAPY}
             format={formatter}
           />
           <NumberItemWithDiff
@@ -114,16 +120,6 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
                 : '-'
             }
             formatter={formatAmtShort}
-          />
-          <Leverage
-            setLeverage={setLeverage}
-            current={leverage}
-            max={BN_ONE.div(BN_ONE.minus(baseLTVasCollateral))}
-          />
-          <NumberItem
-            label={t`Estimated Net APY`}
-            num={estimation.netAPY}
-            format={formatter}
           />
         </NumberItems>
         <SimpleCtaButton
@@ -190,7 +186,10 @@ const Leverage = asStyled<{
         </>
       ) : (
         <LeverageSlider>
-          <button onClick={toggleCustomActive}>{t`Custom Leverage`}</button>
+          <div>
+            <button onClick={toggleCustomActive}>{t`Custom Leverage`}</button>
+            <span>{formatAmt(current, { decimalPlaces: 2 })}x</span>
+          </div>
           <Barometer
             ratio={current.minus(BN_ONE).div(max.minus(BN_ONE)).toNumber()}
             colors={[blue, lightYellow, darkRed]}
@@ -198,7 +197,7 @@ const Leverage = asStyled<{
             rangeInputProps={{
               min: 1,
               max: max.toNumber(),
-              step: 0.00000001,
+              step: 0.01,
               onChange: ({ target: { value } }) => {
                 setLeverage(valueToBigNumber(value))
               },
@@ -210,13 +209,14 @@ const Leverage = asStyled<{
   )
 })`
   margin-top: 24px;
-  height: 80px;
+  height: 96px;
+  border-bottom: 1px solid ${trueBlack}3a;
 `
 const barometerStyle = css`
   height: 4px;
 `
 const thumbStyle = css`
-  border: 4px solid #fbfbfb;
+  border: 4px solid ${cream};
   width: 20px;
   height: 20px;
 `
@@ -263,34 +263,42 @@ const LeverageSlider = styled.div`
   ${Barometer} {
     margin-top: 32px;
   }
-  button {
-    position: relative;
-    padding-left: 32px;
-    :hover {
-      color: ${purple}80;
-      ::after {
-        opacity: 0.5;
+  > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      color: ${trueBlack};
+    }
+    button {
+      position: relative;
+      padding-left: 32px;
+      :hover {
+        color: ${purple}80;
+        ::after {
+          opacity: 0.5;
+        }
       }
-    }
-    ::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      width: 22px;
-      height: 22px;
-      border-radius: 8px;
-      border: 2px solid ${darkPurple}7a;
-      background: radial-gradient(${purple}00, ${purple}3d);
-    }
-    ::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      width: 10px;
-      height: 10px;
-      margin: 6px;
-      border-radius: 50%;
-      background: ${purple};
+      ::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 22px;
+        height: 22px;
+        border-radius: 8px;
+        border: 2px solid ${darkPurple}7a;
+        background: radial-gradient(${purple}00, ${purple}3d);
+      }
+      ::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 10px;
+        height: 10px;
+        margin: 6px;
+        border-radius: 50%;
+        background: ${purple};
+      }
     }
   }
 `

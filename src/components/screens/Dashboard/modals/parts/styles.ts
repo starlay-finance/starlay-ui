@@ -1,13 +1,12 @@
 import { SimpleCtaButton } from 'src/components/parts/Cta'
-import { trueBlack } from 'src/styles/colors'
+import { cream, trueBlack } from 'src/styles/colors'
 import { fontWeightRegular, fontWeightSemiBold } from 'src/styles/font'
 import styled from 'styled-components'
 import { Balance } from './Balance'
 import { Tab } from './Tab'
 
 export const Action = styled.div`
-  backdrop-filter: blur(16px) brightness(1.04);
-  background-color: rgba(255, 255, 255, 0.04);
+  background-color: ${cream};
   font-size: 18px;
   font-weight: ${fontWeightSemiBold};
 `
