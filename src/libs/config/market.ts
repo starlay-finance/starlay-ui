@@ -26,6 +26,7 @@ export type MarketDataType = {
     REPAY_WITH_COLLATERAL_ADAPTER?: EthereumAddress
     FAUCET?: EthereumAddress
     PERMISSION_MANAGER?: EthereumAddress
+    LEVERAGER?: EthereumAddress
   }
 }
 

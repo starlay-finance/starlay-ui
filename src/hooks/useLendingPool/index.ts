@@ -1,7 +1,9 @@
 import { InterestRate } from '@starlay-finance/contract-helpers'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { ethers } from 'ethers'
+import { getMarketConfig } from 'src/libs/config'
 import { lendingPoolContract } from 'src/libs/lending-pool'
+import { leveragerContract } from 'src/libs/leverager'
 import { EthereumAddress } from 'src/types/web3'
 import useSWRImmutable from 'swr/immutable'
 import { useStaticRPCProvider } from '../useStaticRPCProvider'
@@ -15,6 +17,14 @@ export const useLendingPool = (
   const { data: lendingPool } = useSWRImmutable(
     provider && ['lendingpool', provider.chainId],
     () => lendingPoolContract(provider!),
+  )
+  const { data: leverager } = useSWRImmutable(
+    provider && ['lendingpool', provider.chainId],
+    () => {
+      const { LEVERAGER } = getMarketConfig(provider!.chainId).addresses
+      if (!LEVERAGER) return undefined
+      return leveragerContract(provider!, LEVERAGER)
+    },
   )
   const { handleTx } = useTxHandler()
 
@@ -97,5 +107,27 @@ export const useLendingPool = (
     )
   }
 
-  return { deposit, withdraw, borrow, repay, setUsageAsCollateral }
+  const loop = async (
+    amount: BigNumber,
+    underlyingAsset: EthereumAddress,
+    debtToken: EthereumAddress,
+    borrowRatio: BigNumber,
+    loopCount: number,
+  ) => {
+    if (!leverager || !account || !signer) throw new Error('Unexpected state')
+    return handleTx(
+      await leverager.loop({
+        user: account,
+        reserve: underlyingAsset,
+        amount: amount.toString(),
+        debtToken,
+        interestRateMode: InterestRate.Variable,
+        borrowRatio: borrowRatio.toString(),
+        loopCount,
+      }),
+      signer,
+    )
+  }
+
+  return { deposit, withdraw, borrow, repay, setUsageAsCollateral, loop }
 }

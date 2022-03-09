@@ -41,9 +41,12 @@ import {
 
 const TABS = ['loop'] as const
 
-export type LoopingModalBodyProps = Omit<EstimationParam, 'amount'> & {}
+export type LoopingModalBodyProps = Omit<EstimationParam, 'amount'> & {
+  loop: (amount: BigNumber, leverage: BigNumber) => Promise<void>
+}
 
 export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
+  loop,
   ...estimationParams
 }) => {
   const {
@@ -123,7 +126,7 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
           />
         </NumberItems>
         <SimpleCtaButton
-          onClick={() => {}}
+          onClick={() => loop(valueToBigNumber(depositAmount), leverage)}
           disabled={!!estimation.unavailableReason}
         >
           {estimation.unavailableReason || t`Start loops`}

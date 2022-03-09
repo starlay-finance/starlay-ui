@@ -184,7 +184,6 @@ msgid "Repay"
 msgstr "Repay"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Borrow APY"
@@ -201,11 +200,13 @@ msgid "Borrowed"
 msgstr "Borrowed"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Borrow Limit Used"
 msgstr "Borrow Limit Used"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
@@ -219,6 +220,40 @@ msgstr "To repay all, you will pay more than the amount shown because of the int
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Liquidity"
 msgstr "Liquidity"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "ON"
+msgstr "ON"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "OFF"
+msgstr "OFF"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Collateral"
+msgstr "Collateral"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Deposited"
+msgstr "Deposited"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Borrow Available"
+msgstr "Borrow Available"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Disable"
+msgstr "Disable"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Enable"
+msgstr "Enable"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "All_Withdraw"
@@ -235,7 +270,6 @@ msgid "Withdraw"
 msgstr "Withdraw"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Deposit APY"
@@ -246,21 +280,12 @@ msgid "Deposit APR"
 msgstr "Deposit APR"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-msgid "Borrow Available"
-msgstr "Borrow Available"
-
-#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "This asset can't be used as collateral."
 msgstr "This asset can't be used as collateral."
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "For more information, please <0>see our docs</0>."
 msgstr "For more information, please <0>see our docs</0>."
-
-#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#: src/components/screens/Dashboard/parts/Market.tsx
-msgid "Deposited"
-msgstr "Deposited"
 
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
 msgid "Max"
@@ -284,6 +309,10 @@ msgid "APY_Deposit"
 msgstr "APY"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
+msgid "APY_Borrow"
+msgstr "APY"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Deposit Markets"
 msgstr "Deposit Markets"
 
@@ -291,15 +320,12 @@ msgstr "Deposit Markets"
 msgid "Borrow Markets"
 msgstr "Borrow Markets"
 
-#: src/components/screens/Dashboard/parts/Market.tsx
-msgid "APY_Borrow"
-msgstr "APY"
-
 #: src/components/screens/Dashboard/parts/Summary/BorrowLimit.tsx
 msgid "Borrow Limit"
 msgstr "Borrow Limit"
 
 #: src/components/screens/Dashboard/parts/Summary/NetAPY.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Net APY"
 msgstr "Net APY"
 
@@ -322,6 +348,14 @@ msgstr "Wallet"
 #: src/components/screens/Makai/MakaiMarkets.tsx
 msgid "Makai Markets"
 msgstr "Makai Markets"
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Unclaimed Reward"
+msgstr "Unclaimed Reward"
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Claim"
+msgstr "Claim"
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Makai Loops"
@@ -478,6 +512,7 @@ msgstr "Waiting for transaction to be ready..."
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Confirm Transaction"
 msgstr "Confirm Transaction"
 
@@ -487,13 +522,19 @@ msgstr "Approve sending the ERC-20 asset to the pool."
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Transaction Pending"
 msgstr "Transaction Pending"
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Waiting for the transaction to be confirmed..."
 msgstr "Waiting for the transaction to be confirmed..."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Approve the contract to borrow ERC-20 assets on your credit."
+msgstr "Approve the contract to borrow ERC-20 assets on your credit."
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Confirm the transaction."
@@ -574,6 +615,7 @@ msgstr "No liquidity to withdraw"
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Health factor too low"
 msgstr "Health factor too low"
 
@@ -596,3 +638,7 @@ msgstr "Enter leverage"
 #: src/utils/estimationHelper.ts
 msgid "No balance to loop"
 msgstr "No balance to loop"
+
+#: src/utils/estimationHelper.ts
+msgid "Borrow limit reached"
+msgstr "Borrow limit reached"

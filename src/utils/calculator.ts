@@ -88,8 +88,27 @@ export const calculateLoopingAPR = (params: {
     .plus(maxBorrow.multipliedBy(params.variableBorrowIncentiveAPR))
     .div(base)
 }
+
 export const ltvToLoopingLeverage = (ltv: BigNumber) =>
   BN_ONE.div(BN_ONE.minus(ltv))
+
+export const loopingLeverageToLtv = (leverage: BigNumber) =>
+  BN_ONE.minus(BN_ONE.div(leverage))
+
+export const significantLoopingCount = (
+  leverage: BigNumber,
+  significantDigits = 1,
+  maxCount = 40,
+) => {
+  const ltv = loopingLeverageToLtv(leverage)
+  let currentleverage = BN_ONE
+  const significantNum = BN_ONE.shiftedBy(significantDigits * -1)
+  for (let i = 1; i < 40; i++) {
+    currentleverage = currentleverage.multipliedBy(ltv)
+    if (leverage.minus(currentleverage).lt(significantNum)) return i
+  }
+  return maxCount
+}
 
 export const convertToUSD = (
   priceInMarketReferenceCurrency: BigNumber,
