@@ -102,10 +102,13 @@ export const significantLoopingCount = (
 ) => {
   const ltv = loopingLeverageToLtv(leverage)
   let currentleverage = BN_ONE
+  let prevLtv = ltv
   const significantNum = BN_ONE.shiftedBy(significantDigits * -1)
   for (let i = 1; i < 40; i++) {
-    currentleverage = currentleverage.multipliedBy(ltv)
-    if (leverage.minus(currentleverage).lt(significantNum)) return i
+    currentleverage = currentleverage.plus(prevLtv)
+    prevLtv = prevLtv.multipliedBy(ltv)
+    if (leverage.minus(currentleverage).lt(significantNum))
+      return Math.max(i, 2)
   }
   return maxCount
 }

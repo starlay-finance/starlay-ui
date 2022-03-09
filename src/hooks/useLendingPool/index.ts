@@ -19,7 +19,7 @@ export const useLendingPool = (
     () => lendingPoolContract(provider!),
   )
   const { data: leverager } = useSWRImmutable(
-    provider && ['lendingpool', provider.chainId],
+    provider && ['leverager', provider.chainId],
     () => {
       const { LEVERAGER } = getMarketConfig(provider!.chainId).addresses
       if (!LEVERAGER) return undefined
@@ -123,7 +123,7 @@ export const useLendingPool = (
         debtToken,
         interestRateMode: InterestRate.Variable,
         borrowRatio: borrowRatio.toString(),
-        loopCount,
+        loopCount: loopCount.toString(),
       }),
       signer,
     )

@@ -23,6 +23,7 @@ import { ltvToLoopingLeverage } from 'src/utils/calculator'
 import { estimateLooping, EstimationParam } from 'src/utils/estimationHelper'
 import {
   BN_ONE,
+  BN_ZERO,
   formatAmt,
   formatAmtShort,
   formatPct,
@@ -126,7 +127,9 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
           />
         </NumberItems>
         <SimpleCtaButton
-          onClick={() => loop(valueToBigNumber(depositAmount), leverage)}
+          onClick={() =>
+            loop(formattedToBigNumber(depositAmount) || BN_ZERO, leverage)
+          }
           disabled={!!estimation.unavailableReason}
         >
           {estimation.unavailableReason || t`Start loops`}
