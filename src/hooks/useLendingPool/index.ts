@@ -8,7 +8,6 @@ import { AssetSymbol } from 'src/types/models'
 import { EthereumAddress } from 'src/types/web3'
 import { equals } from 'src/utils/address'
 import { TrackedData } from 'src/utils/gtm'
-import { BN_ZERO } from 'src/utils/number'
 import useSWRImmutable from 'swr/immutable'
 import { useStaticRPCProvider } from '../useStaticRPCProvider'
 import { useTxHandler } from './txHandler'
@@ -29,13 +28,14 @@ export const useLendingPool = (
   const createTrackedData = (
     eventType: TrackedData['eventType'],
     amount: BigNumber,
-  ): TrackedData => ({
-    eventType: eventType,
-    assetSymbol: assetSymbol || 'LAY',
-    valueInUSD: priceInMarketReferenceCurrency
-      ? priceInMarketReferenceCurrency.multipliedBy(amount)
-      : BN_ZERO,
-  })
+  ): TrackedData | undefined => {
+    if (!assetSymbol || !priceInMarketReferenceCurrency) return
+    return {
+      eventType: eventType,
+      assetSymbol: assetSymbol,
+      valueInUSD: priceInMarketReferenceCurrency.multipliedBy(amount),
+    }
+  }
 
   const deposit = async (
     amount: BigNumber,
