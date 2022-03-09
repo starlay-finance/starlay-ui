@@ -11,9 +11,14 @@ export const Borrow: VFC<
   ModalContentProps<Omit<BorrowModalBodyProps, 'borrow' | 'repay'>>
 > = ({ close, ...props }) => {
   const { account, signer } = useWallet()
-  const { borrow, repay } = useLendingPool(account, signer)
-
   const { asset } = props
+  const { borrow, repay } = useLendingPool(
+    account,
+    signer,
+    asset.symbol,
+    asset.priceInMarketReferenceCurrency,
+  )
+
   return (
     <DefaultModalContent
       headerNode={<AssetLabel asset={asset} />}

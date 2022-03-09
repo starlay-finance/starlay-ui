@@ -6,6 +6,7 @@ import {
 import { serializeError } from 'eth-rpc-errors'
 import { BigNumber, ethers } from 'ethers'
 import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
+import { sendEventData, TrackedData } from 'src/utils/gtm'
 import { useMarketData } from '../useMarketData'
 import { useUserData } from '../useUserData'
 import { useWalletBalance } from '../useWalletBalance'
@@ -29,6 +30,7 @@ export const useTxHandler = () => {
   const handleTx = async (
     txs: EthereumTransactionTypeExtended[],
     signer: ethers.providers.JsonRpcSigner,
+    trackedData?: TrackedData,
   ) => {
     open({
       type: 'Loading',
@@ -71,6 +73,7 @@ export const useTxHandler = () => {
           message: t`Waiting for the transaction to be confirmed...`,
         })
         await depostRes.wait(1)
+        if (trackedData) sendEventData(trackedData)
         revalidate()
         open({
           type: 'Success',

@@ -4,8 +4,11 @@ import { ethers } from 'ethers'
 import { ChainId, getNetworkConfig } from 'src/libs/config'
 import { lendingPoolContract } from 'src/libs/lending-pool'
 import { BASE_ASSET_DUMMY_ADDRESS } from 'src/libs/pool-data-provider/converters/constants'
+import { AssetSymbol } from 'src/types/models'
 import { EthereumAddress } from 'src/types/web3'
 import { equals } from 'src/utils/address'
+import { TrackedData } from 'src/utils/gtm'
+import { BN_ZERO } from 'src/utils/number'
 import useSWRImmutable from 'swr/immutable'
 import { useStaticRPCProvider } from '../useStaticRPCProvider'
 import { useTxHandler } from './txHandler'
@@ -13,6 +16,8 @@ import { useTxHandler } from './txHandler'
 export const useLendingPool = (
   account: EthereumAddress | null | undefined,
   signer: ethers.providers.JsonRpcSigner | undefined,
+  assetSymbol?: AssetSymbol,
+  priceInMarketReferenceCurrency?: BigNumber,
 ) => {
   const { data: provider } = useStaticRPCProvider()
   const { data: lendingPool } = useSWRImmutable(
@@ -20,6 +25,17 @@ export const useLendingPool = (
     () => lendingPoolContract(provider!),
   )
   const { handleTx } = useTxHandler()
+
+  const createTrackedData = (
+    eventType: TrackedData['eventType'],
+    amount: BigNumber,
+  ): TrackedData => ({
+    eventType: eventType,
+    assetSymbol: assetSymbol || 'LAY',
+    valueInUSD: priceInMarketReferenceCurrency
+      ? priceInMarketReferenceCurrency.multipliedBy(amount)
+      : BN_ZERO,
+  })
 
   const deposit = async (
     amount: BigNumber,
@@ -33,6 +49,7 @@ export const useLendingPool = (
         amount: amount.toString(),
       }),
       signer,
+      createTrackedData('deposit', amount),
     )
   }
   const withdraw = async (
@@ -50,6 +67,7 @@ export const useLendingPool = (
         lTokenAddress,
       }),
       signer,
+      createTrackedData('withdraw', amount),
     )
   }
   const borrow = async (
@@ -67,6 +85,7 @@ export const useLendingPool = (
         debtTokenAddress: vdTokenAddress,
       }),
       signer,
+      createTrackedData('borrow', amount),
     )
   }
   const repay = async (
@@ -83,6 +102,7 @@ export const useLendingPool = (
         interestRateMode: InterestRate.Variable,
       }),
       signer,
+      createTrackedData('repay', amount),
     )
   }
   const setUsageAsCollateral = async (
