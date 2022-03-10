@@ -358,11 +358,11 @@ msgstr ""
 
 #: src/components/screens/Makai/UnclaimedReward.tsx
 msgid "Unclaimed Reward"
-msgstr ""
+msgstr "未請求ボーナス残高"
 
 #: src/components/screens/Makai/UnclaimedReward.tsx
 msgid "Claim"
-msgstr ""
+msgstr "請求"
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Makai Loops"
