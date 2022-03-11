@@ -373,6 +373,14 @@ msgid "Estimated Net APY"
 msgstr "Estimated Net APY"
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "\"Makai Loops\" is an experimental feature."
+msgstr "\"Makai Loops\" is an experimental feature."
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Please <0>read our docs</0> and understand how it works before use."
+msgstr "Please <0>read our docs</0> and understand how it works before use."
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Start loops"
 msgstr "Start loops"
 

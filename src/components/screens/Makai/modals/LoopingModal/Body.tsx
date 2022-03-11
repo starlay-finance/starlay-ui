@@ -1,5 +1,7 @@
 import { t } from '@lingui/macro'
+import { Trans } from '@lingui/react'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
+import Link from 'next/link'
 import { useReducer, useState, VFC } from 'react'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { Barometer } from 'src/components/parts/Chart/Barometer'
@@ -29,6 +31,7 @@ import {
   formatPct,
   formattedToBigNumber,
 } from 'src/utils/number'
+import { DOCS_MAKAI } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import {
   Action,
@@ -126,6 +129,13 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
             formatter={formatAmtShort}
           />
         </NumberItems>
+        <Note>
+          <p>{t`"Makai Loops" is an experimental feature.`}</p>
+          <Trans
+            id="Please <0>read our docs</0> and understand how it works before use."
+            components={[<Link key={'0'} href={DOCS_MAKAI} />]}
+          />
+        </Note>
         <SimpleCtaButton
           onClick={() =>
             loop(formattedToBigNumber(depositAmount) || BN_ZERO, leverage)
@@ -313,3 +323,13 @@ const LeverageSlider = styled.div`
 `
 
 const ActionTab: TabFC = Tab
+
+const Note = styled.p`
+  padding-top: 24px;
+  text-align: center;
+  white-space: pre-wrap;
+  line-height: 1.5;
+  a {
+    color: ${purple};
+  }
+`
