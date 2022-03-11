@@ -111,23 +111,23 @@ export const useLendingPool = (
     )
   }
 
-  const loop = async (
-    amount: BigNumber,
-    underlyingAsset: EthereumAddress,
-    debtToken: EthereumAddress,
-    borrowRatio: BigNumber,
-    loopCount: number,
-  ) => {
+  const loop = async (param: {
+    amount: BigNumber
+    underlyingAsset: EthereumAddress
+    debtToken: EthereumAddress
+    borrowRatio: BigNumber
+    loopCount: number
+  }) => {
     if (!leverager || !account || !signer) throw new Error('Unexpected state')
     return handleTx(
       await leverager.loop({
         user: account,
-        reserve: underlyingAsset,
-        amount: amount.toString(),
-        debtToken,
+        reserve: param.underlyingAsset,
+        amount: param.amount.toString(),
+        debtToken: param.debtToken,
         interestRateMode: InterestRate.Variable,
-        borrowRatio: borrowRatio.toFixed(4, BigNumber.ROUND_FLOOR),
-        loopCount: loopCount.toFixed(0),
+        borrowRatio: param.borrowRatio.toFixed(4, BigNumber.ROUND_FLOOR),
+        loopCount: param.loopCount.toFixed(0),
       }),
       signer,
     )

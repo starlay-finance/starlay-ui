@@ -4,6 +4,7 @@ import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { AssetLabel } from 'src/components/parts/Modal/parts'
 import { useLendingPool } from 'src/hooks/useLendingPool'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
+import { useTracking } from 'src/hooks/useTracking'
 import { useWallet } from 'src/hooks/useWallet'
 import {
   loopingLeverageToLtv,
@@ -16,7 +17,11 @@ export const Looping: VFC<
 > = ({ close, ...props }) => {
   const { account, signer } = useWallet()
   const { loop } = useLendingPool(account, signer)
+  const { withTracking } = useTracking()
   const { asset } = props
+
+  const loopWithTracking = withTracking('loop', loop)
+
   return (
     <DefaultModalContent
       headerNode={<AssetLabel asset={asset} />}
@@ -24,13 +29,13 @@ export const Looping: VFC<
         <LoopingModalBody
           {...props}
           loop={(amount, leverage) =>
-            loop(
+            loopWithTracking({
               amount,
-              asset.underlyingAsset,
-              asset.vdTokenAddress,
-              loopingLeverageToLtv(leverage),
-              significantLoopingCount(leverage),
-            )
+              underlyingAsset: asset.underlyingAsset,
+              debtToken: asset.vdTokenAddress,
+              borrowRatio: loopingLeverageToLtv(leverage),
+              loopCount: significantLoopingCount(leverage),
+            })
           }
         />
       }

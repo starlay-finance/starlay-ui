@@ -43,7 +43,7 @@ import {
 const TABS = ['loop'] as const
 
 export type LoopingModalBodyProps = Omit<EstimationParam, 'amount'> & {
-  loop: (amount: BigNumber, leverage: BigNumber) => Promise<void>
+  loop: (amount: BigNumber, leverage: BigNumber) => Promise<any>
 }
 
 export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
