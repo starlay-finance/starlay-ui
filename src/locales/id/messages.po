@@ -350,7 +350,7 @@ msgstr ""
 
 #: src/components/screens/Makai/MakaiMarkets.tsx
 msgid "Wallet_Balance"
-msgstr ""
+msgstr "Saldo Dompet"
 
 #: src/components/screens/Makai/MakaiMarkets.tsx
 msgid "Makai Markets"
@@ -377,7 +377,7 @@ msgid "\"Makai Loops\" is an experimental feature."
 msgstr ""
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
-msgid "Please <0>read our docs</0> and understand how it works before use."
+msgid "Please <0>read our docs</0> and understand how it works before using it."
 msgstr ""
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx

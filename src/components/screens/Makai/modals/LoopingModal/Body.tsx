@@ -132,7 +132,7 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
         <Note>
           <p>{t`"Makai Loops" is an experimental feature.`}</p>
           <Trans
-            id="Please <0>read our docs</0> and understand how it works before use."
+            id="Please <0>read our docs</0> and understand how it works before using it."
             components={[<Link key={'0'} href={DOCS_MAKAI} />]}
           />
         </Note>
