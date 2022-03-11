@@ -12,13 +12,13 @@ export const Deposit: VFC<
   ModalContentProps<Omit<DepositModalBodyProps, 'deposit' | 'withdraw'>>
 > = ({ close, ...props }) => {
   const { account, signer } = useWallet()
-  const { asset } = props
   const { deposit, withdraw } = useLendingPool(account, signer)
 
   const { withTracking } = useTracking()
   const depositWithTracking = withTracking('deposit', deposit)
   const withdrawWithTracking = withTracking('withdraw', withdraw)
 
+  const { asset } = props
   return (
     <DefaultModalContent
       headerNode={<AssetLabel asset={asset} />}
