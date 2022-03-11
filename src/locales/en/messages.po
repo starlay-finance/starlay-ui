@@ -102,6 +102,10 @@ msgid "Markets"
 msgstr "Markets"
 
 #: src/components/parts/Header/AppHeader.tsx
+msgid "Makai"
+msgstr "Makai"
+
+#: src/components/parts/Header/AppHeader.tsx
 msgid "Connect"
 msgstr "Connect"
 
@@ -127,6 +131,7 @@ msgstr "LAY Balance"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "Wallet Balance"
 
@@ -204,6 +209,7 @@ msgstr "Borrow Limit Used"
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Health Factor"
 msgstr "Health Factor"
 
@@ -290,12 +296,14 @@ msgstr "Max"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/MakaiMarkets.tsx
 #: src/components/screens/Markets/Assets.tsx
 msgid "Asset"
 msgstr "Asset"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Reward APR"
 msgstr "Reward APR"
 
@@ -324,6 +332,7 @@ msgid "Borrow Limit"
 msgstr "Borrow Limit"
 
 #: src/components/screens/Dashboard/parts/Summary/NetAPY.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Net APY"
 msgstr "Net APY"
 
@@ -334,6 +343,58 @@ msgstr "Deposit Balance"
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
 msgid "Borrow Balance"
 msgstr "Borrow Balance"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai APR"
+msgstr "Makai APR"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Wallet_Balance"
+msgstr "Wallet"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai Markets"
+msgstr "Makai Markets"
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Unclaimed Reward"
+msgstr "Unclaimed Reward"
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Claim"
+msgstr "Claim"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Makai Loops"
+msgstr "Makai Loops"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Estimated Net APY"
+msgstr "Estimated Net APY"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "\"Makai Loops\" is an experimental feature."
+msgstr "\"Makai Loops\" is an experimental feature."
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Please <0>read our docs</0> and understand how it works before using it."
+msgstr "Please <0>read our docs</0> and understand how it works before using it."
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Start loops"
+msgstr "Start loops"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Leverage"
+msgstr "Leverage"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom"
+msgstr "Custom"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom Leverage"
+msgstr "Custom Leverage"
 
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Markets/Overview.tsx
@@ -466,6 +527,7 @@ msgstr "Waiting for transaction to be ready..."
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Confirm Transaction"
 msgstr "Confirm Transaction"
 
@@ -475,13 +537,19 @@ msgstr "Approve sending the ERC-20 asset to the pool."
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Transaction Pending"
 msgstr "Transaction Pending"
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Waiting for the transaction to be confirmed..."
 msgstr "Waiting for the transaction to be confirmed..."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Approve the contract to borrow ERC-20 assets on your credit."
+msgstr "Approve the contract to borrow ERC-20 assets on your credit."
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Confirm the transaction."
@@ -539,6 +607,7 @@ msgstr "Your wallet needs to switch networks manually."
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Enter amount"
 msgstr "Enter amount"
 
@@ -561,6 +630,7 @@ msgstr "No liquidity to withdraw"
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Health factor too low"
 msgstr "Health factor too low"
 
@@ -576,3 +646,11 @@ msgstr "No liquidity to borrow"
 #: src/utils/estimationHelper.ts
 msgid "No balance to repay"
 msgstr "No balance to repay"
+
+#: src/utils/estimationHelper.ts
+msgid "Enter leverage"
+msgstr "Enter leverage"
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to loop"
+msgstr "No balance to loop"

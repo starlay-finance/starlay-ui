@@ -53,7 +53,7 @@ export const Assets = asStyled(({ className }) => {
               onClick: () => open({ asset, marketReferenceCurrencyPriceInUSD }),
             }),
           )}
-          hoverGradient={`${darkRed}3d,${skyBlue}3d,${darkRed}3d`}
+          hoverGradients={[`${darkRed}3d`, `${skyBlue}3d`, `${darkRed}3d`]}
         />
       </TableContainer>
     </DetailsSection>

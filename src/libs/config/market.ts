@@ -26,6 +26,7 @@ export type MarketDataType = {
     REPAY_WITH_COLLATERAL_ADAPTER?: EthereumAddress
     FAUCET?: EthereumAddress
     PERMISSION_MANAGER?: EthereumAddress
+    LEVERAGER?: EthereumAddress
   }
 }
 
@@ -42,6 +43,7 @@ export const MARKET_CONFIGS: {
         '0x4c37A76Bf49c01f91E275d5257a228dad1b74EF9',
       LENDING_POOL: '0x90384334333f3356eFDD5b20016350843b90f182',
       WETH_GATEWAY: '0xf630b6d8EB75d3DC9153AAB9e4b6666d4561D6e5',
+      LEVERAGER: '0x138b2985889777Cf33Cb31380E3141cFb1E1842f',
     },
   },
 } as const

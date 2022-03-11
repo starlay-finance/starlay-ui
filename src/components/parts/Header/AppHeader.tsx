@@ -16,7 +16,7 @@ import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
 import { BN_ZERO, formatAmt } from 'src/utils/number'
-import { APP, MARKETS } from 'src/utils/routes'
+import { APP, MAKAI, MARKETS } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import { HeaderWrapper } from './common'
 
@@ -34,6 +34,7 @@ export const AppHeader = () => {
       <Nav>
         <Tab href={APP} $active={pathname === APP}>{t`Dashboard`}</Tab>
         <Tab href={MARKETS} $active={pathname === MARKETS}>{t`Markets`}</Tab>
+        <Tab href={MAKAI} $active={pathname === MAKAI}>{t`Makai`}</Tab>
       </Nav>
       <Menu>
         <MenuButton onClick={() => openRewardModal()} disabled={!user}>

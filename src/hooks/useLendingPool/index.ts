@@ -1,8 +1,9 @@
 import { InterestRate } from '@starlay-finance/contract-helpers'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { ethers } from 'ethers'
-import { ChainId, getNetworkConfig } from 'src/libs/config'
+import { ChainId, getMarketConfig, getNetworkConfig } from 'src/libs/config'
 import { lendingPoolContract } from 'src/libs/lending-pool'
+import { leveragerContract } from 'src/libs/leverager'
 import { BASE_ASSET_DUMMY_ADDRESS } from 'src/libs/pool-data-provider/converters/constants'
 import { EthereumAddress } from 'src/types/web3'
 import { equals } from 'src/utils/address'
@@ -18,6 +19,14 @@ export const useLendingPool = (
   const { data: lendingPool } = useSWRImmutable(
     provider && ['lendingpool', provider.chainId],
     () => lendingPoolContract(provider!),
+  )
+  const { data: leverager } = useSWRImmutable(
+    provider && ['leverager', provider.chainId],
+    () => {
+      const { LEVERAGER } = getMarketConfig(provider!.chainId).addresses
+      if (!LEVERAGER) return undefined
+      return leveragerContract(provider!, LEVERAGER)
+    },
   )
   const { handleTx } = useTxHandler()
 
@@ -102,7 +111,29 @@ export const useLendingPool = (
     )
   }
 
-  return { deposit, withdraw, borrow, repay, setUsageAsCollateral }
+  const loop = async (param: {
+    amount: BigNumber
+    underlyingAsset: EthereumAddress
+    debtToken: EthereumAddress
+    borrowRatio: BigNumber
+    loopCount: number
+  }) => {
+    if (!leverager || !account || !signer) throw new Error('Unexpected state')
+    return handleTx(
+      await leverager.loop({
+        user: account,
+        reserve: param.underlyingAsset,
+        amount: param.amount.toString(),
+        debtToken: param.debtToken,
+        interestRateMode: InterestRate.Variable,
+        borrowRatio: param.borrowRatio.toFixed(4, BigNumber.ROUND_FLOOR),
+        loopCount: param.loopCount.toFixed(0),
+      }),
+      signer,
+    )
+  }
+
+  return { deposit, withdraw, borrow, repay, setUsageAsCollateral, loop }
 }
 
 const reserveAddress = (underlyingAsset: string, chainId: ChainId) => {

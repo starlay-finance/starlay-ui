@@ -1,7 +1,7 @@
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import { AssetMarketData, User } from 'src/types/models'
 import { ValueOf } from 'type-fest'
-import { BN_ZERO } from './number'
+import { BN_ONE, BN_ZERO } from './number'
 
 export const calculateNetAPY = (
   balanceByAsset: User['balanceByAsset'],
@@ -73,6 +73,44 @@ export const calculateAssetPL = (
     lossInUSD: borrowedInUSD.multipliedBy(variableBorrowAPY),
     rewardInUSD,
   }
+}
+
+export const calculateLoopingAPR = (params: {
+  leverage: BigNumber
+  depositIncentiveAPR: BigNumber
+  variableBorrowIncentiveAPR: BigNumber
+}) => {
+  const base = BN_ONE
+  const maxDeposit = base.multipliedBy(params.leverage)
+  const maxBorrow = maxDeposit.minus(base)
+  return maxDeposit
+    .multipliedBy(params.depositIncentiveAPR)
+    .plus(maxBorrow.multipliedBy(params.variableBorrowIncentiveAPR))
+    .div(base)
+}
+
+export const ltvToLoopingLeverage = (ltv: BigNumber) =>
+  BN_ONE.div(BN_ONE.minus(ltv))
+
+export const loopingLeverageToLtv = (leverage: BigNumber) =>
+  BN_ONE.minus(BN_ONE.div(leverage))
+
+export const significantLoopingCount = (
+  leverage: BigNumber,
+  significantDigits = 1,
+  maxCount = 40,
+) => {
+  const ltv = loopingLeverageToLtv(leverage)
+  let currentleverage = BN_ONE
+  let prevLtv = ltv
+  const significantNum = BN_ONE.shiftedBy(significantDigits * -1)
+  for (let i = 1; i < 40; i++) {
+    currentleverage = currentleverage.plus(prevLtv)
+    prevLtv = prevLtv.multipliedBy(ltv)
+    if (leverage.minus(currentleverage).lt(significantNum))
+      return Math.max(i, 2)
+  }
+  return maxCount
 }
 
 export const convertToUSD = (

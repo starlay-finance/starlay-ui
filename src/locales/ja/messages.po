@@ -102,6 +102,10 @@ msgid "Markets"
 msgstr "マーケット"
 
 #: src/components/parts/Header/AppHeader.tsx
+msgid "Makai"
+msgstr ""
+
+#: src/components/parts/Header/AppHeader.tsx
 msgid "Connect"
 msgstr "ウォレット接続"
 
@@ -127,6 +131,7 @@ msgstr "LAY 残高"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "ウォレット残高"
 
@@ -204,6 +209,7 @@ msgstr "担保利用率"
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Health Factor"
 msgstr "ヘルスファクター"
 
@@ -290,12 +296,14 @@ msgstr "最大"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/MakaiMarkets.tsx
 #: src/components/screens/Markets/Assets.tsx
 msgid "Asset"
 msgstr "トークン"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Reward APR"
 msgstr "ボーナスAPR"
 
@@ -324,6 +332,7 @@ msgid "Borrow Limit"
 msgstr "借入上限額"
 
 #: src/components/screens/Dashboard/parts/Summary/NetAPY.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Net APY"
 msgstr "純利回り"
 
@@ -334,6 +343,58 @@ msgstr "合計預入残高"
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
 msgid "Borrow Balance"
 msgstr "合計借入残高"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai APR"
+msgstr ""
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Wallet_Balance"
+msgstr "ウォレット残高"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai Markets"
+msgstr ""
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Unclaimed Reward"
+msgstr "未請求ボーナス残高"
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Claim"
+msgstr "請求"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Makai Loops"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Estimated Net APY"
+msgstr "概算Net APY"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "\"Makai Loops\" is an experimental feature."
+msgstr "\"Makai Loops\" は実験段階の機能です。"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Please <0>read our docs</0> and understand how it works before using it."
+msgstr "<0>ドキュメント</0>を読み、機能を理解した上で利用してください。"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Start loops"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Leverage"
+msgstr "レバレッジ"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom"
+msgstr "カスタム"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom Leverage"
+msgstr "カスタムレバレッジ"
 
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Markets/Overview.tsx
@@ -470,6 +531,7 @@ msgstr "トランザクションの準備中です..."
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Confirm Transaction"
 msgstr "トランザクション承認待ち"
 
@@ -479,13 +541,19 @@ msgstr "ERC20トークンの送金を許可してください"
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Transaction Pending"
 msgstr "トランザクション承認待ち"
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Waiting for the transaction to be confirmed..."
 msgstr "トランザクションの承認を待っています..."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Approve the contract to borrow ERC-20 assets on your credit."
+msgstr "コントラクトによるERC20トークンの借入を許可してください"
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Confirm the transaction."
@@ -543,6 +611,7 @@ msgstr "ウォレットから接続先チェーンを変更してください"
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Enter amount"
 msgstr "金額を入力してください"
 
@@ -565,6 +634,7 @@ msgstr "流動性がありません"
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Health factor too low"
 msgstr "ヘルスファクターが閾値を下回っています"
 
@@ -579,4 +649,12 @@ msgstr "流動性がありません"
 
 #: src/utils/estimationHelper.ts
 msgid "No balance to repay"
+msgstr "ウォレットの残高が不足しています"
+
+#: src/utils/estimationHelper.ts
+msgid "Enter leverage"
+msgstr "レバレッジを設定してください"
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to loop"
 msgstr "ウォレットの残高が不足しています"

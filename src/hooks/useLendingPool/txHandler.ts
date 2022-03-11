@@ -13,6 +13,7 @@ import { useWalletBalance } from '../useWalletBalance'
 export type LendingPoolTxs = {
   actionTx?: EthereumTransactionTypeExtended
   erc20ApprovalTx?: EthereumTransactionTypeExtended
+  debtErc20ApprovalTx?: EthereumTransactionTypeExtended
 }
 
 export const useTxHandler = () => {
@@ -35,7 +36,8 @@ export const useTxHandler = () => {
       title: t`Transaction Preparing`,
       message: t`Waiting for transaction to be ready...`,
     })
-    const { actionTx, erc20ApprovalTx } = pickLendingPoolTxs(txs)
+    const { actionTx, erc20ApprovalTx, debtErc20ApprovalTx } =
+      pickLendingPoolTxs(txs)
 
     try {
       if (erc20ApprovalTx) {
@@ -46,6 +48,22 @@ export const useTxHandler = () => {
         })
         const approveRes = await signer.sendTransaction(
           await erc20ApprovalTx.tx(),
+        )
+        open({
+          type: 'Loading',
+          title: t`Transaction Pending`,
+          message: t`Waiting for the transaction to be confirmed...`,
+        })
+        await approveRes.wait(1)
+      }
+      if (debtErc20ApprovalTx) {
+        open({
+          type: 'Loading',
+          title: t`Confirm Transaction`,
+          message: t`Approve the contract to borrow ERC-20 assets on your credit.`,
+        })
+        const approveRes = await signer.sendTransaction(
+          await debtErc20ApprovalTx.tx(),
         )
         open({
           type: 'Loading',
@@ -105,5 +123,7 @@ const pickLendingPoolTxs = (txs: EthereumTransactionTypeExtended[]) =>
   txs.reduce<LendingPoolTxs>((prev, current) => {
     if (current.txType === eEthereumTxType.ERC20_APPROVAL)
       return { ...prev, erc20ApprovalTx: current }
+    if (current.txType === eEthereumTxType.DEBTERC20_APPROVAL)
+      return { ...prev, debtErc20ApprovalTx: current }
     return { ...prev, actionTx: current }
   }, {})

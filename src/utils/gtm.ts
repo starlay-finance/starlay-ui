@@ -12,7 +12,7 @@ export type TrackedData = {
   valueInUSD: BigNumber
 }
 
-export type EventType = 'deposit' | 'withdraw' | 'borrow' | 'repay'
+export type EventType = 'deposit' | 'withdraw' | 'borrow' | 'repay' | 'loop'
 
 export const createTrackedData = (
   eventType: TrackedData['eventType'],

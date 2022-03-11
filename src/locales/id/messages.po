@@ -102,6 +102,10 @@ msgid "Markets"
 msgstr ""
 
 #: src/components/parts/Header/AppHeader.tsx
+msgid "Makai"
+msgstr ""
+
+#: src/components/parts/Header/AppHeader.tsx
 msgid "Connect"
 msgstr "Menghubungkan"
 
@@ -127,6 +131,7 @@ msgstr "Saldo LAY"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "Saldo Dompet"
 
@@ -204,6 +209,7 @@ msgstr "Batas Pinjaman Digunakan"
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Health Factor"
 msgstr "Faktor Kesehatan"
 
@@ -290,12 +296,14 @@ msgstr "Maksimal"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/MakaiMarkets.tsx
 #: src/components/screens/Markets/Assets.tsx
 msgid "Asset"
 msgstr "Aset"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Reward APR"
 msgstr "Hadiah APR"
 
@@ -324,6 +332,7 @@ msgid "Borrow Limit"
 msgstr "Batas Pinjam"
 
 #: src/components/screens/Dashboard/parts/Summary/NetAPY.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Net APY"
 msgstr "APY Bersih"
 
@@ -334,6 +343,58 @@ msgstr "Saldo Setoran"
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
 msgid "Borrow Balance"
 msgstr "Saldo Pinjaman"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai APR"
+msgstr ""
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Wallet_Balance"
+msgstr "Saldo Dompet"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai Markets"
+msgstr ""
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Unclaimed Reward"
+msgstr ""
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Claim"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Makai Loops"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Estimated Net APY"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "\"Makai Loops\" is an experimental feature."
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Please <0>read our docs</0> and understand how it works before using it."
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Start loops"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Leverage"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom Leverage"
+msgstr ""
 
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Markets/Overview.tsx
@@ -466,6 +527,7 @@ msgstr "Menunggu transaksi siap..."
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Confirm Transaction"
 msgstr "Konfirmasi Transaksi"
 
@@ -475,13 +537,19 @@ msgstr "Setujui pengiriman aset ERC-20 ke pool."
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Transaction Pending"
 msgstr "Transaksi Tertunda"
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Waiting for the transaction to be confirmed..."
 msgstr "Menunggu transaksi dikonfirmasi..."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Approve the contract to borrow ERC-20 assets on your credit."
+msgstr ""
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Confirm the transaction."
@@ -511,10 +579,6 @@ msgstr "Kesalahan"
 msgid "Something went wrong..."
 msgstr "Ada yang salah..."
 
-#: src/hooks/useLendingPool/txHandler.ts
-#~ msgid "You transaction confirmed!"
-#~ msgstr ""
-
 #: src/hooks/useUnsupportedChainAlert.ts
 #: src/hooks/useUnsupportedChainAlert.ts
 msgid "You need to change to a supported chain"
@@ -543,6 +607,7 @@ msgstr "Dompet Anda perlu berpindah jaringan secara manual."
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Enter amount"
 msgstr "Masukan jumlah"
 
@@ -565,6 +630,7 @@ msgstr "Tidak ada likuiditas untuk ditarik"
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Health factor too low"
 msgstr "Faktor kesehatan terlalu rendah"
 
@@ -580,3 +646,11 @@ msgstr "Tidak ada likuiditas untuk dipinjam"
 #: src/utils/estimationHelper.ts
 msgid "No balance to repay"
 msgstr "Tidak ada saldo untuk melunasi"
+
+#: src/utils/estimationHelper.ts
+msgid "Enter leverage"
+msgstr ""
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to loop"
+msgstr ""
