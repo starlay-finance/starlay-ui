@@ -23,7 +23,7 @@ export const SUPPORT = DISCORD
 export const SORRY = '/sorry'
 export const sorryFor = (reason: SorryReason) => `${SORRY}?reason=${reason}`
 
-const MOBILE_NOT_SUPPORTED_PATHS = [APP]
+const MOBILE_SUPPORTED_PATHS = [TOP, SORRY]
 
 export const isMobileSupported = (path: string) =>
-  !MOBILE_NOT_SUPPORTED_PATHS.includes(path)
+  MOBILE_SUPPORTED_PATHS.includes(path)
