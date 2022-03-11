@@ -170,15 +170,10 @@ const Leverage = asStyled<{
         <>
           <p>{t`Leverage`}</p>
           <LeverageControl>
-            {RATIO_LIST.map((ratio) => {
-              const disabled = max.lt(ratio)
+            {RATIO_LIST.filter((ratio) => max.gte(ratio)).map((ratio) => {
               const checked = current.eq(ratio)
               return (
-                <LeverageCheckBox
-                  key={ratio}
-                  $disabled={disabled}
-                  $checked={checked}
-                >
+                <LeverageCheckBox key={ratio} $checked={checked}>
                   <input
                     onClick={() => setLeverage(valueToBigNumber(ratio))}
                     disabled={max.lt(ratio)}
@@ -187,7 +182,10 @@ const Leverage = asStyled<{
                 </LeverageCheckBox>
               )
             })}
-            <button onClick={toggleCustomActive}>{t`Custom`}</button>
+            <CustomLeverageButton
+              onClick={toggleCustomActive}
+              $selected={!RATIO_LIST.some((ratio) => current.eq(ratio))}
+            >{t`Custom`}</CustomLeverageButton>
           </LeverageControl>
         </>
       ) : (
@@ -228,14 +226,8 @@ const thumbStyle = css`
 `
 
 const LeverageCheckBox = styled.label<{
-  $disabled?: boolean
   $checked: boolean
 }>`
-  ${({ $disabled }) =>
-    $disabled &&
-    css`
-      pointer-events: none;
-    `}
   ${({ $checked }) =>
     $checked &&
     css`
@@ -244,13 +236,24 @@ const LeverageCheckBox = styled.label<{
       }
     `}
 `
+
+const CustomLeverageButton = styled.button<{ $selected?: boolean }>`
+  ${({ $selected }) =>
+    $selected &&
+    css`
+      &&& {
+        background-color: ${darkPurple};
+      }
+    `}
+`
+
 const LeverageControl = styled.div`
   margin: 16px 0;
   display: flex;
   column-gap: 8px;
   color: ${trueWhite};
   ${LeverageCheckBox},
-  button {
+  ${CustomLeverageButton} {
     input {
       width: 0;
     }
