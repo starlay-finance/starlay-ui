@@ -17,7 +17,9 @@ import { Action, Balance, ContentDiv, NumberItems, Tab, TabFC } from '../parts'
 const TABS = ['collateral'] as const
 
 export type CollateralModalBodyProps = Omit<EstimationParam, 'amount'> & {
-  setUsageAsCollateral: (enabled: boolean) => Promise<void>
+  setUsageAsCollateral: (
+    enabled: boolean,
+  ) => Promise<{ error: number } | undefined>
 }
 
 export const CollateralModalBody: VFC<CollateralModalBodyProps> = ({
