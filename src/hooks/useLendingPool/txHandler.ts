@@ -75,7 +75,7 @@ export const useTxHandler = () => {
         open({
           type: 'Success',
           title: t`Succeeded!`,
-          message: t`You transaction confirmed!`,
+          message: t`Your transaction confirmed!`,
         })
       }
     } catch (e) {

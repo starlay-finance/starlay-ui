@@ -496,7 +496,7 @@ msgid "Succeeded!"
 msgstr "トランザクションが承認されました"
 
 #: src/hooks/useLendingPool/txHandler.ts
-msgid "You transaction confirmed!"
+msgid "Your transaction confirmed!"
 msgstr "トランザクションが承認されました"
 
 #: src/hooks/useLendingPool/txHandler.ts
