@@ -86,7 +86,7 @@ export const useTxHandler = () => {
           title: t`Transaction Canceled`,
           message: t`You have canceled the transaction.`,
         })
-        return
+        return { error: error.code }
       }
       open({
         type: 'Alert',
@@ -94,6 +94,7 @@ export const useTxHandler = () => {
         message: t`Something went wrong...`,
       })
       console.error(e)
+      return { error: error.code }
     }
   }
 
