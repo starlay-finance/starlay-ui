@@ -29,7 +29,7 @@ const OuterDiv = styled.div<{ visible: boolean }>`
   left: 0;
   right: 0;
   min-height: 9999vh;
-  background-color: ${trueBlack}a3;
+  background-color: ${trueBlack}b8;
   transition: all 0.2s ease-in;
   ${({ visible }) =>
     !visible &&
@@ -40,9 +40,10 @@ const OuterDiv = styled.div<{ visible: boolean }>`
 `
 const LocaleSelectDiv = styled.div<{ visible: boolean }>`
   background: ${purple}3d;
+  backdrop-filter: blur(8px);
   position: absolute;
   bottom: 80px;
-  transform: translateX(-16px);
+  transform: translateX(16px);
   display: flex;
   align-items: center;
   flex-direction: column-reverse;
@@ -64,12 +65,11 @@ const LocaleSelectDiv = styled.div<{ visible: boolean }>`
       border: none;
     }
   }
-  transition: all 0.2s ease-out;
-  clip-path: inset(0);
+  transition: opacity 0.2s ease-out;
   ${({ visible }) =>
     !visible &&
     css`
-      clip-path: inset(50% 0);
+      opacity: 0;
       visibility: hidden;
     `}
 `

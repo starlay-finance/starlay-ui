@@ -162,11 +162,11 @@ msgstr "By connecting, I understood <0>how Starlay Finance works and the risks i
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "All"
-msgstr "All"
+msgstr "ALL"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "All_Repay"
-msgstr "All"
+msgstr "ALL"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
@@ -254,7 +254,7 @@ msgstr "Deposited"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "All_Withdraw"
-msgstr "All"
+msgstr "ALL"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
@@ -492,8 +492,8 @@ msgid "Succeeded!"
 msgstr "Succeeded!"
 
 #: src/hooks/useLendingPool/txHandler.ts
-msgid "You transaction confirmed!"
-msgstr "You transaction confirmed!"
+msgid "Your transaction confirmed!"
+msgstr "Your transaction confirmed!"
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Transaction Canceled"
