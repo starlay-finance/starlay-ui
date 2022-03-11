@@ -11,7 +11,7 @@ import { ModalPortal } from 'src/hooks/useModal'
 import { I18nProvider, loadSync } from 'src/libs/i18n-provider'
 import { getLibrary } from 'src/libs/wallet-provider'
 import { Locale } from 'src/locales'
-import { notoSansJpPath } from 'src/styles/font'
+import { notoSansJpPath, notoSansScPath } from 'src/styles/font'
 import { GlobalStyles } from 'src/styles/global-styles'
 import 'src/styles/globals.css'
 import 'src/styles/lato_fonts.css'
@@ -38,6 +38,7 @@ const MyApp: VFC<Omit<AppProps, 'pageProps'> & { pageProps: PageStaticProps }> =
             content="width=device-width, initial-scale=1.0"
           />
           <link rel="stylesheet" href={notoSansJpPath} />
+          <link rel="stylesheet" href={notoSansScPath} />
         </Head>
         <Web3ReactProvider getLibrary={getLibrary}>
           <I18nProvider>
