@@ -82,7 +82,6 @@ const Control = styled.div`
   > * {
     width: fit-content;
   }
-  text-transform: uppercase;
   button {
     font-size: 16px;
     text-align: center;

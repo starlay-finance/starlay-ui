@@ -11,3 +11,4 @@ export const fontWeightHeavy = 800
 export const fontWeightBlack = 900
 
 export const notoSansJpPath = '/assets/fonts/noto_sans_jp.css'
+export const notoSansScPath = '/assets/fonts/noto_sans_sc.css'
