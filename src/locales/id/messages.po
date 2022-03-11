@@ -37,7 +37,7 @@ msgstr "Bantuan"
 
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
-msgstr ""
+msgstr "Starlay Finance adalah protokol peminjaman terbesar di ekosistem Polkadot."
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/screens/Top/Menu.tsx
@@ -119,7 +119,7 @@ msgstr "Hadiah Bug"
 
 #: src/components/parts/Modal/MessageModalGradient/index.tsx
 msgid "Close"
-msgstr ""
+msgstr "Tutup"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 msgid "LAY Balance"
@@ -182,11 +182,11 @@ msgstr "Melunasi"
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Borrow APY"
-msgstr "Pinjaman APY"
+msgstr "Pinjam APY"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Borrow APR"
-msgstr "Pinjaman APR"
+msgstr "Pinjam APR"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
@@ -218,20 +218,20 @@ msgstr "Likuiditas"
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "ON"
-msgstr ""
+msgstr "Hidup"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "OFF"
-msgstr ""
+msgstr "Mati"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "Collateral_Config"
-msgstr ""
+msgstr "Konfigurasi_Jaminan"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "Collateral_Amount"
-msgstr ""
+msgstr "Jumlah_Jaminan"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
@@ -240,11 +240,11 @@ msgstr "Pinjaman Tersedia"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "Disable"
-msgstr ""
+msgstr "Nonaktifkan"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "Enable"
-msgstr ""
+msgstr "Aktifkan"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
@@ -286,7 +286,7 @@ msgstr "Untuk Informasi lebih lanjut, silahkan <0>lihat dokumen kami</0>."
 
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
 msgid "Max"
-msgstr "Maks"
+msgstr "Maksimal"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
@@ -305,7 +305,7 @@ msgstr "APY_Setor"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Collateral"
-msgstr ""
+msgstr "Jaminan"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "APY_Borrow"
@@ -343,7 +343,7 @@ msgstr "Total Setoran"
 
 #: src/components/screens/Markets/Assets.tsx
 msgid "Deposit Reward APR"
-msgstr ""
+msgstr "Hadiah Setoran APR"
 
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Markets/Overview.tsx
@@ -353,49 +353,49 @@ msgstr "Total Pinjaman"
 
 #: src/components/screens/Markets/Assets.tsx
 msgid "Borrow Reward APR"
-msgstr ""
+msgstr "Hadiah Pinjaman APR"
 
 #: src/components/screens/Markets/Overview.tsx
 msgid "Deposit_Top3 Markets"
-msgstr ""
+msgstr "Setor_Top3 Pasar"
 
 #: src/components/screens/Markets/Overview.tsx
 msgid "Borrow_Top3 Markets"
-msgstr ""
+msgstr "Pinjam_Top3 Pasar"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Borrowing"
-msgstr ""
+msgstr "Meminjam"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Yes"
-msgstr ""
+msgstr "Ya"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "No"
-msgstr ""
+msgstr "Tidak"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Reserve Factor"
-msgstr ""
+msgstr "Faktor Cadangan"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Used as Collateral"
-msgstr ""
+msgstr "Digunakan sebagai Jaminan"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Loan to Value"
-msgstr ""
+msgstr "Pinjaman ke Nilai"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Liquidation Threshold"
-msgstr ""
+msgstr "Ambang Likuidasi"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Liquidation Penalty"
-msgstr ""
+msgstr "Hukuman Likuidasi"
 
 #: src/components/screens/Sorry/index.tsx
 msgid "Go Back"
@@ -413,12 +413,12 @@ msgstr "Ada yang salah. Silakan kembali."
 
 #: src/components/screens/Top/Menu.tsx
 msgid "Menu"
-msgstr ""
+msgstr "Menu"
 
 #: src/components/screens/Top/Menu.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Sorry"
-msgstr ""
+msgstr "Maaf"
 
 #: src/components/screens/Top/parts/Backers.tsx
 msgid "Backers"
@@ -442,7 +442,7 @@ msgstr "Farming dengan Risiko Rendah di Astar Network"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "The largest lending protocol in the Polkadot ecosystem"
-msgstr ""
+msgstr "Protokol peminjaman terbesar di ekosistem Polkadot"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"
@@ -493,7 +493,7 @@ msgstr "Berhasil!"
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "You transaction confirmed!"
-msgstr "Transaksi Anda dikonfirmasi!!"
+msgstr ""
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Transaction Canceled"

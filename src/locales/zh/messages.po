@@ -5,7 +5,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: zh\n"
+"Language: en\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
@@ -15,7 +15,7 @@ msgstr ""
 
 #: src/components/parts/Footer/AppFooter.tsx
 msgid "Latest Block: {blockNumber}"
-msgstr "最近生成区块: {blockNumber}"
+msgstr "最新区块: {blockNumber}"
 
 #: src/components/parts/Footer/AppFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
@@ -119,7 +119,7 @@ msgstr "漏洞赏金"
 
 #: src/components/parts/Modal/MessageModalGradient/index.tsx
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 msgid "LAY Balance"
@@ -157,7 +157,7 @@ msgstr "Metamask"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
-msgstr "一旦点击连接，我理解<0>Starlay Finance是如何运行的并且意识到其中风险</0> 但是我愿意承担风险使用。"
+msgstr "一旦点击连接，我理解<0>Starlay Finance是如何运行的并且意识到其中风险</0> 而且我愿意承担风险使用。"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
@@ -182,11 +182,11 @@ msgstr "偿还"
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Borrow APY"
-msgstr "借款APY"
+msgstr "借出的APY"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Borrow APR"
-msgstr "借款APR"
+msgstr "借出的APR"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
@@ -209,7 +209,7 @@ msgstr "健康因素"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "To repay all, you will pay more than the amount shown because of the interest charged per second."
-msgstr "你需要偿还比显示的金额更多的贷款，因为每一秒都在产生利息。"
+msgstr "你需要偿还比目前显示的金额更多的贷款，因为每一秒都在产生利息。"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Liquidity"
@@ -218,20 +218,20 @@ msgstr "流动性"
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "ON"
-msgstr ""
+msgstr "开"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "OFF"
-msgstr ""
+msgstr "关"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "Collateral_Config"
-msgstr ""
+msgstr "抵押品"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "Collateral_Amount"
-msgstr ""
+msgstr "抵押品"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
@@ -240,11 +240,11 @@ msgstr "可借数额"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "Disable"
-msgstr ""
+msgstr "禁用"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 msgid "Enable"
-msgstr ""
+msgstr "启用"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
@@ -270,11 +270,11 @@ msgstr "提款"
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Deposit APY"
-msgstr "存款APY"
+msgstr "存入APY"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Deposit APR"
-msgstr "存款APR"
+msgstr "存入APR"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "This asset can't be used as collateral."
@@ -301,11 +301,11 @@ msgstr "奖励的APR"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "APY_Deposit"
-msgstr "APY"
+msgstr "APY#APY"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Collateral"
-msgstr ""
+msgstr "抵押品"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "APY_Borrow"
@@ -343,7 +343,7 @@ msgstr "总存入额"
 
 #: src/components/screens/Markets/Assets.tsx
 msgid "Deposit Reward APR"
-msgstr ""
+msgstr "存款激励 APR"
 
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Markets/Overview.tsx
@@ -353,49 +353,49 @@ msgstr "总借出额"
 
 #: src/components/screens/Markets/Assets.tsx
 msgid "Borrow Reward APR"
-msgstr ""
+msgstr "借款激励 APR"
 
 #: src/components/screens/Markets/Overview.tsx
 msgid "Deposit_Top3 Markets"
-msgstr ""
+msgstr "Top3 市场"
 
 #: src/components/screens/Markets/Overview.tsx
 msgid "Borrow_Top3 Markets"
-msgstr ""
+msgstr "Top3 市场"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Borrowing"
-msgstr ""
+msgstr "借款中"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Yes"
-msgstr ""
+msgstr "是"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "No"
-msgstr ""
+msgstr "否"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Reserve Factor"
-msgstr ""
+msgstr "储备系数"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Used as Collateral"
-msgstr ""
+msgstr "用作抵押品"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Loan to Value"
-msgstr ""
+msgstr "贷款价值"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Liquidation Threshold"
-msgstr ""
+msgstr "清算阈值"
 
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Liquidation Penalty"
-msgstr ""
+msgstr "清算惩罚"
 
 #: src/components/screens/Sorry/index.tsx
 msgid "Go Back"
@@ -413,12 +413,12 @@ msgstr "出错了。请返回。"
 
 #: src/components/screens/Top/Menu.tsx
 msgid "Menu"
-msgstr ""
+msgstr "菜单"
 
 #: src/components/screens/Top/Menu.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Sorry"
-msgstr ""
+msgstr "抱歉"
 
 #: src/components/screens/Top/parts/Backers.tsx
 msgid "Backers"
@@ -426,7 +426,7 @@ msgstr "支持者"
 
 #: src/components/screens/Top/parts/Backers.tsx
 msgid "We're supported by leading teams and organizations"
-msgstr "我们收到了领先的团队和组织的支持。"
+msgstr "我们受到了领先的团队和组织的支持。"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "Current Markets"
@@ -442,7 +442,7 @@ msgstr "Astar Network上的低风险挖矿"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "The largest lending protocol in the Polkadot ecosystem"
-msgstr ""
+msgstr "在polkadot生态上最大的借贷协议"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"
@@ -450,7 +450,7 @@ msgstr "探索文档"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Powered by"
-msgstr "驱动"
+msgstr "提供支持"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "ASTAR"
@@ -544,11 +544,11 @@ msgstr "输入金额"
 
 #: src/utils/estimationHelper.ts
 msgid "No balance to deposit"
-msgstr "没有足够存入余额"
+msgstr "没有足够的余额存入"
 
 #: src/utils/estimationHelper.ts
 msgid "No balance to withdraw"
-msgstr "没有足够提取余额"
+msgstr "没有足够的提取余额"
 
 #: src/utils/estimationHelper.ts
 msgid "Insufficient collateral"
