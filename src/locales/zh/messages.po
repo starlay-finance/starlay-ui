@@ -102,6 +102,10 @@ msgid "Markets"
 msgstr ""
 
 #: src/components/parts/Header/AppHeader.tsx
+msgid "Makai"
+msgstr ""
+
+#: src/components/parts/Header/AppHeader.tsx
 msgid "Connect"
 msgstr "连接"
 
@@ -127,6 +131,7 @@ msgstr "LAY余额"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "钱包余额"
 
@@ -204,6 +209,7 @@ msgstr "已经使用的借款限额"
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Health Factor"
 msgstr "健康因素"
 
@@ -290,12 +296,14 @@ msgstr "最大的"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/MakaiMarkets.tsx
 #: src/components/screens/Markets/Assets.tsx
 msgid "Asset"
 msgstr "资产"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Reward APR"
 msgstr "奖励的APR"
 
@@ -324,6 +332,7 @@ msgid "Borrow Limit"
 msgstr "借款限额"
 
 #: src/components/screens/Dashboard/parts/Summary/NetAPY.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Net APY"
 msgstr "净APY"
 
@@ -334,6 +343,58 @@ msgstr "存款余额"
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
 msgid "Borrow Balance"
 msgstr "借款余额"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai APR"
+msgstr ""
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Wallet_Balance"
+msgstr ""
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai Markets"
+msgstr ""
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Unclaimed Reward"
+msgstr ""
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Claim"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Makai Loops"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Estimated Net APY"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "\"Makai Loops\" is an experimental feature."
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Please <0>read our docs</0> and understand how it works before use."
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Start loops"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Leverage"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom Leverage"
+msgstr ""
 
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Markets/Overview.tsx
@@ -466,6 +527,7 @@ msgstr "等待交易完成中…"
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Confirm Transaction"
 msgstr "确认交易"
 
@@ -475,13 +537,19 @@ msgstr "批准发送ERC-20资产到池子。"
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Transaction Pending"
 msgstr "交易待处理中"
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Waiting for the transaction to be confirmed..."
 msgstr "等待交易被确认…"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Approve the contract to borrow ERC-20 assets on your credit."
+msgstr ""
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Confirm the transaction."
@@ -539,6 +607,7 @@ msgstr "需要你手动在钱包中转换网络。"
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Enter amount"
 msgstr "输入金额"
 
@@ -561,6 +630,7 @@ msgstr "没有流动性供提款"
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
 #: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Health factor too low"
 msgstr "健康因素太低"
 
@@ -576,3 +646,11 @@ msgstr "没有流动性供借款"
 #: src/utils/estimationHelper.ts
 msgid "No balance to repay"
 msgstr "没有足够余额偿还"
+
+#: src/utils/estimationHelper.ts
+msgid "Enter leverage"
+msgstr ""
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to loop"
+msgstr ""
