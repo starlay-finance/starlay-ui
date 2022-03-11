@@ -125,8 +125,8 @@ export const useLendingPool = (
         amount: amount.toString(),
         debtToken,
         interestRateMode: InterestRate.Variable,
-        borrowRatio: borrowRatio.toString(),
-        loopCount: loopCount.toString(),
+        borrowRatio: borrowRatio.toFixed(4, BigNumber.ROUND_FLOOR),
+        loopCount: loopCount.toFixed(0),
       }),
       signer,
     )
