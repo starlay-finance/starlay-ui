@@ -1,4 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber'
+import { t } from '@lingui/macro'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { WalletConnector, WalletType } from '../types'
 
@@ -65,7 +66,7 @@ export const requestSwitchChain = async (
 ): Promise<{ error?: string }> => {
   const { ethereum } = window
   if (!ethereum?.isMetaMask)
-    return { error: 'Your wallet needs to switch networks manually.' }
+    return { error: t`Your wallet needs to switch networks manually.` }
   try {
     const chainIdHex = `0x${(+BigNumber.from(chainId)).toString(16)}`
     await ethereum.request({
@@ -75,7 +76,7 @@ export const requestSwitchChain = async (
     return {}
   } catch (e: any) {
     if (e.code === 4902 && chainInfo) return requestAddEthereumChain(chainInfo)
-    return { error: 'Your wallet needs to switch networks manually.' }
+    return { error: t`Your wallet needs to switch networks manually.` }
   }
 }
 

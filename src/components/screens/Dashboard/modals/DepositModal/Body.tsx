@@ -1,17 +1,21 @@
 import { t } from '@lingui/macro'
+import { Trans } from '@lingui/react'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { useState, VFC } from 'react'
+import { Link } from 'src/components/elements/Link'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import {
   NumberItem,
   NumberItemWithDiff,
 } from 'src/components/parts/Modal/parts'
 import { ASSETS_DICT } from 'src/constants/assets'
+import { darkPurple, purple, trueWhite } from 'src/styles/colors'
+import { flexCenter } from 'src/styles/mixins'
 import {
   estimateDeposit,
   estimateWithdrawal,
   EstimationParam,
-} from 'src/utils/calculator'
+} from 'src/utils/estimationHelper'
 import {
   formatAmt,
   formatAmtShort,
@@ -19,6 +23,8 @@ import {
   formattedToBigNumber,
   formatUSD,
 } from 'src/utils/number'
+import { DOCS_RISK } from 'src/utils/routes'
+import styled from 'styled-components'
 import {
   Action,
   AmountInput,
@@ -34,23 +40,25 @@ type TabType = typeof TABS[number]
 
 export type DepositModalBodyProps = Omit<EstimationParam, 'amount'> & {
   deposit: (amount: BigNumber) => void
-  withdraw: (amount: BigNumber) => void
+  withdraw: (amount: BigNumber, all?: boolean) => void
 }
 export const DepositModalBody: VFC<DepositModalBodyProps> = ({
   deposit,
   withdraw,
   ...estimationParams
 }) => {
-  const { asset, userSummary, userAssetStatus } = estimationParams
-  const { symbol, depositAPY, depositIncentiveAPR, isFrozen } = asset
+  const { asset, userSummary, userAssetBalance } = estimationParams
+  const { symbol, displaySymbol, depositAPY, depositIncentiveAPR, isFrozen } =
+    asset
   const { availableBorrowsInUSD, borrowLimitUsed, healthFactor } = userSummary
-  const { inWallet, deposited } = userAssetStatus
+  const { inWallet, deposited } = userAssetBalance
 
   const [activeTab, setActiveTab] = useState<TabType>(
     !isFrozen ? 'deposit' : 'withdraw',
   )
   const [depositAmount, setDepositAmount] = useState('')
   const [withdrawalAmount, setWithdrawalAmount] = useState('')
+  const [all, setAll] = useState(false)
 
   const depositAmountBn = formattedToBigNumber(depositAmount)
   const withdrawalAmountBn = formattedToBigNumber(withdrawalAmount)
@@ -68,6 +76,7 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
           onChange={setDepositAmount}
           setMaxValue={() => setDepositAmount(formatAmt(estimation.maxAmount))}
           significantDigits={asset.decimals}
+          allLabel={t`All`}
         />
       ) : (
         <AmountInput
@@ -82,6 +91,12 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
             )
           }
           significantDigits={asset.decimals}
+          setAll={(all) => {
+            setAll(all)
+            if (all) setWithdrawalAmount(formatAmt(userAssetBalance.deposited))
+          }}
+          all={all}
+          allLabel={t`All_Withdraw`}
         />
       )}
       <ActionTab
@@ -131,6 +146,18 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
             }
             formatter={formatAmtShort}
           />
+          {!asset.usageAsCollateralEnabled && (
+            <NoCollateralMessage>
+              <div />
+              <p>
+                <p>{t`This asset can't be used as collateral.`}</p>
+                <Trans
+                  id="For more information, please <0>see our docs</0>."
+                  components={[<Link key="0" href={DOCS_RISK} />]}
+                />
+              </p>
+            </NoCollateralMessage>
+          )}
         </NumberItems>
         {activeTab === 'deposit' ? (
           <SimpleCtaButton
@@ -141,7 +168,7 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
           </SimpleCtaButton>
         ) : (
           <SimpleCtaButton
-            onClick={() => withdraw(withdrawalAmountBn!)}
+            onClick={() => withdraw(withdrawalAmountBn!, all)}
             disabled={!!estimation.unavailableReason}
           >
             {estimation.unavailableReason || t`Withdraw`}
@@ -151,14 +178,46 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
           <Balance
             label={t`Wallet Balance`}
             balance={inWallet}
-            symbol={symbol}
+            symbol={displaySymbol || symbol}
           />
         ) : (
-          <Balance label={t`Deposited`} balance={deposited} symbol={symbol} />
+          <Balance
+            label={t`Deposited`}
+            balance={deposited}
+            symbol={displaySymbol || symbol}
+          />
         )}
       </Action>
     </ContentDiv>
   )
 }
+
+const NoCollateralMessage = styled.p`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 214px;
+  ${flexCenter};
+  background-color: ${trueWhite};
+  padding: 24px;
+  > div {
+    position: absolute;
+    inset: 0;
+    background-color: ${darkPurple}80;
+  }
+  p {
+    color: ${trueWhite};
+    position: relative;
+    text-align: center;
+    line-height: 1.5;
+    a {
+      text-decoration: underline;
+      :hover {
+        color: ${purple};
+      }
+    }
+  }
+`
 
 const ActionTab: TabFC = Tab

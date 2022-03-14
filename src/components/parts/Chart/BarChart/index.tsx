@@ -1,22 +1,29 @@
 import { VFC } from 'react'
 import { AsStyledProps } from 'src/components/hoc/asStyled'
-import { Reel } from 'src/components/parts/Reel'
+import { Reel } from 'src/components/parts/Number/Reel'
+import { trueWhite } from 'src/styles/colors'
 import { Color } from 'src/styles/types'
 import { formatPct } from 'src/utils/number'
 import styled, { css } from 'styled-components'
 
-type BarChartProps = BarChartStyleProps & {
+export type BarChartProps = {
+  ratio: number
+  unfilled: Color
   showLabel?: boolean
+  filledStyles:
+    | { bgColor: Color; color?: Color }
+    | { gte: number; bgColor: Color; color?: Color }[]
 }
 export const BarChart = styled<VFC<BarChartProps & AsStyledProps>>(
-  ({ showLabel, ratio, filled, className, ...props }) => {
+  ({ showLabel, ratio, filledStyles, className, ...props }) => {
     const ratioPct = Math.floor(ratio * 100)
-    const filledColor = extractColor(filled, ratioPct)
+    const { bgColor, color = trueWhite } = extractStyle(filledStyles, ratioPct)
     return (
       <BarChartDiv
         {...props}
         ratio={ratioPct}
-        filled={filledColor}
+        filled={bgColor}
+        $color={color}
         className={className}
       >
         {showLabel && ratioPct !== 0 && (
@@ -29,23 +36,22 @@ export const BarChart = styled<VFC<BarChartProps & AsStyledProps>>(
   },
 )``
 
-const extractColor = (colors: BarChartProps['filled'], ratioPct: number) => {
-  if (typeof colors === 'string') return colors
-  const filledColor = colors
+const extractStyle = (
+  style: BarChartProps['filledStyles'],
+  ratioPct: number,
+) => {
+  if (!Array.isArray(style)) return style
+  const filledColor = style
     .sort(({ gte: a }, { gte: b }) => (b - a > 0 ? 1 : -1))
     .find(({ gte }, idx, arr) => ratioPct >= gte || idx === arr.length - 1)
-  return filledColor!.color
+  return { bgColor: filledColor!.bgColor, color: filledColor!.color }
 }
 
 export type BarChartStyleProps = {
   ratio: number
-  filled:
-    | Color
-    | {
-        gte: number
-        color: Color
-      }[]
-  unfilled: `${Color}${string}`
+  filled: Color
+  unfilled: Color
+  $color: Color
 }
 const BarChartDiv = styled.div<BarChartStyleProps>`
   position: relative;
@@ -60,7 +66,7 @@ const BarChartDiv = styled.div<BarChartStyleProps>`
   span {
     transition: all 1s ease-in;
   }
-  ${({ ratio, filled, unfilled }) => {
+  ${({ ratio, filled, unfilled, $color }) => {
     return css`
       background: linear-gradient(
         90deg,
@@ -71,7 +77,15 @@ const BarChartDiv = styled.div<BarChartStyleProps>`
       background-size: 200%;
       background-position: ${100 - ratio}%;
       span {
-        left: min(calc(${ratio}% + 0.5em), calc(100% - 4em));
+        font-size: 14px;
+        color: ${$color};
+        background-color: ${filled};
+        left: min(calc(${ratio}%), calc(100% - 4em));
+        padding: 4px 8px;
+        border-radius: 6px;
+        > div {
+          margin-top: 1px;
+        }
       }
     `
   }}

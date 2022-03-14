@@ -4,7 +4,7 @@ import { ASSETS_DICT } from 'src/constants/assets'
 import { darkPurple } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { Asset } from 'src/types/models'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export type AssetLabelProps = {
   label?: string
@@ -37,7 +37,7 @@ export const ItemLabel = asStyled<ItemLabelProps>(
         <Image src={image.src} alt={image.alt} width={32} height={32} />
       )}
       {IconSVG && <IconSVG />}
-      <TextDiv>
+      <TextDiv withNote={!!note}>
         <p>{label}</p>
         {note && <p>{note}</p>}
       </TextDiv>
@@ -60,7 +60,7 @@ export const ItemLabelAstarPair = asStyled<ItemLabelProps>(
         )}
         {IconSVG && <IconSVG />}
       </PairDiv>
-      <TextDiv>
+      <TextDiv withNote={!!note}>
         <p>{label}</p>
         {note && <p>{note}</p>}
       </TextDiv>
@@ -86,12 +86,16 @@ const PairDiv = styled.div`
   }
 `
 const TextDiv = styled.div<{ withNote?: boolean }>`
-  p:first-child {
-    color: ${darkPurple};
-  }
-  p:last-child {
-    font-size: 12px;
-  }
+  ${({ withNote }) =>
+    withNote &&
+    css`
+      p:first-child {
+        color: ${darkPurple};
+      }
+      p:last-child {
+        font-size: 12px;
+      }
+    `}
 `
 
 const LabelDiv = styled.div`

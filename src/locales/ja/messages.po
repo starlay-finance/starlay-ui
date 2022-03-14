@@ -1,0 +1,660 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2022-03-03 12:37+0900\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: ja\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/components/parts/Footer/AppFooter.tsx
+msgid "Latest Block: {blockNumber}"
+msgstr ""
+
+#: src/components/parts/Footer/AppFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Docs"
+msgstr "ドキュメント"
+
+#: src/components/parts/Footer/AppFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Governance"
+msgstr "ガバナンス"
+
+#: src/components/parts/Footer/AppFooter.tsx
+msgid "Support"
+msgstr "サポート"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
+msgstr "Starlay Finance は Polkadot エコシステム最大のレンディングプロトコルです。"
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Twitter"
+msgstr ""
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Discord"
+msgstr ""
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Telegram"
+msgstr ""
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Medium"
+msgstr ""
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Github"
+msgstr ""
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Protocol"
+msgstr "プロトコル"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Developers"
+msgstr "リポジトリ"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Overview"
+msgstr "概要"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Community"
+msgstr "コミュニティ"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Brand"
+msgstr "ブランド"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Media Kit"
+msgstr "メディアキット"
+
+#: src/components/parts/Header/AppHeader.tsx
+msgid "Dashboard"
+msgstr "ダッシュボード"
+
+#: src/components/parts/Header/AppHeader.tsx
+#: src/components/screens/Markets/Assets.tsx
+msgid "Markets"
+msgstr "マーケット"
+
+#: src/components/parts/Header/AppHeader.tsx
+msgid "Makai"
+msgstr ""
+
+#: src/components/parts/Header/AppHeader.tsx
+msgid "Connect"
+msgstr "ウォレット接続"
+
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Launch App"
+msgstr "取引開始"
+
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Bug Bounty"
+msgstr "バウンティ"
+
+#: src/components/parts/Modal/MessageModalGradient/index.tsx
+msgid "Close"
+msgstr "閉じる"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+msgid "LAY Balance"
+msgstr "LAY 残高"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Wallet Balance"
+msgstr "ウォレット残高"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+msgid "Unclaimed Balance"
+msgstr "未請求残高"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Price"
+msgstr "価格"
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "Connect Wallet"
+msgstr "ウォレットを接続する"
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "Connecting the wallet..."
+msgstr "ウォレットに接続しています..."
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "We currently supports Metamask only."
+msgstr "現在Metamaskのみサポートしています"
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "Metamask"
+msgstr ""
+
+#: src/components/parts/Modal/WalletModal/index.tsx
+msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
+msgstr "ウォレットを接続することで、<0>Starlay Financeの仕組みとリスク</0>を理解し、自己責任で利用することに同意します。"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "All"
+msgstr "全額"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "All_Repay"
+msgstr "全額返済"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Borrow"
+msgstr "借入"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Repay"
+msgstr "返済"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Top/parts/Assets.tsx
+msgid "Borrow APY"
+msgstr "借入APY"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Borrow APR"
+msgstr "ボーナスAPR"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Borrowed"
+msgstr "借入残高"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Borrow Limit Used"
+msgstr "担保利用率"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Health Factor"
+msgstr "ヘルスファクター"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "To repay all, you will pay more than the amount shown because of the interest charged per second."
+msgstr "利息は1秒ごとに発生するため、全額返済には表示より多くの額が支払われます。"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Liquidity"
+msgstr "流動性"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "ON"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "OFF"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Collateral_Config"
+msgstr "担保利用設定"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Collateral_Amount"
+msgstr "担保額"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Borrow Available"
+msgstr "借入可能額"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Disable"
+msgstr "担保利用を停止する"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Enable"
+msgstr "担保利用する"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Deposited"
+msgstr "預入残高"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "All_Withdraw"
+msgstr "全額出金"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Deposit"
+msgstr "預入"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Withdraw"
+msgstr "出金"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Top/parts/Assets.tsx
+msgid "Deposit APY"
+msgstr "預入APY"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Deposit APR"
+msgstr "ボーナスAPR"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "This asset can't be used as collateral."
+msgstr "このトークンは担保利用できません。"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "For more information, please <0>see our docs</0>."
+msgstr "詳細は<0>ドキュメント</0>を参照してください。"
+
+#: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
+msgid "Max"
+msgstr "最大"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/MakaiMarkets.tsx
+#: src/components/screens/Markets/Assets.tsx
+msgid "Asset"
+msgstr "トークン"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Reward APR"
+msgstr "ボーナスAPR"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "APY_Deposit"
+msgstr "預入APY"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Collateral"
+msgstr "担保額"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "APY_Borrow"
+msgstr "借入APY"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Deposit Markets"
+msgstr "預入金利"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Borrow Markets"
+msgstr "借入金利"
+
+#: src/components/screens/Dashboard/parts/Summary/BorrowLimit.tsx
+msgid "Borrow Limit"
+msgstr "借入上限額"
+
+#: src/components/screens/Dashboard/parts/Summary/NetAPY.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Net APY"
+msgstr "純利回り"
+
+#: src/components/screens/Dashboard/parts/Summary/index.tsx
+msgid "Deposit Balance"
+msgstr "合計預入残高"
+
+#: src/components/screens/Dashboard/parts/Summary/index.tsx
+msgid "Borrow Balance"
+msgstr "合計借入残高"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai APR"
+msgstr ""
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Wallet_Balance"
+msgstr "ウォレット残高"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai Markets"
+msgstr ""
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Unclaimed Reward"
+msgstr "未請求ボーナス残高"
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Claim"
+msgstr "請求"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Makai Loops"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Estimated Net APY"
+msgstr "概算Net APY"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "\"Makai Loops\" is an experimental feature."
+msgstr "\"Makai Loops\" は実験段階の機能です。"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Please <0>read our docs</0> and understand how it works before using it."
+msgstr "<0>ドキュメント</0>を読み、機能を理解した上で利用してください。"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Start loops"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Leverage"
+msgstr "レバレッジ"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom"
+msgstr "カスタム"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom Leverage"
+msgstr "カスタムレバレッジ"
+
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Deposited"
+msgstr "預入総額"
+
+#: src/components/screens/Markets/Assets.tsx
+msgid "Deposit Reward APR"
+msgstr "預入ボーナスAPR"
+
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Borrowed"
+msgstr "借入総額"
+
+#: src/components/screens/Markets/Assets.tsx
+msgid "Borrow Reward APR"
+msgstr "借入ボーナスAPR"
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Deposit_Top3 Markets"
+msgstr "預入額 TOP3"
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Borrow_Top3 Markets"
+msgstr "借入額 TOP3"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Borrowing"
+msgstr "借入可否"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Yes"
+msgstr "可"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "No"
+msgstr "不可"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Reserve Factor"
+msgstr "リザーブファクター"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Used as Collateral"
+msgstr "担保利用可否"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Loan to Value"
+msgstr "融資比率"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Threshold"
+msgstr "清算閾値"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Penalty"
+msgstr "清算ペナルティ"
+
+#: src/components/screens/Sorry/index.tsx
+msgid "Go Back"
+msgstr ""
+
+#: src/components/screens/Sorry/reasons.ts
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
+msgstr ""
+"Starlay Finance は現在モバイル端末からのアクセスをサポートしていません。\n"
+"PCからアクセスしてください。"
+
+#: src/components/screens/Sorry/reasons.ts
+msgid "Something went wrong. Please go back."
+msgstr "予期せぬエラーが発生しました。前の画面に戻ってください。"
+
+#: src/components/screens/Top/Menu.tsx
+msgid "Menu"
+msgstr ""
+
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Sorry"
+msgstr ""
+
+#: src/components/screens/Top/parts/Backers.tsx
+msgid "Backers"
+msgstr "ステークホルダー"
+
+#: src/components/screens/Top/parts/Backers.tsx
+msgid "We're supported by leading teams and organizations"
+msgstr "グローバルな投資家及びAstarコミュニティの支援を受けています"
+
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Current Markets"
+msgstr "マーケット"
+
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "The more funds that will be borrowed, the higher the interest rate will be"
+msgstr "Astar Network最大の流動性を誇るレンディングマーケット"
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Low Risk Farming on Astar Network"
+msgstr ""
+"Astar Networkの\n"
+"流動性を創出する"
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "The largest lending protocol in the Polkadot ecosystem"
+msgstr "Polkadot エコシステム最大のレンディングプロトコル"
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Explore the docs"
+msgstr "Starlay について知る"
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Powered by"
+msgstr ""
+
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "ASTAR"
+msgstr ""
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Preparing"
+msgstr "準備中"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Waiting for transaction to be ready..."
+msgstr "トランザクションの準備中です..."
+
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Confirm Transaction"
+msgstr "トランザクション承認待ち"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Approve sending the ERC-20 asset to the pool."
+msgstr "ERC20トークンの送金を許可してください"
+
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Pending"
+msgstr "トランザクション承認待ち"
+
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Waiting for the transaction to be confirmed..."
+msgstr "トランザクションの承認を待っています..."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Approve the contract to borrow ERC-20 assets on your credit."
+msgstr "コントラクトによるERC20トークンの借入を許可してください"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Confirm the transaction."
+msgstr "ウォレットでトランザクションを承認してください"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Succeeded!"
+msgstr "トランザクションが承認されました"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Your transaction confirmed!"
+msgstr "トランザクションが承認されました"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Canceled"
+msgstr "キャンセル"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "You have canceled the transaction."
+msgstr "トランザクションをキャンセルしました"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Error"
+msgstr "エラー"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Something went wrong..."
+msgstr "エラーが発生しました"
+
+#: src/hooks/useUnsupportedChainAlert.ts
+#: src/hooks/useUnsupportedChainAlert.ts
+msgid "You need to change to a supported chain"
+msgstr "接続先チェーンを変更してください"
+
+#: src/hooks/useUnsupportedChainAlert.ts
+msgid "Please switch the chain with your wallet."
+msgstr "接続先チェーンを変更してください"
+
+#: src/hooks/useUnsupportedChainAlert.ts
+msgid "Please switch the chain with your wallet..."
+msgstr "接続先チェーンを変更してください"
+
+#: src/hooks/useUnsupportedChainAlert.ts
+msgid "Failed to switch the chain"
+msgstr "接続先チェーンの変更に失敗しました"
+
+#: src/libs/wallet-provider/providers/metamask.ts
+#: src/libs/wallet-provider/providers/metamask.ts
+#: src/libs/wallet-provider/providers/metamask.ts
+#: src/libs/wallet-provider/providers/metamask.ts
+msgid "Your wallet needs to switch networks manually."
+msgstr "ウォレットから接続先チェーンを変更してください"
+
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+msgid "Enter amount"
+msgstr "金額を入力してください"
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to deposit"
+msgstr "ウォレットの残高が不足しています"
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to withdraw"
+msgstr "預入残高が不足しています"
+
+#: src/utils/estimationHelper.ts
+msgid "Insufficient collateral"
+msgstr "担保額が不足しています"
+
+#: src/utils/estimationHelper.ts
+msgid "No liquidity to withdraw"
+msgstr "流動性がありません"
+
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+msgid "Health factor too low"
+msgstr "ヘルスファクターが閾値を下回っています"
+
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+msgid "Borrowing limit reached"
+msgstr "借入上限額を超えています"
+
+#: src/utils/estimationHelper.ts
+msgid "No liquidity to borrow"
+msgstr "流動性がありません"
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to repay"
+msgstr "ウォレットの残高が不足しています"
+
+#: src/utils/estimationHelper.ts
+msgid "Enter leverage"
+msgstr "レバレッジを設定してください"
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to loop"
+msgstr "ウォレットの残高が不足しています"

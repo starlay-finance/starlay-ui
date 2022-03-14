@@ -13,33 +13,38 @@ import { useWalletBalance } from '../useWalletBalance'
 export type LendingPoolTxs = {
   actionTx?: EthereumTransactionTypeExtended
   erc20ApprovalTx?: EthereumTransactionTypeExtended
+  debtErc20ApprovalTx?: EthereumTransactionTypeExtended
 }
 
 export const useTxHandler = () => {
   const { open } = useMessageModal()
-  // TODO fix revalidate
   const { mutate: mutateMarketData } = useMarketData()
   const { mutate: mutateUserData } = useUserData()
   const { mutate: mutateWalletBalance } = useWalletBalance()
+  const revalidate = () => {
+    mutateMarketData()
+    mutateUserData()
+    mutateWalletBalance()
+  }
 
   const handleTx = async (
-    txsPromise: Promise<EthereumTransactionTypeExtended[]>,
+    txs: EthereumTransactionTypeExtended[],
     signer: ethers.providers.JsonRpcSigner,
     onSucceeded?: VoidFunction,
   ) => {
-    // TODO fix messages
     open({
       type: 'Loading',
-      title: 'Transaction Preparing',
+      title: t`Transaction Preparing`,
       message: t`Waiting for transaction to be ready...`,
     })
-    const { actionTx, erc20ApprovalTx } = pickLendingPoolTxs(await txsPromise)
+    const { actionTx, erc20ApprovalTx, debtErc20ApprovalTx } =
+      pickLendingPoolTxs(txs)
 
     try {
       if (erc20ApprovalTx) {
         open({
           type: 'Loading',
-          title: 'Confirm Transaction',
+          title: t`Confirm Transaction`,
           message: t`Approve sending the ERC-20 asset to the pool.`,
         })
         const approveRes = await signer.sendTransaction(
@@ -47,7 +52,23 @@ export const useTxHandler = () => {
         )
         open({
           type: 'Loading',
-          title: 'Transaction Pending',
+          title: t`Transaction Pending`,
+          message: t`Waiting for the transaction to be confirmed...`,
+        })
+        await approveRes.wait(1)
+      }
+      if (debtErc20ApprovalTx) {
+        open({
+          type: 'Loading',
+          title: t`Confirm Transaction`,
+          message: t`Approve the contract to borrow ERC-20 assets on your credit.`,
+        })
+        const approveRes = await signer.sendTransaction(
+          await debtErc20ApprovalTx.tx(),
+        )
+        open({
+          type: 'Loading',
+          title: t`Transaction Pending`,
           message: t`Waiting for the transaction to be confirmed...`,
         })
         await approveRes.wait(1)
@@ -55,7 +76,7 @@ export const useTxHandler = () => {
       if (actionTx) {
         open({
           type: 'Loading',
-          title: 'Confirm Transaction',
+          title: t`Confirm Transaction`,
           message: t`Confirm the transaction.`,
         })
         const tx = await actionTx.tx()
@@ -65,37 +86,35 @@ export const useTxHandler = () => {
         })
         open({
           type: 'Loading',
-          title: 'Transaction Pending',
+          title: t`Transaction Pending`,
           message: t`Waiting for the transaction to be confirmed...`,
         })
         await depostRes.wait(1)
-        mutateMarketData()
-        mutateUserData()
-        mutateWalletBalance()
+        revalidate()
         open({
           type: 'Success',
-          title: 'Succeeded!',
-          message: t`You transaction confirmed!`,
+          title: t`Succeeded!`,
+          message: t`Your transaction confirmed!`,
           onClose: onSucceeded,
         })
       }
     } catch (e) {
       const error = serializeError(e)
-      // TODO handle error
       if (error.code === 4001) {
         open({
           type: 'Alert',
-          title: 'Transaction Canceled',
+          title: t`Transaction Canceled`,
           message: t`You have canceled the transaction.`,
         })
-        return
+        return { error: error.code }
       }
       open({
         type: 'Alert',
-        title: 'Error',
+        title: t`Error`,
         message: t`Something went wrong...`,
       })
       console.error(e)
+      return { error: error.code }
     }
   }
 
@@ -106,5 +125,7 @@ const pickLendingPoolTxs = (txs: EthereumTransactionTypeExtended[]) =>
   txs.reduce<LendingPoolTxs>((prev, current) => {
     if (current.txType === eEthereumTxType.ERC20_APPROVAL)
       return { ...prev, erc20ApprovalTx: current }
+    if (current.txType === eEthereumTxType.DEBTERC20_APPROVAL)
+      return { ...prev, debtErc20ApprovalTx: current }
     return { ...prev, actionTx: current }
   }, {})

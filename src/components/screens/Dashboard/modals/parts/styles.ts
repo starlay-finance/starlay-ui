@@ -1,13 +1,12 @@
 import { SimpleCtaButton } from 'src/components/parts/Cta'
-import { fontWeightSemiBold } from 'src/styles/font'
+import { cream, trueBlack } from 'src/styles/colors'
+import { fontWeightRegular, fontWeightSemiBold } from 'src/styles/font'
 import styled from 'styled-components'
 import { Balance } from './Balance'
 import { Tab } from './Tab'
 
 export const Action = styled.div`
-  padding: 32px;
-  backdrop-filter: blur(16px) brightness(1.04);
-  background-color: rgba(255, 255, 255, 0.04);
+  background-color: ${cream};
   font-size: 18px;
   font-weight: ${fontWeightSemiBold};
 `
@@ -24,14 +23,25 @@ export const ContentDiv = styled.div`
   ${SimpleCtaButton} {
     text-transform: uppercase;
   }
+  ${Action} {
+    padding: 32px;
+  }
 `
 
 export const NumberItems = styled.div`
+  position: relative;
   margin: -24px 0;
   > {
-    :last-child {
+    div:last-of-type {
       border-bottom-width: 3px;
       margin-bottom: 24px;
     }
   }
+`
+
+export const Note = styled.p`
+  padding-top: 24px;
+  color: ${trueBlack};
+  text-align: center;
+  font-weight: ${fontWeightRegular};
 `

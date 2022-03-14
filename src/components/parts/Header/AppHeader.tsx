@@ -1,9 +1,13 @@
 import { t } from '@lingui/macro'
+import { useRouter } from 'next/router'
 import { SymbolLay } from 'src/assets/images'
 import { LogoProtocol } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
+import { useRewardModal } from 'src/components/parts/Modal/RewardModal'
+import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
+import { Reel } from 'src/components/parts/Number/Reel'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
@@ -12,33 +16,38 @@ import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
 import { BN_ZERO, formatAmt } from 'src/utils/number'
-import { APP, TOP } from 'src/utils/routes'
+import { APP, MAKAI, MARKETS } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
-import { useRewardModal } from '../Modal/RewardModal'
-import { useWalletModal } from '../Modal/WalletModal'
 import { HeaderWrapper } from './common'
 
 export const AppHeader = () => {
+  const { pathname } = useRouter()
   const { account } = useWallet()
   const { data: user } = useUserData()
   const { data: balance } = useWalletBalance()
-  const { open } = useRewardModal()
+  const { open: openRewardModal } = useRewardModal()
   const { open: openWalletModal } = useWalletModal()
   const layInWallet = balance?.LAY || BN_ZERO
   return (
     <AppHeaderWrapper>
-      <LogoLink href={TOP} Icon={LogoProtocol} aria-label="Top" />
+      <LogoLink href={APP} Icon={LogoProtocol} aria-label="App" />
       <Nav>
-        <Tab href={APP} $active>{t`Dashboard`}</Tab>
+        <Tab href={APP} $active={pathname === APP}>{t`Dashboard`}</Tab>
+        <Tab href={MARKETS} $active={pathname === MARKETS}>{t`Markets`}</Tab>
+        <Tab href={MAKAI} $active={pathname === MAKAI}>{t`Makai`}</Tab>
       </Nav>
       <Menu>
-        <MenuButton onClick={user ? () => open() : undefined}>
+        <MenuButton onClick={() => openRewardModal()} disabled={!user}>
           <Image src={SymbolLay} alt="Starlay" width={20} height={20} />
-          {user
-            ? formatAmt(layInWallet.plus(user.rewards.unclaimedBalance), {
+          {user ? (
+            <Reel
+              text={formatAmt(layInWallet.plus(user.rewards.unclaimedBalance), {
                 shorteningThreshold: 8,
-              })
-            : '-'}
+              })}
+            />
+          ) : (
+            '-'
+          )}
         </MenuButton>
         <MenuButton onClick={() => openWalletModal()} disabled={!!account}>
           {account ? shortenAddress(account) : t`Connect`}

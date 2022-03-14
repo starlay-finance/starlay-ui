@@ -1,8 +1,8 @@
+import { AppBackground } from 'src/components/parts/Background'
 import { AppFooter } from 'src/components/parts/Footer'
 import { AppHeader } from 'src/components/parts/Header/AppHeader'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
 import styled from 'styled-components'
-import { Background } from './parts/Background'
 import { Market } from './parts/Market'
 import { Summary } from './parts/Summary'
 
@@ -10,7 +10,7 @@ export const Dashboard = () => (
   <>
     <AppHeader />
     <Main>
-      <Background />
+      <AppBackground />
       <Summary />
       <Market />
     </Main>

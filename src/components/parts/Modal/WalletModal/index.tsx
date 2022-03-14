@@ -10,7 +10,7 @@ import { WalletType } from 'src/libs/wallet-provider'
 import { darkPurple, purple, trueBlack } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
-import { TERMS } from 'src/utils/routes'
+import { DOCS } from 'src/utils/routes'
 import styled from 'styled-components'
 import { LoadingProtocolIcon } from '../../Loading'
 import { ItemLabel } from '../parts'
@@ -60,9 +60,9 @@ const BodyConnect: VFC<{ connect: (type: WalletType) => void }> = ({
     </WalletsDiv>
     <TermsP>
       <Trans
-        id="By connecting, I accept Starlay's <0>Terms of Service</0>"
-        message="By connecting, I accept Starlay's <0>Terms of Service</0>"
-        components={[<Link key="0" href={TERMS} />]}
+        id="By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
+        message="By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
+        components={[<Link key="0" href={DOCS} />]}
       />
     </TermsP>
   </BodyDiv>
@@ -71,6 +71,7 @@ const BodyConnect: VFC<{ connect: (type: WalletType) => void }> = ({
 const TermsP = styled.div`
   text-align: center;
   font-size: 14px;
+  line-height: 1.5;
   a {
     color: ${purple};
   }

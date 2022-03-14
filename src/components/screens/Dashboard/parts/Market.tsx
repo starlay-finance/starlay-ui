@@ -1,53 +1,70 @@
 import { t } from '@lingui/macro'
 import { VFC } from 'react'
-import { Image } from 'src/components/elements/Image'
+import {
+  AssetTd,
+  MarketTable,
+  TableContainer,
+} from 'src/components/compositions/Markets/MarketTable'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { BlinkWrapper } from 'src/components/parts/Blink'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
-import { Table } from 'src/components/parts/Table'
+import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
-import { hoveredRow } from 'src/styles/animation'
-import { darkPurple, lightYellow, purple, secondary } from 'src/styles/colors'
-import {
-  fontWeightHeavy,
-  fontWeightMedium,
-  fontWeightSemiBold,
-} from 'src/styles/font'
-import { Color } from 'src/styles/types'
-import { Asset, AssetMarketData, User } from 'src/types/models'
+import { darkPurple, lightYellow, purple, trueWhite } from 'src/styles/colors'
+import { flexCenter } from 'src/styles/mixins'
+import { AssetMarketData, User } from 'src/types/models'
 import { symbolSorter } from 'src/utils/market'
 import { BN_ZERO, formatAmt, formatPct } from 'src/utils/number'
 import styled, { css } from 'styled-components'
 import { useBorrowModal } from '../modals/BorrowModal'
+import { useCollateralModal } from '../modals/CollateralModal'
 import { useDepositModal } from '../modals/DepositModal'
 import { useSuggestModal } from '../modals/SuggestModal'
+
+const DEPOSIT_MARKET_COLUMNS = [
+  { id: 'asset', name: t`Asset`, widthRatio: 4 },
+  { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
+  { id: 'apy', name: t`APY_Deposit`, widthRatio: 2.5 },
+  { id: 'deposited', name: t`Deposited`, widthRatio: 3.5 },
+  { id: 'collateral', name: t`Collateral`, widthRatio: 3 },
+]
+const BORROW_MARKET_COLUMNS = [
+  { id: 'asset', name: t`Asset`, widthRatio: 4 },
+  { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
+  { id: 'apy', name: t`APY_Borrow`, widthRatio: 3 },
+  { id: 'borrowed', name: t`Borrowed`, widthRatio: 6 },
+]
 
 export const Market = asStyled(({ className }) => {
   const { account } = useWallet()
   const { data: marketData } = useMarketData()
-  const markets = (marketData?.assets || []).sort(symbolSorter)
-  const marketReferenceCurrencyPriceInUSD =
-    marketData?.marketReferenceCurrencyPriceInUSD || BN_ZERO
+  const {
+    assets = [],
+    marketReferenceCurrencyPriceInUSD = BN_ZERO,
+    marketReferenceCurrencyDecimals = 0,
+  } = marketData || {}
+  const markets = assets.filter((each) => each.isActive).sort(symbolSorter)
 
   const { data: user } = useUserData()
   const { data: balance } = useWalletBalance()
   const { open: openDepositModal } = useDepositModal()
   const { open: openBorrowModal } = useBorrowModal()
-  const { open: openSuggestModal } = useSuggestModal()
+  const { open: openCollateralModal } = useCollateralModal()
   const { open: openWalletModal } = useWalletModal()
+  const { open: openSuggestModal } = useSuggestModal()
 
   const deposit = (user: User, asset: AssetMarketData) => {
     openDepositModal({
       asset,
       userSummary: user.summary,
-      userAssetStatus: {
+      userAssetBalance: {
         ...user.balanceByAsset[asset.symbol],
         inWallet: balance[asset.symbol],
       },
       marketReferenceCurrencyPriceInUSD,
+      marketReferenceCurrencyDecimals,
     })
   }
 
@@ -55,11 +72,12 @@ export const Market = asStyled(({ className }) => {
     openBorrowModal({
       asset,
       userSummary: user.summary,
-      userAssetStatus: {
+      userAssetBalance: {
         ...user.balanceByAsset[asset.symbol],
         inWallet: balance[asset.symbol],
       },
       marketReferenceCurrencyPriceInUSD,
+      marketReferenceCurrencyDecimals,
       openSuggestModal: () =>
         openSuggestModal({
           asset,
@@ -68,61 +86,85 @@ export const Market = asStyled(({ className }) => {
         }),
     })
   }
+  const setUsageAsCollateral = (user: User, asset: AssetMarketData) => {
+    openCollateralModal({
+      asset,
+      userSummary: user.summary,
+      userAssetBalance: {
+        ...user.balanceByAsset[asset.symbol],
+        inWallet: balance[asset.symbol],
+      },
+      marketReferenceCurrencyPriceInUSD,
+      marketReferenceCurrencyDecimals,
+    })
+  }
 
   return (
     <MarketSecion className={className}>
-      <MarketSummary>
-        <MarketSummaryTable
-          color={purple}
+      <TableContainer>
+        <MarketTable
+          hoverColor={purple}
           caption={t`Deposit Markets`}
-          columns={[
-            { id: 'asset', name: 'Asset', widthRatio: 6 },
-            { id: 'apr', name: 'Reward APR', widthRatio: 3 },
-            { id: 'apy', name: 'APY', widthRatio: 3 },
-            { id: 'deposited', name: 'Deposited', widthRatio: 6 },
-          ]}
+          columns={DEPOSIT_MARKET_COLUMNS}
           placeholderLength={3}
           rows={markets.map((asset) => {
-            const { symbol, name, icon, depositAPY, depositIncentiveAPR } =
-              asset
+            const {
+              symbol,
+              displaySymbol,
+              icon,
+              depositAPY,
+              depositIncentiveAPR,
+            } = asset
             const apy = formatPct(depositAPY)
             const apr = formatPct(depositIncentiveAPR)
             return {
               id: symbol,
               onClick: user ? () => deposit(user, asset) : openWalletModal,
               data: {
-                asset: <AssetTd icon={icon} name={name} />,
+                asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
                 apr: <BlinkWrapper value={apr}>{apr}</BlinkWrapper>,
                 apy: <BlinkWrapper value={apy}>{apy}</BlinkWrapper>,
                 deposited: !account
                   ? '-'
                   : user
                   ? formatAmt(user.balanceByAsset[asset.symbol].deposited, {
-                      symbol,
+                      symbol: displaySymbol || symbol,
                       shorteningThreshold: 6,
                     })
                   : undefined,
+                collateral: !account ? (
+                  '-'
+                ) : user ? (
+                  user.balanceByAsset[asset.symbol].deposited.isZero() ? (
+                    <CollateralToggle enabled={false} />
+                  ) : (
+                    <ClickDisableWrapper onClick={(e) => e.stopPropagation()}>
+                      <CollateralToggle
+                        enabled={
+                          user.balanceByAsset[asset.symbol]
+                            .usageAsCollateralEnabled
+                        }
+                        onClick={() => setUsageAsCollateral(user, asset)}
+                      />
+                    </ClickDisableWrapper>
+                  )
+                ) : undefined,
               },
             }
           })}
         />
-      </MarketSummary>
-      <MarketSummary>
-        <MarketSummaryTable
-          color={lightYellow}
+      </TableContainer>
+      <TableContainer>
+        <MarketTable
+          hoverColor={lightYellow}
           caption={t`Borrow Markets`}
-          columns={[
-            { id: 'asset', name: 'Asset', widthRatio: 6 },
-            { id: 'apr', name: 'Reward APR', widthRatio: 3 },
-            { id: 'apy', name: 'APY', widthRatio: 3 },
-            { id: 'borrowed', name: 'Borrowed', widthRatio: 6 },
-          ]}
+          columns={BORROW_MARKET_COLUMNS}
           placeholderLength={3}
           rowDisabledStyle={rowDisabledStyle}
           rows={markets.map((asset) => {
             const {
               symbol,
-              name,
+              displaySymbol,
               icon,
               variableBorrowAPY,
               variableBorrowIncentiveAPR,
@@ -134,7 +176,7 @@ export const Market = asStyled(({ className }) => {
               id: symbol,
               onClick: user ? () => borrow(user, asset) : openWalletModal,
               data: {
-                asset: <AssetTd icon={icon} name={name} />,
+                asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
                 apr: borrowUnsupported ? (
                   'Coming soon'
                 ) : (
@@ -150,7 +192,7 @@ export const Market = asStyled(({ className }) => {
                     ? '-'
                     : user
                     ? formatAmt(user.balanceByAsset[asset.symbol].borrowed, {
-                        symbol,
+                        symbol: displaySymbol || symbol,
                         shorteningThreshold: 6,
                       })
                     : undefined,
@@ -159,7 +201,7 @@ export const Market = asStyled(({ className }) => {
             }
           })}
         />
-      </MarketSummary>
+      </TableContainer>
     </MarketSecion>
   )
 })``
@@ -167,73 +209,54 @@ const rowDisabledStyle = css`
   opacity: 0.32;
   pointer-events: none;
 `
-const AssetTd: VFC<Pick<Asset, 'icon' | 'name'>> = ({ icon, name }) => (
-  <AssetDiv>
-    <Image src={icon} alt={name} width={32} height={32} />
-    {name}
-  </AssetDiv>
+const ClickDisableWrapper = styled.div`
+  position: absolute;
+  inset: 0;
+  ${flexCenter};
+  cursor: auto;
+`
+
+type CollateralToggleProps = {
+  enabled: boolean
+  onClick?: VoidFunction
+}
+const CollateralToggle: VFC<CollateralToggleProps> = ({ enabled, onClick }) => (
+  <Button $checked={enabled} disabled={!onClick} onClick={onClick} />
 )
 
-const MarketSummaryTable = styled(Table)<{ color: Color }>`
-  caption {
-    padding: 24px 32px 0;
-    font-size: 20px;
-    font-weight: ${fontWeightHeavy};
-    margin-bottom: 24px;
-  }
-  tr {
-    border-top: 1px solid ${darkPurple}3d;
-    height: 64px;
-  }
-  th {
-    color: ${secondary};
-    font-size: 14px;
-    font-weight: ${fontWeightMedium};
-  }
-  td {
-    font-size: 16px;
-    font-weight: ${fontWeightSemiBold};
-    white-space: nowrap;
-  }
-  th,
-  td {
-    padding: 16px 0;
-    vertical-align: middle;
-    :first-child {
-      padding-left: 32px;
-    }
-    :last-child {
-      padding-right: 32px;
-    }
-    :nth-child(n + 2) {
-      text-align: right;
-      margin-left: auto;
-    }
-  }
-  tbody > tr {
-    :hover {
-      ${({ color }) => hoveredRow(color)};
-    }
+const checkedStyle = css`
+  background: ${purple};
+  ::after {
+    left: calc(100% - 21px);
   }
 `
-
-const AssetDiv = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 16px;
-`
-
-const MarketSummary = styled.div`
-  border-radius: 8px;
-  backdrop-filter: blur(8px) brightness(1.16);
-  background-color: rgba(255, 255, 255, 0.16);
-  overflow: hidden;
+const Button = styled.button<{ $checked: boolean }>`
+  position: relative;
+  width: 40px;
+  height: 24px;
+  border-radius: 20px;
+  background: ${darkPurple};
+  ::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: ${trueWhite};
+    top: 3px;
+    left: 3px;
+    transition: all 0.5s;
+  }
+  :disabled {
+    opacity: 0.5;
+  }
+  ${({ $checked }) => $checked && checkedStyle};
 `
 
 const MarketSecion = styled.section`
   display: flex;
   justify-content: space-between;
-  column-gap: 48px;
+  column-gap: 24px;
   > * {
     flex: 1;
   }

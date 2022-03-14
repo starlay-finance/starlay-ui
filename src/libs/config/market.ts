@@ -3,7 +3,7 @@ import { ValueOf } from 'type-fest'
 import { ChainId, CHAIN_ID } from './network'
 
 export const CUSTOM_MARKET = {
-  proto_shiden: 'proto_shiden',
+  proto_astar: 'proto_astar',
 } as const
 export type CustomMarket = ValueOf<typeof CUSTOM_MARKET>
 
@@ -26,22 +26,24 @@ export type MarketDataType = {
     REPAY_WITH_COLLATERAL_ADAPTER?: EthereumAddress
     FAUCET?: EthereumAddress
     PERMISSION_MANAGER?: EthereumAddress
+    LEVERAGER?: EthereumAddress
   }
 }
 
 export const MARKET_CONFIGS: {
   [key in CustomMarket]: MarketDataType
 } = {
-  [CUSTOM_MARKET.proto_shiden]: {
-    chainId: CHAIN_ID.shiden,
+  [CUSTOM_MARKET.proto_astar]: {
+    chainId: CHAIN_ID.astar,
     enabledFeatures: {
       incentives: true,
     },
     addresses: {
       LENDING_POOL_ADDRESS_PROVIDER:
-        '0x1E1254263708b7309e23425BD4509f9820480974',
-      LENDING_POOL: '0xcb7e8E25B3A7619c4b656f1d8cE808a0bE39862F',
-      WETH_GATEWAY: '0xD5Bec33eB0a5cD8889ea0d19C6aeEC8Ea36E2E8a',
+        '0x4c37A76Bf49c01f91E275d5257a228dad1b74EF9',
+      LENDING_POOL: '0x90384334333f3356eFDD5b20016350843b90f182',
+      WETH_GATEWAY: '0xf630b6d8EB75d3DC9153AAB9e4b6666d4561D6e5',
+      LEVERAGER: '0x138b2985889777Cf33Cb31380E3141cFb1E1842f',
     },
   },
 } as const
@@ -49,5 +51,5 @@ export const MARKET_CONFIGS: {
 export const CHAIN_MARKET_CONFIG: {
   [key in ChainId]: MarketDataType
 } = {
-  [CHAIN_ID.shiden]: MARKET_CONFIGS.proto_shiden,
+  [CHAIN_ID.astar]: MARKET_CONFIGS.proto_astar,
 } as const

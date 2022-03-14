@@ -20,46 +20,51 @@ msgstr "Latest Block: {blockNumber}"
 #: src/components/parts/Footer/AppFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
-msgid "Governance"
-msgstr "Governance"
+#: src/components/screens/Top/Menu.tsx
+msgid "Docs"
+msgstr "Docs"
 
 #: src/components/parts/Footer/AppFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
-msgid "Starlay"
-msgstr "Starlay"
+#: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+msgid "Governance"
+msgstr "Governance"
 
 #: src/components/parts/Footer/AppFooter.tsx
 msgid "Support"
 msgstr "Support"
 
-#: src/components/parts/Footer/AppFooter.tsx
-msgid "Terms"
-msgstr "Terms"
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
+msgstr "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
 
 #: src/components/parts/Footer/TopFooter.tsx
-msgid "Starlay Finance is the first lending protocol backed by Astar Network."
-msgstr "Starlay Finance is the first lending protocol backed by Astar Network."
-
-#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Twitter"
 msgstr "Twitter"
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Discord"
 msgstr "Discord"
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Telegram"
 msgstr "Telegram"
 
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Medium"
 msgstr "Medium"
 
 #: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Github"
 msgstr "Github"
 
@@ -72,11 +77,6 @@ msgid "Developers"
 msgstr "Developers"
 
 #: src/components/parts/Footer/TopFooter.tsx
-#: src/components/parts/Header/TopHeader.tsx
-msgid "Docs"
-msgstr "Docs"
-
-#: src/components/parts/Footer/TopFooter.tsx
 msgid "Overview"
 msgstr "Overview"
 
@@ -84,26 +84,54 @@ msgstr "Overview"
 msgid "Community"
 msgstr "Community"
 
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Brand"
+msgstr "Brand"
+
+#: src/components/parts/Footer/TopFooter.tsx
+msgid "Media Kit"
+msgstr "Media Kit"
+
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Dashboard"
 msgstr "Dashboard"
+
+#: src/components/parts/Header/AppHeader.tsx
+#: src/components/screens/Markets/Assets.tsx
+msgid "Markets"
+msgstr "Markets"
+
+#: src/components/parts/Header/AppHeader.tsx
+msgid "Makai"
+msgstr "Makai"
 
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Connect"
 msgstr "Connect"
 
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Launch App"
 msgstr "Launch App"
 
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/Top/Menu.tsx
 msgid "Bug Bounty"
 msgstr "Bug Bounty"
 
+#: src/components/parts/Modal/MessageModalGradient/index.tsx
+msgid "Close"
+msgstr "Close"
+
 #: src/components/parts/Modal/RewardModal/index.tsx
-#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "LAY Balance"
+msgstr "LAY Balance"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "Wallet Balance"
 
@@ -112,6 +140,7 @@ msgid "Unclaimed Balance"
 msgstr "Unclaimed Balance"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Price"
 msgstr "Price"
 
@@ -132,8 +161,17 @@ msgid "Metamask"
 msgstr "Metamask"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
-msgid "By connecting, I accept Starlay's <0>Terms of Service</0>"
-msgstr "By connecting, I accept Starlay's <0>Terms of Service</0>"
+msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
+msgstr "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "All"
+msgstr "ALL"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "All_Repay"
+msgstr "ALL"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
@@ -146,6 +184,7 @@ msgid "Repay"
 msgstr "Repay"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Borrow APY"
 msgstr "Borrow APY"
@@ -156,19 +195,72 @@ msgstr "Borrow APR"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Borrowed"
 msgstr "Borrowed"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "Borrow Limit Used"
 msgstr "Borrow Limit Used"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/parts/Summary/HealthFactor.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Health Factor"
 msgstr "Health Factor"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "To repay all, you will pay more than the amount shown because of the interest charged per second."
+msgstr "To repay all, you will pay more than the amount shown because of the interest charged per second."
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+msgid "Liquidity"
+msgstr "Liquidity"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "ON"
+msgstr "ON"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "OFF"
+msgstr "OFF"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Collateral_Config"
+msgstr "Collateral"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Collateral_Amount"
+msgstr "Collateral"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "Borrow Available"
+msgstr "Borrow Available"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Disable"
+msgstr "Disable"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+msgid "Enable"
+msgstr "Enable"
+
+#: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Deposited"
+msgstr "Deposited"
+
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+msgid "All_Withdraw"
+msgstr "ALL"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
@@ -181,6 +273,7 @@ msgid "Withdraw"
 msgstr "Withdraw"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Top/parts/Assets.tsx
 msgid "Deposit APY"
 msgstr "Deposit APY"
@@ -190,16 +283,41 @@ msgid "Deposit APR"
 msgstr "Deposit APR"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-msgid "Borrow Available"
-msgstr "Borrow Available"
+msgid "This asset can't be used as collateral."
+msgstr "This asset can't be used as collateral."
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-msgid "Deposited"
-msgstr "Deposited"
+msgid "For more information, please <0>see our docs</0>."
+msgstr "For more information, please <0>see our docs</0>."
 
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
 msgid "Max"
 msgstr "Max"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/MakaiMarkets.tsx
+#: src/components/screens/Markets/Assets.tsx
+msgid "Asset"
+msgstr "Asset"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Reward APR"
+msgstr "Reward APR"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "APY_Deposit"
+msgstr "APY"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "Collateral"
+msgstr "Collateral"
+
+#: src/components/screens/Dashboard/parts/Market.tsx
+msgid "APY_Borrow"
+msgstr "APY"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Deposit Markets"
@@ -214,6 +332,7 @@ msgid "Borrow Limit"
 msgstr "Borrow Limit"
 
 #: src/components/screens/Dashboard/parts/Summary/NetAPY.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Net APY"
 msgstr "Net APY"
 
@@ -225,17 +344,142 @@ msgstr "Deposit Balance"
 msgid "Borrow Balance"
 msgstr "Borrow Balance"
 
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai APR"
+msgstr "Makai APR"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Wallet_Balance"
+msgstr "Wallet"
+
+#: src/components/screens/Makai/MakaiMarkets.tsx
+msgid "Makai Markets"
+msgstr "Makai Markets"
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Unclaimed Reward"
+msgstr "Unclaimed Reward"
+
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Claim"
+msgstr "Claim"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Makai Loops"
+msgstr "Makai Loops"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Estimated Net APY"
+msgstr "Estimated Net APY"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "\"Makai Loops\" is an experimental feature."
+msgstr "\"Makai Loops\" is an experimental feature."
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Please <0>read our docs</0> and understand how it works before using it."
+msgstr "Please <0>read our docs</0> and understand how it works before using it."
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Start loops"
+msgstr "Start loops"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Leverage"
+msgstr "Leverage"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom"
+msgstr "Custom"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom Leverage"
+msgstr "Custom Leverage"
+
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Deposited"
+msgstr "Total Deposited"
+
+#: src/components/screens/Markets/Assets.tsx
+msgid "Deposit Reward APR"
+msgstr "Deposit Reward APR"
+
+#: src/components/screens/Markets/Assets.tsx
+#: src/components/screens/Markets/Overview.tsx
+#: src/components/screens/Top/parts/CurrentMarkets.tsx
+msgid "Total Borrowed"
+msgstr "Total Borrowed"
+
+#: src/components/screens/Markets/Assets.tsx
+msgid "Borrow Reward APR"
+msgstr "Borrow Reward APR"
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Deposit_Top3 Markets"
+msgstr "Top3 Markets"
+
+#: src/components/screens/Markets/Overview.tsx
+msgid "Borrow_Top3 Markets"
+msgstr "Top3 Markets"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Borrowing"
+msgstr "Borrowing"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Yes"
+msgstr "Yes"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "No"
+msgstr "No"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Reserve Factor"
+msgstr "Reserve Factor"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Used as Collateral"
+msgstr "Used as Collateral"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Loan to Value"
+msgstr "Loan to Value"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Threshold"
+msgstr "Liquidation Threshold"
+
+#: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
+msgid "Liquidation Penalty"
+msgstr "Liquidation Penalty"
+
 #: src/components/screens/Sorry/index.tsx
 msgid "Go Back"
 msgstr "Go Back"
 
 #: src/components/screens/Sorry/reasons.ts
-msgid "The Starlay Protocol front-end system does not support mobile access, so please access the site from a PC."
-msgstr "The Starlay Protocol front-end system does not support mobile access, so please access the site from a PC."
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
+msgstr "Starlay Finance does not support mobile access currently. Please connect to this website using your PC."
 
 #: src/components/screens/Sorry/reasons.ts
 msgid "Something went wrong. Please go back."
 msgstr "Something went wrong. Please go back."
+
+#: src/components/screens/Top/Menu.tsx
+msgid "Menu"
+msgstr "Menu"
+
+#: src/components/screens/Top/Menu.tsx
+#: src/components/screens/Top/parts/FirstView.tsx
+msgid "Sorry"
+msgstr "Sorry"
 
 #: src/components/screens/Top/parts/Backers.tsx
 msgid "Backers"
@@ -253,21 +497,13 @@ msgstr "Current Markets"
 msgid "The more funds that will be borrowed, the higher the interest rate will be"
 msgstr "The more funds that will be borrowed, the higher the interest rate will be"
 
-#: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "Total Market Size"
-msgstr "Total Market Size"
-
-#: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "Total Borrowed"
-msgstr "Total Borrowed"
-
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Low Risk Farming on Astar Network"
 msgstr "Low Risk Farming on Astar Network"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "Starlay Finance is the first lending protocol backed by Astar Network"
-msgstr "Starlay Finance is the first lending protocol backed by Astar Network"
+msgid "The largest lending protocol in the Polkadot ecosystem"
+msgstr "The largest lending protocol in the Polkadot ecosystem"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"
@@ -282,8 +518,18 @@ msgid "ASTAR"
 msgstr "ASTAR"
 
 #: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Preparing"
+msgstr "Transaction Preparing"
+
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Waiting for transaction to be ready..."
 msgstr "Waiting for transaction to be ready..."
+
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Confirm Transaction"
+msgstr "Confirm Transaction"
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Approve sending the ERC-20 asset to the pool."
@@ -291,20 +537,43 @@ msgstr "Approve sending the ERC-20 asset to the pool."
 
 #: src/hooks/useLendingPool/txHandler.ts
 #: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Pending"
+msgstr "Transaction Pending"
+
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/useLendingPool/txHandler.ts
 msgid "Waiting for the transaction to be confirmed..."
 msgstr "Waiting for the transaction to be confirmed..."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Approve the contract to borrow ERC-20 assets on your credit."
+msgstr "Approve the contract to borrow ERC-20 assets on your credit."
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Confirm the transaction."
 msgstr "Confirm the transaction."
 
 #: src/hooks/useLendingPool/txHandler.ts
-msgid "You transaction confirmed!"
-msgstr "You transaction confirmed!"
+msgid "Succeeded!"
+msgstr "Succeeded!"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Your transaction confirmed!"
+msgstr "Your transaction confirmed!"
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Transaction Canceled"
+msgstr "Transaction Canceled"
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "You have canceled the transaction."
 msgstr "You have canceled the transaction."
+
+#: src/hooks/useLendingPool/txHandler.ts
+msgid "Error"
+msgstr "Error"
 
 #: src/hooks/useLendingPool/txHandler.ts
 msgid "Something went wrong..."
@@ -327,34 +596,61 @@ msgstr "Please switch the chain with your wallet..."
 msgid "Failed to switch the chain"
 msgstr "Failed to switch the chain"
 
-#: src/utils/calculator.ts
+#: src/libs/wallet-provider/providers/metamask.ts
+#: src/libs/wallet-provider/providers/metamask.ts
+#: src/libs/wallet-provider/providers/metamask.ts
+#: src/libs/wallet-provider/providers/metamask.ts
+msgid "Your wallet needs to switch networks manually."
+msgstr "Your wallet needs to switch networks manually."
+
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Enter amount"
 msgstr "Enter amount"
 
-#: src/utils/calculator.ts
+#: src/utils/estimationHelper.ts
 msgid "No balance to deposit"
 msgstr "No balance to deposit"
 
-#: src/utils/calculator.ts
-#: src/utils/calculator.ts
-#: src/utils/calculator.ts
-msgid "Enter Amount"
-msgstr "Enter Amount"
-
-#: src/utils/calculator.ts
-#: src/utils/calculator.ts
+#: src/utils/estimationHelper.ts
 msgid "No balance to withdraw"
 msgstr "No balance to withdraw"
 
-#: src/utils/calculator.ts
-#: src/utils/calculator.ts
+#: src/utils/estimationHelper.ts
+msgid "Insufficient collateral"
+msgstr "Insufficient collateral"
+
+#: src/utils/estimationHelper.ts
+msgid "No liquidity to withdraw"
+msgstr "No liquidity to withdraw"
+
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Health factor too low"
 msgstr "Health factor too low"
 
-#: src/utils/calculator.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
 msgid "Borrowing limit reached"
 msgstr "Borrowing limit reached"
 
-#: src/utils/calculator.ts
+#: src/utils/estimationHelper.ts
+msgid "No liquidity to borrow"
+msgstr "No liquidity to borrow"
+
+#: src/utils/estimationHelper.ts
 msgid "No balance to repay"
 msgstr "No balance to repay"
+
+#: src/utils/estimationHelper.ts
+msgid "Enter leverage"
+msgstr "Enter leverage"
+
+#: src/utils/estimationHelper.ts
+msgid "No balance to loop"
+msgstr "No balance to loop"

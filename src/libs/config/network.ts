@@ -3,7 +3,7 @@ import { EthereumAddress } from 'src/types/web3'
 import { ValueOf } from 'type-fest'
 
 export const CHAIN_ID = {
-  shiden: 336,
+  astar: 592,
 } as const
 
 export type ChainId = ValueOf<typeof CHAIN_ID>
@@ -37,34 +37,42 @@ export type NetworkConfig = {
     underlyingAsset: EthereumAddress
     decimals: number
   }
+  snapshotProvider?: {
+    endpoint: string
+    apiKey?: string
+  }
   explorerLinks?: string[]
   rpcOnly?: boolean
   isTestnet?: boolean
 }
 
 export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
-  [CHAIN_ID.shiden]: {
-    name: 'Shiden Network',
-    publicJsonRPCUrl: ['https://rpc.shiden.astar.network:8545'],
+  [CHAIN_ID.astar]: {
+    name: 'Astar Network',
+    publicJsonRPCUrl: ['https://rpc.astar.network:8545'],
     addresses: {
-      walletBalanceProvider: '0x03416c018C7202A1aE7e27d8D1D16f989F347f06',
-      uiPoolDataProvider: '0xC649aA738A2677Cca93a6a3bD5a1cF18D11815E5',
-      uiIncentiveDataProvider: '0x07CAaB4baD2856109C3bdbc9E396e42E53E9D988',
-      stakeUiHelper: '0x4Bf59A3F1D9419cb2234BbDFD8cb5f3654a79e9a',
+      walletBalanceProvider: '0x449b5A2c9c75d77283253625C03aE6336c957a0c',
+      uiPoolDataProvider: '0x97Fc9e6aFB9d7A9C9898a2b6F97Da43EB5f56331',
+      uiIncentiveDataProvider: '0x08ba69145938dD3CB0EE94c0D59EF6364059956B',
+      stakeUiHelper: '0xa6FAB9Dfd104a6582c049266E7eCCB0b908c55E4',
       priceAggregatorAdapterAddress:
-        '0xA762C9B14600bD3583069E5fc4a4090AabaDA13e',
+        '0xbB5893E0f744b3d6305D49B1da6bc04fE922AC15',
     },
     baseAsset: {
-      symbol: 'SDN',
-      wrapperAddress: '0x44a26AE046a01d99eBAbecc24B4d61B388656871',
+      symbol: 'ASTR',
+      wrapperAddress: '0xAeaaf0e2c81Af264101B9129C00F4440cCF0F720',
     },
     rewardToken: {
       symbol: 'stkLAY',
-      address: '0x4cff3b5f6ba3d64083963de201089f3267490c65',
-      underlyingAsset: '0xb163716cb6c8b0a56e4f57c394A50F173E34181b',
+      address: '0x6FD65f71B3FB5Aa9d794f010AFc65F174012994F',
+      underlyingAsset: '0xc4335B1b76fA6d52877b3046ECA68F6E708a27dd',
       decimals: 18,
     },
-    explorerLinks: ['https://blockscout.com/shiden'],
-    isTestnet: true,
+    snapshotProvider: {
+      endpoint:
+        'https://xok6alsasvgthgl5ozss7upnuu.appsync-api.us-east-1.amazonaws.com/graphql',
+      apiKey: 'da2-qvw2m7hf6jhonms4rhtqgix7ri',
+    },
+    explorerLinks: ['https://blockscout.com/astar'],
   },
 }

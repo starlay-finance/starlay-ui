@@ -1,6 +1,5 @@
 import NextImage, { ImageProps as NextImageProps } from 'next/image'
 import React, { ReactText, VFC } from 'react'
-import { absoluteFill } from 'src/styles/mixins'
 import styled from 'styled-components'
 
 export type ImageInfo = {
@@ -47,7 +46,8 @@ export const Image: VFC<ImageProps> = ({
 }
 
 export const RawImage = styled.img`
-  ${absoluteFill};
+  position: absolute;
+  inset: 0;
   box-sizing: border-box;
   padding: 0px;
   border: none;

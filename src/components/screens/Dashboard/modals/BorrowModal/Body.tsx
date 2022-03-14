@@ -11,7 +11,7 @@ import {
   estimateBorrow,
   estimateRepayment,
   EstimationParam,
-} from 'src/utils/calculator'
+} from 'src/utils/estimationHelper'
 import {
   formatAmt,
   formatAmtShort,
@@ -24,6 +24,7 @@ import {
   AmountInput,
   Balance,
   ContentDiv,
+  Note,
   NumberItems,
   Tab,
   TabFC,
@@ -34,16 +35,17 @@ type TabType = typeof TABS[number]
 
 export type BorrowModalBodyProps = Omit<EstimationParam, 'amount'> & {
   borrow: (amount: BigNumber) => void
-  repay: (amount: BigNumber) => void
+  repay: (amount: BigNumber, all?: boolean) => void
 }
 export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
   borrow,
   repay,
   ...estimationParams
 }) => {
-  const { asset, userSummary, userAssetStatus } = estimationParams
+  const { asset, userSummary, userAssetBalance } = estimationParams
   const {
     symbol,
+    displaySymbol,
     variableBorrowAPY,
     variableBorrowIncentiveAPR,
     liquidity,
@@ -54,7 +56,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
     name,
   } = asset
   const { totalBorrowedInUSD, borrowLimitUsed, healthFactor } = userSummary
-  const { borrowed } = userAssetStatus
+  const { borrowed } = userAssetBalance
 
   const borrowable = borrowingEnabled && !isFrozen
   const [activeTab, setActiveTab] = useState<TabType>(
@@ -62,6 +64,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
   )
   const [borrowingAmount, setBorrowingAmount] = useState('')
   const [repaymentAmount, setRepaymentAmount] = useState('')
+  const [all, setAll] = useState(false)
 
   const borrowingAmountBn = formattedToBigNumber(borrowingAmount)
   const repaymentAmountBn = formattedToBigNumber(repaymentAmount)
@@ -86,6 +89,7 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
             )
           }
           significantDigits={decimals}
+          allLabel={t`All`}
         />
       ) : (
         <AmountInput
@@ -95,6 +99,12 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
             setRepaymentAmount(formatAmt(estimation.maxAmount))
           }
           significantDigits={decimals}
+          setAll={(all: boolean) => {
+            setAll(all)
+            if (all) setRepaymentAmount(formatAmt(userAssetBalance.borrowed))
+          }}
+          all={all}
+          allLabel={t`All_Repay`}
         />
       )}
       <ActionTab
@@ -145,6 +155,11 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
             formatter={formatAmtShort}
           />
         </NumberItems>
+        {all && (
+          <Note>
+            {t`To repay all, you will pay more than the amount shown because of the interest charged per second.`}
+          </Note>
+        )}
         {activeTab === 'borrow' ? (
           <SimpleCtaButton
             onClick={() => borrow(valueToBigNumber(borrowingAmountBn!))}
@@ -154,16 +169,24 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
           </SimpleCtaButton>
         ) : (
           <SimpleCtaButton
-            onClick={() => repay(valueToBigNumber(repaymentAmountBn!))}
+            onClick={() => repay(valueToBigNumber(repaymentAmountBn!), all)}
             disabled={!!estimation.unavailableReason}
           >
             {estimation.unavailableReason || t`Repay`}
           </SimpleCtaButton>
         )}
         {activeTab === 'borrow' ? (
-          <Balance label={t`Liquidity`} balance={liquidity} symbol={symbol} />
+          <Balance
+            label={t`Liquidity`}
+            balance={liquidity}
+            symbol={displaySymbol || symbol}
+          />
         ) : (
-          <Balance label={t`Borrowed`} balance={borrowed} symbol={symbol} />
+          <Balance
+            label={t`Borrowed`}
+            balance={borrowed}
+            symbol={displaySymbol || symbol}
+          />
         )}
       </Action>
     </ContentDiv>

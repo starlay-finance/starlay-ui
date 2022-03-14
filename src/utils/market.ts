@@ -34,9 +34,9 @@ export const amountByAssetsSorter: Sorter<
 export const toMarketCompositions = (data: AssetMarketData[]) =>
   data.reduce<MarketCompositions>((prev, current) => {
     const { deposit, borrow } = prev
-    const { symbol, marketSizeInUSD, totalBorrowedInUSD } = current
+    const { symbol, totalDepositedInUSD, totalBorrowedInUSD } = current
     return {
-      deposit: addToMarketComposition(symbol, marketSizeInUSD, deposit),
+      deposit: addToMarketComposition(symbol, totalDepositedInUSD, deposit),
       borrow: addToMarketComposition(symbol, totalBorrowedInUSD, borrow),
     }
   }, EMPTY_MARKET_COMPOSITIONS)

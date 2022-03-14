@@ -6,6 +6,7 @@ export type AssetSymbol = typeof LISTED_ASSET_SYMBOLS[number]
 
 export type Asset = {
   symbol: AssetSymbol
+  displaySymbol?: string
   icon: string | StaticImageData
   name: string
   borrowUnsupported?: boolean
@@ -18,16 +19,19 @@ export type AssetMarketData = Asset & {
   variableBorrowIncentiveAPR: BigNumber
   liquidity: BigNumber
   liquidityInUSD: BigNumber
-  marketSizeInUSD: BigNumber
+  totalDepositedInUSD: BigNumber
   totalBorrowedInUSD: BigNumber
   baseLTVasCollateral: BigNumber
   priceInMarketReferenceCurrency: BigNumber
-  reserveLiquidationThreshold: number
+  reserveLiquidationThreshold: BigNumber
   usageAsCollateralEnabled: boolean
+  reserveFactor: BigNumber
+  liquidationPenalty: BigNumber
   underlyingAsset: EthereumAddress
   decimals: number
   lTokenAddress: EthereumAddress
   vdTokenAddress: EthereumAddress
+  isActive: boolean
   isFrozen: boolean
   borrowingEnabled: boolean
 }

@@ -1,20 +1,18 @@
 import { t } from '@lingui/macro'
-import { forwardRef, VFC } from 'react'
+import { forwardRef } from 'react'
 import { useInView } from 'react-hook-inview'
+import { AssetBarChartWithPlaceholder } from 'src/components/compositions/Markets/MarketBarChart'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { BlinkWrapper } from 'src/components/parts/Blink'
-import { BarChart } from 'src/components/parts/Chart'
-import { SHIMMER_DARA_URI } from 'src/components/parts/Loading'
-import { Reel } from 'src/components/parts/Reel'
+import { BlinkWrapper } from 'src/components/parts/Number/Blink'
+import { Reel } from 'src/components/parts/Number/Reel'
 import { useMarketData } from 'src/hooks/useMarketData'
-import { darkRed, secondary, skyBlue } from 'src/styles/colors'
+import { darkRed, skyBlue, trueWhite } from 'src/styles/colors'
 import { fontWeightBlack, fontWeightSemiBold } from 'src/styles/font'
-import { contentMaxWidthCssVar } from 'src/styles/mixins'
+import { breakpoint, contentMaxWidthCssVar } from 'src/styles/mixins'
 import { MarketComposition } from 'src/types/models'
 import { amountByAssetsSorter, toMarketCompositions } from 'src/utils/market'
-import { BN_ZERO, formatPct, formatUSD } from 'src/utils/number'
+import { BN_ZERO, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
-import { IterableElement } from 'type-fest'
 
 export const CurrentMarkets = asStyled(({ className }) => {
   const { data } = useMarketData()
@@ -46,33 +44,37 @@ export const CurrentMarketsComponent = forwardRef<
     <div>
       <h2>{t`Current Markets`}</h2>
       <p>{t`The more funds that will be borrowed, the higher the interest rate will be`}</p>
-      <MarketViewDiv ref={ref}>
-        <MarketView
-          title={t`Total Market Size`}
-          market={deposit}
-          touched={touched}
-        />
-        <MarketView
-          title={t`Total Borrowed`}
-          market={borrow}
-          touched={touched}
-        />
-      </MarketViewDiv>
+      <div ref={ref}>
+        <MarketViewDiv>
+          <Background />
+          <MarketView
+            title={t`Total Deposited`}
+            market={deposit}
+            touched={touched}
+          />
+          <MarketView
+            title={t`Total Borrowed`}
+            market={borrow}
+            touched={touched}
+          />
+        </MarketViewDiv>
+      </div>
     </div>
   </CurrentMarketsSection>
 ))
 
-const MarketView: VFC<{
+const MarketView = asStyled<{
   title: string
   market: MarketComposition
   touched: boolean
-}> = ({ title, market: { totalInUSD, amountByAssets }, touched }) => {
+}>(({ title, market: { totalInUSD, amountByAssets }, touched, className }) => {
   const value = formatUSD(touched ? totalInUSD : BN_ZERO, {
     decimalPlaces: 2,
     shorteningThreshold: 30,
   })
   return (
-    <ViewDiv>
+    <ViewDiv className={className}>
+      <Background />
       <h3>{title}</h3>
       <BlinkWrapper value={value}>
         <Reel text={value} />
@@ -82,7 +84,7 @@ const MarketView: VFC<{
           ? Array.from(new Array(3))
           : amountByAssets.sort(amountByAssetsSorter).slice(0, 3)
         ).map((each, idx) => (
-          <AssetsWithPlaceholder
+          <AssetBarChartWithPlaceholder
             key={idx}
             totalInUSD={totalInUSD}
             asset={each}
@@ -91,80 +93,22 @@ const MarketView: VFC<{
       </Composition>
     </ViewDiv>
   )
-}
-
-const AssetsWithPlaceholder: VFC<{
-  totalInUSD: MarketComposition['totalInUSD']
-  asset?: IterableElement<MarketComposition['amountByAssets']>
-}> = ({ totalInUSD, asset }) => {
-  const isValid = totalInUSD.gt(BN_ZERO) && asset
-  return (
-    <Asset>
-      <LabelWithPlaceholder
-        label={asset?.symbol}
-        value={
-          isValid
-            ? formatPct(asset.amountInUSD.dividedBy(totalInUSD))
-            : formatPct(0)
-        }
-      />
-      <BarChart
-        ratio={
-          isValid
-            ? Math.min(asset.amountInUSD.dividedBy(totalInUSD).toNumber(), 1)
-            : 0
-        }
-        filled={skyBlue}
-        unfilled={`${skyBlue}3d`}
-      />
-    </Asset>
-  )
-}
-const LabelWithPlaceholder: VFC<{
-  label?: string
-  value: string
-}> = ({ label, value }) => (
-  <p>
-    <span data-label={label || ''}>{label}</span>
-    <span>{value}</span>
-  </p>
-)
-
-const Asset = styled.div`
-  p {
-    display: flex;
-    justify-content: space-between;
-    color: ${secondary};
-    span:first-child {
-      font-size: 16px;
-      font-weight: ${fontWeightBlack};
-      line-height: 1.2;
-    }
-    span[data-label=''] {
-      background: url('${SHIMMER_DARA_URI}');
-      width: 6em;
-      height: 1.2em;
-      border-radius: 0.5em;
-    }
-    span:last-child {
-      font-size: 14px;
-      font-weight: ${fontWeightSemiBold};
-    }
-  }
-  ${BarChart} {
-    margin-top: 14px;
-    height: 8px;
-  }
-`
+})``
 
 const Composition = styled.div`
-  ${Asset} {
+  ${AssetBarChartWithPlaceholder} {
     margin-top: 16px;
   }
 `
-
+const Background = styled.div`
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, ${darkRed}3d, ${skyBlue}3d);
+`
 const ViewDiv = styled.div`
   position: relative;
+  backdrop-filter: blur(16px) brightness(1.08);
+  background: rgba(255, 255, 255, 0.08);
   ${Composition} {
     margin-top: 24px;
   }
@@ -172,42 +116,79 @@ const ViewDiv = styled.div`
 
 const MarketViewDiv = styled.div`
   position: relative;
-  padding: 32px;
-  border-radius: 24px;
-  overflow: hidden;
-  background: linear-gradient(90deg, ${darkRed}3d, ${skyBlue}3d);
-  backdrop-filter: blur(16px) brightness(1.08);
 
   display: flex;
+  flex-direction: column;
   column-gap: 48px;
+  row-gap: 24px;
   > * {
     flex: 1;
+  }
+  ${MarketView} {
+    padding: 32px 24px 40px;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  > ${Background} {
+    display: none;
+  }
+  @media ${breakpoint.xl} {
+    flex-direction: row;
+
+    padding: 32px;
+    border-radius: 24px;
+    overflow: hidden;
+    backdrop-filter: blur(16px) brightness(1.08);
+    background: rgba(255, 255, 255, 0.08);
+    ${MarketView} {
+      padding: 0;
+      border-radius: 0;
+      overflow: visible;
+      background: none;
+      backdrop-filter: none;
+      ${Background} {
+        display: none;
+      }
+    }
+    > ${Background} {
+      display: block;
+    }
   }
 `
 
 const CurrentMarketsSection = styled.section`
   position: relative;
   width: 100%;
-  height: 504px;
   max-width: var(${contentMaxWidthCssVar});
   margin: 0 auto;
   ${MarketViewDiv} {
-    margin-top: 56px;
+    margin-top: 40px;
   }
   h2,
   h2 + p {
     text-align: center;
   }
   h3 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: ${fontWeightSemiBold};
     padding-bottom: 16px;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid ${trueWhite}52;
   }
   h3 + * {
     display: block;
-    margin-top: 16px;
-    font-size: 36px;
+    margin-top: 24px;
+    font-size: 24px;
     font-weight: ${fontWeightBlack};
+  }
+
+  @media ${breakpoint.xl} {
+    ${MarketViewDiv} {
+      margin-top: 56px;
+    }
+    h3 + * {
+      margin-top: 16px;
+      font-size: 36px;
+    }
   }
 `

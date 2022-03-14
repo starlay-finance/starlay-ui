@@ -8,7 +8,7 @@ import { ChainId } from 'src/libs/config'
 import { PoolDataProviderInterface } from 'src/libs/pool-data-provider/types'
 import { User } from 'src/types/models'
 import { EthereumAddress } from 'src/types/web3'
-import { generateSymbolDict } from 'src/utils/assets'
+import { EMPTY_BALANCE_BY_ASSET } from 'src/utils/assets'
 import { calculateNetAPY } from 'src/utils/calculator'
 import { BN_ZERO } from 'src/utils/number'
 import useSWR from 'swr'
@@ -101,12 +101,6 @@ const toUser = (
   }
 }
 
-const EMPTY_STATUS_BY_ASSET: User['balanceByAsset'] = generateSymbolDict({
-  deposited: BN_ZERO,
-  borrowed: BN_ZERO,
-  usageAsCollateralEnabled: false,
-})
-
 const toBalanceByAsset = (userReservesData: ComputedUserReserve[]) =>
   userReservesData.reduce(
     (prev, { reserve: { symbol }, ...userReserve }) => ({
@@ -117,5 +111,5 @@ const toBalanceByAsset = (userReservesData: ComputedUserReserve[]) =>
         usageAsCollateralEnabled: userReserve.usageAsCollateralEnabledOnUser,
       },
     }),
-    EMPTY_STATUS_BY_ASSET,
+    EMPTY_BALANCE_BY_ASSET,
   )
