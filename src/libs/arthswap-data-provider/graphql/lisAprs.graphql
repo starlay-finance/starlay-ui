@@ -1,0 +1,9 @@
+query ListAPRs {
+  getAprs {
+    lpName
+    apr
+    liquidity
+    multipler
+    updatedAt
+  }
+}

@@ -11,7 +11,7 @@ import { BorrowModalBody, BorrowModalBodyProps } from './Body'
 export const Borrow: VFC<
   ModalContentProps<
     Omit<BorrowModalBodyProps, 'borrow' | 'repay'> & {
-      openSuggestModal: VoidFunction
+      openSuggestModal?: VoidFunction
     }
   >
 > = ({ close, openSuggestModal, ...props }) => {

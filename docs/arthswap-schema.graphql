@@ -1,0 +1,11 @@
+type Apr {
+  lpName: String
+  apr: Float
+  liquidity: Int
+  multipler: Float
+  updatedAt: Float
+}
+type Query {
+  getApr(liquidityPair: String): Apr
+  getAprs: [Apr]
+}

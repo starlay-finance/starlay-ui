@@ -8,6 +8,8 @@ import {
 import { asStyled } from 'src/components/hoc/asStyled'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { BlinkWrapper } from 'src/components/parts/Number/Blink'
+import { ARTHSWAP_ASSETS_DICT } from 'src/constants/assets'
+import { useArthswapData } from 'src/hooks/useArthswapData'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
@@ -15,7 +17,7 @@ import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { darkPurple, lightYellow, purple, trueWhite } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { AssetMarketData, User } from 'src/types/models'
-import { symbolSorter } from 'src/utils/market'
+import { aprSorter, symbolSorter } from 'src/utils/market'
 import { BN_ZERO, formatAmt, formatPct } from 'src/utils/number'
 import styled, { css } from 'styled-components'
 import { useBorrowModal } from '../modals/BorrowModal'
@@ -47,6 +49,8 @@ export const Market = asStyled(({ className }) => {
   } = marketData || {}
   const markets = assets.filter((each) => each.isActive).sort(symbolSorter)
 
+  const { data: arthswapData } = useArthswapData()
+
   const { data: user } = useUserData()
   const { data: balance } = useWalletBalance()
   const { open: openDepositModal } = useDepositModal()
@@ -69,6 +73,14 @@ export const Market = asStyled(({ className }) => {
   }
 
   const borrow = (user: User, asset: AssetMarketData) => {
+    const arthswapPair = arthswapData
+      ?.filter(
+        (each) =>
+          each.symbols.includes(asset.displaySymbol || asset.symbol) &&
+          each.symbols.some((each) => !!ARTHSWAP_ASSETS_DICT[each]),
+      )
+      .sort(aprSorter)[0]
+
     openBorrowModal({
       asset,
       userSummary: user.summary,
@@ -78,12 +90,17 @@ export const Market = asStyled(({ className }) => {
       },
       marketReferenceCurrencyPriceInUSD,
       marketReferenceCurrencyDecimals,
-      openSuggestModal: () =>
-        openSuggestModal({
-          asset,
-          inWallet: balance[asset.symbol],
-          openDeposit: () => deposit(user, asset),
-        }),
+      openSuggestModal: arthswapPair?.apr.gt(
+        asset.depositAPY.plus(asset.depositIncentiveAPR),
+      )
+        ? () =>
+            openSuggestModal({
+              asset,
+              inWallet: balance[asset.symbol],
+              arthswapPair,
+              openDeposit: () => deposit(user, asset),
+            })
+        : undefined,
     })
   }
   const setUsageAsCollateral = (user: User, asset: AssetMarketData) => {

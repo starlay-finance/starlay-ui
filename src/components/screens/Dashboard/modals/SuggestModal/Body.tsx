@@ -2,10 +2,7 @@ import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { ReactNode, VFC } from 'react'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
-import {
-  NumberItem,
-  NumberItemAstarPair,
-} from 'src/components/parts/Modal/parts'
+import { NumberItem, NumberItemPair } from 'src/components/parts/Modal/parts'
 import { hoveredRow } from 'src/styles/animation'
 import { purple } from 'src/styles/colors'
 import { AssetMarketData } from 'src/types/models'
@@ -20,59 +17,29 @@ type Action = {
   apy: BigNumber
   node: ReactNode
 }
-const sorter = (a: { apy: BigNumber }, b: { apy: BigNumber }) => {
-  if (a.apy.gt(b.apy)) return 1
-  if (b.apy.gt(a.apy)) return -1
-  return 0
-}
 
 export type SuggestModalBodyProps = {
   close: VoidFunction
   asset: AssetMarketData
-  arthswapAPY: BigNumber
+  arthswapPair: {
+    symbol1: string
+    symbol2: string
+    image1: StaticImageData
+    image2: StaticImageData
+    apr: BigNumber
+  }
   inWallet: BigNumber
   openDeposit: VoidFunction
 }
 export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
   asset,
   close,
-  arthswapAPY,
+  arthswapPair,
   inWallet,
   openDeposit,
 }) => {
   const { name, symbol, icon, depositAPY } = asset
-  const actions = (): Action[] => [
-    {
-      apy: arthswapAPY,
-      node: (
-        <SuggestItem
-          onClick={() => window.open(ARTHSWAP, '_blank', 'noreferrer')}
-        >
-          <NumberItemAstarPair
-            label={`ASTR-${symbol}`}
-            note={t`Liquidity providing on ArthSwap`}
-            num={arthswapAPY}
-            image={{ src: icon, alt: name }}
-            format={formatPct}
-          />
-        </SuggestItem>
-      ),
-    },
-    {
-      apy: depositAPY,
-      node: (
-        <SuggestItem onClick={openDeposit}>
-          <NumberItem
-            label={symbol}
-            note={t`Lending on Starlay Finance`}
-            num={depositAPY}
-            image={{ src: icon, alt: name }}
-            format={formatPct}
-          />
-        </SuggestItem>
-      ),
-    },
-  ]
+  const { symbol1, symbol2, image1, image2, apr } = arthswapPair
   return (
     <ContentDiv>
       <NoteP>
@@ -86,9 +53,27 @@ export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
       />
       <Action>
         <SuggestItems>
-          {actions()
-            .sort(sorter)
-            .map((each) => each.node)}
+          <SuggestItem
+            onClick={() => window.open(ARTHSWAP, '_blank', 'noreferrer')}
+          >
+            <NumberItemPair
+              label={`${symbol1}-${symbol2}`}
+              note={t`Liquidity providing on ArthSwap`}
+              num={apr}
+              image={{ src: image1, alt: symbol1 }}
+              image2={{ src: image2, alt: symbol2 }}
+              format={formatPct}
+            />
+          </SuggestItem>
+          <SuggestItem onClick={openDeposit}>
+            <NumberItem
+              label={symbol}
+              note={t`Lending on Starlay Finance`}
+              num={depositAPY}
+              image={{ src: icon, alt: name }}
+              format={formatPct}
+            />
+          </SuggestItem>
         </SuggestItems>
         <SimpleCtaButton onClick={close}>{t`Close`}</SimpleCtaButton>
         <Balance label={t`Wallet Balance`} balance={inWallet} symbol={symbol} />
@@ -130,6 +115,8 @@ const SuggestItem = styled(({ children, className, onClick }) => (
   }
 `
 
-const SuggestItems = styled(NumberItems)``
+const SuggestItems = styled(NumberItems)`
+  margin: -32px 0 8px;
+`
 
 const ActionTab: TabFC = Tab

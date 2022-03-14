@@ -1,7 +1,7 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { Item, ItemDiv, ItemWithDiff } from './Item'
-import { ItemLabelAstarPair, ItemLabelProps } from './ItemLabel'
+import { ItemLabelPair, ItemLabelProps } from './ItemLabel'
 
 type NumberItemProps = ItemLabelProps & {
   num: BigNumber
@@ -11,14 +11,17 @@ export const NumberItem = asStyled<NumberItemProps>(
   ({ num, format, ...props }) => <Item value={format(num)} {...props} />,
 )``
 
-export const NumberItemAstarPair = asStyled<NumberItemProps>(
-  ({ num, format, className, ...props }) => (
-    <ItemDiv className={className}>
-      <ItemLabelAstarPair {...props} />
-      <div>{format(num)}</div>
-    </ItemDiv>
-  ),
-)``
+export const NumberItemPair = asStyled<
+  NumberItemProps & {
+    image2?: { src: string | StaticImageData; alt: string }
+    IconSVG2?: SvgrComponent
+  }
+>(({ num, format, className, ...props }) => (
+  <ItemDiv className={className}>
+    <ItemLabelPair {...props} />
+    <div>{format(num)}</div>
+  </ItemDiv>
+))``
 
 type NumberItemWithDiffProps = {
   label: string

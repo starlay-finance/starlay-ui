@@ -1,6 +1,5 @@
 import { Image } from 'src/components/elements/Image'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { ASSETS_DICT } from 'src/constants/assets'
 import { darkPurple } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { Asset } from 'src/types/models'
@@ -28,7 +27,6 @@ export type ItemLabelProps = {
     alt: string
   }
   IconSVG?: SvgrComponent
-  withAstar?: boolean
 }
 export const ItemLabel = asStyled<ItemLabelProps>(
   ({ label, note, image, IconSVG, className }) => (
@@ -45,28 +43,29 @@ export const ItemLabel = asStyled<ItemLabelProps>(
   ),
 )``
 
-export const ItemLabelAstarPair = asStyled<ItemLabelProps>(
-  ({ label, note, image, IconSVG, className }) => (
-    <LabelDiv className={className}>
-      <PairDiv>
-        <Image
-          src={ASSETS_DICT.ASTR.icon}
-          alt={ASSETS_DICT.ASTR.name}
-          width={24}
-          height={24}
-        />
-        {image && (
-          <Image src={image.src} alt={image.alt} width={24} height={24} />
-        )}
-        {IconSVG && <IconSVG />}
-      </PairDiv>
-      <TextDiv withNote={!!note}>
-        <p>{label}</p>
-        {note && <p>{note}</p>}
-      </TextDiv>
-    </LabelDiv>
-  ),
-)``
+export const ItemLabelPair = asStyled<
+  ItemLabelProps & {
+    image2?: { src: string | StaticImageData; alt: string }
+    IconSVG2?: SvgrComponent
+  }
+>(({ label, note, image, IconSVG, image2, IconSVG2, className }) => (
+  <LabelDiv className={className}>
+    <PairDiv>
+      {image && (
+        <Image src={image.src} alt={image.alt} width={24} height={24} />
+      )}
+      {image2 && (
+        <Image src={image2.src} alt={image2.alt} width={24} height={24} />
+      )}
+      {IconSVG && <IconSVG />}
+      {IconSVG2 && <IconSVG2 />}
+    </PairDiv>
+    <TextDiv withNote={!!note}>
+      <p>{label}</p>
+      {note && <p>{note}</p>}
+    </TextDiv>
+  </LabelDiv>
+))``
 
 const PairDiv = styled.div`
   position: relative;
@@ -74,12 +73,12 @@ const PairDiv = styled.div`
   height: 36px;
   > {
     :first-child {
-      position: absolute;
+      position: absolute !important;
       top: 0;
       left: 0;
     }
     :last-child {
-      position: absolute;
+      position: absolute !important;
       bottom: 0;
       right: 0;
     }

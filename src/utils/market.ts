@@ -30,6 +30,11 @@ export const amountByAssetsSorter: Sorter<
   if (a.amountInUSD.gt(b.amountInUSD)) return -1
   return a.symbol > b.symbol ? 1 : -1
 }
+export const aprSorter: Sorter<{ apr: BigNumber }> = (a, b) => {
+  if (a.apr.lt(b.apr)) return 1
+  if (a.apr.gt(b.apr)) return -1
+  return 0
+}
 
 export const toMarketCompositions = (data: AssetMarketData[]) =>
   data.reduce<MarketCompositions>((prev, current) => {

@@ -1,6 +1,10 @@
 import SymbolArsw from 'public/assets/images/symbols/symbol_arsw.png'
 import SymbolAstr from 'public/assets/images/symbols/symbol_astr.png'
+import SymbolBnb from 'public/assets/images/symbols/symbol_bnb.png'
+import SymbolBusd from 'public/assets/images/symbols/symbol_busd.png'
+import SymbolDai from 'public/assets/images/symbols/symbol_dai.png'
 import SymbolLay from 'public/assets/images/symbols/symbol_lay.png'
+import SymbolMatic from 'public/assets/images/symbols/symbol_matic.png'
 import SymbolUsdc from 'public/assets/images/symbols/symbol_usdc.png'
 import SymbolUsdt from 'public/assets/images/symbols/symbol_usdt.png'
 import SymbolWbtc from 'public/assets/images/symbols/symbol_wbtc.png'
@@ -8,12 +12,16 @@ import SymbolWeth from 'public/assets/images/symbols/symbol_weth.png'
 import SymbolWsdn from 'public/assets/images/symbols/symbol_wsdn.png'
 
 export {
-  SymbolAstr,
   SymbolArsw,
-  SymbolWeth,
-  SymbolWbtc,
+  SymbolAstr,
+  SymbolBnb,
+  SymbolBusd,
+  SymbolDai,
+  SymbolLay,
+  SymbolMatic,
   SymbolUsdc,
   SymbolUsdt,
-  SymbolLay,
+  SymbolWbtc,
+  SymbolWeth,
   SymbolWsdn,
 }
