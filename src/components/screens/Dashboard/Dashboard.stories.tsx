@@ -59,6 +59,10 @@ const SuggestModal = () => (
   <DefaultModalContainer isOpen>
     <Suggest
       asset={{ ...MOCK_ASSET_MARKET, ...ASSETS_DICT.USDC }}
+      arthswapPair={{
+        apr: BN_HUNDRED,
+        symbols: ['USDT', 'DAI'],
+      }}
       inWallet={BN_HUNDRED}
       close={() => {}}
       openDeposit={() => {}}
