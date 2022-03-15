@@ -11,10 +11,13 @@ export const TWITTER = 'https://twitter.com/starlay_fi'
 export const TELEGRAM = 'https://t.me/starlay_fi'
 export const MEDIUM = 'http://medium.com/@starlay_fi'
 
+export const ARTHSWAP_SWAP_URL = 'https://app.arthswap.org/#/swap'
+
 export const TOP = '/'
 export const APP = '/app'
 export const MARKETS = '/app/markets'
 export const MAKAI = '/app/makai'
+export const SWAP = ARTHSWAP_SWAP_URL
 export const GOVERNANCE = ''
 export const GOVERNANCE_OVERVIEW = ''
 export const BUG_BOUNTY = ''
