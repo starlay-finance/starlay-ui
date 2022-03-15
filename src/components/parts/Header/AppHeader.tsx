@@ -32,10 +32,18 @@ export const AppHeader = () => {
     <AppHeaderWrapper>
       <LogoLink href={APP} Icon={LogoProtocol} aria-label="App" />
       <Nav>
-        <Tab href={APP} $active={pathname === APP}>{t`Dashboard`}</Tab>
-        <Tab href={MARKETS} $active={pathname === MARKETS}>{t`Markets`}</Tab>
-        <Tab href={MAKAI} $active={pathname === MAKAI}>{t`Makai`}</Tab>
-        <Tab href={SWAP} $active={pathname === SWAP}>{t`Swap`}</Tab>
+        <Tab $active={pathname === APP}>
+          <Link href={APP}>{t`Dashboard`}</Link>
+        </Tab>
+        <Tab $active={pathname === MARKETS}>
+          <Link href={MARKETS}>{t`Markets`}</Link>
+        </Tab>
+        <Tab $active={pathname === MAKAI}>
+          <Link href={MAKAI}>{t`Makai`}</Link>
+        </Tab>
+        <Tab $active={pathname === SWAP}>
+          <Link href={SWAP}>{t`Swap`}</Link>
+        </Tab>
       </Nav>
       <Menu>
         <MenuButton onClick={() => openRewardModal()} disabled={!user}>
@@ -85,7 +93,7 @@ const activeStyle = css`
     border-bottom: 1px solid;
   }
 `
-const Tab = styled(Link)<{ $active?: boolean }>`
+const Tab = styled.div<{ $active?: boolean }>`
   position: relative;
   font-size: 16px;
   font-weight: ${fontWeightHeavy};
