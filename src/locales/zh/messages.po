@@ -106,6 +106,10 @@ msgid "Makai"
 msgstr ""
 
 #: src/components/parts/Header/AppHeader.tsx
+msgid "Swap"
+msgstr ""
+
+#: src/components/parts/Header/AppHeader.tsx
 msgid "Connect"
 msgstr "连接"
 
