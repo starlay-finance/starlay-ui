@@ -13,7 +13,7 @@ const CHIAN_INFO: Record<ChainId, AddEthereumChainParameter> = {
     chainId: toChainIdHex(CHAIN_ID.astar),
     chainName: NETWORK_CONFIG[CHAIN_ID.astar].name,
     nativeCurrency: {
-      name: 'Shiden',
+      name: 'Astar',
       symbol: NETWORK_CONFIG[CHAIN_ID.astar].baseAsset.symbol,
       decimals: 18,
     },
