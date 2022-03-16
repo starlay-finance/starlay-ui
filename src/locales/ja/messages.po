@@ -103,7 +103,11 @@ msgstr "マーケット"
 
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Makai"
-msgstr ""
+msgstr "魔界"
+
+#: src/components/parts/Header/AppHeader.tsx
+msgid "Swap"
+msgstr "スワップ"
 
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Connect"
@@ -368,7 +372,7 @@ msgstr "合計借入残高"
 
 #: src/components/screens/Makai/MakaiMarkets.tsx
 msgid "Makai APR"
-msgstr ""
+msgstr "魔界APR"
 
 #: src/components/screens/Makai/MakaiMarkets.tsx
 msgid "Wallet_Balance"
@@ -376,7 +380,7 @@ msgstr "ウォレット残高"
 
 #: src/components/screens/Makai/MakaiMarkets.tsx
 msgid "Makai Markets"
-msgstr ""
+msgstr "魔界マーケット"
 
 #: src/components/screens/Makai/UnclaimedReward.tsx
 msgid "Unclaimed Reward"
@@ -388,7 +392,7 @@ msgstr "請求"
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Makai Loops"
-msgstr ""
+msgstr "魔界ループ"
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Estimated Net APY"
@@ -396,7 +400,7 @@ msgstr "概算Net APY"
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "\"Makai Loops\" is an experimental feature."
-msgstr "\"Makai Loops\" は実験段階の機能です。"
+msgstr "魔界ループは実験段階の機能です。"
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Please <0>read our docs</0> and understand how it works before using it."
@@ -404,7 +408,7 @@ msgstr "<0>ドキュメント</0>を読み、機能を理解した上で利用�
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Start loops"
-msgstr ""
+msgstr "ループを開始する"
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Leverage"
