@@ -1,4 +1,5 @@
 import { DecoratorFn } from '@storybook/react'
+import { DEFAULT_LOCALE } from 'src/locales'
 import { isScreenshot, withScreenshot } from 'storycap'
 import { Middleware, SWRConfig, SWRResponse } from 'swr'
 import { ModalPortal, MODAL_KEY_LOADING } from '../src/hooks/useModal'
@@ -42,7 +43,7 @@ export const disableLoadingDecorator = createMockSWRDecorator(
 )
 
 const GlobalStylesDecorator: DecoratorFn = (Story) => {
-  loadSync('ja')
+  loadSync(DEFAULT_LOCALE)
   return (
     <>
       <GlobalStyles />
