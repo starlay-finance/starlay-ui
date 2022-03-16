@@ -233,10 +233,7 @@ export const estimateBorrow = ({
     marketReferenceCurrencyPriceInUSD,
     currentBorrowableInUSD,
   )
-  const maxAmount = BigNumber.min(
-    currentBorrowable.multipliedBy('0.98'),
-    liquidity,
-  )
+  const maxAmount = BigNumber.min(currentBorrowable, liquidity)
   if (!validEstimationInput(amount))
     return { unavailableReason: t`Enter amount`, maxAmount }
 
