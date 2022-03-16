@@ -126,7 +126,6 @@ msgid "Bug Bounty"
 msgstr "漏洞赏金"
 
 #: src/components/parts/Modal/MessageModalGradient/index.tsx
-#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
 msgid "Close"
 msgstr "关闭"
 
@@ -297,23 +296,31 @@ msgid "For more information, please <0>see our docs</0>."
 msgstr "如需更多信息，请<0>查阅我们的档案</0>。"
 
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-msgid "Please make investment decisions at your own risk. Starlay does not guarantee any of your assets."
+msgid "Makai on Starlay Finance"
 msgstr ""
 
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-msgid "Automated Aggregator"
+msgid "Loop {symbol}"
 msgstr ""
 
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-msgid "Liquidity providing on ArthSwap"
+msgid "ArthSwap"
 msgstr ""
 
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-msgid "Lending on Starlay Finance"
+msgid "Farm {symbol1}-{symbol2}"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Starlay Finance"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Lend {symbol}"
 msgstr ""
 
 #: src/components/screens/Dashboard/modals/SuggestModal/index.tsx
-msgid "Do you want to earn more?"
+msgid "Comparing {symbol} APYs for Next Action"
 msgstr ""
 
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx

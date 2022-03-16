@@ -2,7 +2,7 @@ import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import Link from 'next/link'
-import { useReducer, useState, VFC } from 'react'
+import { useEffect, useReducer, useState, VFC } from 'react'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { Barometer } from 'src/components/parts/Chart/Barometer'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
@@ -47,10 +47,12 @@ const TABS = ['loop'] as const
 
 export type LoopingModalBodyProps = Omit<EstimationParam, 'amount'> & {
   loop: (amount: BigNumber, leverage: BigNumber) => Promise<any>
+  max?: boolean
 }
 
 export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
   loop,
+  max,
   ...estimationParams
 }) => {
   const {
@@ -78,6 +80,10 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
   })
   const formatter = (num: BigNumber) =>
     formatPct(num, { shorteningThreshold: 99, decimalPlaces: 2 })
+  useEffect(() => {
+    if (max) setDepositAmount(formatAmt(estimation.maxAmount))
+  }, [max])
+
   return (
     <ContentDiv>
       <AmountInput

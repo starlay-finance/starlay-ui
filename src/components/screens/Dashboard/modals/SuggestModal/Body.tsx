@@ -3,88 +3,123 @@ import { BigNumber } from '@starlay-finance/math-utils'
 import { ReactNode, VFC } from 'react'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import { NumberItem, NumberItemPair } from 'src/components/parts/Modal/parts'
-import { hoveredRow } from 'src/styles/animation'
+import { Item } from 'src/components/parts/Modal/parts/Item'
+import { ARTHSWAP_ASSETS_DICT } from 'src/constants/assets'
+import { hoverBackgroundKeyframes, hoveredRow } from 'src/styles/animation'
 import { purple } from 'src/styles/colors'
+import { makaiHoverGradients } from 'src/styles/mixins'
 import { AssetMarketData } from 'src/types/models'
+import { calculateLoopingAPR, ltvToLoopingLeverage } from 'src/utils/calculator'
+import { aprSorter } from 'src/utils/market'
 import { formatPct } from 'src/utils/number'
 import styled from 'styled-components'
-import { Action, Balance, ContentDiv, NumberItems, Tab, TabFC } from '../parts'
-
-const TABS = ['aggregator'] as const
+import { Action, Balance, ContentDiv, NumberItems } from '../parts'
 
 type Action = {
-  apy: BigNumber
+  apr: BigNumber
   node: ReactNode
 }
-
+undefined
 export type SuggestModalBodyProps = {
-  close: VoidFunction
   asset: AssetMarketData
-  arthswapPair: {
-    symbol1: string
-    symbol2: string
-    image1: StaticImageData
-    image2: StaticImageData
+  arthswapPair?: {
     apr: BigNumber
+    symbols: [string, string]
     url: string
   }
   inWallet: BigNumber
   openDeposit: VoidFunction
+  openMakai: VoidFunction
 }
 export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
   asset,
-  close,
   arthswapPair,
   inWallet,
   openDeposit,
 }) => {
-  const { name, symbol, icon, depositAPY } = asset
-  const { symbol1, symbol2, image1, image2, apr, url } = arthswapPair
+  const {
+    name,
+    symbol,
+    icon,
+    depositAPY,
+    baseLTVasCollateral,
+    depositIncentiveAPR,
+    variableBorrowIncentiveAPR,
+  } = asset
+  const makaiAPR = calculateLoopingAPR({
+    leverage: ltvToLoopingLeverage(baseLTVasCollateral),
+    depositIncentiveAPR,
+    variableBorrowIncentiveAPR,
+  })
+  const displayMakaiAPR = formatPct(makaiAPR, {
+    shorteningThreshold: 99,
+    decimalPlaces: 2,
+  })
+  const actions: Action[] = [
+    {
+      apr: depositAPY,
+      node: (
+        <SuggestItem onClick={openDeposit}>
+          <NumberItem
+            label={t`Starlay Finance`}
+            note={t`Lend ${symbol}`}
+            num={depositAPY}
+            image={{ src: icon, alt: name }}
+            format={formatPct}
+          />
+        </SuggestItem>
+      ),
+    },
+    {
+      apr: makaiAPR,
+      node: (
+        <SuggestItemMakai onClick={openDeposit}>
+          <Item
+            label={t`Makai on Starlay Finance`}
+            note={t`Loop ${symbol}`}
+            value={displayMakaiAPR}
+            image={{ src: icon, alt: name }}
+          />
+        </SuggestItemMakai>
+      ),
+    },
+  ]
+  if (arthswapPair) {
+    const {
+      apr,
+      symbols: [symbol1, symbol2],
+      url,
+    } = arthswapPair
+    const image1 = ARTHSWAP_ASSETS_DICT[symbol1].icon
+    const image2 = ARTHSWAP_ASSETS_DICT[symbol2].icon
+    actions.push({
+      apr,
+      node: (
+        <SuggestItem onClick={() => window.open(url, '_blank', 'noreferrer')}>
+          <NumberItemPair
+            label={t`ArthSwap`}
+            note={t`Farm ${symbol1}-${symbol2}`}
+            num={apr}
+            image={{ src: image1, alt: symbol1 }}
+            image2={{ src: image2, alt: symbol2 }}
+            format={formatPct}
+          />
+        </SuggestItem>
+      ),
+    })
+  }
+
   return (
-    <ContentDiv>
-      <NoteP>
-        {t`Please make investment decisions at your own risk. Starlay does not guarantee any of your assets.`}
-      </NoteP>
-      <ActionTab
-        tabs={TABS}
-        contents={{ aggregator: { label: t`Automated Aggregator` } }}
-        activeTab="aggregator"
-        onChangeActiveTab={() => {}}
-      />
-      <Action>
+    <SuggestContent>
+      <SuggestAction>
         <SuggestItems>
-          <SuggestItem onClick={() => window.open(url, '_blank', 'noreferrer')}>
-            <NumberItemPair
-              label={`${symbol1}-${symbol2}`}
-              note={t`Liquidity providing on ArthSwap`}
-              num={apr}
-              image={{ src: image1, alt: symbol1 }}
-              image2={{ src: image2, alt: symbol2 }}
-              format={formatPct}
-            />
-          </SuggestItem>
-          <SuggestItem onClick={openDeposit}>
-            <NumberItem
-              label={symbol}
-              note={t`Lending on Starlay Finance`}
-              num={depositAPY}
-              image={{ src: icon, alt: name }}
-              format={formatPct}
-            />
-          </SuggestItem>
+          {actions.sort(aprSorter).map(({ node }) => node)}
         </SuggestItems>
-        <SimpleCtaButton onClick={close}>{t`Close`}</SimpleCtaButton>
         <Balance label={t`Wallet Balance`} balance={inWallet} symbol={symbol} />
-      </Action>
-    </ContentDiv>
+      </SuggestAction>
+    </SuggestContent>
   )
 }
-
-const NoteP = styled.p`
-  text-align: center;
-  margin: 0 auto;
-  max-width: 360px;
-`
 
 const SuggestItem = styled(({ children, className, onClick }) => (
   <button className={className} onClick={onClick}>
@@ -112,9 +147,29 @@ const SuggestItem = styled(({ children, className, onClick }) => (
     }
   }
 `
-
-const SuggestItems = styled(NumberItems)`
-  margin: -32px 0 8px;
+const SuggestItemMakai = styled(SuggestItem)`
+  :hover {
+    > div:first-child {
+      background: linear-gradient(90deg, ${makaiHoverGradients.join(',')});
+      background-size: ${makaiHoverGradients.length}00%;
+      animation: ${hoverBackgroundKeyframes(makaiHoverGradients.length)}
+        ${(makaiHoverGradients.length * 5) / 3}s infinite linear;
+    }
+  }
 `
 
-const ActionTab: TabFC = Tab
+const SuggestItems = styled(NumberItems)`
+  margin: -32px 0 0;
+  padding-bottom: 16px;
+  border-bottom-width: 3px;
+`
+
+const SuggestContent = styled(ContentDiv)`
+  padding-top: 0;
+`
+
+const SuggestAction = styled(Action)`
+  ${SimpleCtaButton} {
+    margin-top: 24px;
+  }
+`

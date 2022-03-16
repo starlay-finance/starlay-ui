@@ -37,16 +37,17 @@ export const showInsetClipped = keyframes`
   }
 `
 
-const hoverBackgroundKeyframes = keyframes`
+export const hoverBackgroundKeyframes = (numOfColors: number) => keyframes`
   0% {
     background-position: 0%;
   }
   100% {
-    background-position: -300%;
+    background-position: -${numOfColors}00%;
   }
 `
+
 export const hoveredRow = (color: Color) => css`
   background: linear-gradient(90deg, ${color}00, ${color}52, ${color}00);
   background-size: 300%;
-  animation: ${hoverBackgroundKeyframes} 5s infinite linear;
+  animation: ${hoverBackgroundKeyframes(3)} 5s infinite linear;
 `

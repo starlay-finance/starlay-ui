@@ -1,4 +1,5 @@
 import { t } from '@lingui/macro'
+import router from 'next/router'
 import { VFC } from 'react'
 import {
   AssetTd,
@@ -19,6 +20,7 @@ import { flexCenter } from 'src/styles/mixins'
 import { AssetMarketData, User } from 'src/types/models'
 import { aprSorter, symbolSorter } from 'src/utils/market'
 import { BN_ZERO, formatAmt, formatPct } from 'src/utils/number'
+import { toMakaiLoop } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import { useBorrowModal } from '../modals/BorrowModal'
 import { useCollateralModal } from '../modals/CollateralModal'
@@ -90,17 +92,14 @@ export const Market = asStyled(({ className }) => {
       },
       marketReferenceCurrencyPriceInUSD,
       marketReferenceCurrencyDecimals,
-      openSuggestModal: arthswapPair?.apr.gt(
-        asset.depositAPY.plus(asset.depositIncentiveAPR),
-      )
-        ? () =>
-            openSuggestModal({
-              asset,
-              inWallet: balance[asset.symbol],
-              arthswapPair,
-              openDeposit: () => deposit(user, asset),
-            })
-        : undefined,
+      openSuggestModal: () =>
+        openSuggestModal({
+          asset,
+          inWallet: balance[asset.symbol],
+          arthswapPair,
+          openDeposit: () => deposit(user, asset),
+          openMakai: () => router.push(toMakaiLoop(asset.symbol)),
+        }),
     })
   }
   const setUsageAsCollateral = (user: User, asset: AssetMarketData) => {

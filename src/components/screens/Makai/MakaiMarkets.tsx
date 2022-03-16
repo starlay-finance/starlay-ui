@@ -1,5 +1,7 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import {
   AssetTd,
   MarketTable,
@@ -11,8 +13,8 @@ import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
-import { darkRed, lightYellow, purple, skyBlue } from 'src/styles/colors'
-import { AssetMarketData } from 'src/types/models'
+import { makaiHoverGradients } from 'src/styles/mixins'
+import { AssetMarketData, User } from 'src/types/models'
 import { calculateLoopingAPR, ltvToLoopingLeverage } from 'src/utils/calculator'
 import { symbolSorter } from 'src/utils/market'
 import { BN_ZERO, formatAmt, formatPct } from 'src/utils/number'
@@ -26,6 +28,8 @@ const COLUMNS = [
 ]
 
 export const MakaiMarkets = asStyled(({ className }) => {
+  const { query, replace, pathname } = useRouter()
+
   const { data: marketData } = useMarketData()
   const { data: userData } = useUserData()
   const { data: balances } = useWalletBalance()
@@ -39,6 +43,27 @@ export const MakaiMarkets = asStyled(({ className }) => {
   const markets = (assets || [])
     .filter((each) => each.isActive)
     .sort(symbolSorter)
+
+  const loopingParams = (asset: AssetMarketData, userData: User) => ({
+    asset,
+    marketReferenceCurrencyPriceInUSD,
+    marketReferenceCurrencyDecimals,
+    userSummary: userData.summary,
+    userAssetBalance: {
+      ...userData.balanceByAsset[asset.symbol],
+      inWallet: balances[asset.symbol],
+    },
+  })
+
+  useEffect(() => {
+    if (!assets || !userData) return
+    if (typeof query.asset !== 'string') return
+    const asset = assets.find((each) => each.symbol === query.asset)
+    if (!asset) return
+    replace(pathname, undefined, { shallow: true })
+    openLoopingModal(loopingParams(asset, userData))
+  }, [userData, assets, query])
+
   return (
     <MakaiMarketsSection className={className}>
       <TableContainer>
@@ -64,15 +89,7 @@ export const MakaiMarkets = asStyled(({ className }) => {
                 : openWalletModal,
             }),
           )}
-          hoverGradients={[
-            `${darkRed}3d`,
-            `${skyBlue}3d`,
-            `${lightYellow}3d`,
-            `${purple}3d`,
-            `${lightYellow}3d`,
-            `${skyBlue}3d`,
-            `${darkRed}3d`,
-          ]}
+          hoverGradients={makaiHoverGradients}
           rowDisabledStyle={rowDisabledStyle}
         />
       </TableContainer>

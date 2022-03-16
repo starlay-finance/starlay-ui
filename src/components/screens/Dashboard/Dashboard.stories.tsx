@@ -62,10 +62,12 @@ const SuggestModal = () => (
       arthswapPair={{
         apr: BN_HUNDRED,
         symbols: ['USDT', 'DAI'],
+        url: '',
       }}
       inWallet={BN_HUNDRED}
       close={() => {}}
       openDeposit={() => {}}
+      openMakai={() => {}}
     />
   </DefaultModalContainer>
 )
