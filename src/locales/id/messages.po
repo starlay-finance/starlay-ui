@@ -135,6 +135,7 @@ msgstr "Saldo LAY"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "Saldo Dompet"
@@ -293,6 +294,34 @@ msgstr "Aset ini tidak dapat digunakan sebagai jaminan."
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "For more information, please <0>see our docs</0>."
 msgstr "Untuk Informasi lebih lanjut, silahkan <0>lihat dokumen kami</0>."
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Makai on Starlay Finance"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Loop {symbol}"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "ArthSwap"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Farm {symbol1}-{symbol2}"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Starlay Finance"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Lend {symbol}"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/index.tsx
+msgid "Comparing {symbol} APYs for Next Action"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
 msgid "Max"

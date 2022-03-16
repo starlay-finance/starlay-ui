@@ -135,6 +135,7 @@ msgstr "LAY 残高"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "ウォレット残高"
@@ -293,6 +294,34 @@ msgstr "このトークンは担保利用できません。"
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "For more information, please <0>see our docs</0>."
 msgstr "詳細は<0>ドキュメント</0>を参照してください。"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Makai on Starlay Finance"
+msgstr "Starlay Finance - 魔界 -"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Loop {symbol}"
+msgstr "{symbol}をループ"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "ArthSwap"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Farm {symbol1}-{symbol2}"
+msgstr "{symbol1}-{symbol2}でファーミング"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Starlay Finance"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Lend {symbol}"
+msgstr "{symbol}を貸付"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/index.tsx
+msgid "Comparing {symbol} APYs for Next Action"
+msgstr "{symbol} の利回りを比較する"
 
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
 msgid "Max"

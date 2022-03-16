@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { VFC } from 'react'
 import { Table, TableFC } from 'src/components/parts/Table'
+import { hoverBackgroundKeyframes } from 'src/styles/animation'
 import { darkPurple, secondary } from 'src/styles/colors'
 import {
   fontWeightHeavy,
@@ -9,7 +10,7 @@ import {
 } from 'src/styles/font'
 import { Color } from 'src/styles/types'
 import { Asset } from 'src/types/models'
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css } from 'styled-components'
 
 type StyleProps = {
   hoverGradients?: string[]
@@ -86,15 +87,6 @@ const StyledTable = styled(Table)<StyleProps>`
         }
       }
     `}
-`
-
-const hoverBackgroundKeyframes = (numOfColors: number) => keyframes`
-  0% {
-    background-position: 0%;
-  }
-  100% {
-    background-position: -${numOfColors}00%;
-  }
 `
 
 export const AssetTd: VFC<Pick<Asset, 'icon' | 'name'>> = ({ icon, name }) => (

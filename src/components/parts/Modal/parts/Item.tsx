@@ -76,7 +76,7 @@ const ArrowsSpan = styled.span`
   }
 `
 
-const ItemDiv = styled.div`
+export const ItemDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;

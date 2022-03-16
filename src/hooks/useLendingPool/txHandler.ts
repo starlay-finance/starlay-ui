@@ -30,6 +30,7 @@ export const useTxHandler = () => {
   const handleTx = async (
     txs: EthereumTransactionTypeExtended[],
     signer: ethers.providers.JsonRpcSigner,
+    onSucceeded?: VoidFunction,
   ) => {
     open({
       type: 'Loading',
@@ -94,6 +95,7 @@ export const useTxHandler = () => {
           type: 'Success',
           title: t`Succeeded!`,
           message: t`Your transaction confirmed!`,
+          onClose: onSucceeded,
         })
       }
     } catch (e) {

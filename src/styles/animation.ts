@@ -1,4 +1,5 @@
 import { css, keyframes } from 'styled-components'
+import { Color } from './types'
 
 export const fadeIn = keyframes`
 0% {
@@ -34,4 +35,19 @@ export const showInsetClipped = keyframes`
   100% {
     clip-path: inset(0);
   }
+`
+
+export const hoverBackgroundKeyframes = (numOfColors: number) => keyframes`
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: -${numOfColors}00%;
+  }
+`
+
+export const hoveredRow = (color: Color) => css`
+  background: linear-gradient(90deg, ${color}00, ${color}52, ${color}00);
+  background-size: 300%;
+  animation: ${hoverBackgroundKeyframes(3)} 5s infinite linear;
 `

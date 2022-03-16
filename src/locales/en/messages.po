@@ -135,6 +135,7 @@ msgstr "LAY Balance"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "Wallet Balance"
@@ -293,6 +294,34 @@ msgstr "This asset can't be used as collateral."
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "For more information, please <0>see our docs</0>."
 msgstr "For more information, please <0>see our docs</0>."
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Makai on Starlay Finance"
+msgstr "Makai on Starlay Finance"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Loop {symbol}"
+msgstr "Loop {symbol}"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "ArthSwap"
+msgstr "ArthSwap"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Farm {symbol1}-{symbol2}"
+msgstr "Farm {symbol1}-{symbol2}"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Starlay Finance"
+msgstr "Starlay Finance"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Lend {symbol}"
+msgstr "Lend {symbol}"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/index.tsx
+msgid "Comparing {symbol} APYs for Next Action"
+msgstr "Comparing {symbol} APYs for Next Action"
 
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
 msgid "Max"

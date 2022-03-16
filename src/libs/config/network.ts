@@ -41,6 +41,9 @@ export type NetworkConfig = {
     endpoint: string
     apiKey?: string
   }
+  arthswapDataProvider?: {
+    endpoint: string
+  }
   explorerLinks?: string[]
   rpcOnly?: boolean
   isTestnet?: boolean
@@ -72,6 +75,9 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
       endpoint:
         'https://xok6alsasvgthgl5ozss7upnuu.appsync-api.us-east-1.amazonaws.com/graphql',
       apiKey: 'da2-qvw2m7hf6jhonms4rhtqgix7ri',
+    },
+    arthswapDataProvider: {
+      endpoint: 'https://arthswap-apr-api.vercel.app/api/graphql',
     },
     explorerLinks: ['https://blockscout.com/astar'],
   },

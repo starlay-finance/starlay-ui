@@ -1,4 +1,5 @@
 import { t } from '@lingui/macro'
+import router from 'next/router'
 import { VFC } from 'react'
 import {
   AssetTd,
@@ -8,6 +9,8 @@ import {
 import { asStyled } from 'src/components/hoc/asStyled'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { BlinkWrapper } from 'src/components/parts/Number/Blink'
+import { ARTHSWAP_ASSETS_DICT } from 'src/constants/assets'
+import { useArthswapData } from 'src/hooks/useArthswapData'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
@@ -15,12 +18,14 @@ import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { darkPurple, lightYellow, purple, trueWhite } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { AssetMarketData, User } from 'src/types/models'
-import { symbolSorter } from 'src/utils/market'
+import { aprSorter, symbolSorter } from 'src/utils/market'
 import { BN_ZERO, formatAmt, formatPct } from 'src/utils/number'
+import { toMakaiLoop } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import { useBorrowModal } from '../modals/BorrowModal'
 import { useCollateralModal } from '../modals/CollateralModal'
 import { useDepositModal } from '../modals/DepositModal'
+import { useSuggestModal } from '../modals/SuggestModal'
 
 const DEPOSIT_MARKET_COLUMNS = [
   { id: 'asset', name: t`Asset`, widthRatio: 4 },
@@ -46,12 +51,15 @@ export const Market = asStyled(({ className }) => {
   } = marketData || {}
   const markets = assets.filter((each) => each.isActive).sort(symbolSorter)
 
+  const { data: arthswapData } = useArthswapData()
+
   const { data: user } = useUserData()
   const { data: balance } = useWalletBalance()
   const { open: openDepositModal } = useDepositModal()
   const { open: openBorrowModal } = useBorrowModal()
   const { open: openCollateralModal } = useCollateralModal()
   const { open: openWalletModal } = useWalletModal()
+  const { open: openSuggestModal } = useSuggestModal()
 
   const deposit = (user: User, asset: AssetMarketData) => {
     openDepositModal({
@@ -67,6 +75,14 @@ export const Market = asStyled(({ className }) => {
   }
 
   const borrow = (user: User, asset: AssetMarketData) => {
+    const arthswapPair = arthswapData
+      ?.filter(
+        (each) =>
+          each.symbols.includes(asset.displaySymbol || asset.symbol) &&
+          each.symbols.some((each) => !!ARTHSWAP_ASSETS_DICT[each]),
+      )
+      .sort(aprSorter)[0]
+
     openBorrowModal({
       asset,
       userSummary: user.summary,
@@ -76,6 +92,14 @@ export const Market = asStyled(({ className }) => {
       },
       marketReferenceCurrencyPriceInUSD,
       marketReferenceCurrencyDecimals,
+      openSuggestModal: () =>
+        openSuggestModal({
+          asset,
+          inWallet: balance[asset.symbol],
+          arthswapPair,
+          openDeposit: () => deposit(user, asset),
+          openMakai: () => router.push(toMakaiLoop(asset.symbol)),
+        }),
     })
   }
   const setUsageAsCollateral = (user: User, asset: AssetMarketData) => {

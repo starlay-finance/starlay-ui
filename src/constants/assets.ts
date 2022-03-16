@@ -1,7 +1,11 @@
 import {
   SymbolArsw,
   SymbolAstr,
+  SymbolBnb,
+  SymbolBusd,
+  SymbolDai,
   SymbolLay,
+  SymbolMatic,
   SymbolUsdc,
   SymbolUsdt,
   SymbolWbtc,
@@ -80,3 +84,25 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
 } as const
 
 export const ASSETS: Asset[] = Object.values(ASSETS_DICT)
+
+export const ARTHSWAP_ASSETS_DICT: {
+  [key in string]: { symbol: string; icon: StaticImageData }
+} = {
+  ...ASSETS_DICT,
+  BNB: {
+    symbol: 'BNB',
+    icon: SymbolBnb,
+  },
+  DAI: {
+    symbol: 'DAI',
+    icon: SymbolDai,
+  },
+  BUSD: {
+    symbol: 'BUSD',
+    icon: SymbolBusd,
+  },
+  MATIC: {
+    symbol: 'MATIC',
+    icon: SymbolMatic,
+  },
+} as const

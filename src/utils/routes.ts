@@ -23,6 +23,8 @@ export const GOVERNANCE_OVERVIEW = ''
 export const BUG_BOUNTY = ''
 export const SUPPORT = DISCORD
 
+export const toMakaiLoop = (symbol: string) => `${MAKAI}?asset=${symbol}`
+
 export const SORRY = '/sorry'
 export const sorryFor = (reason: SorryReason) => `${SORRY}?reason=${reason}`
 

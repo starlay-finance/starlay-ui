@@ -135,6 +135,7 @@ msgstr "LAY余额"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "钱包余额"
@@ -293,6 +294,34 @@ msgstr "这个资产不能作为抵押物。"
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 msgid "For more information, please <0>see our docs</0>."
 msgstr "如需更多信息，请<0>查阅我们的档案</0>。"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Makai on Starlay Finance"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Loop {symbol}"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "ArthSwap"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Farm {symbol1}-{symbol2}"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Starlay Finance"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Lend {symbol}"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/index.tsx
+msgid "Comparing {symbol} APYs for Next Action"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/parts/AmountInput.tsx
 msgid "Max"

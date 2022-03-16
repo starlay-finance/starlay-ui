@@ -1,4 +1,5 @@
 import { css } from 'styled-components'
+import { darkRed, lightYellow, purple, skyBlue } from './colors'
 
 export const contentMaxWidthCssVar = '--content-max-width'
 
@@ -41,3 +42,13 @@ export const lineClamp = (num: number) =>
     -webkit-line-clamp: ${num};
     -webkit-box-orient: vertical;
   `
+
+export const makaiHoverGradients = [
+  `${darkRed}3d`,
+  `${skyBlue}3d`,
+  `${lightYellow}3d`,
+  `${purple}3d`,
+  `${lightYellow}3d`,
+  `${skyBlue}3d`,
+  `${darkRed}3d`,
+]
