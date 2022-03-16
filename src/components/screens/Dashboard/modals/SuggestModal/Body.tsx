@@ -7,7 +7,6 @@ import { hoveredRow } from 'src/styles/animation'
 import { purple } from 'src/styles/colors'
 import { AssetMarketData } from 'src/types/models'
 import { formatPct } from 'src/utils/number'
-import { ARTHSWAP } from 'src/utils/routes'
 import styled from 'styled-components'
 import { Action, Balance, ContentDiv, NumberItems, Tab, TabFC } from '../parts'
 
@@ -40,7 +39,7 @@ export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
   openDeposit,
 }) => {
   const { name, symbol, icon, depositAPY } = asset
-  const { symbol1, symbol2, image1, image2, apr } = arthswapPair
+  const { symbol1, symbol2, image1, image2, apr, url } = arthswapPair
   return (
     <ContentDiv>
       <NoteP>
@@ -54,9 +53,7 @@ export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
       />
       <Action>
         <SuggestItems>
-          <SuggestItem
-            onClick={() => window.open(ARTHSWAP, '_blank', 'noreferrer')}
-          >
+          <SuggestItem onClick={() => window.open(url, '_blank', 'noreferrer')}>
             <NumberItemPair
               label={`${symbol1}-${symbol2}`}
               note={t`Liquidity providing on ArthSwap`}
