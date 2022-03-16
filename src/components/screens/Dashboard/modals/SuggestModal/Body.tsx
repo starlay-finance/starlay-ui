@@ -36,6 +36,7 @@ export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
   arthswapPair,
   inWallet,
   openDeposit,
+  openMakai,
 }) => {
   const {
     name,
@@ -73,7 +74,7 @@ export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
     {
       apr: makaiAPR,
       node: (
-        <SuggestItemMakai onClick={openDeposit}>
+        <SuggestItemMakai onClick={openMakai}>
           <Item
             label={t`Makai on Starlay Finance`}
             note={t`Loop ${symbol}`}

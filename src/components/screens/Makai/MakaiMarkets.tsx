@@ -61,7 +61,7 @@ export const MakaiMarkets = asStyled(({ className }) => {
     const asset = assets.find((each) => each.symbol === query.asset)
     if (!asset) return
     replace(pathname, undefined, { shallow: true })
-    openLoopingModal(loopingParams(asset, userData))
+    openLoopingModal({ ...loopingParams(asset, userData), max: true })
   }, [userData, assets, query])
 
   return (
