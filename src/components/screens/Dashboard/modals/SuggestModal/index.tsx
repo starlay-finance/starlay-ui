@@ -12,12 +12,14 @@ export const Suggest: VFC<
       arthswapPair: {
         apr: BigNumber
         symbols: [string, string]
+        url: string
       }
     }
 > = ({ arthswapPair, ...props }) => {
   const {
     apr,
     symbols: [symbol1, symbol2],
+    url,
   } = arthswapPair
   return (
     <DefaultModalContent
@@ -31,6 +33,7 @@ export const Suggest: VFC<
             symbol2,
             image1: ARTHSWAP_ASSETS_DICT[symbol1].icon,
             image2: ARTHSWAP_ASSETS_DICT[symbol2].icon,
+            url,
           }}
         />
       }

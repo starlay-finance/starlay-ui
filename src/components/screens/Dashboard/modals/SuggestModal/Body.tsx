@@ -27,6 +27,7 @@ export type SuggestModalBodyProps = {
     image1: StaticImageData
     image2: StaticImageData
     apr: BigNumber
+    url: string
   }
   inWallet: BigNumber
   openDeposit: VoidFunction

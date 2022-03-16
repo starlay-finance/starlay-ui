@@ -297,19 +297,19 @@ msgid "For more information, please <0>see our docs</0>."
 msgstr "詳細は<0>ドキュメント</0>を参照してください。"
 
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-msgid "Liquidity providing on ArthSwap"
-msgstr ""
-
-#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-msgid "Lending on Starlay Finance"
-msgstr ""
-
-#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
 msgid "Please make investment decisions at your own risk. Starlay does not guarantee any of your assets."
 msgstr ""
 
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
 msgid "Automated Aggregator"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Liquidity providing on ArthSwap"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Lending on Starlay Finance"
 msgstr ""
 
 #: src/components/screens/Dashboard/modals/SuggestModal/index.tsx

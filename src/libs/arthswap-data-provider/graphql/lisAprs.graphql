@@ -3,7 +3,8 @@ query ListAPRs {
     lpName
     apr
     liquidity
-    multipler
+    multiplier
     updatedAt
+    liquidityProvidingURL
   }
 }

@@ -2,8 +2,9 @@ type Apr {
   lpName: String
   apr: Float
   liquidity: Int
-  multipler: Float
+  multiplier: Float
   updatedAt: Float
+  liquidityProvidingURL: String
 }
 type Query {
   getApr(liquidityPair: String): Apr

@@ -19,8 +19,9 @@ export type Apr = {
   __typename?: 'Apr';
   apr?: Maybe<Scalars['Float']>;
   liquidity?: Maybe<Scalars['Int']>;
+  liquidityProvidingURL?: Maybe<Scalars['String']>;
   lpName?: Maybe<Scalars['String']>;
-  multipler?: Maybe<Scalars['Float']>;
+  multiplier?: Maybe<Scalars['Float']>;
   updatedAt?: Maybe<Scalars['Float']>;
 };
 
@@ -38,7 +39,7 @@ export type QueryGetAprArgs = {
 export type ListApRsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ListApRsQuery = { __typename?: 'Query', getAprs?: Array<{ __typename?: 'Apr', lpName?: string | null, apr?: number | null, liquidity?: number | null, multipler?: number | null, updatedAt?: number | null } | null> | null };
+export type ListApRsQuery = { __typename?: 'Query', getAprs?: Array<{ __typename?: 'Apr', lpName?: string | null, apr?: number | null, liquidity?: number | null, multiplier?: number | null, updatedAt?: number | null, liquidityProvidingURL?: string | null } | null> | null };
 
 
 export const ListApRsDocument = gql`
@@ -47,8 +48,9 @@ export const ListApRsDocument = gql`
     lpName
     apr
     liquidity
-    multipler
+    multiplier
     updatedAt
+    liquidityProvidingURL
   }
 }
     `;
