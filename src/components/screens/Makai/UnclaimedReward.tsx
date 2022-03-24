@@ -46,7 +46,7 @@ const UnclaimedAmount = styled.div`
   padding-right: 32px;
   border-radius: 12px;
   background: ${trueBlack}52;
-  span {
+  ${Reel} {
     font-size: 18px;
     font-weight: ${fontWeightSemiBold};
   }
@@ -71,7 +71,7 @@ const UnclaimedRewardDiv = styled.div`
     font-size: 18px;
     font-weight: ${fontWeightMedium};
   }
-  p:nth-child(2) {
+  > ${Reel} {
     margin-top: 16px;
     font-size: 32px;
     font-weight: ${fontWeightBold};
