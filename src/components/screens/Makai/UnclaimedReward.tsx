@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro'
 import { Image } from 'src/components/elements/Image'
 import { asStyled } from 'src/components/hoc/asStyled'
+import { Reel } from 'src/components/parts/Number/Reel'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
@@ -27,10 +28,10 @@ export const UnclaimedReward = asStyled(({ className }) => {
   return (
     <UnclaimedRewardDiv className={className}>
       <p>{t`Unclaimed Reward`}</p>
-      <p>{formatUSD(unclaimed.multipliedBy(priceInUSD))}</p>
+      <Reel text={formatUSD(unclaimed.multipliedBy(priceInUSD))} />
       <UnclaimedAmount>
         <Image src={icon} alt={name} width={32} height={32} />
-        <span>{formatAmt(unclaimed, { symbol, decimalPlaces: 2 })}</span>
+        <Reel text={formatAmt(unclaimed, { symbol, decimalPlaces: 2 })} />
       </UnclaimedAmount>
       <ClaimButton disabled>{t`Claim`}</ClaimButton>
     </UnclaimedRewardDiv>
