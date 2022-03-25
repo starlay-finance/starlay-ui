@@ -137,7 +137,11 @@ const calcIncentive = (
   })
 
   const unclaimedBalance = Object.values(incentives)
-    .filter((each) => equals(each.rewardTokenAddress, rewardToken))
+    .filter(
+      (each) =>
+        equals(each.rewardTokenAddress, rewardToken) ||
+        equals(each.rewardTokenAddress, rewardUndelyingAsset),
+    )
     .reduce((prev, current) => {
       return prev.plus(
         normalizeBN(current.claimableRewards, current.rewardTokenDecimals),
