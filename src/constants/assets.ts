@@ -81,7 +81,7 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
   },
   ARSW: {
     symbol: 'ARSW',
-    name: 'Arthswap Token',
+    name: 'ArthSwap Token',
     icon: SymbolArsw,
     borrowUnsupported: true,
   },
@@ -99,10 +99,6 @@ export const ARTHSWAP_ASSETS_DICT: {
   [key in string]: { symbol: string; icon: StaticImageData }
 } = {
   ...ASSETS_DICT,
-  ARSW: {
-    symbol: 'ARSW',
-    icon: SymbolArsw,
-  },
   BNB: {
     symbol: 'BNB',
     icon: SymbolBnb,
