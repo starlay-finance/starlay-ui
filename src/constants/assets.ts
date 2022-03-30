@@ -16,8 +16,10 @@ import { Asset, AssetSymbol } from 'src/types/models'
 
 export const LISTED_ASSET_SYMBOLS = [
   'ASTR',
+  'DAI',
   'USDC',
   'USDT',
+  'BUSD',
   'WETH',
   'WBTC',
   'SDN',
@@ -25,16 +27,14 @@ export const LISTED_ASSET_SYMBOLS = [
   'LAY',
 ] as const
 
-export const SYMBOL_ORDER: Record<AssetSymbol, number> = {
-  ASTR: 0,
-  USDC: 1,
-  USDT: 2,
-  WETH: 3,
-  WBTC: 4,
-  SDN: 5,
-  ARSW: 6,
-  LAY: 7,
-}
+export const SYMBOL_ORDER: Record<AssetSymbol, number> =
+  LISTED_ASSET_SYMBOLS.reduce(
+    (res, symbol, idx) => ({
+      ...res,
+      [symbol]: idx,
+    }),
+    {},
+  ) as Record<AssetSymbol, number>
 
 export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
   ASTR: {
@@ -69,9 +69,19 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     name: 'Tether USD',
     icon: SymbolUsdt,
   },
+  DAI: {
+    symbol: 'DAI',
+    name: 'DAI',
+    icon: SymbolDai,
+  },
+  BUSD: {
+    symbol: 'BUSD',
+    name: 'Binance USD',
+    icon: SymbolBusd,
+  },
   ARSW: {
     symbol: 'ARSW',
-    name: 'ArthSwap Token',
+    name: 'Arthswap Token',
     icon: SymbolArsw,
     borrowUnsupported: true,
   },
@@ -89,17 +99,13 @@ export const ARTHSWAP_ASSETS_DICT: {
   [key in string]: { symbol: string; icon: StaticImageData }
 } = {
   ...ASSETS_DICT,
+  ARSW: {
+    symbol: 'ARSW',
+    icon: SymbolArsw,
+  },
   BNB: {
     symbol: 'BNB',
     icon: SymbolBnb,
-  },
-  DAI: {
-    symbol: 'DAI',
-    icon: SymbolDai,
-  },
-  BUSD: {
-    symbol: 'BUSD',
-    icon: SymbolBusd,
   },
   MATIC: {
     symbol: 'MATIC',
