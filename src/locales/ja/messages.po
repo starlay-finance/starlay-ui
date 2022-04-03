@@ -296,6 +296,14 @@ msgid "For more information, please <0>see our docs</0>."
 msgstr "詳細は<0>ドキュメント</0>を参照してください。"
 
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Starlay Finance"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Lend {symbol}"
+msgstr "{symbol}を貸付"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
 msgid "Makai on Starlay Finance"
 msgstr "Starlay Finance - 魔界 -"
 
@@ -310,14 +318,6 @@ msgstr ""
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
 msgid "Farm {symbol1}-{symbol2}"
 msgstr "{symbol1}-{symbol2}でファーミング"
-
-#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-msgid "Starlay Finance"
-msgstr ""
-
-#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-msgid "Lend {symbol}"
-msgstr "{symbol}を貸付"
 
 #: src/components/screens/Dashboard/modals/SuggestModal/index.tsx
 msgid "Comparing {symbol} APYs for Next Action"

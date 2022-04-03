@@ -296,6 +296,14 @@ msgid "For more information, please <0>see our docs</0>."
 msgstr "Untuk Informasi lebih lanjut, silahkan <0>lihat dokumen kami</0>."
 
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Starlay Finance"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Lend {symbol}"
+msgstr ""
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
 msgid "Makai on Starlay Finance"
 msgstr ""
 
@@ -309,14 +317,6 @@ msgstr ""
 
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
 msgid "Farm {symbol1}-{symbol2}"
-msgstr ""
-
-#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-msgid "Starlay Finance"
-msgstr ""
-
-#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-msgid "Lend {symbol}"
 msgstr ""
 
 #: src/components/screens/Dashboard/modals/SuggestModal/index.tsx

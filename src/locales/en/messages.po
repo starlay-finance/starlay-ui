@@ -296,6 +296,14 @@ msgid "For more information, please <0>see our docs</0>."
 msgstr "For more information, please <0>see our docs</0>."
 
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Starlay Finance"
+msgstr "Starlay Finance"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+msgid "Lend {symbol}"
+msgstr "Lend {symbol}"
+
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
 msgid "Makai on Starlay Finance"
 msgstr "Makai on Starlay Finance"
 
@@ -310,14 +318,6 @@ msgstr "ArthSwap"
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
 msgid "Farm {symbol1}-{symbol2}"
 msgstr "Farm {symbol1}-{symbol2}"
-
-#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-msgid "Starlay Finance"
-msgstr "Starlay Finance"
-
-#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-msgid "Lend {symbol}"
-msgstr "Lend {symbol}"
 
 #: src/components/screens/Dashboard/modals/SuggestModal/index.tsx
 msgid "Comparing {symbol} APYs for Next Action"
