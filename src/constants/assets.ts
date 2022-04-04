@@ -41,6 +41,7 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     symbol: 'ASTR',
     name: 'Astar',
     icon: SymbolAstr,
+    makaiUnsupported: true,
   },
   WETH: {
     symbol: 'WETH',
