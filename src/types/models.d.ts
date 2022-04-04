@@ -10,6 +10,7 @@ export type Asset = {
   icon: StaticImageData
   name: string
   borrowUnsupported?: boolean
+  makaiUnsupported?: boolean
 }
 
 export type AssetMarketData = Asset & {

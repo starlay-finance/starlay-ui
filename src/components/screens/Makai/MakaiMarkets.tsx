@@ -116,6 +116,7 @@ const marketRow = ({
     usageAsCollateralEnabled,
     isFrozen,
     borrowUnsupported,
+    makaiUnsupported,
   } = asset
   const makaiAPR = calculateLoopingAPR({
     leverage: ltvToLoopingLeverage(baseLTVasCollateral),
@@ -129,16 +130,21 @@ const marketRow = ({
   return {
     id: symbol,
     onClick,
-    disabled: borrowUnsupported || !usageAsCollateralEnabled || isFrozen,
+    disabled:
+      borrowUnsupported ||
+      makaiUnsupported ||
+      !usageAsCollateralEnabled ||
+      isFrozen,
     data: {
       asset: <AssetTd icon={icon} name={name} />,
-      makaiAPR: borrowUnsupported ? (
-        'Coming soon'
-      ) : !usageAsCollateralEnabled || isFrozen ? (
-        '-'
-      ) : (
-        <BlinkWrapper value={displayMakaiAPR}>{displayMakaiAPR}</BlinkWrapper>
-      ),
+      makaiAPR:
+        borrowUnsupported || makaiUnsupported ? (
+          'Coming soon'
+        ) : !usageAsCollateralEnabled || isFrozen ? (
+          '-'
+        ) : (
+          <BlinkWrapper value={displayMakaiAPR}>{displayMakaiAPR}</BlinkWrapper>
+        ),
       wallet: formatAmt(balance, { symbol: asset.symbol, decimalPlaces: 2 }),
     },
   }
