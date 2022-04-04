@@ -88,11 +88,16 @@ export const useLendingPool = (
     all?: boolean
   }) => {
     if (!lendingPool || !account || !signer) throw new Error('Unexpected state')
+    const repayAmount = !param.all
+      ? param.amount.toString()
+      : equals(param.underlyingAsset, BASE_ASSET_DUMMY_ADDRESS)
+      ? param.amount.times(1.01).toString()
+      : '-1'
     return handleTx(
       await lendingPool.repay({
         user: account,
         reserve: param.underlyingAsset,
-        amount: param.all ? '-1' : param.amount.toString(),
+        amount: repayAmount,
         interestRateMode: InterestRate.Variable,
       }),
       signer,
