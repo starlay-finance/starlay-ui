@@ -46,6 +46,7 @@ export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
     baseLTVasCollateral,
     depositIncentiveAPR,
     variableBorrowIncentiveAPR,
+    makaiUnsupported,
   } = asset
   const makaiAPR = calculateLoopingAPR({
     leverage: ltvToLoopingLeverage(baseLTVasCollateral),
@@ -71,7 +72,9 @@ export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
         </SuggestItem>
       ),
     },
-    {
+  ]
+  if (!makaiUnsupported)
+    actions.push({
       apr: makaiAPR,
       node: (
         <SuggestItemMakai onClick={openMakai}>
@@ -83,8 +86,7 @@ export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
           />
         </SuggestItemMakai>
       ),
-    },
-  ]
+    })
   if (arthswapPair) {
     const {
       apr,
