@@ -353,8 +353,8 @@ msgid "APY_Borrow"
 msgstr "APY"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
-msgid "Deposit Markets"
-msgstr "Deposit Markets"
+msgid "Deposit Market"
+msgstr "Deposit Market"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 msgid "Borrow Markets"
