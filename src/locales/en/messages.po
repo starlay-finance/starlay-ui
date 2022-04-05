@@ -622,8 +622,8 @@ msgid "Please switch the chain with your wallet."
 msgstr "Please switch the chain with your wallet."
 
 #: src/hooks/useUnsupportedChainAlert.ts
-msgid "Please switch the chain with your wallet..."
-msgstr "Please switch the chain with your wallet..."
+msgid "Please confirm the popup on your wallet..."
+msgstr "Please confirm the popup on your wallet..."
 
 #: src/hooks/useUnsupportedChainAlert.ts
 msgid "Failed to switch the chain"
