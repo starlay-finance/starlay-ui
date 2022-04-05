@@ -523,8 +523,8 @@ msgid "We're supported by leading teams and organizations"
 msgstr "We're supported by leading teams and organizations"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "Current Markets"
-msgstr "Current Markets"
+msgid "Current Market"
+msgstr "Current Market"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
 msgid "The more funds to be borrowed, the higher interest rate will be"
