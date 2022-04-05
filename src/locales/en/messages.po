@@ -357,8 +357,8 @@ msgid "Deposit Market"
 msgstr "Deposit Market"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
-msgid "Borrow Markets"
-msgstr "Borrow Markets"
+msgid "Borrow Market"
+msgstr "Borrow Market"
 
 #: src/components/screens/Dashboard/parts/Summary/BorrowLimit.tsx
 msgid "Borrow Limit"
