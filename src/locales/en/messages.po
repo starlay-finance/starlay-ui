@@ -527,8 +527,8 @@ msgid "Current Markets"
 msgstr "Current Markets"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "The more funds that will be borrowed, the higher the interest rate will be"
-msgstr "The more funds that will be borrowed, the higher the interest rate will be"
+msgid "The more funds to be borrowed, the higher interest rate will be"
+msgstr "The more funds to be borrowed, the higher interest rate will be"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Low Risk Farming on Astar Network"
