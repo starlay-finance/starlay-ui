@@ -535,8 +535,8 @@ msgid "Low Risk Farming on Astar Network"
 msgstr "Low Risk Farming on Astar Network"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "The largest lending protocol in the Polkadot ecosystem"
-msgstr "The largest lending protocol in the Polkadot ecosystem"
+msgid "The Largest Lending Protocol in Polkadot Ecosystem"
+msgstr "The Largest Lending Protocol in Polkadot Ecosystem"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"
