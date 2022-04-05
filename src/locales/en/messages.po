@@ -36,8 +36,8 @@ msgid "Support"
 msgstr "Support"
 
 #: src/components/parts/Footer/TopFooter.tsx
-msgid "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
-msgstr "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
+msgid "Starlay Finance is the largest lending protocol in Polkadot Ecosystem."
+msgstr "Starlay Finance is the largest lending protocol in Polkadot Ecosystem."
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/screens/Top/Menu.tsx
