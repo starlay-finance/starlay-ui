@@ -41,14 +41,13 @@ const formatNum = (
         0,
         shorteningThreshold - intLengthWithDot,
       )}`
-    return formatAmtShort(
-      num,
-      Math.max(
+    return formatAmtShort(num, {
+      decimalPlaces: Math.max(
         shorteningThreshold - int.toString().length - 1,
         Math.min(shorteningThreshold - 4, 2),
       ),
       prefix,
-    )
+    })
   }
 
   const formatted = `${num.toFormat(decimalPlaces)}`
@@ -76,14 +75,20 @@ export const formatAmt = (
 
 export const formatAmtShort = (
   num: BigNumber,
-  decimalPlaces = 2,
-  prefix = '',
+  opts: Omit<FormatOption, 'shorteningThreshold'> = {},
 ) => {
+  const {
+    decimalPlaces = 2,
+    prefix = '',
+    roundingMode = BigNumber.ROUND_FLOOR,
+  } = opts
   if (!num.isFinite()) return num.toString()
   const scaleIdx =
     Math.min(Math.ceil(num.toFixed(0).length / 3), SCALES.length) - 1
   const scaledNum = num.shiftedBy(-(scaleIdx || 0) * 3)
-  return `${prefix}${scaledNum.toFormat(decimalPlaces)}${SCALES[scaleIdx]}`
+  return `${prefix}${scaledNum.toFormat(decimalPlaces, roundingMode)}${
+    SCALES[scaleIdx]
+  }`
 }
 
 export const formatUSD = (
@@ -91,8 +96,8 @@ export const formatUSD = (
   option: FormatOption = { shorteningThreshold: 8, decimalPlaces: 2 },
 ) => `${formatNum(valueToBigNumber(num), { ...option, prefix: '$' })}`
 
-export const formatUSDShort: typeof formatAmtShort = (num, decimalPlaces) =>
-  `${formatAmtShort(num, decimalPlaces, '$')}`
+export const formatUSDShort: typeof formatAmtShort = (num, opts) =>
+  `${formatAmtShort(num, { ...opts, prefix: '$' })}`
 
 export const formatPct = (num: BigNumberValue, option: FormatOption = {}) => {
   const { shorteningThreshold = 5, decimalPlaces = 2 } = option
