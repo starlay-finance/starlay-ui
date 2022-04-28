@@ -22,6 +22,8 @@ export const LISTED_ASSET_SYMBOLS = [
   'BUSD',
   'WETH',
   'WBTC',
+  'MATIC',
+  'BNB',
   'SDN',
   'ARSW',
   'LAY',
@@ -79,6 +81,16 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     name: 'Binance USD',
     icon: SymbolBusd,
   },
+  BNB: {
+    symbol: 'BNB',
+    name: 'Binance Coin',
+    icon: SymbolBnb,
+  },
+  MATIC: {
+    symbol: 'MATIC',
+    name: 'Polygon Matic',
+    icon: SymbolMatic,
+  },
   ARSW: {
     symbol: 'ARSW',
     name: 'ArthSwap Token',
@@ -99,12 +111,4 @@ export const ARTHSWAP_ASSETS_DICT: {
   [key in string]: { symbol: string; icon: StaticImageData }
 } = {
   ...ASSETS_DICT,
-  BNB: {
-    symbol: 'BNB',
-    icon: SymbolBnb,
-  },
-  MATIC: {
-    symbol: 'MATIC',
-    icon: SymbolMatic,
-  },
 } as const
