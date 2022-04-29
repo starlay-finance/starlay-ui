@@ -22,6 +22,7 @@ type RatioControlProps = {
     value: number
   }[]
   max: BigNumber
+  step?: number
   label: string
   customLabel: string
   sliderColors: Color[]
@@ -39,6 +40,7 @@ export const RatioControl = asStyled<RatioControlProps>(
     customLabel,
     sliderColors,
     showValue,
+    step = 0.01,
   }) => {
     const [isCustomActive, toggleCustomActive] = useReducer(
       (state: boolean) => !state,
@@ -88,7 +90,7 @@ export const RatioControl = asStyled<RatioControlProps>(
               rangeInputProps={{
                 min: 1,
                 max: max.toNumber(),
-                step: 0.01,
+                step,
                 onChange: ({ target: { value } }) =>
                   setValue(valueToBigNumber(value)),
               }}

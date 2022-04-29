@@ -9,6 +9,7 @@ import IconMedium from 'public/assets/svgs/icon_medium.svg'
 import IconMenu from 'public/assets/svgs/icon_menu.svg'
 import IconMetamask from 'public/assets/svgs/icon_metamask.svg'
 import IconProtocol from 'public/assets/svgs/icon_protocol.svg'
+import IconSettings from 'public/assets/svgs/icon_settings.svg'
 import IconSuccess from 'public/assets/svgs/icon_success.svg'
 import IconTelegram from 'public/assets/svgs/icon_telegram.svg'
 import IconTwitter from 'public/assets/svgs/icon_twitter.svg'
@@ -26,6 +27,7 @@ export {
   IconMenu,
   IconMedium,
   IconProtocol,
+  IconSettings,
   IconSuccess,
   IconTelegram,
   IconTwitter,
