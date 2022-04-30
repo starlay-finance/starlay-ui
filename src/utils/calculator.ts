@@ -3,6 +3,8 @@ import { AssetMarketData, User } from 'src/types/models'
 import { ValueOf } from 'type-fest'
 import { BN_ONE, BN_ZERO } from './number'
 
+BigNumber.config({ EXPONENTIAL_AT: 1e9 })
+
 export const calculateNetAPY = (
   balanceByAsset: User['balanceByAsset'],
   assets: AssetMarketData[],
