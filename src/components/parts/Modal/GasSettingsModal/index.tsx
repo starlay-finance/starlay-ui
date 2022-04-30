@@ -6,14 +6,17 @@ import { useStaticRPCProvider } from 'src/hooks/useStaticRPCProvider'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { getNetworkConfig } from 'src/libs/config'
 import { DEFAULT_CHAIN_ID } from 'src/utils/env'
-import { getGasFeeRatio, setGasFeeRatio } from 'src/utils/localStorage'
+import {
+  getGasPriceMultiplier,
+  setGasPriceMultiplier,
+} from 'src/utils/localStorage'
 import { GasSettingsModalBody } from './Body'
 
 export const GasSettings: VFC<ModalContentProps> = ({ close }) => {
   const { data } = useStaticRPCProvider()
   const { baseAsset } = getNetworkConfig(data?.chainId || DEFAULT_CHAIN_ID)
   const { data: balance } = useWalletBalance()
-  const current = getGasFeeRatio()
+  const current = getGasPriceMultiplier()
 
   return (
     <DefaultModalContent
@@ -23,7 +26,7 @@ export const GasSettings: VFC<ModalContentProps> = ({ close }) => {
           current={current}
           inWallet={balance[baseAsset.symbol]}
           save={(ratio) => {
-            setGasFeeRatio(ratio)
+            setGasPriceMultiplier(ratio)
             close()
           }}
           symbol={baseAsset.symbol}

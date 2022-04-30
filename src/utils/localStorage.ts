@@ -1,10 +1,10 @@
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import { BN_ONE } from './number'
 
-export const getGasFeeRatio = () => {
-  const value = localStorage.getItem('gasFeeRatio')
+export const getGasPriceMultiplier = () => {
+  const value = localStorage.getItem('gasPriceMultiplier')
   return value ? valueToBigNumber(value) : BN_ONE
 }
 
-export const setGasFeeRatio = (ratio: BigNumber) =>
-  localStorage.setItem('gasFeeRatio', `${ratio.toFixed(0)}`)
+export const setGasPriceMultiplier = (ratio: BigNumber) =>
+  localStorage.setItem('gasPriceMultiplier', `${ratio.toFixed(0)}`)
