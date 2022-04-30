@@ -32,7 +32,7 @@ export const GasSettingsModalBody: VFC<GasSettingsModalBodyProps> = ({
   const [value, setValue] = useState(current)
   return (
     <ContentDiv>
-      <Instruction>{t`TODO`}</Instruction>
+      <Instruction>{t`If your transactions get stuck, you can set the gas price you pay higher to reflect them faster.This setting is stored in your browser and will be applied all your transactions in Starlay Finance.`}</Instruction>
       <Action>
         <NumberItems>
           <RatioControl

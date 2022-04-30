@@ -113,6 +113,11 @@ msgstr ""
 msgid "Connect"
 msgstr "连接"
 
+#: src/components/parts/Header/AppHeader.tsx
+#: src/components/parts/Modal/GasSettingsModal/index.tsx
+msgid "Gas Priority Fee"
+msgstr ""
+
 #: src/components/parts/Header/TopHeader.tsx
 #: src/components/screens/Top/Menu.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
@@ -125,6 +130,42 @@ msgstr "启动应用程序"
 msgid "Bug Bounty"
 msgstr "漏洞赏金"
 
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "If your transactions get stuck, you can set the gas price you pay higher to reflect them faster.This setting is stored in your browser and will be applied all your transactions in Starlay Finance."
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Speed"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Custom Speed"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "SET"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+#: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Wallet Balance"
+msgstr "钱包余额"
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Standard"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Fast"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Very Fast"
+msgstr ""
+
 #: src/components/parts/Modal/MessageModalGradient/index.tsx
 msgid "Close"
 msgstr "关闭"
@@ -132,13 +173,6 @@ msgstr "关闭"
 #: src/components/parts/Modal/RewardModal/index.tsx
 msgid "LAY Balance"
 msgstr "LAY余额"
-
-#: src/components/parts/Modal/RewardModal/index.tsx
-#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
-msgid "Wallet Balance"
-msgstr "钱包余额"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 msgid "Unclaimed Balance"
@@ -168,6 +202,10 @@ msgstr "Metamask"
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
 msgstr "一旦点击连接，我理解<0>Starlay Finance是如何运行的并且意识到其中风险</0> 而且我愿意承担风险使用。"
+
+#: src/components/parts/Modal/parts/RatioControl.tsx
+msgid "Custom"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
@@ -402,6 +440,14 @@ msgid "Makai Loops"
 msgstr ""
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Leverage"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom Leverage"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Estimated Net APY"
 msgstr ""
 
@@ -415,18 +461,6 @@ msgstr ""
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Start loops"
-msgstr ""
-
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
-msgid "Leverage"
-msgstr ""
-
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
-msgid "Custom"
-msgstr ""
-
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
-msgid "Custom Leverage"
 msgstr ""
 
 #: src/components/screens/Markets/Assets.tsx
