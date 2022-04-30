@@ -60,7 +60,9 @@ export const AppHeader = () => {
             <SettingsButton
               onClick={(e) => {
                 e.stopPropagation()
-                openGasSettingsModal()
+                openGasSettingsModal({
+                  afterClose: () => setIsSettingsOpen(false),
+                })
               }}
             >
               {t`Gas Priority Fee`}
