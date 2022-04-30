@@ -6,6 +6,7 @@ import {
 import { serializeError } from 'eth-rpc-errors'
 import { BigNumber, ethers } from 'ethers'
 import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
+import { getGasPriceMultiplier } from 'src/utils/localStorage'
 import { useMarketData } from '../useMarketData'
 import { useUserData } from '../useUserData'
 import { useWalletBalance } from '../useWalletBalance'
@@ -37,8 +38,13 @@ export const useTxHandler = () => {
       title: t`Transaction Preparing`,
       message: t`Waiting for transaction to be ready...`,
     })
+
     const { actionTx, erc20ApprovalTx, debtErc20ApprovalTx } =
       pickLendingPoolTxs(txs)
+
+    const gasPriceMultiplier = getGasPriceMultiplier()
+    const defaultGasPrice = await signer.getGasPrice()
+    const gasPrice = defaultGasPrice.mul(gasPriceMultiplier.toString())
 
     try {
       if (erc20ApprovalTx) {
@@ -47,9 +53,8 @@ export const useTxHandler = () => {
           title: t`Confirm Transaction`,
           message: t`Approve sending the ERC-20 asset to the pool.`,
         })
-        const approveRes = await signer.sendTransaction(
-          await erc20ApprovalTx.tx(),
-        )
+        const tx = await erc20ApprovalTx.tx()
+        const approveRes = await signer.sendTransaction({ ...tx, gasPrice })
         open({
           type: 'Loading',
           title: t`Transaction Pending`,
@@ -63,9 +68,8 @@ export const useTxHandler = () => {
           title: t`Confirm Transaction`,
           message: t`Approve the contract to borrow ERC-20 assets on your credit.`,
         })
-        const approveRes = await signer.sendTransaction(
-          await debtErc20ApprovalTx.tx(),
-        )
+        const tx = await debtErc20ApprovalTx.tx()
+        const approveRes = await signer.sendTransaction({ ...tx, gasPrice })
         open({
           type: 'Loading',
           title: t`Transaction Pending`,
@@ -83,6 +87,7 @@ export const useTxHandler = () => {
         const depostRes = await signer.sendTransaction({
           ...tx,
           value: tx.value ? BigNumber.from(tx.value) : undefined,
+          gasPrice,
         })
         open({
           type: 'Loading',
