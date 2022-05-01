@@ -25,7 +25,6 @@ export const getStaticProps: GetStaticProps<
   LaunchPadPageStaticProps,
   LaunchPadPageContext
 > = async ({ params: { token } = {} }) => {
-  console.log(token)
   if (typeof token !== 'string') return { notFound: true }
   try {
     const data = await import(`public/data/launchpad/${token}.json`)
@@ -34,7 +33,6 @@ export const getStaticProps: GetStaticProps<
       props: JSON.parse(JSON.stringify(props)),
     }
   } catch (e) {
-    console.log(e)
     return { notFound: true }
   }
 }
