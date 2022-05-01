@@ -3,6 +3,7 @@ import {
   eEthereumTxType,
   EthereumTransactionTypeExtended,
 } from '@starlay-finance/contract-helpers'
+import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { serializeError } from 'eth-rpc-errors'
 import { BigNumber, ethers } from 'ethers'
 import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
@@ -41,10 +42,7 @@ export const useTxHandler = () => {
 
     const { actionTx, erc20ApprovalTx, debtErc20ApprovalTx } =
       pickLendingPoolTxs(txs)
-
-    const gasPriceMultiplier = getGasPriceMultiplier()
-    const defaultGasPrice = await signer.getGasPrice()
-    const gasPrice = defaultGasPrice.mul(gasPriceMultiplier.toString())
+    const gasPrice = getMultipliedGasPrice(signer)
 
     try {
       if (erc20ApprovalTx) {
@@ -134,3 +132,12 @@ const pickLendingPoolTxs = (txs: EthereumTransactionTypeExtended[]) =>
       return { ...prev, debtErc20ApprovalTx: current }
     return { ...prev, actionTx: current }
   }, {})
+
+const getMultipliedGasPrice = async (signer: ethers.Signer) => {
+  const baseGasPrice = await signer.getGasPrice()
+  const gasPriceMultiplier = getGasPriceMultiplier()
+  const gasPrice = valueToBigNumber(baseGasPrice.toString())
+    .times(gasPriceMultiplier)
+    .toFixed(0)
+  return BigNumber.from(gasPrice)
+}
