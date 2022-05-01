@@ -32,6 +32,7 @@ export const LaunchPad: VFC<{ data: LaunchPadData }> = ({ data }) => {
 }
 
 const Content = styled.div`
+  position: relative;
   display: flex;
   column-gap: 80px;
 `
