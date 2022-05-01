@@ -32,7 +32,7 @@ export const GasSettingsModalBody: VFC<GasSettingsModalBodyProps> = ({
   const [value, setValue] = useState(current)
   return (
     <ContentDiv>
-      <Instruction>{t`If your transactions get stuck, you can set the gas price you pay higher to reflect them faster.This setting is stored in your browser and will be applied all your transactions in Starlay Finance.`}</Instruction>
+      <Description>{t`If your transactions get stuck, you can set the gas price you pay higher to reflect them faster.This setting is stored in your browser and will be applied all your transactions in Starlay Finance.`}</Description>
       <Action>
         <NumberItems>
           <RatioControl
@@ -72,7 +72,7 @@ const GAS_OPTIONS = [
   { label: t`Very Fast`, value: 5 },
 ]
 
-const Instruction = styled.p`
+const Description = styled.p`
   padding: 0 32px 48px;
   border-bottom: 3px solid ${purple};
   text-align: center;

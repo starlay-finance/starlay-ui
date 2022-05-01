@@ -6,5 +6,5 @@ export const getGasPriceMultiplier = () => {
   return value ? valueToBigNumber(value) : BN_ONE
 }
 
-export const setGasPriceMultiplier = (ratio: BigNumber) =>
-  localStorage.setItem('gasPriceMultiplier', `${ratio.toFixed(0)}`)
+export const setGasPriceMultiplier = (value: BigNumber) =>
+  localStorage.setItem('gasPriceMultiplier', `${value.toFixed(0)}`)
