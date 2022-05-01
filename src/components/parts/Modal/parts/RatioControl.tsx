@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
-import { useReducer } from 'react'
+import { useEffect, useReducer } from 'react'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { Barometer } from 'src/components/parts/Chart/Barometer'
 import {
@@ -47,6 +47,9 @@ export const RatioControl = asStyled<RatioControlProps>(
       (state: boolean) => !state,
       false,
     )
+    useEffect(() => {
+      if (!options.some(({ value }) => current.eq(value))) toggleCustomActive()
+    }, [])
     return (
       <div className={className}>
         {!isCustomActive ? (
