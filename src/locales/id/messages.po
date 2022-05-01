@@ -20,6 +20,7 @@ msgstr "Blok Terbaru: {blockNumber}"
 #: src/components/parts/Footer/AppFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/LaundPad/ProjectInformation.tsx
 #: src/components/screens/Top/Menu.tsx
 msgid "Docs"
 msgstr "Dokumen"
@@ -107,6 +108,10 @@ msgstr ""
 
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Swap"
+msgstr ""
+
+#: src/components/parts/Header/AppHeader.tsx
+msgid "Launchpad"
 msgstr ""
 
 #: src/components/parts/Header/AppHeader.tsx
@@ -376,6 +381,66 @@ msgstr "Saldo Setoran"
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
 msgid "Borrow Balance"
 msgstr "Saldo Pinjaman"
+
+#: src/components/screens/LaunchPadPop/index.tsx
+msgid "Sale start at {0}"
+msgstr ""
+
+#: src/components/screens/LaundPad/ProjectInformation.tsx
+msgid "Project Details"
+msgstr ""
+
+#: src/components/screens/LaundPad/ProjectInformation.tsx
+msgid "Sale Information"
+msgstr ""
+
+#: src/components/screens/LaundPad/ProjectInformation.tsx
+msgid "View details in the docs"
+msgstr ""
+
+#: src/components/screens/LaundPad/ProjectInformation.tsx
+msgid "Participation Notes"
+msgstr ""
+
+#: src/components/screens/LaundPad/ProjectInformation.tsx
+msgid "Web"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Token"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Price Per Token"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Amount Raised"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Number of Bidders"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Sale Start"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Sale End"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Bid with"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Emission"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Raise Size"
+msgstr ""
 
 #: src/components/screens/Makai/MakaiMarkets.tsx
 msgid "Makai APR"

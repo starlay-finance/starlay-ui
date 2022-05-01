@@ -20,6 +20,7 @@ msgstr "Latest Block: {blockNumber}"
 #: src/components/parts/Footer/AppFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
+#: src/components/screens/LaundPad/ProjectInformation.tsx
 #: src/components/screens/Top/Menu.tsx
 msgid "Docs"
 msgstr "Docs"
@@ -108,6 +109,10 @@ msgstr "Makai"
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Swap"
 msgstr "Swap"
+
+#: src/components/parts/Header/AppHeader.tsx
+msgid "Launchpad"
+msgstr "Launchpad"
 
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Connect"
@@ -376,6 +381,66 @@ msgstr "Deposit Balance"
 #: src/components/screens/Dashboard/parts/Summary/index.tsx
 msgid "Borrow Balance"
 msgstr "Borrow Balance"
+
+#: src/components/screens/LaunchPadPop/index.tsx
+msgid "Sale start at {0}"
+msgstr "Sale start at {0}"
+
+#: src/components/screens/LaundPad/ProjectInformation.tsx
+msgid "Project Details"
+msgstr "Project Details"
+
+#: src/components/screens/LaundPad/ProjectInformation.tsx
+msgid "Sale Information"
+msgstr "Sale Information"
+
+#: src/components/screens/LaundPad/ProjectInformation.tsx
+msgid "View details in the docs"
+msgstr "View details in the docs"
+
+#: src/components/screens/LaundPad/ProjectInformation.tsx
+msgid "Participation Notes"
+msgstr "Participation Notes"
+
+#: src/components/screens/LaundPad/ProjectInformation.tsx
+msgid "Web"
+msgstr "Web"
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Token"
+msgstr "Token"
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Price Per Token"
+msgstr "Price Per Token"
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Amount Raised"
+msgstr "Amount Raised"
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Number of Bidders"
+msgstr "Number of Bidders"
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Sale Start"
+msgstr "Sale Start"
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Sale End"
+msgstr "Sale End"
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Bid with"
+msgstr "Bid with"
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Emission"
+msgstr "Emission"
+
+#: src/components/screens/LaundPad/Sale.tsx
+msgid "Raise Size"
+msgstr "Raise Size"
 
 #: src/components/screens/Makai/MakaiMarkets.tsx
 msgid "Makai APR"
