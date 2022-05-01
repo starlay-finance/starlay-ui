@@ -10,7 +10,7 @@ import { useRewardModal } from 'src/components/parts/Modal/RewardModal'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
-import { purple, trueWhite } from 'src/styles/colors'
+import { darkGray, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
@@ -51,11 +51,13 @@ export const AppHeader = () => {
         <MenuButton onClick={() => openWalletModal()} disabled={!!account}>
           {account ? shortenAddress(account) : t`Connect`}
         </MenuButton>
-        <MenuButtonSmall
-          onClick={() => setIsSettingsOpen(!isSetingsOpen)}
-          disabled={!user}
-        >
-          <IconSettings />
+        <div>
+          <MenuButtonSmall
+            onClick={() => setIsSettingsOpen(!isSetingsOpen)}
+            disabled={!user}
+          >
+            <IconSettings />
+          </MenuButtonSmall>
           <SettingsContainer $isOpen={isSetingsOpen}>
             <SettingsButton
               onClick={(e) => {
@@ -68,14 +70,13 @@ export const AppHeader = () => {
               {t`Set Gas Fee`}
             </SettingsButton>
           </SettingsContainer>
-        </MenuButtonSmall>
+        </div>
       </Menu>
     </AppHeaderWrapper>
   )
 }
 
 const MenuButton = styled.button`
-  position: relative;
   ${flexCenter};
   padding: 12px 20px;
   border-radius: 4px;
@@ -90,13 +91,15 @@ const MenuButtonSmall = styled(MenuButton)`
 const Menu = styled.div`
   display: flex;
   column-gap: 12px;
+  > * {
+    position: relative;
+  }
 `
 const SettingsButton = styled.button`
   padding: 12px 16px;
   white-space: nowrap;
   border-radius: 4px;
-  backdrop-filter: blur(16px) brightness(1.32);
-  background-color: rgba(255, 255, 255, 0.32);
+  background-color: ${darkGray};
   line-height: 1;
 `
 
