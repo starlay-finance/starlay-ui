@@ -1,8 +1,10 @@
 import { Dayjs } from 'dayjs'
 
 export type LaunchPadData = {
+  id: string
   projectName: string
   keyVisual: string
+  icon: { url: string; viewBox: string }
   token: {
     name: string
     symbol: string
