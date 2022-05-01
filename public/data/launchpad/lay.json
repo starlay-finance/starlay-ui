@@ -1,0 +1,33 @@
+{
+  "projectName": "Starlay Finance",
+  "keyVisual": "/assets/images/launchpad/lay.webp",
+  "token": {
+    "name": "LAY Token",
+    "symbol": "LAY"
+  },
+  "sale": {
+    "start": "2022-05-13T12:00:00.000Z",
+    "end": "2022-05-15T12:00:00.000Z",
+    "emissionAmount": 50000000,
+    "emissionRatio": 0.05,
+    "biddingAssets": [
+      {
+        "name": "USD Coin",
+        "symbol": "USDC",
+        "address": "0x6a2d262D56735DbA19Dd70682B39F6bE9a931D98"
+      }
+    ]
+  },
+  "information": {
+    "details": "Starlay Finance is a protocol for users to quickly and easily deposit and borrow assets on Astar Network. Depositors can provide liquidity to earn interest as a stable passive income, while borrowers can leverage their assets without selling them out.\nA lending protocol is one of the core Lego Blocks of DeFi composability. It is a public, decentralized marketplace of assets that can be accessed not only by a user but also by bots and other DeFi protocols. Starlay Finance provides a comprehensive set of lending features, with a focus on the assets handled on Astar.",
+    "sale": "The public sale of LAY tokens will be conducted through Starlay Skylab’s proprietary auction method.\nBids for LAY tokens will be accepted only in USDC, and prospective buyers may bid and cancel as many times as they wish during the 48-hour sale period. If a maximum price per token is set at the time of bidding, the bid will be automatically cancelled if it is exceeded. In addition, a 5% bonus will be applied to the bid amount if no maximum amount is set, and a 10% bonus will be applied to the bid amount if the option to not cancel bids is selected.\nThese options are designed to make the token sale fairer and clearer for both the buyer and the project.",
+    "notes": "In addition, persons who are or have been residents of the United States, North Korea, Iran, Venezuela, countries subject to sanctions as determined by OFAC, or any other jurisdiction in which the use of services offered on the Star Ray Finance website, including Skylab, is prohibited (“Prohibited Jurisdictions”), may not use these services or Participation in this token sale is not permitted. For the avoidance of doubt, the foregoing restrictions on any services offered on the RayDiam website from prohibited jurisdictions apply equally to residents and citizens of other countries while located in a prohibited jurisdiction.",
+    "urls": {
+      "website": "https://starlay.finance",
+      "docs": "https://docs.starlay.finance",
+      "twitter": "https://twitter.com/starlay_fi",
+      "discord": "https://discord.gg/M4NjBJZ94b",
+      "telegram": "https://t.me/starlay_fi"
+    }
+  }
+}
