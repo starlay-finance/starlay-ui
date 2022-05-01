@@ -1,4 +1,5 @@
 import { VFC } from 'react'
+import { AppBackground } from 'src/components/parts/Background'
 import { AppFooter } from 'src/components/parts/Footer'
 import { AppHeader } from 'src/components/parts/Header/AppHeader'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
@@ -15,7 +16,7 @@ export const LaunchPad: VFC<{ data: LaunchPadData }> = ({ data }) => {
     <>
       <AppHeader />
       <Main>
-        {/* <AppBackground /> */}
+        <AppBackground />
         <KeyVisual
           src={data.keyVisual}
           alt={`${data.token.symbol} token sale`}
