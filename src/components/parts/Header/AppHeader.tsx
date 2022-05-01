@@ -65,7 +65,7 @@ export const AppHeader = () => {
                 })
               }}
             >
-              {t`Gas Priority Fee`}
+              {t`Set Gas Fee`}
             </SettingsButton>
           </SettingsContainer>
         </MenuButtonSmall>

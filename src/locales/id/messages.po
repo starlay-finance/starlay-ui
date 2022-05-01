@@ -115,7 +115,7 @@ msgstr "Menghubungkan"
 
 #: src/components/parts/Header/AppHeader.tsx
 #: src/components/parts/Modal/GasSettingsModal/index.tsx
-msgid "Gas Priority Fee"
+msgid "Set Gas Fee"
 msgstr ""
 
 #: src/components/parts/Header/TopHeader.tsx
@@ -131,8 +131,12 @@ msgid "Bug Bounty"
 msgstr "Hadiah Bug"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
-msgid "If your transactions get stuck, you can set the gas price you pay higher to reflect them faster.This setting is stored in your browser and will be applied all your transactions in Starlay Finance."
+msgid "You can set Gas Fee for all transactions on Starlay Finance. The higher Gas Fee, the more chance for your transaction to be confirmed.For more about Gas Fee, please click here."
 msgstr ""
+"You can set Gas Fee for all transactions on Starlay Finance.\n"
+"The higher Gas Fee, the more chance for your transaction to be confirmed.\n"
+"For more about Gas Fee, please click here."
+
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "Speed"
@@ -140,6 +144,10 @@ msgstr ""
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "Custom Speed"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Gas Fee"
 msgstr ""
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx

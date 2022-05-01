@@ -31,7 +31,7 @@ export const GasSettings: VFC<ModalContentProps> = ({ close }) => {
 
   return (
     <DefaultModalContent
-      headerNode={t`Gas Priority Fee`}
+      headerNode={t`Set Gas Fee`}
       bodyNode={
         <GasSettingsModalBody
           current={current}

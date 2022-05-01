@@ -32,7 +32,7 @@ export const GasSettingsModalBody: VFC<GasSettingsModalBodyProps> = ({
   const [value, setValue] = useState(current)
   return (
     <ContentDiv>
-      <Description>{t`If your transactions get stuck, you can set the gas price you pay higher to reflect them faster.This setting is stored in your browser and will be applied all your transactions in Starlay Finance.`}</Description>
+      <Description>{t`You can set Gas Fee for all transactions on Starlay Finance. The higher Gas Fee, the more chance for your transaction to be confirmed.For more about Gas Fee, please click here.      `}</Description>
       <Action>
         <NumberItems>
           <RatioControl
@@ -46,7 +46,7 @@ export const GasSettingsModalBody: VFC<GasSettingsModalBodyProps> = ({
             customLabel={t`Custom Speed`}
           />
           <Item
-            label={t`Gas Price`}
+            label={t`Gas Fee`}
             value={
               baseGasPrice
                 ? `${utils.formatUnits(
