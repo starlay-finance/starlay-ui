@@ -116,7 +116,7 @@ msgstr "ウォレット接続"
 #: src/components/parts/Header/AppHeader.tsx
 #: src/components/parts/Modal/GasSettingsModal/index.tsx
 msgid "Set Gas Fee"
-msgstr ""
+msgstr "ガス代の設定"
 
 #: src/components/parts/Header/TopHeader.tsx
 #: src/components/screens/Top/Menu.tsx
@@ -135,30 +135,29 @@ msgid ""
 "You can set Gas Fee for all transactions on Starlay Finance.\n"
 "The higher Gas Fee, the more chance for your transaction to be confirmed."
 msgstr ""
-"You can set Gas Fee for all transactions on Starlay Finance.\n"
-"The higher Gas Fee, the more chance for your transaction to be confirmed.\n"
+"Starlay Finance 上で行うトランザクションのガス代を設定できます。\n"
+"設定したガス代が高いほど、ブロックにより早く取り込まれやすくなります。\n"
 ""
-
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "For more about Gas Fee, please click <0>here</0>."
-msgstr ""
+msgstr "ガス代についての詳細は<0>こちら</0>を参照してください。"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "Speed"
-msgstr ""
+msgstr "スピード"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "Custom Speed"
-msgstr ""
+msgstr "カスタムスピード"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "Gas Fee"
-msgstr ""
+msgstr "ガス代"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "SET"
-msgstr ""
+msgstr "設定"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 #: src/components/parts/Modal/RewardModal/index.tsx
@@ -170,15 +169,15 @@ msgstr "ウォレット残高"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "Standard"
-msgstr ""
+msgstr "標準"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "Fast"
-msgstr ""
+msgstr "高速"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "Very Fast"
-msgstr ""
+msgstr "超高速"
 
 #: src/components/parts/Modal/MessageModalGradient/index.tsx
 msgid "Close"
@@ -216,6 +215,10 @@ msgstr ""
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
 msgstr "ウォレットを接続することで、<0>Starlay Financeの仕組みとリスク</0>を理解し、自己責任で利用することに同意します。"
+
+#: src/components/parts/Modal/parts/RatioControl.tsx
+msgid "\"Standard\" speed refers to the median Gas Fee of the past few blocks."
+msgstr "「標準」の値には、直近数ブロックのガス代の中央値が設定されます。"
 
 #: src/components/parts/Modal/parts/RatioControl.tsx
 msgid "Custom"

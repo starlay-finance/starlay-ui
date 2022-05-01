@@ -55,9 +55,7 @@ export const RatioControl = asStyled<RatioControlProps>(
               <p>
                 <TooltipMessage
                   label={label}
-                  message={
-                    '"Standard" speed refers to the median Gas Fee of the past few blocks.'
-                  }
+                  message={t`"Standard" speed refers to the median Gas Fee of the past few blocks.`}
                   position="left"
                 />
               </p>
@@ -76,7 +74,7 @@ export const RatioControl = asStyled<RatioControlProps>(
                         onClick={() => setValue(valueToBigNumber(value))}
                         disabled={max.lt(value)}
                       />
-                      <span>{label || `${value}x`}</span>
+                      <span>{t({ id: label }) || `${value}x`}</span>
                     </RatioCheckBox>
                   )
                 })}
