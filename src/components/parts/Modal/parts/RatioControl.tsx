@@ -13,6 +13,7 @@ import {
 import { Color } from 'src/styles/types'
 import { BN_ONE, formatAmt } from 'src/utils/number'
 import styled, { css } from 'styled-components'
+import { TooltipMessage } from '../../ToolTip'
 
 type RatioControlProps = {
   setValue: (ratio: BigNumber) => void
@@ -51,7 +52,15 @@ export const RatioControl = asStyled<RatioControlProps>(
         {!isCustomActive ? (
           <>
             <Label>
-              <p>{label}</p>
+              <p>
+                <TooltipMessage
+                  label={label}
+                  message={
+                    '"Standard" speed refers to the median Gas Fee of the past few blocks.'
+                  }
+                  position="left"
+                />
+              </p>
               {showValue && (
                 <span>{formatAmt(current, { decimalPlaces: 2 })}x</span>
               )}
@@ -160,8 +169,21 @@ const Label = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  span {
+  > span {
     color: ${trueBlack};
+  }
+  p {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+    :hover {
+      color: #575757;
+    }
+    ${TooltipMessage} {
+      width: 280px;
+      margin-left: 10%;
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    }
   }
 `
 
