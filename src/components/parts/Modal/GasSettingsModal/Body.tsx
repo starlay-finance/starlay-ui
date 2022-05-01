@@ -1,7 +1,9 @@
 import { t } from '@lingui/macro'
+import { Trans } from '@lingui/react'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import { utils } from 'ethers'
 import { useState, VFC } from 'react'
+import { Link } from 'src/components/elements/Link'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import { RatioControl } from 'src/components/parts/Modal/parts/RatioControl'
 import {
@@ -11,6 +13,7 @@ import {
   NumberItems,
 } from 'src/components/screens/Dashboard/modals/parts'
 import { positive, purple, success } from 'src/styles/colors'
+import { GAS_GUIDE_URL } from 'src/utils/routes'
 import styled from 'styled-components'
 import { Item } from '../parts/Item'
 
@@ -32,7 +35,14 @@ export const GasSettingsModalBody: VFC<GasSettingsModalBodyProps> = ({
   const [value, setValue] = useState(current)
   return (
     <ContentDiv>
-      <Description>{t`You can set Gas Fee for all transactions on Starlay Finance. The higher Gas Fee, the more chance for your transaction to be confirmed.For more about Gas Fee, please click here.`}</Description>
+      <Description>
+        {t`You can set Gas Fee for all transactions on Starlay Finance.
+The higher Gas Fee, the more chance for your transaction to be confirmed.`}
+        <Trans
+          id="For more about Gas Fee, please click <0>here</0>."
+          components={[<Link key="0" href={GAS_GUIDE_URL} />]}
+        />
+      </Description>
       <Action>
         <NumberItems>
           <RatioControl
@@ -77,4 +87,7 @@ const Description = styled.p`
   border-bottom: 3px solid ${purple};
   text-align: center;
   white-space: pre-wrap;
+  a {
+    color: ${purple};
+  }
 `

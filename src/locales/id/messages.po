@@ -131,11 +131,18 @@ msgid "Bug Bounty"
 msgstr "Hadiah Bug"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
-msgid "You can set Gas Fee for all transactions on Starlay Finance. The higher Gas Fee, the more chance for your transaction to be confirmed.For more about Gas Fee, please click here."
+msgid ""
+"You can set Gas Fee for all transactions on Starlay Finance.\n"
+"The higher Gas Fee, the more chance for your transaction to be confirmed."
 msgstr ""
 "You can set Gas Fee for all transactions on Starlay Finance.\n"
 "The higher Gas Fee, the more chance for your transaction to be confirmed.\n"
-"For more about Gas Fee, please click here."
+""
+
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "For more about Gas Fee, please click <0>here</0>."
+msgstr ""
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "Speed"
