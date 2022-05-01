@@ -1,33 +1,32 @@
 import { t } from '@lingui/macro'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { SymbolLay } from 'src/assets/images'
-import { LogoProtocol } from 'src/assets/svgs'
+import { IconSettings, LogoProtocol } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
 import { useRewardModal } from 'src/components/parts/Modal/RewardModal'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
-import { Reel } from 'src/components/parts/Number/Reel'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
-import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
-import { BN_ZERO, formatAmt } from 'src/utils/number'
 import { APP, MAKAI, MARKETS, SWAP } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
+import { useGasSettingsModal } from '../Modal/GasSettingsModal'
 import { HeaderWrapper } from './common'
 
 export const AppHeader = () => {
   const { pathname } = useRouter()
   const { account } = useWallet()
   const { data: user } = useUserData()
-  const { data: balance } = useWalletBalance()
+  const [isSetingsOpen, setIsSettingsOpen] = useState(false)
   const { open: openRewardModal } = useRewardModal()
   const { open: openWalletModal } = useWalletModal()
-  const layInWallet = balance?.LAY || BN_ZERO
+  const { open: openGasSettingsModal } = useGasSettingsModal()
   return (
     <AppHeaderWrapper>
       <LogoLink href={APP} Icon={LogoProtocol} aria-label="App" />
@@ -46,27 +45,37 @@ export const AppHeader = () => {
         </Tab>
       </Nav>
       <Menu>
-        <MenuButton onClick={() => openRewardModal()} disabled={!user}>
+        <MenuButtonSmall onClick={() => openRewardModal()} disabled={!user}>
           <Image src={SymbolLay} alt="Starlay" width={20} height={20} />
-          {user ? (
-            <Reel
-              text={formatAmt(layInWallet.plus(user.rewards.unclaimedBalance), {
-                shorteningThreshold: 8,
-              })}
-            />
-          ) : (
-            '-'
-          )}
-        </MenuButton>
+        </MenuButtonSmall>
         <MenuButton onClick={() => openWalletModal()} disabled={!!account}>
           {account ? shortenAddress(account) : t`Connect`}
         </MenuButton>
+        <MenuButtonSmall
+          onClick={() => setIsSettingsOpen(!isSetingsOpen)}
+          disabled={!user}
+        >
+          <IconSettings />
+          <SettingsContainer $isOpen={isSetingsOpen}>
+            <SettingsButton
+              onClick={(e) => {
+                e.stopPropagation()
+                openGasSettingsModal({
+                  afterClose: () => setIsSettingsOpen(false),
+                })
+              }}
+            >
+              {t`Set Gas Fee`}
+            </SettingsButton>
+          </SettingsContainer>
+        </MenuButtonSmall>
       </Menu>
     </AppHeaderWrapper>
   )
 }
 
 const MenuButton = styled.button`
+  position: relative;
   ${flexCenter};
   padding: 12px 20px;
   border-radius: 4px;
@@ -74,10 +83,37 @@ const MenuButton = styled.button`
   background-color: rgba(255, 255, 255, 0.16);
   column-gap: 8px;
 `
+const MenuButtonSmall = styled(MenuButton)`
+  padding: 12px;
+`
 
 const Menu = styled.div`
   display: flex;
-  column-gap: 16px;
+  column-gap: 12px;
+`
+const SettingsButton = styled.button`
+  padding: 12px 16px;
+  white-space: nowrap;
+  border-radius: 4px;
+  backdrop-filter: blur(16px) brightness(1.32);
+  background-color: rgba(255, 255, 255, 0.32);
+  line-height: 1;
+`
+
+const SettingsContainer = styled.div<{ $isOpen: boolean }>`
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  transition: visibility, opacity, 0.2s ease-in;
+  visibility: hidden;
+  opacity: 0;
+  ${({ $isOpen }) =>
+    $isOpen &&
+    css`
+      visibility: visible;
+      opacity: 1;
+    `}
 `
 
 const activeStyle = css`

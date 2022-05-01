@@ -113,6 +113,11 @@ msgstr "Swap"
 msgid "Connect"
 msgstr "Connect"
 
+#: src/components/parts/Header/AppHeader.tsx
+#: src/components/parts/Modal/GasSettingsModal/index.tsx
+msgid "Set Gas Fee"
+msgstr "Set Gas Fee"
+
 #: src/components/parts/Header/TopHeader.tsx
 #: src/components/screens/Top/Menu.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
@@ -125,6 +130,55 @@ msgstr "Launch App"
 msgid "Bug Bounty"
 msgstr "Bug Bounty"
 
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid ""
+"You can set Gas Fee for all transactions on Starlay Finance.\n"
+"The higher Gas Fee, the more chance for your transaction to be confirmed."
+msgstr ""
+"You can set Gas Fee for all transactions on Starlay Finance.\n"
+"The higher Gas Fee, the more chance for your transaction to be confirmed.\n"
+""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "For more about Gas Fee, please click <0>here</0>."
+msgstr "For more about Gas Fee, please click <0>here</0>."
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Speed"
+msgstr "Speed"
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Custom Speed"
+msgstr "Custom Speed"
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Gas Fee"
+msgstr "Gas Fee"
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "SET"
+msgstr "SET"
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+#: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Wallet Balance"
+msgstr "Wallet Balance"
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Standard"
+msgstr "Standard"
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Fast"
+msgstr "Fast"
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Very Fast"
+msgstr "Very Fast"
+
 #: src/components/parts/Modal/MessageModalGradient/index.tsx
 msgid "Close"
 msgstr "Close"
@@ -132,13 +186,6 @@ msgstr "Close"
 #: src/components/parts/Modal/RewardModal/index.tsx
 msgid "LAY Balance"
 msgstr "LAY Balance"
-
-#: src/components/parts/Modal/RewardModal/index.tsx
-#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
-msgid "Wallet Balance"
-msgstr "Wallet Balance"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 msgid "Unclaimed Balance"
@@ -168,6 +215,14 @@ msgstr "Metamask"
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
 msgstr "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
+
+#: src/components/parts/Modal/parts/RatioControl.tsx
+msgid "\"Standard\" speed refers to the median Gas Fee of the past few blocks."
+msgstr "\"Standard\" speed refers to the median Gas Fee of the past few blocks."
+
+#: src/components/parts/Modal/parts/RatioControl.tsx
+msgid "Custom"
+msgstr "Custom"
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
@@ -402,6 +457,14 @@ msgid "Makai Loops"
 msgstr "Makai Loops"
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Leverage"
+msgstr "Leverage"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom Leverage"
+msgstr "Custom Leverage"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Estimated Net APY"
 msgstr "Estimated Net APY"
 
@@ -416,18 +479,6 @@ msgstr "Please <0>read our docs</0> and understand how it works before using it.
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Start loops"
 msgstr "Start loops"
-
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
-msgid "Leverage"
-msgstr "Leverage"
-
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
-msgid "Custom"
-msgstr "Custom"
-
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
-msgid "Custom Leverage"
-msgstr "Custom Leverage"
 
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Markets/Overview.tsx

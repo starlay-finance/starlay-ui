@@ -113,6 +113,11 @@ msgstr ""
 msgid "Connect"
 msgstr "Menghubungkan"
 
+#: src/components/parts/Header/AppHeader.tsx
+#: src/components/parts/Modal/GasSettingsModal/index.tsx
+msgid "Set Gas Fee"
+msgstr ""
+
 #: src/components/parts/Header/TopHeader.tsx
 #: src/components/screens/Top/Menu.tsx
 #: src/components/screens/Top/parts/FirstView.tsx
@@ -125,6 +130,55 @@ msgstr "Luncurkan Aplikasi"
 msgid "Bug Bounty"
 msgstr "Hadiah Bug"
 
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid ""
+"You can set Gas Fee for all transactions on Starlay Finance.\n"
+"The higher Gas Fee, the more chance for your transaction to be confirmed."
+msgstr ""
+"You can set Gas Fee for all transactions on Starlay Finance.\n"
+"The higher Gas Fee, the more chance for your transaction to be confirmed.\n"
+""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "For more about Gas Fee, please click <0>here</0>."
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Speed"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Custom Speed"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Gas Fee"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "SET"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+#: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Wallet Balance"
+msgstr "Saldo Dompet"
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Standard"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Fast"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Very Fast"
+msgstr ""
+
 #: src/components/parts/Modal/MessageModalGradient/index.tsx
 msgid "Close"
 msgstr "Tutup"
@@ -132,13 +186,6 @@ msgstr "Tutup"
 #: src/components/parts/Modal/RewardModal/index.tsx
 msgid "LAY Balance"
 msgstr "Saldo LAY"
-
-#: src/components/parts/Modal/RewardModal/index.tsx
-#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
-#: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
-msgid "Wallet Balance"
-msgstr "Saldo Dompet"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 msgid "Unclaimed Balance"
@@ -168,6 +215,14 @@ msgstr "Metamask"
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
 msgstr "Dengan Menghubungkan, Saya memahami <0>bagaimana cara kerja Starlay Finance dan risiko yang terlibat</0> dan setuju menggunakannya dengan risiko saya sendiri."
+
+#: src/components/parts/Modal/parts/RatioControl.tsx
+msgid "\"Standard\" speed refers to the median Gas Fee of the past few blocks."
+msgstr ""
+
+#: src/components/parts/Modal/parts/RatioControl.tsx
+msgid "Custom"
+msgstr ""
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
@@ -402,6 +457,14 @@ msgid "Makai Loops"
 msgstr ""
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Leverage"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Custom Leverage"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Estimated Net APY"
 msgstr ""
 
@@ -415,18 +478,6 @@ msgstr ""
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Start loops"
-msgstr ""
-
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
-msgid "Leverage"
-msgstr ""
-
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
-msgid "Custom"
-msgstr ""
-
-#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
-msgid "Custom Leverage"
 msgstr ""
 
 #: src/components/screens/Markets/Assets.tsx
