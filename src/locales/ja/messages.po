@@ -137,7 +137,6 @@ msgstr ""
 "The higher Gas Fee, the more chance for your transaction to be confirmed.\n"
 "For more about Gas Fee, please click here."
 
-
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "Speed"
 msgstr ""

@@ -32,7 +32,7 @@ export const GasSettingsModalBody: VFC<GasSettingsModalBodyProps> = ({
   const [value, setValue] = useState(current)
   return (
     <ContentDiv>
-      <Description>{t`You can set Gas Fee for all transactions on Starlay Finance. The higher Gas Fee, the more chance for your transaction to be confirmed.For more about Gas Fee, please click here.      `}</Description>
+      <Description>{t`You can set Gas Fee for all transactions on Starlay Finance. The higher Gas Fee, the more chance for your transaction to be confirmed.For more about Gas Fee, please click here.`}</Description>
       <Action>
         <NumberItems>
           <RatioControl
