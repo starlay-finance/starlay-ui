@@ -136,7 +136,7 @@ msgid ""
 "The higher Gas Fee, the more chance for your transaction to be confirmed."
 msgstr ""
 "Starlay Finance 上で行うトランザクションのガス代を設定できます。\n"
-"設定したガス代が高いほど、ブロックにより早く取り込まれやすくなります。\n"
+"設定したガス代が高いほど、より早くブロックに取り込まれやすくなります。\n"
 ""
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
