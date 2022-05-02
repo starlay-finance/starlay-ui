@@ -36,6 +36,8 @@ export type LaunchPadData = {
   }
 }
 
+export type Status = 'Upcoming' | 'Open' | 'Ended'
+
 export type Market = {
   currentPriceInUSD: BigNumber
   bottomPriceInUSD: BigNumber
@@ -47,4 +49,10 @@ export type PriceChartData = {
   priceInUSD: number
   bottomPriceInUSD: number
   timestamp: number
+}
+
+export type Bid = {
+  amount: BigNumber
+  capPrice?: BigNumber
+  cancelable?: boolean
 }

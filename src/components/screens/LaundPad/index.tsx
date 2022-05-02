@@ -9,11 +9,10 @@ import { KeyVisual } from './KeyVisual'
 import { ProjectInformation } from './ProjectInformation'
 import { Sale } from './Sale'
 import { Statistics } from './Statistics'
-import { LaunchPadData, PriceChartData } from './types'
+import { LaunchPadData, PriceChartData, Status } from './types'
 
 export type { LaunchPadData }
 
-type Status = 'Upcoming' | 'Open' | 'Ended'
 const judgeStatus = (sale: LaunchPadData['sale']): Status => {
   const now = dayjs()
   // if (now.isBefore(sale.start)) return 'Upcoming'
@@ -44,7 +43,12 @@ export const LaunchPad: VFC<{ data: LaunchPadData }> = ({ data }) => {
         )}
         <Content>
           <ProjectInformation information={data.information} />
-          <Sale token={data.token} information={data.sale} market={market} />
+          <Sale
+            token={data.token}
+            information={data.sale}
+            market={market}
+            status={status}
+          />
         </Content>
       </Main>
       <AppFooter />
