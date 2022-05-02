@@ -1,26 +1,16 @@
 import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
-import { useEffect, useReducer, useState, VFC } from 'react'
+import { useEffect, useState, VFC } from 'react'
 import { Link } from 'src/components/elements/Link'
-import { asStyled } from 'src/components/hoc/asStyled'
-import { Barometer } from 'src/components/parts/Chart/Barometer'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import {
   NumberItem,
   NumberItemWithDiff,
 } from 'src/components/parts/Modal/parts'
+import { RatioControl } from 'src/components/parts/Modal/parts/RatioControl'
 import { ASSETS_DICT } from 'src/constants/assets'
-import {
-  blue,
-  cream,
-  darkPurple,
-  darkRed,
-  lightYellow,
-  purple,
-  trueBlack,
-  trueWhite,
-} from 'src/styles/colors'
+import { blue, darkRed, lightYellow, purple } from 'src/styles/colors'
 import { ltvToLoopingLeverage } from 'src/utils/calculator'
 import { estimateLooping, EstimationParam } from 'src/utils/estimationHelper'
 import {
@@ -32,7 +22,7 @@ import {
   formattedToBigNumber,
 } from 'src/utils/number'
 import { DOCS_MAKAI } from 'src/utils/routes'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import {
   Action,
   AmountInput,
@@ -100,10 +90,14 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
       />
       <Action>
         <NumberItems>
-          <Leverage
-            setLeverage={setLeverage}
+          <RatioControl
+            label={t`Leverage`}
+            options={RATIO_LIST}
+            setValue={setLeverage}
             current={leverage}
             max={BN_ONE.div(BN_ONE.minus(baseLTVasCollateral))}
+            sliderColors={[blue, lightYellow, darkRed]}
+            customLabel={t`Custom Leverage`}
           />
           <NumberItem
             label={t`Net APY`}
@@ -160,173 +154,22 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
   )
 }
 
-const RATIO_LIST = [1.5, 2, 3, 4, 5] as const
+const RATIO_LIST = [
+  { value: 1.5 },
+  { value: 2 },
+  { value: 3 },
+  { value: 4 },
+  { value: 5 },
+]
 
 const initialLeverage = (max: BigNumber) => {
   const numMax = max.toNumber()
-  const leverage = RATIO_LIST.reduce((prev, current) => {
+  const leverage = RATIO_LIST.reduce((prev, { value: current }) => {
     if (numMax >= current) return current
     return prev
   }, 1)
   return valueToBigNumber(leverage)
 }
-
-const Leverage = asStyled<{
-  setLeverage: (ratio: BigNumber) => void
-  current: BigNumber
-  max: BigNumber
-}>(({ className, current, setLeverage, max }) => {
-  const [isCustomActive, toggleCustomActive] = useReducer(
-    (state: boolean) => !state,
-    false,
-  )
-  return (
-    <div className={className}>
-      {!isCustomActive ? (
-        <>
-          <p>{t`Leverage`}</p>
-          <LeverageControl>
-            {RATIO_LIST.filter((ratio) => max.gte(ratio)).map((ratio) => {
-              const checked = current.eq(ratio)
-              return (
-                <LeverageCheckBox key={ratio} $checked={checked}>
-                  <input
-                    onClick={() => setLeverage(valueToBigNumber(ratio))}
-                    disabled={max.lt(ratio)}
-                  />
-                  <span>{ratio}x</span>
-                </LeverageCheckBox>
-              )
-            })}
-            <CustomLeverageButton
-              onClick={toggleCustomActive}
-              $selected={!RATIO_LIST.some((ratio) => current.eq(ratio))}
-            >{t`Custom`}</CustomLeverageButton>
-          </LeverageControl>
-        </>
-      ) : (
-        <LeverageSlider>
-          <div>
-            <button onClick={toggleCustomActive}>{t`Custom Leverage`}</button>
-            <span>{formatAmt(current, { decimalPlaces: 2 })}x</span>
-          </div>
-          <Barometer
-            ratio={current.minus(BN_ONE).div(max.minus(BN_ONE)).toNumber()}
-            colors={[blue, lightYellow, darkRed]}
-            styles={{ barometer: barometerStyle, thumb: thumbStyle }}
-            rangeInputProps={{
-              min: 1,
-              max: max.toNumber(),
-              step: 0.01,
-              onChange: ({ target: { value } }) => {
-                setLeverage(valueToBigNumber(value))
-              },
-            }}
-          />
-        </LeverageSlider>
-      )}
-    </div>
-  )
-})`
-  margin-top: 24px;
-  height: 96px;
-  border-bottom: 1px solid ${trueBlack}3a;
-`
-const barometerStyle = css`
-  height: 4px;
-`
-const thumbStyle = css`
-  border: 4px solid ${cream};
-  width: 20px;
-  height: 20px;
-`
-
-const LeverageCheckBox = styled.label<{
-  $checked: boolean
-}>`
-  ${({ $checked }) =>
-    $checked &&
-    css`
-      &&& {
-        background-color: ${darkPurple};
-      }
-    `}
-`
-
-const CustomLeverageButton = styled.button<{ $selected?: boolean }>`
-  ${({ $selected }) =>
-    $selected &&
-    css`
-      &&& {
-        background-color: ${darkPurple};
-      }
-    `}
-`
-
-const LeverageControl = styled.div`
-  margin: 16px 0;
-  display: flex;
-  column-gap: 8px;
-  color: ${trueWhite};
-  ${LeverageCheckBox},
-  ${CustomLeverageButton} {
-    input {
-      width: 0;
-    }
-    padding: 8px 12px 6px;
-    border-radius: 8px;
-    background-color: ${darkPurple}7a;
-    cursor: pointer;
-    transition: all 0.2s ease-in;
-    :hover {
-      background-color: ${darkPurple};
-    }
-  }
-`
-
-const LeverageSlider = styled.div`
-  ${Barometer} {
-    margin-top: 32px;
-  }
-  > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    span {
-      color: ${trueBlack};
-    }
-    button {
-      position: relative;
-      padding-left: 32px;
-      :hover {
-        color: ${purple}80;
-        ::after {
-          opacity: 0.5;
-        }
-      }
-      ::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        width: 22px;
-        height: 22px;
-        border-radius: 8px;
-        border: 2px solid ${darkPurple}7a;
-        background: radial-gradient(${purple}00, ${purple}3d);
-      }
-      ::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        width: 10px;
-        height: 10px;
-        margin: 6px;
-        border-radius: 50%;
-        background: ${purple};
-      }
-    }
-  }
-`
 
 const ActionTab: TabFC = Tab
 

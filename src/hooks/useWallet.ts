@@ -1,6 +1,6 @@
 import { useWeb3React } from '@web3-react/core'
 import { ethers } from 'ethers'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { ChainId } from 'src/libs/config'
 import { getChainInfo } from 'src/libs/config/chain'
 import { getConnector, metamask, WalletType } from 'src/libs/wallet-provider'
@@ -28,6 +28,8 @@ const useActiveWallet = () => useSWRLocal<ActiveWallet | null>('wallet-active')
 export const useWallet = (): WalletInterface => {
   const { library, error, account, active, chainId, activate, deactivate } =
     useWeb3React<ethers.providers.Web3Provider>()
+
+  const signer = useMemo(() => library?.getSigner(), [library])
   const { data: activeWallet, mutate: mutateActiveWallet } = useActiveWallet()
 
   const connect = useCallback(
@@ -70,7 +72,7 @@ export const useWallet = (): WalletInterface => {
     chainId,
     account: account as WalletInterface['account'],
     library,
-    signer: library?.getSigner(),
+    signer,
     activeWalletType: activeWallet?.type,
     connect,
     disconnect,

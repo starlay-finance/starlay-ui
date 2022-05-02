@@ -7,7 +7,7 @@ import {
   IconTwitter,
 } from 'src/assets/svgs'
 import { Link } from 'src/components/elements/Link'
-import { darkGray, secondary } from 'src/styles/colors'
+import { lightBlack, secondary } from 'src/styles/colors'
 import {
   fontWeightBold,
   fontWeightMedium,
@@ -102,7 +102,7 @@ const UrlsDiv = styled.div`
     ${flexCenter};
     height: 32px;
     border-radius: 16px;
-    background: ${darkGray};
+    background: ${lightBlack};
     line-height: 1;
   }
   > a {
