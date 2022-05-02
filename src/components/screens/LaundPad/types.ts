@@ -1,3 +1,4 @@
+import { BigNumber } from '@starlay-finance/math-utils'
 import { Dayjs } from 'dayjs'
 
 export type LaunchPadData = {
@@ -33,4 +34,18 @@ export type LaunchPadData = {
       address: string
     }[]
   }
+}
+
+export type Market = {
+  currentPriceInUSD: BigNumber
+  bottomPriceInUSD: BigNumber
+  raisedAmountInUSD: BigNumber
+  numOfBids: BigNumber
+}
+
+export type MarketHistorical = {
+  currentPriceInUSD: BigNumber
+  bottomPriceInUSD: BigNumber
+  raisedAmountInUSD: BigNumber
+  numOfBids: BigNumber
 }

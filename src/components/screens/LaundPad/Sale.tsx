@@ -1,29 +1,23 @@
 import { t } from '@lingui/macro'
-import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
+import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
-import { darkPurple, darkRed, skyBlue, trueBlack } from 'src/styles/colors'
+import { ShimmerPlaceholder } from 'src/components/parts/Loading'
+import { darkPurple, darkRed, skyBlue } from 'src/styles/colors'
 import { fontWeightBold, fontWeightMedium } from 'src/styles/font'
 import { formatWithTZ } from 'src/utils/date'
 import { formatAmt, formatPct } from 'src/utils/number'
 import styled from 'styled-components'
-import { LaunchPadData } from './types'
+import { LaunchPadData, Market } from './types'
 
 type SaleProps = {
   token: LaunchPadData['token']
   information: LaunchPadData['sale']
-  status:
-    | {
-        currentPriceInUSD: BigNumber
-        bottomPriceInUSD: BigNumber
-        raisedAmountInUSD: BigNumber
-        numOfBids: BigNumber
-      }
-    | undefined
+  market: Market | undefined
 }
 
 const DATE_FORMAT = 'MMM, D HH:mm z'
 
-export const Sale: VFC<SaleProps> = ({ token, information, status }) => {
+export const Sale: VFC<SaleProps> = ({ token, information, market }) => {
   return (
     <SaleDiv>
       <SaleInformation>
@@ -31,15 +25,15 @@ export const Sale: VFC<SaleProps> = ({ token, information, status }) => {
           <SaleInformationItem label={t`Token`} value={token.symbol} />
           <SaleInformationItem
             label={t`Price Per Token`}
-            value={status ? 'TODO' : '-'}
+            value={market && 'TODO'}
           />
           <SaleInformationItem
             label={t`Amount Raised`}
-            value={status ? 'TODO' : '-'}
+            value={market && 'TODO'}
           />
           <SaleInformationItem
             label={t`Number of Bidders`}
-            value={status ? 'TODO' : '-'}
+            value={market && 'TODO'}
           />
           <SaleInformationItem
             label={t`Sale Start`}
@@ -71,26 +65,24 @@ export const Sale: VFC<SaleProps> = ({ token, information, status }) => {
   )
 }
 
-const SaleInformationItem: VFC<{ label: string; value: string }> = ({
-  label,
-  value,
-}) => (
-  <li>
-    <div>{label}</div>
-    <div>{value}</div>
+const SaleInformationItem = styled<
+  VFC<{ label: string; value: string | undefined; className?: string }>
+>(({ label, value, className }) => (
+  <li className={className}>
+    <p>{label}</p>
+    <p>{value ? value : <ShimmerPlaceholder />}</p>
   </li>
-)
+))``
 
 const SaleInformation = styled.div`
   background: linear-gradient(45deg, ${skyBlue}cc, ${darkRed}cc);
   padding: 2px;
-  border-radius: 6px;
+  border-radius: 8px;
   > ul {
     border-radius: 6px;
     padding: 4px 0 2px;
-    background: linear-gradient(45deg, ${trueBlack}bf, ${trueBlack});
-    backdrop-filter: blur(24px) brightness(0.52);
-    li {
+    background: linear-gradient(30deg, #001a26f5, #00041af5, #000005, #000000);
+    ${SaleInformationItem} {
       display: flex;
       padding: 16px 22px;
       border-bottom: 1px solid ${darkPurple}3d;
@@ -106,6 +98,9 @@ const SaleInformation = styled.div`
           flex: 5;
           font-weight: ${fontWeightMedium};
           font-style: italic;
+          ${ShimmerPlaceholder} {
+            width: 50%;
+          }
         }
       }
     }
