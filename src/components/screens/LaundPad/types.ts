@@ -43,9 +43,8 @@ export type Market = {
   numOfBids: BigNumber
 }
 
-export type MarketHistorical = {
-  currentPriceInUSD: BigNumber
-  bottomPriceInUSD: BigNumber
-  raisedAmountInUSD: BigNumber
-  numOfBids: BigNumber
+export type PriceChartData = {
+  priceInUSD: number
+  bottomPriceInUSD: number
+  timestamp: number
 }
