@@ -10,6 +10,7 @@ import {
   YAxis,
 } from 'recharts'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
+import { TooltipMessage } from 'src/components/parts/ToolTip'
 import {
   darkPurple,
   darkRed,
@@ -44,7 +45,11 @@ export const Statistics: VFC<StatisticsProps> = ({
         <Items>
           <Item label={t`Token`} value={token.symbol} />
           <Item label={t`Price Per Token`} value={market && 'TODO'} />
-          <Item label={t`Bottom Price`} value={market && 'TODO'} />
+          <Item
+            label={t`Bottom Price`}
+            value={market && 'TODO'}
+            tooltip={t`TODO description of bottom price`}
+          />
           <Item label={t`Amount of Raised`} value={market && 'TODO'} />
           <Item label={t`Number of Bidders`} value={market && 'TODO'} />
         </Items>
@@ -152,10 +157,18 @@ const TooltipDiv = styled.div`
 `
 
 const Item = styled<
-  VFC<{ label: string; value: string | undefined; className?: string }>
->(({ label, value, className }) => (
+  VFC<{
+    label: string
+    value: string | undefined
+    tooltip?: string
+    className?: string
+  }>
+>(({ label, value, tooltip, className }) => (
   <li className={className}>
-    <p>{label}</p>
+    <p>
+      {label}
+      {tooltip && <TooltipMessage message={tooltip} />}
+    </p>
     <p>{value ? value : <ShimmerPlaceholder />}</p>
   </li>
 ))``
@@ -170,8 +183,14 @@ const Items = styled.ul`
       border-bottom: 1px solid ${darkPurple}3d;
     }
     p:first-child {
+      display: flex;
+      align-items: center;
+      column-gap: 4px;
       font-size: 16px;
       font-weight: ${fontWeightRegular};
+      ${TooltipMessage} {
+        width: 240px;
+      }
     }
     p:last-child {
       margin-top: 4px;
