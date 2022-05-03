@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { BigNumber } from '@starlay-finance/math-utils'
+import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import { useState, VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { GlassModalContent } from 'src/components/parts/Modal/base/Content/Glass'
@@ -22,6 +22,7 @@ import {
 import { flexCenter } from 'src/styles/mixins'
 import { Asset } from 'src/types/models'
 import {
+  BN_ONE,
   BN_ZERO,
   formatAmt,
   formatPct,
@@ -29,30 +30,45 @@ import {
   parseInput,
 } from 'src/utils/number'
 import styled, { css } from 'styled-components'
+import { Bid } from './types'
 import { calcBoost } from './utils'
 
 type BiddingModalProps = {
-  currentEstimatedPrice: BigNumber
   receivingAsset: Asset
+  maxAmount: BigNumber
+  boostedRaisedAmount?: BigNumber
+  currentEstimatedPrice?: BigNumber
+  bid?: Bid
 }
 const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
   close,
-  currentEstimatedPrice,
   receivingAsset,
+  maxAmount,
+  boostedRaisedAmount = BN_ZERO,
+  currentEstimatedPrice = BN_ZERO,
+  bid,
 }) => {
   const biddingAsset = { ...ASSETS_DICT.USDC, decimals: 6 }
-  const [amount, setAmount] = useState('')
-  const [noPriceLimitEnabled, setNoPriceLimitEnabled] = useState(true)
-  const [limitPrice, setLimitPrice] = useState('')
-  const [cancelable, setCancelable] = useState(false)
+  const [amount, setAmount] = useState(bid?.amount.toString() || '')
+  const [noPriceLimitEnabled, setNoPriceLimitEnabled] = useState(
+    !bid?.limitPrice,
+  )
+  const [limitPrice, setLimitPrice] = useState(
+    bid?.limitPrice?.toString() || '',
+  )
+  const [cancelable, setCancelable] = useState(bid?.cancelable)
   const boost = calcBoost({
     limitPrice: noPriceLimitEnabled ? undefined : BN_ZERO,
     cancelable,
   })
-  const estimatedAmount = (
-    (amount && formattedToBigNumber(amount)?.times(boost)) ||
+  const amountBn =
+    (amount && formattedToBigNumber(amount)?.times(BN_ONE.plus(boost))) ||
     BN_ZERO
-  ).div(currentEstimatedPrice)
+  const estimatedAmount =
+    !amountBn.isZero() &&
+    (noPriceLimitEnabled || currentEstimatedPrice.lte(limitPrice))
+      ? amountBn.div(amountBn.plus(boostedRaisedAmount)).times(maxAmount)
+      : BN_ZERO
   return (
     <GlassModalContent closeModal={close}>
       <Title>
@@ -151,6 +167,7 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
             {formatAmt(estimatedAmount, {
               symbol: receivingAsset.symbol,
               decimalPlaces: 2,
+              roundingMode: BigNumber.ROUND_FLOOR,
             })}
           </div>
         </FormItem>

@@ -1,25 +1,25 @@
 import { t } from '@lingui/macro'
-import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { BN_ZERO, formatAmt, formatPct, formatUSD } from 'src/utils/number'
-import { Bid, LaunchPadData } from '../types'
+import { Bid, LaunchPadData, Market } from '../types'
 import { calcBoost } from '../utils'
 import { CtaButton, Information, InformationItem, Section } from './parts'
 
 type BidSecionProps = {
   bid: Bid
-  currentEstimatedPrice: BigNumber
+  market?: Market
   token: LaunchPadData['token']
   hasEnded: boolean
   openBiddingModal: VoidFunction
 }
 export const BidSecion: VFC<BidSecionProps> = ({
   bid,
-  currentEstimatedPrice,
+  market,
   token,
   hasEnded,
   openBiddingModal,
 }) => {
+  const currentEstimatedPrice = market?.currentPriceInUSD || BN_ZERO
   const boost = calcBoost(bid)
   const currentEstimatedAmount =
     bid.limitPrice && bid.limitPrice.lt(currentEstimatedPrice)

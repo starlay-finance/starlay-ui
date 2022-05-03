@@ -51,7 +51,7 @@ describe('number', () => {
           shorteningThreshold: 6,
           decimalPlaces: 2,
         }),
-      ).toBe('0.00')
+      ).toBe('> 0.01')
       expect(formatAmt(valueToBigNumber(0.00009))).toBe('0.00009')
       expect(formatAmt(valueToBigNumber(0), { decimalPlaces: 2 })).toBe('0.00')
     })

@@ -50,10 +50,6 @@ const formatNum = (
     })
   }
 
-  const formatted = `${num.toFormat(decimalPlaces)}`
-  if (!shorteningThreshold || formatted.length < shorteningThreshold)
-    return `${prefix}${formatted}`
-
   const adjustedDecimalPlaces = Math.min(
     (shorteningThreshold || Number.MAX_SAFE_INTEGER) - 2,
     decimalPlaces || Number.MAX_SAFE_INTEGER,
@@ -65,6 +61,11 @@ const formatNum = (
     return `> ${prefix}${BN_ONE.shiftedBy(-adjustedDecimalPlaces).toFormat(
       adjustedDecimalPlaces,
     )}`
+
+  const formatted = `${num.toFormat(decimalPlaces)}`
+  if (!shorteningThreshold || formatted.length < shorteningThreshold)
+    return `${prefix}${formatted}`
+
   return `${prefix}${num.toFormat(adjustedDecimalPlaces)}`
 }
 

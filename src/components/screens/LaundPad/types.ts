@@ -42,6 +42,7 @@ export type Market = {
   currentPriceInUSD: BigNumber
   bottomPriceInUSD: BigNumber
   raisedAmountInUSD: BigNumber
+  boostedRaisedAmountInUSD: BigNumber
   numOfBids: BigNumber
 }
 

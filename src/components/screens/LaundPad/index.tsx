@@ -5,13 +5,13 @@ import { AppBackground } from 'src/components/parts/Background'
 import { AppFooter } from 'src/components/parts/Footer'
 import { AppHeader } from 'src/components/parts/Header/AppHeader'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
-import { BN_ONE, BN_ZERO } from 'src/utils/number'
+import { BN_ONE } from 'src/utils/number'
 import styled from 'styled-components'
 import { KeyVisual } from './KeyVisual'
 import { ProjectInformation } from './ProjectInformation'
 import { Sale } from './Sale'
 import { Statistics } from './Statistics'
-import { Bid, LaunchPadData, PriceChartData, Status } from './types'
+import { Bid, LaunchPadData, Market, PriceChartData, Status } from './types'
 
 export type { LaunchPadData }
 
@@ -29,13 +29,13 @@ const mockBid: Bid = {
 
 export const LaunchPad: VFC<{ data: LaunchPadData }> = ({ data }) => {
   const status = judgeStatus(data.sale)
-  const market = {
+  const market: Market = {
     currentPriceInUSD: valueToBigNumber(0.41),
     bottomPriceInUSD: valueToBigNumber(0.31),
     raisedAmountInUSD: BN_ONE.times(999999999999999),
+    boostedRaisedAmountInUSD: BN_ONE.times(999999999999999),
     numOfBids: BN_ONE.times(999999999),
   } // TODO
-  const currentEstimatedPrice = BN_ZERO // TODO
   const priceChartData = mockPriceChartData // TODO
   const bid = mockBid //TODO
   return (
@@ -62,7 +62,8 @@ export const LaunchPad: VFC<{ data: LaunchPadData }> = ({ data }) => {
             token={data.token}
             information={data.sale}
             status={status}
-            currentEstimatedPrice={currentEstimatedPrice}
+            market={market}
+            maxAmount={valueToBigNumber(data.sale.emissionAmount)}
             bid={bid}
           />
         </Content>

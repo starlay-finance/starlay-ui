@@ -1,10 +1,9 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { ASSETS_DICT } from 'src/constants/assets'
-import { BN_ZERO } from 'src/utils/number'
 import styled from 'styled-components'
 import { useBiddingModal } from '../BiddingModal'
-import { Bid, LaunchPadData, Status } from '../types'
+import { Bid, LaunchPadData, Market, Status } from '../types'
 import { BidSecion } from './Bid'
 import { SaleInformation } from './SaleInformation'
 
@@ -12,7 +11,8 @@ type SaleProps = {
   token: LaunchPadData['token']
   information: LaunchPadData['sale']
   status: Status
-  currentEstimatedPrice?: BigNumber
+  market?: Market
+  maxAmount: BigNumber
   bid?: Bid
 }
 
@@ -20,13 +20,17 @@ export const Sale: VFC<SaleProps> = ({
   token,
   information,
   status,
-  currentEstimatedPrice = BN_ZERO,
+  market,
+  maxAmount,
   bid,
 }) => {
   const { open } = useBiddingModal()
   const openBiddingModal = () =>
     open({
-      currentEstimatedPrice,
+      bid,
+      maxAmount,
+      currentEstimatedPrice: market?.currentPriceInUSD,
+      boostedRaisedAmount: market?.boostedRaisedAmountInUSD,
       receivingAsset: ASSETS_DICT.LAY,
     })
 
@@ -35,7 +39,7 @@ export const Sale: VFC<SaleProps> = ({
       {bid && (
         <BidSecion
           bid={bid}
-          currentEstimatedPrice={currentEstimatedPrice}
+          market={market}
           hasEnded={status === 'Ended'}
           token={token}
           openBiddingModal={openBiddingModal}
