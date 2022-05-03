@@ -1,9 +1,12 @@
 import { t } from '@lingui/macro'
+import { BigNumber } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
 import { CSSProperties, VFC } from 'react'
 import {
   Area,
-  AreaChart,
+  ComposedChart,
+  Label,
+  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   TooltipProps,
@@ -12,11 +15,14 @@ import {
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import {
+  attention,
   darkPurple,
   darkRed,
   lightPurple,
+  lightYellow,
   secondary,
   skyBlue,
+  success,
   trueWhite,
 } from 'src/styles/colors'
 import {
@@ -32,13 +38,22 @@ type StatisticsProps = {
   token: LaunchPadData['token']
   market: Market | undefined
   priceChartData: PriceChartData[]
+  limitPrice?: BigNumber
 }
 
 export const Statistics: VFC<StatisticsProps> = ({
   token,
   market,
   priceChartData,
+  limitPrice,
 }) => {
+  const limitPriceLineColor = limitPrice
+    ? market?.currentPriceInUSD.gt(limitPrice)
+      ? attention
+      : market?.currentPriceInUSD.eq(limitPrice)
+      ? lightYellow
+      : success
+    : undefined
   return (
     <StatisticsDiv>
       <div>
@@ -55,7 +70,7 @@ export const Statistics: VFC<StatisticsProps> = ({
         </Items>
         <Chart>
           <ResponsiveContainer width={800} height="100%">
-            <AreaChart
+            <ComposedChart
               width={730}
               data={priceChartData}
               margin={{ top: 64, right: 8, left: 8, bottom: 8 }}
@@ -81,13 +96,27 @@ export const Statistics: VFC<StatisticsProps> = ({
                 fill="url(#colorBottomPx)"
               />
               <YAxis dataKey="priceInUSD" tick={false} axisLine={false} />
+              {limitPrice && (
+                <ReferenceLine
+                  y={limitPrice.toNumber()}
+                  stroke={limitPriceLineColor}
+                  strokeDasharray="5"
+                >
+                  <Label
+                    value={t`Your Limit`}
+                    fill={limitPriceLineColor}
+                    transform="translate(-6 -28)"
+                    position="insideTopLeft"
+                  />
+                </ReferenceLine>
+              )}
               <Tooltip
                 position={{ y: 0 }}
                 offset={-72}
                 content={TooltipRenderer}
                 active
               />
-            </AreaChart>
+            </ComposedChart>
           </ResponsiveContainer>
         </Chart>
       </div>

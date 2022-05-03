@@ -53,6 +53,7 @@ export const LaunchPad: VFC<{ data: LaunchPadData }> = ({ data }) => {
             token={data.token}
             market={market}
             priceChartData={priceChartData}
+            limitPrice={bid?.limitPrice}
           />
         )}
         <Content>
