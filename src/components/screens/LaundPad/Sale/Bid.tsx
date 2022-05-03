@@ -71,7 +71,7 @@ export const BidSecion: VFC<BidSecionProps> = ({
           )}
         </ul>
       </Information>
-      {hasEnded ? (
+      {!hasEnded ? (
         <CtaButton onClick={openBiddingModal}>
           <span>
             {bid.cancelable ? t`Cancel` : t`Increase Amount or Limit Price`}
