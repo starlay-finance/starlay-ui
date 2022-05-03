@@ -113,9 +113,11 @@ export const Sale: VFC<SaleProps> = ({ token, information, status }) => {
             />
           </ul>
         </Information>
-        <CtaButton>
-          <span>Bid</span>
-        </CtaButton>
+        {!bid && (
+          <CtaButton>
+            <span>Bid</span>
+          </CtaButton>
+        )}
       </Section>
     </SaleDiv>
   )
