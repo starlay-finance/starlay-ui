@@ -2,6 +2,7 @@ import { t } from '@lingui/macro'
 import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
+import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { darkPurple, darkRed, lightBlack, skyBlue } from 'src/styles/colors'
 import {
   fontWeightBlack,
@@ -64,6 +65,7 @@ export const Sale: VFC<SaleProps> = ({ token, information, status }) => {
               />
               <InformationItem
                 label={t`Estimated Amount`}
+                tooltip={t`TODO description of estimated amount`}
                 // TODO estimate
                 value={formatAmt(bid.amount, { symbol: token.symbol })}
               />
@@ -148,10 +150,18 @@ const CtaButton = styled.button`
 `
 
 const InformationItem = styled<
-  VFC<{ label: string; value: string | undefined; className?: string }>
->(({ label, value, className }) => (
+  VFC<{
+    label: string
+    value: string | undefined
+    tooltip?: string
+    className?: string
+  }>
+>(({ label, value, tooltip, className }) => (
   <li className={className}>
-    <p>{label}</p>
+    <p>
+      {label}
+      {tooltip && <TooltipMessage message={tooltip} />}
+    </p>
     <p>{value ? value : <ShimmerPlaceholder />}</p>
   </li>
 ))``
@@ -175,8 +185,14 @@ const Information = styled.div<{ started?: boolean }>`
       white-space: pre-wrap;
       > * {
         :first-child {
+          display: flex;
+          align-items: center;
+          column-gap: 4px;
           flex: 4;
           font-weight: ${fontWeightBold};
+          ${TooltipMessage} {
+            width: 240px;
+          }
         }
         :last-child {
           flex: 5;
