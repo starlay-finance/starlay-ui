@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { valueToBigNumber } from '@starlay-finance/math-utils'
+import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
@@ -11,7 +11,13 @@ import {
   fontWeightMedium,
 } from 'src/styles/font'
 import { formatWithTZ } from 'src/utils/date'
-import { BN_ONE, formatAmt, formatPct, formatUSD } from 'src/utils/number'
+import {
+  BN_ONE,
+  BN_ZERO,
+  formatAmt,
+  formatPct,
+  formatUSD,
+} from 'src/utils/number'
 import styled, { css } from 'styled-components'
 import { useBiddingModal } from './BiddingModal'
 import { Bid, LaunchPadData, Market, Status } from './types'
@@ -34,56 +40,26 @@ const mockBid: Bid = {
 
 export const Sale: VFC<SaleProps> = ({ token, information, status }) => {
   const started = status !== 'Upcoming'
+  const currentEstimatedPrice = BN_ONE //TODO
   const bid = mockBid // TODO
 
   const { open } = useBiddingModal()
   const openBiddingModal = () =>
     open({
-      currentEstimatedPrice: BN_ONE,
+      currentEstimatedPrice,
       receivingAsset: ASSETS_DICT.LAY,
     })
+
   return (
     <SaleDiv>
-      {/* TODO closed */}
       {bid && (
-        <Section>
-          <h2>{t`Your Bid`}</h2>
-          <Information started>
-            <ul>
-              <InformationItem
-                label={t`Amount`}
-                value={formatAmt(bid.amount, { symbol: 'USDC' })}
-              />
-              <InformationItem
-                label={t`Limit Price`}
-                value={bid.limitPrice ? formatUSD(bid.limitPrice) : '-'}
-              />
-              <InformationItem
-                label={t`Cancel`}
-                value={bid.cancelable ? t`Enabled` : 'Disabled'}
-              />
-              <InformationItem
-                label={t`Boosted`}
-                value={formatPct(calcBoost(bid))}
-              />
-              <InformationItem
-                label={t`Estimated Amount`}
-                tooltip={t`TODO description of estimated amount`}
-                // TODO estimate
-                value={formatAmt(bid.amount, { symbol: token.symbol })}
-              />
-            </ul>
-          </Information>
-          {bid.cancelable ? (
-            <CtaButton>
-              <span>{t`Cancel`}</span>
-            </CtaButton>
-          ) : (
-            <CtaButton onClick={openBiddingModal}>
-              <span>{t`Increase Amount or Limit Price`}</span>
-            </CtaButton>
-          )}
-        </Section>
+        <BidSecion
+          bid={bid}
+          currentEstimatedPrice={currentEstimatedPrice}
+          status={status}
+          token={token}
+          openBiddingModal={openBiddingModal}
+        />
       )}
       <Section>
         {started && <h2>{t`Sale Information`}</h2>}
@@ -118,13 +94,101 @@ export const Sale: VFC<SaleProps> = ({ token, information, status }) => {
             />
           </ul>
         </Information>
-        {!bid && (
-          <CtaButton>
-            <span>Bid</span>
+        {status === 'Open' && !bid ? (
+          <CtaButton onClick={openBiddingModal}>
+            <span>{t`Bid`}</span>
           </CtaButton>
+        ) : (
+          status === 'Ended' && (
+            <CtaButton disabled>
+              <span>{t`Closed`}</span>
+            </CtaButton>
+          )
         )}
       </Section>
     </SaleDiv>
+  )
+}
+
+type BidSecionProps = {
+  bid: Bid
+  currentEstimatedPrice: BigNumber
+  token: LaunchPadData['token']
+  status: Status
+  openBiddingModal: VoidFunction
+}
+const BidSecion: VFC<BidSecionProps> = ({
+  bid,
+  currentEstimatedPrice,
+  token,
+  status,
+  openBiddingModal,
+}) => {
+  const boost = calcBoost(bid)
+  const currentEstimatedAmount =
+    bid.limitPrice && bid.limitPrice.lt(currentEstimatedPrice)
+      ? BN_ZERO
+      : bid.amount.times(boost).div(currentEstimatedPrice)
+
+  const receivableAmount = BN_ZERO // TODO
+  const refundableAmount = BN_ZERO // TODO
+  const requestRefund = () => {} //TODO
+  return (
+    <Section>
+      <h2>{t`Your Bid`}</h2>
+      <Information started>
+        <ul>
+          <InformationItem
+            label={t`Amount`}
+            value={formatAmt(bid.amount, { symbol: 'USDC' })}
+          />
+          <InformationItem
+            label={t`Limit Price`}
+            value={bid.limitPrice ? formatUSD(bid.limitPrice) : '-'}
+          />
+          <InformationItem
+            label={t`Cancel`}
+            value={bid.cancelable ? t`Enabled` : 'Disabled'}
+          />
+          <InformationItem
+            label={t`Boosted`}
+            value={formatPct(calcBoost(bid))}
+          />
+          {status === 'Open' ? (
+            <InformationItem
+              label={t`Estimated Amount`}
+              tooltip={t`TODO description of estimated amount`}
+              value={formatAmt(currentEstimatedAmount, {
+                symbol: token.symbol,
+                decimalPlaces: 2,
+              })}
+            />
+          ) : (
+            <InformationItem
+              label={t`Receivable Amount`}
+              tooltip={t`TODO description of receivable amount`}
+              value={formatAmt(receivableAmount, {
+                symbol: token.symbol,
+                decimalPlaces: 2,
+              })}
+            />
+          )}
+        </ul>
+      </Information>
+      {status === 'Open' ? (
+        <CtaButton onClick={openBiddingModal}>
+          <span>
+            {bid.cancelable ? t`Cancel` : t`Increase Amount or Limit Price`}
+          </span>
+        </CtaButton>
+      ) : (
+        !refundableAmount.isZero() && (
+          <CtaButton onClick={requestRefund}>
+            <span>{t`Request Refund`}</span>
+          </CtaButton>
+        )
+      )}
+    </Section>
   )
 }
 
@@ -149,6 +213,9 @@ const CtaButton = styled.button`
   }
   span {
     position: relative;
+  }
+  :disabled {
+    background: ${lightBlack};
   }
 `
 
@@ -191,14 +258,14 @@ const Information = styled.div<{ started?: boolean }>`
           display: flex;
           align-items: center;
           column-gap: 4px;
-          flex: 4;
+          flex: 1;
           font-weight: ${fontWeightBold};
           ${TooltipMessage} {
             width: 240px;
           }
         }
         :last-child {
-          flex: 5;
+          flex: 1;
           font-weight: ${fontWeightMedium};
           font-style: italic;
           ${ShimmerPlaceholder} {
