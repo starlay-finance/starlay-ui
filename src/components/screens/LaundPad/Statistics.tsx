@@ -58,7 +58,7 @@ export const Statistics: VFC<StatisticsProps> = ({
             <AreaChart
               width={730}
               data={priceChartData}
-              margin={{ top: 64, right: 0, left: 0, bottom: 0 }}
+              margin={{ top: 64, right: 8, left: 8, bottom: 8 }}
             >
               <defs>
                 <linearGradient id="colorPx" x1="0" y1="0" x2="1" y2="1">
@@ -120,7 +120,7 @@ const TooltipRenderer: VFC<TooltipProps<number, string>> = ({
   )
 }
 
-const FORMAT = 'MMM, d, HH:mm z'
+const FORMAT = 'MMM, d HH:mm z'
 const ChartTooltip: VFC<{
   priceInUSD: number
   bottomPriceInUSD: number
@@ -202,7 +202,10 @@ const Items = styled.ul`
     }
   }
 `
-const Chart = styled.figure``
+const Chart = styled.figure`
+  margin-right: -8px;
+  margin-bottom: -8px;
+`
 
 const StatisticsDiv = styled.div`
   width: 100%;
