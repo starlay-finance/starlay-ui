@@ -116,3 +116,17 @@ export const formattedToBigNumber = (
   const bn = valueToBigNumber(value)
   return bn.isNaN() ? defaultValue : bn
 }
+
+const AMOUNT_REGEX = /^\d*\.?\d*$/
+export const parseInput = (input: string, significantDigits: number) => {
+  if (input === '') return input
+  const value = input.replace(/,/g, '')
+  if (!AMOUNT_REGEX.test(value)) return
+  const [_int, decimals] = value.split('.')
+  if (decimals?.length > significantDigits) return
+  if (value.startsWith('.') || value.endsWith('.')) {
+    return value
+  }
+  const bn = valueToBigNumber(value)
+  return bn.isNaN() || bn.isZero() ? value : formatAmt(bn)
+}
