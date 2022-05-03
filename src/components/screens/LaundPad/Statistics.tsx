@@ -31,6 +31,7 @@ import {
   fontWeightRegular,
 } from 'src/styles/font'
 import { formatWithTZ } from 'src/utils/date'
+import { formatAmt, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
 import { LaunchPadData, Market, PriceChartData } from './types'
 
@@ -59,14 +60,30 @@ export const Statistics: VFC<StatisticsProps> = ({
       <div>
         <Items>
           <Item label={t`Token`} value={token.symbol} />
-          <Item label={t`Price Per Token`} value={market && 'TODO'} />
+          <Item
+            label={t`Price Per Token`}
+            value={
+              market && formatAmt(market.currentPriceInUSD, { prefix: '$' })
+            }
+          />
           <Item
             label={t`Bottom Price`}
-            value={market && 'TODO'}
+            value={
+              market && formatAmt(market.bottomPriceInUSD, { prefix: '$' })
+            }
             tooltip={t`TODO description of bottom price`}
           />
-          <Item label={t`Amount of Raised`} value={market && 'TODO'} />
-          <Item label={t`Number of Bidders`} value={market && 'TODO'} />
+          <Item
+            label={t`Amount of Raised`}
+            value={
+              market &&
+              formatUSD(market.raisedAmountInUSD, { decimalPlaces: 0 })
+            }
+          />
+          <Item
+            label={t`Number of Bidders`}
+            value={market && formatAmt(market.numOfBids)}
+          />
         </Items>
         <Chart>
           <ResponsiveContainer width={800} height="100%">

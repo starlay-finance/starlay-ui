@@ -31,9 +31,9 @@ export const LaunchPad: VFC<{ data: LaunchPadData }> = ({ data }) => {
   const status = judgeStatus(data.sale)
   const market = {
     currentPriceInUSD: valueToBigNumber(0.41),
-    bottomPriceInUSD: BN_ZERO,
-    raisedAmountInUSD: BN_ONE,
-    numOfBids: BN_ONE,
+    bottomPriceInUSD: valueToBigNumber(0.31),
+    raisedAmountInUSD: BN_ONE.times(999999999999999),
+    numOfBids: BN_ONE.times(999999999),
   } // TODO
   const currentEstimatedPrice = BN_ZERO // TODO
   const priceChartData = mockPriceChartData // TODO
