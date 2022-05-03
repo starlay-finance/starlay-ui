@@ -131,3 +131,19 @@ export const parseInput = (input: string, significantDigits: number) => {
   const bn = valueToBigNumber(value)
   return bn.isNaN() || bn.isZero() ? value : formatAmt(bn)
 }
+
+export const handleArrow = (
+  code: string,
+  value: BigNumber,
+  step: number,
+  onChange: (value: BigNumber) => void,
+) => {
+  switch (code) {
+    case 'ArrowUp':
+      onChange(value.plus(step))
+      return
+    case 'ArrowDown':
+      onChange(BigNumber.max(value.minus(step), BN_ZERO))
+      return
+  }
+}

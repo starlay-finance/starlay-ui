@@ -27,6 +27,7 @@ import {
   formatAmt,
   formatPct,
   formattedToBigNumber,
+  handleArrow,
   parseInput,
 } from 'src/utils/number'
 import styled, { css } from 'styled-components'
@@ -113,6 +114,16 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
                 if (parsed == null) return
                 setAmount(parsed)
               }}
+              onKeyDown={(e) => {
+                const parsed = parseInput(
+                  e.currentTarget.value,
+                  biddingAsset.decimals,
+                )
+                if (parsed == null) return
+                handleArrow(e.code, valueToBigNumber(parsed), 1, (v) =>
+                  setAmount(formatAmt(v)),
+                )
+              }}
             />
           </InputDiv>
         </FormItem>
@@ -140,6 +151,16 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
                     const parsed = parseInput(value, biddingAsset.decimals)
                     if (parsed == null) return
                     setLimitPrice(parsed)
+                  }}
+                  onKeyDown={(e) => {
+                    const parsed = parseInput(
+                      e.currentTarget.value,
+                      biddingAsset.decimals,
+                    )
+                    if (parsed == null) return
+                    handleArrow(e.code, valueToBigNumber(parsed), 0.01, (v) =>
+                      setLimitPrice(formatAmt(v)),
+                    )
                   }}
                 />
               </InputDiv>
