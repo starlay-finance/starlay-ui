@@ -1,15 +1,17 @@
+import { valueToBigNumber } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
 import { VFC } from 'react'
 import { AppBackground } from 'src/components/parts/Background'
 import { AppFooter } from 'src/components/parts/Footer'
 import { AppHeader } from 'src/components/parts/Header/AppHeader'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
+import { BN_ONE, BN_ZERO } from 'src/utils/number'
 import styled from 'styled-components'
 import { KeyVisual } from './KeyVisual'
 import { ProjectInformation } from './ProjectInformation'
 import { Sale } from './Sale'
 import { Statistics } from './Statistics'
-import { LaunchPadData, PriceChartData, Status } from './types'
+import { Bid, LaunchPadData, PriceChartData, Status } from './types'
 
 export type { LaunchPadData }
 
@@ -19,11 +21,23 @@ const judgeStatus = (sale: LaunchPadData['sale']): Status => {
   // if (now.isAfter(sale.end)) return 'Ended'
   return 'Open'
 }
+const mockBid: Bid = {
+  amount: valueToBigNumber(1000),
+  // cancelable: true,
+  limitPrice: valueToBigNumber(0.41),
+}
 
 export const LaunchPad: VFC<{ data: LaunchPadData }> = ({ data }) => {
   const status = judgeStatus(data.sale)
-  const market = undefined // TODO
-  const priceChartData = mockPriceChartData
+  const market = {
+    currentPriceInUSD: valueToBigNumber(0.41),
+    bottomPriceInUSD: BN_ZERO,
+    raisedAmountInUSD: BN_ONE,
+    numOfBids: BN_ONE,
+  } // TODO
+  const currentEstimatedPrice = BN_ZERO // TODO
+  const priceChartData = mockPriceChartData // TODO
+  const bid = mockBid //TODO
   return (
     <>
       <AppHeader />
@@ -46,8 +60,9 @@ export const LaunchPad: VFC<{ data: LaunchPadData }> = ({ data }) => {
           <Sale
             token={data.token}
             information={data.sale}
-            market={market}
             status={status}
+            currentEstimatedPrice={currentEstimatedPrice}
+            bid={bid}
           />
         </Content>
       </Main>
