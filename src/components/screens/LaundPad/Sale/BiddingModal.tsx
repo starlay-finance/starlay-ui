@@ -31,8 +31,8 @@ import {
   parseInput,
 } from 'src/utils/number'
 import styled, { css } from 'styled-components'
-import { Bid } from './types'
-import { calcBoost } from './utils'
+import { Bid } from '../types'
+import { calcBoost } from '../utils'
 
 type BiddingModalProps = {
   receivingAsset: Asset

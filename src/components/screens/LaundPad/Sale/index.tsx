@@ -2,9 +2,9 @@ import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { ASSETS_DICT } from 'src/constants/assets'
 import styled from 'styled-components'
-import { useBiddingModal } from '../BiddingModal'
 import { Bid, LaunchPadData, Market, Status } from '../types'
 import { BidSecion } from './Bid'
+import { useBiddingModal } from './BiddingModal'
 import { SaleInformation } from './SaleInformation'
 
 type SaleProps = {
