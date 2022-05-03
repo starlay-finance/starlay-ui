@@ -10,6 +10,7 @@ export const darkRed = '#A40056' as const
 export const cream = '#FBFBFB' as const
 export const lightBlack = '#141414' as const
 export const darkGray = '#525252' as const
+export const gray = '#808080' as const
 
 export const positive = '#0297FB' as const
 export const negative = '#E6007A' as const

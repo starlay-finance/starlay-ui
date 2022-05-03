@@ -1,18 +1,20 @@
 import { VFC } from 'react'
 import { darkPurple, purple, trueWhite } from 'src/styles/colors'
-import styled, { css } from 'styled-components'
+import styled, { css, SimpleInterpolation } from 'styled-components'
 
 type ToggleProps = {
   enabled: boolean
   onClick?: VoidFunction
+  enabledStyle?: SimpleInterpolation
 }
 export const Toggle = styled<VFC<ToggleProps & { className?: string }>>(
-  ({ enabled, onClick, className }) => (
+  ({ enabled, onClick, enabledStyle, className }) => (
     <Button
       className={className}
-      $checked={enabled}
       disabled={!onClick}
       onClick={onClick}
+      $checked={enabled}
+      checkedStyle={enabledStyle}
     />
   ),
 )``
@@ -23,7 +25,10 @@ const checkedStyle = css`
     left: calc(100% - 21px);
   }
 `
-const Button = styled.button<{ $checked: boolean }>`
+const Button = styled.button<{
+  $checked: boolean
+  checkedStyle?: SimpleInterpolation
+}>`
   position: relative;
   width: 40px;
   height: 24px;
@@ -43,5 +48,10 @@ const Button = styled.button<{ $checked: boolean }>`
   :disabled {
     opacity: 0.5;
   }
-  ${({ $checked }) => $checked && checkedStyle};
+  ${(props) =>
+    props.$checked &&
+    css`
+      ${checkedStyle};
+      ${props.checkedStyle};
+    `};
 `

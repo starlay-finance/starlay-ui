@@ -32,7 +32,7 @@ const Overlay = styled.div<{ isOpen: boolean; bgColor?: Color }>`
   position: fixed;
   inset: 0;
   overflow: hidden;
-  background-color: ${trueBlack}a3;
+  background-color: ${trueBlack}8f;
   z-index: ${Z_MODAL};
 
   transition: all 0.2s ease-in;

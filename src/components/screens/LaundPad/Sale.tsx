@@ -3,6 +3,7 @@ import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
+import { ASSETS_DICT } from 'src/constants/assets'
 import { darkPurple, darkRed, lightBlack, skyBlue } from 'src/styles/colors'
 import {
   fontWeightBlack,
@@ -10,9 +11,11 @@ import {
   fontWeightMedium,
 } from 'src/styles/font'
 import { formatWithTZ } from 'src/utils/date'
-import { formatAmt, formatPct, formatUSD } from 'src/utils/number'
+import { BN_ONE, formatAmt, formatPct, formatUSD } from 'src/utils/number'
 import styled, { css } from 'styled-components'
+import { useBiddingModal } from './BiddingModal'
 import { Bid, LaunchPadData, Market, Status } from './types'
+import { calcBoost } from './utils'
 
 type SaleProps = {
   token: LaunchPadData['token']
@@ -29,16 +32,16 @@ const mockBid: Bid = {
   limitPrice: valueToBigNumber(0.5),
 }
 
-const calcBoost = (bid: Bid) => {
-  let boost = 0
-  if (!bid.limitPrice) boost += 0.05
-  if (!bid.cancelable) boost += 0.1
-  return boost
-}
-
 export const Sale: VFC<SaleProps> = ({ token, information, status }) => {
   const started = status !== 'Upcoming'
   const bid = mockBid // TODO
+
+  const { open } = useBiddingModal()
+  const openBiddingModal = () =>
+    open({
+      currentEstimatedPrice: BN_ONE,
+      receivingAsset: ASSETS_DICT.LAY,
+    })
   return (
     <SaleDiv>
       {/* TODO closed */}
@@ -76,7 +79,7 @@ export const Sale: VFC<SaleProps> = ({ token, information, status }) => {
               <span>{t`Cancel`}</span>
             </CtaButton>
           ) : (
-            <CtaButton>
+            <CtaButton onClick={openBiddingModal}>
               <span>{t`Increase Amount or Limit Price`}</span>
             </CtaButton>
           )}
