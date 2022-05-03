@@ -27,6 +27,7 @@ import {
   formatAmt,
   formatPct,
   formattedToBigNumber,
+  formatUSD,
   handleArrow,
   parseInput,
 } from 'src/utils/number'
@@ -75,27 +76,10 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
       <Title>
         <p>{t`Bid on ${receivingAsset.symbol}`}</p>
       </Title>
-      <CurrentPriceDiv>
-        <div>
-          <p>{t`Current Estimated Price`}</p>
-          <CurrentPrice>
-            <div />
-            <div />
-            <div>
-              <Image
-                src={receivingAsset.icon}
-                alt={receivingAsset.symbol}
-                width={32}
-                height={32}
-              />
-              <span>{`= ${formatAmt(currentEstimatedPrice, {
-                prefix: '$',
-                decimalPlaces: 2,
-              })}`}</span>
-            </div>
-          </CurrentPrice>
-        </div>
-      </CurrentPriceDiv>
+      <CurrentPrice
+        receivingAsset={receivingAsset}
+        currentEstimatedPrice={currentEstimatedPrice}
+      />
       <FormDiv>
         <FormItem>
           <label>Amount</label>
@@ -106,24 +90,12 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
               width={24}
               height={24}
             />
-            <input
-              placeholder="0.00"
+            <AmountInput
               value={amount}
-              onChange={({ target: { value } }) => {
-                const parsed = parseInput(value, biddingAsset.decimals)
-                if (parsed == null) return
-                setAmount(parsed)
-              }}
-              onKeyDown={(e) => {
-                const parsed = parseInput(
-                  e.currentTarget.value,
-                  biddingAsset.decimals,
-                )
-                if (parsed == null) return
-                handleArrow(e.code, valueToBigNumber(parsed), 1, (v) =>
-                  setAmount(formatAmt(v)),
-                )
-              }}
+              decimals={biddingAsset.decimals}
+              step={1}
+              placeholder="0.00"
+              onChange={setAmount}
             />
           </InputDiv>
         </FormItem>
@@ -144,24 +116,12 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
               <label>{t`Price Limit`}</label>
               <InputDiv>
                 <div>$</div>
-                <input
-                  placeholder="0.00"
+                <AmountInput
                   value={limitPrice}
-                  onChange={({ target: { value } }) => {
-                    const parsed = parseInput(value, biddingAsset.decimals)
-                    if (parsed == null) return
-                    setLimitPrice(parsed)
-                  }}
-                  onKeyDown={(e) => {
-                    const parsed = parseInput(
-                      e.currentTarget.value,
-                      biddingAsset.decimals,
-                    )
-                    if (parsed == null) return
-                    handleArrow(e.code, valueToBigNumber(parsed), 0.01, (v) =>
-                      setLimitPrice(formatAmt(v)),
-                    )
-                  }}
+                  decimals={biddingAsset.decimals}
+                  step={0.01}
+                  placeholder="0.00"
+                  onChange={setLimitPrice}
                 />
               </InputDiv>
             </FormItem>
@@ -197,6 +157,54 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
     </GlassModalContent>
   )
 }
+const CurrentPrice: VFC<{
+  receivingAsset: Asset
+  currentEstimatedPrice: BigNumber
+}> = ({ receivingAsset, currentEstimatedPrice }) => (
+  <CurrentPriceContainer>
+    <div>
+      <p>{t`Current Estimated Price`}</p>
+      <CurrentPriceDiv>
+        <div />
+        <div />
+        <div>
+          <Image
+            src={receivingAsset.icon}
+            alt={receivingAsset.symbol}
+            width={32}
+            height={32}
+          />
+          <span>{`= ${formatUSD(currentEstimatedPrice)}`}</span>
+        </div>
+      </CurrentPriceDiv>
+    </div>
+  </CurrentPriceContainer>
+)
+
+const AmountInput: VFC<{
+  value: string
+  decimals: number
+  step: number
+  placeholder: string
+  onChange: (value: string) => void
+}> = ({ value, decimals, step, onChange }) => (
+  <input
+    placeholder="0.00"
+    value={value}
+    onChange={({ target }) => {
+      const parsed = parseInput(target.value, decimals)
+      if (parsed == null) return
+      onChange(parsed)
+    }}
+    onKeyDown={(e) => {
+      const parsed = parseInput(e.currentTarget.value, decimals)
+      if (parsed == null) return
+      handleArrow(e.code, valueToBigNumber(parsed), 0.01, (v) =>
+        onChange(formatAmt(v)),
+      )
+    }}
+  />
+)
 
 const Button = styled.button`
   display: block;
@@ -285,7 +293,7 @@ const Title = styled.div`
   }
 `
 
-const CurrentPrice = styled.div`
+const CurrentPriceDiv = styled.div`
   position: relative;
   padding: 14px 22px;
   border-radius: 14px;
@@ -317,7 +325,7 @@ const CurrentPrice = styled.div`
   }
 `
 
-const CurrentPriceDiv = styled.div`
+const CurrentPriceContainer = styled.div`
   background-color: ${trueBlack}52;
   > div {
     ${flexCenter};
