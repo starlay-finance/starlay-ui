@@ -24,13 +24,13 @@ const DATE_FORMAT = 'MMM, D HH:mm z'
 
 const mockBid: Bid = {
   amount: valueToBigNumber(1000),
-  cancelable: true,
-  capPrice: valueToBigNumber(0.5),
+  // cancelable: true,
+  limitPrice: valueToBigNumber(0.5),
 }
 
 const calcBoost = (bid: Bid) => {
   let boost = 0
-  if (!bid.capPrice) boost += 0.05
+  if (!bid.limitPrice) boost += 0.05
   if (!bid.cancelable) boost += 0.1
   return boost
 }
@@ -51,8 +51,8 @@ export const Sale: VFC<SaleProps> = ({ token, information, status }) => {
                 value={formatAmt(bid.amount, { symbol: 'USDC' })}
               />
               <InformationItem
-                label={t`Price Limit`}
-                value={bid.capPrice ? formatUSD(bid.capPrice) : '-'}
+                label={t`Limit Price`}
+                value={bid.limitPrice ? formatUSD(bid.limitPrice) : '-'}
               />
               <InformationItem
                 label={t`Cancel`}
@@ -75,7 +75,7 @@ export const Sale: VFC<SaleProps> = ({ token, information, status }) => {
             </CtaButton>
           ) : (
             <CtaButton>
-              <span>{t`Increase Amount or Price Limit`}</span>
+              <span>{t`Increase Amount or Limit Price`}</span>
             </CtaButton>
           )}
         </Section>

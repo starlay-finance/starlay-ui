@@ -53,6 +53,6 @@ export type PriceChartData = {
 
 export type Bid = {
   amount: BigNumber
-  capPrice?: BigNumber
+  limitPrice?: BigNumber
   cancelable?: boolean
 }
