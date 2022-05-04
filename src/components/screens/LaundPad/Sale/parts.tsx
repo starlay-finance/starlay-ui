@@ -45,11 +45,11 @@ export const InformationItem = styled<
   }>
 >(({ label, value, tooltip, className }) => (
   <li className={className}>
-    <p>
+    <div>
       {label}
       {tooltip && <TooltipMessage message={tooltip} />}
-    </p>
-    <p>{value ? value : <ShimmerPlaceholder />}</p>
+    </div>
+    <div>{value ? value : <ShimmerPlaceholder />}</div>
   </li>
 ))``
 

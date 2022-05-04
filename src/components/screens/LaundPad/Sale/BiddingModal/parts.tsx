@@ -1,4 +1,3 @@
-import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { Toggle } from 'src/components/parts/Toggle'
 import { darkRed, gray, skyBlue, trueBlack, trueWhite } from 'src/styles/colors'
@@ -7,28 +6,35 @@ import {
   fontWeightMedium,
   fontWeightRegular,
 } from 'src/styles/font'
-import { formatAmt, handleArrow, parseInput } from 'src/utils/number'
+import {
+  BN_ZERO,
+  formatAmt,
+  formattedToBigNumber,
+  handleArrow,
+  parseInput,
+} from 'src/utils/number'
 import styled, { css } from 'styled-components'
 
 export const AmountInput: VFC<{
   value: string
   decimals: number
   step: number
-  placeholder: string
   onChange: (value: string) => void
-}> = ({ value, decimals, step, onChange }) => (
+  placeholder?: string
+  disabled?: boolean
+}> = ({ decimals, step, onChange, ...props }) => (
   <input
-    placeholder="0.00"
-    value={value}
+    {...props}
     onChange={({ target }) => {
       const parsed = parseInput(target.value, decimals)
       if (parsed == null) return
       onChange(parsed)
     }}
     onKeyDown={(e) => {
-      const parsed = parseInput(e.currentTarget.value, decimals)
+      const parsedInput = parseInput(e.currentTarget.value, decimals)
+      const parsed = parsedInput && formattedToBigNumber(parsedInput)
       if (parsed == null) return
-      handleArrow(e.code, valueToBigNumber(parsed), 0.01, (v) =>
+      handleArrow(e.code, parsed || BN_ZERO, step, (v) =>
         onChange(formatAmt(v)),
       )
     }}

@@ -1,6 +1,11 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { useState } from 'react'
-import { BN_ONE, BN_ZERO, formattedToBigNumber } from 'src/utils/number'
+import {
+  BN_ONE,
+  BN_ZERO,
+  formatAmt,
+  formattedToBigNumber,
+} from 'src/utils/number'
 import { Bid } from '../../types'
 import { calcBoost } from '../../utils'
 
@@ -16,12 +21,12 @@ export const useBiddingForm = ({
   boostedRaisedAmount,
   bid,
 }: BiddingFormProps) => {
-  const [amount, setAmount] = useState(bid?.amount.toString() || '')
+  const [amount, setAmount] = useState(bid ? formatAmt(bid.amount) : '')
   const [noPriceLimitEnabled, setNoPriceLimitEnabled] = useState(
     !bid?.limitPrice,
   )
   const [limitPrice, setLimitPrice] = useState(
-    bid?.limitPrice?.toString() || '',
+    bid?.limitPrice ? formatAmt(bid.limitPrice) : '',
   )
   const [cancelable, setCancelable] = useState(bid?.cancelable)
   const boost = calcBoost({
