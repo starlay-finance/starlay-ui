@@ -57,7 +57,10 @@ export const LaunchPad: VFC<{ data: LaunchPadData }> = ({ data }) => {
           />
         )}
         <Content>
-          <ProjectInformation information={data.information} />
+          <ProjectInformation
+            information={data.information}
+            token={data.token}
+          />
           <Sale
             token={data.token}
             information={data.sale}

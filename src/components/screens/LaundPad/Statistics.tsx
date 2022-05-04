@@ -73,7 +73,7 @@ export const Statistics: VFC<StatisticsProps> = ({
             tooltip={t`TODO description of bottom price`}
           />
           <Item
-            label={t`Amount of Raised`}
+            label={t`Total Raised`}
             value={
               market &&
               formatUSD(market.raisedAmountInUSD, { decimalPlaces: 0 })
@@ -118,7 +118,7 @@ export const Statistics: VFC<StatisticsProps> = ({
                   strokeDasharray="5"
                 >
                   <Label
-                    value={t`Your Limit`}
+                    value={t`Your Limit = ${formatUSD(limitPrice)}`}
                     fill={limitPriceLineColor}
                     transform="translate(-6 -28)"
                     position="insideTopLeft"

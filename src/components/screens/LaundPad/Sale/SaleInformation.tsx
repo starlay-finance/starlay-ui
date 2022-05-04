@@ -33,7 +33,7 @@ export const SaleInformation: VFC<SaleInformationProps> = ({
             <InformationItem label={t`Token`} value={token.symbol} />
           )}
           <InformationItem
-            label={t`Raise Size`}
+            label={t`Tokens to be Offered`}
             value={formatAmt(valueToBigNumber(information.emissionAmount), {
               symbol: token.symbol,
             })}

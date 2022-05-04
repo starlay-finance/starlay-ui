@@ -18,11 +18,16 @@ import styled from 'styled-components'
 import { LaunchPadData } from './types'
 
 export const ProjectInformation = styled<
-  VFC<{ information: LaunchPadData['information'] } & { className?: string }>
->(({ information: { details, sale, notes, urls }, className }) => (
+  VFC<
+    {
+      information: LaunchPadData['information']
+      token: LaunchPadData['token']
+    } & { className?: string }
+  >
+>(({ information: { details, sale, notes, urls }, token, className }) => (
   <ProjectInformationDiv className={className}>
     <Description>
-      <h2>{t`Project Details`}</h2>
+      <h2>{t`What is $${token.symbol}?`}</h2>
       <p>{details}</p>
       <Urls urls={urls} />
     </Description>
@@ -38,7 +43,7 @@ export const ProjectInformation = styled<
       )}
     </Description>
     <Description>
-      <h2>{t`Participation Notes`}</h2>
+      <h2>{t`Reminder`}</h2>
       <p>{notes}</p>
     </Description>
   </ProjectInformationDiv>
@@ -77,6 +82,7 @@ const SingleLink = styled.div`
     display: flex;
     align-items: center;
     line-height: 1;
+    width: fit-content;
     svg {
       height: 0.8em;
     }
