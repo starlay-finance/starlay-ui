@@ -25,16 +25,12 @@ type BiddingFormProps = {
   boostedRaisedAmount: BigNumber
   currentEstimatedPrice: BigNumber
   bid?: Bid
+  submit: (bid: Bid) => any
 }
 
-export const BiddingForm: VFC<BiddingFormProps> = ({
-  receivingAsset,
-  maxAmount,
-  boostedRaisedAmount,
-  currentEstimatedPrice,
-  bid,
-}) => {
+export const BiddingForm: VFC<BiddingFormProps> = (props) => {
   const biddingAsset = { ...ASSETS_DICT.USDC, decimals: 6 }
+  const { bid, receivingAsset } = props
   const {
     amount,
     setAmount,
@@ -46,12 +42,9 @@ export const BiddingForm: VFC<BiddingFormProps> = ({
     setCancelable,
     boost,
     estimatedAmount,
-  } = useBiddingForm({
-    maxAmount,
-    boostedRaisedAmount,
-    currentEstimatedPrice,
-    bid,
-  })
+    submit,
+    error,
+  } = useBiddingForm(props)
   return (
     <FormDiv>
       <FormItem>
@@ -82,7 +75,7 @@ export const BiddingForm: VFC<BiddingFormProps> = ({
               checked={noPriceLimitEnabled}
               onClick={() => setNoPriceLimitEnabled(!noPriceLimitEnabled)}
               checkedStyle={toggleEnabledStyle}
-              disabled={bid?.cancelable}
+              disabled={bid?.cancelable || (bid && !bid.limitPrice)}
             />
           </ToggleDiv>
         </FormItem>
@@ -111,7 +104,7 @@ export const BiddingForm: VFC<BiddingFormProps> = ({
             checked={!cancelable}
             onClick={() => setCancelable(!cancelable)}
             checkedStyle={toggleEnabledStyle}
-            disabled={bid?.cancelable}
+            disabled={!!bid}
           />
         </ToggleDiv>
       </FormItem>
@@ -129,7 +122,9 @@ export const BiddingForm: VFC<BiddingFormProps> = ({
           })}
         </div>
       </FormItem>
-      <Button>{t`Bid`}</Button>
+      <Button onClick={submit} disabled={!!error}>
+        {error || (bid?.cancelable ? t`Cancel` : t`Bid`)}
+      </Button>
     </FormDiv>
   )
 }

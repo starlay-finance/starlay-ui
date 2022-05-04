@@ -26,6 +26,17 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
   currentEstimatedPrice = BN_ZERO,
   bid,
 }) => {
+  const submit = (newBid: Bid) => {
+    if (!bid) {
+      // TODO new bid
+      return
+    }
+    if (bid?.cancelable) {
+      // TODO cancel
+      return
+    }
+    // TODO update bid
+  }
   return (
     <GlassModalContent closeModal={close}>
       <Title>
@@ -41,6 +52,7 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
         maxAmount={maxAmount}
         boostedRaisedAmount={boostedRaisedAmount}
         bid={bid}
+        submit={submit}
       />
     </GlassModalContent>
   )

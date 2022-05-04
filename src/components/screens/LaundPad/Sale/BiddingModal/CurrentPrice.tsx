@@ -73,4 +73,12 @@ const CurrentPriceContainer = styled.div`
     row-gap: 32px;
     padding: 40px;
   }
+  ::before,
+  ::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, ${darkRed}, ${skyBlue});
+  }
 `
