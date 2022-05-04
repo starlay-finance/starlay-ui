@@ -230,22 +230,24 @@ const Items = styled.ul`
       padding-bottom: 12px;
       border-bottom: 1px solid ${darkPurple}3d;
     }
-    div:first-child {
-      display: flex;
-      align-items: center;
-      column-gap: 4px;
-      font-size: 16px;
-      font-weight: ${fontWeightRegular};
-      ${TooltipMessage} {
-        width: 240px;
+    > div {
+      :first-child {
+        display: flex;
+        align-items: center;
+        column-gap: 4px;
+        font-size: 16px;
+        font-weight: ${fontWeightRegular};
+        ${TooltipMessage} {
+          width: 240px;
+        }
       }
-    }
-    div:last-child {
-      margin-top: 4px;
-      font-size: 20px;
-      font-weight: ${fontWeightBold};
-      ${ShimmerPlaceholder} {
-        width: 50%;
+      :last-child {
+        margin-top: 4px;
+        font-size: 20px;
+        font-weight: ${fontWeightBold};
+        ${ShimmerPlaceholder} {
+          width: 50%;
+        }
       }
     }
   }

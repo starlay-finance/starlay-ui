@@ -1,6 +1,5 @@
 import { ReactNode, VFC } from 'react'
 import { IconCloseAlt } from 'src/assets/svgs'
-import { darkRed, skyBlue } from 'src/styles/colors'
 import styled from 'styled-components'
 
 export const GlassModalContent: VFC<{
@@ -34,15 +33,4 @@ const Content = styled.div`
 const Body = styled.div`
   background-color: rgba(255, 255, 255, 0.16);
   backdrop-filter: blur(32px) brightness(1.16);
-  > * {
-    :not(:last-child) {
-      ::after {
-        content: '';
-        display: block;
-        width: 100%;
-        height: 1px;
-        background: linear-gradient(90deg, ${darkRed}, ${skyBlue});
-      }
-    }
-  }
 `
