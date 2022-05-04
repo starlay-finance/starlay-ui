@@ -10,7 +10,6 @@ import {
   ResponsiveContainer,
   Tooltip,
   TooltipProps,
-  YAxis,
 } from 'recharts'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
@@ -86,11 +85,11 @@ export const Statistics: VFC<StatisticsProps> = ({
           />
         </Items>
         <Chart>
-          <ResponsiveContainer width={800} height="100%">
+          <ResponsiveContainer width={800} height="99%">
             <ComposedChart
               width={730}
               data={priceChartData}
-              margin={{ top: 64, right: 8, left: 8, bottom: 8 }}
+              margin={{ top: 0, right: 8, left: 8, bottom: 8 }}
             >
               <defs>
                 <linearGradient id="colorPx" x1="0" y1="0" x2="1" y2="1">
@@ -112,7 +111,6 @@ export const Statistics: VFC<StatisticsProps> = ({
                 fillOpacity={1}
                 fill="url(#colorBottomPx)"
               />
-              <YAxis dataKey="priceInUSD" tick={false} axisLine={false} />
               {limitPrice && (
                 <ReferenceLine
                   y={limitPrice.toNumber()}
@@ -129,8 +127,12 @@ export const Statistics: VFC<StatisticsProps> = ({
               )}
               <Tooltip
                 position={{ y: 0 }}
-                offset={-72}
+                offset={-100}
                 content={TooltipRenderer}
+                cursor={{
+                  strokeDashoffset: 540,
+                  strokeDasharray: 300,
+                }}
                 active
               />
             </ComposedChart>
@@ -159,7 +161,7 @@ const TooltipRenderer: VFC<TooltipProps<number, string>> = ({
       timestamp={payload[0].payload.timestamp}
       style={{
         marginRight: coordinate?.x
-          ? `${Math.max(coordinate?.x - 728, 0)}px`
+          ? `${Math.max(coordinate?.x - 696, 0)}px`
           : undefined,
       }}
     />
@@ -211,11 +213,11 @@ const Item = styled<
   }>
 >(({ label, value, tooltip, className }) => (
   <li className={className}>
-    <p>
+    <div>
       {label}
       {tooltip && <TooltipMessage message={tooltip} />}
-    </p>
-    <p>{value ? value : <ShimmerPlaceholder />}</p>
+    </div>
+    <div>{value ? value : <ShimmerPlaceholder />}</div>
   </li>
 ))``
 
@@ -224,11 +226,11 @@ const Items = styled.ul`
   flex-direction: column;
   row-gap: 12px;
   ${Item} {
-    padding-bottom: 12px;
     :not(:last-child) {
+      padding-bottom: 12px;
       border-bottom: 1px solid ${darkPurple}3d;
     }
-    p:first-child {
+    div:first-child {
       display: flex;
       align-items: center;
       column-gap: 4px;
@@ -238,7 +240,7 @@ const Items = styled.ul`
         width: 240px;
       }
     }
-    p:last-child {
+    div:last-child {
       margin-top: 4px;
       font-size: 20px;
       font-weight: ${fontWeightBold};
@@ -255,7 +257,6 @@ const Chart = styled.figure`
 
 const StatisticsDiv = styled.div`
   width: 100%;
-  height: 392px;
   padding: 2px;
   border-radius: 16px;
   background: linear-gradient(45deg, ${skyBlue}, ${darkRed});
