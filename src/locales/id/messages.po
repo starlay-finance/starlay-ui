@@ -288,11 +288,15 @@ msgstr "Likuiditas"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
 msgid "ON"
 msgstr "Hidup"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
+#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
 msgid "OFF"
 msgstr "Mati"
 
@@ -437,15 +441,12 @@ msgstr "Saldo Setoran"
 msgid "Borrow Balance"
 msgstr "Saldo Pinjaman"
 
-#: src/components/screens/LaunchPadPop/index.tsx
-msgid "Sale start at {0}"
+#: src/components/screens/LaundPad/ProjectInformation.tsx
+msgid "What is ${0}?"
 msgstr ""
 
 #: src/components/screens/LaundPad/ProjectInformation.tsx
-msgid "Project Details"
-msgstr ""
-
-#: src/components/screens/LaundPad/ProjectInformation.tsx
+#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
 msgid "Sale Information"
 msgstr ""
 
@@ -454,47 +455,180 @@ msgid "View details in the docs"
 msgstr ""
 
 #: src/components/screens/LaundPad/ProjectInformation.tsx
-msgid "Participation Notes"
+msgid "Reminder"
 msgstr ""
 
 #: src/components/screens/LaundPad/ProjectInformation.tsx
 msgid "Web"
 msgstr ""
 
-#: src/components/screens/LaundPad/Sale.tsx
+#: src/components/screens/LaundPad/Sale/Bid.tsx
+msgid "Your Bid"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/Bid.tsx
+msgid "Amount"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/Bid.tsx
+msgid "Limit Price"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/Bid.tsx
+#: src/components/screens/LaundPad/Sale/Bid.tsx
+#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+msgid "Cancel"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/Bid.tsx
+msgid "Enabled"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/Bid.tsx
+msgid "Boosted"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/Bid.tsx
+msgid "Estimated Amount"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/Bid.tsx
+msgid "TODO description of estimated amount"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/Bid.tsx
+msgid "Receivable Amount"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/Bid.tsx
+msgid "TODO description of receivable amount"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/Bid.tsx
+msgid "Increase Amount or Limit Price"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/Bid.tsx
+msgid "Request Refund"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+msgid "Get 5% Boost without Price Limit"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+msgid "Price Limit"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+msgid "Get 10% Boost without Cancel"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+msgid "Boost"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+msgid "Current Estimated Amount"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+msgid "Bid"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/CurrentPrice.tsx
+msgid "Current Estimated Price"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/index.tsx
+msgid "Bid on {0}"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
+msgid "Enter Amount"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
+msgid "Limit Price cannot be added"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
+msgid "Enter Limit Price"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
+msgid "Cancelable or not is unchangeable"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
+msgid "Amount must be larger than current"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
+#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
+msgid "No changes"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
+msgid "Limit Price must be higher than current"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+#: src/components/screens/LaundPad/Statistics.tsx
 msgid "Token"
 msgstr ""
 
-#: src/components/screens/LaundPad/Sale.tsx
-msgid "Price Per Token"
+#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+msgid "Tokens to be Offered"
 msgstr ""
 
-#: src/components/screens/LaundPad/Sale.tsx
-msgid "Amount Raised"
-msgstr ""
-
-#: src/components/screens/LaundPad/Sale.tsx
-msgid "Number of Bidders"
-msgstr ""
-
-#: src/components/screens/LaundPad/Sale.tsx
-msgid "Sale Start"
-msgstr ""
-
-#: src/components/screens/LaundPad/Sale.tsx
-msgid "Sale End"
-msgstr ""
-
-#: src/components/screens/LaundPad/Sale.tsx
-msgid "Bid with"
-msgstr ""
-
-#: src/components/screens/LaundPad/Sale.tsx
+#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
 msgid "Emission"
 msgstr ""
 
-#: src/components/screens/LaundPad/Sale.tsx
-msgid "Raise Size"
+#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+msgid "Bid with"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+msgid "Sale Start"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+msgid "Sale End"
+msgstr ""
+
+#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+msgid "Closed"
+msgstr ""
+
+#: src/components/screens/LaundPad/Statistics.tsx
+msgid "Price Per Token"
+msgstr ""
+
+#: src/components/screens/LaundPad/Statistics.tsx
+msgid "Bottom Price"
+msgstr ""
+
+#: src/components/screens/LaundPad/Statistics.tsx
+msgid "TODO description of bottom price"
+msgstr ""
+
+#: src/components/screens/LaundPad/Statistics.tsx
+msgid "Total Raised"
+msgstr ""
+
+#: src/components/screens/LaundPad/Statistics.tsx
+msgid "Number of Bidders"
+msgstr ""
+
+#: src/components/screens/LaundPad/Statistics.tsx
+msgid "Your Limit = {0}"
+msgstr ""
+
+#: src/components/screens/LaundPad/Statistics.tsx
+msgid "Price Per LAY"
 msgstr ""
 
 #: src/components/screens/Makai/MakaiMarkets.tsx
