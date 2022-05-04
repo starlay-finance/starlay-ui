@@ -119,6 +119,7 @@ export const formattedToBigNumber = (
 }
 
 const AMOUNT_REGEX = /^\d*\.?\d*$/
+const TRAILING_ZEROS_REGEXP = /(0*)$/
 export const parseInput = (input: string, significantDigits: number) => {
   if (input === '') return input
   const value = input.replace(/,/g, '')
@@ -129,7 +130,15 @@ export const parseInput = (input: string, significantDigits: number) => {
     return value
   }
   const bn = valueToBigNumber(value)
-  return bn.isNaN() || bn.isZero() ? value : formatAmt(bn)
+  if (bn.isNaN() || bn.isZero()) return value
+  const trailingZerosResult = TRAILING_ZEROS_REGEXP.exec(decimals)
+  const trailingZeros = (trailingZerosResult && trailingZerosResult[1]) || ''
+  const formatted = formatAmt(bn)
+  return `${formatted}${
+    trailingZeros.length && !formatted.includes('.')
+      ? `.${trailingZeros}`
+      : trailingZeros
+  }`
 }
 
 export const handleArrow = (
