@@ -69,6 +69,7 @@ export const BiddingForm: VFC<BiddingFormProps> = ({
             step={1}
             placeholder="0.00"
             onChange={setAmount}
+            disabled={bid?.cancelable}
           />
         </InputDiv>
       </FormItem>
@@ -78,9 +79,10 @@ export const BiddingForm: VFC<BiddingFormProps> = ({
           <ToggleDiv>
             {noPriceLimitEnabled ? t`ON` : t`OFF`}
             <Toggle
-              enabled={noPriceLimitEnabled}
+              checked={noPriceLimitEnabled}
               onClick={() => setNoPriceLimitEnabled(!noPriceLimitEnabled)}
-              enabledStyle={toggleEnabledStyle}
+              checkedStyle={toggleEnabledStyle}
+              disabled={bid?.cancelable}
             />
           </ToggleDiv>
         </FormItem>
@@ -95,6 +97,7 @@ export const BiddingForm: VFC<BiddingFormProps> = ({
                 step={0.01}
                 placeholder="0.00"
                 onChange={setLimitPrice}
+                disabled={bid?.cancelable}
               />
             </InputDiv>
           </FormItem>
@@ -105,9 +108,10 @@ export const BiddingForm: VFC<BiddingFormProps> = ({
         <ToggleDiv>
           {!cancelable ? t`ON` : t`OFF`}
           <Toggle
-            enabled={!cancelable}
+            checked={!cancelable}
             onClick={() => setCancelable(!cancelable)}
-            enabledStyle={toggleEnabledStyle}
+            checkedStyle={toggleEnabledStyle}
+            disabled={bid?.cancelable}
           />
         </ToggleDiv>
       </FormItem>

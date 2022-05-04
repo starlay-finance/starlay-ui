@@ -3,18 +3,19 @@ import { darkPurple, purple, trueWhite } from 'src/styles/colors'
 import styled, { css, SimpleInterpolation } from 'styled-components'
 
 type ToggleProps = {
-  enabled: boolean
+  checked: boolean
   onClick?: VoidFunction
-  enabledStyle?: SimpleInterpolation
+  disabled?: boolean
+  checkedStyle?: SimpleInterpolation
 }
 export const Toggle = styled<VFC<ToggleProps & { className?: string }>>(
-  ({ enabled, onClick, enabledStyle, className }) => (
+  ({ checked, onClick, disabled, checkedStyle, className }) => (
     <Button
       className={className}
-      disabled={!onClick}
+      disabled={disabled || !onClick}
       onClick={onClick}
-      $checked={enabled}
-      checkedStyle={enabledStyle}
+      $checked={checked}
+      checkedStyle={checkedStyle}
     />
   ),
 )``
@@ -47,6 +48,7 @@ const Button = styled.button<{
   }
   :disabled {
     opacity: 0.5;
+    cursor: not-allowed;
   }
   ${(props) =>
     props.$checked &&

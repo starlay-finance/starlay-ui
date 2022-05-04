@@ -23,7 +23,7 @@ export const AmountInput: VFC<{
   placeholder?: string
   disabled?: boolean
 }> = ({ decimals, step, onChange, ...props }) => (
-  <input
+  <Input
     {...props}
     onChange={({ target }) => {
       const parsed = parseInput(target.value, decimals)
@@ -40,6 +40,12 @@ export const AmountInput: VFC<{
     }}
   />
 )
+const Input = styled.input`
+  :disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`
 
 export const Button = styled.button`
   display: block;

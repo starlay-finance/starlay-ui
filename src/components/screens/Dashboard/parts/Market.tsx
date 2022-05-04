@@ -152,11 +152,11 @@ export const Market = asStyled(({ className }) => {
                   '-'
                 ) : user ? (
                   user.balanceByAsset[asset.symbol].deposited.isZero() ? (
-                    <Toggle enabled={false} />
+                    <Toggle checked={false} />
                   ) : (
                     <ClickDisableWrapper onClick={(e) => e.stopPropagation()}>
                       <Toggle
-                        enabled={
+                        checked={
                           user.balanceByAsset[asset.symbol]
                             .usageAsCollateralEnabled
                         }
