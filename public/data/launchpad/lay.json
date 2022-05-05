@@ -1,9 +1,10 @@
 {
   "id": "lay",
   "projectName": "Starlay Finance",
-  "keyVisual": "/assets/images/launchpad/lay.webp",
+  "keyVisual": "/assets/images/launchpad/lay/keyVisual.webp",
+  "ogImage": "/assets/images/launchpad/lay/ogImage.png",
   "icon": {
-    "url": "/assets/images/launchpad/lay.svg#launchpad_pop_icon",
+    "url": "/assets/images/launchpad/lay/icon.svg#launchpad_pop_icon",
     "viewBox": "0 0 150 150"
   },
   "token": {

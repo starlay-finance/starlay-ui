@@ -5,6 +5,7 @@ export type LaunchPadData = {
   id: string
   projectName: string
   keyVisual: string
+  ogImage: string
   icon: { url: string; viewBox: string }
   token: {
     name: string

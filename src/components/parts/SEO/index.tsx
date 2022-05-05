@@ -35,7 +35,9 @@ export const SEO: VFC<SEOProps> = (props) => {
   } = props
   const pageUrl = `${siteUrl}/${path}`
   const title = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle
-  const siteImage = image.startsWith('https') ? image : `${siteUrl}/${image}`
+  const siteImage = image.startsWith('https')
+    ? image
+    : `${siteUrl}/${image.replace(/^\//, '')}`
   const metaData = [
     { name: 'description', content: description },
     { name: 'image', content: siteImage },

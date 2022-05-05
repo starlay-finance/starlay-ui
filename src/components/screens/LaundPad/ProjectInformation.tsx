@@ -7,7 +7,7 @@ import {
   IconTwitter,
 } from 'src/assets/svgs'
 import { Link } from 'src/components/elements/Link'
-import { lightBlack, secondary } from 'src/styles/colors'
+import { lightBlack, primary, purple, secondary } from 'src/styles/colors'
 import {
   fontWeightBold,
   fontWeightMedium,
@@ -110,6 +110,10 @@ const UrlsDiv = styled.div`
     border-radius: 16px;
     background: ${lightBlack};
     line-height: 1;
+    :hover {
+      color: ${primary};
+      background: ${purple};
+    }
   }
   > a {
     padding: 0 16px;
