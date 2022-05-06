@@ -1,6 +1,5 @@
 import { t } from '@lingui/macro'
 import router from 'next/router'
-import { VFC } from 'react'
 import {
   AssetTd,
   MarketTable,
@@ -9,13 +8,14 @@ import {
 import { asStyled } from 'src/components/hoc/asStyled'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { BlinkWrapper } from 'src/components/parts/Number/Blink'
+import { Toggle } from 'src/components/parts/Toggle'
 import { ARTHSWAP_ASSETS_DICT } from 'src/constants/assets'
 import { useArthswapData } from 'src/hooks/useArthswapData'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
-import { darkPurple, lightYellow, purple, trueWhite } from 'src/styles/colors'
+import { lightYellow, purple } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { AssetMarketData, User } from 'src/types/models'
 import { aprSorter, symbolSorter } from 'src/utils/market'
@@ -152,11 +152,11 @@ export const Market = asStyled(({ className }) => {
                   '-'
                 ) : user ? (
                   user.balanceByAsset[asset.symbol].deposited.isZero() ? (
-                    <CollateralToggle enabled={false} />
+                    <Toggle checked={false} />
                   ) : (
                     <ClickDisableWrapper onClick={(e) => e.stopPropagation()}>
-                      <CollateralToggle
-                        enabled={
+                      <Toggle
+                        checked={
                           user.balanceByAsset[asset.symbol]
                             .usageAsCollateralEnabled
                         }
@@ -230,43 +230,6 @@ const ClickDisableWrapper = styled.div`
   inset: 0;
   ${flexCenter};
   cursor: auto;
-`
-
-type CollateralToggleProps = {
-  enabled: boolean
-  onClick?: VoidFunction
-}
-const CollateralToggle: VFC<CollateralToggleProps> = ({ enabled, onClick }) => (
-  <Button $checked={enabled} disabled={!onClick} onClick={onClick} />
-)
-
-const checkedStyle = css`
-  background: ${purple};
-  ::after {
-    left: calc(100% - 21px);
-  }
-`
-const Button = styled.button<{ $checked: boolean }>`
-  position: relative;
-  width: 40px;
-  height: 24px;
-  border-radius: 20px;
-  background: ${darkPurple};
-  ::after {
-    content: '';
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background-color: ${trueWhite};
-    top: 3px;
-    left: 3px;
-    transition: all 0.5s;
-  }
-  :disabled {
-    opacity: 0.5;
-  }
-  ${({ $checked }) => $checked && checkedStyle};
 `
 
 const MarketSecion = styled.section`

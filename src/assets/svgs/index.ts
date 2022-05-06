@@ -2,6 +2,7 @@ import IconAlert from 'public/assets/svgs/icon_alert.svg'
 import IconArrowBottom from 'public/assets/svgs/icon_arrow-bottom.svg'
 import IconArrowRight from 'public/assets/svgs/icon_arrow-right.svg'
 import IconClose from 'public/assets/svgs/icon_close.svg'
+import IconCloseAlt from 'public/assets/svgs/icon_close_alt.svg'
 import IconDiscord from 'public/assets/svgs/icon_discord.svg'
 import IconGithub from 'public/assets/svgs/icon_github.svg'
 import IconLoading from 'public/assets/svgs/icon_loading.svg'
@@ -21,6 +22,7 @@ export {
   IconArrowBottom,
   IconArrowRight,
   IconClose,
+  IconCloseAlt,
   IconDiscord,
   IconGithub,
   IconLoading,

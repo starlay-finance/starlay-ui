@@ -42,6 +42,7 @@
     "react-gtm-module": "^2.0.11",
     "react-hook-inview": "^4.4.0",
     "react-reel": "^1.2.3",
+    "recharts": "^2.1.9",
     "reflect-metadata": "^0.1.13",
     "styled-components": "^5.3.3",
     "swr": "^1.2.0",

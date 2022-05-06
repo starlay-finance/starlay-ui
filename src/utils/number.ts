@@ -50,10 +50,6 @@ const formatNum = (
     })
   }
 
-  const formatted = `${num.toFormat(decimalPlaces)}`
-  if (!shorteningThreshold || formatted.length < shorteningThreshold)
-    return `${prefix}${formatted}`
-
   const adjustedDecimalPlaces = Math.min(
     (shorteningThreshold || Number.MAX_SAFE_INTEGER) - 2,
     decimalPlaces || Number.MAX_SAFE_INTEGER,
@@ -65,6 +61,11 @@ const formatNum = (
     return `> ${prefix}${BN_ONE.shiftedBy(-adjustedDecimalPlaces).toFormat(
       adjustedDecimalPlaces,
     )}`
+
+  const formatted = `${num.toFormat(decimalPlaces)}`
+  if (!shorteningThreshold || formatted.length < shorteningThreshold)
+    return `${prefix}${formatted}`
+
   return `${prefix}${num.toFormat(adjustedDecimalPlaces)}`
 }
 
@@ -115,4 +116,43 @@ export const formattedToBigNumber = (
   const value = formattedAmount.replace(/,/g, '')
   const bn = valueToBigNumber(value)
   return bn.isNaN() ? defaultValue : bn
+}
+
+const AMOUNT_REGEX = /^\d*\.?\d*$/
+const TRAILING_ZEROS_REGEXP = /(0*)$/
+export const parseInput = (input: string, significantDigits: number) => {
+  if (input === '') return input
+  const value = input.replace(/,/g, '')
+  if (!AMOUNT_REGEX.test(value)) return
+  const [_int, decimals] = value.split('.')
+  if (decimals?.length > significantDigits) return
+  if (value.startsWith('.') || value.endsWith('.')) {
+    return value
+  }
+  const bn = valueToBigNumber(value)
+  if (bn.isNaN() || bn.isZero()) return value
+  const trailingZerosResult = TRAILING_ZEROS_REGEXP.exec(decimals)
+  const trailingZeros = (trailingZerosResult && trailingZerosResult[1]) || ''
+  const formatted = formatAmt(bn)
+  return `${formatted}${
+    trailingZeros.length && !formatted.includes('.')
+      ? `.${trailingZeros}`
+      : trailingZeros
+  }`
+}
+
+export const handleArrow = (
+  code: string,
+  value: BigNumber,
+  step: number,
+  onChange: (value: BigNumber) => void,
+) => {
+  switch (code) {
+    case 'ArrowUp':
+      onChange(value.plus(step))
+      return
+    case 'ArrowDown':
+      onChange(BigNumber.max(value.minus(step), BN_ZERO))
+      return
+  }
 }

@@ -14,7 +14,7 @@ import { darkGray, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
-import { APP, MAKAI, MARKETS, SWAP } from 'src/utils/routes'
+import { APP, LAUNCHPAD, MAKAI, MARKETS, SWAP } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import { useGasSettingsModal } from '../Modal/GasSettingsModal'
 import { HeaderWrapper } from './common'
@@ -42,6 +42,9 @@ export const AppHeader = () => {
         </Tab>
         <Tab $active={pathname === SWAP}>
           <Link href={SWAP}>{t`Swap`}</Link>
+        </Tab>
+        <Tab $active={pathname.startsWith(LAUNCHPAD)}>
+          <Link href={LAUNCHPAD}>{t`Launchpad`}</Link>
         </Tab>
       </Nav>
       <Menu>
@@ -121,7 +124,6 @@ const SettingsContainer = styled.div<{ $isOpen: boolean }>`
 
 const activeStyle = css`
   color: ${purple};
-  pointer-events: none;
   :after {
     content: '';
     position: absolute;

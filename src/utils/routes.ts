@@ -17,12 +17,14 @@ export const TOP = '/'
 export const APP = '/app'
 export const MARKETS = '/app/markets'
 export const MAKAI = '/app/makai'
+export const LAUNCHPAD = '/app/launchpad'
 export const SWAP = ARTHSWAP_SWAP_URL
 export const GOVERNANCE = ''
 export const GOVERNANCE_OVERVIEW = ''
 export const BUG_BOUNTY = ''
 export const SUPPORT = DISCORD
 
+export const toLaunchPad = (token: string) => `${LAUNCHPAD}/${token}`
 export const toMakaiLoop = (symbol: string) => `${MAKAI}?asset=${symbol}`
 
 export const SORRY = '/sorry'
