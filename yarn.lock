@@ -2706,17 +2706,17 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@starlay-finance/contract-helpers@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@starlay-finance/contract-helpers/-/contract-helpers-0.0.11.tgz#e6eedaf37dae802b3bbc4f3a0e411b094840a748"
-  integrity sha512-RXHe20I04qluxuUXEzjrA/liitBQleHWmMjK2WGvYi8V1JTIDSeRGN6S27htMxJ5fcbyGSkguebNAn9Xz1ZPSw==
+"@starlay-finance/contract-helpers@0.0.12-88acc9752f6b938b99f5a8fb90e8763a773fceb1.0":
+  version "0.0.12-88acc9752f6b938b99f5a8fb90e8763a773fceb1.0"
+  resolved "https://registry.yarnpkg.com/@starlay-finance/contract-helpers/-/contract-helpers-0.0.12-88acc9752f6b938b99f5a8fb90e8763a773fceb1.0.tgz#94a93b98b4ffc8dee8dac9d40588dd895ace6c06"
+  integrity sha512-ZgtV2CLRYa92LGWjhQCHppNFrVL1QWJ4Cp6O0dHwoIfoC8OVWz4hIR0mQcOojCI18cWLwNbgKvSB4br/voUXLQ==
   dependencies:
     isomorphic-unfetch "^3.1.0"
 
-"@starlay-finance/math-utils@0.0.11":
-  version "0.0.11"
-  resolved "https://registry.yarnpkg.com/@starlay-finance/math-utils/-/math-utils-0.0.11.tgz#3f7d7bf375d70a28b01821532dadb3f71576e1fb"
-  integrity sha512-MJZvc1KEqXshmLZR4sow5vSXdqDxyktN6+HCJzToG2ZehlplN5ULl9S9UD4FcEja6Zb+uMwjcVM4V/Gx1qi2Vw==
+"@starlay-finance/math-utils@0.0.12-88acc9752f6b938b99f5a8fb90e8763a773fceb1.0":
+  version "0.0.12-88acc9752f6b938b99f5a8fb90e8763a773fceb1.0"
+  resolved "https://registry.yarnpkg.com/@starlay-finance/math-utils/-/math-utils-0.0.12-88acc9752f6b938b99f5a8fb90e8763a773fceb1.0.tgz#b1ba936ea30fdeba053cd849405ee0bd359262d5"
+  integrity sha512-W/cuYE2AUzkkiyh6oEgxMIAE9CldFIzxGWxXZikYtGtN8bfOYY9PHPQRyRgGSUOARbxA+2jwlXZAeGiyoI9g8w==
   dependencies:
     bignumber.js "^9.0.1"
     tslib "^2.3.1"
