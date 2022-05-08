@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
-import { toLaunchPad } from 'src/utils/routes'
+import { toLaunchpad } from 'src/utils/routes'
 
-const LaunchPadIndexPage = () => {
+const LaunchpadIndexPage = () => {
   useEffect(() => {
-    window.location.replace(toLaunchPad('lay'))
+    window.location.replace(toLaunchpad('lay'))
   }, [])
   return <></>
 }
-export default LaunchPadIndexPage
+export default LaunchpadIndexPage

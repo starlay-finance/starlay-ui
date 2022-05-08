@@ -1,26 +1,26 @@
 import dayjs from 'dayjs'
 import fs from 'fs'
 import { GetStaticProps } from 'next'
-import { LaunchPadPop } from 'src/components/screens/LaunchPadPop'
-import { LaunchPadData } from 'src/components/screens/LaundPad'
+import { LaunchpadData } from 'src/components/screens/Launchpad'
+import { LaunchpadPop } from 'src/components/screens/LaunchpadPop'
 import { Page } from 'src/types/page'
 
-type LaunchPadPopPageStaticProps = {
-  data: Omit<LaunchPadData, 'sale'> & {
-    sale: Omit<LaunchPadData['sale'], 'start' | 'end'> & {
+type LaunchpadPopPageStaticProps = {
+  data: Omit<LaunchpadData, 'sale'> & {
+    sale: Omit<LaunchpadData['sale'], 'start' | 'end'> & {
       start: string
       end: string
     }
   }
 }
 
-const sortSaleEndAsc = (a: LaunchPadData, b: LaunchPadData) =>
+const sortSaleEndAsc = (a: LaunchpadData, b: LaunchpadData) =>
   a.sale.end.isAfter(b.sale.end) ? 1 : -1
 
-export const getStaticProps: GetStaticProps<LaunchPadPopPageStaticProps> =
+export const getStaticProps: GetStaticProps<LaunchpadPopPageStaticProps> =
   async () => {
     try {
-      const data: LaunchPadData[] = await Promise.all(
+      const data: LaunchpadData[] = await Promise.all(
         fs
           .readdirSync('./public/data/launchpad')
           .map(async (file) => import(`public/data/launchpad/${file}`)),
@@ -39,8 +39,8 @@ export const getStaticProps: GetStaticProps<LaunchPadPopPageStaticProps> =
     }
   }
 
-const LaunchPadPopPage: Page<LaunchPadPopPageStaticProps> = ({ data }) => (
-  <LaunchPadPop
+const LaunchpadPopPage: Page<LaunchpadPopPageStaticProps> = ({ data }) => (
+  <LaunchpadPop
     data={{
       ...data,
       sale: {
@@ -52,4 +52,4 @@ const LaunchPadPopPage: Page<LaunchPadPopPageStaticProps> = ({ data }) => (
   />
 )
 
-export default LaunchPadPopPage
+export default LaunchpadPopPage

@@ -32,10 +32,10 @@ import {
 import { formatWithTZ } from 'src/utils/date'
 import { formatAmt, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
-import { LaunchPadData, Market, PriceChartData } from './types'
+import { LaunchpadData, Market, PriceChartData } from './types'
 
 type StatisticsProps = {
-  token: LaunchPadData['token']
+  token: LaunchpadData['token']
   market: Market | undefined
   priceChartData: PriceChartData[]
   limitPrice?: BigNumber

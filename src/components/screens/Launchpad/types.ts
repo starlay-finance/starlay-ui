@@ -1,7 +1,7 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { Dayjs } from 'dayjs'
 
-export type LaunchPadData = {
+export type LaunchpadData = {
   id: string
   projectName: string
   keyVisual: string

@@ -10,18 +10,18 @@ import { KeyVisual } from './KeyVisual'
 import { ProjectInformation } from './ProjectInformation'
 import { Sale } from './Sale'
 import { Statistics } from './Statistics'
-import { LaunchPadData, PriceChartData, Status } from './types'
+import { LaunchpadData, PriceChartData, Status } from './types'
 
-export type { LaunchPadData }
+export type { LaunchpadData }
 
-const judgeStatus = (sale: LaunchPadData['sale']): Status => {
+const judgeStatus = (sale: LaunchpadData['sale']): Status => {
   const now = dayjs()
   if (now.isBefore(sale.start)) return 'Upcoming'
   if (now.isAfter(sale.end)) return 'Ended'
   return 'Open'
 }
 
-export const LaunchPad: VFC<{ data: LaunchPadData }> = ({ data }) => {
+export const Launchpad: VFC<{ data: LaunchpadData }> = ({ data }) => {
   const status = judgeStatus(data.sale)
   const market = undefined //TOOD
   const priceChartData: PriceChartData[] = [

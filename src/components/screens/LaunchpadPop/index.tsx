@@ -3,18 +3,18 @@ import { darkRed, primary, skyBlue } from 'src/styles/colors'
 import { fontWeightBold } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { formatWithTZ } from 'src/utils/date'
-import { toLaunchPad } from 'src/utils/routes'
+import { toLaunchpad } from 'src/utils/routes'
 import styled, { createGlobalStyle } from 'styled-components'
-import { LaunchPadData } from '../LaundPad'
+import { LaunchpadData } from '../Launchpad'
 
 const DATE_FORMAT = 'hh:mm a z on MMM DD'
 
-export const LaunchPadPop: VFC<{ data: LaunchPadData }> = ({
+export const LaunchpadPop: VFC<{ data: LaunchpadData }> = ({
   data: { id, projectName, icon, token, sale },
 }) => (
   <>
     <Styles />
-    <a href={toLaunchPad(id)} target="_blank" rel="noreferrer">
+    <a href={toLaunchpad(id)} target="_blank" rel="noreferrer">
       <PopDiv>
         <Background icon={icon} />
         <Content>
@@ -30,7 +30,7 @@ export const LaunchPadPop: VFC<{ data: LaunchPadData }> = ({
     </a>
   </>
 )
-const Background: VFC<{ icon: LaunchPadData['icon'] }> = ({ icon }) => (
+const Background: VFC<{ icon: LaunchpadData['icon'] }> = ({ icon }) => (
   <BackgroundDiv>
     <svg xmlns="http://www.w3.org/2000/svg" width="320" height="240">
       <defs>

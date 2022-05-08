@@ -2,14 +2,14 @@ import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { ASSETS_DICT } from 'src/constants/assets'
 import styled from 'styled-components'
-import { Bid, LaunchPadData, Market, Status } from '../types'
+import { Bid, LaunchpadData, Market, Status } from '../types'
 import { BidSecion } from './Bid'
 import { useBiddingModal } from './BiddingModal'
 import { SaleInformation } from './SaleInformation'
 
 type SaleProps = {
-  token: LaunchPadData['token']
-  information: LaunchPadData['sale']
+  token: LaunchpadData['token']
+  information: LaunchpadData['sale']
   status: Status
   market?: Market
   maxAmount: BigNumber

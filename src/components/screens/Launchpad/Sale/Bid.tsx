@@ -1,14 +1,14 @@
 import { t } from '@lingui/macro'
 import { VFC } from 'react'
 import { BN_ZERO, formatAmt, formatPct, formatUSD } from 'src/utils/number'
-import { Bid, LaunchPadData, Market } from '../types'
+import { Bid, LaunchpadData, Market } from '../types'
 import { calcBoost } from '../utils'
 import { CtaButton, Information, InformationItem, Section } from './parts'
 
 type BidSecionProps = {
   bid: Bid
   market?: Market
-  token: LaunchPadData['token']
+  token: LaunchpadData['token']
   hasEnded: boolean
   openBiddingModal: VoidFunction
 }

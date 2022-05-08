@@ -24,7 +24,7 @@ export const GOVERNANCE_OVERVIEW = ''
 export const BUG_BOUNTY = ''
 export const SUPPORT = DISCORD
 
-export const toLaunchPad = (token: string) => `${LAUNCHPAD}/${token}`
+export const toLaunchpad = (token: string) => `${LAUNCHPAD}/${token}`
 export const toMakaiLoop = (symbol: string) => `${MAKAI}?asset=${symbol}`
 
 export const SORRY = '/sorry'
