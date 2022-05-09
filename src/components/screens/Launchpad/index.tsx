@@ -17,9 +17,8 @@ export type { LaunchpadData }
 
 const judgeStatus = (sale: LaunchpadData['sale']): Status => {
   const now = dayjs()
-  // if (now.isBefore(sale.start)) return 'Upcoming'
-  // if (now.isAfter(sale.end)) return 'Ended'
-  return 'Ended'
+  if (now.isBefore(sale.start)) return 'Upcoming'
+  if (now.isAfter(sale.end)) return 'Ended'
   return 'Open'
 }
 

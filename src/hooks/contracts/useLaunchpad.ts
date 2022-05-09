@@ -106,7 +106,7 @@ const fetchUserData = async (
         BIDDING_ASSET_DECIMALS,
       )
       return {
-        amount: normalizeBN(bid.amount.paid.toString(), BIDDING_ASSET_DECIMALS),
+        amount: normalizeBN(bid.paid.toString(), BIDDING_ASSET_DECIMALS),
         limitPrice: limitPrice.isZero() ? undefined : limitPrice,
         cancelable: bid.cancelable,
       }

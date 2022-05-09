@@ -30,7 +30,6 @@ export const BidSecion: VFC<BidSecionProps> = ({
 }) => {
   const currentEstimatedPrice = market?.currentPriceInUSD || BN_ZERO
   const boost = calcBoost(bid)
-  // TODO max
   const currentEstimatedAmount =
     bid.limitPrice && bid.limitPrice.lt(currentEstimatedPrice)
       ? BN_ZERO
