@@ -1,4 +1,5 @@
 import { t } from '@lingui/macro'
+import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { BN_ZERO, formatAmt, formatPct, formatUSD } from 'src/utils/number'
 import { Bid, LaunchpadData, Market } from '../types'
@@ -11,6 +12,9 @@ type BidSecionProps = {
   token: LaunchpadData['token']
   hasEnded: boolean
   openBiddingModal: VoidFunction
+  receivableAmount: BigNumber
+  refundableAmount: BigNumber
+  requestRefund: VoidFunction
 }
 export const BidSecion: VFC<BidSecionProps> = ({
   bid,
@@ -18,17 +22,17 @@ export const BidSecion: VFC<BidSecionProps> = ({
   token,
   hasEnded,
   openBiddingModal,
+  receivableAmount,
+  refundableAmount,
+  requestRefund,
 }) => {
   const currentEstimatedPrice = market?.currentPriceInUSD || BN_ZERO
   const boost = calcBoost(bid)
+  // TODO max
   const currentEstimatedAmount =
     bid.limitPrice && bid.limitPrice.lt(currentEstimatedPrice)
       ? BN_ZERO
       : bid.amount.times(boost).div(currentEstimatedPrice)
-
-  const receivableAmount = BN_ZERO // TODO
-  const refundableAmount = BN_ZERO // TODO
-  const requestRefund = () => {} //TODO
   return (
     <Section>
       <h2>{t`Your Bid`}</h2>

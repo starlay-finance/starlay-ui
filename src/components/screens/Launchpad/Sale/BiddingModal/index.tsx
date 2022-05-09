@@ -2,8 +2,8 @@ import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { GlassModalContent } from 'src/components/parts/Modal/base/Content/Glass'
+import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
-import { useWallet } from 'src/hooks/useWallet'
 import { Asset, ERC20Asset } from 'src/types/models'
 import { EthereumAddress } from 'src/types/web3'
 import { BN_ZERO } from 'src/utils/number'
@@ -30,16 +30,11 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
   currentEstimatedPrice = BN_ZERO,
   currentBid,
 }) => {
-  const submit = (newBid: Bid) => {
-    if (!bid) {
-      // TODO new bid
-      return
-    }
-    if (bid?.cancelable) {
-      // TODO cancel
-      return
-    }
-    // TODO update bid
+  const { bid, update, cancel } = useLaunchpad()
+  const submit = (newBid: Bid & { asset: EthereumAddress }) => {
+    if (!currentBid) return bid(newBid)
+    if (currentBid?.cancelable) return cancel()
+    return update(newBid)
   }
   return (
     <GlassModalContent closeModal={close}>

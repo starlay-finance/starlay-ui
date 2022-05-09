@@ -1,9 +1,10 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { ASSETS_DICT } from 'src/constants/assets'
+import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
 import { assetFromSymbol } from 'src/utils/assets'
 import styled from 'styled-components'
-import { Bid, LaunchpadData, Market, Status } from '../types'
+import { LaunchpadData, Market, Status } from '../types'
 import { BidSecion } from './Bid'
 import { useBiddingModal } from './BiddingModal'
 import { SaleInformation } from './SaleInformation'
@@ -14,7 +15,6 @@ type SaleProps = {
   status: Status
   market?: Market
   maxAmount: BigNumber
-  currentBid?: Bid
 }
 
 export const Sale: VFC<SaleProps> = ({
@@ -23,8 +23,10 @@ export const Sale: VFC<SaleProps> = ({
   status,
   market,
   maxAmount,
-  currentBid,
 }) => {
+  const { userData, refund } = useLaunchpad()
+  const currentBid = userData?.bid
+
   const { open } = useBiddingModal()
   const openBiddingModal = () =>
     open({
@@ -48,6 +50,9 @@ export const Sale: VFC<SaleProps> = ({
           hasEnded={status === 'Ended'}
           token={token}
           openBiddingModal={openBiddingModal}
+          receivableAmount={userData.claimable}
+          refundableAmount={userData.refundable}
+          requestRefund={refund}
         />
       )}
       <SaleInformation

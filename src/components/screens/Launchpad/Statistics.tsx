@@ -1,5 +1,4 @@
 import { t } from '@lingui/macro'
-import { BigNumber } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
 import { CSSProperties, VFC } from 'react'
 import {
@@ -13,6 +12,7 @@ import {
 } from 'recharts'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
+import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
 import {
   attention,
   darkPurple,
@@ -38,15 +38,16 @@ type StatisticsProps = {
   token: LaunchpadData['token']
   market: Market | undefined
   priceChartData: PriceChartData[]
-  limitPrice?: BigNumber
 }
 
 export const Statistics: VFC<StatisticsProps> = ({
   token,
   market,
   priceChartData,
-  limitPrice,
 }) => {
+  const { userData } = useLaunchpad()
+  const limitPrice = userData?.bid?.limitPrice
+
   const limitPriceLineColor = limitPrice
     ? market?.currentPriceInUSD.gt(limitPrice)
       ? attention

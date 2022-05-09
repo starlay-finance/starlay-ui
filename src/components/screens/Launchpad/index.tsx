@@ -1,65 +1,70 @@
 import { valueToBigNumber } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
-import { VFC } from 'react'
+import { useEffect, useState, VFC } from 'react'
 import { AppBackground } from 'src/components/parts/Background'
 import { AppFooter } from 'src/components/parts/Footer'
 import { AppHeader } from 'src/components/parts/Header/AppHeader'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
 import styled from 'styled-components'
 import { KeyVisual } from './KeyVisual'
+import { LaunchpadContextProvider } from './LaunchpadContext'
 import { ProjectInformation } from './ProjectInformation'
 import { Sale } from './Sale'
 import { Statistics } from './Statistics'
-import { LaunchpadData, PriceChartData, Status } from './types'
+import { LaunchpadData, Market, PriceChartData, Status } from './types'
 
 export type { LaunchpadData }
 
 const judgeStatus = (sale: LaunchpadData['sale']): Status => {
   const now = dayjs()
-  if (now.isBefore(sale.start)) return 'Upcoming'
-  if (now.isAfter(sale.end)) return 'Ended'
+  // if (now.isBefore(sale.start)) return 'Upcoming'
+  // if (now.isAfter(sale.end)) return 'Ended'
+  return 'Ended'
   return 'Open'
 }
 
 export const Launchpad: VFC<{ data: LaunchpadData }> = ({ data }) => {
   const status = judgeStatus(data.sale)
   const market: Market | undefined = undefined
-  const currentBid: Bid | undefined = undefined
-  const priceChartData: PriceChartData[] = [
-    { priceInUSD: 0, bottomPriceInUSD: 0, timestamp: 1652356800 },
-  ] // TODO
+  const [priceChartData, setpriceChartData] = useState<PriceChartData[]>([])
+  useEffect(() => {
+    setpriceChartData([
+      { priceInUSD: 0, bottomPriceInUSD: 0, timestamp: 1652356800 },
+      ...mockPriceChartData,
+    ])
+  }, [])
   return (
     <>
       <AppHeader />
       <Main>
-        <AppBackground />
-        {status === 'Upcoming' ? (
-          <KeyVisual
-            src={data.keyVisual}
-            alt={`${data.token.symbol} token sale`}
-          />
-        ) : (
-          <Statistics
-            token={data.token}
-            market={market}
-            priceChartData={priceChartData}
-            limitPrice={currentBid?.limitPrice}
-          />
-        )}
-        <Content>
-          <ProjectInformation
-            information={data.information}
-            token={data.token}
-          />
-          <Sale
-            token={data.token}
-            information={data.sale}
-            status={status}
-            market={market}
-            maxAmount={valueToBigNumber(data.sale.emissionAmount)}
-            currentBid={currentBid}
-          />
-        </Content>
+        <LaunchpadContextProvider launchpadAddress={data.launchpadAddress}>
+          <AppBackground />
+          {status === 'Upcoming' ? (
+            <KeyVisual
+              src={data.keyVisual}
+              alt={`${data.token.symbol} token sale`}
+            />
+          ) : (
+            <Statistics
+              token={data.token}
+              market={market}
+              priceChartData={priceChartData}
+            />
+          )}
+          <Content>
+            <ProjectInformation
+              information={data.information}
+              token={data.token}
+            />
+            <Sale
+              token={data.token}
+              information={data.sale}
+              status={status}
+              market={market}
+              maxAmount={valueToBigNumber(data.sale.emissionAmount)}
+            />
+          </Content>
+        </LaunchpadContextProvider>
       </Main>
       <AppFooter />
     </>

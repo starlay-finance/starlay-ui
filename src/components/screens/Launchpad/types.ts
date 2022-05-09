@@ -1,6 +1,7 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { Dayjs } from 'dayjs'
 import { ERC20Asset } from 'src/types/models'
+import { EthereumAddress } from 'src/types/web3'
 
 export type LaunchpadData = {
   id: string
@@ -32,6 +33,7 @@ export type LaunchpadData = {
     emissionRatio: number
     biddingAssets: Omit<ERC20Asset, 'icon'>[]
   }
+  launchpadAddress: EthereumAddress | undefined
 }
 
 export type Status = 'Upcoming' | 'Open' | 'Ended'
