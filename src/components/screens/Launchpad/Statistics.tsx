@@ -92,7 +92,7 @@ export const Statistics: VFC<StatisticsProps> = ({
               margin={{ top: 0, right: 8, left: 8, bottom: 8 }}
             >
               <defs>
-                <linearGradient id="colorPx" x1="0" y1="0" x2="1" y2="1">
+                <linearGradient id="colorPx" x1="0" y1=".5" x2="1" y2=".5">
                   <stop offset="0%" stopColor={skyBlue} stopOpacity={0.48} />
                   <stop offset="100%" stopColor={darkRed} stopOpacity={0.48} />
                 </linearGradient>
@@ -101,6 +101,7 @@ export const Statistics: VFC<StatisticsProps> = ({
                 type="monotone"
                 dataKey="priceInUSD"
                 stroke={trueWhite}
+                strokeWidth={2}
                 fillOpacity={1}
                 fill="url(#colorPx)"
               />
@@ -108,6 +109,7 @@ export const Statistics: VFC<StatisticsProps> = ({
                 type="monotone"
                 dataKey="bottomPriceInUSD"
                 stroke={lightPurple}
+                strokeWidth={1}
                 fillOpacity={1}
                 fill="url(#colorBottomPx)"
               />

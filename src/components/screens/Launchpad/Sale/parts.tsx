@@ -1,6 +1,7 @@
 import { VFC } from 'react'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
+import { hoverBackgroundKeyframes } from 'src/styles/animation'
 import { darkPurple, darkRed, lightBlack, skyBlue } from 'src/styles/colors'
 import {
   fontWeightBlack,
@@ -17,7 +18,15 @@ export const CtaButton = styled.button`
   border-radius: 6px;
   overflow: hidden;
 
-  background: linear-gradient(90deg, ${skyBlue}cc, ${darkRed}cc);
+  background: linear-gradient(90deg, ${skyBlue}cc, ${darkRed}cc, ${skyBlue}cc);
+  :enabled {
+    background-size: 300%;
+    animation: ${hoverBackgroundKeyframes(3)} 10s -4.5s infinite linear;
+    animation-play-state: paused;
+    :hover {
+      animation-play-state: running;
+    }
+  }
   text-align: center;
   font-size: 16px;
   font-weight: ${fontWeightBlack};

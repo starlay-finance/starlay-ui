@@ -2,6 +2,7 @@ import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
+import { Reel } from 'src/components/parts/Number/Reel'
 import { Toggle } from 'src/components/parts/Toggle'
 import { Asset, ERC20Asset } from 'src/types/models'
 import { EthereumAddress } from 'src/types/web3'
@@ -113,16 +114,20 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
       </FormItem>
       <FormItem>
         <label>{t`Boost`}</label>
-        <div>{boost ? `+${formatPct(boost)}` : '0%'}</div>
+        <div>
+          <Reel text={`+${formatPct(boost)}`} />
+        </div>
       </FormItem>
       <FormItem>
         <label>{t`Current Estimated Amount`}</label>
         <div>
-          {formatAmt(estimatedAmount, {
-            symbol: receivingAsset.symbol,
-            decimalPlaces: 2,
-            roundingMode: BigNumber.ROUND_FLOOR,
-          })}
+          <Reel
+            text={formatAmt(estimatedAmount, {
+              symbol: receivingAsset.symbol,
+              decimalPlaces: 2,
+              roundingMode: BigNumber.ROUND_FLOOR,
+            })}
+          />
         </div>
       </FormItem>
       <Button onClick={submit} disabled={!!error}>

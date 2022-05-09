@@ -1,5 +1,6 @@
 import { VFC } from 'react'
 import { Toggle } from 'src/components/parts/Toggle'
+import { hoverBackgroundKeyframes } from 'src/styles/animation'
 import { darkRed, gray, skyBlue, trueBlack, trueWhite } from 'src/styles/colors'
 import {
   fontWeightBold,
@@ -52,12 +53,24 @@ export const Button = styled.button`
   width: 100%;
   padding: 22px;
   border-radius: 8px;
-  background-color: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(30px) brightness(1.15);
 
   font-size: 18px;
   font-weight: ${fontWeightBold};
   text-align: center;
+
+  background: linear-gradient(90deg, ${skyBlue}cc, ${darkRed}cc, ${skyBlue}cc);
+  :enabled {
+    background-size: 300%;
+    animation: ${hoverBackgroundKeyframes(3)} 10s -4.5s infinite linear;
+    animation-play-state: paused;
+    :hover {
+      animation-play-state: running;
+    }
+  }
+  :disabled {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(30px) brightness(1.15);
+  }
 `
 
 export const ToggleDiv = styled.div`
