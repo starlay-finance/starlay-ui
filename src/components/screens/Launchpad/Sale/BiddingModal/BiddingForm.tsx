@@ -115,7 +115,7 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
       <FormItem>
         <label>{t`Boost`}</label>
         <div>
-          <Reel text={`+${formatPct(boost)}`} />
+          <Reel text={`+${formatPct(boost - 1)}`} />
         </div>
       </FormItem>
       <FormItem>
