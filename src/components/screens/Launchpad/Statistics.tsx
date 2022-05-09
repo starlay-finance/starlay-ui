@@ -120,7 +120,7 @@ export const Statistics: VFC<StatisticsProps> = ({
                   strokeDasharray="5"
                 >
                   <Label
-                    value={t`Your Limit = ${formatUSD(limitPrice)}`}
+                    value={t`Your Limit Price = ${formatUSD(limitPrice)}`}
                     fill={limitPriceLineColor}
                     transform="translate(-6 -28)"
                     position="insideTopLeft"

@@ -50,7 +50,7 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
   return (
     <FormDiv>
       <FormItem>
-        <label>Amount</label>
+        <label>{t`Bid Amount`}</label>
         <InputDiv>
           <Image
             src={biddingAsset.icon}
@@ -70,7 +70,7 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
       </FormItem>
       <FormItemMulti>
         <FormItem>
-          <label>{t`Get 5% Boost without Price Limit`}</label>
+          <label>{t`Get 5% Boost without Limit Price`}</label>
           <ToggleDiv>
             {noPriceLimitEnabled ? t`ON` : t`OFF`}
             <Toggle
@@ -85,7 +85,7 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
         </FormItem>
         {!noPriceLimitEnabled && (
           <FormItem>
-            <label>{t`Price Limit`}</label>
+            <label>{t`Limit Price`}</label>
             <InputDiv>
               <div>$</div>
               <AmountInput
@@ -119,7 +119,7 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
         </div>
       </FormItem>
       <FormItem>
-        <label>{t`Current Estimated Amount`}</label>
+        <label>{t`Estimated Receivable Amount`}</label>
         <div>
           <Reel
             text={formatAmt(estimatedAmount, {
@@ -131,7 +131,12 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
         </div>
       </FormItem>
       <Button onClick={submit} disabled={!!error}>
-        {error || (currentBid?.cancelable ? t`Cancel` : t`Bid`)}
+        {error ||
+          (currentBid?.cancelable
+            ? t`Cancel`
+            : currentBid
+            ? t`Apply Your Change`
+            : t`Bid`)}
       </Button>
     </FormDiv>
   )

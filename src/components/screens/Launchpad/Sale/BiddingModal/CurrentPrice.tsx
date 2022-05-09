@@ -15,7 +15,7 @@ export const CurrentPrice: VFC<{
 }> = ({ receivingAsset, currentEstimatedPrice }) => (
   <CurrentPriceContainer>
     <div>
-      <p>{t`Current Estimated Price`}</p>
+      <p>{t`Current Price`}</p>
       <CurrentPriceDiv>
         <div />
         <div />

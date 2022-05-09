@@ -35,7 +35,7 @@ export const BidSecion: VFC<BidSecionProps> = ({
       <Information started>
         <ul>
           <InformationItem
-            label={t`Amount`}
+            label={t`Bid Amount`}
             value={formatAmt(bid.amount, { symbol: 'USDC' })}
           />
           <InformationItem
@@ -48,25 +48,21 @@ export const BidSecion: VFC<BidSecionProps> = ({
           />
           <InformationItem
             label={t`Boosted`}
-            value={formatPct(calcBoost(bid))}
+            value={formatPct(calcBoost(bid) - 1)}
           />
-          {hasEnded ? (
+          <InformationItem
+            label={t`Receivable Amount`}
+            tooltip={t`TODO description of receivable amount`}
+            value={formatAmt(
+              hasEnded ? receivableAmount : currentEstimatedAmount,
+              { symbol: token.symbol, decimalPlaces: 2 },
+            )}
+          />
+          {!receivableAmount.isZero() && (
             <InformationItem
-              label={t`Estimated Amount`}
-              tooltip={t`TODO description of estimated amount`}
-              value={formatAmt(currentEstimatedAmount, {
-                symbol: token.symbol,
-                decimalPlaces: 2,
-              })}
-            />
-          ) : (
-            <InformationItem
-              label={t`Receivable Amount`}
+              label={t`Vesting Period`}
               tooltip={t`TODO description of receivable amount`}
-              value={formatAmt(receivableAmount, {
-                symbol: token.symbol,
-                decimalPlaces: 2,
-              })}
+              value={'2022/07/02 - 2023/07/02'}
             />
           )}
         </ul>
@@ -74,13 +70,19 @@ export const BidSecion: VFC<BidSecionProps> = ({
       {!hasEnded ? (
         <CtaButton onClick={openBiddingModal}>
           <span>
-            {bid.cancelable ? t`Cancel` : t`Increase Amount or Limit Price`}
+            {bid.cancelable
+              ? t`Cancel`
+              : t`Increase Bid Amount and/or Limit Price`}
           </span>
         </CtaButton>
       ) : (
         !refundableAmount.isZero() && (
           <CtaButton onClick={requestRefund}>
-            <span>{t`Request Refund`}</span>
+            <span>
+              {receivableAmount.isZero()
+                ? t`Request Bid Amount Refund`
+                : t`Partially Filled! Request Refund for Remained Amount`}
+            </span>
           </CtaButton>
         )
       )}

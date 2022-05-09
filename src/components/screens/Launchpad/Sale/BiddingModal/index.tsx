@@ -44,7 +44,13 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
   return (
     <GlassModalContent closeModal={close}>
       <Title>
-        <p>{t`Bid on ${receivingAsset.symbol}`}</p>
+        <p>
+          {currentBid?.cancelable
+            ? t`Cancel Bid`
+            : currentBid
+            ? t`Increase Bid Amount and/or Limit Price`
+            : t`Bid on ${receivingAsset.symbol}`}
+        </p>
       </Title>
       <CurrentPrice
         receivingAsset={receivingAsset}

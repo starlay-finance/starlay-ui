@@ -27,7 +27,7 @@ export const ProjectInformation = styled<
 >(({ information: { details, sale, notes, urls }, token, className }) => (
   <ProjectInformationDiv className={className}>
     <Description>
-      <h2>{t`What is $${token.symbol}?`}</h2>
+      <h2>{t`What is ${token.symbol}?`}</h2>
       <p>{details}</p>
       <Urls urls={urls} />
     </Description>

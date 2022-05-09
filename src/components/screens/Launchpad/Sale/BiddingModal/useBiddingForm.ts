@@ -141,18 +141,17 @@ export const validate = (
   if (!currentBid) return
   if (!!bid.cancelable !== !!currentBid.cancelable)
     return t`Cancelable or not is unchangeable`
-  if (bid.amount.lt(currentBid.amount))
-    return t`Amount must be larger than current`
+  if (bid.amount.lt(currentBid.amount)) return t`Only Allowed to Add Bid`
   if (noPriceLimitEnabled) {
     if (!currentBid.limitPrice && bid.amount.eq(currentBid.amount))
-      return t`No changes`
+      return t`Nothing Changed`
     return
   }
   if (bid.limitPrice?.lt(currentBid.limitPrice || BN_ZERO))
-    return t`Limit Price must be higher than current`
+    return t`Only Allowed to Raise or Disable Limit Price`
   if (
     bid.amount.eq(currentBid.amount) &&
     (!currentBid.limitPrice || bid.limitPrice?.eq(currentBid.limitPrice))
   )
-    return t`No changes`
+    return t`Nothing Changed`
 }
