@@ -1,6 +1,7 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { ASSETS_DICT } from 'src/constants/assets'
+import { assetFromSymbol } from 'src/utils/assets'
 import styled from 'styled-components'
 import { Bid, LaunchpadData, Market, Status } from '../types'
 import { BidSecion } from './Bid'
@@ -13,7 +14,7 @@ type SaleProps = {
   status: Status
   market?: Market
   maxAmount: BigNumber
-  bid?: Bid
+  currentBid?: Bid
 }
 
 export const Sale: VFC<SaleProps> = ({
@@ -22,13 +23,17 @@ export const Sale: VFC<SaleProps> = ({
   status,
   market,
   maxAmount,
-  bid,
+  currentBid,
 }) => {
   const { open } = useBiddingModal()
   const openBiddingModal = () =>
     open({
-      bid,
+      currentBid,
       maxAmount,
+      biddingAssets: information.biddingAssets.map((asset) => ({
+        ...asset,
+        icon: assetFromSymbol(asset.symbol).icon,
+      })),
       currentEstimatedPrice: market?.currentPriceInUSD,
       boostedRaisedAmount: market?.boostedRaisedAmountInUSD,
       receivingAsset: ASSETS_DICT.LAY,
@@ -36,9 +41,9 @@ export const Sale: VFC<SaleProps> = ({
 
   return (
     <SaleDiv>
-      {bid && (
+      {currentBid && (
         <BidSecion
-          bid={bid}
+          bid={currentBid}
           market={market}
           hasEnded={status === 'Ended'}
           token={token}
@@ -50,7 +55,7 @@ export const Sale: VFC<SaleProps> = ({
         token={token}
         information={information}
         openBiddingModal={openBiddingModal}
-        hasBidded={!!bid}
+        hasBidded={!!currentBid}
       />
     </SaleDiv>
   )

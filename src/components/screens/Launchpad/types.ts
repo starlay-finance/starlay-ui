@@ -1,5 +1,6 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { Dayjs } from 'dayjs'
+import { ERC20Asset } from 'src/types/models'
 
 export type LaunchpadData = {
   id: string
@@ -29,11 +30,7 @@ export type LaunchpadData = {
     end: Dayjs
     emissionAmount: number
     emissionRatio: number
-    biddingAssets: {
-      name: string
-      symbol: string
-      address: string
-    }[]
+    biddingAssets: Omit<ERC20Asset, 'icon'>[]
   }
 }
 

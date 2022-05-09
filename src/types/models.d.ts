@@ -12,6 +12,13 @@ export type Asset = {
   borrowUnsupported?: boolean
   makaiUnsupported?: boolean
 }
+export type ERC20Asset = {
+  symbol: AssetSymbol
+  icon: StaticImageData
+  name: string
+  address: EthereumAddress
+  decimals: number
+}
 
 export type AssetMarketData = Asset & {
   depositAPY: BigNumber

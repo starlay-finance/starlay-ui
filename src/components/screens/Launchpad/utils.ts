@@ -1,8 +1,9 @@
+import { BN_ONE } from 'src/utils/number'
 import { Bid } from './types'
 
 export const calcBoost = (bid: Omit<Bid, 'amount'>) => {
-  let boost = 0
-  if (!bid.limitPrice) boost += 0.05
-  if (!bid.cancelable) boost += 0.1
-  return boost
+  let boost = BN_ONE
+  if (!bid.limitPrice) boost = boost.plus('0.05')
+  if (!bid.cancelable) boost = boost.plus('0.1')
+  return boost.toNumber()
 }

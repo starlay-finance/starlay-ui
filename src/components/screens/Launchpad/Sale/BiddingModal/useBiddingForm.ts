@@ -1,6 +1,8 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { useState } from 'react'
+import { ERC20Asset } from 'src/types/models'
+import { EthereumAddress } from 'src/types/web3'
 import { BN_ZERO, formatAmt, formattedToBigNumber } from 'src/utils/number'
 import { Bid } from '../../types'
 import { calcBoost } from '../../utils'
@@ -9,47 +11,46 @@ type BiddingFormProps = {
   maxAmount: BigNumber
   boostedRaisedAmount: BigNumber
   currentEstimatedPrice: BigNumber
-  bid?: Bid
-  submit: (bid: Bid) => VoidFunction
+  biddingAssets: ERC20Asset[]
+  currentBid?: Bid
+  submit: (currentBid: Bid & { asset: EthereumAddress }) => VoidFunction
 }
 export const useBiddingForm = ({
-  maxAmount,
-  currentEstimatedPrice,
-  boostedRaisedAmount,
-  bid,
+  biddingAssets,
+  currentBid,
   submit,
+  ...market
 }: BiddingFormProps) => {
-  const [amount, setAmount] = useState(bid ? formatAmt(bid.amount) : '')
+  const [amount, setAmount] = useState(
+    currentBid ? formatAmt(currentBid.amount) : '',
+  )
   const [noPriceLimitEnabled, setNoPriceLimitEnabled] = useState(
-    !bid?.limitPrice,
+    !currentBid?.limitPrice,
   )
   const [limitPrice, setLimitPrice] = useState(
-    bid?.limitPrice ? formatAmt(bid.limitPrice) : '',
+    currentBid?.limitPrice ? formatAmt(currentBid.limitPrice) : '',
   )
-  const [cancelable, setCancelable] = useState(bid?.cancelable)
+  const [cancelable, setCancelable] = useState(currentBid?.cancelable)
   const boost = calcBoost({
     limitPrice: noPriceLimitEnabled ? undefined : BN_ZERO,
     cancelable,
   })
-  const amountBn = (amount && formattedToBigNumber(amount)) || BN_ZERO
-  const limitPriceBn =
-    !noPriceLimitEnabled && limitPrice && formattedToBigNumber(limitPrice)
-  const boostedAmountBn = amountBn.times(boost)
-  const estimatedAmount =
-    !amountBn.isZero() &&
-    (noPriceLimitEnabled ||
-      (limitPriceBn && currentEstimatedPrice.lte(limitPriceBn)))
-      ? boostedAmountBn
-          .div(boostedAmountBn.plus(boostedRaisedAmount))
-          .times(maxAmount)
-      : BN_ZERO
 
-  const newBid = {
-    amount: amountBn,
-    limitPrice: limitPriceBn || undefined,
+  const biddingAsset = biddingAssets[0]
+  const bid = newBid(
+    biddingAsset.address,
+    amount,
+    noPriceLimitEnabled,
+    limitPrice,
     cancelable,
-  }
-  const error = validate(newBid, noPriceLimitEnabled, bid)
+  )
+  const estimatedAmount = calcEstimatedAmount(
+    bid,
+    noPriceLimitEnabled,
+    market,
+    currentBid,
+  )
+  const error = validate(bid, noPriceLimitEnabled, currentBid)
 
   return {
     amount,
@@ -62,9 +63,66 @@ export const useBiddingForm = ({
     setCancelable,
     boost,
     estimatedAmount,
-    submit: () => submit(newBid),
+    submit: () => submit(bid),
     error,
   }
+}
+
+const newBid = (
+  asset: EthereumAddress,
+  amount: string,
+  noPriceLimitEnabled: boolean,
+  limitPrice?: string,
+  cancelable?: boolean,
+) => {
+  const amountBn = (amount && formattedToBigNumber(amount)) || BN_ZERO
+  const limitPriceBn =
+    !noPriceLimitEnabled && limitPrice && formattedToBigNumber(limitPrice)
+
+  return {
+    amount: amountBn,
+    asset,
+    limitPrice: limitPriceBn || undefined,
+    cancelable,
+  }
+}
+
+export const calcEstimatedAmount = (
+  bid: Bid,
+  noPriceLimitEnabled: boolean,
+  market: {
+    maxAmount: BigNumber
+    boostedRaisedAmount: BigNumber
+    currentEstimatedPrice: BigNumber
+  },
+  currentBid?: Bid,
+) => {
+  if (bid.amount.isZero()) return BN_ZERO
+  if (market.boostedRaisedAmount.isZero()) return market.maxAmount
+  const boost = calcBoost({
+    limitPrice: noPriceLimitEnabled ? undefined : BN_ZERO,
+    cancelable: bid.cancelable,
+  })
+  if (
+    !noPriceLimitEnabled &&
+    bid.limitPrice &&
+    bid.limitPrice.lt(market.currentEstimatedPrice)
+  )
+    return BN_ZERO
+
+  const currentBoostedAmountBn = currentBid
+    ? currentBid.amount.times(calcBoost(currentBid))
+    : BN_ZERO
+
+  const boostedAmountBn = bid.amount.times(boost)
+
+  const newRaisedAmount = boostedAmountBn.plus(
+    market.boostedRaisedAmount.minus(currentBoostedAmountBn),
+  )
+  return boostedAmountBn
+    .div(newRaisedAmount)
+    .times(market.maxAmount)
+    .decimalPlaces(18, BigNumber.ROUND_FLOOR)
 }
 
 export const validate = (

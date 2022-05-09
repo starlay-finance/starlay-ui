@@ -3,8 +3,8 @@ import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { Toggle } from 'src/components/parts/Toggle'
-import { ASSETS_DICT } from 'src/constants/assets'
-import { Asset } from 'src/types/models'
+import { Asset, ERC20Asset } from 'src/types/models'
+import { EthereumAddress } from 'src/types/web3'
 import { formatAmt, formatPct } from 'src/utils/number'
 import { Bid } from '../../types'
 import {
@@ -21,16 +21,17 @@ import { useBiddingForm } from './useBiddingForm'
 
 type BiddingFormProps = {
   receivingAsset: Asset
+  biddingAssets: ERC20Asset[]
   maxAmount: BigNumber
   boostedRaisedAmount: BigNumber
   currentEstimatedPrice: BigNumber
-  bid?: Bid
-  submit: (bid: Bid) => any
+  currentBid?: Bid
+  submit: (bid: Bid & { asset: EthereumAddress }) => any
 }
 
 export const BiddingForm: VFC<BiddingFormProps> = (props) => {
-  const biddingAsset = { ...ASSETS_DICT.USDC, decimals: 6 }
-  const { bid, receivingAsset } = props
+  const biddingAsset = props.biddingAssets[0]
+  const { currentBid, receivingAsset } = props
   const {
     amount,
     setAmount,
@@ -62,7 +63,7 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
             step={1}
             placeholder="0.00"
             onChange={setAmount}
-            disabled={bid?.cancelable}
+            disabled={currentBid?.cancelable}
           />
         </InputDiv>
       </FormItem>
@@ -75,7 +76,9 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
               checked={noPriceLimitEnabled}
               onClick={() => setNoPriceLimitEnabled(!noPriceLimitEnabled)}
               checkedStyle={toggleEnabledStyle}
-              disabled={bid?.cancelable || (bid && !bid.limitPrice)}
+              disabled={
+                currentBid?.cancelable || (currentBid && !currentBid.limitPrice)
+              }
             />
           </ToggleDiv>
         </FormItem>
@@ -90,7 +93,7 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
                 step={0.01}
                 placeholder="0.00"
                 onChange={setLimitPrice}
-                disabled={bid?.cancelable}
+                disabled={currentBid?.cancelable}
               />
             </InputDiv>
           </FormItem>
@@ -104,7 +107,7 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
             checked={!cancelable}
             onClick={() => setCancelable(!cancelable)}
             checkedStyle={toggleEnabledStyle}
-            disabled={!!bid}
+            disabled={!!currentBid}
           />
         </ToggleDiv>
       </FormItem>
@@ -123,7 +126,7 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
         </div>
       </FormItem>
       <Button onClick={submit} disabled={!!error}>
-        {error || (bid?.cancelable ? t`Cancel` : t`Bid`)}
+        {error || (currentBid?.cancelable ? t`Cancel` : t`Bid`)}
       </Button>
     </FormDiv>
   )

@@ -23,11 +23,11 @@ const judgeStatus = (sale: LaunchpadData['sale']): Status => {
 
 export const Launchpad: VFC<{ data: LaunchpadData }> = ({ data }) => {
   const status = judgeStatus(data.sale)
-  const market = undefined //TOOD
+  const market: Market | undefined = undefined
+  const currentBid: Bid | undefined = undefined
   const priceChartData: PriceChartData[] = [
     { priceInUSD: 0, bottomPriceInUSD: 0, timestamp: 1652356800 },
   ] // TODO
-  const bid = undefined //TODO
   return (
     <>
       <AppHeader />
@@ -43,7 +43,7 @@ export const Launchpad: VFC<{ data: LaunchpadData }> = ({ data }) => {
             token={data.token}
             market={market}
             priceChartData={priceChartData}
-            limitPrice={bid}
+            limitPrice={currentBid?.limitPrice}
           />
         )}
         <Content>
@@ -57,7 +57,7 @@ export const Launchpad: VFC<{ data: LaunchpadData }> = ({ data }) => {
             status={status}
             market={market}
             maxAmount={valueToBigNumber(data.sale.emissionAmount)}
-            bid={bid}
+            currentBid={currentBid}
           />
         </Content>
       </Main>

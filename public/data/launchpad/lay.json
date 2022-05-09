@@ -20,7 +20,8 @@
       {
         "name": "USD Coin",
         "symbol": "USDC",
-        "address": "0x6a2d262D56735DbA19Dd70682B39F6bE9a931D98"
+        "address": "0x6a2d262D56735DbA19Dd70682B39F6bE9a931D98",
+        "decimals": 6
       }
     ]
   },
