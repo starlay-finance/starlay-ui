@@ -57,8 +57,7 @@ export const Launchpad: VFC<{ data: LaunchpadData }> = ({ data }) => {
               token={data.token}
             />
             <Sale
-              token={data.token}
-              information={data.sale}
+              data={data}
               status={status}
               market={market}
               maxAmount={valueToBigNumber(data.sale.emissionAmount)}

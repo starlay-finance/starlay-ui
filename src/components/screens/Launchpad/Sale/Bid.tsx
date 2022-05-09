@@ -10,6 +10,7 @@ type BidSecionProps = {
   bid: Bid
   market?: Market
   token: LaunchpadData['token']
+  vesting: LaunchpadData['vesting']
   hasEnded: boolean
   openBiddingModal: VoidFunction
   receivableAmount: BigNumber
@@ -20,6 +21,7 @@ export const BidSecion: VFC<BidSecionProps> = ({
   bid,
   market,
   token,
+  vesting,
   hasEnded,
   openBiddingModal,
   receivableAmount,
@@ -65,8 +67,9 @@ export const BidSecion: VFC<BidSecionProps> = ({
           {!receivableAmount.isZero() && (
             <InformationItem
               label={t`Vesting Period`}
-              tooltip={t`TODO description of receivable amount`}
-              value={'2022/07/02 - 2023/07/02'}
+              value={`${vesting.start.format('MMM, D YYYY')} - ${vesting.start
+                .add(vesting.seconds, 's')
+                .format('MMM, D YYYY')}`}
             />
           )}
         </ul>

@@ -33,6 +33,10 @@ export type LaunchpadData = {
     emissionRatio: number
     biddingAssets: Omit<ERC20Asset, 'icon'>[]
   }
+  vesting: {
+    start: Dayjs
+    seconds: number
+  }
   launchpadAddress: EthereumAddress | undefined
 }
 

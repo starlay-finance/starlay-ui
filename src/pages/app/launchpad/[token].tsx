@@ -55,6 +55,10 @@ const LaunchpadPage: Page<LaunchpadPageStaticProps> = ({ data }) => (
         start: dayjs(data.sale.start),
         end: dayjs(data.sale.end),
       },
+      vesting: {
+        ...data.vesting,
+        start: dayjs(data.vesting.start),
+      },
     }}
   />
 )

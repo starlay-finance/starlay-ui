@@ -10,16 +10,14 @@ import { useBiddingModal } from './BiddingModal'
 import { SaleInformation } from './SaleInformation'
 
 type SaleProps = {
-  token: LaunchpadData['token']
-  information: LaunchpadData['sale']
+  data: LaunchpadData
   status: Status
   market?: Market
   maxAmount: BigNumber
 }
 
 export const Sale: VFC<SaleProps> = ({
-  token,
-  information,
+  data: { token, sale, vesting },
   status,
   market,
   maxAmount,
@@ -32,7 +30,7 @@ export const Sale: VFC<SaleProps> = ({
     open({
       currentBid,
       maxAmount,
-      biddingAssets: information.biddingAssets.map((asset) => ({
+      biddingAssets: sale.biddingAssets.map((asset) => ({
         ...asset,
         icon: assetFromSymbol(asset.symbol).icon,
       })),
@@ -49,6 +47,7 @@ export const Sale: VFC<SaleProps> = ({
           market={market}
           hasEnded={status === 'Ended'}
           token={token}
+          vesting={vesting}
           openBiddingModal={openBiddingModal}
           receivableAmount={userData.claimable}
           refundableAmount={userData.refundable}
@@ -58,7 +57,7 @@ export const Sale: VFC<SaleProps> = ({
       <SaleInformation
         status={status}
         token={token}
-        information={information}
+        information={sale}
         openBiddingModal={openBiddingModal}
         hasBidded={!!currentBid}
       />
