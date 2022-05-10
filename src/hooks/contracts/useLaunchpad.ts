@@ -1,5 +1,9 @@
-import { Launchpad } from '@starlay-finance/contract-helpers'
+import {
+  EthereumTransactionTypeExtended,
+  Launchpad,
+} from '@starlay-finance/contract-helpers'
 import { BigNumber, normalizeBN } from '@starlay-finance/math-utils'
+import { ethers } from 'ethers'
 import { useLaunchpadContext } from 'src/components/screens/Launchpad/LaunchpadContext'
 import { Bid } from 'src/components/screens/Launchpad/types'
 import { launchpadContract } from 'src/libs/launchpad'
@@ -32,9 +36,8 @@ export const useLaunchpad = (params?: {
       return launchpadContract(provider!, launchpadAddress)
     },
   )
-  const { handleTx } = useTxHandler()
 
-  const { data: userData } = useSWRImmutable<UserData>(
+  const { data: userData, mutate } = useSWRImmutable<UserData>(
     provider &&
       launchpadAddress &&
       launchpad &&
@@ -47,6 +50,12 @@ export const useLaunchpad = (params?: {
     (_key, _chainId, _launchpadAddress, account) =>
       fetchUserData(launchpad!, account),
   )
+
+  const handler = useTxHandler()
+  const handleTx = (
+    txs: EthereumTransactionTypeExtended[],
+    signer: ethers.providers.JsonRpcSigner,
+  ) => handler.handleTx(txs, signer, () => mutate())
 
   const bid = async (param: {
     amount: BigNumber
