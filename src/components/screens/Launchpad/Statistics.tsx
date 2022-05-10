@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
-import dayjs from 'dayjs'
-import { CSSProperties, VFC } from 'react'
+import dayjs, { Dayjs } from 'dayjs'
+import { CSSProperties, useEffect, useState, VFC } from 'react'
 import {
   Area,
   ComposedChart,
@@ -13,6 +13,7 @@ import {
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
+import { useLaunchpadPricesHistorical } from 'src/hooks/useLaunchpadData'
 import {
   attention,
   darkPurple,
@@ -36,15 +37,20 @@ import { LaunchpadData, Market, PriceChartData } from './types'
 
 type StatisticsProps = {
   token: LaunchpadData['token']
+  start: Dayjs
   market: Market | undefined
-  priceChartData: PriceChartData[]
 }
 
-export const Statistics: VFC<StatisticsProps> = ({
-  token,
-  market,
-  priceChartData,
-}) => {
+export const Statistics: VFC<StatisticsProps> = ({ token, start, market }) => {
+  const { data: historical = [] } = useLaunchpadPricesHistorical()
+  const [priceChartData, setpriceChartData] = useState<PriceChartData[]>([])
+  useEffect(() => {
+    setpriceChartData([
+      { priceInUSD: 0, bottomPriceInUSD: 0, timestamp: start.unix() },
+      ...historical,
+    ])
+  }, [historical])
+
   const { userData } = useLaunchpad()
   const limitPrice = userData?.bid?.limitPrice
 
@@ -90,7 +96,7 @@ export const Statistics: VFC<StatisticsProps> = ({
             <ComposedChart
               width={730}
               data={priceChartData}
-              margin={{ top: 0, right: 8, left: 8, bottom: 8 }}
+              margin={{ top: 40, right: 8, left: 8, bottom: 8 }}
             >
               <defs>
                 <linearGradient id="colorPx" x1="0" y1=".5" x2="1" y2=".5">
@@ -134,7 +140,7 @@ export const Statistics: VFC<StatisticsProps> = ({
                 content={TooltipRenderer}
                 cursor={{
                   strokeDashoffset: 540,
-                  strokeDasharray: 300,
+                  strokeDasharray: 280,
                 }}
                 active
               />
@@ -220,7 +226,7 @@ const Item = styled<
       {label}
       {tooltip && <TooltipMessage message={tooltip} />}
     </div>
-    <div>{value ? value : <ShimmerPlaceholder />}</div>
+    <div>{value ? value : <ShimmerPlaceholder as="div" />}</div>
   </li>
 ))``
 
@@ -250,6 +256,7 @@ const Items = styled.ul`
         font-weight: ${fontWeightBold};
         ${ShimmerPlaceholder} {
           width: 50%;
+          height: 1.2em;
         }
       }
     }

@@ -1,17 +1,18 @@
 import { valueToBigNumber } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
-import { useEffect, useState, VFC } from 'react'
+import { VFC } from 'react'
 import { AppBackground } from 'src/components/parts/Background'
 import { AppFooter } from 'src/components/parts/Footer'
 import { AppHeader } from 'src/components/parts/Header/AppHeader'
+import { useLaunchpadData } from 'src/hooks/useLaunchpadData'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
 import styled from 'styled-components'
 import { KeyVisual } from './KeyVisual'
-import { LaunchpadContextProvider } from './LaunchpadContext'
+import { withLaunchpadContext } from './LaunchpadContext'
 import { ProjectInformation } from './ProjectInformation'
 import { Sale } from './Sale'
 import { Statistics } from './Statistics'
-import { LaunchpadData, Market, PriceChartData, Status } from './types'
+import { LaunchpadData, Status } from './types'
 
 export type { LaunchpadData }
 
@@ -22,21 +23,14 @@ const judgeStatus = (sale: LaunchpadData['sale']): Status => {
   return 'Open'
 }
 
-export const Launchpad: VFC<{ data: LaunchpadData }> = ({ data }) => {
-  const status = judgeStatus(data.sale)
-  const market: Market | undefined = undefined
-  const [priceChartData, setpriceChartData] = useState<PriceChartData[]>([])
-  useEffect(() => {
-    setpriceChartData([
-      { priceInUSD: 0, bottomPriceInUSD: 0, timestamp: 1652356800 },
-      ...mockPriceChartData,
-    ])
-  }, [])
-  return (
-    <>
-      <AppHeader />
-      <Main>
-        <LaunchpadContextProvider launchpadAddress={data.launchpadAddress}>
+export const Launchpad: VFC<{ data: LaunchpadData }> = withLaunchpadContext(
+  ({ data }) => {
+    const status = judgeStatus(data.sale)
+    const { data: market } = useLaunchpadData()
+    return (
+      <>
+        <AppHeader />
+        <Main>
           <AppBackground />
           {status === 'Upcoming' ? (
             <KeyVisual
@@ -46,8 +40,8 @@ export const Launchpad: VFC<{ data: LaunchpadData }> = ({ data }) => {
           ) : (
             <Statistics
               token={data.token}
+              start={data.sale.start}
               market={market}
-              priceChartData={priceChartData}
             />
           )}
           <Content>
@@ -62,12 +56,12 @@ export const Launchpad: VFC<{ data: LaunchpadData }> = ({ data }) => {
               maxAmount={valueToBigNumber(data.sale.emissionAmount)}
             />
           </Content>
-        </LaunchpadContextProvider>
-      </Main>
-      <AppFooter />
-    </>
-  )
-}
+        </Main>
+        <AppFooter />
+      </>
+    )
+  },
+)
 
 const Content = styled.div`
   position: relative;
@@ -87,16 +81,3 @@ const Main = styled.main`
     flex: 1;
   }
 `
-
-const mockPriceChartData: PriceChartData[] = [
-  { priceInUSD: 0, bottomPriceInUSD: 0, timestamp: 1652141000 },
-  { priceInUSD: 0.01, bottomPriceInUSD: 0, timestamp: 1652141100 },
-  { priceInUSD: 0.05, bottomPriceInUSD: 0.01, timestamp: 1652141200 },
-  { priceInUSD: 0.1, bottomPriceInUSD: 0.01, timestamp: 1652141300 },
-  { priceInUSD: 0.11, bottomPriceInUSD: 0.01, timestamp: 1652141400 },
-  { priceInUSD: 0.13, bottomPriceInUSD: 0.01, timestamp: 1652142000 },
-  { priceInUSD: 0.28, bottomPriceInUSD: 0.14, timestamp: 1652143000 },
-  { priceInUSD: 0.31, bottomPriceInUSD: 0.21, timestamp: 1652144000 },
-  { priceInUSD: 0.35, bottomPriceInUSD: 0.21, timestamp: 1652145000 },
-  { priceInUSD: 0.41, bottomPriceInUSD: 0.31, timestamp: 1652146000 },
-]
