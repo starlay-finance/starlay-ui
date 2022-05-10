@@ -33,10 +33,18 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
   currentEstimatedPrice = BN_ZERO,
   currentBid,
 }) => {
-  const { bid, update, cancel } = useLaunchpad({ launchpadAddress })
+  const { bid, update, updateAmount, updateLimitPrice, cancel } = useLaunchpad({
+    launchpadAddress,
+  })
   const submit = (newBid: Bid & { asset: EthereumAddress }) => {
     if (!currentBid) return bid(newBid)
     if (currentBid?.cancelable) return cancel()
+    if (
+      !currentBid.limitPrice ||
+      (newBid.limitPrice && currentBid.limitPrice.eq(newBid.limitPrice))
+    )
+      return updateAmount(newBid)
+    if (currentBid.amount.eq(newBid.amount)) return updateLimitPrice(newBid)
     return update(newBid)
   }
   return (

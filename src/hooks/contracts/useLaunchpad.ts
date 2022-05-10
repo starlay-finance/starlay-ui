@@ -84,6 +84,36 @@ export const useLaunchpad = (params?: {
     )
   }
 
+  const updateAmount = async (param: {
+    amount: BigNumber
+    asset: EthereumAddress
+  }) => {
+    if (!launchpad || !account || !signer) throw new Error('Unexpected state')
+    return handleTx(
+      await launchpad.updateAmount({
+        user: account,
+        reserve: param.asset,
+        amount: param.amount.toString(),
+      }),
+      signer,
+    )
+  }
+
+  const updateLimitPrice = async (param: {
+    asset: EthereumAddress
+    limitPrice?: BigNumber
+  }) => {
+    if (!launchpad || !account || !signer) throw new Error('Unexpected state')
+    return handleTx(
+      await launchpad.updatePriceCap({
+        user: account,
+        reserve: param.asset,
+        priceCap: param.limitPrice?.toString() || '0',
+      }),
+      signer,
+    )
+  }
+
   const cancel = async () => {
     if (!launchpad || !account || !signer) throw new Error('Unexpected state')
     return handleTx(await launchpad.cancel({ user: account }), signer)
@@ -94,7 +124,15 @@ export const useLaunchpad = (params?: {
     return handleTx(await launchpad.refund({ user: account }), signer)
   }
 
-  return { bid, update, cancel, refund, userData }
+  return {
+    bid,
+    update,
+    updateAmount,
+    updateLimitPrice,
+    cancel,
+    refund,
+    userData,
+  }
 }
 
 const fetchUserData = async (
