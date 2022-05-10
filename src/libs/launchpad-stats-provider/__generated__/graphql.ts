@@ -20,36 +20,36 @@ export type Scalars = {
 
 export type Bid = {
   __typename?: 'Bid';
-  amount: Scalars['BigInt'];
+  amount: Scalars['BigDecimal'];
   cancellable: Scalars['Boolean'];
-  cap: Scalars['BigInt'];
+  cap: Scalars['BigDecimal'];
   id: Scalars['ID'];
-  multiplied: Scalars['BigInt'];
+  multiplied: Scalars['BigDecimal'];
   project: Project;
   timestamp: Scalars['BigInt'];
 };
 
 export type Bid_Filter = {
-  amount?: InputMaybe<Scalars['BigInt']>;
-  amount_gt?: InputMaybe<Scalars['BigInt']>;
-  amount_gte?: InputMaybe<Scalars['BigInt']>;
-  amount_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  amount_lt?: InputMaybe<Scalars['BigInt']>;
-  amount_lte?: InputMaybe<Scalars['BigInt']>;
-  amount_not?: InputMaybe<Scalars['BigInt']>;
-  amount_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  amount?: InputMaybe<Scalars['BigDecimal']>;
+  amount_gt?: InputMaybe<Scalars['BigDecimal']>;
+  amount_gte?: InputMaybe<Scalars['BigDecimal']>;
+  amount_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  amount_lt?: InputMaybe<Scalars['BigDecimal']>;
+  amount_lte?: InputMaybe<Scalars['BigDecimal']>;
+  amount_not?: InputMaybe<Scalars['BigDecimal']>;
+  amount_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
   cancellable?: InputMaybe<Scalars['Boolean']>;
   cancellable_in?: InputMaybe<Array<Scalars['Boolean']>>;
   cancellable_not?: InputMaybe<Scalars['Boolean']>;
   cancellable_not_in?: InputMaybe<Array<Scalars['Boolean']>>;
-  cap?: InputMaybe<Scalars['BigInt']>;
-  cap_gt?: InputMaybe<Scalars['BigInt']>;
-  cap_gte?: InputMaybe<Scalars['BigInt']>;
-  cap_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  cap_lt?: InputMaybe<Scalars['BigInt']>;
-  cap_lte?: InputMaybe<Scalars['BigInt']>;
-  cap_not?: InputMaybe<Scalars['BigInt']>;
-  cap_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  cap?: InputMaybe<Scalars['BigDecimal']>;
+  cap_gt?: InputMaybe<Scalars['BigDecimal']>;
+  cap_gte?: InputMaybe<Scalars['BigDecimal']>;
+  cap_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  cap_lt?: InputMaybe<Scalars['BigDecimal']>;
+  cap_lte?: InputMaybe<Scalars['BigDecimal']>;
+  cap_not?: InputMaybe<Scalars['BigDecimal']>;
+  cap_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
   id?: InputMaybe<Scalars['ID']>;
   id_gt?: InputMaybe<Scalars['ID']>;
   id_gte?: InputMaybe<Scalars['ID']>;
@@ -58,14 +58,14 @@ export type Bid_Filter = {
   id_lte?: InputMaybe<Scalars['ID']>;
   id_not?: InputMaybe<Scalars['ID']>;
   id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  multiplied?: InputMaybe<Scalars['BigInt']>;
-  multiplied_gt?: InputMaybe<Scalars['BigInt']>;
-  multiplied_gte?: InputMaybe<Scalars['BigInt']>;
-  multiplied_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  multiplied_lt?: InputMaybe<Scalars['BigInt']>;
-  multiplied_lte?: InputMaybe<Scalars['BigInt']>;
-  multiplied_not?: InputMaybe<Scalars['BigInt']>;
-  multiplied_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  multiplied?: InputMaybe<Scalars['BigDecimal']>;
+  multiplied_gt?: InputMaybe<Scalars['BigDecimal']>;
+  multiplied_gte?: InputMaybe<Scalars['BigDecimal']>;
+  multiplied_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  multiplied_lt?: InputMaybe<Scalars['BigDecimal']>;
+  multiplied_lte?: InputMaybe<Scalars['BigDecimal']>;
+  multiplied_not?: InputMaybe<Scalars['BigDecimal']>;
+  multiplied_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
   project?: InputMaybe<Scalars['String']>;
   project_contains?: InputMaybe<Scalars['String']>;
   project_contains_nocase?: InputMaybe<Scalars['String']>;
@@ -124,20 +124,20 @@ export type Block_Height = {
 
 export type LockedBidSummary = {
   __typename?: 'LockedBidSummary';
-  amount: Scalars['BigInt'];
+  amount: Scalars['BigDecimal'];
   id: Scalars['ID'];
-  multiplied: Scalars['BigInt'];
+  multiplied: Scalars['BigDecimal'];
 };
 
 export type LockedBidSummary_Filter = {
-  amount?: InputMaybe<Scalars['BigInt']>;
-  amount_gt?: InputMaybe<Scalars['BigInt']>;
-  amount_gte?: InputMaybe<Scalars['BigInt']>;
-  amount_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  amount_lt?: InputMaybe<Scalars['BigInt']>;
-  amount_lte?: InputMaybe<Scalars['BigInt']>;
-  amount_not?: InputMaybe<Scalars['BigInt']>;
-  amount_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  amount?: InputMaybe<Scalars['BigDecimal']>;
+  amount_gt?: InputMaybe<Scalars['BigDecimal']>;
+  amount_gte?: InputMaybe<Scalars['BigDecimal']>;
+  amount_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  amount_lt?: InputMaybe<Scalars['BigDecimal']>;
+  amount_lte?: InputMaybe<Scalars['BigDecimal']>;
+  amount_not?: InputMaybe<Scalars['BigDecimal']>;
+  amount_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
   id?: InputMaybe<Scalars['ID']>;
   id_gt?: InputMaybe<Scalars['ID']>;
   id_gte?: InputMaybe<Scalars['ID']>;
@@ -146,14 +146,14 @@ export type LockedBidSummary_Filter = {
   id_lte?: InputMaybe<Scalars['ID']>;
   id_not?: InputMaybe<Scalars['ID']>;
   id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  multiplied?: InputMaybe<Scalars['BigInt']>;
-  multiplied_gt?: InputMaybe<Scalars['BigInt']>;
-  multiplied_gte?: InputMaybe<Scalars['BigInt']>;
-  multiplied_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  multiplied_lt?: InputMaybe<Scalars['BigInt']>;
-  multiplied_lte?: InputMaybe<Scalars['BigInt']>;
-  multiplied_not?: InputMaybe<Scalars['BigInt']>;
-  multiplied_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  multiplied?: InputMaybe<Scalars['BigDecimal']>;
+  multiplied_gt?: InputMaybe<Scalars['BigDecimal']>;
+  multiplied_gte?: InputMaybe<Scalars['BigDecimal']>;
+  multiplied_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  multiplied_lt?: InputMaybe<Scalars['BigDecimal']>;
+  multiplied_lte?: InputMaybe<Scalars['BigDecimal']>;
+  multiplied_not?: InputMaybe<Scalars['BigDecimal']>;
+  multiplied_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
 };
 
 export enum LockedBidSummary_OrderBy {
@@ -194,8 +194,8 @@ export type ProjectStatistic = {
   bottomPrice: Scalars['BigDecimal'];
   id: Scalars['ID'];
   numOfBidders: Scalars['BigInt'];
-  totalAmount: Scalars['BigInt'];
-  totalMultiplied: Scalars['BigInt'];
+  totalAmount: Scalars['BigDecimal'];
+  totalMultiplied: Scalars['BigDecimal'];
 };
 
 export type ProjectStatistic_Filter = {
@@ -223,22 +223,22 @@ export type ProjectStatistic_Filter = {
   numOfBidders_lte?: InputMaybe<Scalars['BigInt']>;
   numOfBidders_not?: InputMaybe<Scalars['BigInt']>;
   numOfBidders_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  totalAmount?: InputMaybe<Scalars['BigInt']>;
-  totalAmount_gt?: InputMaybe<Scalars['BigInt']>;
-  totalAmount_gte?: InputMaybe<Scalars['BigInt']>;
-  totalAmount_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  totalAmount_lt?: InputMaybe<Scalars['BigInt']>;
-  totalAmount_lte?: InputMaybe<Scalars['BigInt']>;
-  totalAmount_not?: InputMaybe<Scalars['BigInt']>;
-  totalAmount_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  totalMultiplied?: InputMaybe<Scalars['BigInt']>;
-  totalMultiplied_gt?: InputMaybe<Scalars['BigInt']>;
-  totalMultiplied_gte?: InputMaybe<Scalars['BigInt']>;
-  totalMultiplied_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  totalMultiplied_lt?: InputMaybe<Scalars['BigInt']>;
-  totalMultiplied_lte?: InputMaybe<Scalars['BigInt']>;
-  totalMultiplied_not?: InputMaybe<Scalars['BigInt']>;
-  totalMultiplied_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  totalAmount?: InputMaybe<Scalars['BigDecimal']>;
+  totalAmount_gt?: InputMaybe<Scalars['BigDecimal']>;
+  totalAmount_gte?: InputMaybe<Scalars['BigDecimal']>;
+  totalAmount_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  totalAmount_lt?: InputMaybe<Scalars['BigDecimal']>;
+  totalAmount_lte?: InputMaybe<Scalars['BigDecimal']>;
+  totalAmount_not?: InputMaybe<Scalars['BigDecimal']>;
+  totalAmount_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  totalMultiplied?: InputMaybe<Scalars['BigDecimal']>;
+  totalMultiplied_gt?: InputMaybe<Scalars['BigDecimal']>;
+  totalMultiplied_gte?: InputMaybe<Scalars['BigDecimal']>;
+  totalMultiplied_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  totalMultiplied_lt?: InputMaybe<Scalars['BigDecimal']>;
+  totalMultiplied_lte?: InputMaybe<Scalars['BigDecimal']>;
+  totalMultiplied_not?: InputMaybe<Scalars['BigDecimal']>;
+  totalMultiplied_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
 };
 
 export enum ProjectStatistic_OrderBy {

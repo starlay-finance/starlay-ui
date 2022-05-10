@@ -12,36 +12,36 @@ directive @entity on OBJECT
 directive @subgraphId(id: String!) on OBJECT
 
 type Bid {
-  amount: BigInt!
+  amount: BigDecimal!
   cancellable: Boolean!
-  cap: BigInt!
+  cap: BigDecimal!
   id: ID!
-  multiplied: BigInt!
+  multiplied: BigDecimal!
   project: Project!
   timestamp: BigInt!
 }
 
 input Bid_filter {
-  amount: BigInt
-  amount_gt: BigInt
-  amount_gte: BigInt
-  amount_in: [BigInt!]
-  amount_lt: BigInt
-  amount_lte: BigInt
-  amount_not: BigInt
-  amount_not_in: [BigInt!]
+  amount: BigDecimal
+  amount_gt: BigDecimal
+  amount_gte: BigDecimal
+  amount_in: [BigDecimal!]
+  amount_lt: BigDecimal
+  amount_lte: BigDecimal
+  amount_not: BigDecimal
+  amount_not_in: [BigDecimal!]
   cancellable: Boolean
   cancellable_in: [Boolean!]
   cancellable_not: Boolean
   cancellable_not_in: [Boolean!]
-  cap: BigInt
-  cap_gt: BigInt
-  cap_gte: BigInt
-  cap_in: [BigInt!]
-  cap_lt: BigInt
-  cap_lte: BigInt
-  cap_not: BigInt
-  cap_not_in: [BigInt!]
+  cap: BigDecimal
+  cap_gt: BigDecimal
+  cap_gte: BigDecimal
+  cap_in: [BigDecimal!]
+  cap_lt: BigDecimal
+  cap_lte: BigDecimal
+  cap_not: BigDecimal
+  cap_not_in: [BigDecimal!]
   id: ID
   id_gt: ID
   id_gte: ID
@@ -50,14 +50,14 @@ input Bid_filter {
   id_lte: ID
   id_not: ID
   id_not_in: [ID!]
-  multiplied: BigInt
-  multiplied_gt: BigInt
-  multiplied_gte: BigInt
-  multiplied_in: [BigInt!]
-  multiplied_lt: BigInt
-  multiplied_lte: BigInt
-  multiplied_not: BigInt
-  multiplied_not_in: [BigInt!]
+  multiplied: BigDecimal
+  multiplied_gt: BigDecimal
+  multiplied_gte: BigDecimal
+  multiplied_in: [BigDecimal!]
+  multiplied_lt: BigDecimal
+  multiplied_lte: BigDecimal
+  multiplied_not: BigDecimal
+  multiplied_not_in: [BigDecimal!]
   project: String
   project_contains: String
   project_contains_nocase: String
@@ -117,20 +117,20 @@ input Block_height {
 scalar Bytes
 
 type LockedBidSummary {
-  amount: BigInt!
+  amount: BigDecimal!
   id: ID!
-  multiplied: BigInt!
+  multiplied: BigDecimal!
 }
 
 input LockedBidSummary_filter {
-  amount: BigInt
-  amount_gt: BigInt
-  amount_gte: BigInt
-  amount_in: [BigInt!]
-  amount_lt: BigInt
-  amount_lte: BigInt
-  amount_not: BigInt
-  amount_not_in: [BigInt!]
+  amount: BigDecimal
+  amount_gt: BigDecimal
+  amount_gte: BigDecimal
+  amount_in: [BigDecimal!]
+  amount_lt: BigDecimal
+  amount_lte: BigDecimal
+  amount_not: BigDecimal
+  amount_not_in: [BigDecimal!]
   id: ID
   id_gt: ID
   id_gte: ID
@@ -139,14 +139,14 @@ input LockedBidSummary_filter {
   id_lte: ID
   id_not: ID
   id_not_in: [ID!]
-  multiplied: BigInt
-  multiplied_gt: BigInt
-  multiplied_gte: BigInt
-  multiplied_in: [BigInt!]
-  multiplied_lt: BigInt
-  multiplied_lte: BigInt
-  multiplied_not: BigInt
-  multiplied_not_in: [BigInt!]
+  multiplied: BigDecimal
+  multiplied_gt: BigDecimal
+  multiplied_gte: BigDecimal
+  multiplied_in: [BigDecimal!]
+  multiplied_lt: BigDecimal
+  multiplied_lte: BigDecimal
+  multiplied_not: BigDecimal
+  multiplied_not_in: [BigDecimal!]
 }
 
 enum LockedBidSummary_orderBy {
@@ -176,8 +176,8 @@ type ProjectStatistic {
   bottomPrice: BigDecimal!
   id: ID!
   numOfBidders: BigInt!
-  totalAmount: BigInt!
-  totalMultiplied: BigInt!
+  totalAmount: BigDecimal!
+  totalMultiplied: BigDecimal!
 }
 
 input ProjectStatistic_filter {
@@ -205,22 +205,22 @@ input ProjectStatistic_filter {
   numOfBidders_lte: BigInt
   numOfBidders_not: BigInt
   numOfBidders_not_in: [BigInt!]
-  totalAmount: BigInt
-  totalAmount_gt: BigInt
-  totalAmount_gte: BigInt
-  totalAmount_in: [BigInt!]
-  totalAmount_lt: BigInt
-  totalAmount_lte: BigInt
-  totalAmount_not: BigInt
-  totalAmount_not_in: [BigInt!]
-  totalMultiplied: BigInt
-  totalMultiplied_gt: BigInt
-  totalMultiplied_gte: BigInt
-  totalMultiplied_in: [BigInt!]
-  totalMultiplied_lt: BigInt
-  totalMultiplied_lte: BigInt
-  totalMultiplied_not: BigInt
-  totalMultiplied_not_in: [BigInt!]
+  totalAmount: BigDecimal
+  totalAmount_gt: BigDecimal
+  totalAmount_gte: BigDecimal
+  totalAmount_in: [BigDecimal!]
+  totalAmount_lt: BigDecimal
+  totalAmount_lte: BigDecimal
+  totalAmount_not: BigDecimal
+  totalAmount_not_in: [BigDecimal!]
+  totalMultiplied: BigDecimal
+  totalMultiplied_gt: BigDecimal
+  totalMultiplied_gte: BigDecimal
+  totalMultiplied_in: [BigDecimal!]
+  totalMultiplied_lt: BigDecimal
+  totalMultiplied_lte: BigDecimal
+  totalMultiplied_not: BigDecimal
+  totalMultiplied_not_in: [BigDecimal!]
 }
 
 enum ProjectStatistic_orderBy {
