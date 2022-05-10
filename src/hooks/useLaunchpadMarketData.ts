@@ -46,13 +46,15 @@ export const useLaunchpadMarketData = ({
       ? saleStart.unix() - now.unix()
       : Math.max(INTERVAL - (now.unix() - latestTimestamp), INTERVAL)
     const timer = setTimeout(() => {
-      mutate(async (data) =>
-        updateLaunchpadMarketData(
-          data || { chartData: [initialChartData(saleStart)] },
-          provider!.chainId,
-          launchpadAddress!,
-          latestTimestamp,
-        ),
+      mutate(
+        async (data) =>
+          updateLaunchpadMarketData(
+            data || { chartData: [initialChartData(saleStart)] },
+            provider!.chainId,
+            launchpadAddress!,
+            latestTimestamp,
+          ),
+        { revalidate: false },
       )
     }, next)
     return () => {
