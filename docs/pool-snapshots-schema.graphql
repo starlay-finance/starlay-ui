@@ -67,6 +67,21 @@ type BaseCurrencyData {
   networkBaseTokenPriceInUsd: String!
 }
 
+type HealthFactor {
+  """ # health factor"""
+  borrowed: String!
+  id: ID!
+  number: Float!
+
+  """ # account address"""
+  timestamp: String!
+}
+
+type HealthFactorsOutput {
+  items: [HealthFactor!]!
+  nextToken: String
+}
+
 type IncentivesWithFeeds {
   emissionEndTimestamp: Int!
   emissionPerSecond: String!
@@ -80,6 +95,11 @@ type IncentivesWithFeeds {
   tokenIncentivesIndex: String!
 }
 
+input PageInput {
+  limit: Int
+  nextToken: String
+}
+
 type PoolData {
   baseCurrencyData: BaseCurrencyData!
   reservesData: [ReservesData!]!
@@ -87,6 +107,8 @@ type PoolData {
 
 type Query {
   getAssetData(date: String!): AssetData
+  getStatistics(dateAndTime: String!): Statistics
+  healthFactors(PageInput: PageInput): HealthFactorsOutput!
 }
 
 type ReservesData {
@@ -131,4 +153,14 @@ type ReservesIncentivesData {
   sdIncentiveData: IncentivesWithFeeds!
   underlyingAsset: String!
   vdIncentiveData: IncentivesWithFeeds!
+}
+
+type Statistics {
+  borrowTxCount: Int!
+  data: String!
+  depositTxCount: Int!
+  id: ID!
+  timestamp: String!
+  uniqueBorrowedUsers: Int!
+  uniqueDepositedUsers: Int!
 }

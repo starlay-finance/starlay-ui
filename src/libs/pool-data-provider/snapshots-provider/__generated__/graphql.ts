@@ -31,6 +31,22 @@ export type BaseCurrencyData = {
   networkBaseTokenPriceInUsd: Scalars['String'];
 };
 
+export type HealthFactor = {
+  __typename?: 'HealthFactor';
+  /**  # health factor */
+  borrowed: Scalars['String'];
+  id: Scalars['ID'];
+  number: Scalars['Float'];
+  /**  # account address */
+  timestamp: Scalars['String'];
+};
+
+export type HealthFactorsOutput = {
+  __typename?: 'HealthFactorsOutput';
+  items: Array<HealthFactor>;
+  nextToken?: Maybe<Scalars['String']>;
+};
+
 export type IncentivesWithFeeds = {
   __typename?: 'IncentivesWithFeeds';
   emissionEndTimestamp: Scalars['Int'];
@@ -45,6 +61,11 @@ export type IncentivesWithFeeds = {
   tokenIncentivesIndex: Scalars['String'];
 };
 
+export type PageInput = {
+  limit?: InputMaybe<Scalars['Int']>;
+  nextToken?: InputMaybe<Scalars['String']>;
+};
+
 export type PoolData = {
   __typename?: 'PoolData';
   baseCurrencyData: BaseCurrencyData;
@@ -54,11 +75,23 @@ export type PoolData = {
 export type Query = {
   __typename?: 'Query';
   getAssetData?: Maybe<AssetData>;
+  getStatistics?: Maybe<Statistics>;
+  healthFactors: HealthFactorsOutput;
 };
 
 
 export type QueryGetAssetDataArgs = {
   date: Scalars['String'];
+};
+
+
+export type QueryGetStatisticsArgs = {
+  dateAndTime: Scalars['String'];
+};
+
+
+export type QueryHealthFactorsArgs = {
+  PageInput?: InputMaybe<PageInput>;
 };
 
 export type ReservesData = {
@@ -105,6 +138,17 @@ export type ReservesIncentivesData = {
   sdIncentiveData: IncentivesWithFeeds;
   underlyingAsset: Scalars['String'];
   vdIncentiveData: IncentivesWithFeeds;
+};
+
+export type Statistics = {
+  __typename?: 'Statistics';
+  borrowTxCount: Scalars['Int'];
+  data: Scalars['String'];
+  depositTxCount: Scalars['Int'];
+  id: Scalars['ID'];
+  timestamp: Scalars['String'];
+  uniqueBorrowedUsers: Scalars['Int'];
+  uniqueDepositedUsers: Scalars['Int'];
 };
 
 export type GetAssetDataQueryVariables = Exact<{
