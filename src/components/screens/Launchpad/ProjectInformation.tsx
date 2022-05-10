@@ -15,13 +15,13 @@ import {
 } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import styled from 'styled-components'
-import { LaunchpadData } from './types'
+import { ProjectData } from './types'
 
 export const ProjectInformation = styled<
   VFC<
     {
-      information: LaunchpadData['information']
-      token: LaunchpadData['token']
+      information: ProjectData['information']
+      token: ProjectData['token']
     } & { className?: string }
   >
 >(({ information: { details, sale, notes, urls }, token, className }) => (
@@ -49,9 +49,7 @@ export const ProjectInformation = styled<
   </ProjectInformationDiv>
 ))``
 
-const Urls: VFC<{ urls: LaunchpadData['information']['urls'] }> = ({
-  urls,
-}) => (
+const Urls: VFC<{ urls: ProjectData['information']['urls'] }> = ({ urls }) => (
   <UrlsDiv>
     <Link href={urls.website}>{t`Web`}</Link>
     {urls.docs && <Link href={urls.docs}>{t`Docs`}</Link>}

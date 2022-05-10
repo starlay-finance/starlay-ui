@@ -4,13 +4,13 @@ import { ASSETS_DICT } from 'src/constants/assets'
 import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
 import { assetFromSymbol } from 'src/utils/assets'
 import styled from 'styled-components'
-import { LaunchpadData, Market, Status } from '../types'
+import { Market, ProjectData, Status } from '../types'
 import { BidSecion } from './Bid'
 import { useBiddingModal } from './BiddingModal'
 import { SaleInformation } from './SaleInformation'
 
 type SaleProps = {
-  data: LaunchpadData
+  data: ProjectData
   status: Status
   market?: Market
   maxAmount: BigNumber

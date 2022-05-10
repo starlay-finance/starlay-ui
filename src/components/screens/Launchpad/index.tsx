@@ -12,18 +12,18 @@ import { withLaunchpadContext } from './LaunchpadContext'
 import { ProjectInformation } from './ProjectInformation'
 import { Sale } from './Sale'
 import { Statistics } from './Statistics'
-import { LaunchpadData, Status } from './types'
+import { ProjectData, Status } from './types'
 
-export type { LaunchpadData }
+export type { ProjectData }
 
-const judgeStatus = (sale: LaunchpadData['sale']): Status => {
+const judgeStatus = (sale: ProjectData['sale']): Status => {
   const now = dayjs()
   if (now.isBefore(sale.start)) return 'Upcoming'
   if (now.isAfter(sale.end)) return 'Ended'
   return 'Open'
 }
 
-export const Launchpad: VFC<{ data: LaunchpadData }> = withLaunchpadContext(
+export const Launchpad: VFC<{ data: ProjectData }> = withLaunchpadContext(
   ({ data }) => {
     const status = judgeStatus(data.sale)
     const { data: market } = useLaunchpadData()

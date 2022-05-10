@@ -3,7 +3,7 @@ import { Dayjs } from 'dayjs'
 import { ERC20Asset } from 'src/types/models'
 import { EthereumAddress } from 'src/types/web3'
 
-export type LaunchpadData = {
+export type ProjectData = {
   id: string
   projectName: string
   keyVisual: string

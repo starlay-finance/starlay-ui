@@ -3,14 +3,14 @@ import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { formatWithTZ } from 'src/utils/date'
 import { formatAmt, formatPct } from 'src/utils/number'
-import { LaunchpadData, Status } from '../types'
+import { ProjectData, Status } from '../types'
 import { CtaButton, Information, InformationItem, Section } from './parts'
 
 const DATE_FORMAT = 'MMM, D HH:mm z'
 
 type SaleInformationProps = {
-  token: LaunchpadData['token']
-  information: LaunchpadData['sale']
+  token: ProjectData['token']
+  information: ProjectData['sale']
   status: Status
   openBiddingModal: VoidFunction
   hasBidded?: boolean

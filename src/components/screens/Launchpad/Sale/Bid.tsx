@@ -2,15 +2,15 @@ import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { BN_ZERO, formatAmt, formatPct, formatUSD } from 'src/utils/number'
-import { Bid, LaunchpadData, Market } from '../types'
+import { Bid, Market, ProjectData } from '../types'
 import { calcBoost } from '../utils'
 import { CtaButton, Information, InformationItem, Section } from './parts'
 
 type BidSecionProps = {
   bid: Bid
   market?: Market
-  token: LaunchpadData['token']
-  vesting: LaunchpadData['vesting']
+  token: ProjectData['token']
+  vesting: ProjectData['vesting']
   hasEnded: boolean
   openBiddingModal: VoidFunction
   receivableAmount: BigNumber

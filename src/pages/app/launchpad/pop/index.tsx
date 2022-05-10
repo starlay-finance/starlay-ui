@@ -1,26 +1,26 @@
 import dayjs from 'dayjs'
 import fs from 'fs'
 import { GetStaticProps } from 'next'
-import { LaunchpadData } from 'src/components/screens/Launchpad'
+import { ProjectData } from 'src/components/screens/Launchpad'
 import { LaunchpadPop } from 'src/components/screens/LaunchpadPop'
 import { Page } from 'src/types/page'
 
 type LaunchpadPopPageStaticProps = {
-  data: Omit<LaunchpadData, 'sale'> & {
-    sale: Omit<LaunchpadData['sale'], 'start' | 'end'> & {
+  data: Omit<ProjectData, 'sale'> & {
+    sale: Omit<ProjectData['sale'], 'start' | 'end'> & {
       start: string
       end: string
     }
   }
 }
 
-const sortSaleEndAsc = (a: LaunchpadData, b: LaunchpadData) =>
+const sortSaleEndAsc = (a: ProjectData, b: ProjectData) =>
   a.sale.end.isAfter(b.sale.end) ? 1 : -1
 
 export const getStaticProps: GetStaticProps<LaunchpadPopPageStaticProps> =
   async () => {
     try {
-      const data: LaunchpadData[] = await Promise.all(
+      const data: ProjectData[] = await Promise.all(
         fs
           .readdirSync('./public/data/launchpad')
           .map(async (file) => import(`public/data/launchpad/${file}`)),

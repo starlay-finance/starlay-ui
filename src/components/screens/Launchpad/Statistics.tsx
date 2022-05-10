@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import dayjs, { Dayjs } from 'dayjs'
-import { CSSProperties, useEffect, useState, VFC } from 'react'
+import { CSSProperties, VFC } from 'react'
 import {
   Area,
   ComposedChart,
@@ -33,23 +33,25 @@ import {
 import { formatWithTZ } from 'src/utils/date'
 import { formatAmt, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
-import { LaunchpadData, Market, PriceChartData } from './types'
+import { Market, PriceChartData, ProjectData } from './types'
 
 type StatisticsProps = {
-  token: LaunchpadData['token']
-  start: Dayjs
+  token: ProjectData['token']
   market: Market | undefined
+  saleStart: Dayjs
+  saleEnd: Dayjs
 }
 
-export const Statistics: VFC<StatisticsProps> = ({ token, start, market }) => {
-  const { data: historical = [] } = useLaunchpadPricesHistorical()
-  const [priceChartData, setpriceChartData] = useState<PriceChartData[]>([])
-  useEffect(() => {
-    setpriceChartData([
-      { priceInUSD: 0, bottomPriceInUSD: 0, timestamp: start.unix() },
-      ...historical,
-    ])
-  }, [historical])
+export const Statistics: VFC<StatisticsProps> = ({
+  token,
+  market,
+  saleStart,
+  saleEnd,
+}) => {
+  const { data: priceChartData = [] } = useLaunchpadPricesHistorical({
+    saleStart,
+    saleEnd,
+  })
 
   const { userData } = useLaunchpad()
   const limitPrice = userData?.bid?.limitPrice
@@ -93,58 +95,66 @@ export const Statistics: VFC<StatisticsProps> = ({ token, start, market }) => {
         </Items>
         <Chart>
           <ResponsiveContainer width={800} height="99%">
-            <ComposedChart
-              width={730}
-              data={priceChartData}
-              margin={{ top: 40, right: 8, left: 8, bottom: 8 }}
-            >
-              <defs>
-                <linearGradient id="colorPx" x1="0" y1=".5" x2="1" y2=".5">
-                  <stop offset="0%" stopColor={skyBlue} stopOpacity={0.48} />
-                  <stop offset="100%" stopColor={darkRed} stopOpacity={0.48} />
-                </linearGradient>
-              </defs>
-              <Area
-                type="monotone"
-                dataKey="priceInUSD"
-                stroke={trueWhite}
-                strokeWidth={2}
-                fillOpacity={1}
-                fill="url(#colorPx)"
-              />
-              <Area
-                type="monotone"
-                dataKey="bottomPriceInUSD"
-                stroke={lightPurple}
-                strokeWidth={1}
-                fillOpacity={1}
-                fill="url(#colorBottomPx)"
-              />
-              {limitPrice && (
-                <ReferenceLine
-                  y={limitPrice.toNumber()}
-                  stroke={limitPriceLineColor}
-                  strokeDasharray="5"
-                >
-                  <Label
-                    value={t`Your Limit Price = ${formatUSD(limitPrice)}`}
-                    fill={limitPriceLineColor}
-                    transform="translate(-6 -28)"
-                    position="insideTopLeft"
-                  />
-                </ReferenceLine>
-              )}
-              <Tooltip
-                position={{ y: 0 }}
-                offset={-100}
-                content={TooltipRenderer}
-                cursor={{
-                  strokeDashoffset: 540,
-                  strokeDasharray: 280,
-                }}
-                active
-              />
-            </ComposedChart>
+            {priceChartData.length > 0 ? (
+              <ComposedChart
+                width={730}
+                data={priceChartData}
+                margin={{ top: 40, right: 8, left: 8, bottom: 8 }}
+              >
+                <defs>
+                  <linearGradient id="colorPx" x1="0" y1=".5" x2="1" y2=".5">
+                    <stop offset="0%" stopColor={skyBlue} stopOpacity={0.48} />
+                    <stop
+                      offset="100%"
+                      stopColor={darkRed}
+                      stopOpacity={0.48}
+                    />
+                  </linearGradient>
+                </defs>
+                <Area
+                  type="monotone"
+                  dataKey="priceInUSD"
+                  stroke={trueWhite}
+                  strokeWidth={2}
+                  fillOpacity={1}
+                  fill="url(#colorPx)"
+                />
+                <Area
+                  type="monotone"
+                  dataKey="bottomPriceInUSD"
+                  stroke={lightPurple}
+                  strokeWidth={1}
+                  fillOpacity={1}
+                  fill="url(#colorBottomPx)"
+                />
+                {limitPrice && (
+                  <ReferenceLine
+                    y={limitPrice.toNumber()}
+                    stroke={limitPriceLineColor}
+                    strokeDasharray="5"
+                  >
+                    <Label
+                      value={t`Your Limit Price = ${formatUSD(limitPrice)}`}
+                      fill={limitPriceLineColor}
+                      transform="translate(-6 -28)"
+                      position="insideTopLeft"
+                    />
+                  </ReferenceLine>
+                )}
+                <Tooltip
+                  position={{ y: 0 }}
+                  offset={-100}
+                  content={TooltipRenderer}
+                  cursor={{
+                    strokeDashoffset: 540,
+                    strokeDasharray: 280,
+                  }}
+                  active
+                />
+              </ComposedChart>
+            ) : (
+              <></>
+            )}
           </ResponsiveContainer>
         </Chart>
       </div>

@@ -1,11 +1,11 @@
 import dayjs from 'dayjs'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { Launchpad, LaunchpadData } from 'src/components/screens/Launchpad'
+import { Launchpad, ProjectData } from 'src/components/screens/Launchpad'
 import { Page, PageStaticProps } from 'src/types/page'
 
 type LaunchpadPageStaticProps = {
-  data: Omit<LaunchpadData, 'sale'> & {
-    sale: Omit<LaunchpadData['sale'], 'start' | 'end'> & {
+  data: Omit<ProjectData, 'sale'> & {
+    sale: Omit<ProjectData['sale'], 'start' | 'end'> & {
       start: string
       end: string
     }

@@ -5,11 +5,11 @@ import { flexCenter } from 'src/styles/mixins'
 import { formatWithTZ } from 'src/utils/date'
 import { toLaunchpad } from 'src/utils/routes'
 import styled, { createGlobalStyle } from 'styled-components'
-import { LaunchpadData } from '../Launchpad'
+import { ProjectData } from '../Launchpad/types'
 
 const DATE_FORMAT = 'hh:mm a z on MMM DD'
 
-export const LaunchpadPop: VFC<{ data: LaunchpadData }> = ({
+export const LaunchpadPop: VFC<{ data: ProjectData }> = ({
   data: { id, projectName, icon, token, sale },
 }) => (
   <>
@@ -30,7 +30,7 @@ export const LaunchpadPop: VFC<{ data: LaunchpadData }> = ({
     </a>
   </>
 )
-const Background: VFC<{ icon: LaunchpadData['icon'] }> = ({ icon }) => (
+const Background: VFC<{ icon: ProjectData['icon'] }> = ({ icon }) => (
   <BackgroundDiv>
     <svg xmlns="http://www.w3.org/2000/svg" width="320" height="240">
       <defs>
