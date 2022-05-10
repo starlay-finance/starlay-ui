@@ -1,6 +1,8 @@
 import { t } from '@lingui/macro'
 import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
+import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
+import { useWallet } from 'src/hooks/useWallet'
 import { formatWithTZ } from 'src/utils/date'
 import { formatAmt, formatPct } from 'src/utils/number'
 import { ProjectData, Status } from '../types'
@@ -23,6 +25,8 @@ export const SaleInformation: VFC<SaleInformationProps> = ({
   openBiddingModal,
   hasBidded,
 }) => {
+  const { account } = useWallet()
+  const { open: openWalletModal } = useWalletModal()
   const started = status !== 'Upcoming'
   return (
     <Section>
@@ -58,16 +62,21 @@ export const SaleInformation: VFC<SaleInformationProps> = ({
           />
         </ul>
       </Information>
-      {status === 'Open' && !hasBidded ? (
+      {status === 'Open' && !account ? (
+        <CtaButton onClick={() => openWalletModal()}>
+          <span>{t`Connect Wallet`}</span>
+        </CtaButton>
+      ) : status === 'Open' && !hasBidded ? (
         <CtaButton onClick={openBiddingModal}>
           <span>{t`Bid`}</span>
         </CtaButton>
       ) : (
-        status === 'Ended' && (
-          <CtaButton disabled>
-            <span>{t`Closed`}</span>
-          </CtaButton>
-        )
+        <></>
+      )}
+      {status === 'Ended' && (
+        <CtaButton disabled>
+          <span>{t`Closed`}</span>
+        </CtaButton>
       )}
     </Section>
   )
