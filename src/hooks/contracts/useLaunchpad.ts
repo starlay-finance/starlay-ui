@@ -5,10 +5,10 @@ import {
 import { BigNumber, normalizeBN } from '@starlay-finance/math-utils'
 import { ethers } from 'ethers'
 import { useLaunchpadContext } from 'src/components/screens/Launchpad/LaunchpadContext'
-import { Bid } from 'src/components/screens/Launchpad/types'
 import { launchpadContract } from 'src/libs/launchpad'
 import { EthereumAddress } from 'src/types/web3'
 import useSWRImmutable from 'swr/immutable'
+import { useLaunchpadBid } from '../useLaunchpadBid'
 import { useStaticRPCProvider } from '../useStaticRPCProvider'
 import { useWallet } from '../useWallet'
 import { useTxHandler } from './txHandler'
@@ -16,8 +16,7 @@ import { useTxHandler } from './txHandler'
 const ASSET_DECIMALS = 18
 const BIDDING_ASSET_DECIMALS = 6
 
-type UserData = {
-  bid?: Bid
+type UserResult = {
   claimable: BigNumber
   refundable: BigNumber
 }
@@ -28,6 +27,7 @@ export const useLaunchpad = (params?: {
   const launchpadAddress = params?.launchpadAddress || context.launchpadAddress
   const { data: provider } = useStaticRPCProvider()
   const { account, signer } = useWallet()
+  const { data: currentBid, mutate: mutateBid } = useLaunchpadBid()
 
   const { data: launchpad } = useSWRImmutable(
     provider &&
@@ -37,7 +37,7 @@ export const useLaunchpad = (params?: {
     },
   )
 
-  const { data: userData, mutate } = useSWRImmutable<UserData>(
+  const { data: userResult } = useSWRImmutable<UserResult>(
     provider &&
       launchpadAddress &&
       launchpad &&
@@ -48,14 +48,14 @@ export const useLaunchpad = (params?: {
         account,
       ],
     (_key, _chainId, _launchpadAddress, account) =>
-      fetchUserData(launchpad!, account),
+      fetchUserResult(launchpad!, account),
   )
 
   const handler = useTxHandler()
   const handleTx = (
     txs: EthereumTransactionTypeExtended[],
     signer: ethers.providers.JsonRpcSigner,
-  ) => handler.handleTx(txs, signer, () => mutate())
+  ) => handler.handleTx(txs, signer, () => mutateBid())
 
   const bid = async (param: {
     amount: BigNumber
@@ -140,34 +140,25 @@ export const useLaunchpad = (params?: {
     updateLimitPrice,
     cancel,
     refund,
-    userData,
+    currentBid,
+    userResult,
   }
 }
 
-const fetchUserData = async (
+const fetchUserResult = async (
   launchpad: Launchpad,
   account: EthereumAddress,
-): Promise<UserData> => {
-  const [bid, claimable, refundable] = await Promise.all([
-    launchpad!.participant(account).then((bid) => {
-      if (!bid) return
-      const limitPrice = normalizeBN(
-        bid.priceCap.toString(),
-        BIDDING_ASSET_DECIMALS,
-      )
-      return {
-        amount: normalizeBN(bid.paid.toString(), BIDDING_ASSET_DECIMALS),
-        limitPrice: limitPrice.isZero() ? undefined : limitPrice,
-        cancelable: bid.cancelable,
-      }
-    }),
+): Promise<UserResult> => {
+  const [claimable, refundable] = await Promise.all([
     launchpad
       .claimable(account)
       .then((claimable) => normalizeBN(claimable.toString(), ASSET_DECIMALS)),
     launchpad
       .refundable(account)
-      .then((refundable) => normalizeBN(refundable.toString(), ASSET_DECIMALS)),
+      .then((refundable) =>
+        normalizeBN(refundable.toString(), BIDDING_ASSET_DECIMALS),
+      ),
   ])
 
-  return { bid, claimable, refundable }
+  return { claimable, refundable }
 }

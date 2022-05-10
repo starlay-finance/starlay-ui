@@ -46,8 +46,8 @@ export const Statistics: VFC<StatisticsProps> = ({
   market,
   priceChartData = [],
 }) => {
-  const { userData } = useLaunchpad()
-  const limitPrice = userData?.bid?.limitPrice
+  const { currentBid } = useLaunchpad()
+  const limitPrice = currentBid?.limitPrice
 
   const limitPriceLineColor = limitPrice
     ? market?.currentPriceInUSD.gt(limitPrice)

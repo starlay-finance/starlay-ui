@@ -14,8 +14,8 @@ type BidSecionProps = {
   hasEnded: boolean
   openBiddingModal: VoidFunction
   maxAmount: BigNumber
-  receivableAmount: BigNumber
-  refundableAmount: BigNumber
+  receivableAmount?: BigNumber
+  refundableAmount?: BigNumber
   requestRefund: VoidFunction
 }
 export const BidSecion: VFC<BidSecionProps> = ({
@@ -63,11 +63,11 @@ export const BidSecion: VFC<BidSecionProps> = ({
             label={t`Receivable Amount`}
             tooltip={t`TODO description of receivable amount`}
             value={formatAmt(
-              hasEnded ? receivableAmount : currentEstimatedAmount,
+              hasEnded ? receivableAmount || BN_ZERO : currentEstimatedAmount,
               { symbol: token.symbol, decimalPlaces: 2 },
             )}
           />
-          {!receivableAmount.isZero() && (
+          {!receivableAmount?.isZero() && (
             <InformationItem
               label={t`Vesting Period`}
               value={`${vesting.start.format('MMM, D YYYY')} - ${vesting.start
@@ -86,10 +86,10 @@ export const BidSecion: VFC<BidSecionProps> = ({
           </span>
         </CtaButton>
       ) : (
-        !refundableAmount.isZero() && (
+        !refundableAmount?.isZero() && (
           <CtaButton onClick={requestRefund}>
             <span>
-              {receivableAmount.isZero()
+              {receivableAmount?.isZero()
                 ? t`Request Bid Amount Refund`
                 : t`Partially Filled! Request Refund for Remained Amount`}
             </span>

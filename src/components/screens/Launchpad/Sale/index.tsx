@@ -24,8 +24,7 @@ export const Sale: VFC<SaleProps> = ({
   maxAmount,
 }) => {
   const { launchpadAddress } = useLaunchpadContext()
-  const { userData, refund } = useLaunchpad()
-  const currentBid = userData?.bid
+  const { currentBid, userResult, refund } = useLaunchpad()
 
   const { open } = useBiddingModal()
   const openBiddingModal = () =>
@@ -54,8 +53,8 @@ export const Sale: VFC<SaleProps> = ({
           vesting={vesting}
           openBiddingModal={openBiddingModal}
           maxAmount={valueToBigNumber(sale.emissionAmount)}
-          receivableAmount={userData.claimable}
-          refundableAmount={userData.refundable}
+          receivableAmount={userResult?.claimable}
+          refundableAmount={userResult?.refundable}
           requestRefund={refund}
         />
       )}

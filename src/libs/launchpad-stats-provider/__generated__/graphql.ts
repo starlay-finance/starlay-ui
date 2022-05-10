@@ -667,6 +667,13 @@ export enum _SubgraphErrorPolicy_ {
   Deny = 'deny'
 }
 
+export type GetBidQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetBidQuery = { __typename?: 'Query', bid?: { __typename?: 'Bid', amount: string, multiplied: string, cap: string, cancellable: boolean } | null };
+
 export type GetCurrentDataQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -675,6 +682,16 @@ export type GetCurrentDataQueryVariables = Exact<{
 export type GetCurrentDataQuery = { __typename?: 'Query', projectStatistic?: { __typename?: 'ProjectStatistic', totalAmount: string, totalMultiplied: string, numOfBidders: string } | null };
 
 
+export const GetBidDocument = gql`
+    query GetBid($id: ID!) {
+  bid(id: $id) {
+    amount
+    multiplied
+    cap
+    cancellable
+  }
+}
+    `;
 export const GetCurrentDataDocument = gql`
     query GetCurrentData($id: ID!) {
   projectStatistic(id: $id) {
@@ -692,6 +709,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    GetBid(variables: GetBidQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBidQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetBidQuery>(GetBidDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetBid');
+    },
     GetCurrentData(variables: GetCurrentDataQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetCurrentDataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetCurrentDataQuery>(GetCurrentDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetCurrentData');
     }
