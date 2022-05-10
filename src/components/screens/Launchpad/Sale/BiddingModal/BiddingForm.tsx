@@ -46,6 +46,7 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
     estimatedAmount,
     maxBiddableAmount,
     submit,
+    isSubmitting,
     error,
   } = useBiddingForm(props)
   return (
@@ -132,7 +133,7 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
           />
         </div>
       </FormItem>
-      <Button onClick={submit} disabled={!!error}>
+      <Button onClick={submit} disabled={isSubmitting || !!error}>
         {error ||
           (currentBid?.cancelable
             ? t`Cancel`

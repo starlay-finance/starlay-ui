@@ -22,6 +22,8 @@ export const useBiddingForm = ({
   submit,
   ...market
 }: BiddingFormProps) => {
+  const [isSubmitting, setSubmiting] = useState(false)
+
   const { data } = useWalletBalance()
   const [amount, setAmount] = useState(
     currentBid ? formatAmt(currentBid.amount) : '',
@@ -68,7 +70,11 @@ export const useBiddingForm = ({
     boost,
     estimatedAmount,
     maxBiddableAmount,
-    submit: () => submit(bid),
+    submit: () => {
+      setSubmiting(true)
+      return submit(bid)
+    },
+    isSubmitting,
     error,
   }
 }
