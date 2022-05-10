@@ -495,7 +495,6 @@ msgid "Receivable Amount"
 msgstr "Receivable Amount"
 
 #: src/components/screens/Launchpad/Sale/Bid.tsx
-#: src/components/screens/Launchpad/Sale/Bid.tsx
 msgid "TODO description of receivable amount"
 msgstr "TODO description of receivable amount"
 
