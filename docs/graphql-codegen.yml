@@ -11,11 +11,11 @@ generates:
         : headers: { x-api-key: da2-qvw2m7hf6jhonms4rhtqgix7ri }
     plugins:
       - schema-ast
-  docs/launchpad-schema.graphql:
+  docs/launchpad-stats-schema.graphql:
     schema: http://52.70.161.175:8000/subgraphs/name/starlay/starlay-launchpad
     plugins:
       - schema-ast
-  docs/launchpad-historical-schema.graphql:
+  docs/launchpad-price-data-schema.graphql:
     schema:
       - ? https://7fkvk2oqm5ewxbiealg7orclku.appsync-api.us-east-1.amazonaws.com/graphql
         : headers: { x-api-key: da2-vm7th2zcezdmbpkbkcbmm766pe }
@@ -30,18 +30,18 @@ generates:
       - typescript
       - typescript-operations
       - typescript-graphql-request
-  src/libs/launchpad-data-provider/__generated__/graphql.ts:
+  src/libs/launchpad-stats-provider/__generated__/graphql.ts:
     schema: http://52.70.161.175:8000/subgraphs/name/starlay/starlay-launchpad
-    documents: 'src/libs/launchpad-data-provider/graphql/**/*.graphql'
+    documents: 'src/libs/launchpad-stats-provider/graphql/**/*.graphql'
     plugins:
       - typescript
       - typescript-operations
       - typescript-graphql-request
-  src/libs/launchpad-historical-data-provider/__generated__/graphql.ts:
+  src/libs/launchpad-price-data-provider/__generated__/graphql.ts:
     schema:
       - ? https://7fkvk2oqm5ewxbiealg7orclku.appsync-api.us-east-1.amazonaws.com/graphql
         : headers: { x-api-key: da2-vm7th2zcezdmbpkbkcbmm766pe }
-    documents: 'src/libs/launchpad-historical-data-provider/graphql/**/*.graphql'
+    documents: 'src/libs/launchpad-price-data-provider/graphql/**/*.graphql'
     plugins:
       - typescript
       - typescript-operations

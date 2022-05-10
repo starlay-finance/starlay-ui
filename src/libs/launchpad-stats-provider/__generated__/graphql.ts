@@ -26,6 +26,7 @@ export type Bid = {
   id: Scalars['ID'];
   multiplied: Scalars['BigInt'];
   project: Project;
+  timestamp: Scalars['BigInt'];
 };
 
 export type Bid_Filter = {
@@ -85,6 +86,14 @@ export type Bid_Filter = {
   project_not_starts_with_nocase?: InputMaybe<Scalars['String']>;
   project_starts_with?: InputMaybe<Scalars['String']>;
   project_starts_with_nocase?: InputMaybe<Scalars['String']>;
+  timestamp?: InputMaybe<Scalars['BigInt']>;
+  timestamp_gt?: InputMaybe<Scalars['BigInt']>;
+  timestamp_gte?: InputMaybe<Scalars['BigInt']>;
+  timestamp_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  timestamp_lt?: InputMaybe<Scalars['BigInt']>;
+  timestamp_lte?: InputMaybe<Scalars['BigInt']>;
+  timestamp_not?: InputMaybe<Scalars['BigInt']>;
+  timestamp_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
 };
 
 export enum Bid_OrderBy {
@@ -93,7 +102,8 @@ export enum Bid_OrderBy {
   Cap = 'cap',
   Id = 'id',
   Multiplied = 'multiplied',
-  Project = 'project'
+  Project = 'project',
+  Timestamp = 'timestamp'
 }
 
 /** The block at which the query should be executed. */
@@ -646,13 +656,12 @@ export type GetCurrentDataQueryVariables = Exact<{
 }>;
 
 
-export type GetCurrentDataQuery = { __typename?: 'Query', projectStatistics: Array<{ __typename?: 'ProjectStatistics', bottomPrice: string, totalAmount: string, totalMultiplied: string, numOfBidders: string }> };
+export type GetCurrentDataQuery = { __typename?: 'Query', projectStatistics: Array<{ __typename?: 'ProjectStatistics', totalAmount: string, totalMultiplied: string, numOfBidders: string }> };
 
 
 export const GetCurrentDataDocument = gql`
     query GetCurrentData($projectId: ID!) {
   projectStatistics(where: {id: $projectId}) {
-    bottomPrice
     totalAmount
     totalMultiplied
     numOfBidders

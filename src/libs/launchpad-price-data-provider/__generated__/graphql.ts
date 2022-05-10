@@ -17,6 +17,7 @@ export type Scalars = {
 
 export type Price = {
   __typename?: 'Price';
+  bottomPrice: Scalars['Float'];
   data: Scalars['Float'];
   timestamp: Scalars['Int'];
 };
@@ -61,20 +62,21 @@ export type GetCurrentPriceQueryVariables = Exact<{
 }>;
 
 
-export type GetCurrentPriceQuery = { __typename?: 'Query', priceCurrent: { __typename?: 'Price', data: number, timestamp: number } };
+export type GetCurrentPriceQuery = { __typename?: 'Query', priceCurrent: { __typename?: 'Price', data: number, bottomPrice: number, timestamp: number } };
 
 export type ListPricesHistoricalQueryVariables = Exact<{
   input: PricesInput;
 }>;
 
 
-export type ListPricesHistoricalQuery = { __typename?: 'Query', prices5Min: { __typename?: 'PricesOutput', items: Array<{ __typename?: 'Price', data: number, timestamp: number }> } };
+export type ListPricesHistoricalQuery = { __typename?: 'Query', prices5Min: { __typename?: 'PricesOutput', items: Array<{ __typename?: 'Price', data: number, bottomPrice: number, timestamp: number }> } };
 
 
 export const GetCurrentPriceDocument = gql`
     query GetCurrentPrice($projectId: String!) {
   priceCurrent(projectId: $projectId) {
     data
+    bottomPrice
     timestamp
   }
 }
@@ -84,6 +86,7 @@ export const ListPricesHistoricalDocument = gql`
   prices5Min(input: $input) {
     items {
       data
+      bottomPrice
       timestamp
     }
   }

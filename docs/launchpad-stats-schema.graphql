@@ -18,6 +18,7 @@ type Bid {
   id: ID!
   multiplied: BigInt!
   project: Project!
+  timestamp: BigInt!
 }
 
 input Bid_filter {
@@ -77,6 +78,14 @@ input Bid_filter {
   project_not_starts_with_nocase: String
   project_starts_with: String
   project_starts_with_nocase: String
+  timestamp: BigInt
+  timestamp_gt: BigInt
+  timestamp_gte: BigInt
+  timestamp_in: [BigInt!]
+  timestamp_lt: BigInt
+  timestamp_lte: BigInt
+  timestamp_not: BigInt
+  timestamp_not_in: [BigInt!]
 }
 
 enum Bid_orderBy {
@@ -86,6 +95,7 @@ enum Bid_orderBy {
   id
   multiplied
   project
+  timestamp
 }
 
 scalar BigDecimal

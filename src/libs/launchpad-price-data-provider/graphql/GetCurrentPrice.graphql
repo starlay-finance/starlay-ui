@@ -1,6 +1,7 @@
 query GetCurrentPrice($projectId: String!) {
   priceCurrent(projectId: $projectId) {
     data
+    bottomPrice
     timestamp
   }
 }

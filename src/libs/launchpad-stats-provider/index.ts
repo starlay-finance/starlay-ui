@@ -11,10 +11,12 @@ const graphqlClient = (endpoint: string, apiKey?: string) =>
     }),
   )
 
-export const getCurrentData = async (
+export const getCurrentStats = async (
   chainId: ChainId,
   projectId: string,
-): Promise<Omit<Market, 'currentPriceInUSD'> | undefined> => {
+): Promise<
+  Omit<Market, 'currentPriceInUSD' | 'bottomPriceInUSD'> | undefined
+> => {
   const { launchpadDataProvider } = getNetworkConfig(chainId)
   if (!launchpadDataProvider) return undefined
   const client = graphqlClient(
@@ -26,7 +28,6 @@ export const getCurrentData = async (
   } = await client.GetCurrentData({ projectId })
   if (!stats) return undefined
   return {
-    bottomPriceInUSD: valueToBigNumber(stats.bottomPrice),
     raisedAmountInUSD: valueToBigNumber(stats.totalAmount),
     boostedRaisedAmountInUSD: valueToBigNumber(stats.totalMultiplied),
     numOfBids: valueToBigNumber(stats.numOfBidders),

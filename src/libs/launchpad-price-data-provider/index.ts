@@ -1,6 +1,6 @@
-import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
+import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { GraphQLClient } from 'graphql-request'
-import { PriceChartData } from 'src/components/screens/Launchpad/types'
+import { Market, PriceChartData } from 'src/components/screens/Launchpad/types'
 import { ChainId, getNetworkConfig } from '../config'
 import { getSdk } from './__generated__/graphql'
 
@@ -14,7 +14,9 @@ const graphqlClient = (endpoint: string, apiKey?: string) =>
 export const getCurrentPrice = async (
   chainId: ChainId,
   projectId: string,
-): Promise<BigNumber | undefined> => {
+): Promise<
+  Pick<Market, 'currentPriceInUSD' | 'bottomPriceInUSD'> | undefined
+> => {
   const { launchpadHistoricalDataProvider } = getNetworkConfig(chainId)
   if (!launchpadHistoricalDataProvider) return undefined
   const client = graphqlClient(
@@ -22,7 +24,10 @@ export const getCurrentPrice = async (
     launchpadHistoricalDataProvider.apiKey,
   )
   const res = await client.GetCurrentPrice({ projectId })
-  return valueToBigNumber(res.priceCurrent.data)
+  return {
+    currentPriceInUSD: valueToBigNumber(res.priceCurrent.data),
+    bottomPriceInUSD: valueToBigNumber(res.priceCurrent.bottomPrice),
+  }
 }
 
 export const listPricesHistorical = async (

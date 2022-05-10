@@ -54,6 +54,7 @@ directive @aws_subscribe(
 directive @defer on FIELD
 
 type Price {
+  bottomPrice: Float!
   data: Float!
   timestamp: Int!
 }
