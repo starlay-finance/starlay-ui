@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import dayjs from 'dayjs'
-import { CSSProperties, VFC } from 'react'
+import { CSSProperties, ReactNode, VFC } from 'react'
 import {
   Area,
   ComposedChart,
@@ -11,6 +11,7 @@ import {
   TooltipProps,
 } from 'recharts'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
+import { Reel } from 'src/components/parts/Number/Reel'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
 import {
@@ -59,31 +60,31 @@ export const Statistics: VFC<StatisticsProps> = ({
     <StatisticsDiv>
       <div>
         <Items>
-          <Item label={t`Token`} value={token.symbol} />
-          <Item
-            label={t`Price Per Token`}
-            value={
-              market && formatAmt(market.currentPriceInUSD, { prefix: '$' })
-            }
-          />
-          <Item
-            label={t`Bottom Price`}
-            value={
-              market && formatAmt(market.bottomPriceInUSD, { prefix: '$' })
-            }
-            tooltip={t`TODO description of bottom price`}
-          />
-          <Item
-            label={t`Total Raised`}
-            value={
-              market &&
-              formatUSD(market.raisedAmountInUSD, { decimalPlaces: 0 })
-            }
-          />
-          <Item
-            label={t`Number of Bidders`}
-            value={market && formatAmt(market.numOfBids)}
-          />
+          <Item label={t`Token`}>{token.symbol}</Item>
+          <Item label={t`Price Per Token`}>
+            {market && (
+              <Reel
+                text={formatAmt(market.currentPriceInUSD, { prefix: '$' })}
+              />
+            )}
+          </Item>
+          <Item label={t`Bottom Price`}>
+            {market && (
+              <Reel
+                text={formatAmt(market.bottomPriceInUSD, { prefix: '$' })}
+              />
+            )}
+          </Item>
+          <Item label={t`Total Raised`}>
+            {market && (
+              <Reel
+                text={formatUSD(market.raisedAmountInUSD, { decimalPlaces: 0 })}
+              />
+            )}
+          </Item>
+          <Item label={t`Number of Bidders`}>
+            {market && <Reel text={formatAmt(market.numOfBids)} />}
+          </Item>
         </Items>
         <Chart>
           <ResponsiveContainer width={800} height="99%">
@@ -218,17 +219,17 @@ const TooltipDiv = styled.div`
 const Item = styled<
   VFC<{
     label: string
-    value: string | undefined
+    children: ReactNode | undefined
     tooltip?: string
     className?: string
   }>
->(({ label, value, tooltip, className }) => (
+>(({ label, children, tooltip, className }) => (
   <li className={className}>
     <div>
       {label}
       {tooltip && <TooltipMessage message={tooltip} />}
     </div>
-    <div>{value ? value : <ShimmerPlaceholder as="div" />}</div>
+    <div>{children ? children : <ShimmerPlaceholder as="div" />}</div>
   </li>
 ))``
 
@@ -256,9 +257,9 @@ const Items = styled.ul`
         margin-top: 4px;
         font-size: 20px;
         font-weight: ${fontWeightBold};
+        height: 1.2em;
         ${ShimmerPlaceholder} {
           width: 50%;
-          height: 1.2em;
         }
       }
     }
