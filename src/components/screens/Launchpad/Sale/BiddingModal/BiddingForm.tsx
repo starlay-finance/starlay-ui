@@ -44,6 +44,7 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
     setCancelable,
     boost,
     estimatedAmount,
+    maxBiddableAmount,
     submit,
     error,
   } = useBiddingForm(props)
@@ -60,6 +61,7 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
           />
           <AmountInput
             value={amount}
+            maxAmount={maxBiddableAmount}
             decimals={biddingAsset.decimals}
             step={1}
             placeholder="0.00"

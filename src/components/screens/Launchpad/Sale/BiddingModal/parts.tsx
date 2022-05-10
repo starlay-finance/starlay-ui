@@ -1,7 +1,16 @@
+import { t } from '@lingui/macro'
+import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { Toggle } from 'src/components/parts/Toggle'
 import { hoverBackgroundKeyframes } from 'src/styles/animation'
-import { darkRed, gray, skyBlue, trueBlack, trueWhite } from 'src/styles/colors'
+import {
+  darkRed,
+  gray,
+  purple,
+  skyBlue,
+  trueBlack,
+  trueWhite,
+} from 'src/styles/colors'
 import {
   fontWeightBold,
   fontWeightMedium,
@@ -21,26 +30,53 @@ export const AmountInput: VFC<{
   decimals: number
   step: number
   onChange: (value: string) => void
+  maxAmount?: BigNumber
   placeholder?: string
   disabled?: boolean
-}> = ({ decimals, step, onChange, ...props }) => (
-  <Input
-    {...props}
-    onChange={({ target }) => {
-      const parsed = parseInput(target.value, decimals)
-      if (parsed == null) return
-      onChange(parsed)
-    }}
-    onKeyDown={(e) => {
-      const parsedInput = parseInput(e.currentTarget.value, decimals)
-      const parsed = parsedInput && formattedToBigNumber(parsedInput)
-      if (parsed == null) return
-      handleArrow(e.code, parsed || BN_ZERO, step, (v) =>
-        onChange(formatAmt(v)),
-      )
-    }}
-  />
+}> = ({ decimals, step, onChange, maxAmount, ...props }) => (
+  <InputContainer>
+    <Input
+      {...props}
+      onChange={({ target }) => {
+        const parsed = parseInput(target.value, decimals)
+        if (parsed == null) return
+        onChange(parsed)
+      }}
+      onKeyDown={(e) => {
+        const parsedInput = parseInput(e.currentTarget.value, decimals)
+        const parsed = parsedInput && formattedToBigNumber(parsedInput)
+        if (parsed == null) return
+        handleArrow(e.code, parsed || BN_ZERO, step, (v) =>
+          onChange(formatAmt(v)),
+        )
+      }}
+    />
+    {maxAmount && (
+      <MaxButton
+        onClick={() => onChange(maxAmount?.toString())}
+      >{t`MAX`}</MaxButton>
+    )}
+  </InputContainer>
 )
+
+const MaxButton = styled.button`
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(30px) brightness(1.15);
+  line-height: 1;
+  :hover {
+    background: ${purple}cc;
+  }
+`
+const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+`
+
 const Input = styled.input`
   :disabled {
     opacity: 0.5;
@@ -86,7 +122,7 @@ export const InputDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
+  width: 252px;
   padding: 12px;
   border-radius: 8px;
   background-color: ${trueBlack}52;

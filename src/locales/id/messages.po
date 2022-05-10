@@ -202,6 +202,7 @@ msgid "Price"
 msgstr "Harga"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
+#: src/components/screens/Launchpad/Sale/SaleInformation.tsx
 msgid "Connect Wallet"
 msgstr "Hubungkan Dompet"
 
@@ -552,6 +553,10 @@ msgstr ""
 msgid "Bid on {0}"
 msgstr ""
 
+#: src/components/screens/Launchpad/Sale/BiddingModal/parts.tsx
+msgid "MAX"
+msgstr ""
+
 #: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
 msgid "Enter Amount"
 msgstr ""
@@ -565,11 +570,19 @@ msgid "Enter Limit Price"
 msgstr ""
 
 #: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
+msgid "No Balance to Bid"
+msgstr ""
+
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
 msgid "Cancelable or not is unchangeable"
 msgstr ""
 
 #: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
 msgid "Only Allowed to Add Bid"
+msgstr ""
+
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
+msgid "No Balance to Add Bid"
 msgstr ""
 
 #: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
@@ -616,10 +629,6 @@ msgstr ""
 
 #: src/components/screens/Launchpad/Statistics.tsx
 msgid "Bottom Price"
-msgstr ""
-
-#: src/components/screens/Launchpad/Statistics.tsx
-msgid "TODO description of bottom price"
 msgstr ""
 
 #: src/components/screens/Launchpad/Statistics.tsx

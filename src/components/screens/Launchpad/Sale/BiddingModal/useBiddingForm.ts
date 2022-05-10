@@ -52,12 +52,9 @@ export const useBiddingForm = ({
     market,
     currentBid,
   )
-  const error = validate(
-    bid,
-    noPriceLimitEnabled,
-    data[biddingAsset.symbol],
-    currentBid,
-  )
+  const inWallet = data[biddingAsset.symbol]
+  const maxBiddableAmount = inWallet.plus(currentBid?.amount || BN_ZERO)
+  const error = validate(bid, noPriceLimitEnabled, inWallet, currentBid)
 
   return {
     amount,
@@ -70,6 +67,7 @@ export const useBiddingForm = ({
     setCancelable,
     boost,
     estimatedAmount,
+    maxBiddableAmount,
     submit: () => submit(bid),
     error,
   }

@@ -202,6 +202,7 @@ msgid "Price"
 msgstr "Price"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
+#: src/components/screens/Launchpad/Sale/SaleInformation.tsx
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
 
@@ -552,6 +553,10 @@ msgstr "Cancel Bid"
 msgid "Bid on {0}"
 msgstr "Bid on {0}"
 
+#: src/components/screens/Launchpad/Sale/BiddingModal/parts.tsx
+msgid "MAX"
+msgstr "MAX"
+
 #: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
 msgid "Enter Amount"
 msgstr "Enter Amount"
@@ -565,12 +570,20 @@ msgid "Enter Limit Price"
 msgstr "Enter Limit Price"
 
 #: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
+msgid "No Balance to Bid"
+msgstr "No Balance to Bid"
+
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
 msgid "Cancelable or not is unchangeable"
 msgstr "Cancelable or not is unchangeable"
 
 #: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
 msgid "Only Allowed to Add Bid"
 msgstr "Only Allowed to Add Bid"
+
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
+msgid "No Balance to Add Bid"
+msgstr "No Balance to Add Bid"
 
 #: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
 #: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
@@ -617,10 +630,6 @@ msgstr "Price Per Token"
 #: src/components/screens/Launchpad/Statistics.tsx
 msgid "Bottom Price"
 msgstr "Bottom Price"
-
-#: src/components/screens/Launchpad/Statistics.tsx
-msgid "TODO description of bottom price"
-msgstr "TODO description of bottom price"
 
 #: src/components/screens/Launchpad/Statistics.tsx
 msgid "Total Raised"
