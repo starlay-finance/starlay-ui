@@ -1,7 +1,6 @@
 import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { GraphQLClient } from 'graphql-request'
-import { Market, PriceChartData } from 'src/components/screens/LaundPad/types'
-import { BN_ZERO } from 'src/utils/number'
+import { Market } from 'src/components/screens/Launchpad/types'
 import { ChainId, getNetworkConfig } from '../config'
 import { getSdk } from './__generated__/graphql'
 
@@ -12,43 +11,24 @@ const graphqlClient = (endpoint: string, apiKey?: string) =>
     }),
   )
 
-export const getCurrentPrice = async (
+export const getCurrentData = async (
   chainId: ChainId,
   projectId: string,
-): Promise<Market | undefined> => {
+): Promise<Omit<Market, 'currentPriceInUSD'> | undefined> => {
   const { launchpadDataProvider } = getNetworkConfig(chainId)
   if (!launchpadDataProvider) return undefined
   const client = graphqlClient(
     launchpadDataProvider.endpoint,
     launchpadDataProvider.apiKey,
   )
-  const res = await client.GetCurrentPrice({ projectId })
+  const {
+    projectStatistics: [stats],
+  } = await client.GetCurrentData({ projectId })
+  if (!stats) return undefined
   return {
-    currentPriceInUSD: valueToBigNumber(res.priceCurrent.data),
-    bottomPriceInUSD: BN_ZERO,
-    raisedAmountInUSD: BN_ZERO,
-    boostedRaisedAmountInUSD: BN_ZERO,
-    numOfBids: BN_ZERO,
+    bottomPriceInUSD: valueToBigNumber(stats.bottomPrice),
+    raisedAmountInUSD: valueToBigNumber(stats.totalAmount),
+    boostedRaisedAmountInUSD: valueToBigNumber(stats.totalMultiplied),
+    numOfBids: valueToBigNumber(stats.numOfBidders),
   }
-}
-
-export const listPricesHistorical = async (
-  chainId: ChainId,
-  projectId: string,
-  fromTimestamp?: number,
-): Promise<PriceChartData[]> => {
-  const { launchpadDataProvider } = getNetworkConfig(chainId)
-  if (!launchpadDataProvider) return []
-  const client = graphqlClient(
-    launchpadDataProvider.endpoint,
-    launchpadDataProvider.apiKey,
-  )
-  const res = await client.ListPricesHistorical({
-    input: { projectId, fromTimestamp },
-  })
-  return res.prices5Min.items.map(({ data, timestamp }) => ({
-    priceInUSD: +data,
-    bottomPriceInUSD: 0,
-    timestamp,
-  }))
 }
