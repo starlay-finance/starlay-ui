@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
+import { requireSupportedChain } from 'src/components/hoc/requireSupportedChain'
 import { GlassModalContent } from 'src/components/parts/Modal/base/Content/Glass'
 import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
@@ -13,6 +14,7 @@ import { CurrentPrice } from './CurrentPrice'
 import { Title } from './parts'
 
 type BiddingModalProps = {
+  launchpadAddress: EthereumAddress
   receivingAsset: Asset
   maxAmount: BigNumber
   biddingAssets: ERC20Asset[]
@@ -22,6 +24,7 @@ type BiddingModalProps = {
 }
 
 const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
+  launchpadAddress,
   close,
   receivingAsset,
   maxAmount,
@@ -30,7 +33,7 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
   currentEstimatedPrice = BN_ZERO,
   currentBid,
 }) => {
-  const { bid, update, cancel } = useLaunchpad()
+  const { bid, update, cancel } = useLaunchpad({ launchpadAddress })
   const submit = (newBid: Bid & { asset: EthereumAddress }) => {
     if (!currentBid) return bid(newBid)
     if (currentBid?.cancelable) return cancel()
@@ -64,4 +67,5 @@ const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
   )
 }
 
-export const useBiddingModal = () => useModalDialog(BiddingModal)
+export const useBiddingModal = () =>
+  useModalDialog(requireSupportedChain(BiddingModal))

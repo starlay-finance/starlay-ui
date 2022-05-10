@@ -4,6 +4,7 @@ import { ASSETS_DICT } from 'src/constants/assets'
 import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
 import { assetFromSymbol } from 'src/utils/assets'
 import styled from 'styled-components'
+import { useLaunchpadContext } from '../LaunchpadContext'
 import { Market, ProjectData, Status } from '../types'
 import { BidSecion } from './Bid'
 import { useBiddingModal } from './BiddingModal'
@@ -22,12 +23,15 @@ export const Sale: VFC<SaleProps> = ({
   market,
   maxAmount,
 }) => {
+  const { launchpadAddress } = useLaunchpadContext()
   const { userData, refund } = useLaunchpad()
   const currentBid = userData?.bid
 
   const { open } = useBiddingModal()
   const openBiddingModal = () =>
+    launchpadAddress &&
     open({
+      launchpadAddress,
       currentBid,
       maxAmount,
       biddingAssets: sale.biddingAssets.map((asset) => ({

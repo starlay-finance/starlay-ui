@@ -17,8 +17,11 @@ type UserData = {
   claimable: BigNumber
   refundable: BigNumber
 }
-export const useLaunchpad = () => {
-  const { launchpadAddress } = useLaunchpadContext()
+export const useLaunchpad = (params?: {
+  launchpadAddress: EthereumAddress
+}) => {
+  const context = useLaunchpadContext()
+  const launchpadAddress = params?.launchpadAddress || context.launchpadAddress
   const { data: provider } = useStaticRPCProvider()
   const { account, signer } = useWallet()
 
