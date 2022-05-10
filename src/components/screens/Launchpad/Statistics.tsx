@@ -92,7 +92,7 @@ export const Statistics: VFC<StatisticsProps> = ({
               <ComposedChart
                 width={730}
                 data={priceChartData}
-                margin={{ top: 40, right: 8, left: 8, bottom: 8 }}
+                margin={{ top: 64, right: 8, left: 8, bottom: 8 }}
               >
                 <defs>
                   <linearGradient id="colorPx" x1="0" y1=".5" x2="1" y2=".5">
@@ -139,8 +139,8 @@ export const Statistics: VFC<StatisticsProps> = ({
                   offset={-100}
                   content={TooltipRenderer}
                   cursor={{
-                    strokeDashoffset: 540,
-                    strokeDasharray: 280,
+                    strokeDashoffset: 600,
+                    strokeDasharray: 300,
                   }}
                   active
                 />

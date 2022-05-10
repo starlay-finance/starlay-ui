@@ -50,9 +50,9 @@ export const listPricesHistorical = async (
   const res = await client.ListPricesHistorical({
     input: { projectId, fromTimestamp },
   })
-  return res.prices5Min.items.map(({ data, timestamp }) => ({
+  return res.prices5Min.items.map(({ data, bottomPrice, timestamp }) => ({
     priceInUSD: +data,
-    bottomPriceInUSD: 0,
+    bottomPriceInUSD: +bottomPrice,
     timestamp,
   }))
 }
