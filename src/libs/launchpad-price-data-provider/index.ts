@@ -1,6 +1,7 @@
 import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { GraphQLClient } from 'graphql-request'
 import { Market, PriceChartData } from 'src/components/screens/Launchpad/types'
+import { BN_ZERO } from 'src/utils/number'
 import { ChainId, getNetworkConfig } from '../config'
 import { getSdk } from './__generated__/graphql'
 
@@ -24,6 +25,11 @@ export const getCurrentPrice = async (
     launchpadHistoricalDataProvider.apiKey,
   )
   const res = await client.GetCurrentPrice({ projectId })
+  if (!res.priceCurrent)
+    return {
+      currentPriceInUSD: BN_ZERO,
+      bottomPriceInUSD: BN_ZERO,
+    }
   return {
     currentPriceInUSD: valueToBigNumber(res.priceCurrent.data),
     bottomPriceInUSD: valueToBigNumber(res.priceCurrent.bottomPrice),

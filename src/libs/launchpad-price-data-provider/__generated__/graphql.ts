@@ -37,7 +37,7 @@ export type PricesOutput = {
 
 export type Query = {
   __typename?: 'Query';
-  priceCurrent: Price;
+  priceCurrent?: Maybe<Price>;
   prices5Min: PricesOutput;
   pricesHour: PricesOutput;
 };
@@ -62,7 +62,7 @@ export type GetCurrentPriceQueryVariables = Exact<{
 }>;
 
 
-export type GetCurrentPriceQuery = { __typename?: 'Query', priceCurrent: { __typename?: 'Price', data: number, bottomPrice: number, timestamp: number } };
+export type GetCurrentPriceQuery = { __typename?: 'Query', priceCurrent?: { __typename?: 'Price', data: number, bottomPrice: number, timestamp: number } | null };
 
 export type ListPricesHistoricalQueryVariables = Exact<{
   input: PricesInput;

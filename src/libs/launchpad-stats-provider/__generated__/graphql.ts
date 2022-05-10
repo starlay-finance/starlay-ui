@@ -189,8 +189,8 @@ export type ProjectBidsArgs = {
   where?: InputMaybe<Bid_Filter>;
 };
 
-export type ProjectStatistics = {
-  __typename?: 'ProjectStatistics';
+export type ProjectStatistic = {
+  __typename?: 'ProjectStatistic';
   bottomPrice: Scalars['BigDecimal'];
   id: Scalars['ID'];
   numOfBidders: Scalars['BigInt'];
@@ -198,7 +198,7 @@ export type ProjectStatistics = {
   totalMultiplied: Scalars['BigInt'];
 };
 
-export type ProjectStatistics_Filter = {
+export type ProjectStatistic_Filter = {
   bottomPrice?: InputMaybe<Scalars['BigDecimal']>;
   bottomPrice_gt?: InputMaybe<Scalars['BigDecimal']>;
   bottomPrice_gte?: InputMaybe<Scalars['BigDecimal']>;
@@ -241,7 +241,7 @@ export type ProjectStatistics_Filter = {
   totalMultiplied_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
 };
 
-export enum ProjectStatistics_OrderBy {
+export enum ProjectStatistic_OrderBy {
   BottomPrice = 'bottomPrice',
   Id = 'id',
   NumOfBidders = 'numOfBidders',
@@ -348,7 +348,8 @@ export type Query = {
   lockedBidSummaries: Array<LockedBidSummary>;
   lockedBidSummary?: Maybe<LockedBidSummary>;
   project?: Maybe<Project>;
-  projectStatistics: Array<ProjectStatistics>;
+  projectStatistic?: Maybe<ProjectStatistic>;
+  projectStatistics: Array<ProjectStatistic>;
   projects: Array<Project>;
   token?: Maybe<Token>;
   tokens: Array<Token>;
@@ -403,14 +404,21 @@ export type QueryProjectArgs = {
 };
 
 
+export type QueryProjectStatisticArgs = {
+  block?: InputMaybe<Block_Height>;
+  id: Scalars['ID'];
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
 export type QueryProjectStatisticsArgs = {
   block?: InputMaybe<Block_Height>;
   first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<ProjectStatistics_OrderBy>;
+  orderBy?: InputMaybe<ProjectStatistic_OrderBy>;
   orderDirection?: InputMaybe<OrderDirection>;
   skip?: InputMaybe<Scalars['Int']>;
   subgraphError?: _SubgraphErrorPolicy_;
-  where?: InputMaybe<ProjectStatistics_Filter>;
+  where?: InputMaybe<ProjectStatistic_Filter>;
 };
 
 
@@ -451,7 +459,8 @@ export type Subscription = {
   lockedBidSummaries: Array<LockedBidSummary>;
   lockedBidSummary?: Maybe<LockedBidSummary>;
   project?: Maybe<Project>;
-  projectStatistics: Array<ProjectStatistics>;
+  projectStatistic?: Maybe<ProjectStatistic>;
+  projectStatistics: Array<ProjectStatistic>;
   projects: Array<Project>;
   token?: Maybe<Token>;
   tokens: Array<Token>;
@@ -506,14 +515,21 @@ export type SubscriptionProjectArgs = {
 };
 
 
+export type SubscriptionProjectStatisticArgs = {
+  block?: InputMaybe<Block_Height>;
+  id: Scalars['ID'];
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
 export type SubscriptionProjectStatisticsArgs = {
   block?: InputMaybe<Block_Height>;
   first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<ProjectStatistics_OrderBy>;
+  orderBy?: InputMaybe<ProjectStatistic_OrderBy>;
   orderDirection?: InputMaybe<OrderDirection>;
   skip?: InputMaybe<Scalars['Int']>;
   subgraphError?: _SubgraphErrorPolicy_;
-  where?: InputMaybe<ProjectStatistics_Filter>;
+  where?: InputMaybe<ProjectStatistic_Filter>;
 };
 
 
@@ -652,16 +668,16 @@ export enum _SubgraphErrorPolicy_ {
 }
 
 export type GetCurrentDataQueryVariables = Exact<{
-  projectId: Scalars['ID'];
+  id: Scalars['ID'];
 }>;
 
 
-export type GetCurrentDataQuery = { __typename?: 'Query', projectStatistics: Array<{ __typename?: 'ProjectStatistics', totalAmount: string, totalMultiplied: string, numOfBidders: string }> };
+export type GetCurrentDataQuery = { __typename?: 'Query', projectStatistic?: { __typename?: 'ProjectStatistic', totalAmount: string, totalMultiplied: string, numOfBidders: string } | null };
 
 
 export const GetCurrentDataDocument = gql`
-    query GetCurrentData($projectId: ID!) {
-  projectStatistics(where: {id: $projectId}) {
+    query GetCurrentData($id: ID!) {
+  projectStatistic(id: $id) {
     totalAmount
     totalMultiplied
     numOfBidders

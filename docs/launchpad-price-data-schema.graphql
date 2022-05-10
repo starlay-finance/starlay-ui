@@ -72,7 +72,7 @@ type PricesOutput {
 }
 
 type Query {
-  priceCurrent(projectId: String!): Price!
+  priceCurrent(projectId: String!): Price
   prices5Min(input: PricesInput!): PricesOutput!
   pricesHour(input: PricesInput!): PricesOutput!
 }

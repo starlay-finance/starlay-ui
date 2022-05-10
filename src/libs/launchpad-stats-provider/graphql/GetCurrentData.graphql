@@ -1,5 +1,5 @@
-query GetCurrentData($projectId: ID!) {
-  projectStatistics(where: { id: $projectId }) {
+query GetCurrentData($id: ID!) {
+  projectStatistic(id: $id) {
     totalAmount
     totalMultiplied
     numOfBidders

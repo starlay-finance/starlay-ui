@@ -172,7 +172,7 @@ type Project {
   saleStartTimestamp: BigInt!
 }
 
-type ProjectStatistics {
+type ProjectStatistic {
   bottomPrice: BigDecimal!
   id: ID!
   numOfBidders: BigInt!
@@ -180,7 +180,7 @@ type ProjectStatistics {
   totalMultiplied: BigInt!
 }
 
-input ProjectStatistics_filter {
+input ProjectStatistic_filter {
   bottomPrice: BigDecimal
   bottomPrice_gt: BigDecimal
   bottomPrice_gte: BigDecimal
@@ -223,7 +223,7 @@ input ProjectStatistics_filter {
   totalMultiplied_not_in: [BigInt!]
 }
 
-enum ProjectStatistics_orderBy {
+enum ProjectStatistic_orderBy {
   bottomPrice
   id
   numOfBidders
@@ -392,13 +392,25 @@ type Query {
     """
     subgraphError: _SubgraphErrorPolicy_! = deny
   ): Project
+  projectStatistic(
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+    id: ID!
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): ProjectStatistic
   projectStatistics(
     """
     The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
     """
     block: Block_height
     first: Int = 100
-    orderBy: ProjectStatistics_orderBy
+    orderBy: ProjectStatistic_orderBy
     orderDirection: OrderDirection
     skip: Int = 0
 
@@ -406,8 +418,8 @@ type Query {
     Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
     """
     subgraphError: _SubgraphErrorPolicy_! = deny
-    where: ProjectStatistics_filter
-  ): [ProjectStatistics!]!
+    where: ProjectStatistic_filter
+  ): [ProjectStatistic!]!
   projects(
     """
     The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
@@ -525,13 +537,25 @@ type Subscription {
     """
     subgraphError: _SubgraphErrorPolicy_! = deny
   ): Project
+  projectStatistic(
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+    id: ID!
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): ProjectStatistic
   projectStatistics(
     """
     The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
     """
     block: Block_height
     first: Int = 100
-    orderBy: ProjectStatistics_orderBy
+    orderBy: ProjectStatistic_orderBy
     orderDirection: OrderDirection
     skip: Int = 0
 
@@ -539,8 +563,8 @@ type Subscription {
     Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
     """
     subgraphError: _SubgraphErrorPolicy_! = deny
-    where: ProjectStatistics_filter
-  ): [ProjectStatistics!]!
+    where: ProjectStatistic_filter
+  ): [ProjectStatistic!]!
   projects(
     """
     The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.

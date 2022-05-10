@@ -1,6 +1,7 @@
 import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { GraphQLClient } from 'graphql-request'
 import { Market } from 'src/components/screens/Launchpad/types'
+import { BN_ZERO } from 'src/utils/number'
 import { ChainId, getNetworkConfig } from '../config'
 import { getSdk } from './__generated__/graphql'
 
@@ -13,7 +14,7 @@ const graphqlClient = (endpoint: string, apiKey?: string) =>
 
 export const getCurrentStats = async (
   chainId: ChainId,
-  projectId: string,
+  id: string,
 ): Promise<
   Omit<Market, 'currentPriceInUSD' | 'bottomPriceInUSD'> | undefined
 > => {
@@ -23,13 +24,18 @@ export const getCurrentStats = async (
     launchpadDataProvider.endpoint,
     launchpadDataProvider.apiKey,
   )
-  const {
-    projectStatistics: [stats],
-  } = await client.GetCurrentData({ projectId })
-  if (!stats) return undefined
+  const { projectStatistic } = await client.GetCurrentData({ id })
+  if (!projectStatistic)
+    return {
+      raisedAmountInUSD: BN_ZERO,
+      boostedRaisedAmountInUSD: BN_ZERO,
+      numOfBids: BN_ZERO,
+    }
   return {
-    raisedAmountInUSD: valueToBigNumber(stats.totalAmount),
-    boostedRaisedAmountInUSD: valueToBigNumber(stats.totalMultiplied),
-    numOfBids: valueToBigNumber(stats.numOfBidders),
+    raisedAmountInUSD: valueToBigNumber(projectStatistic.totalAmount),
+    boostedRaisedAmountInUSD: valueToBigNumber(
+      projectStatistic.totalMultiplied,
+    ),
+    numOfBids: valueToBigNumber(projectStatistic.numOfBidders),
   }
 }
