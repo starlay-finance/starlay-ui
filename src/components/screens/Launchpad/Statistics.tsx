@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import { CSSProperties, VFC } from 'react'
 import {
   Area,
@@ -13,7 +13,6 @@ import {
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
-import { useLaunchpadPricesHistorical } from 'src/hooks/useLaunchpadData'
 import {
   attention,
   darkPurple,
@@ -38,21 +37,14 @@ import { Market, PriceChartData, ProjectData } from './types'
 type StatisticsProps = {
   token: ProjectData['token']
   market: Market | undefined
-  saleStart: Dayjs
-  saleEnd: Dayjs
+  priceChartData: PriceChartData[] | undefined
 }
 
 export const Statistics: VFC<StatisticsProps> = ({
   token,
   market,
-  saleStart,
-  saleEnd,
+  priceChartData = [],
 }) => {
-  const { data: priceChartData = [] } = useLaunchpadPricesHistorical({
-    saleStart,
-    saleEnd,
-  })
-
   const { userData } = useLaunchpad()
   const limitPrice = userData?.bid?.limitPrice
 

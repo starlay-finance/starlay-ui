@@ -4,7 +4,7 @@ import { VFC } from 'react'
 import { AppBackground } from 'src/components/parts/Background'
 import { AppFooter } from 'src/components/parts/Footer'
 import { AppHeader } from 'src/components/parts/Header/AppHeader'
-import { useLaunchpadData } from 'src/hooks/useLaunchpadData'
+import { useLaunchpadMarketData } from 'src/hooks/useLaunchpadMarketData'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
 import styled from 'styled-components'
 import { KeyVisual } from './KeyVisual'
@@ -26,7 +26,11 @@ const judgeStatus = (sale: ProjectData['sale']): Status => {
 export const Launchpad: VFC<{ data: ProjectData }> = withLaunchpadContext(
   ({ data }) => {
     const status = judgeStatus(data.sale)
-    const { data: market } = useLaunchpadData()
+    const { data: marketData } = useLaunchpadMarketData({
+      saleStart: data.sale.start,
+      saleEnd: data.sale.end,
+    })
+    const { market, chartData } = marketData || {}
     return (
       <>
         <AppHeader />
@@ -41,8 +45,7 @@ export const Launchpad: VFC<{ data: ProjectData }> = withLaunchpadContext(
             <Statistics
               token={data.token}
               market={market}
-              saleStart={data.sale.start}
-              saleEnd={data.sale.end}
+              priceChartData={chartData}
             />
           )}
           <Content>
