@@ -54,6 +54,7 @@ export const AmountInput: VFC<{
     {maxAmount && (
       <MaxButton
         onClick={() => onChange(maxAmount?.toString())}
+        disabled={props.disabled}
       >{t`MAX`}</MaxButton>
     )}
   </InputContainer>
@@ -67,8 +68,11 @@ const MaxButton = styled.button`
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(30px) brightness(1.15);
   line-height: 1;
-  :hover {
+  :enabled:hover {
     background: ${purple}cc;
+  }
+  :disabled {
+    cursor: not-allowed;
   }
 `
 const InputContainer = styled.div`
