@@ -13,6 +13,7 @@ type BidSecionProps = {
   vesting: ProjectData['vesting']
   hasEnded: boolean
   openBiddingModal: VoidFunction
+  maxAmount: BigNumber
   receivableAmount: BigNumber
   refundableAmount: BigNumber
   requestRefund: VoidFunction
@@ -24,6 +25,7 @@ export const BidSecion: VFC<BidSecionProps> = ({
   vesting,
   hasEnded,
   openBiddingModal,
+  maxAmount,
   receivableAmount,
   refundableAmount,
   requestRefund,
@@ -33,6 +35,8 @@ export const BidSecion: VFC<BidSecionProps> = ({
   const currentEstimatedAmount =
     bid.limitPrice && bid.limitPrice.lt(currentEstimatedPrice)
       ? BN_ZERO
+      : currentEstimatedPrice.isZero()
+      ? maxAmount
       : bid.amount.times(boost).div(currentEstimatedPrice)
   return (
     <Section>

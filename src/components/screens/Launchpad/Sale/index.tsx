@@ -1,4 +1,4 @@
-import { BigNumber } from '@starlay-finance/math-utils'
+import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
@@ -53,6 +53,7 @@ export const Sale: VFC<SaleProps> = ({
           token={token}
           vesting={vesting}
           openBiddingModal={openBiddingModal}
+          maxAmount={valueToBigNumber(sale.emissionAmount)}
           receivableAmount={userData.claimable}
           refundableAmount={userData.refundable}
           requestRefund={refund}

@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { useState } from 'react'
+import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { ERC20Asset } from 'src/types/models'
 import { EthereumAddress } from 'src/types/web3'
 import { BN_ZERO, formatAmt, formattedToBigNumber } from 'src/utils/number'
@@ -21,6 +22,7 @@ export const useBiddingForm = ({
   submit,
   ...market
 }: BiddingFormProps) => {
+  const { data } = useWalletBalance()
   const [amount, setAmount] = useState(
     currentBid ? formatAmt(currentBid.amount) : '',
   )
@@ -50,7 +52,12 @@ export const useBiddingForm = ({
     market,
     currentBid,
   )
-  const error = validate(bid, noPriceLimitEnabled, currentBid)
+  const error = validate(
+    bid,
+    noPriceLimitEnabled,
+    data[biddingAsset.symbol],
+    currentBid,
+  )
 
   return {
     amount,
@@ -128,6 +135,7 @@ export const calcEstimatedAmount = (
 export const validate = (
   bid: Bid,
   noPriceLimitEnabled: boolean,
+  inWallet: BigNumber,
   currentBid?: Bid,
 ) => {
   // cancel only
@@ -138,10 +146,13 @@ export const validate = (
       return t`Limit Price cannot be added`
     if (!bid.limitPrice?.gt(BN_ZERO)) return t`Enter Limit Price`
   }
+  if (!currentBid && inWallet.lt(bid.amount)) return t`No Balance to Bid`
   if (!currentBid) return
   if (!!bid.cancelable !== !!currentBid.cancelable)
     return t`Cancelable or not is unchangeable`
   if (bid.amount.lt(currentBid.amount)) return t`Only Allowed to Add Bid`
+  if (inWallet.lt(bid.amount.minus(currentBid.amount)))
+    return t`No Balance to Add Bid`
   if (noPriceLimitEnabled) {
     if (!currentBid.limitPrice && bid.amount.eq(currentBid.amount))
       return t`Nothing Changed`

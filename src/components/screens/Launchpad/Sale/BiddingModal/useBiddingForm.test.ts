@@ -1,5 +1,5 @@
 import { valueToBigNumber } from '@starlay-finance/math-utils'
-import { BN_ONE, BN_ZERO } from 'src/utils/number'
+import { BN_HUNDRED, BN_ONE, BN_ZERO } from 'src/utils/number'
 import { calcEstimatedAmount, validate } from './useBiddingForm'
 
 describe('useBiddingForm', () => {
@@ -120,41 +120,51 @@ describe('useBiddingForm', () => {
     })
   })
   describe('validate', () => {
+    const inWallet = BN_HUNDRED
     describe('new', () => {
       const validBid = {
         amount: BN_ONE,
       }
       test('return undefined if valid', () => {
-        expect(validate(validBid, true)).toBeUndefined()
+        expect(validate(validBid, true, inWallet)).toBeUndefined()
       })
       test('return "Enter Amount" if input amount is zero', () => {
-        expect(validate({ amount: BN_ZERO }, true)).toBe('Enter Amount')
+        expect(validate({ amount: BN_ZERO }, true, inWallet)).toBe(
+          'Enter Amount',
+        )
       })
       test('return "Enter Amount" if input amount is zero', () => {
-        expect(validate({ amount: BN_ZERO }, true)).toBe('Enter Amount')
-      })
-      test('return "Enter Limit Price" if not noLimitPriceEnabled  and Limit Price is zero or empty', () => {
-        expect(validate(validBid, false)).toBe('Enter Limit Price')
-        expect(validate({ ...validBid, limitPrice: BN_ZERO }, false)).toBe(
-          'Enter Limit Price',
+        expect(validate({ amount: BN_ZERO }, true, inWallet)).toBe(
+          'Enter Amount',
         )
       })
       test('return "Enter Limit Price" if not noLimitPriceEnabled  and Limit Price is zero or empty', () => {
-        expect(validate(validBid, false)).toBe('Enter Limit Price')
-        expect(validate({ ...validBid, limitPrice: BN_ZERO }, false)).toBe(
-          'Enter Limit Price',
-        )
+        expect(validate(validBid, false, inWallet)).toBe('Enter Limit Price')
+        expect(
+          validate({ ...validBid, limitPrice: BN_ZERO }, false, inWallet),
+        ).toBe('Enter Limit Price')
+      })
+      test('return "Enter Limit Price" if not noLimitPriceEnabled  and Limit Price is zero or empty', () => {
+        expect(validate(validBid, false, inWallet)).toBe('Enter Limit Price')
+        expect(
+          validate({ ...validBid, limitPrice: BN_ZERO }, false, inWallet),
+        ).toBe('Enter Limit Price')
+      })
+      test('return "No Balance to Bid" if the balance less than the bid amount', () => {
+        expect(validate(validBid, true, BN_ZERO)).toBe('No Balance to Bid')
       })
     })
     describe('update', () => {
       test('return undefined if Amount is updated larger', () => {
         expect(
-          validate({ amount: BN_ONE.plus(BN_ONE) }, true, { amount: BN_ONE }),
+          validate({ amount: BN_ONE.plus(BN_ONE) }, true, inWallet, {
+            amount: BN_ONE,
+          }),
         ).toBeUndefined()
       })
       test('return undefined if Limit Price is updated higher', () => {
         expect(
-          validate({ amount: BN_ONE, limitPrice: BN_ONE }, false, {
+          validate({ amount: BN_ONE, limitPrice: BN_ONE }, false, inWallet, {
             amount: BN_ONE,
             limitPrice: BN_ONE.div(2),
           }),
@@ -162,54 +172,68 @@ describe('useBiddingForm', () => {
       })
       test('return undefined if Limit Price removed', () => {
         expect(
-          validate({ amount: BN_ONE.plus(BN_ONE) }, true, {
+          validate({ amount: BN_ONE.plus(BN_ONE) }, true, inWallet, {
             amount: BN_ONE,
             limitPrice: BN_ONE,
           }),
         ).toBeUndefined()
       })
-      test('return "Amount must be larger than current" if new Amount is smaller', () => {
+      test('return "Only Allowed to Add Bid" if new Amount is smaller', () => {
         expect(
-          validate({ amount: BN_ONE }, true, { amount: BN_ONE.plus(BN_ONE) }),
-        ).toBe('Amount must be larger than current')
-      })
-      test('return "Limit Price must be higher than current" if new Limit Price is lower', () => {
-        expect(
-          validate({ amount: BN_ONE, limitPrice: BN_ONE.div(2) }, false, {
-            amount: BN_ONE,
-            limitPrice: BN_ONE,
+          validate({ amount: BN_ONE }, true, inWallet, {
+            amount: BN_ONE.plus(BN_ONE),
           }),
-        ).toBe('Limit Price must be higher than current')
+        ).toBe('Only Allowed to Add Bid')
+      })
+      test('return "Only Allowed to Raise or Disable Limit Price" if new Limit Price is lower', () => {
+        expect(
+          validate(
+            { amount: BN_ONE, limitPrice: BN_ONE.div(2) },
+            false,
+            inWallet,
+            {
+              amount: BN_ONE,
+              limitPrice: BN_ONE,
+            },
+          ),
+        ).toBe('Only Allowed to Raise or Disable Limit Price')
       })
       test('return "Limit Price cannot be added" if Limit Price not set', () => {
-        expect(validate({ amount: BN_ONE }, false, { amount: BN_ONE })).toBe(
-          'Limit Price cannot be added',
-        )
+        expect(
+          validate({ amount: BN_ONE }, false, inWallet, { amount: BN_ONE }),
+        ).toBe('Limit Price cannot be added')
       })
       test('return "Cancelable or not is unchangeable" if cancelable changed', () => {
         expect(
-          validate({ amount: BN_ONE, cancelable: true }, true, {
+          validate({ amount: BN_ONE, cancelable: true }, true, inWallet, {
             amount: BN_ONE,
             cancelable: false,
           }),
         ).toBe('Cancelable or not is unchangeable')
       })
-      test('return "No changes" if input not changed', () => {
-        expect(validate({ amount: BN_ONE }, true, { amount: BN_ONE })).toBe(
-          'No changes',
-        )
+      test('return "Nothing Changed" if input not changed', () => {
         expect(
-          validate({ amount: BN_ONE, limitPrice: BN_ONE }, false, {
+          validate({ amount: BN_ONE }, true, inWallet, { amount: BN_ONE }),
+        ).toBe('Nothing Changed')
+        expect(
+          validate({ amount: BN_ONE, limitPrice: BN_ONE }, false, inWallet, {
             amount: BN_ONE,
             limitPrice: BN_ONE,
           }),
-        ).toBe('No changes')
+        ).toBe('Nothing Changed')
+      })
+      test('return "No Balance to Add Bid" if the balance less than the additional bid amount', () => {
+        expect(
+          validate({ amount: BN_ONE.plus(1.1) }, true, BN_ONE, {
+            amount: BN_ONE,
+          }),
+        ).toBe('No Balance to Add Bid')
       })
     })
     describe('cancel', () => {
       test('return "undefined" if current bid is cancelable', () => {
         expect(
-          validate({ amount: BN_ONE }, true, {
+          validate({ amount: BN_ONE }, true, inWallet, {
             amount: BN_ONE,
             cancelable: true,
           }),
