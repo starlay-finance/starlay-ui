@@ -15,9 +15,7 @@ const graphqlClient = (endpoint: string, apiKey?: string) =>
 export const getCurrentPrice = async (
   chainId: ChainId,
   projectId: string,
-): Promise<
-  Pick<Market, 'currentPriceInUSD' | 'bottomPriceInUSD'> | undefined
-> => {
+): Promise<Omit<Market, 'numOfBids'> | undefined> => {
   const { launchpadHistoricalDataProvider } = getNetworkConfig(chainId)
   if (!launchpadHistoricalDataProvider) return undefined
   const client = graphqlClient(
@@ -29,10 +27,16 @@ export const getCurrentPrice = async (
     return {
       currentPriceInUSD: BN_ZERO,
       bottomPriceInUSD: BN_ZERO,
+      raisedAmountInUSD: BN_ZERO,
+      boostedRaisedAmountInUSD: BN_ZERO,
     }
   return {
     currentPriceInUSD: valueToBigNumber(res.priceCurrent.data),
     bottomPriceInUSD: valueToBigNumber(res.priceCurrent.bottomPrice),
+    raisedAmountInUSD: valueToBigNumber(res.priceCurrent.amountOfRaised),
+    boostedRaisedAmountInUSD: valueToBigNumber(
+      res.priceCurrent.boostedAmountOfRaised,
+    ),
   }
 }
 

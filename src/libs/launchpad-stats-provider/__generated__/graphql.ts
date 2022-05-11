@@ -679,7 +679,7 @@ export type GetCurrentDataQueryVariables = Exact<{
 }>;
 
 
-export type GetCurrentDataQuery = { __typename?: 'Query', projectStatistic?: { __typename?: 'ProjectStatistic', totalAmount: string, totalMultiplied: string, numOfBidders: string } | null };
+export type GetCurrentDataQuery = { __typename?: 'Query', projectStatistic?: { __typename?: 'ProjectStatistic', numOfBidders: string } | null };
 
 
 export const GetBidDocument = gql`
@@ -695,8 +695,6 @@ export const GetBidDocument = gql`
 export const GetCurrentDataDocument = gql`
     query GetCurrentData($id: ID!) {
   projectStatistic(id: $id) {
-    totalAmount
-    totalMultiplied
     numOfBidders
   }
 }
