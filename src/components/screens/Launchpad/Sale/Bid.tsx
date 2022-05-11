@@ -37,7 +37,10 @@ export const BidSecion: VFC<BidSecionProps> = ({
       ? BN_ZERO
       : currentEstimatedPrice.isZero()
       ? maxAmount
-      : bid.amount.times(boost).div(currentEstimatedPrice)
+      : BigNumber.min(
+          bid.amount.times(boost).div(currentEstimatedPrice),
+          maxAmount,
+        )
   return (
     <Section>
       <h2>{t`Your Bid`}</h2>
@@ -67,7 +70,7 @@ export const BidSecion: VFC<BidSecionProps> = ({
               { symbol: token.symbol, decimalPlaces: 2 },
             )}
           />
-          {!receivableAmount?.isZero() && (
+          {hasEnded && !receivableAmount?.isZero() && (
             <InformationItem
               label={t`Vesting Period`}
               value={`${vesting.start.format('MMM, D YYYY')} - ${vesting.start
