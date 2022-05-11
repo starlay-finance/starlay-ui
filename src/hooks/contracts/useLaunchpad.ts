@@ -27,7 +27,7 @@ export const useLaunchpad = (params?: {
   const launchpadAddress = params?.launchpadAddress || context.launchpadAddress
   const { data: provider } = useStaticRPCProvider()
   const { account, signer } = useWallet()
-  const { data: currentBid, mutate: mutateBid } = useLaunchpadBid()
+  const { data: currentBid, mutate: mutateBid } = useLaunchpadBid(params)
 
   const { data: launchpad } = useSWRImmutable(
     provider &&
@@ -55,7 +55,7 @@ export const useLaunchpad = (params?: {
   const handleTx = (
     txs: EthereumTransactionTypeExtended[],
     signer: ethers.providers.JsonRpcSigner,
-  ) => handler.handleTx(txs, signer, () => mutateBid())
+  ) => handler.handleTx(txs, signer, mutateBid)
 
   const bid = async (param: {
     amount: BigNumber

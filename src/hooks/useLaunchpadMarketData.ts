@@ -17,12 +17,15 @@ const INTERVAL = 60000
 export const useLaunchpadMarketData = ({
   saleStart,
   saleEnd,
+  ...params
 }: {
+  launchpadAddress?: EthereumAddress
   saleStart: Dayjs
   saleEnd: Dayjs
 }) => {
   const { data: provider } = useStaticRPCProvider()
-  const { launchpadAddress } = useLaunchpadContext()
+  const context = useLaunchpadContext()
+  const launchpadAddress = params?.launchpadAddress || context.launchpadAddress
   const { data, mutate } = useSWRImmutable(
     () =>
       provider &&
