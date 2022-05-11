@@ -48,6 +48,7 @@ export type Market = {
   raisedAmountInUSD: BigNumber
   boostedRaisedAmountInUSD: BigNumber
   numOfBids: BigNumber
+  closed?: boolean
 }
 
 export type PriceChartData = {

@@ -37,6 +37,7 @@ export const getCurrentStats = async (
     raisedAmountInUSD: valueToBigNumber(projectResult.totalAmount),
     boostedRaisedAmountInUSD: valueToBigNumber(projectResult.totalMultiplied),
     numOfBids: valueToBigNumber(projectResult.numOfBidders),
+    closed: true,
   }
 }
 

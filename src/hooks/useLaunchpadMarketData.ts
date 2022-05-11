@@ -56,6 +56,7 @@ export const useLaunchpadMarketData = ({
             provider!.chainId,
             launchpadAddress!,
             latestTimestamp,
+            saleEnd,
           ),
         { revalidate: false },
       )
@@ -90,17 +91,29 @@ const updateLaunchpadMarketData = async (
   chainId: ChainId,
   launchpadAddress: EthereumAddress,
   latestTimestamp: number,
+  saleEnd: Dayjs,
 ): Promise<{ market: Market; chartData: PriceChartData[] } | undefined> => {
-  const [prices, stats, chartData] = await Promise.all([
+  const [prices, stats, newChartData] = await Promise.all([
     getCurrentPrice(chainId, launchpadAddress!),
     getCurrentStats(chainId, launchpadAddress!),
     listPricesHistorical(chainId, launchpadAddress!, latestTimestamp),
   ])
   if (!prices || !stats)
     return current.market ? { ...current, market: current.market } : undefined
+  const market = { ...prices, ...stats }
+  const chartData = [...current.chartData, ...newChartData]
   return {
-    market: { ...prices, ...stats },
-    chartData: [...current.chartData, ...chartData],
+    market,
+    chartData: !market.closed
+      ? chartData
+      : [
+          ...chartData,
+          {
+            priceInUSD: market.currentPriceInUSD.toNumber(),
+            bottomPriceInUSD: market.bottomPriceInUSD.toNumber(),
+            timestamp: saleEnd.unix(),
+          },
+        ],
   }
 }
 
