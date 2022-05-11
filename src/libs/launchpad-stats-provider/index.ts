@@ -22,7 +22,9 @@ export const getCurrentStats = async (
     launchpadDataProvider.endpoint,
     launchpadDataProvider.apiKey,
   )
-  const { projectStatistic } = await client.GetCurrentData({ id })
+  const { projectStatistic } = await client.GetCurrentData({
+    id: id.toLowerCase(),
+  })
   return {
     numOfBids: projectStatistic
       ? valueToBigNumber(projectStatistic.numOfBidders)
@@ -42,7 +44,7 @@ export const getBid = async (
     launchpadDataProvider.apiKey,
   )
   const { bid } = await client.GetBid({
-    id: `${projectId}:${account}`,
+    id: `${projectId}:${account}`.toLowerCase(),
   })
   if (!bid) return undefined
   const limitPrice = valueToBigNumber(bid.cap)
