@@ -189,6 +189,76 @@ export type ProjectBidsArgs = {
   where?: InputMaybe<Bid_Filter>;
 };
 
+export type ProjectResult = {
+  __typename?: 'ProjectResult';
+  bottomPrice: Scalars['BigDecimal'];
+  id: Scalars['ID'];
+  numOfBidders: Scalars['BigInt'];
+  price: Scalars['BigDecimal'];
+  totalAmount: Scalars['BigDecimal'];
+  totalMultiplied: Scalars['BigDecimal'];
+};
+
+export type ProjectResult_Filter = {
+  bottomPrice?: InputMaybe<Scalars['BigDecimal']>;
+  bottomPrice_gt?: InputMaybe<Scalars['BigDecimal']>;
+  bottomPrice_gte?: InputMaybe<Scalars['BigDecimal']>;
+  bottomPrice_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  bottomPrice_lt?: InputMaybe<Scalars['BigDecimal']>;
+  bottomPrice_lte?: InputMaybe<Scalars['BigDecimal']>;
+  bottomPrice_not?: InputMaybe<Scalars['BigDecimal']>;
+  bottomPrice_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  id?: InputMaybe<Scalars['ID']>;
+  id_gt?: InputMaybe<Scalars['ID']>;
+  id_gte?: InputMaybe<Scalars['ID']>;
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  id_lt?: InputMaybe<Scalars['ID']>;
+  id_lte?: InputMaybe<Scalars['ID']>;
+  id_not?: InputMaybe<Scalars['ID']>;
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  numOfBidders?: InputMaybe<Scalars['BigInt']>;
+  numOfBidders_gt?: InputMaybe<Scalars['BigInt']>;
+  numOfBidders_gte?: InputMaybe<Scalars['BigInt']>;
+  numOfBidders_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  numOfBidders_lt?: InputMaybe<Scalars['BigInt']>;
+  numOfBidders_lte?: InputMaybe<Scalars['BigInt']>;
+  numOfBidders_not?: InputMaybe<Scalars['BigInt']>;
+  numOfBidders_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  price?: InputMaybe<Scalars['BigDecimal']>;
+  price_gt?: InputMaybe<Scalars['BigDecimal']>;
+  price_gte?: InputMaybe<Scalars['BigDecimal']>;
+  price_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  price_lt?: InputMaybe<Scalars['BigDecimal']>;
+  price_lte?: InputMaybe<Scalars['BigDecimal']>;
+  price_not?: InputMaybe<Scalars['BigDecimal']>;
+  price_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  totalAmount?: InputMaybe<Scalars['BigDecimal']>;
+  totalAmount_gt?: InputMaybe<Scalars['BigDecimal']>;
+  totalAmount_gte?: InputMaybe<Scalars['BigDecimal']>;
+  totalAmount_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  totalAmount_lt?: InputMaybe<Scalars['BigDecimal']>;
+  totalAmount_lte?: InputMaybe<Scalars['BigDecimal']>;
+  totalAmount_not?: InputMaybe<Scalars['BigDecimal']>;
+  totalAmount_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  totalMultiplied?: InputMaybe<Scalars['BigDecimal']>;
+  totalMultiplied_gt?: InputMaybe<Scalars['BigDecimal']>;
+  totalMultiplied_gte?: InputMaybe<Scalars['BigDecimal']>;
+  totalMultiplied_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  totalMultiplied_lt?: InputMaybe<Scalars['BigDecimal']>;
+  totalMultiplied_lte?: InputMaybe<Scalars['BigDecimal']>;
+  totalMultiplied_not?: InputMaybe<Scalars['BigDecimal']>;
+  totalMultiplied_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+};
+
+export enum ProjectResult_OrderBy {
+  BottomPrice = 'bottomPrice',
+  Id = 'id',
+  NumOfBidders = 'numOfBidders',
+  Price = 'price',
+  TotalAmount = 'totalAmount',
+  TotalMultiplied = 'totalMultiplied'
+}
+
 export type ProjectStatistic = {
   __typename?: 'ProjectStatistic';
   bottomPrice: Scalars['BigDecimal'];
@@ -348,6 +418,8 @@ export type Query = {
   lockedBidSummaries: Array<LockedBidSummary>;
   lockedBidSummary?: Maybe<LockedBidSummary>;
   project?: Maybe<Project>;
+  projectResult?: Maybe<ProjectResult>;
+  projectResults: Array<ProjectResult>;
   projectStatistic?: Maybe<ProjectStatistic>;
   projectStatistics: Array<ProjectStatistic>;
   projects: Array<Project>;
@@ -401,6 +473,24 @@ export type QueryProjectArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryProjectResultArgs = {
+  block?: InputMaybe<Block_Height>;
+  id: Scalars['ID'];
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type QueryProjectResultsArgs = {
+  block?: InputMaybe<Block_Height>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ProjectResult_OrderBy>;
+  orderDirection?: InputMaybe<OrderDirection>;
+  skip?: InputMaybe<Scalars['Int']>;
+  subgraphError?: _SubgraphErrorPolicy_;
+  where?: InputMaybe<ProjectResult_Filter>;
 };
 
 
@@ -459,6 +549,8 @@ export type Subscription = {
   lockedBidSummaries: Array<LockedBidSummary>;
   lockedBidSummary?: Maybe<LockedBidSummary>;
   project?: Maybe<Project>;
+  projectResult?: Maybe<ProjectResult>;
+  projectResults: Array<ProjectResult>;
   projectStatistic?: Maybe<ProjectStatistic>;
   projectStatistics: Array<ProjectStatistic>;
   projects: Array<Project>;
@@ -512,6 +604,24 @@ export type SubscriptionProjectArgs = {
   block?: InputMaybe<Block_Height>;
   id: Scalars['ID'];
   subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionProjectResultArgs = {
+  block?: InputMaybe<Block_Height>;
+  id: Scalars['ID'];
+  subgraphError?: _SubgraphErrorPolicy_;
+};
+
+
+export type SubscriptionProjectResultsArgs = {
+  block?: InputMaybe<Block_Height>;
+  first?: InputMaybe<Scalars['Int']>;
+  orderBy?: InputMaybe<ProjectResult_OrderBy>;
+  orderDirection?: InputMaybe<OrderDirection>;
+  skip?: InputMaybe<Scalars['Int']>;
+  subgraphError?: _SubgraphErrorPolicy_;
+  where?: InputMaybe<ProjectResult_Filter>;
 };
 
 
@@ -679,7 +789,7 @@ export type GetCurrentDataQueryVariables = Exact<{
 }>;
 
 
-export type GetCurrentDataQuery = { __typename?: 'Query', projectStatistic?: { __typename?: 'ProjectStatistic', numOfBidders: string } | null };
+export type GetCurrentDataQuery = { __typename?: 'Query', projectStatistic?: { __typename?: 'ProjectStatistic', numOfBidders: string } | null, projectResult?: { __typename?: 'ProjectResult', price: string, bottomPrice: string, totalAmount: string, totalMultiplied: string, numOfBidders: string } | null };
 
 
 export const GetBidDocument = gql`
@@ -695,6 +805,13 @@ export const GetBidDocument = gql`
 export const GetCurrentDataDocument = gql`
     query GetCurrentData($id: ID!) {
   projectStatistic(id: $id) {
+    numOfBidders
+  }
+  projectResult(id: $id) {
+    price
+    bottomPrice
+    totalAmount
+    totalMultiplied
     numOfBidders
   }
 }

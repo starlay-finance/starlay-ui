@@ -1,0 +1,12 @@
+query GetCurrentData($id: ID!) {
+  projectStatistic(id: $id) {
+    numOfBidders
+  }
+  projectResult(id: $id) {
+    price
+    bottomPrice
+    totalAmount
+    totalMultiplied
+    numOfBidders
+  }
+}

@@ -1,5 +1,0 @@
-query GetCurrentData($id: ID!) {
-  projectStatistic(id: $id) {
-    numOfBidders
-  }
-}

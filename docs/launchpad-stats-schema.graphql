@@ -172,6 +172,75 @@ type Project {
   saleStartTimestamp: BigInt!
 }
 
+type ProjectResult {
+  bottomPrice: BigDecimal!
+  id: ID!
+  numOfBidders: BigInt!
+  price: BigDecimal!
+  totalAmount: BigDecimal!
+  totalMultiplied: BigDecimal!
+}
+
+input ProjectResult_filter {
+  bottomPrice: BigDecimal
+  bottomPrice_gt: BigDecimal
+  bottomPrice_gte: BigDecimal
+  bottomPrice_in: [BigDecimal!]
+  bottomPrice_lt: BigDecimal
+  bottomPrice_lte: BigDecimal
+  bottomPrice_not: BigDecimal
+  bottomPrice_not_in: [BigDecimal!]
+  id: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_not: ID
+  id_not_in: [ID!]
+  numOfBidders: BigInt
+  numOfBidders_gt: BigInt
+  numOfBidders_gte: BigInt
+  numOfBidders_in: [BigInt!]
+  numOfBidders_lt: BigInt
+  numOfBidders_lte: BigInt
+  numOfBidders_not: BigInt
+  numOfBidders_not_in: [BigInt!]
+  price: BigDecimal
+  price_gt: BigDecimal
+  price_gte: BigDecimal
+  price_in: [BigDecimal!]
+  price_lt: BigDecimal
+  price_lte: BigDecimal
+  price_not: BigDecimal
+  price_not_in: [BigDecimal!]
+  totalAmount: BigDecimal
+  totalAmount_gt: BigDecimal
+  totalAmount_gte: BigDecimal
+  totalAmount_in: [BigDecimal!]
+  totalAmount_lt: BigDecimal
+  totalAmount_lte: BigDecimal
+  totalAmount_not: BigDecimal
+  totalAmount_not_in: [BigDecimal!]
+  totalMultiplied: BigDecimal
+  totalMultiplied_gt: BigDecimal
+  totalMultiplied_gte: BigDecimal
+  totalMultiplied_in: [BigDecimal!]
+  totalMultiplied_lt: BigDecimal
+  totalMultiplied_lte: BigDecimal
+  totalMultiplied_not: BigDecimal
+  totalMultiplied_not_in: [BigDecimal!]
+}
+
+enum ProjectResult_orderBy {
+  bottomPrice
+  id
+  numOfBidders
+  price
+  totalAmount
+  totalMultiplied
+}
+
 type ProjectStatistic {
   bottomPrice: BigDecimal!
   id: ID!
@@ -392,6 +461,34 @@ type Query {
     """
     subgraphError: _SubgraphErrorPolicy_! = deny
   ): Project
+  projectResult(
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+    id: ID!
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): ProjectResult
+  projectResults(
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+    first: Int = 100
+    orderBy: ProjectResult_orderBy
+    orderDirection: OrderDirection
+    skip: Int = 0
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+    where: ProjectResult_filter
+  ): [ProjectResult!]!
   projectStatistic(
     """
     The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
@@ -537,6 +634,34 @@ type Subscription {
     """
     subgraphError: _SubgraphErrorPolicy_! = deny
   ): Project
+  projectResult(
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+    id: ID!
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+  ): ProjectResult
+  projectResults(
+    """
+    The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
+    """
+    block: Block_height
+    first: Int = 100
+    orderBy: ProjectResult_orderBy
+    orderDirection: OrderDirection
+    skip: Int = 0
+
+    """
+    Set to `allow` to receive data even if the subgraph has skipped over errors while syncing.
+    """
+    subgraphError: _SubgraphErrorPolicy_! = deny
+    where: ProjectResult_filter
+  ): [ProjectResult!]!
   projectStatistic(
     """
     The block at which the query should be executed. Can either be a `{ hash: Bytes }` value containing a block hash, a `{ number: Int }` containing the block number, or a `{ number_gte: Int }` containing the minimum block number. In the case of `number_gte`, the query will be executed on the latest block only if the subgraph has progressed to or past the minimum block number. Defaults to the latest block when omitted.
