@@ -67,14 +67,23 @@ export const BidSecion: VFC<BidSecionProps> = ({
             label={t`Receivable Amount`}
             tooltip={t`TODO description of receivable amount`}
             value={
-              <Reel
-                text={formatAmt(
-                  market?.closed
-                    ? receivableAmount || BN_ZERO
-                    : currentEstimatedAmount,
-                  { symbol: token.symbol, decimalPlaces: 2 },
-                )}
-              />
+              market ? (
+                !market.closed ? (
+                  <Reel
+                    text={formatAmt(currentEstimatedAmount, {
+                      symbol: token.symbol,
+                      decimalPlaces: 2,
+                    })}
+                  />
+                ) : receivableAmount ? (
+                  <Reel
+                    text={formatAmt(receivableAmount, {
+                      symbol: token.symbol,
+                      decimalPlaces: 2,
+                    })}
+                  />
+                ) : undefined
+              ) : undefined
             }
           />
           {market?.closed && receivableAmount?.gt(BN_ZERO) && (
