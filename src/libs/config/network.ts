@@ -86,7 +86,7 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
     },
     launchpadDataProvider: {
       endpoint:
-        'http://52.70.161.175:8000/subgraphs/name/starlay/starlay-launchpad',
+        'https://launchpad-subgraph.decartel.xyz/subgraphs/name/starlay/starlay-launchpad',
     },
     launchpadHistoricalDataProvider: {
       endpoint:

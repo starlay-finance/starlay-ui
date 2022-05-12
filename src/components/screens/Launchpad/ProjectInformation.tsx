@@ -14,6 +14,7 @@ import {
   fontWeightSemiBold,
 } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
+import { DOCS_LAUNCHPAD } from 'src/utils/routes'
 import styled from 'styled-components'
 import { ProjectData } from './types'
 
@@ -34,13 +35,11 @@ export const ProjectInformation = styled<
     <Description>
       <h2>{t`Sale Information`}</h2>
       <p>{sale}</p>
-      {urls.docs && (
-        <SingleLink>
-          <Link href={urls.docs}>
-            {t`View details in the docs`} <IconArrowRight />
-          </Link>
-        </SingleLink>
-      )}
+      <SingleLink>
+        <Link href={DOCS_LAUNCHPAD}>
+          {t`View details in the docs`} <IconArrowRight />
+        </Link>
+      </SingleLink>
     </Description>
     <Description>
       <h2>{t`Reminder`}</h2>

@@ -170,6 +170,7 @@ type Project {
   paymentToken: Token!
   saleEndTimestamp: BigInt!
   saleStartTimestamp: BigInt!
+  tokenAllocation: BigDecimal!
 }
 
 type ProjectResult {
@@ -377,6 +378,14 @@ input Project_filter {
   saleStartTimestamp_lte: BigInt
   saleStartTimestamp_not: BigInt
   saleStartTimestamp_not_in: [BigInt!]
+  tokenAllocation: BigDecimal
+  tokenAllocation_gt: BigDecimal
+  tokenAllocation_gte: BigDecimal
+  tokenAllocation_in: [BigDecimal!]
+  tokenAllocation_lt: BigDecimal
+  tokenAllocation_lte: BigDecimal
+  tokenAllocation_not: BigDecimal
+  tokenAllocation_not_in: [BigDecimal!]
 }
 
 enum Project_orderBy {
@@ -388,6 +397,7 @@ enum Project_orderBy {
   paymentToken
   saleEndTimestamp
   saleStartTimestamp
+  tokenAllocation
 }
 
 type Query {

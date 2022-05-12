@@ -178,6 +178,7 @@ export type Project = {
   paymentToken: Token;
   saleEndTimestamp: Scalars['BigInt'];
   saleStartTimestamp: Scalars['BigInt'];
+  tokenAllocation: Scalars['BigDecimal'];
 };
 
 
@@ -396,6 +397,14 @@ export type Project_Filter = {
   saleStartTimestamp_lte?: InputMaybe<Scalars['BigInt']>;
   saleStartTimestamp_not?: InputMaybe<Scalars['BigInt']>;
   saleStartTimestamp_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
+  tokenAllocation?: InputMaybe<Scalars['BigDecimal']>;
+  tokenAllocation_gt?: InputMaybe<Scalars['BigDecimal']>;
+  tokenAllocation_gte?: InputMaybe<Scalars['BigDecimal']>;
+  tokenAllocation_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
+  tokenAllocation_lt?: InputMaybe<Scalars['BigDecimal']>;
+  tokenAllocation_lte?: InputMaybe<Scalars['BigDecimal']>;
+  tokenAllocation_not?: InputMaybe<Scalars['BigDecimal']>;
+  tokenAllocation_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
 };
 
 export enum Project_OrderBy {
@@ -406,7 +415,8 @@ export enum Project_OrderBy {
   No = 'no',
   PaymentToken = 'paymentToken',
   SaleEndTimestamp = 'saleEndTimestamp',
-  SaleStartTimestamp = 'saleStartTimestamp'
+  SaleStartTimestamp = 'saleStartTimestamp',
+  TokenAllocation = 'tokenAllocation'
 }
 
 export type Query = {
