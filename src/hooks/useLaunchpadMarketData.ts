@@ -81,7 +81,7 @@ const fetchLaunchpadMarketData = async (
   ])
   if (!prices || !stats) return undefined
   return {
-    market: { ...stats, ...prices },
+    market: { ...prices, ...stats },
     chartData: [initialChartData(saleStart), ...chartData],
   }
 }
