@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { ReactNode, VFC } from 'react'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { hoverBackgroundKeyframes } from 'src/styles/animation'
@@ -48,7 +48,7 @@ export const CtaButton = styled.button`
 export const InformationItem = styled<
   VFC<{
     label: string
-    value: string | undefined
+    value: ReactNode | undefined
     tooltip?: string
     className?: string
   }>

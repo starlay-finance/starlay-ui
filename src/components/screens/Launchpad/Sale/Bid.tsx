@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
+import { Reel } from 'src/components/parts/Number/Reel'
 import { BN_ZERO, formatAmt, formatPct, formatUSD } from 'src/utils/number'
 import { Bid, Market, ProjectData } from '../types'
 import { calcBoost } from '../utils'
@@ -65,14 +66,18 @@ export const BidSecion: VFC<BidSecionProps> = ({
           <InformationItem
             label={t`Receivable Amount`}
             tooltip={t`TODO description of receivable amount`}
-            value={formatAmt(
-              market?.closed
-                ? receivableAmount || BN_ZERO
-                : currentEstimatedAmount,
-              { symbol: token.symbol, decimalPlaces: 2 },
-            )}
+            value={
+              <Reel
+                text={formatAmt(
+                  market?.closed
+                    ? receivableAmount || BN_ZERO
+                    : currentEstimatedAmount,
+                  { symbol: token.symbol, decimalPlaces: 2 },
+                )}
+              />
+            }
           />
-          {market?.closed && !receivableAmount?.isZero() && (
+          {market?.closed && receivableAmount?.gt(BN_ZERO) && (
             <InformationItem
               label={t`Vesting Period`}
               value={`${vesting.start.format('MMM, D YYYY')} - ${vesting.start
