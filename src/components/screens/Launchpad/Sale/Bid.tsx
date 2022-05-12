@@ -66,11 +66,13 @@ export const BidSecion: VFC<BidSecionProps> = ({
             label={t`Receivable Amount`}
             tooltip={t`TODO description of receivable amount`}
             value={formatAmt(
-              hasEnded ? receivableAmount || BN_ZERO : currentEstimatedAmount,
+              market?.closed
+                ? receivableAmount || BN_ZERO
+                : currentEstimatedAmount,
               { symbol: token.symbol, decimalPlaces: 2 },
             )}
           />
-          {hasEnded && !receivableAmount?.isZero() && (
+          {market?.closed && !receivableAmount?.isZero() && (
             <InformationItem
               label={t`Vesting Period`}
               value={`${vesting.start.format('MMM, D YYYY')} - ${vesting.start
@@ -89,10 +91,11 @@ export const BidSecion: VFC<BidSecionProps> = ({
           </span>
         </CtaButton>
       ) : (
-        !refundableAmount?.isZero() && (
+        refundableAmount?.gt(BN_ZERO) &&
+        receivableAmount && (
           <CtaButton onClick={requestRefund}>
             <span>
-              {receivableAmount?.isZero()
+              {receivableAmount.isZero()
                 ? t`Request Bid Amount Refund`
                 : t`Partially Filled! Request Refund for Remained Amount`}
             </span>
