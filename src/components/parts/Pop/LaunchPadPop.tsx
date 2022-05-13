@@ -1,5 +1,7 @@
-import { Dayjs } from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import { VFC } from 'react'
+import Countdown from 'react-countdown'
+import { attention } from 'src/styles/colors'
 import { fontWeightBold } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { formatWithTZ } from 'src/utils/date'
@@ -32,10 +34,28 @@ export const LaunchPadPopContent: VFC<{ data: LaunchPadPopData }> = ({
         <h1>{`${token.symbol} Token Sale`}</h1>
         <p>{`on Starlay Launchpad`}</p>
       </Content>
-      <Schedule>{`Sale start at ${formatWithTZ(
-        sale.start,
-        DATE_FORMAT,
-      )}`}</Schedule>
+      <Schedule>
+        {sale.start.isAfter(dayjs()) ? (
+          `Sale start at ${formatWithTZ(sale.start, DATE_FORMAT)}`
+        ) : (
+          <>
+            {`Remaining Time to Bid: `}
+            <Countdown
+              date={sale.end.toDate()}
+              daysInHours
+              renderer={({ formatted: { hours, minutes, seconds }, total }) => {
+                const color =
+                  total > 0 && total < 3600000 ? attention : undefined
+                return (
+                  <span style={{ color }}>
+                    {hours}:{minutes}:{seconds}
+                  </span>
+                )
+              }}
+            />
+          </>
+        )}
+      </Schedule>
     </PopDiv>
   </a>
 )
@@ -80,6 +100,7 @@ const Schedule = styled.div`
   height: 50px;
   background-color: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(24px) brightness(1.08);
+  white-space: pre-wrap;
 `
 
 const Content = styled.div`
