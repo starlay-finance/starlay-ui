@@ -184,7 +184,7 @@ const TooltipRenderer: VFC<TooltipProps<number, string>> = ({
   )
 }
 
-const FORMAT = 'MMM, d HH:mm z'
+const FORMAT = 'MMM, D HH:mm z'
 const ChartTooltip: VFC<{
   priceInUSD: number
   bottomPriceInUSD: number
