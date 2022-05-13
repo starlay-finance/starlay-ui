@@ -14,10 +14,10 @@ export const AssetsMobile = asStyled<AssetsProps>((props) => {
   const markets = data?.assets || []
   if (typeof window === 'undefined') return <></>
   return (
-    <AssetsMobileSection>
+    <AssetsMobileDiv>
       <AssetsComponent {...props} markets={markets} />
       <AssetsComponent {...props} markets={markets} />
-    </AssetsMobileSection>
+    </AssetsMobileDiv>
   )
 })``
 
@@ -80,7 +80,7 @@ const AssetsDiv = styled.div<{ $appeared: boolean }>`
   }
 `
 
-const AssetsMobileSection = styled.section`
+const AssetsMobileDiv = styled.div`
   margin-top: 80px;
   display: flex;
   flex-direction: column;
