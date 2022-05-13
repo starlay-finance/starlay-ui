@@ -20,7 +20,7 @@ msgstr "Latest Block: {blockNumber}"
 #: src/components/parts/Footer/AppFooter.tsx
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/parts/Header/TopHeader.tsx
-#: src/components/screens/LaundPad/ProjectInformation.tsx
+#: src/components/screens/Launchpad/ProjectInformation.tsx
 #: src/components/screens/Top/Menu.tsx
 msgid "Docs"
 msgstr "Docs"
@@ -202,6 +202,7 @@ msgid "Price"
 msgstr "Price"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
+#: src/components/screens/Launchpad/Sale/SaleInformation.tsx
 msgid "Connect Wallet"
 msgstr "Connect Wallet"
 
@@ -288,15 +289,15 @@ msgstr "Liquidity"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
-#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
-#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+#: src/components/screens/Launchpad/Sale/BiddingModal/BiddingForm.tsx
+#: src/components/screens/Launchpad/Sale/BiddingModal/BiddingForm.tsx
 msgid "ON"
 msgstr "ON"
 
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
 #: src/components/screens/Dashboard/modals/CollateralModal/Body.tsx
-#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
-#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+#: src/components/screens/Launchpad/Sale/BiddingModal/BiddingForm.tsx
+#: src/components/screens/Launchpad/Sale/BiddingModal/BiddingForm.tsx
 msgid "OFF"
 msgstr "OFF"
 
@@ -441,193 +442,228 @@ msgstr "Deposit Balance"
 msgid "Borrow Balance"
 msgstr "Borrow Balance"
 
-#: src/components/screens/LaundPad/ProjectInformation.tsx
-msgid "What is ${0}?"
-msgstr "What is ${0}?"
+#: src/components/screens/Launchpad/ProjectInformation.tsx
+msgid "What is {0}?"
+msgstr "What is {0}?"
 
-#: src/components/screens/LaundPad/ProjectInformation.tsx
-#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+#: src/components/screens/Launchpad/ProjectInformation.tsx
+#: src/components/screens/Launchpad/Sale/SaleInformation.tsx
 msgid "Sale Information"
 msgstr "Sale Information"
 
-#: src/components/screens/LaundPad/ProjectInformation.tsx
+#: src/components/screens/Launchpad/ProjectInformation.tsx
 msgid "View details in the docs"
 msgstr "View details in the docs"
 
-#: src/components/screens/LaundPad/ProjectInformation.tsx
+#: src/components/screens/Launchpad/ProjectInformation.tsx
 msgid "Reminder"
 msgstr "Reminder"
 
-#: src/components/screens/LaundPad/ProjectInformation.tsx
+#: src/components/screens/Launchpad/ProjectInformation.tsx
 msgid "Web"
 msgstr "Web"
 
-#: src/components/screens/LaundPad/Sale/Bid.tsx
+#: src/components/screens/Launchpad/Sale/Bid.tsx
 msgid "Your Bid"
 msgstr "Your Bid"
 
-#: src/components/screens/LaundPad/Sale/Bid.tsx
-msgid "Amount"
-msgstr "Amount"
+#: src/components/screens/Launchpad/Sale/Bid.tsx
+#: src/components/screens/Launchpad/Sale/BiddingModal/BiddingForm.tsx
+msgid "Bid Amount"
+msgstr "Bid Amount"
 
-#: src/components/screens/LaundPad/Sale/Bid.tsx
+#: src/components/screens/Launchpad/Sale/Bid.tsx
+#: src/components/screens/Launchpad/Sale/BiddingModal/BiddingForm.tsx
 msgid "Limit Price"
 msgstr "Limit Price"
 
-#: src/components/screens/LaundPad/Sale/Bid.tsx
-#: src/components/screens/LaundPad/Sale/Bid.tsx
-#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+#: src/components/screens/Launchpad/Sale/Bid.tsx
+#: src/components/screens/Launchpad/Sale/Bid.tsx
+#: src/components/screens/Launchpad/Sale/BiddingModal/BiddingForm.tsx
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/components/screens/LaundPad/Sale/Bid.tsx
+#: src/components/screens/Launchpad/Sale/Bid.tsx
 msgid "Enabled"
 msgstr "Enabled"
 
-#: src/components/screens/LaundPad/Sale/Bid.tsx
+#: src/components/screens/Launchpad/Sale/Bid.tsx
 msgid "Boosted"
 msgstr "Boosted"
 
-#: src/components/screens/LaundPad/Sale/Bid.tsx
-msgid "Estimated Amount"
-msgstr "Estimated Amount"
-
-#: src/components/screens/LaundPad/Sale/Bid.tsx
-msgid "TODO description of estimated amount"
-msgstr "TODO description of estimated amount"
-
-#: src/components/screens/LaundPad/Sale/Bid.tsx
+#: src/components/screens/Launchpad/Sale/Bid.tsx
 msgid "Receivable Amount"
 msgstr "Receivable Amount"
 
-#: src/components/screens/LaundPad/Sale/Bid.tsx
-msgid "TODO description of receivable amount"
-msgstr "TODO description of receivable amount"
+#: src/components/screens/Launchpad/Sale/Bid.tsx
+msgid ""
+"The estimated amount of {0} you may receive according to the current Price Per Token updates every minute.\n"
+"LAYs will be unlocked linearly and can be claimed during the vesting period."
+msgstr ""
+"The estimated amount of {0} you may receive according to the current Price Per Token updates every minute.\n"
+"LAYs will be unlocked linearly and can be claimed during the vesting period."
 
-#: src/components/screens/LaundPad/Sale/Bid.tsx
-msgid "Increase Amount or Limit Price"
-msgstr "Increase Amount or Limit Price"
+#: src/components/screens/Launchpad/Sale/Bid.tsx
+msgid "Vesting Period"
+msgstr "Vesting Period"
 
-#: src/components/screens/LaundPad/Sale/Bid.tsx
-msgid "Request Refund"
-msgstr "Request Refund"
+#: src/components/screens/Launchpad/Sale/Bid.tsx
+#: src/components/screens/Launchpad/Sale/BiddingModal/index.tsx
+msgid "Increase Bid Amount and/or Limit Price"
+msgstr "Increase Bid Amount and/or Limit Price"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
-msgid "Get 5% Boost without Price Limit"
-msgstr "Get 5% Boost without Price Limit"
+#: src/components/screens/Launchpad/Sale/Bid.tsx
+msgid "Request Bid Amount Refund"
+msgstr "Request Bid Amount Refund"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
-msgid "Price Limit"
-msgstr "Price Limit"
+#: src/components/screens/Launchpad/Sale/Bid.tsx
+msgid "Partially Filled! Request Refund for Remained Amount"
+msgstr "Partially Filled! Request Refund for Remained Amount"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+#: src/components/screens/Launchpad/Sale/BiddingModal/BiddingForm.tsx
+msgid "Get 5% Boost without Limit Price"
+msgstr "Get 5% Boost without Limit Price"
+
+#: src/components/screens/Launchpad/Sale/BiddingModal/BiddingForm.tsx
 msgid "Get 10% Boost without Cancel"
 msgstr "Get 10% Boost without Cancel"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
+#: src/components/screens/Launchpad/Sale/BiddingModal/BiddingForm.tsx
 msgid "Boost"
 msgstr "Boost"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
-msgid "Current Estimated Amount"
-msgstr "Current Estimated Amount"
+#: src/components/screens/Launchpad/Sale/BiddingModal/BiddingForm.tsx
+msgid "Estimated Receivable Amount"
+msgstr "Estimated Receivable Amount"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/BiddingForm.tsx
-#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+#: src/components/screens/Launchpad/Sale/BiddingModal/BiddingForm.tsx
+msgid "Apply Your Change"
+msgstr "Apply Your Change"
+
+#: src/components/screens/Launchpad/Sale/BiddingModal/BiddingForm.tsx
+#: src/components/screens/Launchpad/Sale/SaleInformation.tsx
 msgid "Bid"
 msgstr "Bid"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/CurrentPrice.tsx
-msgid "Current Estimated Price"
-msgstr "Current Estimated Price"
+#: src/components/screens/Launchpad/Sale/BiddingModal/CurrentPrice.tsx
+msgid "Current Price"
+msgstr "Current Price"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/index.tsx
+#: src/components/screens/Launchpad/Sale/BiddingModal/index.tsx
+msgid "Cancel Bid"
+msgstr "Cancel Bid"
+
+#: src/components/screens/Launchpad/Sale/BiddingModal/index.tsx
 msgid "Bid on {0}"
 msgstr "Bid on {0}"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
+#: src/components/screens/Launchpad/Sale/BiddingModal/parts.tsx
+msgid "MAX"
+msgstr "MAX"
+
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
 msgid "Enter Amount"
 msgstr "Enter Amount"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
 msgid "Limit Price cannot be added"
 msgstr "Limit Price cannot be added"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
 msgid "Enter Limit Price"
 msgstr "Enter Limit Price"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
+msgid "No Balance to Bid"
+msgstr "No Balance to Bid"
+
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
 msgid "Cancelable or not is unchangeable"
 msgstr "Cancelable or not is unchangeable"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
-msgid "Amount must be larger than current"
-msgstr "Amount must be larger than current"
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
+msgid "Only Allowed to Add Bid"
+msgstr "Only Allowed to Add Bid"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
-#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
-msgid "No changes"
-msgstr "No changes"
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
+msgid "No Balance to Add Bid"
+msgstr "No Balance to Add Bid"
 
-#: src/components/screens/LaundPad/Sale/BiddingModal/useBiddingForm.ts
-msgid "Limit Price must be higher than current"
-msgstr "Limit Price must be higher than current"
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
+msgid "Nothing Changed"
+msgstr "Nothing Changed"
 
-#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
-#: src/components/screens/LaundPad/Statistics.tsx
+#: src/components/screens/Launchpad/Sale/BiddingModal/useBiddingForm.ts
+msgid "Only Allowed to Raise or Disable Limit Price"
+msgstr "Only Allowed to Raise or Disable Limit Price"
+
+#: src/components/screens/Launchpad/Sale/SaleInformation.tsx
+#: src/components/screens/Launchpad/Statistics.tsx
 msgid "Token"
 msgstr "Token"
 
-#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+#: src/components/screens/Launchpad/Sale/SaleInformation.tsx
 msgid "Tokens to be Offered"
 msgstr "Tokens to be Offered"
 
-#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+#: src/components/screens/Launchpad/Sale/SaleInformation.tsx
 msgid "Emission"
 msgstr "Emission"
 
-#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+#: src/components/screens/Launchpad/Sale/SaleInformation.tsx
 msgid "Bid with"
 msgstr "Bid with"
 
-#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+#: src/components/screens/Launchpad/Sale/SaleInformation.tsx
 msgid "Sale Start"
 msgstr "Sale Start"
 
-#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+#: src/components/screens/Launchpad/Sale/SaleInformation.tsx
 msgid "Sale End"
 msgstr "Sale End"
 
-#: src/components/screens/LaundPad/Sale/SaleInformation.tsx
+#: src/components/screens/Launchpad/Sale/SaleInformation.tsx
 msgid "Closed"
 msgstr "Closed"
 
-#: src/components/screens/LaundPad/Statistics.tsx
+#: src/components/screens/Launchpad/Sale/parts.tsx
+msgid "If your limit price is equal to the final token price, no token or only some tokens might be receivable."
+msgstr "If your limit price is equal to the final token price, no token or only some tokens might be receivable."
+
+#: src/components/screens/Launchpad/Sale/parts.tsx
+msgid "Please refer to the <0>doc</0> for the detail."
+msgstr "Please refer to the <0>doc</0> for the detail."
+
+#: src/components/screens/Launchpad/Statistics.tsx
 msgid "Price Per Token"
 msgstr "Price Per Token"
 
-#: src/components/screens/LaundPad/Statistics.tsx
+#: src/components/screens/Launchpad/Statistics.tsx
 msgid "Bottom Price"
 msgstr "Bottom Price"
 
-#: src/components/screens/LaundPad/Statistics.tsx
-msgid "TODO description of bottom price"
-msgstr "TODO description of bottom price"
+#: src/components/screens/Launchpad/Statistics.tsx
+msgid ""
+"{0} will not be priced lower than this after the auction.\n"
+"Bottom Price = Total Bids without Canceling or Limit Price Options / Amount of Tokens to be Released."
+msgstr ""
+"{0} will not be priced lower than this after the auction.\n"
+"Bottom Price = Total Bids without Canceling or Limit Price Options / Amount of Tokens to be Released."
 
-#: src/components/screens/LaundPad/Statistics.tsx
+#: src/components/screens/Launchpad/Statistics.tsx
 msgid "Total Raised"
 msgstr "Total Raised"
 
-#: src/components/screens/LaundPad/Statistics.tsx
+#: src/components/screens/Launchpad/Statistics.tsx
 msgid "Number of Bidders"
 msgstr "Number of Bidders"
 
-#: src/components/screens/LaundPad/Statistics.tsx
-msgid "Your Limit = {0}"
-msgstr "Your Limit = {0}"
+#: src/components/screens/Launchpad/Statistics.tsx
+msgid "Your Limit Price = {0}"
+msgstr "Your Limit Price = {0}"
 
-#: src/components/screens/LaundPad/Statistics.tsx
+#: src/components/screens/Launchpad/Statistics.tsx
 msgid "Price Per LAY"
 msgstr "Price Per LAY"
 
@@ -800,65 +836,65 @@ msgstr "Powered by"
 msgid "ASTAR"
 msgstr "ASTAR"
 
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "Transaction Preparing"
 msgstr "Transaction Preparing"
 
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "Waiting for transaction to be ready..."
 msgstr "Waiting for transaction to be ready..."
 
-#: src/hooks/useLendingPool/txHandler.ts
-#: src/hooks/useLendingPool/txHandler.ts
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "Confirm Transaction"
 msgstr "Confirm Transaction"
 
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "Approve sending the ERC-20 asset to the pool."
 msgstr "Approve sending the ERC-20 asset to the pool."
 
-#: src/hooks/useLendingPool/txHandler.ts
-#: src/hooks/useLendingPool/txHandler.ts
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "Transaction Pending"
 msgstr "Transaction Pending"
 
-#: src/hooks/useLendingPool/txHandler.ts
-#: src/hooks/useLendingPool/txHandler.ts
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "Waiting for the transaction to be confirmed..."
 msgstr "Waiting for the transaction to be confirmed..."
 
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "Approve the contract to borrow ERC-20 assets on your credit."
 msgstr "Approve the contract to borrow ERC-20 assets on your credit."
 
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "Confirm the transaction."
 msgstr "Confirm the transaction."
 
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "Succeeded!"
 msgstr "Succeeded!"
 
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "Your transaction confirmed!"
 msgstr "Your transaction confirmed!"
 
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "Transaction Canceled"
 msgstr "Transaction Canceled"
 
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "You have canceled the transaction."
 msgstr "You have canceled the transaction."
 
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "Error"
 msgstr "Error"
 
-#: src/hooks/useLendingPool/txHandler.ts
+#: src/hooks/contracts/txHandler.ts
 msgid "Something went wrong..."
 msgstr "Something went wrong..."
 

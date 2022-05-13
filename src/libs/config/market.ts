@@ -27,6 +27,7 @@ export type MarketDataType = {
     FAUCET?: EthereumAddress
     PERMISSION_MANAGER?: EthereumAddress
     LEVERAGER?: EthereumAddress
+    LAUNCHPAD?: EthereumAddress
   }
 }
 

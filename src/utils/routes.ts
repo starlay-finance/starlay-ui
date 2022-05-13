@@ -4,6 +4,7 @@ export const DEVELOPERS = 'https://docs.starlay.finance/development/repository'
 export const DOCS = 'https://docs.starlay.finance'
 export const DOCS_RISK = 'https://docs.starlay.finance/asset/risk-parameters'
 export const DOCS_MAKAI = 'https://docs.starlay.finance/function/makai'
+export const DOCS_LAUNCHPAD = 'https://docs.starlay.finance/function/launchpad'
 export const DISCORD = 'https://discord.gg/M4NjBJZ94b'
 export const GITHUB = 'https://github.com/starlay-finance'
 export const MEDIA_KIT = 'https://github.com/starlay-finance/media-kit'
@@ -24,7 +25,7 @@ export const GOVERNANCE_OVERVIEW = ''
 export const BUG_BOUNTY = ''
 export const SUPPORT = DISCORD
 
-export const toLaunchPad = (token: string) => `${LAUNCHPAD}/${token}`
+export const toLaunchpad = (token: string) => `${LAUNCHPAD}/${token}`
 export const toMakaiLoop = (symbol: string) => `${MAKAI}?asset=${symbol}`
 
 export const SORRY = '/sorry'

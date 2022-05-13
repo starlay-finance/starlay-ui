@@ -18,15 +18,13 @@
     "run-storycap": "storycap http://localhost:6006 --serverCmd \"yarn storybook\" --serverTimeout 60000",
     "remove-caps-default-vewport": "cd __screenshots__ && grep -rl . | grep -v '_' | xargs -d '\\n' rm -f && cd ..",
     "vrt": "yarn run-storycap && yarn remove-caps-default-vewport && reg-suit run",
-    "codegen:caching-server": "graphql-codegen --config caching-server-graphql-codegen.yml",
-    "codegen:pool-snapshots": "graphql-codegen --config pool-snapshots-codegen.yml",
-    "codegen:arthswap": "graphql-codegen --config arthswap-codegen.yml"
+    "codegen": "graphql-codegen --config docs/graphql-codegen.yml"
   },
   "dependencies": {
     "@lingui/macro": "^3.13.0",
     "@lingui/react": "^3.13.0",
-    "@starlay-finance/contract-helpers": "0.0.12",
-    "@starlay-finance/math-utils": "0.0.12",
+    "@starlay-finance/contract-helpers": "0.0.13",
+    "@starlay-finance/math-utils": "0.0.13",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
     "chroma-js": "^2.4.2",

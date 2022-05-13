@@ -1,0 +1,8 @@
+query GetBid($id: ID!) {
+  bid(id: $id) {
+    amount
+    multiplied
+    cap
+    cancellable
+  }
+}

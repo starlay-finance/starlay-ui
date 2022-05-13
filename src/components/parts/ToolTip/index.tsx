@@ -1,6 +1,6 @@
 import { ReactNode, VFC } from 'react'
 import { IconTips } from 'src/assets/svgs'
-import { primary } from 'src/styles/colors'
+import { primary, purple } from 'src/styles/colors'
 import { fontWeightRegular } from 'src/styles/font'
 import styled, { css } from 'styled-components'
 
@@ -26,7 +26,7 @@ export const Tooltip: VFC<TooltipProps> = ({
 
 export const TooltipMessage = styled<
   VFC<{
-    message: string
+    message: ReactNode
     label?: string
     position?: ToolTipPosition
     className?: string
@@ -49,10 +49,16 @@ const TooltipContainer = styled.div<{ position: ToolTipPosition }>`
     display: none;
     position: absolute;
     top: 100%;
-    margin-top: 6px;
+    margin-top: 5px;
   }
   ${IconSpan} {
     position: relative;
+  }
+  a {
+    color: ${purple};
+    :hover {
+      color: ${purple}80;
+    }
   }
   :hover {
     > ${Content} {
@@ -83,6 +89,7 @@ const TooltipContainer = styled.div<{ position: ToolTipPosition }>`
         return css`
           > ${Content} {
             left: 0;
+            margin-left: -16px;
           }
         `
       default:

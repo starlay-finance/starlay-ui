@@ -1,0 +1,9 @@
+query GetCurrentPrice($projectId: String!) {
+  priceCurrent(projectId: $projectId) {
+    data
+    bottomPrice
+    amountOfRaised
+    boostedAmountOfRaised
+    timestamp
+  }
+}

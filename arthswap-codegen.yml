@@ -1,9 +1,0 @@
-overwrite: true
-schema: docs/arthswap-schema.graphql
-documents: 'src/libs/arthswap-data-provider/graphql/**/*.graphql'
-generates:
-  src/libs/arthswap-data-provider/__generated__/graphql.ts:
-    plugins:
-      - typescript
-      - typescript-operations
-      - typescript-graphql-request

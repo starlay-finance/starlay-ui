@@ -1,18 +1,18 @@
 import dayjs from 'dayjs'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { LaunchPad, LaunchPadData } from 'src/components/screens/LaundPad'
+import { Launchpad, ProjectData } from 'src/components/screens/Launchpad'
 import { Page, PageStaticProps } from 'src/types/page'
 
-type LaunchPadPageStaticProps = {
-  data: Omit<LaunchPadData, 'sale'> & {
-    sale: Omit<LaunchPadData['sale'], 'start' | 'end'> & {
+type LaunchpadPageStaticProps = {
+  data: Omit<ProjectData, 'sale'> & {
+    sale: Omit<ProjectData['sale'], 'start' | 'end'> & {
       start: string
       end: string
     }
   }
 }
 
-type LaunchPadPageContext = {
+type LaunchpadPageContext = {
   token: string
 }
 
@@ -22,15 +22,15 @@ export const getStaticPaths: GetStaticPaths = () => ({
 })
 
 export const getStaticProps: GetStaticProps<
-  LaunchPadPageStaticProps,
-  LaunchPadPageContext
+  LaunchpadPageStaticProps,
+  LaunchpadPageContext
 > = async ({ params: { token } = {} }) => {
   if (typeof token !== 'string') return { notFound: true }
   try {
-    const data: LaunchPadPageStaticProps['data'] = await import(
+    const data: LaunchpadPageStaticProps['data'] = await import(
       `public/data/launchpad/${token}.json`
     )
-    const props: PageStaticProps<LaunchPadPageStaticProps> = {
+    const props: PageStaticProps<LaunchpadPageStaticProps> = {
       data,
       seoProps: {
         siteTitle: `${data.token.symbol} Token Public Sale`,
@@ -46,8 +46,8 @@ export const getStaticProps: GetStaticProps<
   }
 }
 
-const LaunchPadPage: Page<LaunchPadPageStaticProps> = ({ data }) => (
-  <LaunchPad
+const LaunchpadPage: Page<LaunchpadPageStaticProps> = ({ data }) => (
+  <Launchpad
     data={{
       ...data,
       sale: {
@@ -55,8 +55,12 @@ const LaunchPadPage: Page<LaunchPadPageStaticProps> = ({ data }) => (
         start: dayjs(data.sale.start),
         end: dayjs(data.sale.end),
       },
+      vesting: {
+        ...data.vesting,
+        start: dayjs(data.vesting.start),
+      },
     }}
   />
 )
 
-export default LaunchPadPage
+export default LaunchpadPage

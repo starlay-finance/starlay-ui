@@ -1,0 +1,9 @@
+query ListPricesHistorical($input: PricesInput!) {
+  prices5Min(input: $input) {
+    items {
+      data
+      bottomPrice
+      timestamp
+    }
+  }
+}

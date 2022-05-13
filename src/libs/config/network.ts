@@ -41,6 +41,14 @@ export type NetworkConfig = {
     endpoint: string
     apiKey?: string
   }
+  launchpadDataProvider?: {
+    endpoint: string
+    apiKey?: string
+  }
+  launchpadHistoricalDataProvider?: {
+    endpoint: string
+    apiKey?: string
+  }
   arthswapDataProvider?: {
     endpoint: string
   }
@@ -75,6 +83,15 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
       endpoint:
         'https://xok6alsasvgthgl5ozss7upnuu.appsync-api.us-east-1.amazonaws.com/graphql',
       apiKey: 'da2-qvw2m7hf6jhonms4rhtqgix7ri',
+    },
+    launchpadDataProvider: {
+      endpoint:
+        'https://launchpad-subgraph.decartel.xyz/subgraphs/name/starlay/starlay-launchpad',
+    },
+    launchpadHistoricalDataProvider: {
+      endpoint:
+        'https://7fkvk2oqm5ewxbiealg7orclku.appsync-api.us-east-1.amazonaws.com/graphql',
+      apiKey: 'da2-vm7th2zcezdmbpkbkcbmm766pe',
     },
     arthswapDataProvider: {
       endpoint: 'https://arthswap-apr-api.vercel.app/api/graphql',
