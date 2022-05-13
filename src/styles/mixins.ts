@@ -23,6 +23,7 @@ const size = {
   m: 680,
   l: 960,
   xl: 1224,
+  xxl: 1724,
 }
 
 export const breakpoint = {
@@ -30,6 +31,7 @@ export const breakpoint = {
   m: `screen and (min-width:${size.m}px)`,
   l: `screen and (min-width:${size.l}px)`,
   xl: `screen and (min-width:${size.xl}px)`,
+  xxl: `screen and (min-width:${size.xxl}px)`,
   lts: `screen and (max-width:${size.s - 1}px)`,
   ltxs: `screen and (max-width:${size.xs - 1}px)`,
 }

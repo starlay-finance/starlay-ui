@@ -3,6 +3,7 @@ import { useState, VFC } from 'react'
 import { GradientCtaLink } from 'src/components/parts/Cta'
 import { TopFooter } from 'src/components/parts/Footer'
 import { TopHeader } from 'src/components/parts/Header'
+import { LaunchPadPop } from 'src/components/parts/Pop'
 import { Locale } from 'src/locales'
 import { secondary } from 'src/styles/colors'
 import { fontWeightHeavy, fontWeightRegular } from 'src/styles/font'
@@ -29,6 +30,7 @@ export const Top: VFC<TopProps> = ({ backers }) => {
         <MobileMenu isOpen={isMenuOpen} close={() => setMenuOpen(false)} />
       </Main>
       <TopFooter />
+      <LaunchPadPop />
     </>
   )
 }
