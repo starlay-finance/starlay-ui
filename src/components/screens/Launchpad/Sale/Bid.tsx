@@ -5,7 +5,13 @@ import { Reel } from 'src/components/parts/Number/Reel'
 import { BN_ZERO, formatAmt, formatPct, formatUSD } from 'src/utils/number'
 import { Bid, Market, ProjectData } from '../types'
 import { calcBoost } from '../utils'
-import { CtaButton, Information, InformationItem, Section } from './parts'
+import {
+  CtaButton,
+  Information,
+  InformationItem,
+  LimitPriceTooltip,
+  Section,
+} from './parts'
 
 type BidSecionProps = {
   bid: Bid
@@ -53,6 +59,7 @@ export const BidSecion: VFC<BidSecionProps> = ({
           />
           <InformationItem
             label={t`Limit Price`}
+            tooltip={<LimitPriceTooltip />}
             value={bid.limitPrice ? formatUSD(bid.limitPrice) : '-'}
           />
           <InformationItem
@@ -65,7 +72,8 @@ export const BidSecion: VFC<BidSecionProps> = ({
           />
           <InformationItem
             label={t`Receivable Amount`}
-            tooltip={t`TODO description of receivable amount`}
+            tooltip={t`The estimated amount of ${token.symbol} you may receive according to the current Price Per Token updates every minute.
+LAYs will be unlocked linearly and can be claimed during the vesting period.`}
             value={
               market ? (
                 !market.closed ? (

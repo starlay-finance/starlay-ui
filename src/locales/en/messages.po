@@ -496,8 +496,12 @@ msgid "Receivable Amount"
 msgstr "Receivable Amount"
 
 #: src/components/screens/Launchpad/Sale/Bid.tsx
-msgid "TODO description of receivable amount"
-msgstr "TODO description of receivable amount"
+msgid ""
+"The estimated amount of {0} you may receive according to the current Price Per Token updates every minute.\n"
+"LAYs will be unlocked linearly and can be claimed during the vesting period."
+msgstr ""
+"The estimated amount of {0} you may receive according to the current Price Per Token updates every minute.\n"
+"LAYs will be unlocked linearly and can be claimed during the vesting period."
 
 #: src/components/screens/Launchpad/Sale/Bid.tsx
 msgid "Vesting Period"
@@ -623,6 +627,14 @@ msgstr "Sale End"
 msgid "Closed"
 msgstr "Closed"
 
+#: src/components/screens/Launchpad/Sale/parts.tsx
+msgid "If your limit price is equal to the final token price, no token or only some tokens might be receivable."
+msgstr "If your limit price is equal to the final token price, no token or only some tokens might be receivable."
+
+#: src/components/screens/Launchpad/Sale/parts.tsx
+msgid "Please refer to the <0>doc</0> for the detail."
+msgstr "Please refer to the <0>doc</0> for the detail."
+
 #: src/components/screens/Launchpad/Statistics.tsx
 msgid "Price Per Token"
 msgstr "Price Per Token"
@@ -630,6 +642,14 @@ msgstr "Price Per Token"
 #: src/components/screens/Launchpad/Statistics.tsx
 msgid "Bottom Price"
 msgstr "Bottom Price"
+
+#: src/components/screens/Launchpad/Statistics.tsx
+msgid ""
+"{0} will not be priced lower than this after the auction.\n"
+"Bottom Price = Total Bids without Canceling or Limit Price Options / Amount of Tokens to be Released."
+msgstr ""
+"{0} will not be priced lower than this after the auction.\n"
+"Bottom Price = Total Bids without Canceling or Limit Price Options / Amount of Tokens to be Released."
 
 #: src/components/screens/Launchpad/Statistics.tsx
 msgid "Total Raised"

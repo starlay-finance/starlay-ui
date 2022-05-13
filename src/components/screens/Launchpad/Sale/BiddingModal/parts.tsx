@@ -2,6 +2,7 @@ import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { Toggle } from 'src/components/parts/Toggle'
+import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { hoverBackgroundKeyframes } from 'src/styles/animation'
 import {
   darkRed,
@@ -148,6 +149,14 @@ export const FormItem = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 24px 0;
+  label {
+    display: flex;
+    align-items: center;
+    column-gap: 4px;
+    ${TooltipMessage} {
+      width: 320px;
+    }
+  }
   :not(:last-child) {
     border-bottom: 1px solid ${trueWhite}29;
   }

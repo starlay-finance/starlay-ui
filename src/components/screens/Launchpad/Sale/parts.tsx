@@ -1,4 +1,7 @@
+import { t } from '@lingui/macro'
+import { Trans } from '@lingui/react'
 import { ReactNode, VFC } from 'react'
+import { Link } from 'src/components/elements/Link'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { hoverBackgroundKeyframes } from 'src/styles/animation'
@@ -8,6 +11,7 @@ import {
   fontWeightBold,
   fontWeightMedium,
 } from 'src/styles/font'
+import { DOCS_LAUNCHPAD } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 
 export const CtaButton = styled.button`
@@ -49,7 +53,7 @@ export const InformationItem = styled<
   VFC<{
     label: string
     value: ReactNode | undefined
-    tooltip?: string
+    tooltip?: ReactNode
     className?: string
   }>
 >(({ label, value, tooltip, className }) => (
@@ -87,7 +91,7 @@ export const Information = styled.div<{ started?: boolean }>`
           flex: 1;
           font-weight: ${fontWeightBold};
           ${TooltipMessage} {
-            width: 240px;
+            width: 320px;
           }
         }
         :last-child {
@@ -124,3 +128,14 @@ export const Section = styled.section`
     font-weight: ${fontWeightBold};
   }
 `
+
+export const LimitPriceTooltip = () => (
+  <>
+    {t`If your limit price is equal to the final token price, no token or only some tokens might be receivable.`}
+    <br />
+    <Trans
+      id="Please refer to the <0>doc</0> for the detail."
+      components={[<Link key="0" href={DOCS_LAUNCHPAD} />]}
+    />
+  </>
+)

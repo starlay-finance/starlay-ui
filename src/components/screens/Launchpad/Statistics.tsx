@@ -68,7 +68,11 @@ export const Statistics: VFC<StatisticsProps> = ({
               />
             )}
           </Item>
-          <Item label={t`Bottom Price`}>
+          <Item
+            label={t`Bottom Price`}
+            tooltip={t`${token.symbol} will not be priced lower than this after the auction.
+Bottom Price = Total Bids without Canceling or Limit Price Options / Amount of Tokens to be Released.`}
+          >
             {market && (
               <Reel
                 text={formatAmt(market.bottomPriceInUSD, { prefix: '$' })}
@@ -250,7 +254,7 @@ const Items = styled.ul`
         font-size: 16px;
         font-weight: ${fontWeightRegular};
         ${TooltipMessage} {
-          width: 240px;
+          width: 320px;
         }
       }
       :last-child {

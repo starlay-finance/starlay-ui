@@ -4,10 +4,12 @@ import { VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { Toggle } from 'src/components/parts/Toggle'
+import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { Asset, ERC20Asset } from 'src/types/models'
 import { EthereumAddress } from 'src/types/web3'
 import { formatAmt, formatPct } from 'src/utils/number'
 import { Bid } from '../../types'
+import { LimitPriceTooltip } from '../parts'
 import {
   AmountInput,
   Button,
@@ -88,7 +90,10 @@ export const BiddingForm: VFC<BiddingFormProps> = (props) => {
         </FormItem>
         {!noPriceLimitEnabled && (
           <FormItem>
-            <label>{t`Limit Price`}</label>
+            <label>
+              {t`Limit Price`}
+              <TooltipMessage message={<LimitPriceTooltip />} position="left" />
+            </label>
             <InputDiv>
               <div>$</div>
               <AmountInput
