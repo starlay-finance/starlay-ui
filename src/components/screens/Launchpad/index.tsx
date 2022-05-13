@@ -46,6 +46,7 @@ export const Launchpad: VFC<{ data: ProjectData }> = withLaunchpadContext(
               token={data.token}
               market={market}
               priceChartData={chartData}
+              saleEnd={data.sale.end}
             />
           )}
           <Content>

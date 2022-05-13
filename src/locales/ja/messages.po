@@ -656,6 +656,10 @@ msgid "Number of Bidders"
 msgstr ""
 
 #: src/components/screens/Launchpad/Statistics.tsx
+msgid "Remaining Time to Bid"
+msgstr ""
+
+#: src/components/screens/Launchpad/Statistics.tsx
 msgid "Your Limit Price = {0}"
 msgstr ""
 

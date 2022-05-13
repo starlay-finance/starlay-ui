@@ -156,3 +156,13 @@ export const handleArrow = (
       return
   }
 }
+
+const REGEXP_ZEROS_BEFORE_VALID_NUMBER = /\.(0*)[1-9]/
+export const getFirstNumberDecimalPlaces = (num: number) => {
+  if (num > 1) return 0
+  const result = REGEXP_ZEROS_BEFORE_VALID_NUMBER.exec(`${num}`)
+  if (!result?.length) return 0
+  return (result[1]?.length || 0) + 2
+}
+export const roundDownDecimals = (num: number, decimalPlaces: number) =>
+  Math.floor(num * 10 ** decimalPlaces) / 10 ** decimalPlaces

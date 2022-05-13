@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro'
-import dayjs from 'dayjs'
+import dayjs, { Dayjs } from 'dayjs'
 import { CSSProperties, ReactNode, VFC } from 'react'
+import Countdown from 'react-countdown'
 import {
   Area,
   ComposedChart,
@@ -31,7 +32,12 @@ import {
   fontWeightRegular,
 } from 'src/styles/font'
 import { formatWithTZ } from 'src/utils/date'
-import { formatAmt, formatUSD } from 'src/utils/number'
+import {
+  formatAmt,
+  formatUSD,
+  getFirstNumberDecimalPlaces,
+  roundDownDecimals,
+} from 'src/utils/number'
 import styled from 'styled-components'
 import { Market, PriceChartData, ProjectData } from './types'
 
@@ -39,12 +45,14 @@ type StatisticsProps = {
   token: ProjectData['token']
   market: Market | undefined
   priceChartData: PriceChartData[] | undefined
+  saleEnd: Dayjs
 }
 
 export const Statistics: VFC<StatisticsProps> = ({
   token,
   market,
   priceChartData = [],
+  saleEnd,
 }) => {
   const { currentBid } = useLaunchpad()
   const limitPrice = currentBid?.limitPrice
@@ -56,6 +64,7 @@ export const Statistics: VFC<StatisticsProps> = ({
       ? lightYellow
       : success
     : undefined
+
   return (
     <StatisticsDiv>
       <div>
@@ -88,6 +97,21 @@ Bottom Price = Total Bids without Canceling or Limit Price Options / Amount of T
           </Item>
           <Item label={t`Number of Bidders`}>
             {market && <Reel text={formatAmt(market.numOfBids)} />}
+          </Item>
+          <Item label={t`Remaining Time to Bid`}>
+            <Countdown
+              date={saleEnd.toDate()}
+              daysInHours
+              renderer={({ formatted: { hours, minutes, seconds }, total }) => {
+                const color =
+                  total > 0 && total < 3600000 ? attention : undefined
+                return (
+                  <span style={{ color }}>
+                    {hours}:{minutes}:{seconds}
+                  </span>
+                )
+              }}
+            />
           </Item>
         </Items>
         <Chart>
@@ -142,10 +166,7 @@ Bottom Price = Total Bids without Canceling or Limit Price Options / Amount of T
                   position={{ y: 0 }}
                   offset={-100}
                   content={TooltipRenderer}
-                  cursor={{
-                    strokeDashoffset: 600,
-                    strokeDasharray: 300,
-                  }}
+                  cursor={{ strokeDashoffset: 720, strokeDasharray: 360 }}
                   active
                 />
               </ComposedChart>
@@ -190,17 +211,22 @@ const ChartTooltip: VFC<{
   bottomPriceInUSD: number
   timestamp: number
   style?: CSSProperties
-}> = ({ priceInUSD, bottomPriceInUSD, timestamp, style }) => (
-  <TooltipDiv style={style}>
-    <p>
-      {t`Price Per LAY`}
-      <span>{`$${bottomPriceInUSD.toFixed(2)} - $${priceInUSD.toFixed(
-        2,
-      )}`}</span>
-    </p>
-    <p>{formatWithTZ(dayjs.unix(timestamp), FORMAT)}</p>
-  </TooltipDiv>
-)
+}> = ({ priceInUSD, bottomPriceInUSD, timestamp, style }) => {
+  const decimals = getFirstNumberDecimalPlaces(priceInUSD)
+  const decimalsBottom = getFirstNumberDecimalPlaces(bottomPriceInUSD)
+  return (
+    <TooltipDiv style={style}>
+      <p>
+        {t`Price Per LAY`}
+        <span>{`$${roundDownDecimals(
+          bottomPriceInUSD,
+          decimalsBottom,
+        )} - $${roundDownDecimals(priceInUSD, decimals)}`}</span>
+      </p>
+      <p>{formatWithTZ(dayjs.unix(timestamp), FORMAT)}</p>
+    </TooltipDiv>
+  )
+}
 
 const TooltipDiv = styled.div`
   text-align: center;
