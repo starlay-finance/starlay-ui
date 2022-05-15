@@ -12,7 +12,6 @@ import {
   TooltipProps,
 } from 'recharts'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
-import { Reel } from 'src/components/parts/Number/Reel'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
 import {
@@ -33,7 +32,6 @@ import {
 } from 'src/styles/font'
 import { formatWithTZ } from 'src/utils/date'
 import {
-  formatAmt,
   formatUSD,
   getFirstNumberDecimalPlaces,
   roundDownDecimals,
@@ -71,32 +69,37 @@ export const Statistics: VFC<StatisticsProps> = ({
         <Items>
           <Item label={t`Token`}>{token.symbol}</Item>
           <Item label={t`Price Per Token`}>
-            {market && (
+            {/* {market && (
               <Reel
                 text={formatAmt(market.currentPriceInUSD, { prefix: '$' })}
               />
-            )}
+            )} */}
+            {/* <Reel text={'Aggregation currently in process.'} /> */}
+            <p>Aggregation currently in process.</p>
           </Item>
           <Item
             label={t`Bottom Price`}
             tooltip={t`${token.symbol} will not be priced lower than this after the auction.
 Bottom Price = Total Bids without Canceling or Limit Price Options / Amount of Tokens to be Released.`}
           >
-            {market && (
+            {/* {market && (
               <Reel
                 text={formatAmt(market.bottomPriceInUSD, { prefix: '$' })}
               />
-            )}
+            )} */}
+            <p>Aggregation currently in process.</p>
           </Item>
           <Item label={t`Total Raised`}>
-            {market && (
+            {/* {market && (
               <Reel
                 text={formatUSD(market.raisedAmountInUSD, { decimalPlaces: 0 })}
               />
-            )}
+            )} */}
+            <p>Aggregation currently in process.</p>
           </Item>
           <Item label={t`Number of Bidders`}>
-            {market && <Reel text={formatAmt(market.numOfBids)} />}
+            {/* {market && <Reel text={formatAmt(market.numOfBids)} />} */}
+            <p>Aggregation currently in process.</p>
           </Item>
           <Item label={t`Remaining Time to Bid`}>
             <Countdown
@@ -261,7 +264,12 @@ const Item = styled<
     </div>
     <div>{children ? children : <ShimmerPlaceholder as="div" />}</div>
   </li>
-))``
+))`
+  p {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+`
 
 const Items = styled.ul`
   display: flex;
