@@ -2,15 +2,7 @@ import { t } from '@lingui/macro'
 import dayjs, { Dayjs } from 'dayjs'
 import { CSSProperties, ReactNode, VFC } from 'react'
 import Countdown from 'react-countdown'
-import {
-  Area,
-  ComposedChart,
-  Label,
-  ReferenceLine,
-  ResponsiveContainer,
-  Tooltip,
-  TooltipProps,
-} from 'recharts'
+import { TooltipProps } from 'recharts'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
@@ -18,12 +10,10 @@ import {
   attention,
   darkPurple,
   darkRed,
-  lightPurple,
   lightYellow,
   secondary,
   skyBlue,
   success,
-  trueWhite,
 } from 'src/styles/colors'
 import {
   fontWeightBlack,
@@ -32,7 +22,6 @@ import {
 } from 'src/styles/font'
 import { formatWithTZ } from 'src/utils/date'
 import {
-  formatUSD,
   getFirstNumberDecimalPlaces,
   roundDownDecimals,
 } from 'src/utils/number'
@@ -118,7 +107,7 @@ Bottom Price = Total Bids without Canceling or Limit Price Options / Amount of T
           </Item>
         </Items>
         <Chart>
-          <ResponsiveContainer width={800} height="99%">
+          {/* <ResponsiveContainer width={800} height="99%">
             {priceChartData.length > 0 ? (
               <ComposedChart
                 width={730}
@@ -176,7 +165,7 @@ Bottom Price = Total Bids without Canceling or Limit Price Options / Amount of T
             ) : (
               <></>
             )}
-          </ResponsiveContainer>
+          </ResponsiveContainer>  */}
         </Chart>
       </div>
     </StatisticsDiv>
