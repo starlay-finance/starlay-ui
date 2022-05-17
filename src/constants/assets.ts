@@ -110,4 +110,5 @@ export const ARTHSWAP_ASSETS_DICT: {
   [key in string]: { symbol: string; icon: StaticImageData }
 } = {
   ...ASSETS_DICT,
+  WSDN: ASSETS_DICT.SDN,
 } as const

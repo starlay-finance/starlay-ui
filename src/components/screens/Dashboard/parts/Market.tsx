@@ -3,7 +3,7 @@ import router from 'next/router'
 import {
   AssetTd,
   MarketTable,
-  TableContainer,
+  TableContainer
 } from 'src/components/compositions/Markets/MarketTable'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
@@ -79,10 +79,16 @@ export const Market = asStyled(({ className }) => {
       ?.filter(
         (each) =>
           each.symbols.includes(asset.displaySymbol || asset.symbol) &&
-          each.symbols.some((each) => !!ARTHSWAP_ASSETS_DICT[each]),
+          each.symbols.every((each) => !!ARTHSWAP_ASSETS_DICT[each]),
       )
       .sort(aprSorter)[0]
 
+    if (arthswapPair)
+      arthswapPair.symbols = arthswapPair.symbols.map((e) =>
+        e === asset.displaySymbol ? asset.symbol : e,
+      ) as [string, string]
+
+    console.log(arthswapPair)
     openBorrowModal({
       asset,
       userSummary: user.summary,
