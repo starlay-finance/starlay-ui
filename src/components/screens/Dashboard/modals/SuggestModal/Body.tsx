@@ -61,7 +61,7 @@ export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
     {
       apr: depositAPY,
       node: (
-        <SuggestItem onClick={openDeposit}>
+        <SuggestItem key="deposit" onClick={openDeposit}>
           <NumberItem
             label={t`Starlay Finance`}
             note={t`Lend ${symbol}`}
@@ -77,7 +77,7 @@ export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
     actions.push({
       apr: makaiAPR,
       node: (
-        <SuggestItemMakai onClick={openMakai}>
+        <SuggestItemMakai key="loop" onClick={openMakai}>
           <Item
             label={t`Makai on Starlay Finance`}
             note={t`Loop ${symbol}`}
@@ -98,7 +98,10 @@ export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
     actions.push({
       apr,
       node: (
-        <SuggestItem onClick={() => window.open(url, '_blank', 'noreferrer')}>
+        <SuggestItem
+          key="arthswap"
+          onClick={() => window.open(url, '_blank', 'noreferrer')}
+        >
           <NumberItemPair
             label={t`ArthSwap`}
             note={t`Farm ${symbol1}-${symbol2}`}
