@@ -13,7 +13,7 @@ import {
 import { LoopingModalBody, LoopingModalBodyProps } from './Body'
 
 export const Looping: VFC<
-  ModalContentProps<Omit<LoopingModalBodyProps, 'loop'>>
+  ModalContentProps<Omit<LoopingModalBodyProps, 'loop' | 'close'>>
 > = ({ close, ...props }) => {
   const { account, signer } = useWallet()
   const { loop, closeLoop } = useLendingPool(account, signer)
