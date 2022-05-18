@@ -16,7 +16,7 @@ export const Looping: VFC<
   ModalContentProps<Omit<LoopingModalBodyProps, 'loop'>>
 > = ({ close, ...props }) => {
   const { account, signer } = useWallet()
-  const { loop } = useLendingPool(account, signer)
+  const { loop, closeLoop } = useLendingPool(account, signer)
   const { withTracking } = useTracking()
   const { asset } = props
 
@@ -35,6 +35,12 @@ export const Looping: VFC<
               debtToken: asset.vdTokenAddress,
               borrowRatio: loopingLeverageToLtv(leverage),
               loopCount: significantLoopingCount(leverage),
+            })
+          }
+          close={() =>
+            closeLoop({
+              underlyingAsset: asset.underlyingAsset,
+              lToken: asset.lTokenAddress,
             })
           }
         />

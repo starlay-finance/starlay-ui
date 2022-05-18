@@ -33,15 +33,18 @@ import {
   TabFC,
 } from '../../../Dashboard/modals/parts'
 
-const TABS = ['loop'] as const
+const TABS = ['loop', 'close'] as const
+type TabType = typeof TABS[number]
 
 export type LoopingModalBodyProps = Omit<EstimationParam, 'amount'> & {
   loop: (amount: BigNumber, leverage: BigNumber) => Promise<any>
+  close: () => Promise<any>
   max?: boolean
 }
 
 export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
   loop,
+  close,
   max,
   ...estimationParams
 }) => {
@@ -74,6 +77,8 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
     if (max) setDepositAmount(formatAmt(estimation.maxAmount))
   }, [max])
 
+  const [activeTab, setActiveTab] = useState<TabType>('loop')
+  const isLooping = activeTab === 'loop'
   return (
     <ContentDiv>
       <AmountInput
@@ -81,54 +86,60 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
         onChange={setDepositAmount}
         setMaxValue={() => setDepositAmount(formatAmt(estimation.maxAmount))}
         significantDigits={asset.decimals}
+        disabled={!isLooping}
       />
       <ActionTab
         tabs={TABS}
-        contents={{ loop: { label: t`Makai Loops` } }}
-        activeTab="loop"
-        onChangeActiveTab={() => {}}
+        contents={{
+          loop: { label: t`Makai Loops` },
+          close: { label: t`Close` },
+        }}
+        activeTab={activeTab}
+        onChangeActiveTab={setActiveTab}
       />
       <Action>
-        <NumberItems>
-          <RatioControl
-            label={t`Leverage`}
-            options={RATIO_LIST}
-            setValue={setLeverage}
-            current={leverage}
-            max={BN_ONE.div(BN_ONE.minus(baseLTVasCollateral))}
-            sliderColors={[blue, lightYellow, darkRed]}
-            customLabel={t`Custom Leverage`}
-          />
-          <NumberItem
-            label={t`Net APY`}
-            num={estimation.depositAPY.minus(estimation.borrowAPY)}
-            image={{ src: asset.icon, alt: asset.name }}
-            format={formatter}
-          />
-          <NumberItem
-            label={t`Reward APR`}
-            num={estimation.rewardAPR}
-            image={{ src: ASSETS_DICT.LAY.icon, alt: ASSETS_DICT.LAY.name }}
-            format={formatter}
-          />
-          <NumberItem
-            label={t`Estimated Net APY`}
-            num={estimation.netAPY}
-            format={formatter}
-          />
-          <NumberItemWithDiff
-            label={t`Health Factor`}
-            current={healthFactor.isPositive() ? healthFactor : undefined}
-            after={
-              !estimation.healthFactor
-                ? undefined
-                : estimation.healthFactor.isPositive()
-                ? estimation.healthFactor
-                : '-'
-            }
-            formatter={formatAmtShort}
-          />
-        </NumberItems>
+        {isLooping && (
+          <NumberItems>
+            <RatioControl
+              label={t`Leverage`}
+              options={RATIO_LIST}
+              setValue={setLeverage}
+              current={leverage}
+              max={BN_ONE.div(BN_ONE.minus(baseLTVasCollateral))}
+              sliderColors={[blue, lightYellow, darkRed]}
+              customLabel={t`Custom Leverage`}
+            />
+            <NumberItem
+              label={t`Net APY`}
+              num={estimation.depositAPY.minus(estimation.borrowAPY)}
+              image={{ src: asset.icon, alt: asset.name }}
+              format={formatter}
+            />
+            <NumberItem
+              label={t`Reward APR`}
+              num={estimation.rewardAPR}
+              image={{ src: ASSETS_DICT.LAY.icon, alt: ASSETS_DICT.LAY.name }}
+              format={formatter}
+            />
+            <NumberItem
+              label={t`Estimated Net APY`}
+              num={estimation.netAPY}
+              format={formatter}
+            />
+            <NumberItemWithDiff
+              label={t`Health Factor`}
+              current={healthFactor.isPositive() ? healthFactor : undefined}
+              after={
+                !estimation.healthFactor
+                  ? undefined
+                  : estimation.healthFactor.isPositive()
+                  ? estimation.healthFactor
+                  : '-'
+              }
+              formatter={formatAmtShort}
+            />
+          </NumberItems>
+        )}
         <Note>
           <p>{t`"Makai Loops" is an experimental feature.`}</p>
           <Trans
@@ -137,12 +148,17 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
           />
         </Note>
         <SimpleCtaButton
-          onClick={() =>
-            loop(formattedToBigNumber(depositAmount) || BN_ZERO, leverage)
+          onClick={
+            isLooping
+              ? () =>
+                  loop(formattedToBigNumber(depositAmount) || BN_ZERO, leverage)
+              : close
           }
-          disabled={!!estimation.unavailableReason}
+          disabled={isLooping && !!estimation.unavailableReason}
         >
-          {estimation.unavailableReason || t`Start loops`}
+          {isLooping
+            ? estimation.unavailableReason || t`Start loops`
+            : t`Close loops`}
         </SimpleCtaButton>
         <Balance
           label={t`Wallet Balance`}

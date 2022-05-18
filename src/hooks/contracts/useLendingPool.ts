@@ -141,7 +141,30 @@ export const useLendingPool = (
     )
   }
 
-  return { deposit, withdraw, borrow, repay, setUsageAsCollateral, loop }
+  const closeLoop = async (param: {
+    underlyingAsset: EthereumAddress
+    lToken: EthereumAddress
+  }) => {
+    if (!leverager || !account || !signer) throw new Error('Unexpected state')
+    return handleTx(
+      await leverager.close({
+        user: account,
+        reserve: param.underlyingAsset,
+        lToken: param.lToken,
+      }),
+      signer,
+    )
+  }
+
+  return {
+    deposit,
+    withdraw,
+    borrow,
+    repay,
+    setUsageAsCollateral,
+    loop,
+    closeLoop,
+  }
 }
 
 const reserveAddress = (underlyingAsset: string, chainId: ChainId) => {
