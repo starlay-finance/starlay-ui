@@ -160,11 +160,19 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
             ? estimation.unavailableReason || t`Start loops`
             : t`Close loops`}
         </SimpleCtaButton>
-        <Balance
-          label={t`Wallet Balance`}
-          balance={inWallet}
-          symbol={displaySymbol || symbol}
-        />
+        {isLooping ? (
+          <Balance
+            label={t`Wallet Balance`}
+            balance={inWallet}
+            symbol={displaySymbol || symbol}
+          />
+        ) : (
+          <Balance
+            label={t`Borrowed`}
+            balance={userAssetBalance.borrowed}
+            symbol={displaySymbol || symbol}
+          />
+        )}
       </Action>
     </ContentDiv>
   )
