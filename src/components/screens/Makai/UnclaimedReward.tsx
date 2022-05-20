@@ -3,9 +3,11 @@ import { Image } from 'src/components/elements/Image'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { ASSETS_DICT } from 'src/constants/assets'
+import { useIncentivesController } from 'src/hooks/contracts/useIncentivesController'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
-import { trueBlack } from 'src/styles/colors'
+import { useWallet } from 'src/hooks/useWallet'
+import { purple, trueBlack } from 'src/styles/colors'
 import {
   fontWeightBold,
   fontWeightMedium,
@@ -15,8 +17,12 @@ import { BN_ZERO, formatAmt, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
 
 export const UnclaimedReward = asStyled(({ className }) => {
+  const { account, signer } = useWallet()
   const { data: marketData } = useMarketData()
   const { data: user } = useUserData()
+
+  const { claim } = useIncentivesController(account, signer)
+
   const { icon, name, symbol } = ASSETS_DICT.LAY
   const unclaimed = user?.rewards.unclaimedBalance || BN_ZERO
   const priceInUSD = (
@@ -33,7 +39,7 @@ export const UnclaimedReward = asStyled(({ className }) => {
         <Image src={icon} alt={name} width={32} height={32} />
         <Reel text={formatAmt(unclaimed, { symbol, decimalPlaces: 2 })} />
       </UnclaimedAmount>
-      <ClaimButton disabled>{t`Claim`}</ClaimButton>
+      <ClaimButton onClick={claim}>{t`Claim`}</ClaimButton>
     </UnclaimedRewardDiv>
   )
 })``
@@ -55,10 +61,11 @@ const ClaimButton = styled.button`
   padding: 16px;
   width: 100%;
   border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.16);
+  background-color: ${purple};
   backdrop-filter: blur(16px) brightness(1.16);
   text-align: center;
   :disabled {
+    background-color: rgba(255, 255, 255, 0.16);
     opacity: 0.32;
   }
 `
