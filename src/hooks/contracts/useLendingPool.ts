@@ -146,10 +146,14 @@ export const useLendingPool = (
     lToken: EthereumAddress
   }) => {
     if (!leverager || !account || !signer) throw new Error('Unexpected state')
+    const { baseAsset } = getNetworkConfig(provider!.chainId)
+
     return handleTx(
       await leverager.close({
         user: account,
-        reserve: param.underlyingAsset,
+        reserve: !equals(param.underlyingAsset, BASE_ASSET_DUMMY_ADDRESS)
+          ? param.underlyingAsset
+          : baseAsset.wrapperAddress,
         lToken: param.lToken,
       }),
       signer,
