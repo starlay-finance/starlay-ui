@@ -8,12 +8,14 @@ import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
 import { useRewardModal } from 'src/components/parts/Modal/RewardModal'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
+import { useLAYPrice } from 'src/hooks/useLAYPrice'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { darkGray, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
+import { formatUSD } from 'src/utils/number'
 import { APP, LAUNCHPAD, MAKAI, MARKETS, SWAP } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import { useGasSettingsModal } from '../Modal/GasSettingsModal'
@@ -27,6 +29,7 @@ export const AppHeader = () => {
   const { open: openRewardModal } = useRewardModal()
   const { open: openWalletModal } = useWalletModal()
   const { open: openGasSettingsModal } = useGasSettingsModal()
+  const { data: layPriceInUSD } = useLAYPrice()
   return (
     <AppHeaderWrapper>
       <LogoLink href={APP} Icon={LogoProtocol} aria-label="App" />
@@ -50,6 +53,7 @@ export const AppHeader = () => {
       <Menu>
         <MenuButtonSmall onClick={() => openRewardModal()} disabled={!user}>
           <Image src={SymbolLay} alt="Starlay" width={20} height={20} />
+          {layPriceInUSD ? formatUSD(layPriceInUSD, { decimalPlaces: 2 }) : '-'}
         </MenuButtonSmall>
         <MenuButton onClick={() => openWalletModal()} disabled={!!account}>
           {account ? shortenAddress(account) : t`Connect`}

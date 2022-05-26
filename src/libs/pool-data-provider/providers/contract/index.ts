@@ -8,6 +8,7 @@ import {
   UserReserveIncentiveDataHumanizedResponse,
 } from '@starlay-finance/contract-helpers'
 import {
+  BigNumber,
   calculateAllUserIncentives,
   getComputedReserveFields,
   normalizeBN,
@@ -57,7 +58,13 @@ export class RPCClient implements PoolDataProviderInterface {
       params.rewardUndelyingAssetDict,
     )
 
-  getReservesWithIncentives = async (currentTimestamp: number) => {
+  getReservesWithIncentives = async (
+    currentTimestamp: number,
+    rewardToken?: {
+      address: EthereumAddress
+      priceInUSD: BigNumber
+    },
+  ) => {
     const {
       uiPoolDataProvider,
       uiIncentiveDataProvider,
@@ -71,15 +78,29 @@ export class RPCClient implements PoolDataProviderInterface {
         lendingPoolAddressProvider,
       }),
     ])
+
+    const reservesData = !rewardToken
+      ? poolData.reservesData
+      : poolData.reservesData.map((e) => {
+          if (!equals(e.underlyingAsset, rewardToken.address)) return e
+          return {
+            ...e,
+            priceInMarketReferenceCurrency: rewardToken.priceInUSD
+              .shiftedBy(
+                poolData.baseCurrencyData.marketReferenceCurrencyDecimals,
+              )
+              .toString(),
+          }
+        })
     return {
       ...formatReserves(
-        poolData,
+        { ...poolData, reservesData },
         reservesIncentives,
         currentTimestamp,
         baseAsset,
         rewardUndelyingAssetDict,
       ),
-      rawReservesData: poolData.reservesData,
+      rawReservesData: reservesData,
       rawBaseCurrencyData: poolData.baseCurrencyData,
       rawReserveIncentivesData: reservesIncentives,
     }

@@ -16,7 +16,13 @@ import { ChainId } from '../config'
 export type FormattedReserveData = ReserveDataHumanized & FormatReserveResponse
 
 export type PoolDataProviderInterface = {
-  getReservesWithIncentives: (currentTimestamp: number) => Promise<{
+  getReservesWithIncentives: (
+    currentTimestamp: number,
+    rewardToken?: {
+      address: EthereumAddress
+      priceInUSD: BigNumber
+    },
+  ) => Promise<{
     reservesData: FormattedReserveData[]
     incentivesByUnderlyingAsset: ReserveIncentiveDict
     marketReferenceCurrencyPriceInUSD: BigNumber

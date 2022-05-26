@@ -29,3 +29,20 @@ export const listArthswapAprs = async (chainId: ChainId) => {
     })) || []
   )
 }
+
+export const getLAYPrice = async (chainId: ChainId) => {
+  const { arthswapDataProvider, baseAsset, rewardToken } =
+    getNetworkConfig(chainId)
+  if (!arthswapDataProvider) return undefined
+  const client = graphqlClient(arthswapDataProvider.endpoint)
+  const res = await client.ListPrices({
+    input: {
+      quoteToken: baseAsset.wrapperAddress,
+      tokens: [rewardToken.underlyingAsset],
+    },
+  })
+  const priceInQuoteToken = res.getPrices.prices[0]?.priceInQuoteToken
+  const quoteTokenPriceInUSD = res.getPrices.quoteTokenPriceInUSD
+  if (!priceInQuoteToken || !quoteTokenPriceInUSD) return undefined
+  return valueToBigNumber(priceInQuoteToken).times(quoteTokenPriceInUSD)
+}
