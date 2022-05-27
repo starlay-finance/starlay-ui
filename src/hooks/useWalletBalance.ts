@@ -1,5 +1,6 @@
 import { normalizeBN } from '@starlay-finance/math-utils'
-import { ChainId } from 'src/libs/config'
+import { ASSETS_DICT } from 'src/constants/assets'
+import { ChainId, getNetworkConfig } from 'src/libs/config'
 import {
   walletBalanceProviderContract,
   WalletBalanceProviderInterface,
@@ -30,8 +31,14 @@ export const useWalletBalance = () => {
         provider.chainId,
         account,
       ],
-    (_key: string, _chainId: ChainId, account: EthereumAddress) =>
-      getWalletBalance(provider!.provider, account, marketData!.assets),
+    (_key: string, chainId: ChainId, account: EthereumAddress) => {
+      const { rewardToken } = getNetworkConfig(chainId)
+      return getWalletBalance(provider!.provider, account, marketData!.assets, {
+        symbol: ASSETS_DICT.LAY.symbol,
+        underlyingAsset: rewardToken.underlyingAsset,
+        decimals: rewardToken.decimals,
+      })
+    },
     { fallbackData: EMPTY_WALLET_BALANCE },
   ) as SWRResponseWithFallback<WalletBalance>
 }
@@ -55,11 +62,18 @@ const getWalletBalance = async (
     underlyingAsset: EthereumAddress
     decimals: number
   }[],
+  rewardToken: {
+    symbol: AssetSymbol
+    underlyingAsset: EthereumAddress
+    decimals: number
+  },
 ): Promise<WalletBalance> => {
   const balancesDict =
     await walletBalanceProvider.getBeforeNormalizedWalletBalance(account)
-  return assets.reduce((prev, asset) => {
-    const balance = balancesDict[asset.underlyingAsset]
+  walletBalanceProvider
+  const balances = assets.reduce((prev, asset) => {
+    const balance =
+      balancesDict[asset.underlyingAsset.toLowerCase() as EthereumAddress]
     return {
       ...prev,
       [asset.symbol]: balance
@@ -67,4 +81,16 @@ const getWalletBalance = async (
         : BN_ZERO,
     }
   }, {}) as WalletBalance
+
+  const rewardBalance = await walletBalanceProvider.getBalance(
+    account,
+    rewardToken.underlyingAsset,
+  )
+  return {
+    ...balances,
+    [ASSETS_DICT.LAY.symbol]: normalizeBN(
+      rewardBalance.toString(),
+      rewardToken.decimals,
+    ),
+  }
 }

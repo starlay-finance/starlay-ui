@@ -5,14 +5,17 @@ import { VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { ASSETS_DICT } from 'src/constants/assets'
+import { useIncentivesController } from 'src/hooks/contracts/useIncentivesController'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useUserData } from 'src/hooks/useUserData'
+import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { trueBlack } from 'src/styles/colors'
 import { fontWeightMedium, fontWeightSemiBold } from 'src/styles/font'
 import { BN_ZERO, formatAmt, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
+import { SimpleCtaButton } from '../../Cta'
 import { NumberItem } from '../parts'
 
 const Reward: VFC<ModalContentProps> = ({ close }) => {
@@ -27,9 +30,12 @@ const Reward: VFC<ModalContentProps> = ({ close }) => {
 
 const RewardModalBody = () => {
   const { locale } = useRouter()
+  const { account, signer } = useWallet()
   const { data: marketData } = useMarketData()
   const { data: user } = useUserData()
   const { data: balance } = useWalletBalance()
+  const { claim } = useIncentivesController(account, signer)
+
   const { icon, name, symbol } = ASSETS_DICT.LAY
   const unclaimed = user?.rewards.unclaimedBalance || BN_ZERO
   const inWallet = balance?.LAY || BN_ZERO
@@ -64,6 +70,7 @@ const RewardModalBody = () => {
       {locale !== 'ja' && (
         <NumberItem label={t`Price`} num={priceInUSD} format={formatUSD} />
       )}
+      <SimpleCtaButton onClick={claim}>{t`Claim`}</SimpleCtaButton>
     </BodyDiv>
   )
 }
@@ -94,6 +101,9 @@ const BodyDiv = styled.div`
   font-weight: ${fontWeightSemiBold};
   ${SummaryDiv} {
     margin-bottom: 16px;
+  }
+  ${SimpleCtaButton} {
+    margin-top: 48px;
   }
 `
 
