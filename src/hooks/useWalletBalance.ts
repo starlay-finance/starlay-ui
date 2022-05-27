@@ -70,7 +70,8 @@ const getWalletBalance = async (
 ): Promise<WalletBalance> => {
   const balancesDict =
     await walletBalanceProvider.getBeforeNormalizedWalletBalance(account)
-  return [...assets, rewardToken].reduce((prev, asset) => {
+  walletBalanceProvider
+  const balances = assets.reduce((prev, asset) => {
     const balance =
       balancesDict[asset.underlyingAsset.toLowerCase() as EthereumAddress]
     return {
@@ -80,4 +81,16 @@ const getWalletBalance = async (
         : BN_ZERO,
     }
   }, {}) as WalletBalance
+
+  const rewardBalance = await walletBalanceProvider.getBalance(
+    account,
+    rewardToken.underlyingAsset,
+  )
+  return {
+    ...balances,
+    [ASSETS_DICT.LAY.symbol]: normalizeBN(
+      rewardBalance.toString(),
+      rewardToken.decimals,
+    ),
+  }
 }
