@@ -1,0 +1,11 @@
+query ListPrices($input: PricesQueryInput!) {
+  getPrices(input: $input) {
+    prices {
+      token
+      priceInQuoteToken
+    }
+    quoteToken
+    quoteTokenPriceInUSD
+    timestamp
+  }
+}

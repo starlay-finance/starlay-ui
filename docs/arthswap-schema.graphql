@@ -6,7 +6,38 @@ type Apr {
   updatedAt: Float
   liquidityProvidingURL: String
 }
+
+type Token {
+  address: String!
+  symbol: String!
+}
+
+type Pair {
+  address: String!
+  token0: Token!
+  token1: Token!
+}
+
+type Price {
+  token: String!
+  priceInQuoteToken: String
+}
+
+type Prices {
+  prices: [Price!]!
+  quoteToken: String!
+  quoteTokenPriceInUSD: String
+  timestamp: String!
+}
+
+input PricesQueryInput {
+  tokens: [String!]!
+  quoteToken: String!
+}
+
 type Query {
   getApr(liquidityPair: String): Apr
   getAprs: [Apr]
+  getPairs: [Pair!]
+  getPrices(input: PricesQueryInput!): Prices!
 }
