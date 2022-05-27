@@ -53,7 +53,7 @@ export const AppHeader = () => {
       <Menu>
         <MenuButtonSmall onClick={() => openRewardModal()} disabled={!user}>
           <Image src={SymbolLay} alt="Starlay" width={20} height={20} />
-          {layPriceInUSD ? formatUSD(layPriceInUSD, { decimalPlaces: 2 }) : '-'}
+          {layPriceInUSD ? formatUSD(layPriceInUSD, { decimalPlaces: 3 }) : '-'}
         </MenuButtonSmall>
         <MenuButton onClick={() => openWalletModal()} disabled={!!account}>
           {account ? shortenAddress(account) : t`Connect`}

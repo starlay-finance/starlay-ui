@@ -53,9 +53,7 @@ const RewardModalBody = () => {
       <SummaryDiv>
         <Image src={icon} alt={name} width={80} height={80} />
         <p>{formatter(total)}</p>
-        {locale !== 'ja' && (
-          <p>{formatUSD(totalInUSD, { shorteningThreshold: 8 })}</p>
-        )}
+        <p>{formatUSD(totalInUSD, { shorteningThreshold: 8 })}</p>
       </SummaryDiv>
       <NumberItem
         label={t`Wallet Balance`}
@@ -67,9 +65,11 @@ const RewardModalBody = () => {
         num={valueToBigNumber(unclaimed)}
         format={formatter}
       />
-      {locale !== 'ja' && (
-        <NumberItem label={t`Price`} num={priceInUSD} format={formatUSD} />
-      )}
+      <NumberItem
+        label={t`Price`}
+        num={priceInUSD}
+        format={(num) => formatUSD(num, { decimalPlaces: 8 })}
+      />
       <SimpleCtaButton onClick={claim}>{t`Claim`}</SimpleCtaButton>
     </BodyDiv>
   )
