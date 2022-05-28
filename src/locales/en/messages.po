@@ -37,8 +37,8 @@ msgid "Support"
 msgstr "Support"
 
 #: src/components/parts/Footer/TopFooter.tsx
-msgid "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
-msgstr "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
+msgid "Starlay Finance is the largest lending protocol in Polkadot Ecosystem."
+msgstr "Starlay Finance is the largest lending protocol in Polkadot Ecosystem."
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/screens/Top/Menu.tsx
@@ -418,12 +418,12 @@ msgid "APY_Borrow"
 msgstr "APY"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
-msgid "Deposit Markets"
-msgstr "Deposit Markets"
+msgid "Deposit Market"
+msgstr "Deposit Market"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
-msgid "Borrow Markets"
-msgstr "Borrow Markets"
+msgid "Borrow Market"
+msgstr "Borrow Market"
 
 #: src/components/screens/Dashboard/parts/Summary/BorrowLimit.tsx
 msgid "Borrow Limit"
@@ -813,20 +813,20 @@ msgid "We're supported by leading teams and organizations"
 msgstr "We're supported by leading teams and organizations"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "Current Markets"
-msgstr "Current Markets"
+msgid "Current Market"
+msgstr "Current Market"
 
 #: src/components/screens/Top/parts/CurrentMarkets.tsx
-msgid "The more funds that will be borrowed, the higher the interest rate will be"
-msgstr "The more funds that will be borrowed, the higher the interest rate will be"
+msgid "The more funds to be borrowed, the higher interest rate will be"
+msgstr "The more funds to be borrowed, the higher interest rate will be"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Low Risk Farming on Astar Network"
 msgstr "Low Risk Farming on Astar Network"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "The largest lending protocol in the Polkadot ecosystem"
-msgstr "The largest lending protocol in the Polkadot ecosystem"
+msgid "The Largest Lending Protocol in Polkadot Ecosystem"
+msgstr "The Largest Lending Protocol in Polkadot Ecosystem"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"
@@ -904,16 +904,16 @@ msgstr "Something went wrong..."
 
 #: src/hooks/useUnsupportedChainAlert.ts
 #: src/hooks/useUnsupportedChainAlert.ts
-msgid "You need to change to a supported chain"
-msgstr "You need to change to a supported chain"
+msgid "Changing Chain..."
+msgstr "Changing Chain..."
 
 #: src/hooks/useUnsupportedChainAlert.ts
 msgid "Please switch the chain with your wallet."
 msgstr "Please switch the chain with your wallet."
 
 #: src/hooks/useUnsupportedChainAlert.ts
-msgid "Please switch the chain with your wallet..."
-msgstr "Please switch the chain with your wallet..."
+msgid "Please confirm the popup on your wallet..."
+msgstr "Please confirm the popup on your wallet..."
 
 #: src/hooks/useUnsupportedChainAlert.ts
 msgid "Failed to switch the chain"
