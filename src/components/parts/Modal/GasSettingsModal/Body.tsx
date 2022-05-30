@@ -54,6 +54,7 @@ The higher Gas Fee, the more chance for your transaction to be confirmed.`}
             step={0.1}
             sliderColors={[positive, success]}
             customLabel={t`Custom Speed`}
+            tooltip={t`"Standard" speed refers to the median Gas Fee of the past few blocks.`}
           />
           <Item
             label={t`Gas Fee`}

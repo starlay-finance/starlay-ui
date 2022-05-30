@@ -23,6 +23,7 @@ type RatioControlProps = {
     value: number
   }[]
   max: BigNumber
+  tooltip?: string
   step?: number
   label: string
   customLabel: string
@@ -37,6 +38,7 @@ export const RatioControl = asStyled<RatioControlProps>(
     setValue,
     options,
     max,
+    tooltip,
     label,
     customLabel,
     sliderColors,
@@ -55,13 +57,17 @@ export const RatioControl = asStyled<RatioControlProps>(
         {!isCustomActive ? (
           <>
             <Label>
-              <p>
-                <TooltipMessage
-                  label={label}
-                  message={t`"Standard" speed refers to the median Gas Fee of the past few blocks.`}
-                  position="left"
-                />
-              </p>
+              {tooltip ? (
+                <p>
+                  <TooltipMessage
+                    label={label}
+                    message={tooltip}
+                    position="left"
+                  />
+                </p>
+              ) : (
+                label
+              )}
               {showValue && (
                 <span>{formatAmt(current, { decimalPlaces: 2 })}x</span>
               )}
