@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
-import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
+import { BigNumber } from '@starlay-finance/math-utils'
 import { useEffect, useState, VFC } from 'react'
 import { Link } from 'src/components/elements/Link'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
@@ -11,7 +11,6 @@ import {
 import { RatioControl } from 'src/components/parts/Modal/parts/RatioControl'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { blue, darkRed, lightYellow, purple } from 'src/styles/colors'
-import { ltvToLoopingLeverage } from 'src/utils/calculator'
 import { estimateLooping, EstimationParam } from 'src/utils/estimationHelper'
 import {
   BN_ONE,
@@ -56,9 +55,12 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
   const { inWallet } = userAssetBalance
   const { healthFactor } = userSummary
   const [depositAmount, setDepositAmount] = useState('')
-  const [leverage, setLeverage] = useState<BigNumber>(
-    initialLeverage(ltvToLoopingLeverage(asset.baseLTVasCollateral)),
-  )
+
+  const maxLeverage = BN_ONE.div(
+    BN_ONE.minus(baseLTVasCollateral),
+  ).decimalPlaces(2, BigNumber.ROUND_FLOOR)
+  const [leverage, setLeverage] = useState<BigNumber>(maxLeverage)
+
   const estimation = estimateLooping({
     amount: formattedToBigNumber(depositAmount),
     asset,
@@ -92,10 +94,10 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
         <NumberItems>
           <RatioControl
             label={t`Leverage`}
-            options={RATIO_LIST}
+            options={RATIO_LIST.concat({ value: maxLeverage.toNumber() })}
             setValue={setLeverage}
             current={leverage}
-            max={BN_ONE.div(BN_ONE.minus(baseLTVasCollateral))}
+            max={maxLeverage}
             sliderColors={[blue, lightYellow, darkRed]}
             customLabel={t`Custom Leverage`}
           />
@@ -154,22 +156,7 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
   )
 }
 
-const RATIO_LIST = [
-  { value: 1.5 },
-  { value: 2 },
-  { value: 3 },
-  { value: 4 },
-  { value: 5 },
-]
-
-const initialLeverage = (max: BigNumber) => {
-  const numMax = max.toNumber()
-  const leverage = RATIO_LIST.reduce((prev, { value: current }) => {
-    if (numMax >= current) return current
-    return prev
-  }, 1)
-  return valueToBigNumber(leverage)
-}
+const RATIO_LIST = [{ value: 1.5 }, { value: 2 }, { value: 3 }, { value: 4 }]
 
 const ActionTab: TabFC = Tab
 
