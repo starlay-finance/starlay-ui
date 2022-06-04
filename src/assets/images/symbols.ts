@@ -3,6 +3,7 @@ import SymbolAstr from 'public/assets/images/symbols/symbol_astr.png'
 import SymbolBnb from 'public/assets/images/symbols/symbol_bnb.png'
 import SymbolBusd from 'public/assets/images/symbols/symbol_busd.png'
 import SymbolDai from 'public/assets/images/symbols/symbol_dai.png'
+import SymbolDot from 'public/assets/images/symbols/symbol_dot.png'
 import SymbolLay from 'public/assets/images/symbols/symbol_lay.png'
 import SymbolMatic from 'public/assets/images/symbols/symbol_matic.png'
 import SymbolUsdc from 'public/assets/images/symbols/symbol_usdc.png'
@@ -17,6 +18,7 @@ export {
   SymbolBnb,
   SymbolBusd,
   SymbolDai,
+  SymbolDot,
   SymbolLay,
   SymbolMatic,
   SymbolUsdc,
