@@ -17,6 +17,8 @@ import { TooltipMessage } from '../../ToolTip'
 
 type RatioControlProps = {
   setValue: (ratio: BigNumber) => void
+  onCustomActive?: VoidFunction
+  onCustomInactive?: VoidFunction
   current: BigNumber
   options: {
     label?: string
@@ -27,8 +29,10 @@ type RatioControlProps = {
   step?: number
   label: string
   customLabel: string
+  customButtonLabel?: string
   sliderColors: Color[]
   showValue?: boolean
+  showValueOnCustom?: boolean
 }
 
 export const RatioControl = asStyled<RatioControlProps>(
@@ -36,13 +40,17 @@ export const RatioControl = asStyled<RatioControlProps>(
     className,
     current,
     setValue,
+    onCustomActive,
+    onCustomInactive,
     options,
     max,
     tooltip,
     label,
     customLabel,
+    customButtonLabel = t`Custom`,
     sliderColors,
     showValue,
+    showValueOnCustom = true,
     step = 0.01,
   }) => {
     const [isCustomActive, toggleCustomActive] = useReducer(
@@ -88,16 +96,30 @@ export const RatioControl = asStyled<RatioControlProps>(
                   )
                 })}
               <CustomRatioButton
-                onClick={toggleCustomActive}
+                onClick={() => {
+                  toggleCustomActive()
+                  onCustomActive && onCustomActive()
+                }}
                 $selected={!options.some(({ value }) => current.eq(value))}
-              >{t`Custom`}</CustomRatioButton>
+              >
+                {customButtonLabel}
+              </CustomRatioButton>
             </RatioOptions>
           </>
         ) : (
           <RatioSlider>
             <Label>
-              <button onClick={toggleCustomActive}>{customLabel}</button>
-              <span>{formatAmt(current, { decimalPlaces: 2 })}x</span>
+              <button
+                onClick={() => {
+                  toggleCustomActive()
+                  onCustomInactive && onCustomInactive()
+                }}
+              >
+                {customLabel}
+              </button>
+              {showValueOnCustom && (
+                <span>{formatAmt(current, { decimalPlaces: 2 })}x</span>
+              )}
             </Label>
             <Barometer
               ratio={current.minus(BN_ONE).div(max.minus(BN_ONE)).toNumber()}

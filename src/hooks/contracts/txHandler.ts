@@ -7,8 +7,13 @@ import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { serializeError } from 'eth-rpc-errors'
 import { BigNumber, ethers } from 'ethers'
 import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
-import { getGasPriceMultiplier } from 'src/utils/localStorage'
+import {
+  getGasPriceMultiplier,
+  getManualGasPrice,
+} from 'src/utils/localStorage'
+import { BN_ONE } from 'src/utils/number'
 import { useMarketData } from '../useMarketData'
+import { useRecentGasPrice } from '../useRecentGasPrice'
 import { useUserData } from '../useUserData'
 import { useWalletBalance } from '../useWalletBalance'
 
@@ -23,6 +28,7 @@ export const useTxHandler = () => {
   const { mutate: mutateMarketData } = useMarketData()
   const { mutate: mutateUserData } = useUserData()
   const { mutate: mutateWalletBalance } = useWalletBalance()
+  const { getRecentGasPrice } = useRecentGasPrice()
   const revalidate = () => {
     mutateMarketData()
     mutateUserData()
@@ -42,7 +48,7 @@ export const useTxHandler = () => {
 
     const { actionTx, erc20ApprovalTx, debtErc20ApprovalTx } =
       pickLendingPoolTxs(txs)
-    const gasPrice = getMultipliedGasPrice(signer)
+    const gasPrice = getMultipliedGasPrice(signer, await getRecentGasPrice())
 
     try {
       if (erc20ApprovalTx) {
@@ -133,11 +139,16 @@ const pickLendingPoolTxs = (txs: EthereumTransactionTypeExtended[]) =>
     return { ...prev, actionTx: current }
   }, {})
 
-const getMultipliedGasPrice = async (signer: ethers.Signer) => {
-  const baseGasPrice = await signer.getGasPrice()
+const getMultipliedGasPrice = async (
+  signer: ethers.Signer,
+  latestGasPrice?: BigNumber,
+) => {
+  const baseGasPrice = latestGasPrice || (await signer.getGasPrice())
   const gasPriceMultiplier = getGasPriceMultiplier()
+  const manualGasPrice = getManualGasPrice()
+  if (manualGasPrice) return BigNumber.from(+manualGasPrice * 10 ** 9)
   const gasPrice = valueToBigNumber(baseGasPrice.toString())
-    .times(gasPriceMultiplier)
+    .times(gasPriceMultiplier || BN_ONE)
     .toFixed(0)
   return BigNumber.from(gasPrice)
 }
