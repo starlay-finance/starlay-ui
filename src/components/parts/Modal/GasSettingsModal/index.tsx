@@ -1,16 +1,18 @@
 import { t } from '@lingui/macro'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
-import { utils } from 'ethers'
 import { useEffect, useState, VFC } from 'react'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
+import { useRecentGasPrice } from 'src/hooks/useRecentGasPrice'
 import { useStaticRPCProvider } from 'src/hooks/useStaticRPCProvider'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { getNetworkConfig } from 'src/libs/config'
 import { DEFAULT_CHAIN_ID } from 'src/utils/env'
 import {
   getGasPriceMultiplier,
+  getManualGasPrice,
   setGasPriceMultiplier,
+  setManualGasPrice,
 } from 'src/utils/localStorage'
 import { GasSettingsModalBody } from './Body'
 
@@ -18,30 +20,29 @@ export const GasSettings: VFC<ModalContentProps> = ({ close }) => {
   const { data } = useStaticRPCProvider()
   const { baseAsset } = getNetworkConfig(data?.chainId || DEFAULT_CHAIN_ID)
   const { data: balance } = useWalletBalance()
-  const current = getGasPriceMultiplier()
-  const [baseGasPrice, setBaseGasPrice] = useState<BigNumber>()
-
+  const multiplier = getGasPriceMultiplier()
+  const manual = getManualGasPrice()
+  const { getRecentGasPrice } = useRecentGasPrice()
+  const [gasPrice, setGasPrice] = useState<BigNumber>()
   useEffect(() => {
-    data?.provider
-      .getGasPrice()
-      .then((price) =>
-        setBaseGasPrice(valueToBigNumber(utils.formatEther(price))),
-      )
-  }, [data?.provider])
+    getRecentGasPrice().then((v) => setGasPrice(valueToBigNumber(v.toString())))
+  }, [])
 
   return (
     <DefaultModalContent
       headerNode={t`Set Gas Fee`}
       bodyNode={
         <GasSettingsModalBody
-          current={current}
+          currentMultiplier={multiplier}
+          currentManualValue={manual}
           inWallet={balance[baseAsset.symbol]}
-          save={(ratio) => {
-            setGasPriceMultiplier(ratio)
+          save={(multiplier, manual) => {
+            setGasPriceMultiplier(multiplier)
+            setManualGasPrice(manual)
             close()
           }}
           symbol={baseAsset.symbol}
-          baseGasPrice={baseGasPrice}
+          baseGasPrice={gasPrice}
         />
       }
       closeModal={close}
