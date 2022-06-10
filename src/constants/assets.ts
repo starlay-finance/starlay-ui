@@ -4,6 +4,7 @@ import {
   SymbolBnb,
   SymbolBusd,
   SymbolDai,
+  SymbolDot,
   SymbolLay,
   SymbolMatic,
   SymbolUsdc,
@@ -16,6 +17,7 @@ import { Asset, AssetSymbol } from 'src/types/models'
 
 export const LISTED_ASSET_SYMBOLS = [
   'ASTR',
+  'DOT',
   'DAI',
   'USDC',
   'USDT',
@@ -43,6 +45,13 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     symbol: 'ASTR',
     name: 'Astar',
     icon: SymbolAstr,
+  },
+  DOT: {
+    symbol: 'DOT',
+    name: 'Polkadot',
+    icon: SymbolDot,
+    // borrowUnsupported: true,
+    // makaiUnsupported: true,
   },
   WETH: {
     symbol: 'WETH',

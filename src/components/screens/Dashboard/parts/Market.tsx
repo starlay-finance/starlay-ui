@@ -3,7 +3,7 @@ import router from 'next/router'
 import {
   AssetTd,
   MarketTable,
-  TableContainer
+  TableContainer,
 } from 'src/components/compositions/Markets/MarketTable'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
@@ -88,7 +88,6 @@ export const Market = asStyled(({ className }) => {
         e === asset.displaySymbol ? asset.symbol : e,
       ) as [string, string]
 
-    console.log(arthswapPair)
     openBorrowModal({
       asset,
       userSummary: user.summary,

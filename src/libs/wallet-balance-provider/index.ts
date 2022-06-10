@@ -1,5 +1,5 @@
 import { WalletBalanceProvider } from '@starlay-finance/contract-helpers'
-import { BigNumber } from '@starlay-finance/math-utils'
+import { BigNumber } from 'ethers'
 import { EthereumAddress } from 'src/types/web3'
 import { getMarketConfig, getNetworkConfig, NetworkConfig } from '../config'
 import { StaticRPCProvider } from '../pool-data-provider'
@@ -12,6 +12,7 @@ export type WalletBalanceProviderInterface = {
   getBeforeNormalizedWalletBalance: (
     account: string,
   ) => Promise<{ [key in EthereumAddress]: BigNumber }>
+  getBalance: (account: string, token: string) => Promise<BigNumber>
 }
 
 class WalletBalanceProviderWrapper implements WalletBalanceProviderInterface {
@@ -52,5 +53,9 @@ class WalletBalanceProviderWrapper implements WalletBalanceProviderInterface {
         [asset.toLowerCase()]: balances[idx],
       }
     }, {}) as { [key in EthereumAddress]: BigNumber }
+  }
+
+  getBalance = async (account: string, token: string) => {
+    return this.proivder.balanceOf(account, token)
   }
 }
