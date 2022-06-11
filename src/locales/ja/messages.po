@@ -149,16 +149,28 @@ msgid "For more about Gas Fee, please click <0>here</0>."
 msgstr "ガス代についての詳細は<0>こちら</0>を参照してください。"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "Speed"
 msgstr "スピード"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
-msgid "Custom Speed"
-msgstr "カスタムスピード"
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Manual Gas Fee"
+msgstr ""
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
-msgid "Gas Fee"
-msgstr "ガス代"
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Manual"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "\"Standard\" speed refers to the median Gas Fee of the past few blocks."
+msgstr "「標準」の値には、直近数ブロックのガス代の中央値が設定されます。"
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Current Gas Fee"
+msgstr ""
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "SET"
@@ -185,6 +197,7 @@ msgid "Very Fast"
 msgstr "超高速"
 
 #: src/components/parts/Modal/MessageModalGradient/index.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Close"
 msgstr "閉じる"
 
@@ -200,6 +213,11 @@ msgstr "未請求残高"
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Price"
 msgstr "価格"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Claim"
+msgstr "請求"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
 #: src/components/screens/Launchpad/Sale/SaleInformation.tsx
@@ -221,10 +239,6 @@ msgstr ""
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
 msgstr "ウォレットを接続することで、<0>Starlay Financeの仕組みとリスク</0>を理解し、自己責任で利用することに同意します。"
-
-#: src/components/parts/Modal/parts/RatioControl.tsx
-msgid "\"Standard\" speed refers to the median Gas Fee of the past few blocks."
-msgstr "「標準」の値には、直近数ブロックのガス代の中央値が設定されます。"
 
 #: src/components/parts/Modal/parts/RatioControl.tsx
 msgid "Custom"
@@ -262,6 +276,7 @@ msgstr "ボーナスAPR"
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Borrowed"
 msgstr "借入残高"
 
@@ -683,10 +698,6 @@ msgstr "魔界マーケット"
 msgid "Unclaimed Reward"
 msgstr "未請求ボーナス残高"
 
-#: src/components/screens/Makai/UnclaimedReward.tsx
-msgid "Claim"
-msgstr "請求"
-
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Makai Loops"
 msgstr "魔界ループ"
@@ -714,6 +725,10 @@ msgstr "<0>ドキュメント</0>を読み、機能を理解した上で利用�
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Start loops"
 msgstr "ループを開始する"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Close loops"
+msgstr ""
 
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Markets/Overview.tsx
