@@ -48,7 +48,7 @@ export const AmountInput: VFC<AmountInputProps> = ({
             if (setAll) setAll(false)
             setMaxValue()
           }}
-          disabled
+          disabled={disabled}
         >
           {maxLabel || t`Max`}
         </button>
@@ -58,7 +58,7 @@ export const AmountInput: VFC<AmountInputProps> = ({
               type="checkbox"
               checked={all}
               onChange={() => setAll(!all)}
-              disabled
+              disabled={disabled}
             />
             <span>{allLabel}</span>
           </label>
