@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro'
 import { ReactNode } from 'react'
 import { AsStyledProps } from 'src/components/hoc/asStyled'
-import { offWhite } from 'src/styles/colors'
+import { offWhite, purple } from 'src/styles/colors'
 import styled, { css, SimpleInterpolation } from 'styled-components'
 import { ShimmerPlaceholder } from '../Loading'
 
@@ -120,9 +120,9 @@ const Tabs = styled.div`
       cursor: pointer;
       color: ${offWhite};
       border-color: transparent;
-    }
-    :disabled {
-      cursor: not-allowed;
+      :hover {
+        color: ${purple};
+      }
     }
   }
 `
