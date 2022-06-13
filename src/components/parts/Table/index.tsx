@@ -1,12 +1,19 @@
 import { t } from '@lingui/macro'
 import { ReactNode } from 'react'
 import { AsStyledProps } from 'src/components/hoc/asStyled'
+import { offWhite } from 'src/styles/colors'
 import styled, { css, SimpleInterpolation } from 'styled-components'
 import { ShimmerPlaceholder } from '../Loading'
 
 export type TableFC = <T extends string>(
   props: {
     caption?: string
+    tabs?: {
+      items: { id: string; label: string }[]
+      setTab: (id: string) => void
+      activeTab: string
+    }
+    control?: ReactNode
     columns: {
       id: T
       name: string
@@ -26,6 +33,8 @@ export type TableFC = <T extends string>(
 export const Table: TableFC = ({
   className,
   caption,
+  tabs,
+  control,
   columns,
   rows,
   placeholderLength = 0,
@@ -37,7 +46,25 @@ export const Table: TableFC = ({
   )
   return (
     <StyledTable className={className}>
-      {caption && <caption>{caption}</caption>}
+      <caption>
+        <div>
+          {caption}
+          {tabs && (
+            <Tabs>
+              {tabs.items.map(({ id, label }) => (
+                <button
+                  key={id}
+                  onClick={() => tabs.setTab(id)}
+                  disabled={id === tabs.activeTab}
+                >
+                  {t({ id: label })}
+                </button>
+              ))}
+            </Tabs>
+          )}
+          {control}
+        </div>
+      </caption>
       <thead>
         <tr>
           {columns.map(({ id, name, widthRatio }) => (
@@ -81,8 +108,30 @@ export const Table: TableFC = ({
     </StyledTable>
   )
 }
-
+const Tabs = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 24px;
+  margin-bottom: -24px;
+  > button {
+    padding-bottom: 24px;
+    border-bottom: 2px solid;
+    :enabled {
+      cursor: pointer;
+      color: ${offWhite};
+      border-color: transparent;
+    }
+    :disabled {
+      cursor: not-allowed;
+    }
+  }
+`
 const StyledTable = styled.table`
+  caption > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   table-layout: fixed;
   width: 100%;
   ${ShimmerPlaceholder} {

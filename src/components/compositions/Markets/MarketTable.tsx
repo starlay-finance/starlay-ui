@@ -36,7 +36,7 @@ const StyledTable = styled(Table)<StyleProps>`
     padding: 24px 32px 0;
     font-size: 20px;
     font-weight: ${fontWeightHeavy};
-    margin-bottom: 24px;
+    padding-bottom: 24px;
   }
   thead > tr {
     height: 56px !important;
