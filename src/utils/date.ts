@@ -13,3 +13,5 @@ export const utcStartOfDate = () => dayjs().utc().startOf('date')
 
 export const formatWithTZ = (value: Dayjs, format: string) =>
   value.format(format)
+
+export const SECONDS_OF_WEEK = 60 * 60 * 24 * 7
