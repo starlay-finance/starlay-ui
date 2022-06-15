@@ -4,14 +4,18 @@ import {
   valueToBigNumber,
   WEI_DECIMALS,
 } from '@starlay-finance/math-utils'
+import dayjs, { Dayjs } from 'dayjs'
 import { useState, VFC } from 'react'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import { RatioControl } from 'src/components/parts/Modal/parts/RatioControl'
 import { ASSETS_DICT } from 'src/constants/assets'
-import { blue, darkRed, lightYellow, purple } from 'src/styles/colors'
-import { SECONDS_OF_MONTH, SECONDS_OF_YEAR } from 'src/utils/date'
+import { blue, darkRed, lightYellow } from 'src/styles/colors'
+import {
+  SECONDS_OF_DAY,
+  SECONDS_OF_MONTH,
+  SECONDS_OF_YEAR,
+} from 'src/utils/date'
 import { BN_ZERO, formatAmt, formattedToBigNumber } from 'src/utils/number'
-import styled from 'styled-components'
 import {
   Action,
   AmountInput,
@@ -26,13 +30,33 @@ const TABS = ['wallet', 'ido', 'tokenSale'] as const
 type TabType = typeof TABS[number]
 
 export type LockModalBodyProps = {
-  lock: (amount: BigNumber, duration: number) => Promise<any>
+  lock: (
+    amount: BigNumber,
+    duration: number,
+    mode?: 'amount' | 'duration',
+  ) => Promise<any>
   balances: Record<TabType, BigNumber>
+  current?: {
+    locked: BigNumber
+    lockedEnd: Dayjs
+  }
+  mode?: 'amount' | 'duration'
 }
 
-export const LockModalBody: VFC<LockModalBodyProps> = ({ balances, lock }) => {
-  const [lockAmount, setLockAmount] = useState('')
-  const [lockDuration, setLockDuration] = useState<BigNumber>(BN_ZERO)
+export const LockModalBody: VFC<LockModalBodyProps> = ({
+  balances,
+  mode,
+  current,
+  lock,
+}) => {
+  const [lockAmount, setLockAmount] = useState(
+    current && mode === 'duration' ? formatAmt(current.locked) : '',
+  )
+  const [lockDuration, setLockDuration] = useState<BigNumber>(
+    current
+      ? valueToBigNumber(current.lockedEnd.unix() - dayjs().unix())
+      : valueToBigNumber(DURATION_LIST[0].value),
+  )
   const [activeTab, setActiveTab] = useState<TabType>('wallet')
 
   const lockAmountBn = formattedToBigNumber(lockAmount) || BN_ZERO
@@ -43,9 +67,10 @@ export const LockModalBody: VFC<LockModalBodyProps> = ({ balances, lock }) => {
         onChange={setLockAmount}
         setMaxValue={() => setLockAmount(formatAmt(balances[activeTab]))}
         significantDigits={WEI_DECIMALS}
+        disabled={mode === 'duration'}
       />
       <ActionTab
-        tabs={TABS}
+        tabs={mode !== 'duration' ? TABS : []}
         contents={{
           wallet: { label: 'Wallet' },
           ido: { label: 'IDO' },
@@ -64,15 +89,24 @@ export const LockModalBody: VFC<LockModalBodyProps> = ({ balances, lock }) => {
             max={valueToBigNumber(
               DURATION_LIST[DURATION_LIST.length - 1].value,
             )}
+            formatCustomValue={(num) =>
+              `Until: ${dayjs().add(num.toNumber(), 's').format('DD/MM/YYYY')}`
+            }
+            step={SECONDS_OF_DAY}
             sliderColors={[blue, lightYellow, darkRed]}
-            customLabel={t`Custom Duration`}
+            customLabel={t`Custom`}
+            disabled={mode === 'amount'}
           />
         </NumberItems>
         <SimpleCtaButton
-          onClick={() => lock(lockAmountBn, lockDuration.toNumber())}
+          onClick={() => lock(lockAmountBn, lockDuration.toNumber(), mode)}
           disabled={!lockAmountBn.gt(BN_ZERO) || !lockDuration.gt(BN_ZERO)}
         >
-          {t`Lock`}
+          {mode === 'amount'
+            ? t`Add`
+            : mode === 'duration'
+            ? t`Extend`
+            : t`Lock`}
         </SimpleCtaButton>
         <Balance
           label={t`Available`}
@@ -93,13 +127,3 @@ const DURATION_LIST = [
 ]
 
 const ActionTab: TabFC = Tab
-
-const Note = styled.p`
-  padding-top: 24px;
-  text-align: center;
-  white-space: pre-wrap;
-  line-height: 1.5;
-  a {
-    color: ${purple};
-  }
-`

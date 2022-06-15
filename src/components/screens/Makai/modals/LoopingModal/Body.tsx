@@ -89,6 +89,7 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
         setMaxValue={() => setDepositAmount(formatAmt(estimation.maxAmount))}
         significantDigits={asset.decimals}
         disabled={!isLooping}
+        hideValue={!isLooping}
       />
       <ActionTab
         tabs={TABS}

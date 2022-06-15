@@ -8,9 +8,11 @@ import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { BN_ZERO } from 'src/utils/number'
-import { LockModalBody } from './Body'
+import { LockModalBody, LockModalBodyProps } from './Body'
 
-export const Lock: VFC<ModalContentProps> = ({ close, ...props }) => {
+export const Lock: VFC<
+  ModalContentProps & Pick<LockModalBodyProps, 'current' | 'mode'>
+> = ({ close, ...props }) => {
   const { lock } = useVotingEscrow()
   const { data: wallet } = useWalletBalance()
   const balances = {

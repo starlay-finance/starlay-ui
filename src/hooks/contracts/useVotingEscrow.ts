@@ -46,8 +46,12 @@ export const useVotingEscrow = () => {
       mutateUserData()
     })
 
-  const lock = async (amount: BigNumber, duration?: number) => {
-    if (!account || !signer || !votingEscrow || !userData)
+  const lock = async (
+    amount: BigNumber,
+    duration: number,
+    mode?: 'amount' | 'duration',
+  ) => {
+    if (!account || !signer || !votingEscrow)
       throw new Error('Unexpected state')
     const lockerId = userData?.lockerId
     if (!lockerId || lockerId.isZero())
@@ -59,7 +63,7 @@ export const useVotingEscrow = () => {
         }),
         signer,
       )
-    if (!duration)
+    if (mode === 'amount')
       return handleTx(
         await votingEscrow.increaseAmount({
           user: account,
@@ -76,7 +80,13 @@ export const useVotingEscrow = () => {
     )
   }
 
-  return { ...data, userData, lock }
+  const withdraw = async () => {
+    if (!account || !signer || !votingEscrow)
+      throw new Error('Unexpected state')
+    return handleTx(await votingEscrow.withdraw({ user: account }), signer)
+  }
+
+  return { ...data, userData, lock, withdraw }
 }
 
 const init = async (provider: StaticRPCProvider) => {

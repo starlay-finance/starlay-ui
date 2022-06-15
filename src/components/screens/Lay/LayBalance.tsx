@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
+import dayjs from 'dayjs'
 import { VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { asStyled } from 'src/components/hoc/asStyled'
@@ -52,22 +53,26 @@ export const UnclaimedLAY = asStyled(({ className }) => {
 
 export const WalletBalance = asStyled(({ className }) => {
   const { data: balances } = useWalletBalance()
+  const { userData } = useVotingEscrow()
   const { open } = useLockModal()
   return (
     <LayBalance
       className={className}
       label={t`Wallet Balance`}
       amount={balances[ASSETS_DICT.LAY.symbol]}
-      actions={[{ label: t`Lock`, onClick: open }]}
+      actions={[{ label: t`Lock`, onClick: open, disabled: !!userData }]}
     />
   )
 })``
 
 export const LockedLAY = asStyled(({ className }) => {
-  const { userData } = useVotingEscrow()
+  const { userData, withdraw } = useVotingEscrow()
   const { userData: voteData } = useVoteData()
   const { data: layPrice } = useLAYPrice()
+  const { open } = useLockModal()
+
   const locked = userData?.locked || BN_ZERO
+  const expired = userData?.lockedEnd.isBefore(dayjs())
   return (
     <LayBalance
       className={className}
@@ -88,10 +93,22 @@ export const LockedLAY = asStyled(({ className }) => {
               : '-',
         },
       ]}
-      actions={[
-        { label: t`Add`, onClick: () => {} },
-        { label: t`Extend`, onClick: () => {} },
-      ]}
+      actions={
+        !expired
+          ? [
+              {
+                label: t`Add`,
+                onClick: () => open({ mode: 'amount', current: userData }),
+                disabled: !userData,
+              },
+              {
+                label: t`Extend`,
+                onClick: () => open({ mode: 'duration', current: userData }),
+                disabled: !userData,
+              },
+            ]
+          : [{ label: t`Withdraw`, onClick: withdraw }]
+      }
     />
   )
 })``
@@ -106,6 +123,7 @@ type LayBalanceProps = {
   actions: {
     label: string
     onClick: VoidFunction
+    disabled?: boolean
   }[]
 }
 const LayBalance = styled<VFC<LayBalanceProps & { className?: string }>>(
@@ -131,8 +149,8 @@ const LayBalance = styled<VFC<LayBalanceProps & { className?: string }>>(
           </DetailsDiv>
         )}
         <ActionsDiv>
-          {actions.map(({ label, onClick }) => (
-            <Button key={label} onClick={onClick}>
+          {actions.map(({ label, onClick, disabled }) => (
+            <Button key={label} onClick={onClick} disabled={disabled}>
               {label}
             </Button>
           ))}

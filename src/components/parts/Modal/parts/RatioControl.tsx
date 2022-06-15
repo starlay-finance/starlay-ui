@@ -19,6 +19,7 @@ type RatioControlProps = {
   setValue: (ratio: BigNumber) => void
   onCustomActive?: VoidFunction
   onCustomInactive?: VoidFunction
+  formatCustomValue?: (ratio: BigNumber) => string
   current: BigNumber
   options: {
     label?: string
@@ -33,6 +34,7 @@ type RatioControlProps = {
   sliderColors: Color[]
   showValue?: boolean
   showValueOnCustom?: boolean
+  disabled?: boolean
 }
 
 export const RatioControl = asStyled<RatioControlProps>(
@@ -51,7 +53,9 @@ export const RatioControl = asStyled<RatioControlProps>(
     sliderColors,
     showValue,
     showValueOnCustom = true,
+    formatCustomValue,
     step = 0.01,
+    disabled,
   }) => {
     const [isCustomActive, toggleCustomActive] = useReducer(
       (state: boolean) => !state,
@@ -89,7 +93,7 @@ export const RatioControl = asStyled<RatioControlProps>(
                     <RatioCheckBox key={value} $checked={checked}>
                       <input
                         onClick={() => setValue(valueToBigNumber(value))}
-                        disabled={max.lt(value)}
+                        disabled={disabled || max.lt(value)}
                       />
                       <span>{t({ id: label }) || `${value}x`}</span>
                     </RatioCheckBox>
@@ -101,6 +105,7 @@ export const RatioControl = asStyled<RatioControlProps>(
                   onCustomActive && onCustomActive()
                 }}
                 $selected={!options.some(({ value }) => current.eq(value))}
+                disabled={disabled}
               >
                 {customButtonLabel}
               </CustomRatioButton>
@@ -114,11 +119,16 @@ export const RatioControl = asStyled<RatioControlProps>(
                   toggleCustomActive()
                   onCustomInactive && onCustomInactive()
                 }}
+                disabled={disabled}
               >
                 {customLabel}
               </button>
-              {showValueOnCustom && (
-                <span>{formatAmt(current, { decimalPlaces: 2 })}x</span>
+              {formatCustomValue ? (
+                <span>{formatCustomValue(current)}</span>
+              ) : (
+                showValueOnCustom && (
+                  <span>{formatAmt(current, { decimalPlaces: 2 })}x</span>
+                )
               )}
             </Label>
             <Barometer
@@ -131,6 +141,7 @@ export const RatioControl = asStyled<RatioControlProps>(
                 step,
                 onChange: ({ target: { value } }) =>
                   setValue(valueToBigNumber(value)),
+                disabled,
               }}
             />
           </RatioSlider>
@@ -187,8 +198,8 @@ const RatioOptions = styled.div`
     padding: 8px 12px 6px;
     border-radius: 8px;
     background-color: ${darkPurple}7a;
-    cursor: pointer;
     transition: all 0.2s ease-in;
+    cursor: pointer;
     :hover {
       background-color: ${darkPurple};
     }
@@ -217,6 +228,9 @@ const Label = styled.div`
 `
 
 const RatioSlider = styled.div`
+  *:disabled {
+    cursor: not-allowed;
+  }
   ${Barometer} {
     margin-top: 32px;
   }
@@ -224,7 +238,7 @@ const RatioSlider = styled.div`
     button {
       position: relative;
       padding-left: 32px;
-      :hover {
+      :enabled:hover {
         color: ${purple}80;
         ::after {
           opacity: 0.5;
