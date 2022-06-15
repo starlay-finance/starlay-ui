@@ -12,12 +12,15 @@ import { ethers } from 'ethers'
 import { getNetworkConfig } from 'src/libs/config'
 import { StaticRPCProvider } from 'src/libs/pool-data-provider'
 import { votingEscrowContract } from 'src/libs/voting-escrow'
+import { SECONDS_OF_WEEK } from 'src/utils/date'
 import useSWRImmutable from 'swr/immutable'
 import { useStaticRPCProvider } from '../useStaticRPCProvider'
 import { useWallet } from '../useWallet'
 import { useTxHandler } from './txHandler'
 
 export const useVotingEscrow = () => {
+  const nextTerm = Math.ceil(dayjs().unix() / SECONDS_OF_WEEK) * SECONDS_OF_WEEK
+
   const { data: provider } = useStaticRPCProvider()
   const { account, signer } = useWallet()
   const { data: votingEscrow } = useSWRImmutable(
@@ -26,14 +29,21 @@ export const useVotingEscrow = () => {
   )
 
   const { data, mutate: mutateData } = useSWRImmutable(
-    provider && votingEscrow && ['votingescrow-data', provider.chainId],
-    async () => fetchData(votingEscrow!),
+    provider &&
+      votingEscrow && ['votingescrow-data', provider.chainId, nextTerm],
+    async (_1, _2, term) => fetchData(votingEscrow!, term),
   )
   const { data: userData, mutate: mutateUserData } = useSWRImmutable(
     account &&
       provider &&
-      votingEscrow && ['votingescrow-userdata', provider.chainId, account],
-    async (_1, _2, account) => fetchUserData(votingEscrow!, account),
+      votingEscrow && [
+        'votingescrow-userdata',
+        provider.chainId,
+        account,
+        nextTerm,
+      ],
+    async (_1, _2, account, term) =>
+      fetchUserData(votingEscrow!, account, term),
   )
 
   const handler = useTxHandler()
@@ -86,7 +96,7 @@ export const useVotingEscrow = () => {
     return handleTx(await votingEscrow.withdraw({ user: account }), signer)
   }
 
-  return { ...data, userData, lock, withdraw }
+  return { ...data, userData, nextTerm, lock, withdraw }
 }
 
 const init = async (provider: StaticRPCProvider) => {
@@ -98,8 +108,8 @@ const init = async (provider: StaticRPCProvider) => {
   )
 }
 
-const fetchData = async (votingEscrow: VotingEscrow) => {
-  const lockData = await votingEscrow.lockData()
+const fetchData = async (votingEscrow: VotingEscrow, timestamp: number) => {
+  const lockData = await votingEscrow.lockData({ timestamp })
   return {
     totalVotingPower: normalizeBN(
       lockData.totalVotingPower.toString(),
@@ -109,9 +119,14 @@ const fetchData = async (votingEscrow: VotingEscrow) => {
   }
 }
 
-const fetchUserData = async (votingEscrow: VotingEscrow, account: string) => {
+const fetchUserData = async (
+  votingEscrow: VotingEscrow,
+  account: string,
+  timestamp: number,
+) => {
   const userData = await votingEscrow.userLockData({
     user: account,
+    timestamp,
   })
   return (
     userData && {

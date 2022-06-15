@@ -23,8 +23,8 @@
   "dependencies": {
     "@lingui/macro": "^3.13.0",
     "@lingui/react": "^3.13.0",
-    "@starlay-finance/contract-helpers": "0.0.15-321aa963ae92c296f000689bf52bf4cfefe685c8.0",
-    "@starlay-finance/math-utils": "0.0.15-321aa963ae92c296f000689bf52bf4cfefe685c8.0",
+    "@starlay-finance/contract-helpers": "0.0.15-1d7aa87d5675c778555101b5da2e1892a728d193.0",
+    "@starlay-finance/math-utils": "0.0.15-1d7aa87d5675c778555101b5da2e1892a728d193.0",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
     "chroma-js": "^2.4.2",

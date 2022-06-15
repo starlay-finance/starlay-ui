@@ -1,12 +1,13 @@
 import { t } from '@lingui/macro'
-import { BigNumber } from '@starlay-finance/math-utils'
-import { useState } from 'react'
+import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
+import { useEffect, useState } from 'react'
 import {
   AssetTd,
   MarketTable,
   TableContainer,
 } from 'src/components/compositions/Markets/MarketTable'
 import { asStyled } from 'src/components/hoc/asStyled'
+import { useVoter } from 'src/hooks/contracts/useVoter'
 import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
 import { useMarketData } from 'src/hooks/useMarketData'
@@ -14,9 +15,11 @@ import { useVoteData } from 'src/hooks/useVoteData'
 import { darkGray, darkRed, purple, skyBlue } from 'src/styles/colors'
 import { fontWeightBold, fontWeightMedium } from 'src/styles/font'
 import { AssetMarketData, UserVoteData, VoteData } from 'src/types/models'
+import { filterFalsy } from 'src/utils/array'
 import { symbolSorter } from 'src/utils/market'
 import { BN_ZERO, formatAmtShort, formatPct, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
+import { Slider } from './Slider'
 
 const STATS_COLUMNS = [
   { id: 'asset', name: t`Asset`, widthRatio: 4 },
@@ -28,16 +31,22 @@ const STATS_COLUMNS = [
 ]
 
 const VOTING_COLUMNS = [
-  { id: 'asset', name: t`Asset`, widthRatio: 8 },
-  { id: 'totalWeight', name: t`Total Weight`, widthRatio: 2 },
-  { id: 'votedWeight', name: t`Voted Weight`, widthRatio: 2 },
-  { id: 'voting', name: t`Voting`, widthRatio: 2 },
+  { id: 'asset', name: t`Asset`, widthRatio: 6 },
+  { id: 'totalWeight', name: t`Total Weight`, widthRatio: 3 },
+  { id: 'votedWeight', name: t`Voted Weight`, widthRatio: 3 },
+  { id: 'voting', name: t`Voting`, widthRatio: 3 },
   { id: 'votingSlider', name: '', widthRatio: 6 },
 ]
+const WEIGHT_DECIMALS = 4
 
 export const Assets = asStyled(({ className }) => {
   const [activeTab, setActiveTab] = useState('stats')
+  const [votingData, setVotingData] =
+    useState<Partial<Record<string, number>>>()
+  const [touched, setTouched] = useState(false)
+
   const { data: marketData } = useMarketData()
+  const { vote } = useVoter()
   const { data: voteData, userData: userVoteData } = useVoteData()
   const { userData } = useVotingEscrow()
   const { data: layPrice } = useLAYPrice()
@@ -45,6 +54,34 @@ export const Assets = asStyled(({ className }) => {
   const markets = (assets || [])
     .filter((each) => each.isActive)
     .sort(symbolSorter)
+
+  const currentVotingTotal =
+    (votingData &&
+      Object.values(votingData).reduce((res = 0, num = 0) => res + num)) ||
+    0
+
+  useEffect(() => {
+    if (!userVoteData || votingData) return
+    const weightTotal = BigNumber.sum(
+      ...Object.values(userVoteData.data)
+        .filter(filterFalsy)
+        .map(({ weight }) => weight),
+    )
+    setVotingData(
+      Object.keys(userVoteData.data).reduce(
+        (res, key) => ({
+          ...res,
+          [key]:
+            (!weightTotal.isZero() &&
+              userVoteData.data[key]?.weight
+                .div(weightTotal)
+                .decimalPlaces(WEIGHT_DECIMALS, BigNumber.ROUND_FLOOR)) ||
+            0,
+        }),
+        {},
+      ),
+    )
+  }, [userVoteData])
 
   return (
     <DetailsSection className={className}>
@@ -66,7 +103,9 @@ export const Assets = asStyled(({ className }) => {
                     ? formatUSD(userVoteData.claimableTotalInUSD)
                     : '-'
                 }`}</span>
-                <button>{t`Claim`}</button>
+                <button
+                  disabled={!userVoteData?.claimableTotalInUSD.gt(BN_ZERO)}
+                >{t`Claim`}</button>
               </Control>
             }
             columns={STATS_COLUMNS}
@@ -95,16 +134,55 @@ export const Assets = asStyled(({ className }) => {
                 <span>{t`Voting Power Used: ${
                   userData
                     ? `${formatAmtShort(
-                        userVoteData?.votedTotal || BN_ZERO,
+                        touched
+                          ? userData.votingPower.times(currentVotingTotal)
+                          : userVoteData?.votedTotal || BN_ZERO,
                       )}/${formatAmtShort(userData.votingPower)}`
                     : '-/-'
                 }`}</span>
-                <button>{t`Submit`}</button>
+                <button
+                  onClick={
+                    votingData
+                      ? () =>
+                          vote(
+                            Object.keys(votingData).reduce(
+                              (res, key) => ({
+                                ...res,
+                                [key]: valueToBigNumber(
+                                  votingData[key]!,
+                                ).shiftedBy(WEIGHT_DECIMALS),
+                              }),
+                              {},
+                            ),
+                          )
+                      : undefined
+                  }
+                  disabled={
+                    !(touched && currentVotingTotal === 1) &&
+                    !(
+                      !touched &&
+                      userData?.votingPower.gt(0) &&
+                      userVoteData?.votedTotal.gt(0) &&
+                      !userData.votingPower.eq(userVoteData.votedTotal)
+                    )
+                  }
+                >{t`Apply`}</button>
               </Control>
             }
             columns={VOTING_COLUMNS}
             rows={markets.map((asset) =>
-              votingRow({ asset, voteData, userVoteData }),
+              votingRow({
+                asset,
+                voteData,
+                userVoteData,
+                votingData,
+                setWeight: (key, weight) => {
+                  setTouched(true)
+                  setVotingData({ ...votingData, [key]: weight })
+                },
+                currentVotingTotal,
+                votingPower: userData?.votingPower,
+              }),
             )}
             hoverGradients={[`${darkRed}3d`, `${skyBlue}3d`, `${darkRed}3d`]}
           />
@@ -166,14 +244,23 @@ const votingRow = ({
   asset,
   voteData,
   userVoteData,
+  votingData,
+  setWeight,
+  currentVotingTotal,
+  votingPower,
 }: {
   asset: AssetMarketData
   voteData: VoteData | undefined
   userVoteData: UserVoteData | undefined
+  votingData: Partial<Record<string, number>> | undefined
+  setWeight: (key: string, weight: number) => void
+  currentVotingTotal: number
+  votingPower: BigNumber | undefined
 }) => {
   const { symbol, icon, name, lTokenAddress } = asset
   const assetWeight = voteData?.data[lTokenAddress.toLowerCase()]?.weight
   const userAssetVoteData = userVoteData?.data[lTokenAddress.toLowerCase()]
+  const votingWeight = votingData && votingData[lTokenAddress.toLowerCase()]
   return {
     id: symbol,
     data: {
@@ -189,8 +276,20 @@ const votingRow = ({
         ? formatAmtShort(userAssetVoteData.vote)
         : '-',
       // TODO replace to editing value
-      voting: userAssetVoteData ? formatAmtShort(userAssetVoteData.vote) : '-',
-      votingSlider: 'TODO',
+      voting:
+        votingPower && votingWeight != null
+          ? `${formatAmtShort(votingPower.times(votingWeight))}(${formatPct(
+              votingWeight,
+            )})`
+          : '-',
+      votingSlider: (
+        <Slider
+          current={votingWeight || 0}
+          setValue={(num) => setWeight(lTokenAddress.toLowerCase(), num)}
+          remaining={1 - currentVotingTotal}
+          disabled={!votingData}
+        />
+      ),
     },
   }
 }
@@ -211,10 +310,16 @@ const Control = styled.div`
     padding: 8px 16px;
     line-height: 1;
     transition: background 0.15s ease-in;
-    :enabled:hover {
+    :enabled {
       background: ${purple};
     }
   }
 `
 
-const DetailsSection = styled.section``
+const DetailsSection = styled.section`
+  table {
+    ${Slider} {
+      margin-left: 16px;
+    }
+  }
+`

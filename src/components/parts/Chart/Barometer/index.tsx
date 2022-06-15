@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, ReactNode } from 'react'
+import { CSSProperties, InputHTMLAttributes, ReactNode } from 'react'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { trueBlack } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
@@ -15,10 +15,20 @@ export type BarometerProps = {
     barometer?: SimpleInterpolation
     thumb?: SimpleInterpolation
   }
+  chartStyle?: CSSProperties
   rangeInputProps?: InputHTMLAttributes<HTMLInputElement>
 }
 export const Barometer = asStyled<BarometerProps>(
-  ({ label, value, ratio, colors, styles, rangeInputProps, className }) => {
+  ({
+    label,
+    value,
+    ratio,
+    colors,
+    chartStyle,
+    styles,
+    rangeInputProps,
+    className,
+  }) => {
     const currentColor = pickColorInGradient(ratio, ...colors)
     const adjustedRatio = Math.max(Math.min(ratio, 1), 0)
     return (
@@ -32,7 +42,7 @@ export const Barometer = asStyled<BarometerProps>(
         {label && (
           <figcaption style={{ color: currentColor }}>{label}</figcaption>
         )}
-        <div>
+        <div style={chartStyle}>
           <BarometerThumb
             style={{
               left: `min(max(${adjustedRatio * 100}%, 4px), calc(100% - 4px))`,
@@ -84,6 +94,9 @@ const BarometerFigure = styled.figure<BarometerFigureProps>`
     margin-top: -6px;
     height: 16px;
     cursor: pointer;
+    :disabled {
+      cursor: not-allowed;
+    }
   }
   figcaption {
     width: 128px;

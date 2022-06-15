@@ -8,12 +8,10 @@ import {
   valueToBigNumber,
   WEI_DECIMALS,
 } from '@starlay-finance/math-utils'
-import dayjs from 'dayjs'
 import { ethers } from 'ethers'
 import { getNetworkConfig } from 'src/libs/config'
 import { StaticRPCProvider } from 'src/libs/pool-data-provider'
 import { voterContract } from 'src/libs/voter'
-import { SECONDS_OF_WEEK } from 'src/utils/date'
 import useSWRImmutable from 'swr/immutable'
 import { useStaticRPCProvider } from '../useStaticRPCProvider'
 import { useWallet } from '../useWallet'
@@ -21,11 +19,9 @@ import { useTxHandler } from './txHandler'
 import { useVotingEscrow } from './useVotingEscrow'
 
 export const useVoter = () => {
-  const nextTerm = Math.ceil(dayjs().unix() / SECONDS_OF_WEEK) * SECONDS_OF_WEEK
-
   const { data: provider } = useStaticRPCProvider()
   const { account, signer } = useWallet()
-  const { userData: userLockData } = useVotingEscrow()
+  const { nextTerm, userData: userLockData } = useVotingEscrow()
   const { data: voter } = useSWRImmutable(
     provider && ['voter', provider.chainId],
     async () => init(provider!),
