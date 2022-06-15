@@ -18,6 +18,7 @@ import {
 } from 'src/styles/font'
 import { BN_ZERO, formatAmt, formatPct, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
+import { useLockModal } from './modals/LockModal'
 
 const EMTPY_DATA = {
   rewards: BN_ZERO,
@@ -51,12 +52,13 @@ export const UnclaimedLAY = asStyled(({ className }) => {
 
 export const WalletBalance = asStyled(({ className }) => {
   const { data: balances } = useWalletBalance()
+  const { open } = useLockModal()
   return (
     <LayBalance
       className={className}
       label={t`Wallet Balance`}
-      amount={(balances && balances[ASSETS_DICT.LAY.symbol]) || BN_ZERO}
-      actions={[{ label: t`Lock`, onClick: () => {} }]}
+      amount={balances[ASSETS_DICT.LAY.symbol]}
+      actions={[{ label: t`Lock`, onClick: open }]}
     />
   )
 })``
