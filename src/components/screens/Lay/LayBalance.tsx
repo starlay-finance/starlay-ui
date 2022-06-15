@@ -5,10 +5,10 @@ import { Image } from 'src/components/elements/Image'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { ASSETS_DICT } from 'src/constants/assets'
-import { useIncentivesController } from 'src/hooks/contracts/useIncentivesController'
+import { useClaimer } from 'src/hooks/contracts/useClaimer'
+import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
-import { useUserData } from 'src/hooks/useUserData'
-import { useWallet } from 'src/hooks/useWallet'
+import { useVoteData } from 'src/hooks/useVoteData'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { darkGray, primary, purple, trueBlack } from 'src/styles/colors'
 import {
@@ -16,18 +16,18 @@ import {
   fontWeightMedium,
   fontWeightSemiBold,
 } from 'src/styles/font'
-import { BN_ZERO, formatAmt, formatUSD } from 'src/utils/number'
+import { BN_ZERO, formatAmt, formatPct, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
 
+const EMTPY_DATA = {
+  rewards: BN_ZERO,
+  ido: BN_ZERO,
+  tokenSale: BN_ZERO,
+}
 export const UnclaimedLAY = asStyled(({ className }) => {
   const { symbol } = ASSETS_DICT.LAY
-  const { account, signer } = useWallet()
-  const { data: user } = useUserData()
-  const { claim } = useIncentivesController(account, signer)
-  const rewards = user?.rewards.unclaimedBalance || BN_ZERO
-  // TODO replace mock value
-  const ido = BN_ZERO
-  const tokenSale = BN_ZERO
+  const { data, claim } = useClaimer()
+  const { rewards, ido, tokenSale } = data || EMTPY_DATA
   return (
     <LayBalance
       className={className}
@@ -62,18 +62,29 @@ export const WalletBalance = asStyled(({ className }) => {
 })``
 
 export const LockedLAY = asStyled(({ className }) => {
-  // TODO replace mock value
-  const lockedAmount = BN_ZERO
-  const lockedUntil = 'May, 6 12:00 UTC'
-  const currentAPY = '5.61%'
+  const { userData } = useVotingEscrow()
+  const { userData: voteData } = useVoteData()
+  const { data: layPrice } = useLAYPrice()
+  const locked = userData?.locked || BN_ZERO
   return (
     <LayBalance
       className={className}
       label={t`Locked LAY`}
-      amount={lockedAmount}
+      amount={locked}
       details={[
-        { label: t`Locked Until`, value: lockedUntil },
-        { label: t`Current APY`, value: currentAPY },
+        {
+          label: t`Locked Until`,
+          value: userData?.lockedEnd.format('DD/MM/YYYY') || '-',
+        },
+        {
+          label: t`Current APY`,
+          value:
+            locked.gt(BN_ZERO) && voteData && layPrice
+              ? formatPct(
+                  voteData.claimableTotalInUSD.div(locked).div(layPrice),
+                )
+              : '-',
+        },
       ]}
       actions={[
         { label: t`Add`, onClick: () => {} },

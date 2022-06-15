@@ -32,21 +32,23 @@ export const useVoter = () => {
   )
 
   const { data, mutate: mutateData } = useSWRImmutable(
-    provider && voter && ['voter', provider.chainId, nextTerm],
+    provider && voter && ['voter-data', provider.chainId, nextTerm],
     async (_1, _2, nextTerm) => fetchData(voter!, nextTerm),
   )
 
   const { data: userData, mutate: mutateUserData } = useSWRImmutable(
     userLockData &&
       provider &&
+      account &&
       voter && [
-        'voter',
+        'voter-userdata',
         provider.chainId,
         nextTerm,
+        account,
         userLockData.lockerId.toString(),
       ],
-    async (_1, _2, nextTerm, lockerId) =>
-      fetchUserData(voter!, nextTerm, lockerId),
+    async (_1, _2, nextTerm, account, lockerId) =>
+      fetchUserData(voter!, nextTerm, account, lockerId),
   )
 
   const handler = useTxHandler()
@@ -86,7 +88,7 @@ export const useVoter = () => {
     return handleTx(await voter.claim({ user: account }), signer)
   }
 
-  return { ...data, userData, vote, poke, claim }
+  return { data, userData, vote, poke, claim }
 }
 
 const init = async (provider: StaticRPCProvider) => {
@@ -99,34 +101,45 @@ const init = async (provider: StaticRPCProvider) => {
 }
 
 const fetchData = async (voter: Voter, timestamp: number) => {
-  const { totalWeight, poolWeights } = await voter.voteData({ timestamp })
+  const { totalWeight, data } = await voter.voteData({ timestamp })
   return {
-    totalWeight: normalizeBN(totalWeight.toString(), WEI_DECIMALS),
-    poolWeights: Object.keys(poolWeights).reduce(
+    total: normalizeBN(totalWeight.toString(), WEI_DECIMALS),
+    data: Object.keys(data).reduce(
       (res, key) => ({
         ...res,
-        [key]: normalizeBN(poolWeights[key]!.toString(), WEI_DECIMALS),
+        [key]: {
+          weight: normalizeBN(data[key]!.weight.toString(), WEI_DECIMALS),
+          rawLastWeekRevenue: data[key]!.lastWeekRevenue.toString(),
+        },
       }),
       {},
-    ),
+    ) as Partial<
+      Record<string, { rawLastWeekRevenue: string; weight: BigNumber }>
+    >,
   }
 }
 
 const fetchUserData = async (
   voter: Voter,
   timestamp: number,
+  user: string,
   lockerId: string,
 ) => {
-  const userData = await voter.userData({ lockerId, timestamp })
+  const userData = await voter.userData({ user, lockerId, timestamp })
   return Object.keys(userData).reduce(
     (res, key) => ({
       ...res,
       [key]: {
-        rawClaimable: '0', // userData[key]!.claimable,
+        rawClaimable: userData[key]!.claimable,
         weight: valueToBigNumber(userData[key]!.weight.toString()),
         vote: normalizeBN(userData[key]!.vote.toString(), WEI_DECIMALS),
       },
     }),
     {},
-  )
+  ) as Partial<
+    Record<
+      string,
+      { rawClaimable: BigNumber; weight: BigNumber; vote: BigNumber }
+    >
+  >
 }

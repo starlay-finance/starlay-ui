@@ -9,12 +9,10 @@ import {
 import { asStyled } from 'src/components/hoc/asStyled'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
 import { useMarketData } from 'src/hooks/useMarketData'
-import { RevenueData, useRevenueData } from 'src/hooks/useRevenue'
-import { UserVoteData, useUserVoteData } from 'src/hooks/useUserVoteData'
-import { useVoteData, VoteData } from 'src/hooks/useVoteData'
+import { useVoteData } from 'src/hooks/useVoteData'
 import { darkGray, darkRed, purple, skyBlue } from 'src/styles/colors'
 import { fontWeightBold, fontWeightMedium } from 'src/styles/font'
-import { AssetMarketData } from 'src/types/models'
+import { AssetMarketData, UserVoteData, VoteData } from 'src/types/models'
 import { symbolSorter } from 'src/utils/market'
 import { formatAmtShort, formatPct, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
@@ -39,9 +37,7 @@ const VOTING_COLUMNS = [
 export const Assets = asStyled(({ className }) => {
   const [activeTab, setActiveTab] = useState('stats')
   const { data: marketData } = useMarketData()
-  const { data: voteData } = useVoteData()
-  const { data: userVoteData } = useUserVoteData()
-  const { data: revenueData } = useRevenueData()
+  const { data: voteData, userData: userVoteData } = useVoteData()
   const { data: layPrice } = useLAYPrice()
   const { assets } = marketData || {}
   const markets = (assets || [])
@@ -74,7 +70,6 @@ export const Assets = asStyled(({ className }) => {
             rows={markets.map((asset) =>
               statsRow({
                 asset,
-                revenueData,
                 voteData,
                 userVoteData,
                 layPrice,
@@ -98,7 +93,7 @@ export const Assets = asStyled(({ className }) => {
                   userVoteData
                     ? `${formatAmtShort(
                         userVoteData.votedTotal,
-                      )}/${formatAmtShort(userVoteData.total)}`
+                      )}/${formatAmtShort(userVoteData.powerTotal)}`
                     : '-/-'
                 }`}</span>
                 <button>{t`Submit`}</button>
@@ -118,41 +113,42 @@ export const Assets = asStyled(({ className }) => {
 
 const statsRow = ({
   asset,
-  revenueData,
   voteData,
   userVoteData,
   layPrice,
 }: {
   asset: AssetMarketData
-  revenueData: RevenueData | undefined
   voteData: VoteData | undefined
   userVoteData: UserVoteData | undefined
   layPrice: BigNumber | undefined
 }) => {
-  const { symbol, icon, name, depositAPY, totalDepositedInUSD } = asset
-  const assetRevenueData = revenueData && revenueData[asset.symbol]
-  const assetVoteData = voteData?.data[asset.symbol]
+  const { symbol, icon, name, underlyingAsset } = asset
+  const assetVoteData = voteData?.data[underlyingAsset]
   const userAssetVoteData = userVoteData?.data[asset.symbol]
   return {
     id: symbol,
     data: {
       asset: <AssetTd icon={icon} name={name} />,
       revenue:
-        assetRevenueData && formatUSD(assetRevenueData, { decimalPlaces: 2 }),
+        assetVoteData &&
+        formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 }),
       apr:
-        assetRevenueData &&
         assetVoteData &&
         layPrice &&
         formatPct(
-          assetRevenueData.div(7).times(365).div(assetVoteData).div(layPrice),
+          assetVoteData.lastWeekRevenueInUSD
+            .div(7)
+            .times(365)
+            .div(assetVoteData.weight)
+            .div(layPrice),
         ),
       totalWeight:
         voteData &&
         assetVoteData &&
-        `${formatAmtShort(assetVoteData)}(${formatPct(
-          assetVoteData.div(voteData.total),
+        `${formatAmtShort(assetVoteData.weight)}(${formatPct(
+          assetVoteData.weight.div(voteData.total),
         )})`,
-      weight: userAssetVoteData && formatAmtShort(userAssetVoteData.voted),
+      weight: userAssetVoteData && formatAmtShort(userAssetVoteData.vote),
       claimable:
         userAssetVoteData &&
         formatUSD(userAssetVoteData.claimableInUSD, {
@@ -170,8 +166,8 @@ const votingRow = ({
   voteData: VoteData | undefined
   userVoteData: UserVoteData | undefined
 }) => {
-  const { symbol, icon, name } = asset
-  const assetVoteData = voteData?.data[asset.symbol]
+  const { symbol, icon, name, underlyingAsset } = asset
+  const assetWeight = voteData?.data[underlyingAsset]?.weight
   const userAssetVoteData = userVoteData?.data[asset.symbol]
   return {
     id: symbol,
@@ -179,12 +175,13 @@ const votingRow = ({
       asset: <AssetTd icon={icon} name={name} />,
       totalWeight:
         voteData &&
-        assetVoteData &&
-        `${formatAmtShort(assetVoteData)}(${formatPct(
-          assetVoteData.div(voteData.total),
+        assetWeight &&
+        `${formatAmtShort(assetWeight)}(${formatPct(
+          assetWeight.div(voteData.total),
         )})`,
-      votedWeight: userAssetVoteData && formatAmtShort(userAssetVoteData.voted),
-      voting: userAssetVoteData && formatAmtShort(userAssetVoteData.voted),
+      votedWeight: userAssetVoteData && formatAmtShort(userAssetVoteData.vote),
+      // TODO replace to editing value
+      voting: userAssetVoteData && formatAmtShort(userAssetVoteData.vote),
       votingSlider: 'TODO',
     },
   }
