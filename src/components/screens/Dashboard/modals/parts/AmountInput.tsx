@@ -15,6 +15,7 @@ type AmountInputProps = {
   setAll?: (all: boolean) => void
   allLabel?: string
   all?: boolean
+  disabled?: boolean
 }
 export const AmountInput: VFC<AmountInputProps> = ({
   value,
@@ -25,20 +26,21 @@ export const AmountInput: VFC<AmountInputProps> = ({
   setAll,
   allLabel = 'label',
   all,
+  disabled,
 }) => {
   return (
     <InputDiv>
       <ScalingInput
         width={360}
         maxFontSize={40}
-        value={value}
+        value={disabled ? '-' : value}
         placeholder={'0'}
         onChange={({ target: { value } }) => {
           const parsed = parseInput(value, significantDigits)
           if (parsed == null) return
           onChange(parsed)
         }}
-        disabled={all}
+        disabled={disabled || all}
       />
       <Control>
         <button
@@ -46,6 +48,7 @@ export const AmountInput: VFC<AmountInputProps> = ({
             if (setAll) setAll(false)
             setMaxValue()
           }}
+          disabled={disabled}
         >
           {maxLabel || t`Max`}
         </button>
@@ -55,6 +58,7 @@ export const AmountInput: VFC<AmountInputProps> = ({
               type="checkbox"
               checked={all}
               onChange={() => setAll(!all)}
+              disabled={disabled}
             />
             <span>{allLabel}</span>
           </label>
@@ -87,6 +91,7 @@ const Control = styled.div`
     }
     :disabled {
       color: unset;
+      cursor: not-allowed;
     }
   }
   input:checked + span {

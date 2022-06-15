@@ -149,16 +149,28 @@ msgid "For more about Gas Fee, please click <0>here</0>."
 msgstr "For more about Gas Fee, please click <0>here</0>."
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "Speed"
 msgstr "Speed"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
-msgid "Custom Speed"
-msgstr "Custom Speed"
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Manual Gas Fee"
+msgstr "Manual Gas Fee"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
-msgid "Gas Fee"
-msgstr "Gas Fee"
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Manual"
+msgstr "Manual"
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "\"Standard\" speed refers to the median Gas Fee of the past few blocks."
+msgstr "\"Standard\" speed refers to the median Gas Fee of the past few blocks."
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Current Gas Fee"
+msgstr "Current Gas Fee"
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "SET"
@@ -185,6 +197,7 @@ msgid "Very Fast"
 msgstr "Very Fast"
 
 #: src/components/parts/Modal/MessageModalGradient/index.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Close"
 msgstr "Close"
 
@@ -200,6 +213,11 @@ msgstr "Unclaimed Balance"
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Price"
 msgstr "Price"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Claim"
+msgstr "Claim"
 
 #: src/components/parts/Modal/WalletModal/index.tsx
 #: src/components/screens/Launchpad/Sale/SaleInformation.tsx
@@ -221,10 +239,6 @@ msgstr "Metamask"
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
 msgstr "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
-
-#: src/components/parts/Modal/parts/RatioControl.tsx
-msgid "\"Standard\" speed refers to the median Gas Fee of the past few blocks."
-msgstr "\"Standard\" speed refers to the median Gas Fee of the past few blocks."
 
 #: src/components/parts/Modal/parts/RatioControl.tsx
 msgid "Custom"
@@ -262,6 +276,7 @@ msgstr "Borrow APR"
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Borrowed"
 msgstr "Borrowed"
 
@@ -687,10 +702,6 @@ msgstr "Makai Markets"
 msgid "Unclaimed Reward"
 msgstr "Unclaimed Reward"
 
-#: src/components/screens/Makai/UnclaimedReward.tsx
-msgid "Claim"
-msgstr "Claim"
-
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Makai Loops"
 msgstr "Makai Loops"
@@ -718,6 +729,10 @@ msgstr "Please <0>read our docs</0> and understand how it works before using it.
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Start loops"
 msgstr "Start loops"
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Close loops"
+msgstr "Close loops"
 
 #: src/components/screens/Markets/Assets.tsx
 #: src/components/screens/Markets/Overview.tsx

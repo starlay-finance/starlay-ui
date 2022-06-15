@@ -149,15 +149,27 @@ msgid "For more about Gas Fee, please click <0>here</0>."
 msgstr ""
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
 msgid "Speed"
 msgstr ""
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
-msgid "Custom Speed"
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Manual Gas Fee"
 msgstr ""
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
-msgid "Gas Fee"
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Manual"
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "\"Standard\" speed refers to the median Gas Fee of the past few blocks."
+msgstr ""
+
+#: src/components/parts/Modal/GasSettingsModal/Body.tsx
+msgid "Current Gas Fee"
 msgstr ""
 
 #: src/components/parts/Modal/GasSettingsModal/Body.tsx
@@ -185,6 +197,7 @@ msgid "Very Fast"
 msgstr ""
 
 #: src/components/parts/Modal/MessageModalGradient/index.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Close"
 msgstr "Tutup"
 
@@ -200,6 +213,11 @@ msgstr "Saldo tidak diklaim"
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
 msgid "Price"
 msgstr "Harga"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Claim"
+msgstr ""
 
 #: src/components/parts/Modal/WalletModal/index.tsx
 #: src/components/screens/Launchpad/Sale/SaleInformation.tsx
@@ -221,10 +239,6 @@ msgstr "Metamask"
 #: src/components/parts/Modal/WalletModal/index.tsx
 msgid "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
 msgstr "Dengan Menghubungkan, Saya memahami <0>bagaimana cara kerja Starlay Finance dan risiko yang terlibat</0> dan setuju menggunakannya dengan risiko saya sendiri."
-
-#: src/components/parts/Modal/parts/RatioControl.tsx
-msgid "\"Standard\" speed refers to the median Gas Fee of the past few blocks."
-msgstr ""
 
 #: src/components/parts/Modal/parts/RatioControl.tsx
 msgid "Custom"
@@ -262,6 +276,7 @@ msgstr "Pinjam APR"
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Borrowed"
 msgstr "Dipinjamkan"
 
@@ -683,10 +698,6 @@ msgstr ""
 msgid "Unclaimed Reward"
 msgstr ""
 
-#: src/components/screens/Makai/UnclaimedReward.tsx
-msgid "Claim"
-msgstr ""
-
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Makai Loops"
 msgstr ""
@@ -713,6 +724,10 @@ msgstr ""
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Start loops"
+msgstr ""
+
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Close loops"
 msgstr ""
 
 #: src/components/screens/Markets/Assets.tsx
