@@ -9,15 +9,13 @@ export const useVoteData = () => {
   const { data: market } = useMarketData()
   const { userData } = useVotingEscrow()
   const { data: voteData, userData: userVoteData } = useVoter()
+
   const data: VoteData | undefined = market &&
     voteData && {
       total: voteData.total,
       data: market.assets.reduce(
-        (
-          res,
-          { underlyingAsset, decimals, priceInMarketReferenceCurrency },
-        ) => {
-          const item = voteData.data[underlyingAsset]
+        (res, { lTokenAddress, decimals, priceInMarketReferenceCurrency }) => {
+          const item = voteData.data[lTokenAddress.toLowerCase()]
           if (!item) return res
           const lastWeekRevenueInUSD = normalizeBN(
             item.rawLastWeekRevenue,
@@ -25,7 +23,10 @@ export const useVoteData = () => {
           ).times(priceInMarketReferenceCurrency)
           return {
             ...res,
-            [underlyingAsset]: { weight: item.weight, lastWeekRevenueInUSD },
+            [lTokenAddress.toLowerCase()]: {
+              weight: item.weight,
+              lastWeekRevenueInUSD,
+            },
           }
         },
         {},
@@ -34,20 +35,21 @@ export const useVoteData = () => {
   if (!market || !userData || !userVoteData) return { data }
 
   const _userVoteData = market.assets.reduce(
-    (res, { underlyingAsset, decimals, priceInMarketReferenceCurrency }) => {
-      const item = userVoteData[underlyingAsset]
+    (res, { lTokenAddress, decimals, priceInMarketReferenceCurrency }) => {
+      const item = userVoteData[lTokenAddress.toLowerCase()]
       if (!item) return res
-      const claimableInUSD = normalizeBN(item.rawClaimable, decimals).times(
-        priceInMarketReferenceCurrency,
-      )
+      const claimableInUSD = normalizeBN(
+        item.rawClaimable.toString(),
+        decimals,
+      ).times(priceInMarketReferenceCurrency)
       return {
         votedTotal: res.votedTotal.plus(item.vote),
         claimableTotalInUSD: res.claimableTotalInUSD.plus(claimableInUSD),
         data: {
           ...res.data,
-          [underlyingAsset]: {
+          [lTokenAddress.toLowerCase()]: {
             weight: item.weight,
-            voted: item.vote,
+            vote: item.vote,
             claimableInUSD: claimableInUSD,
           },
         },
