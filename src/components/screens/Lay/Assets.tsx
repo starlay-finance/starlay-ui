@@ -75,7 +75,8 @@ export const Assets = asStyled(({ className }) => {
             (!weightTotal.isZero() &&
               userVoteData.data[key]?.weight
                 .div(weightTotal)
-                .decimalPlaces(WEIGHT_DECIMALS, BigNumber.ROUND_FLOOR)) ||
+                .decimalPlaces(WEIGHT_DECIMALS, BigNumber.ROUND_FLOOR)
+                .toNumber()) ||
             0,
         }),
         {},
