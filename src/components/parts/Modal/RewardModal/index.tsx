@@ -1,15 +1,12 @@
 import { t } from '@lingui/macro'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
-import { useRouter } from 'next/router'
 import { VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { ASSETS_DICT } from 'src/constants/assets'
-import { useIncentivesController } from 'src/hooks/contracts/useIncentivesController'
+import { useClaimer } from 'src/hooks/contracts/useClaimer'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
-import { useUserData } from 'src/hooks/useUserData'
-import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { trueBlack } from 'src/styles/colors'
 import { fontWeightMedium, fontWeightSemiBold } from 'src/styles/font'
@@ -29,15 +26,12 @@ const Reward: VFC<ModalContentProps> = ({ close }) => {
 }
 
 const RewardModalBody = () => {
-  const { locale } = useRouter()
-  const { account, signer } = useWallet()
   const { data: marketData } = useMarketData()
-  const { data: user } = useUserData()
   const { data: balance } = useWalletBalance()
-  const { claim } = useIncentivesController(account, signer)
+  const { data, claim } = useClaimer()
 
   const { icon, name, symbol } = ASSETS_DICT.LAY
-  const unclaimed = user?.rewards.unclaimedBalance || BN_ZERO
+  const unclaimed = data?.total || BN_ZERO
   const inWallet = balance?.LAY || BN_ZERO
   const total = unclaimed.plus(inWallet)
   const priceInUSD = (

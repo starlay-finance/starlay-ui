@@ -28,12 +28,20 @@ export const useVotingEscrow = () => {
     async () => init(provider!),
   )
 
-  const { data, mutate: mutateData } = useSWRImmutable(
+  const {
+    data,
+    mutate: mutateData,
+    isValidating: isValidatingData,
+  } = useSWRImmutable(
     provider &&
       votingEscrow && ['votingescrow-data', provider.chainId, nextTerm],
     async (_1, _2, term) => fetchData(votingEscrow!, term),
   )
-  const { data: userData, mutate: mutateUserData } = useSWRImmutable(
+  const {
+    data: userData,
+    mutate: mutateUserData,
+    isValidating: isValidatingUserData,
+  } = useSWRImmutable(
     account &&
       provider &&
       votingEscrow && [
@@ -46,15 +54,15 @@ export const useVotingEscrow = () => {
       fetchUserData(votingEscrow!, account, term),
   )
 
+  const mutate = () => {
+    mutateData()
+    mutateUserData()
+  }
   const handler = useTxHandler()
   const handleTx = (
     txs: EthereumTransactionTypeExtended[],
     signer: ethers.providers.JsonRpcSigner,
-  ) =>
-    handler.handleTx(txs, signer, () => {
-      mutateData()
-      mutateUserData()
-    })
+  ) => handler.handleTx(txs, signer, mutate)
 
   const lock = async (
     amount: BigNumber,
@@ -96,7 +104,15 @@ export const useVotingEscrow = () => {
     return handleTx(await votingEscrow.withdraw({ user: account }), signer)
   }
 
-  return { ...data, userData, nextTerm, lock, withdraw }
+  return {
+    ...data,
+    userData,
+    nextTerm,
+    lock,
+    withdraw,
+    mutate,
+    isValidating: isValidatingData || isValidatingUserData,
+  }
 }
 
 const init = async (provider: StaticRPCProvider) => {

@@ -26,6 +26,8 @@ export type NetworkConfig = {
     voterAddress: EthereumAddress
     votingEscrowAddress: EthereumAddress
     claimerAddress: EthereumAddress
+    idoVestingAddress: EthereumAddress
+    tokenSaleVestingAddress: EthereumAddress
     multicallAddress: EthereumAddress
   }
   protocolDataUrl?: string
@@ -75,6 +77,8 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
       voterAddress: '0xTODO',
       votingEscrowAddress: '0xTODO',
       claimerAddress: '0xTODO',
+      idoVestingAddress: '0xTODO',
+      tokenSaleVestingAddress: '0xTODO',
       multicallAddress: '0x7D6046156df81EF335E7e765d3bc714960B73207',
     },
     baseAsset: {

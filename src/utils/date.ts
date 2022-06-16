@@ -16,5 +16,8 @@ export const formatWithTZ = (value: Dayjs, format: string) =>
 
 export const SECONDS_OF_DAY = 60 * 60 * 24
 export const SECONDS_OF_WEEK = 60 * 60 * 24 * 7
-export const SECONDS_OF_MONTH = 60 * 60 * 24 * 30
-export const SECONDS_OF_YEAR = 60 * 60 * 24 * 365
+export const SECONDS_OF_MONTH = SECONDS_OF_WEEK * 4
+export const SECONDS_OF_YEAR = SECONDS_OF_WEEK * 52
+
+export const truncateWith = (num: number, unit: number) =>
+  Math.floor(num / unit) * unit

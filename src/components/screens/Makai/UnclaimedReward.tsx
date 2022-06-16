@@ -3,10 +3,8 @@ import { Image } from 'src/components/elements/Image'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { ASSETS_DICT } from 'src/constants/assets'
-import { useIncentivesController } from 'src/hooks/contracts/useIncentivesController'
+import { useClaimer } from 'src/hooks/contracts/useClaimer'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
-import { useUserData } from 'src/hooks/useUserData'
-import { useWallet } from 'src/hooks/useWallet'
 import { purple, trueBlack } from 'src/styles/colors'
 import {
   fontWeightBold,
@@ -17,13 +15,10 @@ import { BN_ZERO, formatAmt, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
 
 export const UnclaimedReward = asStyled(({ className }) => {
-  const { account, signer } = useWallet()
-  const { data: user } = useUserData()
-
-  const { claim } = useIncentivesController(account, signer)
+  const { data, claim } = useClaimer()
 
   const { icon, name, symbol } = ASSETS_DICT.LAY
-  const unclaimed = user?.rewards.unclaimedBalance || BN_ZERO
+  const unclaimed = data?.total || BN_ZERO
   const { data: layPrice } = useLAYPrice()
   return (
     <UnclaimedRewardDiv className={className}>

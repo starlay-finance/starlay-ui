@@ -4,12 +4,14 @@ import dayjs from 'dayjs'
 import { VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { asStyled } from 'src/components/hoc/asStyled'
+import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { useClaimer } from 'src/hooks/contracts/useClaimer'
 import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
 import { useVoteData } from 'src/hooks/useVoteData'
+import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { darkGray, primary, purple, trueBlack } from 'src/styles/colors'
 import {
@@ -34,7 +36,7 @@ export const UnclaimedLAY = asStyled(({ className }) => {
     <LayBalance
       className={className}
       label={t`Unclaimed LAY`}
-      amount={BigNumber.sum(rewards, ido, tokenSale)}
+      amount={data && BigNumber.sum(rewards, ido, tokenSale)}
       details={[
         {
           label: t`Rewards`,
@@ -46,21 +48,27 @@ export const UnclaimedLAY = asStyled(({ className }) => {
           value: formatAmt(tokenSale, { symbol, decimalPlaces: 2 }),
         },
       ]}
-      actions={[{ label: t`Claim`, onClick: claim }]}
+      actions={[{ label: t`Claim`, onClick: claim, disabled: !data }]}
     />
   )
 })``
 
 export const WalletBalance = asStyled(({ className }) => {
   const { data: balances } = useWalletBalance()
-  const { userData } = useVotingEscrow()
+  const { userData, isValidating } = useVotingEscrow()
   const { open } = useLockModal()
   return (
     <LayBalance
       className={className}
       label={t`Wallet Balance`}
       amount={balances[ASSETS_DICT.LAY.symbol]}
-      actions={[{ label: t`Lock`, onClick: open, disabled: !!userData }]}
+      actions={[
+        {
+          label: t`Lock`,
+          onClick: open,
+          disabled: isValidating || !!userData,
+        },
+      ]}
     />
   )
 })``
@@ -77,7 +85,7 @@ export const LockedLAY = asStyled(({ className }) => {
     <LayBalance
       className={className}
       label={t`Locked LAY`}
-      amount={locked}
+      amount={userData?.locked}
       details={[
         {
           label: t`Locked Until`,
@@ -115,7 +123,7 @@ export const LockedLAY = asStyled(({ className }) => {
 
 type LayBalanceProps = {
   label: string
-  amount: BigNumber
+  amount: BigNumber | undefined
   details?: {
     label: string
     value: string
@@ -128,15 +136,26 @@ type LayBalanceProps = {
 }
 const LayBalance = styled<VFC<LayBalanceProps & { className?: string }>>(
   ({ label, amount, actions, details, className }) => {
+    const { account } = useWallet()
     const { icon, name, symbol } = ASSETS_DICT.LAY
     const { data: priceInUSD = BN_ZERO } = useLAYPrice()
     return (
       <LayBalanceDiv className={className}>
         <p>{label}</p>
-        <Reel text={formatUSD(amount.multipliedBy(priceInUSD))} />
+        <AmountInUSDDiv>
+          {amount ? (
+            <Reel text={formatUSD(amount.multipliedBy(priceInUSD))} />
+          ) : (
+            <ShimmerPlaceholder />
+          )}
+        </AmountInUSDDiv>
         <LayAmount>
           <Image src={icon} alt={name} width={32} height={32} />
-          <Reel text={formatAmt(amount, { symbol, decimalPlaces: 2 })} />
+          {amount ? (
+            <Reel text={formatAmt(amount, { symbol, decimalPlaces: 2 })} />
+          ) : (
+            <ShimmerPlaceholder />
+          )}
         </LayAmount>
         {details && (
           <DetailsDiv>
@@ -150,7 +169,11 @@ const LayBalance = styled<VFC<LayBalanceProps & { className?: string }>>(
         )}
         <ActionsDiv>
           {actions.map(({ label, onClick, disabled }) => (
-            <Button key={label} onClick={onClick} disabled={disabled}>
+            <Button
+              key={label}
+              onClick={onClick}
+              disabled={!account || disabled}
+            >
               {label}
             </Button>
           ))}
@@ -159,7 +182,7 @@ const LayBalance = styled<VFC<LayBalanceProps & { className?: string }>>(
     )
   },
 )``
-
+const AmountInUSDDiv = styled.div``
 const ActionsDiv = styled.div`
   display: flex;
   justify-content: space-between;
@@ -197,9 +220,11 @@ const LayAmount = styled.div`
   padding-right: 32px;
   border-radius: 12px;
   background: ${trueBlack}52;
-  ${Reel} {
-    font-size: 18px;
-    font-weight: ${fontWeightSemiBold};
+  font-size: 18px;
+  font-weight: ${fontWeightSemiBold};
+
+  ${ShimmerPlaceholder} {
+    width: 50%;
   }
 `
 const Button = styled.button`
@@ -230,10 +255,13 @@ const LayBalanceDiv = styled.div`
     font-size: 18px;
     font-weight: ${fontWeightMedium};
   }
-  > ${Reel} {
+  > ${AmountInUSDDiv} {
     margin-top: 16px;
     font-size: 32px;
     font-weight: ${fontWeightBold};
+    ${ShimmerPlaceholder} {
+      width: 75%;
+    }
   }
   ${LayAmount} {
     margin-top: 16px;

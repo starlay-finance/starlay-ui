@@ -25,6 +25,7 @@ type RatioControlProps = {
     label?: string
     value: number
   }[]
+  min?: number
   max: BigNumber
   tooltip?: string
   step?: number
@@ -45,6 +46,7 @@ export const RatioControl = asStyled<RatioControlProps>(
     onCustomActive,
     onCustomInactive,
     options,
+    min = 1,
     max,
     tooltip,
     label,
@@ -86,7 +88,7 @@ export const RatioControl = asStyled<RatioControlProps>(
             </Label>
             <RatioOptions>
               {options
-                .filter(({ value }) => max.gte(value))
+                .filter(({ value }) => value >= min && max.gte(value))
                 .map(({ label, value }) => {
                   const checked = current.eq(value)
                   return (
@@ -139,8 +141,13 @@ export const RatioControl = asStyled<RatioControlProps>(
                 min: 1,
                 max: max.toNumber(),
                 step,
-                onChange: ({ target: { value } }) =>
-                  setValue(valueToBigNumber(value)),
+                onChange: ({ target: { value } }) => {
+                  if (+value < min) {
+                    setValue(valueToBigNumber(min))
+                    return
+                  }
+                  setValue(valueToBigNumber(value))
+                },
                 disabled,
               }}
             />
