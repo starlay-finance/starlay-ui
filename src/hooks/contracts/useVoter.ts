@@ -57,21 +57,22 @@ export const useVoter = () => {
       mutateUserData()
     })
 
-  const vote = async (weights: Partial<Record<string, BigNumber>>) => {
+  const vote = async (
+    _weights: Partial<Record<string, BigNumber>>,
+    endTimestamp?: number,
+  ) => {
     if (!account || !signer || !voter) throw new Error('Unexpected state')
-    return handleTx(
-      await voter.vote({
-        user: account,
-        weights: Object.keys(weights).reduce(
-          (res, key) => ({
-            ...res,
-            [key.toLowerCase()]: weights[key]!.toString(),
-          }),
-          {},
-        ),
+    const weights = Object.keys(_weights).reduce(
+      (res, key) => ({
+        ...res,
+        [key.toLowerCase()]: weights[key]!.toString(),
       }),
-      signer,
-    )
+      {},
+    ) as Record<string, string>
+    const txs = endTimestamp
+      ? await voter.voteUntil({ user: account, weights, endTimestamp })
+      : await voter.vote({ user: account, weights })
+    return handleTx(txs, signer)
   }
 
   const poke = async () => {
