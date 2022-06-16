@@ -65,7 +65,7 @@ export const useVoter = () => {
     const weights = Object.keys(_weights).reduce(
       (res, key) => ({
         ...res,
-        [key.toLowerCase()]: weights[key]!.toString(),
+        [key.toLowerCase()]: _weights[key]?.toFixed(0) || '0',
       }),
       {},
     ) as Record<string, string>
