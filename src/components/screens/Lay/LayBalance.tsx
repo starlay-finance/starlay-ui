@@ -54,14 +54,14 @@ export const UnclaimedLAY = asStyled(({ className }) => {
 })``
 
 export const WalletBalance = asStyled(({ className }) => {
-  const { data: balances } = useWalletBalance()
+  const { data: balances } = useWalletBalance(false)
   const { userData, isValidating } = useVotingEscrow()
   const { open } = useLockModal()
   return (
     <LayBalance
       className={className}
       label={t`Wallet Balance`}
-      amount={balances[ASSETS_DICT.LAY.symbol]}
+      amount={balances && balances[ASSETS_DICT.LAY.symbol]}
       actions={[
         {
           label: t`Lock`,
@@ -74,7 +74,7 @@ export const WalletBalance = asStyled(({ className }) => {
 })``
 
 export const LockedLAY = asStyled(({ className }) => {
-  const { userData, withdraw } = useVotingEscrow()
+  const { userData, withdraw, isValidating } = useVotingEscrow()
   const { userData: voteData } = useVoteData()
   const { data: layPrice } = useLAYPrice()
   const { open } = useLockModal()
@@ -85,7 +85,7 @@ export const LockedLAY = asStyled(({ className }) => {
     <LayBalance
       className={className}
       label={t`Locked LAY`}
-      amount={userData?.locked}
+      amount={userData?.locked || (isValidating ? undefined : BN_ZERO)}
       details={[
         {
           label: t`Locked Until`,

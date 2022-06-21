@@ -39,8 +39,10 @@ export const useTokenSaleVesting = () => {
   const handleTx = (
     txs: EthereumTransactionTypeExtended[],
     signer: ethers.providers.JsonRpcSigner,
+    onSuccess?: VoidFunction,
   ) =>
     handler.handleTx(txs, signer, () => {
+      onSuccess && onSuccess()
       mutate()
       mutateVe()
     })
@@ -49,18 +51,20 @@ export const useTokenSaleVesting = () => {
     type: TokenSaleType,
     _amount: BigNumber,
     duration: number,
+    onSuccess?: VoidFunction,
   ) => {
     if (!account || !signer || !contracts) throw new Error('Unexpected state')
     const lockerId = userLockData?.lockerId
     const amount = ethers.BigNumber.from(_amount.toString())
     if (!lockerId || lockerId.isZero())
       return handleTx(
-        await contracts[type].lock({ user: account, amount, duration: 3600 }),
+        await contracts[type].lock({ user: account, amount, duration }),
         signer,
       )
     return handleTx(
       await contracts[type].deposit({ user: account, amount }),
       signer,
+      onSuccess,
     )
   }
 

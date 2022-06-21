@@ -16,12 +16,10 @@ import { useStaticRPCProvider } from '../useStaticRPCProvider'
 import { useUserData } from '../useUserData'
 import { useWallet } from '../useWallet'
 import { useTxHandler } from './txHandler'
-import { useIncentivesController } from './useIncentivesController'
 
 export const useClaimer = () => {
   const { data: provider } = useStaticRPCProvider()
   const { account, signer } = useWallet()
-  const { claim: claimRewards } = useIncentivesController(account, signer)
   const { data: claimer } = useSWRImmutable(
     provider && ['claimer', provider.chainId],
     async () => init(provider!),
@@ -47,17 +45,18 @@ export const useClaimer = () => {
   const { data, mutate } = useSWR(
     provider &&
       claimer &&
-      account && ['claimer-data', provider.chainId, account],
+      account &&
+      assets.length > 0 && ['claimer-data', provider.chainId, account],
     async (_1, _2, account) => {
       const res = await claimer!.releasable({ user: account, reserves: assets })
       return {
         ido: normalizeBN(res.ido.toString(), WEI_DECIMALS),
         tokenSale: normalizeBN(res.tokenSale.toString(), WEI_DECIMALS),
+        rewards: normalizeBN(res.rewards.toString(), WEI_DECIMALS),
       }
     },
     { dedupingInterval: 10000 },
   )
-
   const handler = useTxHandler()
   const handleTx = (
     txs: EthereumTransactionTypeExtended[],
@@ -65,24 +64,17 @@ export const useClaimer = () => {
   ) => handler.handleTx(txs, signer, mutate)
   const claim = async () => {
     if (!account || !signer || !claimer) throw new Error('Unexpected state')
-    if (data && (data.ido.gt(0) || data?.tokenSale.gt(0)))
-      return handleTx(
-        await claimer.release({ user: account, reserves: assets }),
-        signer,
-      )
-    return claimRewards()
+    return handleTx(
+      await claimer.release({ user: account, reserves: assets }),
+      signer,
+    )
   }
 
   return {
     data: data &&
       userData && {
         ...data,
-        rewards: userData.rewards.unclaimedBalance,
-        total: BigNumber.sum(
-          data.ido,
-          data.tokenSale,
-          userData.rewards.unclaimedBalance,
-        ),
+        total: BigNumber.sum(data.ido, data.tokenSale, data.rewards),
       },
     claim,
   }

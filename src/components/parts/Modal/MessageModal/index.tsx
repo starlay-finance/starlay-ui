@@ -6,7 +6,7 @@ import { AnimatedAlert, AnimatedSuccess } from './icons'
 import { MessageModalBase, MessageModalBaseProps } from './MessageModalBase'
 
 type MessageType = 'Message' | 'Success' | 'Alert' | 'Loading'
-type MessageModalProps = Omit<MessageModalBaseProps, 'children'> & {
+type MessageModalProps = MessageModalBaseProps & {
   type?: MessageType
 }
 export const MessageModal: VFC<ModalContentProps<MessageModalProps>> = ({

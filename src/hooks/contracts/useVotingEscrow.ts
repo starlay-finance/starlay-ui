@@ -28,6 +28,8 @@ export const useVotingEscrow = () => {
     async () => init(provider!),
   )
 
+  const isUserDataLoadable = account && provider && votingEscrow
+
   const {
     data,
     mutate: mutateData,
@@ -42,14 +44,12 @@ export const useVotingEscrow = () => {
     mutate: mutateUserData,
     isValidating: isValidatingUserData,
   } = useSWRImmutable(
-    account &&
-      provider &&
-      votingEscrow && [
-        'votingescrow-userdata',
-        provider.chainId,
-        account,
-        nextTerm,
-      ],
+    isUserDataLoadable && [
+      'votingescrow-userdata',
+      provider.chainId,
+      account,
+      nextTerm,
+    ],
     async (_1, _2, account, term) =>
       fetchUserData(votingEscrow!, account, term),
   )
@@ -62,12 +62,18 @@ export const useVotingEscrow = () => {
   const handleTx = (
     txs: EthereumTransactionTypeExtended[],
     signer: ethers.providers.JsonRpcSigner,
-  ) => handler.handleTx(txs, signer, mutate)
+    onSuccess?: VoidFunction,
+  ) =>
+    handler.handleTx(txs, signer, () => {
+      onSuccess && onSuccess()
+      mutate()
+    })
 
   const lock = async (
     amount: BigNumber,
     duration: number,
     mode?: 'amount' | 'duration',
+    onSuccess?: VoidFunction,
   ) => {
     if (!account || !signer || !votingEscrow)
       throw new Error('Unexpected state')
@@ -80,6 +86,7 @@ export const useVotingEscrow = () => {
           duration: duration!.toFixed(),
         }),
         signer,
+        onSuccess,
       )
     if (mode === 'amount')
       return handleTx(
@@ -111,7 +118,8 @@ export const useVotingEscrow = () => {
     lock,
     withdraw,
     mutate,
-    isValidating: isValidatingData || isValidatingUserData,
+    isValidating:
+      !isUserDataLoadable || isValidatingData || isValidatingUserData,
   }
 }
 

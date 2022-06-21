@@ -159,13 +159,14 @@ export const Assets = asStyled(({ className }) => {
                       : undefined
                   }
                   disabled={
-                    !(touched && currentVotingTotal === 1) &&
-                    !(
-                      !touched &&
-                      userData?.votingPower.gt(0) &&
-                      userVoteData?.votedTotal.gt(0) &&
-                      !userData.votingPower.eq(userVoteData.votedTotal)
-                    )
+                    !userData ||
+                    userData.votingPower.isZero() ||
+                    (!(touched && currentVotingTotal === 1) &&
+                      !(
+                        !touched &&
+                        userData?.votingPower.gt(0) &&
+                        !userData.votingPower.eq(userVoteData?.votedTotal || 0)
+                      ))
                   }
                 >{t`Apply`}</button>
               </Control>

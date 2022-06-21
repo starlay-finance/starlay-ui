@@ -8,7 +8,7 @@ import styled, { css } from 'styled-components'
 
 export type MessageModalBaseProps = {
   title: string
-  message: string
+  message?: string
   children?: ReactNode
   iconColor?: Color
   messageDelay?: number
@@ -36,7 +36,11 @@ const Body: VFC<Omit<MessageModalBaseProps, 'title'>> = ({
 }) => (
   <BodyDiv iconColor={iconColor} messageDelay={messageDelay}>
     {children}
-    <p onAnimationEnd={() => onClose && setTimeout(onClose, 500)}>{message}</p>
+    {message && (
+      <p onAnimationEnd={() => onClose && setTimeout(onClose, 500)}>
+        {message}
+      </p>
+    )}
   </BodyDiv>
 )
 
