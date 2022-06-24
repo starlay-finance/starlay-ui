@@ -5,6 +5,7 @@ import { VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
+import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { useClaimer } from 'src/hooks/contracts/useClaimer'
@@ -78,9 +79,11 @@ export const LockedLAY = asStyled(({ className }) => {
   const { userData: voteData } = useVoteData()
   const { data: layPrice } = useLAYPrice()
   const { open } = useLockModal()
+  const { open: openMessageModal } = useMessageModal()
 
   const locked = userData?.locked || BN_ZERO
   const expired = userData?.lockedEnd.isBefore(dayjs())
+  const claimable = voteData?.claimableTotalInUSD.gt(BN_ZERO)
   return (
     <LayBalance
       className={className}
@@ -115,7 +118,20 @@ export const LockedLAY = asStyled(({ className }) => {
                 disabled: !userData,
               },
             ]
-          : [{ label: t`Withdraw`, onClick: withdraw }]
+          : [
+              {
+                label: t`Withdraw`,
+                onClick: claimable
+                  ? () =>
+                      openMessageModal({
+                        title: t`Unclaimed vote reward remain`,
+                        message: t`You need to claim it before withdrawal.`,
+                        type: 'Alert',
+                      })
+                  : withdraw,
+                disabled: !voteData,
+              },
+            ]
       }
     />
   )
