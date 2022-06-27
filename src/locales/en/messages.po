@@ -207,7 +207,6 @@ msgid "LAY Balance"
 msgstr "LAY Balance"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
-#: src/components/screens/Makai/UnclaimedReward.tsx
 msgid "Unclaimed Reward"
 msgstr "Unclaimed Reward"
 
@@ -755,6 +754,7 @@ msgid "Apply"
 msgstr "Apply"
 
 #: src/components/screens/Lay/LayBalance.tsx
+#: src/components/screens/Makai/UnclaimedReward.tsx
 msgid "Unclaimed LAY"
 msgstr "Unclaimed LAY"
 

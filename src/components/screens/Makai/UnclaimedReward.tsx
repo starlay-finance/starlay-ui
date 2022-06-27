@@ -22,7 +22,7 @@ export const UnclaimedReward = asStyled(({ className }) => {
   const { data: layPrice } = useLAYPrice()
   return (
     <UnclaimedRewardDiv className={className}>
-      <p>{t`Unclaimed Reward`}</p>
+      <p>{t`Unclaimed LAY`}</p>
       <Reel text={formatUSD(unclaimed.multipliedBy(layPrice || BN_ZERO))} />
       <UnclaimedAmount>
         <Image src={icon} alt={name} width={32} height={32} />
