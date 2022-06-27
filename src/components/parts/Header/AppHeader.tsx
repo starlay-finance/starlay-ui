@@ -16,14 +16,7 @@ import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
 import { formatUSD } from 'src/utils/number'
-import {
-  APP,
-  LAUNCHPAD,
-  LAY_VELAY,
-  MAKAI,
-  MARKETS,
-  SWAP,
-} from 'src/utils/routes'
+import { APP, LAUNCHPAD, MAKAI, MARKETS, SWAP } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import { useGasSettingsModal } from '../Modal/GasSettingsModal'
 import { HeaderWrapper } from './common'
@@ -50,9 +43,15 @@ export const AppHeader = () => {
         <Tab $active={pathname === MAKAI}>
           <Link href={MAKAI}>{t`Makai`}</Link>
         </Tab>
-        <Tab $active={pathname === LAY_VELAY}>
-          <Link href={LAY_VELAY}>{t`LAY/veLAY`}</Link>
+        <Tab $active={pathname === SWAP}>
+          <Link href={MAKAI}>{t`Swap`}</Link>
         </Tab>
+        <Tab $active={pathname === LAUNCHPAD}>
+          <Link href={MAKAI}>{t`Launchpad`}</Link>
+        </Tab>
+        {/* <Tab $active={pathname === LAY_VELAY}>
+          <Link href={LAY_VELAY}>{t`LAY/veLAY`}</Link>
+        </Tab> */}
       </Nav>
       <Menu>
         <MenuButtonSmall onClick={() => openRewardModal()} disabled={!user}>
@@ -70,12 +69,12 @@ export const AppHeader = () => {
             <IconSettings />
           </MenuButtonSmall>
           <SettingsContainer $isOpen={isSetingsOpen}>
-            <SettingsDiv as="div">
+            {/* <SettingsDiv as="div">
               <Link href={SWAP}>{t`Swap`}</Link>
             </SettingsDiv>
             <SettingsDiv as="div">
               <Link href={LAUNCHPAD}>{t`Launchpad`}</Link>
-            </SettingsDiv>
+            </SettingsDiv> */}
             <SettingsDiv>
               <button
                 onClick={(e) => {
