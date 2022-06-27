@@ -55,8 +55,18 @@ const RewardModalBody = () => {
         format={formatter}
       />
       <NumberItem
-        label={t`Unclaimed Balance`}
-        num={valueToBigNumber(unclaimed)}
+        label={t`Unclaimed Reward`}
+        num={valueToBigNumber(data?.rewards || BN_ZERO)}
+        format={formatter}
+      />
+      <NumberItem
+        label={t`IDO Vested`}
+        num={valueToBigNumber(data?.ido || BN_ZERO)}
+        format={formatter}
+      />
+      <NumberItem
+        label={t`Token Sale Vested`}
+        num={valueToBigNumber(data?.tokenSale || BN_ZERO)}
         format={formatter}
       />
       <NumberItem
