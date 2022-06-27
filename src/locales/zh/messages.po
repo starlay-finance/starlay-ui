@@ -180,6 +180,7 @@ msgstr ""
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+#: src/components/screens/Lay/LayBalance.tsx
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "钱包余额"
@@ -206,8 +207,17 @@ msgid "LAY Balance"
 msgstr "LAY余额"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
-msgid "Unclaimed Balance"
-msgstr "未认领的余额"
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Unclaimed Reward"
+msgstr ""
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+msgid "IDO Vested"
+msgstr ""
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+msgid "Token Sale Vested"
+msgstr ""
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
@@ -215,6 +225,8 @@ msgid "Price"
 msgstr "价格"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/LayBalance.tsx
 #: src/components/screens/Makai/UnclaimedReward.tsx
 msgid "Claim"
 msgstr ""
@@ -241,6 +253,7 @@ msgid "By connecting, I understood <0>how Starlay Finance works and the risks in
 msgstr "一旦点击连接，我理解<0>Starlay Finance是如何运行的并且意识到其中风险</0> 而且我愿意承担风险使用。"
 
 #: src/components/parts/Modal/parts/RatioControl.tsx
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
 msgid "Custom"
 msgstr ""
 
@@ -354,6 +367,7 @@ msgstr "存款"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Lay/LayBalance.tsx
 msgid "Withdraw"
 msgstr "提款"
 
@@ -409,6 +423,8 @@ msgstr "最大的"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
 #: src/components/screens/Makai/MakaiMarkets.tsx
 #: src/components/screens/Markets/Assets.tsx
 msgid "Asset"
@@ -682,6 +698,152 @@ msgstr ""
 msgid "Price Per LAY"
 msgstr ""
 
+#: src/components/screens/Lay/Assets.tsx
+msgid "Weekly Protocol Revenue"
+msgstr ""
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Dividend APR"
+msgstr ""
+
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+msgid "Total Weight"
+msgstr ""
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Your Weight"
+msgstr ""
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Claimable Amount"
+msgstr ""
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Voted Weight"
+msgstr ""
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Voting"
+msgstr ""
+
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+msgid "Stats"
+msgstr ""
+
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+msgid "Vote"
+msgstr ""
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Total Claimable: {0}"
+msgstr ""
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Voting Power Used: {0}"
+msgstr ""
+
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/modals/LockModal/index.tsx
+msgid "Apply"
+msgstr ""
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Unclaimed LAY"
+msgstr ""
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Rewards"
+msgstr ""
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "IDO"
+msgstr ""
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Token Sale"
+msgstr ""
+
+#: src/components/screens/Lay/LayBalance.tsx
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "Lock"
+msgstr ""
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Locked LAY"
+msgstr ""
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Locked Until"
+msgstr ""
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Current APY"
+msgstr ""
+
+#: src/components/screens/Lay/LayBalance.tsx
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "Add"
+msgstr ""
+
+#: src/components/screens/Lay/LayBalance.tsx
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "Extend"
+msgstr ""
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Unclaimed vote reward remain"
+msgstr ""
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "You need to claim it before withdrawal."
+msgstr ""
+
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "Duration"
+msgstr ""
+
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "Available"
+msgstr ""
+
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "extend lock period later than vesting end"
+msgstr ""
+
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+msgid "Enter amount"
+msgstr "输入金额"
+
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "No balance to lock"
+msgstr ""
+
+#: src/components/screens/Lay/modals/LockModal/index.tsx
+msgid "Apply Voting Power"
+msgstr ""
+
+#: src/components/screens/Lay/modals/LockModal/index.tsx
+msgid ""
+"To apply the increased voting power, you need to send a transaction.\n"
+"You can also apply from the vote screen with changing vote settings later."
+msgstr ""
+
+#: src/components/screens/Lay/modals/LockModal/index.tsx
+msgid "Later"
+msgstr ""
+
+#: src/components/screens/Lay/modals/LockModal/index.tsx
+msgid "Lock LAY"
+msgstr ""
+
 #: src/components/screens/Makai/MakaiMarkets.tsx
 msgid "Makai APR"
 msgstr ""
@@ -692,10 +854,6 @@ msgstr ""
 
 #: src/components/screens/Makai/MakaiMarkets.tsx
 msgid "Makai Markets"
-msgstr ""
-
-#: src/components/screens/Makai/UnclaimedReward.tsx
-msgid "Unclaimed Reward"
 msgstr ""
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
@@ -936,14 +1094,6 @@ msgstr "转换网络失败"
 #: src/libs/wallet-provider/providers/metamask.ts
 msgid "Your wallet needs to switch networks manually."
 msgstr "需要你手动在钱包中转换网络。"
-
-#: src/utils/estimationHelper.ts
-#: src/utils/estimationHelper.ts
-#: src/utils/estimationHelper.ts
-#: src/utils/estimationHelper.ts
-#: src/utils/estimationHelper.ts
-msgid "Enter amount"
-msgstr "输入金额"
 
 #: src/utils/estimationHelper.ts
 msgid "No balance to deposit"
