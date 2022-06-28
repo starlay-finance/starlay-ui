@@ -44,11 +44,14 @@ export const AppHeader = () => {
           <Link href={MAKAI}>{t`Makai`}</Link>
         </Tab>
         <Tab $active={pathname === SWAP}>
-          <Link href={SWAP}>{t`Swap`}</Link>
+          <Link href={MAKAI}>{t`Swap`}</Link>
         </Tab>
-        <Tab $active={pathname.startsWith(LAUNCHPAD)}>
-          <Link href={LAUNCHPAD}>{t`Launchpad`}</Link>
+        <Tab $active={pathname === LAUNCHPAD}>
+          <Link href={MAKAI}>{t`Launchpad`}</Link>
         </Tab>
+        {/* <Tab $active={pathname === LAY_VELAY}>
+          <Link href={LAY_VELAY}>{t`LAY/veLAY`}</Link>
+        </Tab> */}
       </Nav>
       <Menu>
         <MenuButtonSmall onClick={() => openRewardModal()} disabled={!user}>
@@ -66,16 +69,22 @@ export const AppHeader = () => {
             <IconSettings />
           </MenuButtonSmall>
           <SettingsContainer $isOpen={isSetingsOpen}>
-            <SettingsButton
-              onClick={(e) => {
-                e.stopPropagation()
-                openGasSettingsModal({
-                  afterClose: () => setIsSettingsOpen(false),
-                })
-              }}
-            >
-              {t`Set Gas Fee`}
-            </SettingsButton>
+            {/* <SettingsDiv as="div">
+              <Link href={SWAP}>{t`Swap`}</Link>
+            </SettingsDiv>
+            <SettingsDiv as="div">
+              <Link href={LAUNCHPAD}>{t`Launchpad`}</Link>
+            </SettingsDiv> */}
+            <SettingsDiv>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  openGasSettingsModal({
+                    afterClose: () => setIsSettingsOpen(false),
+                  })
+                }}
+              >{t`Set Gas Fee`}</button>
+            </SettingsDiv>
           </SettingsContainer>
         </div>
       </Menu>
@@ -102,12 +111,19 @@ const Menu = styled.div`
     position: relative;
   }
 `
-const SettingsButton = styled.button`
-  padding: 12px 16px;
-  white-space: nowrap;
-  border-radius: 4px;
-  background-color: ${darkGray};
-  line-height: 1;
+const SettingsDiv = styled.div`
+  > a,
+  button {
+    display: block;
+    padding: 12px 16px;
+    white-space: nowrap;
+    background-color: ${darkGray};
+    line-height: 1;
+    transition: color 0.15s ease-in;
+    :hover {
+      color: ${purple};
+    }
+  }
 `
 
 const SettingsContainer = styled.div<{ $isOpen: boolean }>`
@@ -115,6 +131,8 @@ const SettingsContainer = styled.div<{ $isOpen: boolean }>`
   top: 100%;
   right: 0;
   margin-top: 8px;
+  border-radius: 4px;
+  overflow: hidden;
   transition: visibility, opacity, 0.2s ease-in;
   visibility: hidden;
   opacity: 0;

@@ -18,7 +18,7 @@ import { useWallet } from './useWallet'
 
 const EMPTY_WALLET_BALANCE: WalletBalance = generateSymbolDict(BN_ZERO)
 
-export const useWalletBalance = () => {
+export const useWalletBalance = (withFallback = true) => {
   const { account } = useWallet()
   const { data: provider } = useWalletBalanceProvider()
   const { data: marketData } = useMarketData()
@@ -39,7 +39,7 @@ export const useWalletBalance = () => {
         decimals: rewardToken.decimals,
       })
     },
-    { fallbackData: EMPTY_WALLET_BALANCE },
+    withFallback ? { fallbackData: EMPTY_WALLET_BALANCE } : undefined,
   ) as SWRResponseWithFallback<WalletBalance>
 }
 

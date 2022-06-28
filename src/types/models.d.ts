@@ -96,3 +96,22 @@ export type WalletBalance = {
 export type StakeData = {
   userIncentivesToClaim: BigNumber
 }
+
+export type VoteData = {
+  total: BigNumber
+  data: Partial<
+    Record<string, { weight: BigNumber; lastWeekRevenueInUSD: BigNumber }>
+  >
+}
+
+export type UserVoteData = {
+  powerTotal: BigNumber
+  votedTotal: BigNumber
+  claimableTotalInUSD: BigNumber
+  data: Partial<
+    Record<
+      string,
+      { claimableInUSD: BigNumber; weight: BigNumber; vote: BigNumber }
+    >
+  >
+}
