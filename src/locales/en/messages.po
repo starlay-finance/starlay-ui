@@ -180,6 +180,7 @@ msgstr "SET"
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/modals/SuggestModal/Body.tsx
+#: src/components/screens/Lay/LayBalance.tsx
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Wallet Balance"
 msgstr "Wallet Balance"
@@ -206,8 +207,16 @@ msgid "LAY Balance"
 msgstr "LAY Balance"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
-msgid "Unclaimed Balance"
-msgstr "Unclaimed Balance"
+msgid "Unclaimed Reward"
+msgstr "Unclaimed Reward"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+msgid "IDO on ArthSwap Vested"
+msgstr "IDO on ArthSwap Vested"
+
+#: src/components/parts/Modal/RewardModal/index.tsx
+msgid "Token Sale on Starlay Vested"
+msgstr "Token Sale on Starlay Vested"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
 #: src/components/screens/Markets/modals/AssetMarketDetailsModal/Body.tsx
@@ -215,6 +224,8 @@ msgid "Price"
 msgstr "Price"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/LayBalance.tsx
 #: src/components/screens/Makai/UnclaimedReward.tsx
 msgid "Claim"
 msgstr "Claim"
@@ -241,6 +252,7 @@ msgid "By connecting, I understood <0>how Starlay Finance works and the risks in
 msgstr "By connecting, I understood <0>how Starlay Finance works and the risks involved</0> and agreed to use it at my own risk."
 
 #: src/components/parts/Modal/parts/RatioControl.tsx
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
 msgid "Custom"
 msgstr "Custom"
 
@@ -354,6 +366,7 @@ msgstr "Deposit"
 
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
 #: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Lay/LayBalance.tsx
 msgid "Withdraw"
 msgstr "Withdraw"
 
@@ -409,6 +422,8 @@ msgstr "Max"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
 #: src/components/screens/Makai/MakaiMarkets.tsx
 #: src/components/screens/Markets/Assets.tsx
 msgid "Asset"
@@ -686,6 +701,155 @@ msgstr "Your Limit Price = {0}"
 msgid "Price Per LAY"
 msgstr "Price Per LAY"
 
+#: src/components/screens/Lay/Assets.tsx
+msgid "Weekly Protocol Revenue"
+msgstr "Weekly Protocol Revenue"
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Dividend APR"
+msgstr "Dividend APR"
+
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+msgid "Total Weight"
+msgstr "Total Weight"
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Your Weight"
+msgstr "Your Weight"
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Claimable Amount"
+msgstr "Claimable Amount"
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Voted Weight"
+msgstr "Voted Weight"
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Voting"
+msgstr "Voting"
+
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+msgid "Stats"
+msgstr "Stats"
+
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+msgid "Vote"
+msgstr "Vote"
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Total Claimable: {0}"
+msgstr "Total Claimable: {0}"
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Voting Power Used: {0}"
+msgstr "Voting Power Used: {0}"
+
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/modals/LockModal/index.tsx
+msgid "Apply"
+msgstr "Apply"
+
+#: src/components/screens/Lay/LayBalance.tsx
+#: src/components/screens/Makai/UnclaimedReward.tsx
+msgid "Unclaimed LAY"
+msgstr "Unclaimed LAY"
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Rewards"
+msgstr "Rewards"
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "IDO"
+msgstr "IDO"
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Token Sale"
+msgstr "Token Sale"
+
+#: src/components/screens/Lay/LayBalance.tsx
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "Lock"
+msgstr "Lock"
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Locked LAY"
+msgstr "Locked LAY"
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Locked Until"
+msgstr "Locked Until"
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Current APY"
+msgstr "Current APY"
+
+#: src/components/screens/Lay/LayBalance.tsx
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "Add"
+msgstr "Add"
+
+#: src/components/screens/Lay/LayBalance.tsx
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "Extend"
+msgstr "Extend"
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Unclaimed vote reward remain"
+msgstr "Unclaimed vote reward remain"
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "You need to claim it before withdrawal."
+msgstr "You need to claim it before withdrawal."
+
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "Duration"
+msgstr "Duration"
+
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "Available"
+msgstr "Available"
+
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "extend lock period later than vesting end"
+msgstr "extend lock period later than vesting end"
+
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+#: src/utils/estimationHelper.ts
+msgid "Enter amount"
+msgstr "Enter amount"
+
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+msgid "No balance to lock"
+msgstr "No balance to lock"
+
+#: src/components/screens/Lay/modals/LockModal/index.tsx
+msgid "Apply Voting Power"
+msgstr "Apply Voting Power"
+
+#: src/components/screens/Lay/modals/LockModal/index.tsx
+msgid ""
+"To apply the increased voting power, you need to send a transaction.\n"
+"You can also apply from the vote screen with changing vote settings later."
+msgstr ""
+"To apply the increased voting power, you need to send a transaction.\n"
+"You can also apply from the vote screen with changing vote settings later."
+
+#: src/components/screens/Lay/modals/LockModal/index.tsx
+msgid "Later"
+msgstr "Later"
+
+#: src/components/screens/Lay/modals/LockModal/index.tsx
+msgid "Lock LAY"
+msgstr "Lock LAY"
+
 #: src/components/screens/Makai/MakaiMarkets.tsx
 msgid "Makai APR"
 msgstr "Makai APR"
@@ -697,10 +861,6 @@ msgstr "Wallet"
 #: src/components/screens/Makai/MakaiMarkets.tsx
 msgid "Makai Markets"
 msgstr "Makai Markets"
-
-#: src/components/screens/Makai/UnclaimedReward.tsx
-msgid "Unclaimed Reward"
-msgstr "Unclaimed Reward"
 
 #: src/components/screens/Makai/modals/LoopingModal/Body.tsx
 msgid "Makai Loops"
@@ -940,14 +1100,6 @@ msgstr "Failed to switch the chain"
 #: src/libs/wallet-provider/providers/metamask.ts
 msgid "Your wallet needs to switch networks manually."
 msgstr "Your wallet needs to switch networks manually."
-
-#: src/utils/estimationHelper.ts
-#: src/utils/estimationHelper.ts
-#: src/utils/estimationHelper.ts
-#: src/utils/estimationHelper.ts
-#: src/utils/estimationHelper.ts
-msgid "Enter amount"
-msgstr "Enter amount"
 
 #: src/utils/estimationHelper.ts
 msgid "No balance to deposit"

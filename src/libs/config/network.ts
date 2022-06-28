@@ -23,6 +23,12 @@ export type NetworkConfig = {
     uiIncentiveDataProvider: EthereumAddress
     stakeUiHelper: EthereumAddress
     priceAggregatorAdapterAddress: EthereumAddress
+    voterAddress: EthereumAddress
+    votingEscrowAddress: EthereumAddress
+    claimerAddress: EthereumAddress
+    idoVestingAddress: EthereumAddress
+    tokenSaleVestingAddress: EthereumAddress
+    multicallAddress: EthereumAddress
   }
   protocolDataUrl?: string
   cachingServerUrl?: string
@@ -68,6 +74,12 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
       stakeUiHelper: '0xa6FAB9Dfd104a6582c049266E7eCCB0b908c55E4',
       priceAggregatorAdapterAddress:
         '0xbB5893E0f744b3d6305D49B1da6bc04fE922AC15',
+      voterAddress: '0xTODO',
+      votingEscrowAddress: '0xTODO',
+      claimerAddress: '0x05aed49d7979D50cA2D76479a63d5560EeDf243A',
+      idoVestingAddress: '0x54F5002b5F44E2ef5a98761b6fa97a2eF4437099',
+      tokenSaleVestingAddress: '0xFb5504e1F1F147c7Db1bd9B47dD0465DF3C16310',
+      multicallAddress: '0x7D6046156df81EF335E7e765d3bc714960B73207',
     },
     baseAsset: {
       symbol: 'ASTR',

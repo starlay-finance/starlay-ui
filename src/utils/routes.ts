@@ -18,6 +18,7 @@ export const TOP = '/'
 export const APP = '/app'
 export const MARKETS = '/app/markets'
 export const MAKAI = '/app/makai'
+export const LAY_VELAY = '/app/lay'
 export const LAUNCHPAD = '/app/launchpad'
 export const SWAP = ARTHSWAP_SWAP_URL
 export const GOVERNANCE = ''
