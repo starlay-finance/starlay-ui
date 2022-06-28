@@ -211,11 +211,11 @@ msgid "Unclaimed Reward"
 msgstr ""
 
 #: src/components/parts/Modal/RewardModal/index.tsx
-msgid "IDO Vested"
+msgid "IDO on ArthSwap Vested"
 msgstr ""
 
 #: src/components/parts/Modal/RewardModal/index.tsx
-msgid "Token Sale Vested"
+msgid "Token Sale on Starlay Vested"
 msgstr ""
 
 #: src/components/parts/Modal/RewardModal/index.tsx
