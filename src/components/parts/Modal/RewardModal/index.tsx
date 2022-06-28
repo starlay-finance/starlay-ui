@@ -59,19 +59,23 @@ const RewardModalBody = () => {
         num={valueToBigNumber(data?.rewards || BN_ZERO)}
         format={formatter}
       />
-      {data && data.ido && (
-        <NumberItem
-          label={t`IDO Vested`}
-          num={valueToBigNumber(data.ido)}
-          format={formatter}
-        />
-      )}
-      {data && data.tokenSale && (
-        <NumberItem
-          label={t`Token Sale Vested`}
-          num={valueToBigNumber(data.tokenSale)}
-          format={formatter}
-        />
+      {data && (
+        <>
+          {!data.ido.isZero() && (
+            <NumberItem
+              label={t`IDO on ArthSwap Vested`}
+              num={valueToBigNumber(data.ido)}
+              format={formatter}
+            />
+          )}
+          {!data.tokenSale.isZero() && (
+            <NumberItem
+              label={t`Token Sale on Starlay Vested`}
+              num={valueToBigNumber(data.tokenSale)}
+              format={formatter}
+            />
+          )}
+        </>
       )}
       <NumberItem
         label={t`Price`}

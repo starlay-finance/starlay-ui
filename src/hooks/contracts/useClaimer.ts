@@ -29,7 +29,7 @@ export const useClaimer = () => {
   const assets = useMemo(
     () =>
       !userData || !marketData
-        ? []
+        ? undefined
         : marketData.assets.flatMap(
             ({ symbol, lTokenAddress, vdTokenAddress }) => {
               const asset = userData.balanceByAsset[symbol]
@@ -46,9 +46,12 @@ export const useClaimer = () => {
     provider &&
       claimer &&
       account &&
-      assets.length > 0 && ['claimer-data', provider.chainId, account],
+      assets && ['claimer-data', provider.chainId, account],
     async (_1, _2, account) => {
-      const res = await claimer!.releasable({ user: account, reserves: assets })
+      const res = await claimer!.releasable({
+        user: account,
+        reserves: assets!,
+      })
       return {
         ido: normalizeBN(res.ido.toString(), WEI_DECIMALS),
         tokenSale: normalizeBN(res.tokenSale.toString(), WEI_DECIMALS),
@@ -63,7 +66,8 @@ export const useClaimer = () => {
     signer: ethers.providers.JsonRpcSigner,
   ) => handler.handleTx(txs, signer, mutate)
   const claim = async () => {
-    if (!account || !signer || !claimer) throw new Error('Unexpected state')
+    if (!account || !signer || !claimer || !assets)
+      throw new Error('Unexpected state')
     return handleTx(
       await claimer.release({ user: account, reserves: assets }),
       signer,
