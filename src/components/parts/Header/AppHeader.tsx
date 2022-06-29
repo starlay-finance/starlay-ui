@@ -44,10 +44,10 @@ export const AppHeader = () => {
           <Link href={MAKAI}>{t`Makai`}</Link>
         </Tab>
         <Tab $active={pathname === SWAP}>
-          <Link href={MAKAI}>{t`Swap`}</Link>
+          <Link href={SWAP}>{t`Swap`}</Link>
         </Tab>
         <Tab $active={pathname === LAUNCHPAD}>
-          <Link href={MAKAI}>{t`Launchpad`}</Link>
+          <Link href={LAUNCHPAD}>{t`Launchpad`}</Link>
         </Tab>
         {/* <Tab $active={pathname === LAY_VELAY}>
           <Link href={LAY_VELAY}>{t`LAY/veLAY`}</Link>
