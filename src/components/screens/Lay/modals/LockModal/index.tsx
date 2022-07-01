@@ -26,7 +26,7 @@ export const Lock: VFC<
   const { open, close: closeMessageModal } = useMessageModal()
   const suggestPokeOnVotingPowerIncreased = () => {
     if (!userVoteData) return
-    const weights = Object.values(userVoteData)
+    const weights = Object.values(userVoteData.data)
       .filter(filterFalsy)
       .map(({ weight }) => weight)
     if (!weights.length || !weights.some((weight) => weight.isZero())) return

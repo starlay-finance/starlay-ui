@@ -18,8 +18,9 @@ import { useStaticRPCProvider } from '../useStaticRPCProvider'
 import { useWallet } from '../useWallet'
 import { useTxHandler } from './txHandler'
 
+export const TERM_UNIT = SECONDS_OF_WEEK * 2
 export const useVotingEscrow = () => {
-  const nextTerm = Math.ceil(dayjs().unix() / SECONDS_OF_WEEK) * SECONDS_OF_WEEK
+  const nextTerm = Math.ceil(dayjs().unix() / TERM_UNIT) * TERM_UNIT
 
   const { data: provider } = useStaticRPCProvider()
   const { account, signer } = useWallet()
