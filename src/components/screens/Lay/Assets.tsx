@@ -205,13 +205,13 @@ const statsRow = ({
   userVoteData: UserVoteData | undefined
   layPrice: BigNumber | undefined
 }) => {
-  const { symbol, icon, name, lTokenAddress } = asset
+  const { symbol, displaySymbol, icon, lTokenAddress } = asset
   const assetVoteData = voteData?.data[lTokenAddress.toLowerCase()]
   const userAssetVoteData = userVoteData?.data[lTokenAddress.toLowerCase()]
   return {
     id: symbol,
     data: {
-      asset: <AssetTd icon={icon} name={name} />,
+      asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
       revenue:
         assetVoteData &&
         formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 }),
@@ -260,14 +260,14 @@ const votingRow = ({
   currentVotingTotal: number
   votingPower: BigNumber | undefined
 }) => {
-  const { symbol, icon, name, lTokenAddress } = asset
+  const { symbol, displaySymbol, icon, lTokenAddress } = asset
   const assetWeight = voteData?.data[lTokenAddress.toLowerCase()]?.weight
   const userAssetVoteData = userVoteData?.data[lTokenAddress.toLowerCase()]
   const votingWeight = votingData && votingData[lTokenAddress.toLowerCase()]
   return {
     id: symbol,
     data: {
-      asset: <AssetTd icon={icon} name={name} />,
+      asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
       totalWeight:
         voteData &&
         assetWeight &&

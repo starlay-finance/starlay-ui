@@ -108,8 +108,8 @@ const marketRow = ({
 }) => {
   const {
     symbol,
+    displaySymbol,
     icon,
-    name,
     depositIncentiveAPR,
     variableBorrowIncentiveAPR,
     baseLTVasCollateral,
@@ -136,7 +136,7 @@ const marketRow = ({
       !usageAsCollateralEnabled ||
       isFrozen,
     data: {
-      asset: <AssetTd icon={icon} name={name} />,
+      asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
       makaiAPR:
         borrowUnsupported || makaiUnsupported ? (
           'Coming soon'

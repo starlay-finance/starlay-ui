@@ -71,9 +71,8 @@ const detailsRow = ({
 }) => {
   const {
     symbol,
+    displaySymbol,
     icon,
-    name,
-    liquidityInUSD,
     depositAPY,
     depositIncentiveAPR,
     totalDepositedInUSD,
@@ -86,7 +85,7 @@ const detailsRow = ({
     id: symbol,
     onClick,
     data: {
-      asset: <AssetTd icon={icon} name={name} />,
+      asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
       totalDeposited: (
         <ValueWithPercentageChange
           value={formatUSDShort(totalDepositedInUSD)}
