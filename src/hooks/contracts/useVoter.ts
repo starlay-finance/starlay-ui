@@ -12,12 +12,14 @@ import { ethers } from 'ethers'
 import { getNetworkConfig } from 'src/libs/config'
 import { StaticRPCProvider } from 'src/libs/pool-data-provider'
 import { voterContract } from 'src/libs/voter'
+import { SECONDS_OF_WEEK } from 'src/utils/date'
 import useSWRImmutable from 'swr/immutable'
 import { useStaticRPCProvider } from '../useStaticRPCProvider'
 import { useWallet } from '../useWallet'
 import { useTxHandler } from './txHandler'
 import { useVotingEscrow } from './useVotingEscrow'
 
+export const TERM_UNIT = SECONDS_OF_WEEK * 2
 export const useVoter = () => {
   const { data: provider } = useStaticRPCProvider()
   const { account, signer } = useWallet()
@@ -59,7 +61,7 @@ export const useVoter = () => {
 
   const vote = async (
     _weights: Partial<Record<string, BigNumber>>,
-    endTimestamp?: number,
+    endTimestamp: number = nextTerm + TERM_UNIT * 6,
   ) => {
     if (!account || !signer || !voter) throw new Error('Unexpected state')
     const weights = Object.keys(_weights).reduce(
@@ -75,7 +77,7 @@ export const useVoter = () => {
     )
   }
 
-  const poke = async (endTimestamp = nextTerm + TEST_TERM_UNIT * 6) => {
+  const poke = async (endTimestamp = nextTerm + TERM_UNIT * 6) => {
     if (!account || !signer || !voter || !userData)
       throw new Error('Unexpected state')
     const weights = Object.keys(userData).reduce(
