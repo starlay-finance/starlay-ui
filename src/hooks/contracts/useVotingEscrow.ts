@@ -95,6 +95,7 @@ export const useVotingEscrow = () => {
           amount: amount.toString(),
         }),
         signer,
+        onSuccess,
       )
     return handleTx(
       await votingEscrow.increaseUnlockTime({
@@ -102,6 +103,7 @@ export const useVotingEscrow = () => {
         duration: duration!.toFixed(),
       }),
       signer,
+      onSuccess,
     )
   }
 

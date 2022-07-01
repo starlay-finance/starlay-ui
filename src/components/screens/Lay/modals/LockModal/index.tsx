@@ -40,7 +40,7 @@ You can also apply from the vote screen with changing vote settings later.`}
             <SimpleCtaButton
               onClick={closeMessageModal}
             >{t`Later`}</SimpleCtaButton>
-            <SimpleCtaButton onClick={poke}>{t`Apply`}</SimpleCtaButton>
+            <SimpleCtaButton onClick={() => poke()}>{t`Apply`}</SimpleCtaButton>
           </div>
         </SuggestDiv>
       ),

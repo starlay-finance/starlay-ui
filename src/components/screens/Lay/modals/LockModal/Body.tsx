@@ -163,6 +163,7 @@ const validate = (
     vesting[type].vestingEnd.isAfter(dayjs().add(duration, 's'))
   )
     return { error: t`extend lock period later than vesting end` }
+  if (mode === 'duration') return { label: t`Extend` }
   if (amount.lte(0)) return { error: t`Enter amount` }
   if (amount.gt(lockable)) return { error: t`No balance to lock` }
   if (mode === 'amount') {

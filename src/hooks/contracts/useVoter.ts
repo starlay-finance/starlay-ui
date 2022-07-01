@@ -69,15 +69,26 @@ export const useVoter = () => {
       }),
       {},
     ) as Record<string, string>
-    const txs = endTimestamp
-      ? await voter.voteUntil({ user: account, weights, endTimestamp })
-      : await voter.vote({ user: account, weights })
-    return handleTx(txs, signer)
+    return handleTx(
+      await voter.voteUntil({ user: account, weights, endTimestamp }),
+      signer,
+    )
   }
 
-  const poke = async () => {
-    if (!account || !signer || !voter) throw new Error('Unexpected state')
-    return handleTx(await voter.poke({ user: account }), signer)
+  const poke = async (endTimestamp = nextTerm + TEST_TERM_UNIT * 6) => {
+    if (!account || !signer || !voter || !userData)
+      throw new Error('Unexpected state')
+    const weights = Object.keys(userData).reduce(
+      (res, key) => ({
+        ...res,
+        [key.toLowerCase()]: userData[key]?.weight.toFixed(0) || '0',
+      }),
+      {},
+    ) as Record<string, string>
+    return handleTx(
+      await voter.voteUntil({ user: account, weights, endTimestamp }),
+      signer,
+    )
   }
 
   const claim = async () => {

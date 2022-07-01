@@ -46,7 +46,7 @@ export const Assets = asStyled(({ className }) => {
   const [touched, setTouched] = useState(false)
 
   const { data: marketData } = useMarketData()
-  const { vote } = useVoter()
+  const { vote, claim } = useVoter()
   const { data: voteData, userData: userVoteData } = useVoteData()
   const { userData } = useVotingEscrow()
   const { data: layPrice } = useLAYPrice()
@@ -83,7 +83,6 @@ export const Assets = asStyled(({ className }) => {
       ),
     )
   }, [userVoteData])
-
   return (
     <DetailsSection className={className}>
       <TableContainer>
@@ -105,6 +104,7 @@ export const Assets = asStyled(({ className }) => {
                     : '-'
                 }`}</span>
                 <button
+                  onClick={claim}
                   disabled={!userVoteData?.claimableTotalInUSD.gt(BN_ZERO)}
                 >{t`Claim`}</button>
               </Control>
@@ -218,14 +218,15 @@ const statsRow = ({
       apr:
         assetVoteData &&
         layPrice &&
-        assetVoteData.weight.gt(BN_ZERO) &&
-        formatPct(
-          assetVoteData.lastWeekRevenueInUSD
-            .div(7)
-            .times(365)
-            .div(assetVoteData.weight)
-            .div(layPrice),
-        ),
+        (assetVoteData.weight.gt(BN_ZERO)
+          ? formatPct(
+              assetVoteData.lastWeekRevenueInUSD
+                .div(7)
+                .times(365)
+                .div(assetVoteData.weight)
+                .div(layPrice),
+            )
+          : '-'),
       totalWeight:
         voteData &&
         assetVoteData &&
@@ -277,7 +278,6 @@ const votingRow = ({
       votedWeight: userAssetVoteData
         ? formatAmtShort(userAssetVoteData.vote)
         : '-',
-      // TODO replace to editing value
       voting:
         votingPower && votingWeight != null
           ? `${formatAmtShort(votingPower.times(votingWeight))}(${formatPct(
