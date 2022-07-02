@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
+import dayjs from 'dayjs'
 import { useEffect, useState } from 'react'
 import {
   AssetTd,
@@ -11,7 +12,7 @@ import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { useVoter } from 'src/hooks/contracts/useVoter'
-import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
+import { TERM_UNIT, useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useVoteData } from 'src/hooks/useVoteData'
@@ -98,7 +99,7 @@ export const Assets = asStyled(({ className }) => {
   const { data: marketData } = useMarketData()
   const { vote, claim } = useVoter()
   const { data: voteData, userData: userVoteData } = useVoteData()
-  const { userData } = useVotingEscrow()
+  const { userData, nextTerm } = useVotingEscrow()
   const { data: layPrice } = useLAYPrice()
   const { assets } = marketData || {}
   const markets = (assets || [])
@@ -185,6 +186,11 @@ export const Assets = asStyled(({ className }) => {
             control={
               <Control>
                 <span>
+                  {t`For: ${dayjs.unix(nextTerm).format('DD/MM/YYYY')} - ${dayjs
+                    .unix(nextTerm + TERM_UNIT)
+                    .format('DD/MM/YYYY')}`}
+                </span>
+                <span>
                   {t`Voting Power Used: ${
                     userData
                       ? `${formatAmtShort(
@@ -199,7 +205,9 @@ export const Assets = asStyled(({ className }) => {
                   />
                 </span>
                 <span>{t`Expiry: ${
-                  userVoteData ? userVoteData.expiry.format('DD/MM/YYYY') : '-'
+                  userVoteData && userVoteData.expiry.unix() > 0
+                    ? userVoteData.expiry.format('DD/MM/YYYY')
+                    : '-'
                 }`}</span>
                 <button
                   onClick={
@@ -274,6 +282,7 @@ const statsRow = ({
     data: {
       asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
       revenue: '-',
+      // TODO temporarily
       // assetVoteData &&
       // formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 }),
       apr: '-',
@@ -360,6 +369,8 @@ const Control = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  flex: 1;
+  margin-left: 64px;
   column-gap: 20px;
   font-size: 14px;
   span {
