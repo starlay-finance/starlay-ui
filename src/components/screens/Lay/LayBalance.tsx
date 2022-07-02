@@ -23,13 +23,7 @@ import {
   fontWeightSemiBold,
 } from 'src/styles/font'
 import { equals } from 'src/utils/address'
-import {
-  BN_ZERO,
-  formatAmt,
-  formatAmtShort,
-  formatPct,
-  formatUSD,
-} from 'src/utils/number'
+import { BN_ZERO, formatAmt, formatAmtShort, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
 import { useLockModal } from './modals/LockModal'
 
@@ -135,10 +129,11 @@ export const LockedLAY = asStyled(({ className }) => {
         },
         {
           label: t`Current Est. Avg. APR`,
-          value:
-            locked.gt(BN_ZERO) && estimatedAnnualDividend && layPrice
-              ? formatPct(estimatedAnnualDividend.div(locked.times(layPrice)))
-              : '-',
+          value: '-',
+          // TODO temporarily
+          // locked.gt(BN_ZERO) && estimatedAnnualDividend && layPrice
+          //   ? formatPct(estimatedAnnualDividend.div(locked.times(layPrice)))
+          //   : '-',
           tooltip: t`The volume weighted average APR of all your assets.`,
         },
       ]}

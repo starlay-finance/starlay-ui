@@ -273,20 +273,20 @@ const statsRow = ({
     id: symbol,
     data: {
       asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
-      revenue:
-        assetVoteData &&
-        formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 }),
-      apr:
-        assetVoteData &&
-        layPrice &&
-        (assetVoteData.weight.gt(BN_ZERO)
-          ? formatPct(
-              assetVoteData.lastWeekRevenueInUSD
-                .div(14)
-                .times(365)
-                .div(assetVoteData.weight.times(layPrice)),
-            )
-          : '-'),
+      revenue: '-',
+      // assetVoteData &&
+      // formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 }),
+      apr: '-',
+      // assetVoteData &&
+      // layPrice &&
+      // (assetVoteData.weight.gt(BN_ZERO)
+      //   ? formatPct(
+      //       assetVoteData.lastWeekRevenueInUSD
+      //         .div(14)
+      //         .times(365)
+      //         .div(assetVoteData.weight.times(layPrice)),
+      //     )
+      //   : '-'),
       totalWeight:
         voteData &&
         assetVoteData &&
