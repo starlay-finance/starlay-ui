@@ -141,6 +141,9 @@ export const Assets = asStyled(({ className }) => {
                       )}/${formatAmtShort(userData.votingPower)}`
                     : '-/-'
                 }`}</span>
+                <span>{t`Expiry: ${
+                  userVoteData ? userVoteData.expiry.format('DD/MM/YYYY') : '-'
+                }`}</span>
                 <button
                   onClick={
                     votingData
@@ -221,10 +224,9 @@ const statsRow = ({
         (assetVoteData.weight.gt(BN_ZERO)
           ? formatPct(
               assetVoteData.lastWeekRevenueInUSD
-                .div(7)
+                .div(14)
                 .times(365)
-                .div(assetVoteData.weight)
-                .div(layPrice),
+                .div(assetVoteData.weight.times(layPrice)),
             )
           : '-'),
       totalWeight:

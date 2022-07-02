@@ -11,6 +11,7 @@ import { ASSETS_DICT } from 'src/constants/assets'
 import { useClaimer } from 'src/hooks/contracts/useClaimer'
 import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
+import { useMarketData } from 'src/hooks/useMarketData'
 import { useVoteData } from 'src/hooks/useVoteData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
@@ -20,7 +21,14 @@ import {
   fontWeightMedium,
   fontWeightSemiBold,
 } from 'src/styles/font'
-import { BN_ZERO, formatAmt, formatPct, formatUSD } from 'src/utils/number'
+import { equals } from 'src/utils/address'
+import {
+  BN_ZERO,
+  formatAmt,
+  formatAmtShort,
+  formatPct,
+  formatUSD,
+} from 'src/utils/number'
 import styled from 'styled-components'
 import { useLockModal } from './modals/LockModal'
 
@@ -75,8 +83,9 @@ export const WalletBalance = asStyled(({ className }) => {
 })``
 
 export const LockedLAY = asStyled(({ className }) => {
+  const { data: marketData } = useMarketData()
   const { userData, withdraw, isValidating } = useVotingEscrow()
-  const { userData: voteData } = useVoteData()
+  const { data, userData: voteData } = useVoteData()
   const { data: layPrice } = useLAYPrice()
   const { open } = useLockModal()
   const { open: openMessageModal } = useMessageModal()
@@ -84,6 +93,24 @@ export const LockedLAY = asStyled(({ className }) => {
   const locked = userData?.locked || BN_ZERO
   const expired = userData?.lockedEnd.isBefore(dayjs())
   const claimable = voteData?.claimableTotalInUSD.gt(BN_ZERO)
+  const lastWeekDividendInUSD =
+    data &&
+    voteData &&
+    marketData &&
+    Object.keys(voteData.data)
+      .filter((key) => voteData.data[key]?.vote.gt(BN_ZERO))
+      .reduce((res, key) => {
+        const voted = voteData.data[key]!.vote
+        const { weight, lastWeekRevenueInUSD } = data.data[key]!
+        const dividend = lastWeekRevenueInUSD.times(voted.div(weight))
+        const priceInUSD =
+          marketData.assets.find(({ lTokenAddress }) =>
+            equals(key, lTokenAddress),
+          )?.priceInMarketReferenceCurrency || BN_ZERO
+        return res.plus(dividend.times(priceInUSD))
+      }, BN_ZERO)
+  const estimatedAnnualDividend =
+    lastWeekDividendInUSD && lastWeekDividendInUSD.div(14).times(365)
   return (
     <LayBalance
       className={className}
@@ -95,12 +122,14 @@ export const LockedLAY = asStyled(({ className }) => {
           value: userData?.lockedEnd.format('DD/MM/YYYY') || '-',
         },
         {
-          label: t`Current APY`,
+          label: t`Current Voting Power`,
+          value: voteData ? formatAmtShort(voteData.powerTotal) : '-',
+        },
+        {
+          label: t`Current Est. Avg. APR`,
           value:
-            locked.gt(BN_ZERO) && voteData && layPrice
-              ? formatPct(
-                  voteData.claimableTotalInUSD.div(locked).div(layPrice),
-                )
+            locked.gt(BN_ZERO) && estimatedAnnualDividend && layPrice
+              ? formatPct(estimatedAnnualDividend.div(locked.times(layPrice)))
               : '-',
         },
       ]}
