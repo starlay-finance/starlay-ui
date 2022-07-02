@@ -107,16 +107,20 @@ msgid "Makai"
 msgstr "Makai"
 
 #: src/components/parts/Header/AppHeader.tsx
+msgid "LAY/veLAY"
+msgstr "LAY/veLAY"
+
+#: src/components/parts/Header/AppHeader.tsx
+msgid "Connect"
+msgstr "Connect"
+
+#: src/components/parts/Header/AppHeader.tsx
 msgid "Swap"
 msgstr "Swap"
 
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Launchpad"
 msgstr "Launchpad"
-
-#: src/components/parts/Header/AppHeader.tsx
-msgid "Connect"
-msgstr "Connect"
 
 #: src/components/parts/Header/AppHeader.tsx
 #: src/components/parts/Modal/GasSettingsModal/index.tsx
@@ -702,12 +706,20 @@ msgid "Price Per LAY"
 msgstr "Price Per LAY"
 
 #: src/components/screens/Lay/Assets.tsx
-msgid "Weekly Protocol Revenue"
-msgstr "Weekly Protocol Revenue"
+msgid "Last Term Revenue"
+msgstr "Last Term Revenue"
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "The revenue earned in the last term."
+msgstr "The revenue earned in the last term."
 
 #: src/components/screens/Lay/Assets.tsx
 msgid "Dividend APR"
 msgstr "Dividend APR"
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Estimated APR of dividends by transaction fees of each pool."
+msgstr "Estimated APR of dividends by transaction fees of each pool."
 
 #: src/components/screens/Lay/Assets.tsx
 #: src/components/screens/Lay/Assets.tsx
@@ -715,8 +727,18 @@ msgid "Total Weight"
 msgstr "Total Weight"
 
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+msgid "The total number and percentage of vote power each pool obtained."
+msgstr "The total number and percentage of vote power each pool obtained."
+
+#: src/components/screens/Lay/Assets.tsx
 msgid "Your Weight"
 msgstr "Your Weight"
+
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+msgid "The number of voting power you voted for each pool."
+msgstr "The number of voting power you voted for each pool."
 
 #: src/components/screens/Lay/Assets.tsx
 msgid "Claimable Amount"
@@ -727,8 +749,12 @@ msgid "Voted Weight"
 msgstr "Voted Weight"
 
 #: src/components/screens/Lay/Assets.tsx
-msgid "Voting"
-msgstr "Voting"
+msgid "Voting Ranges"
+msgstr "Voting Ranges"
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "The number and percentage of voting power you applied for each asset."
+msgstr "The number and percentage of voting power you applied for each asset."
 
 #: src/components/screens/Lay/Assets.tsx
 #: src/components/screens/Lay/Assets.tsx
@@ -737,8 +763,8 @@ msgstr "Stats"
 
 #: src/components/screens/Lay/Assets.tsx
 #: src/components/screens/Lay/Assets.tsx
-msgid "Vote"
-msgstr "Vote"
+msgid "Votes"
+msgstr "Votes"
 
 #: src/components/screens/Lay/Assets.tsx
 msgid "Total Claimable: {0}"
@@ -749,9 +775,30 @@ msgid "Voting Power Used: {0}"
 msgstr "Voting Power Used: {0}"
 
 #: src/components/screens/Lay/Assets.tsx
+msgid "The fraction of voting power you use and you have. To apply on-chain, you must use 100% of the voting rights you have and click \"Apply.\""
+msgstr "The fraction of voting power you use and you have. To apply on-chain, you must use 100% of the voting rights you have and click \"Apply.\""
+
+#: src/components/screens/Lay/Assets.tsx
+msgid "Expiry: {0}"
+msgstr "Expiry: {0}"
+
+#: src/components/screens/Lay/Assets.tsx
 #: src/components/screens/Lay/modals/LockModal/index.tsx
 msgid "Apply"
 msgstr "Apply"
+
+#: src/components/screens/Lay/Assets.tsx
+#~ msgid "Weekly Protocol Revenue"
+#~ msgstr "Weekly Protocol Revenue"
+
+#: src/components/screens/Lay/Assets.tsx
+#~ msgid "Voting"
+#~ msgstr "Voting"
+
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+#~ msgid "Vote"
+#~ msgstr "Vote"
 
 #: src/components/screens/Lay/LayBalance.tsx
 #: src/components/screens/Makai/UnclaimedReward.tsx
@@ -763,12 +810,20 @@ msgid "Rewards"
 msgstr "Rewards"
 
 #: src/components/screens/Lay/LayBalance.tsx
-msgid "IDO"
-msgstr "IDO"
+msgid "IDO on ArthSwap"
+msgstr "IDO on ArthSwap"
 
 #: src/components/screens/Lay/LayBalance.tsx
-msgid "Token Sale"
-msgstr "Token Sale"
+msgid "The number of LAY vested for LAY IDO on ArthSwap."
+msgstr "The number of LAY vested for LAY IDO on ArthSwap."
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Token Sale on Starlay"
+msgstr "Token Sale on Starlay"
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "The number of LAY vested for LAY Token Sale on Starlay Launchpad."
+msgstr "The number of LAY vested for LAY Token Sale on Starlay Launchpad."
 
 #: src/components/screens/Lay/LayBalance.tsx
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
@@ -784,8 +839,24 @@ msgid "Locked Until"
 msgstr "Locked Until"
 
 #: src/components/screens/Lay/LayBalance.tsx
-msgid "Current APY"
-msgstr "Current APY"
+msgid "Your LAY is locked until this date. You cannot withdraw your LAY even partially until the date comes."
+msgstr "Your LAY is locked until this date. You cannot withdraw your LAY even partially until the date comes."
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Current Voting Power"
+msgstr "Current Voting Power"
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "As the remaining lock period gets shorter, voting power decreases linearly."
+msgstr "As the remaining lock period gets shorter, voting power decreases linearly."
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "Current Est. Avg. APR"
+msgstr "Current Est. Avg. APR"
+
+#: src/components/screens/Lay/LayBalance.tsx
+msgid "The volume weighted average APR of all your assets."
+msgstr "The volume weighted average APR of all your assets."
 
 #: src/components/screens/Lay/LayBalance.tsx
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
@@ -794,16 +865,37 @@ msgstr "Add"
 
 #: src/components/screens/Lay/LayBalance.tsx
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
 msgid "Extend"
 msgstr "Extend"
 
 #: src/components/screens/Lay/LayBalance.tsx
-msgid "Unclaimed vote reward remain"
-msgstr "Unclaimed vote reward remain"
+msgid "Please Claim Reward Before Withdrawing LAY"
+msgstr "Please Claim Reward Before Withdrawing LAY"
 
 #: src/components/screens/Lay/LayBalance.tsx
-msgid "You need to claim it before withdrawal."
-msgstr "You need to claim it before withdrawal."
+msgid "You need to claim rewards before withdrawing unlocked LAY."
+msgstr "You need to claim rewards before withdrawing unlocked LAY."
+
+#: src/components/screens/Lay/LayBalance.tsx
+#~ msgid "IDO"
+#~ msgstr "IDO"
+
+#: src/components/screens/Lay/LayBalance.tsx
+#~ msgid "Token Sale"
+#~ msgstr "Token Sale"
+
+#: src/components/screens/Lay/LayBalance.tsx
+#~ msgid "Current APY"
+#~ msgstr "Current APY"
+
+#: src/components/screens/Lay/LayBalance.tsx
+#~ msgid "Unclaimed vote reward remain"
+#~ msgstr "Unclaimed vote reward remain"
+
+#: src/components/screens/Lay/LayBalance.tsx
+#~ msgid "You need to claim it before withdrawal."
+#~ msgstr "You need to claim it before withdrawal."
 
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
 msgid "Duration"
@@ -831,16 +923,12 @@ msgid "No balance to lock"
 msgstr "No balance to lock"
 
 #: src/components/screens/Lay/modals/LockModal/index.tsx
-msgid "Apply Voting Power"
-msgstr "Apply Voting Power"
+msgid "Let's Apply Voting Power You've Added"
+msgstr "Let's Apply Voting Power You've Added"
 
 #: src/components/screens/Lay/modals/LockModal/index.tsx
-msgid ""
-"To apply the increased voting power, you need to send a transaction.\n"
-"You can also apply from the vote screen with changing vote settings later."
-msgstr ""
-"To apply the increased voting power, you need to send a transaction.\n"
-"You can also apply from the vote screen with changing vote settings later."
+msgid "To apply the voting power you just added by locking additional LAY to your votes, please click \"Apply\". This can be done from \"Apply\" button in the \"Vote\" tab. Otherwise, the voting power you added won't be reflected in your current votes."
+msgstr "To apply the voting power you just added by locking additional LAY to your votes, please click \"Apply\". This can be done from \"Apply\" button in the \"Vote\" tab. Otherwise, the voting power you added won't be reflected in your current votes."
 
 #: src/components/screens/Lay/modals/LockModal/index.tsx
 msgid "Later"
@@ -849,6 +937,18 @@ msgstr "Later"
 #: src/components/screens/Lay/modals/LockModal/index.tsx
 msgid "Lock LAY"
 msgstr "Lock LAY"
+
+#: src/components/screens/Lay/modals/LockModal/index.tsx
+#~ msgid "Apply Voting Power"
+#~ msgstr "Apply Voting Power"
+
+#: src/components/screens/Lay/modals/LockModal/index.tsx
+#~ msgid ""
+#~ "To apply the increased voting power, you need to send a transaction.\n"
+#~ "You can also apply from the vote screen with changing vote settings later."
+#~ msgstr ""
+#~ "To apply the increased voting power, you need to send a transaction.\n"
+#~ "You can also apply from the vote screen with changing vote settings later."
 
 #: src/components/screens/Makai/MakaiMarkets.tsx
 msgid "Makai APR"

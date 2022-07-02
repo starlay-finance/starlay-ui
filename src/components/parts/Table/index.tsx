@@ -4,6 +4,7 @@ import { AsStyledProps } from 'src/components/hoc/asStyled'
 import { offWhite, purple } from 'src/styles/colors'
 import styled, { css, SimpleInterpolation } from 'styled-components'
 import { ShimmerPlaceholder } from '../Loading'
+import { TooltipMessage, ToolTipPosition } from '../ToolTip'
 
 export type TableFC = <T extends string>(
   props: {
@@ -18,6 +19,8 @@ export type TableFC = <T extends string>(
       id: T
       name: string
       widthRatio: number
+      tooltip?: ReactNode
+      tooltipPosition?: ToolTipPosition
     }[]
     rows: {
       id: string
@@ -67,14 +70,22 @@ export const Table: TableFC = ({
       </caption>
       <thead>
         <tr>
-          {columns.map(({ id, name, widthRatio }) => (
+          {columns.map(({ id, name, tooltip, tooltipPosition, widthRatio }) => (
             <th
               key={id}
               style={{
                 width: `${Math.floor((widthRatio / widthRatioSum) * 100)}%`,
               }}
             >
-              {t({ id: name })}
+              <div>
+                {t({ id: name })}
+                {tooltip && (
+                  <TooltipMessage
+                    message={tooltip}
+                    position={tooltipPosition}
+                  />
+                )}
+              </div>
             </th>
           ))}
         </tr>

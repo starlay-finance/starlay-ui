@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { VFC } from 'react'
 import { Table, TableFC } from 'src/components/parts/Table'
+import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { hoverBackgroundKeyframes } from 'src/styles/animation'
 import { darkPurple, secondary } from 'src/styles/colors'
 import {
@@ -15,21 +16,23 @@ import styled, { css } from 'styled-components'
 type StyleProps = {
   hoverGradients?: string[]
 }
-export const MarketTable = ({
-  hoverGradients,
-  hoverColor,
-  ...props
-}: Parameters<TableFC>[0] & StyleProps & { hoverColor?: Color }) => (
-  <StyledTable
-    {...props}
-    hoverGradients={
-      hoverGradients ||
-      (hoverColor
-        ? [`${hoverColor}00`, `${hoverColor}52`, `${hoverColor}00`]
-        : undefined)
-    }
-  />
-)
+export const MarketTable = styled(
+  ({
+    hoverGradients,
+    hoverColor,
+    ...props
+  }: Parameters<TableFC>[0] & StyleProps & { hoverColor?: Color }) => (
+    <StyledTable
+      {...props}
+      hoverGradients={
+        hoverGradients ||
+        (hoverColor
+          ? [`${hoverColor}00`, `${hoverColor}52`, `${hoverColor}00`]
+          : undefined)
+      }
+    />
+  ),
+)``
 
 const StyledTable = styled(Table)<StyleProps>`
   caption {
@@ -53,6 +56,17 @@ const StyledTable = styled(Table)<StyleProps>`
     color: ${secondary};
     font-size: 14px;
     font-weight: ${fontWeightMedium};
+    :nth-child(n + 2) {
+      > div {
+        display: flex;
+        justify-content: flex-end;
+        column-gap: 4px;
+        ${TooltipMessage} {
+          width: 240px;
+          text-align: left;
+        }
+      }
+    }
   }
   td {
     font-size: 16px;

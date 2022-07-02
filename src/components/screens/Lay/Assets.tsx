@@ -1,4 +1,5 @@
 import { t } from '@lingui/macro'
+import { Trans } from '@lingui/react'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import { useEffect, useState } from 'react'
 import {
@@ -6,7 +7,9 @@ import {
   MarketTable,
   TableContainer,
 } from 'src/components/compositions/Markets/MarketTable'
+import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
+import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { useVoter } from 'src/hooks/contracts/useVoter'
 import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
@@ -18,23 +21,70 @@ import { AssetMarketData, UserVoteData, VoteData } from 'src/types/models'
 import { filterFalsy } from 'src/utils/array'
 import { symbolSorter } from 'src/utils/market'
 import { BN_ZERO, formatAmtShort, formatPct, formatUSD } from 'src/utils/number'
+import { DOCS_VELAY } from 'src/utils/routes'
 import styled from 'styled-components'
 import { Slider } from './Slider'
 
 const STATS_COLUMNS = [
   { id: 'asset', name: t`Asset`, widthRatio: 4 },
-  { id: 'revenue', name: t`Weekly Protocol Revenue`, widthRatio: 4 },
-  { id: 'apr', name: t`Dividend APR`, widthRatio: 2 },
-  { id: 'totalWeight', name: t`Total Weight`, widthRatio: 2 },
-  { id: 'weight', name: t`Your Weight`, widthRatio: 2 },
-  { id: 'claimable', name: t`Claimable Amount`, widthRatio: 3 },
+  {
+    id: 'revenue',
+    name: t`Last Term Revenue`,
+    tooltip: t`The revenue earned in the last term.`,
+    widthRatio: 4,
+  },
+  {
+    id: 'apr',
+    name: t`Dividend APR`,
+    tooltip: t`Estimated APR of dividends by transaction fees of each pool.`,
+    widthRatio: 2,
+  },
+  {
+    id: 'totalWeight',
+    name: t`Total Weight`,
+    tooltip: t`The total number and percentage of vote power each pool obtained.`,
+    widthRatio: 2,
+  },
+  {
+    id: 'weight',
+    name: t`Your Weight`,
+    tooltip: t`The number of voting power you voted for each pool.`,
+    widthRatio: 2,
+  },
+  {
+    id: 'claimable',
+    name: t`Claimable Amount`,
+    tooltip: (
+      <Trans
+        id={`Rewards from transaction fees of each pool you can claim calculated. For more information, please click <0>here</0>.`}
+        components={[<Link key="0" href={DOCS_VELAY} />]}
+      />
+    ),
+    tooltipPosition: 'right',
+    widthRatio: 3,
+  },
 ]
 
 const VOTING_COLUMNS = [
   { id: 'asset', name: t`Asset`, widthRatio: 6 },
-  { id: 'totalWeight', name: t`Total Weight`, widthRatio: 3 },
-  { id: 'votedWeight', name: t`Voted Weight`, widthRatio: 3 },
-  { id: 'voting', name: t`Voting`, widthRatio: 3 },
+  {
+    id: 'totalWeight',
+    name: t`Total Weight`,
+    tooltip: t`The total number and percentage of vote power each pool obtained.`,
+    widthRatio: 3,
+  },
+  {
+    id: 'votedWeight',
+    name: t`Voted Weight`,
+    tooltip: t`The number of voting power you voted for each pool.`,
+    widthRatio: 3,
+  },
+  {
+    id: 'voting',
+    name: t`Voting Ranges`,
+    tooltip: t`The number and percentage of voting power you applied for each asset.`,
+    widthRatio: 3,
+  },
   { id: 'votingSlider', name: '', widthRatio: 6 },
 ]
 const WEIGHT_DECIMALS = 4
@@ -91,7 +141,7 @@ export const Assets = asStyled(({ className }) => {
             tabs={{
               items: [
                 { id: 'stats', label: t`Stats` },
-                { id: 'voting', label: t`Vote` },
+                { id: 'voting', label: t`Votes` },
               ],
               setTab: setActiveTab,
               activeTab: 'stats',
@@ -109,7 +159,8 @@ export const Assets = asStyled(({ className }) => {
                 >{t`Claim`}</button>
               </Control>
             }
-            columns={STATS_COLUMNS}
+            // TODO
+            columns={STATS_COLUMNS as any}
             rows={markets.map((asset) =>
               statsRow({
                 asset,
@@ -119,28 +170,34 @@ export const Assets = asStyled(({ className }) => {
               }),
             )}
             hoverGradients={[`${darkRed}3d`, `${skyBlue}3d`, `${darkRed}3d`]}
+            placeholderLength={3}
           />
         ) : (
           <MarketTable
             tabs={{
               items: [
                 { id: 'stats', label: t`Stats` },
-                { id: 'voting', label: t`Vote` },
+                { id: 'voting', label: t`Votes` },
               ],
               setTab: setActiveTab,
               activeTab: 'voting',
             }}
             control={
               <Control>
-                <span>{t`Voting Power Used: ${
-                  userData
-                    ? `${formatAmtShort(
-                        touched
-                          ? userData.votingPower.times(currentVotingTotal)
-                          : userVoteData?.votedTotal || BN_ZERO,
-                      )}/${formatAmtShort(userData.votingPower)}`
-                    : '-/-'
-                }`}</span>
+                <span>
+                  {t`Voting Power Used: ${
+                    userData
+                      ? `${formatAmtShort(
+                          touched
+                            ? userData.votingPower.times(currentVotingTotal)
+                            : userVoteData?.votedTotal || BN_ZERO,
+                        )}/${formatAmtShort(userData.votingPower)}`
+                      : '-/-'
+                  }`}
+                  <TooltipMessage
+                    message={t`The fraction of voting power you use and you have. To apply on-chain, you must use 100% of the voting rights you have and click "Apply."`}
+                  />
+                </span>
                 <span>{t`Expiry: ${
                   userVoteData ? userVoteData.expiry.format('DD/MM/YYYY') : '-'
                 }`}</span>
@@ -190,6 +247,7 @@ export const Assets = asStyled(({ className }) => {
               }),
             )}
             hoverGradients={[`${darkRed}3d`, `${skyBlue}3d`, `${darkRed}3d`]}
+            placeholderLength={3}
           />
         )}
       </TableContainer>
@@ -305,7 +363,12 @@ const Control = styled.div`
   column-gap: 20px;
   font-size: 14px;
   span {
+    display: flex;
+    column-gap: 4px;
     font-weight: ${fontWeightMedium};
+    ${TooltipMessage} {
+      width: 240px;
+    }
   }
   button {
     background: ${darkGray};

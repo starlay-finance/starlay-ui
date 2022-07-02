@@ -7,6 +7,7 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
 import { Reel } from 'src/components/parts/Number/Reel'
+import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { useClaimer } from 'src/hooks/contracts/useClaimer'
 import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
@@ -51,10 +52,15 @@ export const UnclaimedLAY = asStyled(({ className }) => {
           label: t`Rewards`,
           value: formatAmt(rewards, { symbol, decimalPlaces: 2 }),
         },
-        { label: t`IDO`, value: formatAmt(ido, { symbol, decimalPlaces: 2 }) },
         {
-          label: t`Token Sale`,
+          label: t`IDO on ArthSwap`,
+          value: formatAmt(ido, { symbol, decimalPlaces: 2 }),
+          tooltip: t`The number of LAY vested for LAY IDO on ArthSwap.`,
+        },
+        {
+          label: t`Token Sale on Starlay`,
           value: formatAmt(tokenSale, { symbol, decimalPlaces: 2 }),
+          tooltip: t`The number of LAY vested for LAY Token Sale on Starlay Launchpad.`,
         },
       ]}
       actions={[{ label: t`Claim`, onClick: claim, disabled: !data }]}
@@ -120,10 +126,12 @@ export const LockedLAY = asStyled(({ className }) => {
         {
           label: t`Locked Until`,
           value: userData?.lockedEnd.format('DD/MM/YYYY') || '-',
+          tooltip: t`Your LAY is locked until this date. You cannot withdraw your LAY even partially until the date comes.`,
         },
         {
           label: t`Current Voting Power`,
           value: voteData ? formatAmtShort(voteData.powerTotal) : '-',
+          tooltip: t`As the remaining lock period gets shorter, voting power decreases linearly.`,
         },
         {
           label: t`Current Est. Avg. APR`,
@@ -131,6 +139,7 @@ export const LockedLAY = asStyled(({ className }) => {
             locked.gt(BN_ZERO) && estimatedAnnualDividend && layPrice
               ? formatPct(estimatedAnnualDividend.div(locked.times(layPrice)))
               : '-',
+          tooltip: t`The volume weighted average APR of all your assets.`,
         },
       ]}
       actions={
@@ -153,8 +162,8 @@ export const LockedLAY = asStyled(({ className }) => {
                 onClick: claimable
                   ? () =>
                       openMessageModal({
-                        title: t`Unclaimed vote reward remain`,
-                        message: t`You need to claim it before withdrawal.`,
+                        title: t`Please Claim Reward Before Withdrawing LAY`,
+                        message: t`You need to claim rewards before withdrawing unlocked LAY.`,
                         type: 'Alert',
                       })
                   : withdraw,
@@ -172,6 +181,7 @@ type LayBalanceProps = {
   details?: {
     label: string
     value: string
+    tooltip?: string
   }[]
   actions: {
     label: string
@@ -204,9 +214,12 @@ const LayBalance = styled<VFC<LayBalanceProps & { className?: string }>>(
         </LayAmount>
         {details && (
           <DetailsDiv>
-            {details.map(({ label, value }) => (
+            {details.map(({ label, value, tooltip }) => (
               <DetailDiv key={label}>
-                <span>{label}</span>
+                <span>
+                  {label}
+                  {tooltip && <TooltipMessage message={t({ id: tooltip })} />}
+                </span>
                 <span>{value}</span>
               </DetailDiv>
             ))}
@@ -239,8 +252,15 @@ const DetailDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  > span:first-child {
+    display: flex;
+    column-gap: 4px;
+  }
   > span:last-child {
     color: ${primary}a3;
+  }
+  ${TooltipMessage} {
+    width: 240px;
   }
 `
 
