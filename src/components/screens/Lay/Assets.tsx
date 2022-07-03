@@ -185,10 +185,12 @@ export const Assets = asStyled(({ className }) => {
             }}
             control={
               <Control>
-                <span>
-                  {t`For: ${dayjs.unix(nextTerm).format('DD/MM/YYYY')} - ${dayjs
+                <span style={{ marginRight: 'auto' }}>
+                  {t`For: ${dayjs
+                    .unix(nextTerm)
+                    .format('DD/MM/YYYY HH:mm:ss')} - ${dayjs
                     .unix(nextTerm + TERM_UNIT)
-                    .format('DD/MM/YYYY')}`}
+                    .format('DD/MM/YYYY HH:mm:ss')}`}
                 </span>
                 <span>
                   {t`Voting Power Used: ${
