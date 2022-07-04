@@ -178,7 +178,7 @@ const DURATION_LIST = [
   { label: '3 Months', value: SECONDS_OF_MONTH * 3 },
   { label: '6 Months', value: SECONDS_OF_MONTH * 6 },
   { label: '1 Year', value: SECONDS_OF_YEAR },
-  { label: '2 Year', value: SECONDS_OF_YEAR * 2 },
+  { label: '2 Years', value: SECONDS_OF_YEAR * 2 },
 ]
 
 const ActionTab: TabFC = Tab

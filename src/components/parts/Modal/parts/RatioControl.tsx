@@ -206,6 +206,7 @@ const RatioOptions = styled.div`
     border-radius: 8px;
     background-color: ${darkPurple}7a;
     transition: all 0.2s ease-in;
+    white-space: nowrap;
     cursor: pointer;
     :hover {
       background-color: ${darkPurple};

@@ -31,25 +31,30 @@ const STATS_COLUMNS = [
   {
     id: 'revenue',
     name: t`Last Term Revenue`,
-    tooltip: t`The revenue earned in the last term.`,
+    tooltip: (
+      <Trans
+        id="The revenue of the protocol in the last term. For more detail, please refer <0>here</0>."
+        components={[<Link key="0" href={DOCS_VELAY} />]}
+      />
+    ),
     widthRatio: 4,
   },
   {
     id: 'apr',
     name: t`Dividend APR`,
-    tooltip: t`Estimated APR of dividends by transaction fees of each pool.`,
+    tooltip: t`Estimated APR of dividends calculated from Last Term Revenue.`,
     widthRatio: 2,
   },
   {
     id: 'totalWeight',
     name: t`Total Weight`,
-    tooltip: t`The total number and percentage of vote power each pool obtained.`,
+    tooltip: t`The total number and percentage of voting power each asset obtained.`,
     widthRatio: 2,
   },
   {
     id: 'weight',
     name: t`Your Weight`,
-    tooltip: t`The number of voting power you voted for each pool.`,
+    tooltip: t`The number of voting power you voted for each asset.`,
     widthRatio: 2,
   },
   {
@@ -57,7 +62,7 @@ const STATS_COLUMNS = [
     name: t`Claimable Amount`,
     tooltip: (
       <Trans
-        id={`Rewards from transaction fees of each pool you can claim calculated. For more information, please click <0>here</0>.`}
+        id="Dividends you can claim from the revenue of the term your voting results applied. For more detail, please click <0>here</0>."
         components={[<Link key="0" href={DOCS_VELAY} />]}
       />
     ),
@@ -71,19 +76,19 @@ const VOTING_COLUMNS = [
   {
     id: 'totalWeight',
     name: t`Total Weight`,
-    tooltip: t`The total number and percentage of vote power each pool obtained.`,
+    tooltip: t`The total number and percentage of voting power each asset obtained.`,
     widthRatio: 3,
   },
   {
     id: 'votedWeight',
     name: t`Voted Weight`,
-    tooltip: t`The number of voting power you voted for each pool.`,
+    tooltip: t`The number of voting power you voted for each asset.`,
     widthRatio: 3,
   },
   {
     id: 'voting',
-    name: t`Voting Ranges`,
-    tooltip: t`The number and percentage of voting power you applied for each asset.`,
+    name: t`Voting Allocations`,
+    tooltip: t`The number and percentage of voting power you apply for each asset.`,
     widthRatio: 3,
   },
   { id: 'votingSlider', name: '', widthRatio: 6 },
@@ -111,6 +116,9 @@ export const Assets = asStyled(({ className }) => {
       Object.values(votingData).reduce((res = 0, num = 0) => res + num)) ||
     0
 
+  const nextTermDayjs = dayjs.unix(nextTerm)
+  const votingPowerAvailable = userData?.lockedEnd.isAfter(nextTermDayjs)
+
   useEffect(() => {
     if (!userVoteData || votingData) return
     const weightTotal = BigNumber.sum(
@@ -134,6 +142,7 @@ export const Assets = asStyled(({ className }) => {
       ),
     )
   }, [userVoteData])
+
   return (
     <DetailsSection className={className}>
       <TableContainer>
@@ -186,10 +195,10 @@ export const Assets = asStyled(({ className }) => {
             control={
               <Control>
                 <span style={{ marginRight: 'auto' }}>
-                  {t`For: ${dayjs
-                    .unix(nextTerm)
-                    .format('DD/MM/YYYY HH:mm:ss')} - ${dayjs
-                    .unix(nextTerm + TERM_UNIT)
+                  {t`Voting Term: ${nextTermDayjs.format(
+                    'DD/MM/YYYY HH:mm:ss',
+                  )} - ${nextTermDayjs
+                    .add(TERM_UNIT, 's')
                     .format('DD/MM/YYYY HH:mm:ss')}`}
                 </span>
                 <span>
@@ -203,14 +212,28 @@ export const Assets = asStyled(({ className }) => {
                       : '-/-'
                   }`}
                   <TooltipMessage
-                    message={t`The fraction of voting power you use and you have. To apply on-chain, you must use 100% of the voting rights you have and click "Apply."`}
+                    message={t`The fraction of voting power you use and you have. To apply on-chain, you must use 100% of the voting power and click "Apply."`}
                   />
                 </span>
-                <span>{t`Expiry: ${
-                  userVoteData && userVoteData.expiry.unix() > 0
-                    ? userVoteData.expiry.format('DD/MM/YYYY')
-                    : '-'
-                }`}</span>
+                <span>
+                  {t`Expiry: ${
+                    userVoteData &&
+                    userVoteData.expiry.unix() > 0 &&
+                    votingPowerAvailable
+                      ? userVoteData.expiry.isAfter(nextTermDayjs)
+                        ? userVoteData.expiry.format('DD/MM/YYYY')
+                        : `Expired`
+                      : '-'
+                  }`}
+                  <TooltipMessage
+                    message={
+                      <Trans
+                        id="Your voting ranges will be applied until the Expiry. All ranges will become 0 after that. For more information, please click <0>here</0>."
+                        components={[<Link key="0" href={DOCS_VELAY} />]}
+                      />
+                    }
+                  />
+                </span>
                 <button
                   onClick={
                     votingData
@@ -254,6 +277,7 @@ export const Assets = asStyled(({ className }) => {
                 },
                 currentVotingTotal,
                 votingPower: userData?.votingPower,
+                votingPowerAvailable,
               }),
             )}
             hoverGradients={[`${darkRed}3d`, `${skyBlue}3d`, `${darkRed}3d`]}
@@ -322,6 +346,7 @@ const votingRow = ({
   setWeight,
   currentVotingTotal,
   votingPower,
+  votingPowerAvailable,
 }: {
   asset: AssetMarketData
   voteData: VoteData | undefined
@@ -330,6 +355,7 @@ const votingRow = ({
   setWeight: (key: string, weight: number) => void
   currentVotingTotal: number
   votingPower: BigNumber | undefined
+  votingPowerAvailable: boolean | undefined
 }) => {
   const { symbol, displaySymbol, icon, lTokenAddress } = asset
   const assetWeight = voteData?.data[lTokenAddress.toLowerCase()]?.weight
@@ -360,7 +386,7 @@ const votingRow = ({
           current={votingWeight || 0}
           setValue={(num) => setWeight(lTokenAddress.toLowerCase(), num)}
           remaining={1 - currentVotingTotal}
-          disabled={!votingData}
+          disabled={!votingData || !votingPowerAvailable}
         />
       ),
     },

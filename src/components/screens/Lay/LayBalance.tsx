@@ -1,8 +1,10 @@
 import { t } from '@lingui/macro'
+import { Trans } from '@lingui/react'
 import { BigNumber } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
-import { VFC } from 'react'
+import { ReactNode, VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
+import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
@@ -24,6 +26,7 @@ import {
 } from 'src/styles/font'
 import { equals } from 'src/utils/address'
 import { BN_ZERO, formatAmt, formatAmtShort, formatUSD } from 'src/utils/number'
+import { DOCS_VELAY } from 'src/utils/routes'
 import styled from 'styled-components'
 import { useLockModal } from './modals/LockModal'
 
@@ -49,12 +52,10 @@ export const UnclaimedLAY = asStyled(({ className }) => {
         {
           label: t`IDO on ArthSwap`,
           value: formatAmt(ido, { symbol, decimalPlaces: 2 }),
-          tooltip: t`The number of LAY vested for LAY IDO on ArthSwap.`,
         },
         {
           label: t`Token Sale on Starlay`,
           value: formatAmt(tokenSale, { symbol, decimalPlaces: 2 }),
-          tooltip: t`The number of LAY vested for LAY Token Sale on Starlay Launchpad.`,
         },
       ]}
       actions={[{ label: t`Claim`, onClick: claim, disabled: !data }]}
@@ -63,14 +64,45 @@ export const UnclaimedLAY = asStyled(({ className }) => {
 })``
 
 export const WalletBalance = asStyled(({ className }) => {
+  const { symbol } = ASSETS_DICT.LAY
   const { data: balances } = useWalletBalance(false)
   const { userData, isValidating } = useVotingEscrow()
+  const { data, claim } = useClaimer()
+  const inWallet = balances && balances[ASSETS_DICT.LAY.symbol]
+  const { ido, tokenSale } = data || EMTPY_DATA
+  const lockable = inWallet && data && BigNumber.sum(inWallet, ido, tokenSale)
   const { open } = useLockModal()
   return (
     <LayBalance
       className={className}
-      label={t`Wallet Balance`}
-      amount={balances && balances[ASSETS_DICT.LAY.symbol]}
+      label={t`Lockable Balance`}
+      amount={lockable}
+      details={[
+        {
+          label: t`Wallet`,
+          value: formatAmt(inWallet || BN_ZERO, { symbol, decimalPlaces: 2 }),
+        },
+        {
+          label: t`IDO on ArthSwap`,
+          value: formatAmt(ido, { symbol, decimalPlaces: 2 }),
+          tooltip: (
+            <Trans
+              id="You can use your unvested LAY from IDO on ArthSwap or Token Sale on Launchpad to acquire veLAY. For more information, please click <0>here</0>."
+              components={[<Link key="0" href={DOCS_VELAY} />]}
+            />
+          ),
+        },
+        {
+          label: t`Token Sale on Starlay`,
+          value: formatAmt(tokenSale, { symbol, decimalPlaces: 2 }),
+          tooltip: (
+            <Trans
+              id="You can use your unvested LAY from IDO on ArthSwap or Token Sale on Launchpad to acquire veLAY. For more information, please click <0>here</0>."
+              components={[<Link key="0" href={DOCS_VELAY} />]}
+            />
+          ),
+        },
+      ]}
       actions={[
         {
           label: t`Lock`,
@@ -119,8 +151,8 @@ export const LockedLAY = asStyled(({ className }) => {
       details={[
         {
           label: t`Locked Until`,
-          value: userData?.lockedEnd.format('DD/MM/YYYY') || '-',
-          tooltip: t`Your LAY is locked until this date. You cannot withdraw your LAY even partially until the date comes.`,
+          value: userData?.lockedEnd.format('DD/MM/YYYY HH:mm:ss') || '-',
+          tooltip: t`Your LAY is locked until this date and time. You cannot withdraw your LAY even partially until the date and time comes.`,
         },
         {
           label: t`Current Voting Power`,
@@ -134,7 +166,7 @@ export const LockedLAY = asStyled(({ className }) => {
           // locked.gt(BN_ZERO) && estimatedAnnualDividend && layPrice
           //   ? formatPct(estimatedAnnualDividend.div(locked.times(layPrice)))
           //   : '-',
-          tooltip: t`The volume weighted average APR of all your assets.`,
+          tooltip: t`The volume weighted average APR of assets you voted.`,
         },
       ]}
       actions={
@@ -157,8 +189,8 @@ export const LockedLAY = asStyled(({ className }) => {
                 onClick: claimable
                   ? () =>
                       openMessageModal({
-                        title: t`Please Claim Reward Before Withdrawing LAY`,
-                        message: t`You need to claim rewards before withdrawing unlocked LAY.`,
+                        title: t`Please Claim Dividends Before Withdrawing LAY`,
+                        message: t`You need to claim dividends before withdrawing unlocked LAY.`,
                         type: 'Alert',
                       })
                   : withdraw,
@@ -176,7 +208,7 @@ type LayBalanceProps = {
   details?: {
     label: string
     value: string
-    tooltip?: string
+    tooltip?: ReactNode
   }[]
   actions: {
     label: string
@@ -213,7 +245,7 @@ const LayBalance = styled<VFC<LayBalanceProps & { className?: string }>>(
               <DetailDiv key={label}>
                 <span>
                   {label}
-                  {tooltip && <TooltipMessage message={t({ id: tooltip })} />}
+                  {tooltip && <TooltipMessage message={tooltip} />}
                 </span>
                 <span>{value}</span>
               </DetailDiv>
