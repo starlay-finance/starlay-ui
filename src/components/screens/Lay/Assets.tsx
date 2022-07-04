@@ -254,12 +254,12 @@ export const Assets = asStyled(({ className }) => {
                   disabled={
                     !userData ||
                     userData.votingPower.isZero() ||
-                    (!(touched && currentVotingTotal === 1) &&
-                      !(
-                        !touched &&
-                        userData?.votingPower.gt(0) &&
-                        !userData.votingPower.eq(userVoteData?.votedTotal || 0)
-                      ))
+                    !(touched && currentVotingTotal === 1) ||
+                    !(
+                      !touched &&
+                      userData?.votingPower.gt(0) &&
+                      !userData.votingPower.eq(userVoteData?.votedTotal || 0)
+                    )
                   }
                 >{t`Apply`}</button>
               </Control>
@@ -273,7 +273,12 @@ export const Assets = asStyled(({ className }) => {
                 votingData,
                 setWeight: (key, weight) => {
                   setTouched(true)
-                  setVotingData({ ...votingData, [key]: weight })
+                  setVotingData({
+                    ...votingData,
+                    [key]: valueToBigNumber(weight)
+                      .decimalPlaces(4, BigNumber.ROUND_FLOOR)
+                      .toNumber(),
+                  })
                 },
                 currentVotingTotal,
                 votingPower: userData?.votingPower,
@@ -398,7 +403,7 @@ const Control = styled.div`
   justify-content: flex-end;
   align-items: center;
   flex: 1;
-  margin-left: 64px;
+  margin-left: 32px;
   column-gap: 20px;
   font-size: 14px;
   span {
