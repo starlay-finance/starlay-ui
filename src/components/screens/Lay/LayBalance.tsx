@@ -12,6 +12,7 @@ import { Reel } from 'src/components/parts/Number/Reel'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { useClaimer } from 'src/hooks/contracts/useClaimer'
+import { useTokenSaleVesting } from 'src/hooks/contracts/useTokenSaleVesting'
 import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
 import { useMarketData } from 'src/hooks/useMarketData'
@@ -67,10 +68,16 @@ export const WalletBalance = asStyled(({ className }) => {
   const { symbol } = ASSETS_DICT.LAY
   const { data: balances } = useWalletBalance(false)
   const { userData, isValidating } = useVotingEscrow()
-  const { data, claim } = useClaimer()
+  const { userData: vestingData } = useTokenSaleVesting()
   const inWallet = balances && balances[ASSETS_DICT.LAY.symbol]
-  const { ido, tokenSale } = data || EMTPY_DATA
-  const lockable = inWallet && data && BigNumber.sum(inWallet, ido, tokenSale)
+  const lockable =
+    inWallet &&
+    vestingData &&
+    BigNumber.sum(
+      inWallet,
+      vestingData.ido.lockable,
+      vestingData.tokenSale.lockable,
+    )
   const { open } = useLockModal()
   return (
     <LayBalance
@@ -84,7 +91,10 @@ export const WalletBalance = asStyled(({ className }) => {
         },
         {
           label: t`IDO on ArthSwap`,
-          value: formatAmt(ido, { symbol, decimalPlaces: 2 }),
+          value: formatAmt(vestingData?.ido.lockable || BN_ZERO, {
+            symbol,
+            decimalPlaces: 2,
+          }),
           tooltip: (
             <Trans
               id="You can use your unvested LAY from IDO on ArthSwap or Token Sale on Launchpad to acquire veLAY. For more information, please click <0>here</0>."
@@ -94,7 +104,10 @@ export const WalletBalance = asStyled(({ className }) => {
         },
         {
           label: t`Token Sale on Starlay`,
-          value: formatAmt(tokenSale, { symbol, decimalPlaces: 2 }),
+          value: formatAmt(vestingData?.tokenSale.lockable || BN_ZERO, {
+            symbol,
+            decimalPlaces: 2,
+          }),
           tooltip: (
             <Trans
               id="You can use your unvested LAY from IDO on ArthSwap or Token Sale on Launchpad to acquire veLAY. For more information, please click <0>here</0>."
