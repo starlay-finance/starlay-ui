@@ -254,12 +254,14 @@ export const Assets = asStyled(({ className }) => {
                   disabled={
                     !userData ||
                     userData.votingPower.isZero() ||
-                    !(touched && currentVotingTotal === 1) ||
-                    !(
-                      !touched &&
-                      userData?.votingPower.gt(0) &&
-                      !userData.votingPower.eq(userVoteData?.votedTotal || 0)
-                    )
+                    (!(touched && currentVotingTotal === 1) &&
+                      !(
+                        !touched &&
+                        userVoteData &&
+                        userVoteData.expiry.unix() > 0 &&
+                        userData?.votingPower.gt(0) &&
+                        !userData.votingPower.eq(userVoteData.votedTotal || 0)
+                      ))
                   }
                 >{t`Apply`}</button>
               </Control>
