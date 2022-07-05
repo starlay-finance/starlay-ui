@@ -115,7 +115,7 @@ export const LockModalBody: VFC<LockModalBodyProps> = ({
               activeTab !== 'wallet' && vesting
                 ? vesting[activeTab].vestingEnd.diff(dayjs(), 's')
                 : current
-                ? current?.lockedEnd.diff(dayjs(), 's')
+                ? current?.lockedEnd.diff(dayjs(), 's') + TERM_UNIT
                 : undefined
             }
             max={valueToBigNumber(
@@ -124,10 +124,11 @@ export const LockModalBody: VFC<LockModalBodyProps> = ({
             formatCustomValue={(num) =>
               `Until: ${dayjs
                 .unix(
-                  Math.floor((dayjs().unix() + num.toNumber()) / TERM_UNIT) *
-                    TERM_UNIT,
+                  Math.floor(
+                    (dayjs().unix() + num.toNumber() + 60) / TERM_UNIT,
+                  ) * TERM_UNIT,
                 )
-                .format('DD/MM/YYYY')}`
+                .format('DD/MM/YYYY HH:mm:ss')}`
             }
             step={TERM_UNIT}
             sliderColors={[blue, lightYellow, darkRed]}
@@ -168,14 +169,13 @@ const validate = (
     mode !== 'duration' &&
     vesting[type].vestingEnd.isAfter(dayjs().add(duration, 's'))
   )
-    return { error: t`extend lock period later than vesting end` }
+    return { error: t`need to lock longer than vesting period` }
   if (mode === 'duration') return { label: t`Extend` }
   if (amount.lte(0)) return { error: t`Enter amount` }
   if (amount.gt(lockable)) return { error: t`No balance to lock` }
   if (mode === 'amount') {
     return { label: t`Add` }
   }
-  if (mode === 'duration') return { label: t`Extend` }
   return { label: t`Lock` }
 }
 

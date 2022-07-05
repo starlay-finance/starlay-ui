@@ -870,7 +870,6 @@ msgstr "Add"
 
 #: src/components/screens/Lay/LayBalance.tsx
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
-#: src/components/screens/Lay/modals/LockModal/Body.tsx
 msgid "Extend"
 msgstr "Extend"
 
@@ -891,8 +890,8 @@ msgid "Available"
 msgstr "Available"
 
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
-msgid "extend lock period later than vesting end"
-msgstr "extend lock period later than vesting end"
+msgid "need to lock longer than vesting period"
+msgstr "need to lock longer than vesting period"
 
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
 #: src/utils/estimationHelper.ts
@@ -906,6 +905,10 @@ msgstr "Enter amount"
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
 msgid "No balance to lock"
 msgstr "No balance to lock"
+
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+#~ msgid "extend lock period later than vesting end"
+#~ msgstr "extend lock period later than vesting end"
 
 #: src/components/screens/Lay/modals/LockModal/index.tsx
 msgid "Let's Apply Voting Power You've Added"

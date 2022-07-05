@@ -866,7 +866,6 @@ msgstr ""
 
 #: src/components/screens/Lay/LayBalance.tsx
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
-#: src/components/screens/Lay/modals/LockModal/Body.tsx
 msgid "Extend"
 msgstr ""
 
@@ -887,7 +886,7 @@ msgid "Available"
 msgstr ""
 
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
-msgid "extend lock period later than vesting end"
+msgid "need to lock longer than vesting period"
 msgstr ""
 
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
@@ -902,6 +901,10 @@ msgstr "Masukan jumlah"
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
 msgid "No balance to lock"
 msgstr ""
+
+#: src/components/screens/Lay/modals/LockModal/Body.tsx
+#~ msgid "extend lock period later than vesting end"
+#~ msgstr ""
 
 #: src/components/screens/Lay/modals/LockModal/index.tsx
 msgid "Let's Apply Voting Power You've Added"
