@@ -1,4 +1,5 @@
 import { BigNumber } from '@starlay-finance/math-utils'
+import { Dayjs } from 'dayjs'
 import { LISTED_ASSET_SYMBOLS } from 'src/constants/assets'
 import { EthereumAddress } from './web3'
 
@@ -114,4 +115,5 @@ export type UserVoteData = {
       { claimableInUSD: BigNumber; weight: BigNumber; vote: BigNumber }
     >
   >
+  expiry: Dayjs
 }

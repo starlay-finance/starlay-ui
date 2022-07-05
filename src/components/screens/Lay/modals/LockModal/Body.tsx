@@ -9,6 +9,7 @@ import { useMemo, useState, VFC } from 'react'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import { RatioControl } from 'src/components/parts/Modal/parts/RatioControl'
 import { ASSETS_DICT } from 'src/constants/assets'
+import { TERM_UNIT } from 'src/hooks/contracts/useVotingEscrow'
 import { blue, darkRed, lightYellow } from 'src/styles/colors'
 import {
   SECONDS_OF_MONTH,
@@ -114,16 +115,22 @@ export const LockModalBody: VFC<LockModalBodyProps> = ({
               activeTab !== 'wallet' && vesting
                 ? vesting[activeTab].vestingEnd.diff(dayjs(), 's')
                 : current
-                ? current?.lockedEnd.diff(dayjs(), 's')
+                ? current?.lockedEnd.diff(dayjs(), 's') + TERM_UNIT
                 : undefined
             }
             max={valueToBigNumber(
               DURATION_LIST[DURATION_LIST.length - 1].value,
             )}
             formatCustomValue={(num) =>
-              `Until: ${dayjs().add(num.toNumber(), 's').format('DD/MM/YYYY')}`
+              `Until: ${dayjs
+                .unix(
+                  Math.floor(
+                    (dayjs().unix() + num.toNumber() + 60) / TERM_UNIT,
+                  ) * TERM_UNIT,
+                )
+                .format('DD/MM/YYYY HH:mm:ss')}`
             }
-            step={SECONDS_OF_WEEK}
+            step={TERM_UNIT}
             sliderColors={[blue, lightYellow, darkRed]}
             customLabel={t`Custom`}
             disabled={mode === 'amount'}
@@ -162,13 +169,13 @@ const validate = (
     mode !== 'duration' &&
     vesting[type].vestingEnd.isAfter(dayjs().add(duration, 's'))
   )
-    return { error: t`extend lock period later than vesting end` }
+    return { error: t`need to lock longer than vesting period` }
+  if (mode === 'duration') return { label: t`Extend` }
   if (amount.lte(0)) return { error: t`Enter amount` }
   if (amount.gt(lockable)) return { error: t`No balance to lock` }
   if (mode === 'amount') {
     return { label: t`Add` }
   }
-  if (mode === 'duration') return { label: t`Extend` }
   return { label: t`Lock` }
 }
 
@@ -176,8 +183,8 @@ const DURATION_LIST = [
   { label: '1 Month', value: SECONDS_OF_MONTH },
   { label: '3 Months', value: SECONDS_OF_MONTH * 3 },
   { label: '6 Months', value: SECONDS_OF_MONTH * 6 },
-  { label: '1 Year', value: SECONDS_OF_YEAR },
-  { label: '2 Year', value: SECONDS_OF_YEAR * 2 },
+  { label: '1 Year', value: SECONDS_OF_YEAR + TERM_UNIT },
+  { label: '2 Years', value: SECONDS_OF_YEAR * 2 },
 ]
 
 const ActionTab: TabFC = Tab

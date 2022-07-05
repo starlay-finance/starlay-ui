@@ -55,7 +55,7 @@ export const useTxHandler = () => {
         open({
           type: 'Loading',
           title: t`Confirm Transaction`,
-          message: t`Approve sending the ERC-20 asset to the pool.`,
+          message: t`Approve sending your asset...`,
         })
         const tx = await erc20ApprovalTx.tx()
         const approveRes = await signer.sendTransaction({ ...tx, gasPrice })

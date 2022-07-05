@@ -23,12 +23,19 @@ export const Slider = styled<VFC<SliderProps & { className?: string }>>(
         colors={[purple, gray]}
         styles={{ barometer: barometerStyle, thumb: thumbStyle }}
         chartStyle={{
-          background: `linear-gradient(to right,${[
-            purple,
-            `${purple} ${Math.floor(current * 100)}%`,
-            `${gray} ${Math.floor(current * 100)}%`,
-            `${gray}`,
-          ].join(',')}`,
+          background: disabled
+            ? `linear-gradient(to right,${[
+                `${purple}80`,
+                `${purple}80 ${Math.floor(current * 100)}%`,
+                `${gray} ${Math.floor(current * 100)}%`,
+                `${gray}`,
+              ].join(',')}`
+            : `linear-gradient(to right,${[
+                purple,
+                `${purple} ${Math.floor(current * 100)}%`,
+                `${gray} ${Math.floor(current * 100)}%`,
+                `${gray}`,
+              ].join(',')}`,
         }}
         rangeInputProps={{
           ...inputProps,
