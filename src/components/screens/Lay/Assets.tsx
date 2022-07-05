@@ -22,7 +22,7 @@ import { AssetMarketData, UserVoteData, VoteData } from 'src/types/models'
 import { filterFalsy } from 'src/utils/array'
 import { symbolSorter } from 'src/utils/market'
 import { BN_ZERO, formatAmtShort, formatPct, formatUSD } from 'src/utils/number'
-import { DOCS_VELAY } from 'src/utils/routes'
+import { DOCS_VELAY_CLAIM, DOCS_VELAY_TERMS } from 'src/utils/routes'
 import styled from 'styled-components'
 import { Slider } from './Slider'
 
@@ -34,7 +34,7 @@ const STATS_COLUMNS = [
     tooltip: (
       <Trans
         id="The revenue of the protocol in the last term. For more detail, please refer <0>here</0>."
-        components={[<Link key="0" href={DOCS_VELAY} />]}
+        components={[<Link key="0" href={DOCS_VELAY_TERMS} />]}
       />
     ),
     widthRatio: 4,
@@ -63,7 +63,7 @@ const STATS_COLUMNS = [
     tooltip: (
       <Trans
         id="Dividends you can claim from the revenue of the term your voting results applied. For more detail, please click <0>here</0>."
-        components={[<Link key="0" href={DOCS_VELAY} />]}
+        components={[<Link key="0" href={DOCS_VELAY_CLAIM} />]}
       />
     ),
     tooltipPosition: 'right',
@@ -226,12 +226,7 @@ export const Assets = asStyled(({ className }) => {
                       : '-'
                   }`}
                   <TooltipMessage
-                    message={
-                      <Trans
-                        id="Your voting ranges will be applied until the Expiry. All ranges will become 0 after that. For more information, please click <0>here</0>."
-                        components={[<Link key="0" href={DOCS_VELAY} />]}
-                      />
-                    }
+                    message={t`Your voting ranges will be applied until the Expiry. All ranges will become 0 after that.`}
                   />
                 </span>
                 <button

@@ -786,7 +786,7 @@ msgid "Expiry: {0}"
 msgstr ""
 
 #: src/components/screens/Lay/Assets.tsx
-msgid "Your voting ranges will be applied until the Expiry. All ranges will become 0 after that. For more information, please click <0>here</0>."
+msgid "Your voting ranges will be applied until the Expiry. All ranges will become 0 after that."
 msgstr ""
 
 #: src/components/screens/Lay/Assets.tsx
@@ -823,7 +823,7 @@ msgstr ""
 
 #: src/components/screens/Lay/LayBalance.tsx
 #: src/components/screens/Lay/LayBalance.tsx
-msgid "You can use your unvested LAY from IDO on ArthSwap or Token Sale on Launchpad to acquire veLAY. For more information, please click <0>here</0>."
+msgid "You can use your unvested LAY from IDO on ArthSwap or Token Sale on Launchpad to acquire veLAY. You need to lock longer the vesting period."
 msgstr ""
 
 #: src/components/screens/Lay/LayBalance.tsx
@@ -901,10 +901,6 @@ msgstr "Masukan jumlah"
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
 msgid "No balance to lock"
 msgstr ""
-
-#: src/components/screens/Lay/modals/LockModal/Body.tsx
-#~ msgid "extend lock period later than vesting end"
-#~ msgstr ""
 
 #: src/components/screens/Lay/modals/LockModal/index.tsx
 msgid "Let's Apply Voting Power You've Added"

@@ -5,7 +5,11 @@ export const DOCS = 'https://docs.starlay.finance'
 export const DOCS_RISK = 'https://docs.starlay.finance/asset/risk-parameters'
 export const DOCS_MAKAI = 'https://docs.starlay.finance/function/makai'
 export const DOCS_LAUNCHPAD = 'https://docs.starlay.finance/function/launchpad'
-export const DOCS_VELAY = 'TODO'
+export const DOCS_VELAY = 'https://docs.starlay.finance/function/lock-vote'
+export const DOCS_VELAY_TERMS =
+  'https://docs.starlay.finance/function/lock-vote#terminology'
+export const DOCS_VELAY_CLAIM =
+  'https://docs.starlay.finance/function/lock-vote#terminology'
 export const DISCORD = 'https://discord.gg/M4NjBJZ94b'
 export const GITHUB = 'https://github.com/starlay-finance'
 export const MEDIA_KIT = 'https://github.com/starlay-finance/media-kit'

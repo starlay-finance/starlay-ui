@@ -1,10 +1,8 @@
 import { t } from '@lingui/macro'
-import { Trans } from '@lingui/react'
 import { BigNumber } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
 import { ReactNode, VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
-import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
@@ -27,7 +25,6 @@ import {
 } from 'src/styles/font'
 import { equals } from 'src/utils/address'
 import { BN_ZERO, formatAmt, formatAmtShort, formatUSD } from 'src/utils/number'
-import { DOCS_VELAY } from 'src/utils/routes'
 import styled from 'styled-components'
 import { useLockModal } from './modals/LockModal'
 
@@ -95,12 +92,7 @@ export const WalletBalance = asStyled(({ className }) => {
             symbol,
             decimalPlaces: 2,
           }),
-          tooltip: (
-            <Trans
-              id="You can use your unvested LAY from IDO on ArthSwap or Token Sale on Launchpad to acquire veLAY. For more information, please click <0>here</0>."
-              components={[<Link key="0" href={DOCS_VELAY} />]}
-            />
-          ),
+          tooltip: t`You can use your unvested LAY from IDO on ArthSwap or Token Sale on Launchpad to acquire veLAY. You need to lock longer the vesting period.`,
         },
         {
           label: t`Token Sale on Starlay`,
@@ -108,12 +100,7 @@ export const WalletBalance = asStyled(({ className }) => {
             symbol,
             decimalPlaces: 2,
           }),
-          tooltip: (
-            <Trans
-              id="You can use your unvested LAY from IDO on ArthSwap or Token Sale on Launchpad to acquire veLAY. For more information, please click <0>here</0>."
-              components={[<Link key="0" href={DOCS_VELAY} />]}
-            />
-          ),
+          tooltip: t`You can use your unvested LAY from IDO on ArthSwap or Token Sale on Launchpad to acquire veLAY. You need to lock longer the vesting period.`,
         },
       ]}
       actions={[
