@@ -26,21 +26,20 @@ export const Lock: VFC<
   const { open, close: closeMessageModal } = useMessageModal()
   const suggestPokeOnVotingPowerIncreased = () => {
     if (!userVoteData) return
-    const weights = Object.values(userVoteData)
+    const weights = Object.values(userVoteData.data)
       .filter(filterFalsy)
       .map(({ weight }) => weight)
     if (!weights.length || !weights.some((weight) => weight.isZero())) return
     open({
-      title: t`Apply Voting Power`,
+      title: t`Let's Apply Voting Power You've Added`,
       children: (
         <SuggestDiv>
-          {t`To apply the increased voting power, you need to send a transaction.
-You can also apply from the vote screen with changing vote settings later.`}
+          {t`To apply the voting power you just added by locking additional LAY to your votes, please click "Apply". This can be done from "Apply" button in the "Vote" tab. Otherwise, the voting power you added won't be reflected in your current votes.`}
           <div>
             <SimpleCtaButton
               onClick={closeMessageModal}
             >{t`Later`}</SimpleCtaButton>
-            <SimpleCtaButton onClick={poke}>{t`Apply`}</SimpleCtaButton>
+            <SimpleCtaButton onClick={() => poke()}>{t`Apply`}</SimpleCtaButton>
           </div>
         </SuggestDiv>
       ),

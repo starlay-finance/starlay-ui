@@ -1,16 +1,19 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
-import { VFC } from 'react'
+import { ReactNode, VFC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
 import { Reel } from 'src/components/parts/Number/Reel'
+import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { useClaimer } from 'src/hooks/contracts/useClaimer'
+import { useTokenSaleVesting } from 'src/hooks/contracts/useTokenSaleVesting'
 import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
+import { useMarketData } from 'src/hooks/useMarketData'
 import { useVoteData } from 'src/hooks/useVoteData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
@@ -20,7 +23,8 @@ import {
   fontWeightMedium,
   fontWeightSemiBold,
 } from 'src/styles/font'
-import { BN_ZERO, formatAmt, formatPct, formatUSD } from 'src/utils/number'
+import { equals } from 'src/utils/address'
+import { BN_ZERO, formatAmt, formatAmtShort, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
 import { useLockModal } from './modals/LockModal'
 
@@ -43,9 +47,12 @@ export const UnclaimedLAY = asStyled(({ className }) => {
           label: t`Rewards`,
           value: formatAmt(rewards, { symbol, decimalPlaces: 2 }),
         },
-        { label: t`IDO`, value: formatAmt(ido, { symbol, decimalPlaces: 2 }) },
         {
-          label: t`Token Sale`,
+          label: t`IDO on ArthSwap`,
+          value: formatAmt(ido, { symbol, decimalPlaces: 2 }),
+        },
+        {
+          label: t`Token Sale on Starlay`,
           value: formatAmt(tokenSale, { symbol, decimalPlaces: 2 }),
         },
       ]}
@@ -55,14 +62,47 @@ export const UnclaimedLAY = asStyled(({ className }) => {
 })``
 
 export const WalletBalance = asStyled(({ className }) => {
+  const { symbol } = ASSETS_DICT.LAY
   const { data: balances } = useWalletBalance(false)
   const { userData, isValidating } = useVotingEscrow()
+  const { userData: vestingData } = useTokenSaleVesting()
+  const inWallet = balances && balances[ASSETS_DICT.LAY.symbol]
+  const lockable =
+    inWallet &&
+    vestingData &&
+    BigNumber.sum(
+      inWallet,
+      vestingData.ido.lockable,
+      vestingData.tokenSale.lockable,
+    )
   const { open } = useLockModal()
   return (
     <LayBalance
       className={className}
-      label={t`Wallet Balance`}
-      amount={balances && balances[ASSETS_DICT.LAY.symbol]}
+      label={t`Lockable Balance`}
+      amount={lockable}
+      details={[
+        {
+          label: t`Wallet`,
+          value: formatAmt(inWallet || BN_ZERO, { symbol, decimalPlaces: 2 }),
+        },
+        {
+          label: t`IDO on ArthSwap`,
+          value: formatAmt(vestingData?.ido.lockable || BN_ZERO, {
+            symbol,
+            decimalPlaces: 2,
+          }),
+          tooltip: t`You can use your unvested LAY from IDO on ArthSwap or Token Sale on Launchpad to acquire veLAY. You need to lock longer the vesting period.`,
+        },
+        {
+          label: t`Token Sale on Starlay`,
+          value: formatAmt(vestingData?.tokenSale.lockable || BN_ZERO, {
+            symbol,
+            decimalPlaces: 2,
+          }),
+          tooltip: t`You can use your unvested LAY from IDO on ArthSwap or Token Sale on Launchpad to acquire veLAY. You need to lock longer the vesting period.`,
+        },
+      ]}
       actions={[
         {
           label: t`Lock`,
@@ -75,8 +115,9 @@ export const WalletBalance = asStyled(({ className }) => {
 })``
 
 export const LockedLAY = asStyled(({ className }) => {
+  const { data: marketData } = useMarketData()
   const { userData, withdraw, isValidating } = useVotingEscrow()
-  const { userData: voteData } = useVoteData()
+  const { data, userData: voteData } = useVoteData()
   const { data: layPrice } = useLAYPrice()
   const { open } = useLockModal()
   const { open: openMessageModal } = useMessageModal()
@@ -84,6 +125,24 @@ export const LockedLAY = asStyled(({ className }) => {
   const locked = userData?.locked || BN_ZERO
   const expired = userData?.lockedEnd.isBefore(dayjs())
   const claimable = voteData?.claimableTotalInUSD.gt(BN_ZERO)
+  const lastWeekDividendInUSD =
+    data &&
+    voteData &&
+    marketData &&
+    Object.keys(voteData.data)
+      .filter((key) => voteData.data[key]?.vote.gt(BN_ZERO))
+      .reduce((res, key) => {
+        const voted = voteData.data[key]!.vote
+        const { weight, lastWeekRevenueInUSD } = data.data[key]!
+        const dividend = lastWeekRevenueInUSD.times(voted.div(weight))
+        const priceInUSD =
+          marketData.assets.find(({ lTokenAddress }) =>
+            equals(key, lTokenAddress),
+          )?.priceInMarketReferenceCurrency || BN_ZERO
+        return res.plus(dividend.times(priceInUSD))
+      }, BN_ZERO)
+  const estimatedAnnualDividend =
+    lastWeekDividendInUSD && lastWeekDividendInUSD.div(14).times(365)
   return (
     <LayBalance
       className={className}
@@ -92,16 +151,22 @@ export const LockedLAY = asStyled(({ className }) => {
       details={[
         {
           label: t`Locked Until`,
-          value: userData?.lockedEnd.format('DD/MM/YYYY') || '-',
+          value: userData?.lockedEnd.format('DD/MM/YYYY HH:mm:ss') || '-',
+          tooltip: t`Your LAY is locked until this date and time. You cannot withdraw your LAY even partially until the date and time comes.`,
         },
         {
-          label: t`Current APY`,
-          value:
-            locked.gt(BN_ZERO) && voteData && layPrice
-              ? formatPct(
-                  voteData.claimableTotalInUSD.div(locked).div(layPrice),
-                )
-              : '-',
+          label: t`Current Voting Power`,
+          value: voteData ? formatAmtShort(voteData.powerTotal) : '-',
+          tooltip: t`As the remaining lock period gets shorter, voting power decreases linearly.`,
+        },
+        {
+          label: t`Current Est. Avg. APR`,
+          value: '-',
+          // TODO temporarily
+          // locked.gt(BN_ZERO) && estimatedAnnualDividend && layPrice
+          //   ? formatPct(estimatedAnnualDividend.div(locked.times(layPrice)))
+          //   : '-',
+          tooltip: t`The volume weighted average APR of assets you voted.`,
         },
       ]}
       actions={
@@ -124,8 +189,8 @@ export const LockedLAY = asStyled(({ className }) => {
                 onClick: claimable
                   ? () =>
                       openMessageModal({
-                        title: t`Unclaimed vote reward remain`,
-                        message: t`You need to claim it before withdrawal.`,
+                        title: t`Please Claim Dividends Before Withdrawing LAY`,
+                        message: t`You need to claim dividends before withdrawing unlocked LAY.`,
                         type: 'Alert',
                       })
                   : withdraw,
@@ -143,6 +208,7 @@ type LayBalanceProps = {
   details?: {
     label: string
     value: string
+    tooltip?: ReactNode
   }[]
   actions: {
     label: string
@@ -175,9 +241,12 @@ const LayBalance = styled<VFC<LayBalanceProps & { className?: string }>>(
         </LayAmount>
         {details && (
           <DetailsDiv>
-            {details.map(({ label, value }) => (
+            {details.map(({ label, value, tooltip }) => (
               <DetailDiv key={label}>
-                <span>{label}</span>
+                <span>
+                  {label}
+                  {tooltip && <TooltipMessage message={tooltip} />}
+                </span>
                 <span>{value}</span>
               </DetailDiv>
             ))}
@@ -210,8 +279,15 @@ const DetailDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  > span:first-child {
+    display: flex;
+    column-gap: 4px;
+  }
   > span:last-child {
     color: ${primary}a3;
+  }
+  ${TooltipMessage} {
+    width: 240px;
   }
 `
 

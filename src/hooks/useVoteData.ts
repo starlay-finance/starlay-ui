@@ -36,7 +36,7 @@ export const useVoteData = () => {
 
   const _userVoteData = market.assets.reduce(
     (res, { lTokenAddress, decimals, priceInMarketReferenceCurrency }) => {
-      const item = userVoteData[lTokenAddress.toLowerCase()]
+      const item = userVoteData.data[lTokenAddress.toLowerCase()]
       if (!item) return res
       const claimableInUSD = normalizeBN(
         item.rawClaimable.toString(),
@@ -66,6 +66,7 @@ export const useVoteData = () => {
     userData: {
       powerTotal: userData.votingPower,
       ..._userVoteData,
+      expiry: userVoteData.expiry,
     },
   }
 }

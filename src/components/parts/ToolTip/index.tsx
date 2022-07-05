@@ -41,7 +41,6 @@ const IconSpan = styled.span``
 const Content = styled.div``
 const TooltipContainer = styled.div<{ position: ToolTipPosition }>`
   position: relative;
-  flex: 1;
   > span {
     margin-right: 4px;
   }

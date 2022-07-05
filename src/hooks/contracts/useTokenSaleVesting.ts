@@ -49,13 +49,13 @@ export const useTokenSaleVesting = () => {
 
   const lock = async (
     type: TokenSaleType,
-    _amount: BigNumber,
+    amountBn: BigNumber,
     duration: number,
     onSuccess?: VoidFunction,
   ) => {
     if (!account || !signer || !contracts) throw new Error('Unexpected state')
     const lockerId = userLockData?.lockerId
-    const amount = ethers.BigNumber.from(_amount.toString())
+    const amount = amountBn.toString()
     if (!lockerId || lockerId.isZero())
       return handleTx(
         await contracts[type].lock({ user: account, amount, duration }),

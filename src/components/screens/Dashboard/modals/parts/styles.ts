@@ -22,6 +22,9 @@ export const ContentDiv = styled.div`
   }
   ${SimpleCtaButton} {
     text-transform: uppercase;
+    :enabled {
+      cursor: pointer;
+    }
   }
   ${Action} {
     padding: 32px;
