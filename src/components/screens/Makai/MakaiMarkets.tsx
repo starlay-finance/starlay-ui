@@ -130,11 +130,11 @@ const marketRow = ({
   return {
     id: symbol,
     onClick,
-    disabled:
-      borrowUnsupported ||
-      makaiUnsupported ||
-      !usageAsCollateralEnabled ||
-      isFrozen,
+    disabled: true,
+    // borrowUnsupported ||
+    // makaiUnsupported ||
+    // !usageAsCollateralEnabled ||
+    // isFrozen,
     data: {
       asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
       makaiAPR:
