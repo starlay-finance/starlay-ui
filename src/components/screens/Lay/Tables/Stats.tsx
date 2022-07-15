@@ -139,7 +139,12 @@ const statsRow = ({
         `${formatAmtShort(assetVoteData.weight)}(${formatPct(
           assetVoteData.weight.div(voteData.total),
         )})`,
-      weight: userAssetVoteData ? formatAmtShort(userAssetVoteData.vote) : '-',
+      weight:
+        userAssetVoteData && assetVoteData
+          ? `${formatAmtShort(userAssetVoteData.vote)}(${formatPct(
+              userAssetVoteData.vote.div(assetVoteData.weight),
+            )})`
+          : '-',
       claimable: userAssetVoteData
         ? formatUSD(userAssetVoteData.claimableInUSD, {
             decimalPlaces: 2,
