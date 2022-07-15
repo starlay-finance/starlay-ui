@@ -6,6 +6,7 @@ import styled from 'styled-components'
 
 export const TABS = [
   { id: 'stats', label: t`Stats` },
+  { id: 'realtime', label: t`Realtime` },
   { id: 'votes', label: t`Votes` },
 ] as const
 

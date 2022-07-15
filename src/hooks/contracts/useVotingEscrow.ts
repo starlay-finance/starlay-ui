@@ -19,8 +19,9 @@ import { useWallet } from '../useWallet'
 import { useTxHandler } from './txHandler'
 
 export const TERM_UNIT = SECONDS_OF_WEEK * 2
-export const useVotingEscrow = () => {
-  const nextTerm = Math.ceil(dayjs().unix() / TERM_UNIT) * TERM_UNIT
+export const useVotingEscrow = (offset = 0) => {
+  const term =
+    Math.ceil(dayjs().unix() / TERM_UNIT) * TERM_UNIT + TERM_UNIT * offset
 
   const { data: provider } = useStaticRPCProvider()
   const { account, signer } = useWallet()
@@ -36,8 +37,7 @@ export const useVotingEscrow = () => {
     mutate: mutateData,
     isValidating: isValidatingData,
   } = useSWRImmutable(
-    provider &&
-      votingEscrow && ['votingescrow-data', provider.chainId, nextTerm],
+    provider && votingEscrow && ['votingescrow-data', provider.chainId, term],
     async (_1, _2, term) => fetchData(votingEscrow!, term),
   )
   const {
@@ -49,7 +49,7 @@ export const useVotingEscrow = () => {
       'votingescrow-userdata',
       provider.chainId,
       account,
-      nextTerm,
+      term,
     ],
     async (_1, _2, account, term) =>
       fetchUserData(votingEscrow!, account, term),
@@ -117,7 +117,7 @@ export const useVotingEscrow = () => {
   return {
     ...data,
     userData,
-    nextTerm,
+    term,
     lock,
     withdraw,
     mutate,
@@ -137,6 +137,7 @@ const init = async (provider: StaticRPCProvider) => {
 
 const fetchData = async (votingEscrow: VotingEscrow, timestamp: number) => {
   const lockData = await votingEscrow.lockData({ timestamp })
+  console.log(timestamp)
   return {
     totalVotingPower: normalizeBN(
       lockData.totalVotingPower.toString(),
@@ -155,6 +156,7 @@ const fetchUserData = async (
     user: account,
     timestamp,
   })
+  console.log(timestamp)
   return (
     userData && {
       lockerId: userData.lockerId,

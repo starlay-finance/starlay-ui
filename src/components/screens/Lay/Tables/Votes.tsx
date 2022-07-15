@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import { VFC } from 'react'
 import {
   AssetTd,
-  MarketTable
+  MarketTable,
 } from 'src/components/compositions/Markets/MarketTable'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { useVoter } from 'src/hooks/contracts/useVoter'
@@ -60,7 +60,7 @@ export const VotesTable: VFC<VotesTableProps> = ({
   touch,
   setVotingData,
 }) => {
-  const { userData, nextTerm } = useVotingEscrow()
+  const { userData, term } = useVotingEscrow()
   const { vote } = useVoter()
 
   const currentVotingTotal =
@@ -68,7 +68,7 @@ export const VotesTable: VFC<VotesTableProps> = ({
       Object.values(votingData).reduce((res = 0, num = 0) => res + num)) ||
     0
 
-  const nextTermDayjs = dayjs.unix(nextTerm)
+  const nextTermDayjs = dayjs.unix(term)
   const votingPowerAvailable = userData?.lockedEnd.isAfter(nextTermDayjs)
   return (
     <MarketTable

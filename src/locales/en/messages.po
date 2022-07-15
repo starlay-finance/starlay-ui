@@ -227,8 +227,8 @@ msgid "Price"
 msgstr "Price"
 
 #: src/components/parts/Modal/RewardModal/index.tsx
-#: src/components/screens/Lay/Assets.tsx
 #: src/components/screens/Lay/LayBalance.tsx
+#: src/components/screens/Lay/Tables/Stats.tsx
 #: src/components/screens/Makai/UnclaimedReward.tsx
 msgid "Claim"
 msgstr "Claim"
@@ -427,6 +427,10 @@ msgstr "Max"
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Lay/Assets.tsx
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Realtime.tsx
+#: src/components/screens/Lay/Tables/Stats.tsx
+#: src/components/screens/Lay/Tables/Votes.tsx
 #: src/components/screens/Makai/MakaiMarkets.tsx
 #: src/components/screens/Markets/Assets.tsx
 msgid "Asset"
@@ -705,98 +709,100 @@ msgid "Price Per LAY"
 msgstr "Price Per LAY"
 
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Stats.tsx
 msgid "Last Term Revenue"
 msgstr "Last Term Revenue"
 
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Stats.tsx
 msgid "The revenue of the protocol in the last term. For more detail, please refer <0>here</0>."
 msgstr "The revenue of the protocol in the last term. For more detail, please refer <0>here</0>."
 
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Stats.tsx
 msgid "Dividend APR"
 msgstr "Dividend APR"
 
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Stats.tsx
 msgid "Estimated APR of dividends calculated from Last Term Revenue."
 msgstr "Estimated APR of dividends calculated from Last Term Revenue."
 
 #: src/components/screens/Lay/Assets.tsx
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Realtime.tsx
+#: src/components/screens/Lay/Tables/Stats.tsx
+#: src/components/screens/Lay/Tables/Votes.tsx
 msgid "Total Weight"
 msgstr "Total Weight"
 
 #: src/components/screens/Lay/Assets.tsx
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Realtime.tsx
+#: src/components/screens/Lay/Tables/Stats.tsx
+#: src/components/screens/Lay/Tables/Votes.tsx
 msgid "The total number and percentage of voting power each asset obtained."
 msgstr "The total number and percentage of voting power each asset obtained."
 
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Realtime.tsx
+#: src/components/screens/Lay/Tables/Stats.tsx
 msgid "Your Weight"
 msgstr "Your Weight"
 
 #: src/components/screens/Lay/Assets.tsx
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Realtime.tsx
+#: src/components/screens/Lay/Tables/Stats.tsx
+#: src/components/screens/Lay/Tables/Votes.tsx
 msgid "The number of voting power you voted for each asset."
 msgstr "The number of voting power you voted for each asset."
 
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Stats.tsx
 msgid "Claimable Amount"
 msgstr "Claimable Amount"
 
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Realtime.tsx
+#: src/components/screens/Lay/Tables/Stats.tsx
 msgid "Dividends you can claim from the revenue of the term your voting results applied. For more detail, please click <0>here</0>."
 msgstr "Dividends you can claim from the revenue of the term your voting results applied. For more detail, please click <0>here</0>."
 
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Realtime.tsx
+msgid "Earned Revenue"
+msgstr "Earned Revenue"
+
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Realtime.tsx
+msgid "The revenue of the protocol in this term. For more detail, please refer <0>here</0>."
+msgstr "The revenue of the protocol in this term. For more detail, please refer <0>here</0>."
+
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Realtime.tsx
+msgid "You Dividend"
+msgstr "You Dividend"
+
+#: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Votes.tsx
 msgid "Voted Weight"
 msgstr "Voted Weight"
 
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Votes.tsx
 msgid "Voting Allocations"
 msgstr "Voting Allocations"
 
 #: src/components/screens/Lay/Assets.tsx
+#: src/components/screens/Lay/Tables/Votes.tsx
 msgid "The number and percentage of voting power you apply for each asset."
 msgstr "The number and percentage of voting power you apply for each asset."
-
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Assets.tsx
-msgid "Stats"
-msgstr "Stats"
-
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Assets.tsx
-msgid "Votes"
-msgstr "Votes"
-
-#: src/components/screens/Lay/Assets.tsx
-msgid "Total Claimable: {0}"
-msgstr "Total Claimable: {0}"
-
-#: src/components/screens/Lay/Assets.tsx
-msgid "Voting Term: {0} - {1}"
-msgstr "Voting Term: {0} - {1}"
-
-#: src/components/screens/Lay/Assets.tsx
-msgid "Voting Power Used: {0}"
-msgstr "Voting Power Used: {0}"
-
-#: src/components/screens/Lay/Assets.tsx
-msgid "The fraction of voting power you use and you have. To apply on-chain, you must use 100% of the voting power and click \"Apply.\""
-msgstr "The fraction of voting power you use and you have. To apply on-chain, you must use 100% of the voting power and click \"Apply.\""
-
-#: src/components/screens/Lay/Assets.tsx
-msgid "Expiry: {0}"
-msgstr "Expiry: {0}"
-
-#: src/components/screens/Lay/Assets.tsx
-msgid "Your voting ranges will be applied until the Expiry. All ranges will become 0 after that."
-msgstr "Your voting ranges will be applied until the Expiry. All ranges will become 0 after that."
-
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/modals/LockModal/index.tsx
-msgid "Apply"
-msgstr "Apply"
 
 #: src/components/screens/Lay/LayBalance.tsx
 #: src/components/screens/Makai/UnclaimedReward.tsx
@@ -880,6 +886,51 @@ msgstr "Please Claim Dividends Before Withdrawing LAY"
 #: src/components/screens/Lay/LayBalance.tsx
 msgid "You need to claim dividends before withdrawing unlocked LAY."
 msgstr "You need to claim dividends before withdrawing unlocked LAY."
+
+#: src/components/screens/Lay/Tables/Realtime.tsx
+msgid "Term: {0} - {1}"
+msgstr "Term: {0} - {1}"
+
+#: src/components/screens/Lay/Tables/Stats.tsx
+msgid "Total Claimable: {0}"
+msgstr "Total Claimable: {0}"
+
+#: src/components/screens/Lay/Tables/Votes.tsx
+msgid "Voting Term: {0} - {1}"
+msgstr "Voting Term: {0} - {1}"
+
+#: src/components/screens/Lay/Tables/Votes.tsx
+msgid "Voting Power Used: {0}"
+msgstr "Voting Power Used: {0}"
+
+#: src/components/screens/Lay/Tables/Votes.tsx
+msgid "The fraction of voting power you use and you have. To apply on-chain, you must use 100% of the voting power and click \"Apply.\""
+msgstr "The fraction of voting power you use and you have. To apply on-chain, you must use 100% of the voting power and click \"Apply.\""
+
+#: src/components/screens/Lay/Tables/Votes.tsx
+msgid "Expiry: {0}"
+msgstr "Expiry: {0}"
+
+#: src/components/screens/Lay/Tables/Votes.tsx
+msgid "Your voting ranges will be applied until the Expiry. All ranges will become 0 after that."
+msgstr "Your voting ranges will be applied until the Expiry. All ranges will become 0 after that."
+
+#: src/components/screens/Lay/Tables/Votes.tsx
+#: src/components/screens/Lay/modals/LockModal/index.tsx
+msgid "Apply"
+msgstr "Apply"
+
+#: src/components/screens/Lay/Tables/common.tsx
+msgid "Stats"
+msgstr "Stats"
+
+#: src/components/screens/Lay/Tables/common.tsx
+msgid "Realtime"
+msgstr "Realtime"
+
+#: src/components/screens/Lay/Tables/common.tsx
+msgid "Votes"
+msgstr "Votes"
 
 #: src/components/screens/Lay/modals/LockModal/Body.tsx
 msgid "Duration"

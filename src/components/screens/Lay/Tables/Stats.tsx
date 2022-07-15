@@ -25,7 +25,7 @@ const STATS_COLUMNS = [
         components={[<Link key="0" href={DOCS_VELAY_TERMS} />]}
       />
     ),
-    widthRatio: 4,
+    widthRatio: 2,
   },
   {
     id: 'apr',

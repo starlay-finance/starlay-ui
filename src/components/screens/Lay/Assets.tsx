@@ -13,6 +13,7 @@ import { symbolSorter } from 'src/utils/market'
 import { DOCS_VELAY_CLAIM, DOCS_VELAY_TERMS } from 'src/utils/routes'
 import styled from 'styled-components'
 import { Slider } from './Slider'
+import { RealtimeTable } from './Tables/Realtime'
 import { StatsTable } from './Tables/Stats'
 import { VotesTable } from './Tables/Votes'
 
@@ -129,9 +130,9 @@ export const Assets = asStyled(({ className }) => {
   const [votingData, setVotingData] =
     useState<Partial<Record<string, number>>>()
   const [touched, setTouched] = useState(false)
+  const { data: voteData, userData: userVoteData } = useVoteData(0)
 
   const { data: marketData } = useMarketData()
-  const { data: voteData, userData: userVoteData } = useVoteData()
   const { data: layPrice } = useLAYPrice()
   const assets = marketData?.assets || []
   const markets = assets.filter((each) => each.isActive).sort(symbolSorter)
@@ -172,6 +173,9 @@ export const Assets = asStyled(({ className }) => {
             changeTab={setActiveTab}
           />
         )}
+        {activeTab == 'realtime' && (
+          <RealtimeTable markets={markets} changeTab={setActiveTab} />
+        )}
         {activeTab == 'votes' && (
           <VotesTable
             markets={markets}
@@ -194,6 +198,7 @@ const DetailsSection = styled.section`
   table {
     ${Slider} {
       margin-left: 16px;
+      width: 96%;
     }
   }
 `
