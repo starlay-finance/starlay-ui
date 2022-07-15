@@ -10,7 +10,7 @@ export type TableFC = <T extends string>(
   props: {
     caption?: string
     tabs?: {
-      items: { id: string; label: string }[]
+      items: readonly { id: string; label: string }[]
       setTab: (id: string) => void
       activeTab: string
     }
