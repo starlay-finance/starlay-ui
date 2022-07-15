@@ -20,19 +20,19 @@ const VOTES_COLUMNS = [
   {
     id: 'totalWeight',
     name: t`Total Weight`,
-    tooltip: t`The total number and percentage of voting power each asset obtained.`,
+    tooltip: t`The total number and percentage of voting power each asset obtained planned to be applied for the next Term.`,
     widthRatio: 3,
   },
   {
     id: 'votedWeight',
     name: t`Voted Weight`,
-    tooltip: t`The number of voting power you voted for each asset.`,
+    tooltip: t`The number of voting power you voted for each asset which will be applied for the next Term.`,
     widthRatio: 3,
   },
   {
     id: 'voting',
     name: t`Voting Allocations`,
-    tooltip: t`The number and percentage of voting power you apply for each asset.`,
+    tooltip: t`The number and percentage of voting power you apply for each asset for the next Term.`,
     widthRatio: 3,
   },
   { id: 'votingSlider', name: '', widthRatio: 6 },

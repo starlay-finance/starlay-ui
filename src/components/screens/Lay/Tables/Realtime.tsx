@@ -22,7 +22,7 @@ const REALTIME_COLUMNS = [
     name: t`Earned Revenue`,
     tooltip: (
       <Trans
-        id="The revenue of the protocol in this term. For more detail, please refer <0>here</0>."
+        id="The revenue of the protocol so far in the current Term. For more detail, please refer <0>here</0>."
         components={[<Link key="0" href={DOCS_VELAY_TERMS} />]}
       />
     ),
@@ -30,13 +30,13 @@ const REALTIME_COLUMNS = [
   },
   {
     id: 'totalWeight',
-    name: t`Total Weight`,
+    name: t`Applied Total Weight`,
     tooltip: t`The total number and percentage of voting power each asset obtained.`,
     widthRatio: 3,
   },
   {
     id: 'weight',
-    name: t`Your Weight`,
+    name: t`Your Applied Weight`,
     tooltip: t`The number of voting power you voted for each asset.`,
     widthRatio: 3,
   },
@@ -45,7 +45,7 @@ const REALTIME_COLUMNS = [
     name: t`Your Dividend`,
     tooltip: (
       <Trans
-        id="Dividends you can claim from the revenue of the term your voting results applied. For more detail, please click <0>here</0>."
+        id="Dividend you earned so far in the current Term. You can claim after the Term ends. For more detail, please click <0>here</0>."
         components={[<Link key="0" href={DOCS_VELAY_CLAIM} />]}
       />
     ),

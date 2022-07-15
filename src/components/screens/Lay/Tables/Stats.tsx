@@ -8,6 +8,7 @@ import {
 } from 'src/components/compositions/Markets/MarketTable'
 import { Link } from 'src/components/elements/Link'
 import { useVoter } from 'src/hooks/contracts/useVoter'
+import { useVoteData } from 'src/hooks/useVoteData'
 import { darkRed, skyBlue } from 'src/styles/colors'
 import { AssetMarketData, UserVoteData, VoteData } from 'src/types/models'
 import { BN_ZERO, formatAmtShort, formatPct, formatUSD } from 'src/utils/number'
@@ -15,13 +16,24 @@ import { DOCS_VELAY_CLAIM, DOCS_VELAY_TERMS } from 'src/utils/routes'
 import { Control, TABS } from './common'
 
 const STATS_COLUMNS = [
-  { id: 'asset', name: t`Asset`, widthRatio: 4 },
+  { id: 'asset', name: t`Asset`, widthRatio: 3 },
   {
     id: 'revenue',
     name: t`Last Term Revenue`,
     tooltip: (
       <Trans
-        id="The revenue of the protocol in the last term. For more detail, please refer <0>here</0>."
+        id="The revenue of the protocol in the last Term. For more detail, please refer <0>here</0>."
+        components={[<Link key="0" href={DOCS_VELAY_TERMS} />]}
+      />
+    ),
+    widthRatio: 2,
+  },
+  {
+    id: 'lastTermWeight',
+    name: t`Last Term Weight`,
+    tooltip: (
+      <Trans
+        id="The percentage of voting power each asset obtained in the last Term."
         components={[<Link key="0" href={DOCS_VELAY_TERMS} />]}
       />
     ),
@@ -29,20 +41,20 @@ const STATS_COLUMNS = [
   },
   {
     id: 'apr',
-    name: t`Dividend APR`,
-    tooltip: t`Estimated APR of dividends calculated from Last Term Revenue.`,
+    name: t`Est. Dividend APR`,
+    tooltip: t`Estimated APR of dividends calculated from Last Term Revenue and Total Weight.`,
     widthRatio: 2,
   },
   {
     id: 'totalWeight',
     name: t`Total Weight`,
-    tooltip: t`The total number and percentage of voting power each asset obtained.`,
+    tooltip: t`The total number and percentage of voting power each asset obtained planned to be applied for the next Term.`,
     widthRatio: 2,
   },
   {
     id: 'weight',
     name: t`Your Weight`,
-    tooltip: t`The number of voting power you voted for each asset.`,
+    tooltip: t`The number of voting power you voted for each asset planned be applied for the next Term.`,
     widthRatio: 2,
   },
   {
@@ -74,6 +86,7 @@ export const StatsTable: VFC<StatsTableProps> = ({
   changeTab,
 }) => {
   const { claim } = useVoter()
+  const { data: lastTermVoteData } = useVoteData(-2)
   return (
     <MarketTable
       tabs={{ items: TABS, setTab: changeTab, activeTab: 'stats' }}
@@ -91,7 +104,7 @@ export const StatsTable: VFC<StatsTableProps> = ({
       // TODO
       columns={STATS_COLUMNS as any}
       rows={markets.map((asset) =>
-        statsRow({ asset, voteData, userVoteData, layPrice }),
+        statsRow({ asset, voteData, userVoteData, layPrice, lastTermVoteData }),
       )}
       hoverGradients={[`${darkRed}3d`, `${skyBlue}3d`, `${darkRed}3d`]}
       placeholderLength={3}
@@ -104,15 +117,19 @@ const statsRow = ({
   voteData,
   userVoteData,
   layPrice,
+  lastTermVoteData,
 }: {
   asset: AssetMarketData
   voteData: VoteData | undefined
+  lastTermVoteData: VoteData | undefined
   userVoteData: UserVoteData | undefined
   layPrice: BigNumber | undefined
 }) => {
   const { symbol, displaySymbol, icon, lTokenAddress } = asset
   const assetVoteData = voteData?.data[lTokenAddress.toLowerCase()]
   const userAssetVoteData = userVoteData?.data[lTokenAddress.toLowerCase()]
+  const lastTermAssetVoteData =
+    lastTermVoteData?.data[lTokenAddress.toLowerCase()]
   return {
     id: symbol,
     data: {
@@ -121,6 +138,11 @@ const statsRow = ({
       // TODO temporarily
       // assetVoteData &&
       // formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 }),
+      lastTermWeight: '-',
+      // TODO temporarily
+      // lastTermAssetVoteData &&
+      // lastTermVoteData.total.gt(BN_ZERO) &&
+      // formatPct(lastTermAssetVoteData.weight.div(lastTermVoteData.total)),
       apr: '-',
       // assetVoteData &&
       // layPrice &&
@@ -133,7 +155,6 @@ const statsRow = ({
       //     )
       //   : '-'),
       totalWeight:
-        voteData &&
         assetVoteData &&
         voteData.total.gt(BN_ZERO) &&
         `${formatAmtShort(assetVoteData.weight)}(${formatPct(
