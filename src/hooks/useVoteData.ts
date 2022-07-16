@@ -5,10 +5,10 @@ import { useVoter } from './contracts/useVoter'
 import { useVotingEscrow } from './contracts/useVotingEscrow'
 import { useMarketData } from './useMarketData'
 
-export const useVoteData = () => {
+export const useVoteData = (offset = 0) => {
   const { data: market } = useMarketData()
-  const { userData } = useVotingEscrow()
-  const { data: voteData, userData: userVoteData } = useVoter()
+  const { userData } = useVotingEscrow(offset)
+  const { data: voteData, userData: userVoteData } = useVoter(offset)
 
   const data: VoteData | undefined = market &&
     voteData && {

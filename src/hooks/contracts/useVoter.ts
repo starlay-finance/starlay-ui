@@ -19,18 +19,18 @@ import { useWallet } from '../useWallet'
 import { useTxHandler } from './txHandler'
 import { TERM_UNIT, useVotingEscrow } from './useVotingEscrow'
 
-export const useVoter = () => {
+export const useVoter = (offset = 0) => {
   const { data: provider } = useStaticRPCProvider()
   const { account, signer } = useWallet()
-  const { nextTerm, userData: userLockData } = useVotingEscrow()
+  const { term, userData: userLockData } = useVotingEscrow(offset)
   const { data: voter } = useSWRImmutable(
     provider && ['voter', provider.chainId],
     async () => init(provider!),
   )
 
   const { data, mutate: mutateData } = useSWRImmutable(
-    provider && voter && ['voter-data', provider.chainId, nextTerm],
-    async (_1, _2, nextTerm) => fetchData(voter!, nextTerm),
+    provider && voter && ['voter-data', provider.chainId, term],
+    async (_1, _2, term) => fetchData(voter!, term, offset ? term : undefined),
   )
 
   const { data: userData, mutate: mutateUserData } = useSWRImmutable(
@@ -40,12 +40,12 @@ export const useVoter = () => {
       voter && [
         'voter-userdata',
         provider.chainId,
-        nextTerm,
+        term,
         account,
         userLockData.lockerId.toString(),
       ],
-    async (_1, _2, nextTerm, account, lockerId) =>
-      fetchUserData(voter!, nextTerm, account, lockerId),
+    async (_1, _2, term, account, lockerId) =>
+      fetchUserData(voter!, term, account, lockerId),
   )
 
   const handler = useTxHandler()
@@ -60,9 +60,10 @@ export const useVoter = () => {
 
   const vote = async (
     _weights: Partial<Record<string, BigNumber>>,
-    endTimestamp: number = nextTerm + TERM_UNIT * 6,
+    endTimestamp: number = term + TERM_UNIT * 6,
   ) => {
-    if (!account || !signer || !voter) throw new Error('Unexpected state')
+    if (!account || !signer || !voter || offset !== 0)
+      throw new Error('Unexpected state')
     const weights = Object.keys(_weights).reduce(
       (res, key) => ({
         ...res,
@@ -76,8 +77,8 @@ export const useVoter = () => {
     )
   }
 
-  const poke = async (endTimestamp = nextTerm + TERM_UNIT * 6) => {
-    if (!account || !signer || !voter || !userData)
+  const poke = async (endTimestamp = term + TERM_UNIT * 6) => {
+    if (!account || !signer || !voter || !userData || offset !== 0)
       throw new Error('Unexpected state')
     const weights = Object.keys(userData.data).reduce(
       (res, key) => ({
@@ -93,7 +94,8 @@ export const useVoter = () => {
   }
 
   const claim = async () => {
-    if (!account || !signer || !voter) throw new Error('Unexpected state')
+    if (!account || !signer || !voter || offset !== 0)
+      throw new Error('Unexpected state')
     return handleTx(await voter.claim({ user: account }), signer)
   }
 
@@ -109,8 +111,15 @@ const init = async (provider: StaticRPCProvider) => {
   )
 }
 
-const fetchData = async (voter: Voter, timestamp: number) => {
-  const { totalWeight, data } = await voter.voteData({ timestamp })
+const fetchData = async (
+  voter: Voter,
+  timestamp: number,
+  revenueTimestamp?: number,
+) => {
+  const { totalWeight, data } = await voter.voteData({
+    timestamp,
+    revenueTimestamp,
+  })
   return {
     total: normalizeBN(totalWeight.toString(), WEI_DECIMALS),
     data: Object.keys(data).reduce(
