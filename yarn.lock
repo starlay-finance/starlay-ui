@@ -2706,17 +2706,17 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@starlay-finance/contract-helpers@0.0.17":
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/@starlay-finance/contract-helpers/-/contract-helpers-0.0.17.tgz#ad39056f6287b1709e9487e4d8f997f5d1fe9044"
-  integrity sha512-+8nP1AE4jkTDoKeTkV22cDAutjPxbfWDDH+FyEhdJOTIL3incSpxdSYMrcziOoFKvLhr0ExLI0NGNXig33EFGA==
+"@starlay-finance/contract-helpers@0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@starlay-finance/contract-helpers/-/contract-helpers-0.0.18.tgz#1ce06b27776ec3c397d2c78ff97fff7bb85ff6ac"
+  integrity sha512-+q3No+hx60NJHxzvGvQ73C+CQJPb44IDWgsxPqwrqkdxXahuI0fIhNme4kb81L4++qlYGNI7JHMK8UhHNNMlKA==
   dependencies:
     isomorphic-unfetch "^3.1.0"
 
-"@starlay-finance/math-utils@0.0.17":
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/@starlay-finance/math-utils/-/math-utils-0.0.17.tgz#f83acd42b18a18a6615e7e7c453671aa2175d41c"
-  integrity sha512-vrlRTiKIl41l5t+755JS+j9tVwJbrGqmvu0MAmC+nGzxkOfXvzslqQqAJgQK9xdsNnIZxc9Ud7jTk1QNpNDW2g==
+"@starlay-finance/math-utils@0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@starlay-finance/math-utils/-/math-utils-0.0.18.tgz#99520f87cbb90a1777a554edfe26f0fba9e5679c"
+  integrity sha512-7QEOHJEW4R7GLkgtSF8FnLmWJPnnO4MSYuOBjxNukLhxqYjKC6I00Er8ThUwNV97dV0qtzYu/1blS/a2wBY/xQ==
   dependencies:
     bignumber.js "^9.0.1"
     tslib "^2.3.1"
@@ -5961,9 +5961,9 @@ camelize@^1.0.0:
   integrity sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=
 
 caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001283, caniuse-lite@^1.0.30001286:
-  version "1.0.30001303"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001303.tgz"
-  integrity sha512-/Mqc1oESndUNszJP0kx0UaQU9kEv9nNtJ7Kn8AdA0mNnH8eR1cj0kG+NbNuC1Wq/b21eA8prhKRA3bbkjONegQ==
+  version "1.0.30001366"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001366.tgz"
+  integrity sha512-yy7XLWCubDobokgzudpkKux8e0UOOnLHE6mlNJBzT3lZJz6s5atSEzjoL+fsCPkI0G8MP5uVdDx1ur/fXEWkZA==
 
 capital-case@^1.0.4:
   version "1.0.4"
