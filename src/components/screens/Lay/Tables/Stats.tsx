@@ -48,13 +48,13 @@ const STATS_COLUMNS = [
   {
     id: 'totalWeight',
     name: t`Total Weight`,
-    tooltip: t`The total number and percentage of voting power each asset obtained planned to be applied for the next Term.`,
+    tooltip: t`The total number and percentage of voting power of each asset planned to be applied for the next Term.`,
     widthRatio: 2,
   },
   {
     id: 'weight',
     name: t`Your Weight`,
-    tooltip: t`The number of voting power you voted for each asset planned be applied for the next Term.`,
+    tooltip: t`The number of voting power you voted for each asset which will be applied for the next Term.`,
     widthRatio: 2,
   },
   {
@@ -62,7 +62,7 @@ const STATS_COLUMNS = [
     name: t`Claimable Amount`,
     tooltip: (
       <Trans
-        id="Dividends you can claim from the revenue of the term your voting results applied. For more detail, please click <0>here</0>."
+        id="Dividends you can claim from the revenue of Terms your voting results applied. For more detail, please click <0>here</0>."
         components={[<Link key="0" href={DOCS_VELAY_CLAIM} />]}
       />
     ),

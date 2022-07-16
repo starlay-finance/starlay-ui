@@ -756,7 +756,6 @@ msgstr ""
 
 #: src/components/screens/Lay/Assets.tsx
 #: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Tables/Stats.tsx
 msgid "Dividends you can claim from the revenue of the term your voting results applied. For more detail, please click <0>here</0>."
 msgstr ""
 
@@ -916,19 +915,20 @@ msgstr ""
 
 #: src/components/screens/Lay/Tables/Stats.tsx
 #: src/components/screens/Lay/Tables/Votes.tsx
-msgid "The total number and percentage of voting power each asset obtained planned to be applied for the next Term."
+msgid "The total number and percentage of voting power of each asset planned to be applied for the next Term."
 msgstr ""
 
 #: src/components/screens/Lay/Tables/Stats.tsx
-msgid "The number of voting power you voted for each asset planned be applied for the next Term."
+#: src/components/screens/Lay/Tables/Votes.tsx
+msgid "The number of voting power you voted for each asset which will be applied for the next Term."
+msgstr ""
+
+#: src/components/screens/Lay/Tables/Stats.tsx
+msgid "Dividends you can claim from the revenue of Terms your voting results applied. For more detail, please click <0>here</0>."
 msgstr ""
 
 #: src/components/screens/Lay/Tables/Stats.tsx
 msgid "Total Claimable: {0}"
-msgstr ""
-
-#: src/components/screens/Lay/Tables/Votes.tsx
-msgid "The number of voting power you voted for each asset which will be applied for the next Term."
 msgstr ""
 
 #: src/components/screens/Lay/Tables/Votes.tsx
