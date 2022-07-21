@@ -137,7 +137,6 @@ const init = async (provider: StaticRPCProvider) => {
 
 const fetchData = async (votingEscrow: VotingEscrow, timestamp: number) => {
   const lockData = await votingEscrow.lockData({ timestamp })
-  console.log(timestamp)
   return {
     totalVotingPower: normalizeBN(
       lockData.totalVotingPower.toString(),
@@ -156,7 +155,6 @@ const fetchUserData = async (
     user: account,
     timestamp,
   })
-  console.log(timestamp)
   return (
     userData && {
       lockerId: userData.lockerId,
