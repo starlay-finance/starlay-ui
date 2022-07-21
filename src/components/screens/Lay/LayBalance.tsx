@@ -13,7 +13,6 @@ import { useClaimer } from 'src/hooks/contracts/useClaimer'
 import { useTokenSaleVesting } from 'src/hooks/contracts/useTokenSaleVesting'
 import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
-import { useMarketData } from 'src/hooks/useMarketData'
 import { useVoteData } from 'src/hooks/useVoteData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
@@ -23,7 +22,6 @@ import {
   fontWeightMedium,
   fontWeightSemiBold,
 } from 'src/styles/font'
-import { equals } from 'src/utils/address'
 import {
   BN_ZERO,
   formatAmt,
@@ -121,7 +119,6 @@ export const WalletBalance = asStyled(({ className }) => {
 })``
 
 export const LockedLAY = asStyled(({ className }) => {
-  const { data: marketData } = useMarketData()
   const { userData, withdraw, isValidating } = useVotingEscrow()
   const { data, userData: voteData } = useVoteData()
   const { data: layPrice } = useLAYPrice()
@@ -134,18 +131,13 @@ export const LockedLAY = asStyled(({ className }) => {
   const lastWeekDividendInUSD =
     data &&
     voteData &&
-    marketData &&
     Object.keys(voteData.data)
       .filter((key) => voteData.data[key]?.vote.gt(BN_ZERO))
       .reduce((res, key) => {
         const voted = voteData.data[key]!.vote
         const { weight, lastWeekRevenueInUSD } = data.data[key]!
         const dividend = lastWeekRevenueInUSD.times(voted.div(weight))
-        const priceInUSD =
-          marketData.assets.find(({ lTokenAddress }) =>
-            equals(key, lTokenAddress),
-          )?.priceInMarketReferenceCurrency || BN_ZERO
-        return res.plus(dividend.times(priceInUSD))
+        return res.plus(dividend)
       }, BN_ZERO)
   const estimatedAnnualDividend =
     lastWeekDividendInUSD && lastWeekDividendInUSD.div(14).times(365)
