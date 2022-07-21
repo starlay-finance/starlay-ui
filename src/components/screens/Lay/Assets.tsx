@@ -1,128 +1,18 @@
-import { t } from '@lingui/macro'
-import { Trans } from '@lingui/react'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { useEffect, useState } from 'react'
 import { TableContainer } from 'src/components/compositions/Markets/MarketTable'
-import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useVoteData } from 'src/hooks/useVoteData'
 import { filterFalsy } from 'src/utils/array'
 import { symbolSorter } from 'src/utils/market'
-import { DOCS_VELAY_CLAIM, DOCS_VELAY_TERMS } from 'src/utils/routes'
 import styled from 'styled-components'
 import { Slider } from './Slider'
 import { RealtimeTable } from './Tables/Realtime'
 import { StatsTable } from './Tables/Stats'
 import { VotesTable } from './Tables/Votes'
 
-const STATS_COLUMNS = [
-  { id: 'asset', name: t`Asset`, widthRatio: 4 },
-  {
-    id: 'revenue',
-    name: t`Last Term Revenue`,
-    tooltip: (
-      <Trans
-        id="The revenue of the protocol in the last term. For more detail, please refer <0>here</0>."
-        components={[<Link key="0" href={DOCS_VELAY_TERMS} />]}
-      />
-    ),
-    widthRatio: 4,
-  },
-  {
-    id: 'apr',
-    name: t`Dividend APR`,
-    tooltip: t`Estimated APR of dividends calculated from Last Term Revenue.`,
-    widthRatio: 2,
-  },
-  {
-    id: 'totalWeight',
-    name: t`Total Weight`,
-    tooltip: t`The total number and percentage of voting power each asset obtained.`,
-    widthRatio: 2,
-  },
-  {
-    id: 'weight',
-    name: t`Your Weight`,
-    tooltip: t`The number of voting power you voted for each asset.`,
-    widthRatio: 2,
-  },
-  {
-    id: 'claimable',
-    name: t`Claimable Amount`,
-    tooltip: (
-      <Trans
-        id="Dividends you can claim from the revenue of the term your voting results applied. For more detail, please click <0>here</0>."
-        components={[<Link key="0" href={DOCS_VELAY_CLAIM} />]}
-      />
-    ),
-    tooltipPosition: 'right',
-    widthRatio: 3,
-  },
-]
-
-const REALTIME_COLUMNS = [
-  { id: 'asset', name: t`Asset`, widthRatio: 4 },
-  {
-    id: 'revenue',
-    name: t`Earned Revenue`,
-    tooltip: (
-      <Trans
-        id="The revenue of the protocol in this term. For more detail, please refer <0>here</0>."
-        components={[<Link key="0" href={DOCS_VELAY_TERMS} />]}
-      />
-    ),
-    widthRatio: 4,
-  },
-  {
-    id: 'totalWeight',
-    name: t`Total Weight`,
-    tooltip: t`The total number and percentage of voting power each asset obtained.`,
-    widthRatio: 2,
-  },
-  {
-    id: 'weight',
-    name: t`Your Weight`,
-    tooltip: t`The number of voting power you voted for each asset.`,
-    widthRatio: 2,
-  },
-  {
-    id: 'dividends',
-    name: t`You Dividend`,
-    tooltip: (
-      <Trans
-        id="Dividends you can claim from the revenue of the term your voting results applied. For more detail, please click <0>here</0>."
-        components={[<Link key="0" href={DOCS_VELAY_CLAIM} />]}
-      />
-    ),
-    tooltipPosition: 'right',
-    widthRatio: 3,
-  },
-] as const
-
-const VOTING_COLUMNS = [
-  { id: 'asset', name: t`Asset`, widthRatio: 6 },
-  {
-    id: 'totalWeight',
-    name: t`Total Weight`,
-    tooltip: t`The total number and percentage of voting power each asset obtained.`,
-    widthRatio: 3,
-  },
-  {
-    id: 'votedWeight',
-    name: t`Voted Weight`,
-    tooltip: t`The number of voting power you voted for each asset.`,
-    widthRatio: 3,
-  },
-  {
-    id: 'voting',
-    name: t`Voting Allocations`,
-    tooltip: t`The number and percentage of voting power you apply for each asset.`,
-    widthRatio: 3,
-  },
-  { id: 'votingSlider', name: '', widthRatio: 6 },
-]
 const WEIGHT_DECIMALS = 4
 
 export const Assets = asStyled(({ className }) => {
