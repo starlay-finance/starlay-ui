@@ -73,18 +73,16 @@ export const AppHeader = () => {
             <SettingsDiv as="div">
               <Link href={LAUNCHPAD}>{t`Launchpad`}</Link>
             </SettingsDiv>
-            {user && (
-              <SettingsDiv>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    openGasSettingsModal({
-                      afterClose: () => setIsSettingsOpen(false),
-                    })
-                  }}
-                >{t`Set Gas Fee`}</button>
-              </SettingsDiv>
-            )}
+            <SettingsDiv>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  openGasSettingsModal({
+                    afterClose: () => setIsSettingsOpen(false),
+                  })
+                }}
+              >{t`Set Gas Fee`}</button>
+            </SettingsDiv>
           </SettingsContainer>
         </div>
       </Menu>
