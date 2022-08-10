@@ -63,10 +63,7 @@ export const AppHeader = () => {
           {account ? shortenAddress(account) : t`Connect`}
         </MenuButton>
         <div>
-          <MenuButtonSmall
-            onClick={() => setIsSettingsOpen(!isSetingsOpen)}
-            disabled={!user}
-          >
+          <MenuButtonSmall onClick={() => setIsSettingsOpen(!isSetingsOpen)}>
             <IconSettings />
           </MenuButtonSmall>
           <SettingsContainer $isOpen={isSetingsOpen}>
