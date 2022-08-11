@@ -77,10 +77,10 @@ export const VotesTable: VFC<VotesTableProps> = ({
         <Control>
           <span style={{ marginRight: 'auto' }}>
             {t`Voting Term: ${nextTermDayjs.format(
-              'DD/MM/YYYY HH:mm:ss',
+              'DD/MM/YYYY HH:mm',
             )} - ${nextTermDayjs
               .add(TERM_UNIT, 's')
-              .format('DD/MM/YYYY HH:mm:ss')}`}
+              .format('DD/MM/YYYY HH:mm')}`}
           </span>
           <span>
             {t`Voting Power Used: ${
@@ -196,13 +196,13 @@ const votingRow = ({
     id: symbol,
     data: {
       asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
-      totalWeight:
-        voteData &&
-        assetWeight &&
-        voteData.total.gt(BN_ZERO) &&
-        `${formatAmtShort(assetWeight)}(${formatPct(
-          assetWeight.div(voteData.total),
-        )})`,
+      totalWeight: !voteData
+        ? undefined
+        : assetWeight
+        ? `${formatAmtShort(assetWeight)}(${formatPct(
+            voteData.total.gt(BN_ZERO) ? assetWeight.div(voteData.total) : 0,
+          )})`
+        : '-',
       votedWeight: userAssetVoteData
         ? formatAmtShort(userAssetVoteData.vote)
         : '-',
