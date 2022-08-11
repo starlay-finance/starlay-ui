@@ -134,30 +134,35 @@ const statsRow = ({
     id: symbol,
     data: {
       asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
-      revenue:
-        assetVoteData &&
-        formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 }),
-      lastTermWeight:
-        lastTermAssetVoteData &&
-        lastTermVoteData.total.gt(BN_ZERO) &&
-        formatPct(lastTermAssetVoteData.weight.div(lastTermVoteData.total)),
-      apr:
-        assetVoteData &&
-        layPrice &&
-        (assetVoteData.weight.gt(BN_ZERO)
-          ? formatPct(
-              assetVoteData.lastWeekRevenueInUSD
-                .div(14)
-                .times(365)
-                .div(assetVoteData.weight.times(layPrice)),
-            )
-          : '-'),
-      totalWeight:
-        assetVoteData &&
-        voteData.total.gt(BN_ZERO) &&
-        `${formatAmtShort(assetVoteData.weight)}(${formatPct(
-          assetVoteData.weight.div(voteData.total),
-        )})`,
+      revenue: !voteData
+        ? undefined
+        : assetVoteData
+        ? formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 })
+        : '-',
+      lastTermWeight: !lastTermVoteData
+        ? undefined
+        : lastTermAssetVoteData && lastTermVoteData.total.gt(BN_ZERO)
+        ? formatPct(lastTermAssetVoteData.weight.div(lastTermVoteData.total))
+        : '-',
+      apr: !voteData
+        ? undefined
+        : assetVoteData && layPrice
+        ? formatPct(
+            assetVoteData.weight.gt(BN_ZERO)
+              ? assetVoteData.lastWeekRevenueInUSD
+                  .div(14)
+                  .times(365)
+                  .div(assetVoteData.weight.times(layPrice))
+              : 0,
+          )
+        : '-',
+      totalWeight: !voteData
+        ? undefined
+        : assetVoteData && voteData.total.gt(BN_ZERO)
+        ? `${formatAmtShort(assetVoteData.weight)}(${formatPct(
+            assetVoteData.weight.div(voteData.total),
+          )})`
+        : '-',
       weight:
         userAssetVoteData && assetVoteData
           ? `${formatAmtShort(userAssetVoteData.vote)}(${formatPct(

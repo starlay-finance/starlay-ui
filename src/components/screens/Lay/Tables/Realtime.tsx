@@ -110,16 +110,20 @@ const realtimeRow = ({
     id: symbol,
     data: {
       asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
-      revenue:
-        assetVoteData &&
-        formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 }),
-      totalWeight:
-        voteData &&
-        assetVoteData &&
-        voteData.total.gt(BN_ZERO) &&
-        `${formatAmtShort(assetVoteData.weight)}(${formatPct(
-          assetVoteData.weight.div(voteData.total),
-        )})`,
+      revenue: !voteData
+        ? undefined
+        : assetVoteData
+        ? formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 })
+        : '-',
+      totalWeight: !voteData
+        ? undefined
+        : assetVoteData
+        ? `${formatAmtShort(assetVoteData.weight)}(${formatPct(
+            voteData.total.gt(BN_ZERO)
+              ? assetVoteData.weight.div(voteData.total)
+              : 0,
+          )})`
+        : '-',
       weight: userShare
         ? `${formatAmtShort(userAssetVoteData.vote)}(${formatPct(userShare)})`
         : '-',
