@@ -1,5 +1,6 @@
 import SymbolArsw from 'public/assets/images/symbols/symbol_arsw.png'
 import SymbolAstr from 'public/assets/images/symbols/symbol_astr.png'
+import SymbolAusd from 'public/assets/images/symbols/symbol_ausd.png'
 import SymbolBnb from 'public/assets/images/symbols/symbol_bnb.png'
 import SymbolBusd from 'public/assets/images/symbols/symbol_busd.png'
 import SymbolDai from 'public/assets/images/symbols/symbol_dai.png'
@@ -15,6 +16,7 @@ import SymbolWsdn from 'public/assets/images/symbols/symbol_wsdn.png'
 export {
   SymbolArsw,
   SymbolAstr,
+  SymbolAusd,
   SymbolBnb,
   SymbolBusd,
   SymbolDai,
