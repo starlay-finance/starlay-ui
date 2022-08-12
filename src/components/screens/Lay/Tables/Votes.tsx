@@ -217,7 +217,7 @@ const votingRow = ({
           current={votingWeight || 0}
           setValue={(num) => setWeight(lTokenAddress.toLowerCase(), num)}
           remaining={1 - currentVotingTotal}
-          disabled={!votingData || !votingPowerAvailable}
+          disabled={!assetWeight || !votingData || !votingPowerAvailable}
         />
       ),
     },
