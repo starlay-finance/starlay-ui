@@ -9,7 +9,6 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { Toggle } from 'src/components/parts/Toggle'
-import { ARTHSWAP_ASSETS_DICT } from 'src/constants/assets'
 import { useArthswapData } from 'src/hooks/useArthswapData'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
@@ -18,7 +17,7 @@ import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { lightYellow, purple } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { AssetMarketData, User } from 'src/types/models'
-import { aprSorter, symbolSorter } from 'src/utils/market'
+import { symbolSorter } from 'src/utils/market'
 import { BN_ZERO, formatAmt, formatPct } from 'src/utils/number'
 import { toMakaiLoop } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
@@ -75,18 +74,18 @@ export const Market = asStyled(({ className }) => {
   }
 
   const borrow = (user: User, asset: AssetMarketData) => {
-    const arthswapPair = arthswapData
-      ?.filter(
-        (each) =>
-          each.symbols.includes(asset.displaySymbol || asset.symbol) &&
-          each.symbols.every((each) => !!ARTHSWAP_ASSETS_DICT[each]),
-      )
-      .sort(aprSorter)[0]
+    // const arthswapPair = arthswapData
+    //   ?.filter(
+    //     (each) =>
+    //       each.symbols.includes(asset.displaySymbol || asset.symbol) &&
+    //       each.symbols.every((each) => !!ARTHSWAP_ASSETS_DICT[each]),
+    //   )
+    //   .sort(aprSorter)[0]
 
-    if (arthswapPair)
-      arthswapPair.symbols = arthswapPair.symbols.map((e) =>
-        e === asset.displaySymbol ? asset.symbol : e,
-      ) as [string, string]
+    // if (arthswapPair)
+    //   arthswapPair.symbols = arthswapPair.symbols.map((e) =>
+    //     e === asset.displaySymbol ? asset.symbol : e,
+    //   ) as [string, string]
 
     openBorrowModal({
       asset,
@@ -101,7 +100,7 @@ export const Market = asStyled(({ className }) => {
         openSuggestModal({
           asset,
           inWallet: balance[asset.symbol],
-          arthswapPair,
+          // arthswapPair,
           openDeposit: () => deposit(user, asset),
           openMakai: () => router.push(toMakaiLoop(asset.symbol)),
         }),

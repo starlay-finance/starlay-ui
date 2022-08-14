@@ -2,8 +2,9 @@ import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { ReactNode, VFC } from 'react'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
-import { NumberItem } from 'src/components/parts/Modal/parts'
+import { NumberItem, NumberItemPair } from 'src/components/parts/Modal/parts'
 import { Item } from 'src/components/parts/Modal/parts/Item'
+import { ARTHSWAP_ASSETS_DICT } from 'src/constants/assets'
 import { hoverBackgroundKeyframes, hoveredRow } from 'src/styles/animation'
 import { purple } from 'src/styles/colors'
 import { makaiHoverGradients } from 'src/styles/mixins'
@@ -86,33 +87,33 @@ export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
         </SuggestItemMakai>
       ),
     })
-  // if (arthswapPair) {
-  //   const {
-  //     apr,
-  //     symbols: [symbol1, symbol2],
-  //     url,
-  //   } = arthswapPair
-  //   const image1 = ARTHSWAP_ASSETS_DICT[symbol1].icon
-  //   const image2 = ARTHSWAP_ASSETS_DICT[symbol2].icon
-  //   actions.push({
-  //     apr,
-  //     node: (
-  //       <SuggestItem
-  //         key="arthswap"
-  //         onClick={() => window.open(url, '_blank', 'noreferrer')}
-  //       >
-  //         <NumberItemPair
-  //           label={t`ArthSwap`}
-  //           note={t`Farm ${symbol1}-${symbol2}`}
-  //           num={apr}
-  //           image={{ src: image1, alt: symbol1 }}
-  //           image2={{ src: image2, alt: symbol2 }}
-  //           format={formatPct}
-  //         />
-  //       </SuggestItem>
-  //     ),
-  //   })
-  // }
+  if (arthswapPair) {
+    const {
+      apr,
+      symbols: [symbol1, symbol2],
+      url,
+    } = arthswapPair
+    const image1 = ARTHSWAP_ASSETS_DICT[symbol1].icon
+    const image2 = ARTHSWAP_ASSETS_DICT[symbol2].icon
+    actions.push({
+      apr,
+      node: (
+        <SuggestItem
+          key="arthswap"
+          onClick={() => window.open(url, '_blank', 'noreferrer')}
+        >
+          <NumberItemPair
+            label={t`ArthSwap`}
+            note={t`Farm ${symbol1}-${symbol2}`}
+            num={apr}
+            image={{ src: image1, alt: symbol1 }}
+            image2={{ src: image2, alt: symbol2 }}
+            format={formatPct}
+          />
+        </SuggestItem>
+      ),
+    })
+  }
 
   return (
     <SuggestContent>
