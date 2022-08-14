@@ -163,9 +163,11 @@ export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
         {activeTab === 'borrow' ? (
           <SimpleCtaButton
             onClick={() => borrow(valueToBigNumber(borrowingAmountBn!))}
-            disabled={!!estimation.unavailableReason}
+            disabled={asset.symbol === 'aUSD' || !!estimation.unavailableReason}
           >
-            {estimation.unavailableReason || t`Borrow`}
+            {asset.symbol === 'aUSD'
+              ? t`Suspended`
+              : estimation.unavailableReason || t`Borrow`}
           </SimpleCtaButton>
         ) : (
           <SimpleCtaButton

@@ -162,9 +162,11 @@ export const DepositModalBody: VFC<DepositModalBodyProps> = ({
         {activeTab === 'deposit' ? (
           <SimpleCtaButton
             onClick={() => deposit(depositAmountBn!)}
-            disabled={!!estimation.unavailableReason}
+            disabled={asset.symbol === 'aUSD' || !!estimation.unavailableReason}
           >
-            {estimation.unavailableReason || t`Deposit`}
+            {asset.symbol === 'aUSD'
+              ? t`Suspended`
+              : estimation.unavailableReason || t`Deposit`}
           </SimpleCtaButton>
         ) : (
           <SimpleCtaButton
