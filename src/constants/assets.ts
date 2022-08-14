@@ -1,7 +1,6 @@
 import {
   SymbolArsw,
   SymbolAstr,
-  SymbolAusd,
   SymbolBnb,
   SymbolBusd,
   SymbolDai,
@@ -19,7 +18,7 @@ import { Asset, AssetSymbol } from 'src/types/models'
 export const LISTED_ASSET_SYMBOLS = [
   'ASTR',
   'DOT',
-  'aUSD',
+  // 'aUSD',
   'DAI',
   'USDC',
   'USDT',
@@ -91,11 +90,11 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     name: 'Binance USD',
     icon: SymbolBusd,
   },
-  aUSD: {
-    symbol: 'aUSD',
-    name: 'Acalla Dollar',
-    icon: SymbolAusd,
-  },
+  // aUSD: {
+  //   symbol: 'aUSD',
+  //   name: 'Acalla Dollar',
+  //   icon: SymbolAusd,
+  // },
   BNB: {
     symbol: 'BNB',
     name: 'Binance Coin',
