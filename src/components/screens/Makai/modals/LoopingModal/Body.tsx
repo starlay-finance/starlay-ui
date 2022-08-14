@@ -157,10 +157,15 @@ export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
                   loop(formattedToBigNumber(depositAmount) || BN_ZERO, leverage)
               : close
           }
-          disabled={isLooping && !!estimation.unavailableReason}
+          disabled={
+            isLooping &&
+            (asset.symbol === 'aUSD' || !!estimation.unavailableReason)
+          }
         >
           {isLooping
-            ? estimation.unavailableReason || t`Start loops`
+            ? asset.symbol === 'aUSD'
+              ? t`Suspended`
+              : estimation.unavailableReason || t`Start loops`
             : t`Close loops`}
         </SimpleCtaButton>
         {isLooping ? (
