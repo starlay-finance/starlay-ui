@@ -128,7 +128,7 @@ export const LockedLAY = asStyled(({ className }) => {
   const locked = userData?.locked || BN_ZERO
   const expired = userData?.lockedEnd.isBefore(dayjs())
   const claimable = voteData?.claimableTotalInUSD.gt(BN_ZERO)
-  const lastWeekDividendInUSD =
+  const lastWeekRewardInUSD =
     data &&
     voteData &&
     Object.keys(voteData.data)
@@ -136,11 +136,11 @@ export const LockedLAY = asStyled(({ className }) => {
       .reduce((res, key) => {
         const voted = voteData.data[key]!.vote
         const { weight, lastWeekRevenueInUSD } = data.data[key]!
-        const dividend = lastWeekRevenueInUSD.times(voted.div(weight))
-        return res.plus(dividend)
+        const reward = lastWeekRevenueInUSD.times(voted.div(weight))
+        return res.plus(reward)
       }, BN_ZERO)
-  const estimatedAnnualDividend =
-    lastWeekDividendInUSD && lastWeekDividendInUSD.div(14).times(365)
+  const estimatedAnnualReward =
+    lastWeekRewardInUSD && lastWeekRewardInUSD.div(14).times(365)
   return (
     <LayBalance
       className={className}
@@ -160,8 +160,8 @@ export const LockedLAY = asStyled(({ className }) => {
         {
           label: t`Current Est. Avg. APR`,
           value:
-            locked.gt(BN_ZERO) && estimatedAnnualDividend && layPrice
-              ? formatPct(estimatedAnnualDividend.div(locked.times(layPrice)))
+            locked.gt(BN_ZERO) && estimatedAnnualReward && layPrice
+              ? formatPct(estimatedAnnualReward.div(locked.times(layPrice)))
               : '-',
           tooltip: t`The volume weighted average APR of assets you voted.`,
         },
@@ -186,8 +186,8 @@ export const LockedLAY = asStyled(({ className }) => {
                 onClick: claimable
                   ? () =>
                       openMessageModal({
-                        title: t`Please Claim Dividends Before Withdrawing LAY`,
-                        message: t`You need to claim dividends before withdrawing unlocked LAY.`,
+                        title: t`Please Claim Rewards Before Withdrawing LAY`,
+                        message: t`You need to claim rewards before withdrawing unlocked LAY.`,
                         type: 'Alert',
                       })
                   : withdraw,
