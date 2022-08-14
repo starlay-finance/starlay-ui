@@ -41,8 +41,8 @@ const STATS_COLUMNS = [
   },
   {
     id: 'apr',
-    name: t`Est. Dividend APR`,
-    tooltip: t`Estimated APR of dividends calculated from Last Term Revenue and Total Weight.`,
+    name: t`Est. Reward APR`,
+    tooltip: t`Estimated APR of rewards calculated from Last Term Revenue and Total Weight.`,
     widthRatio: 2,
   },
   {
@@ -62,7 +62,7 @@ const STATS_COLUMNS = [
     name: t`Claimable Amount`,
     tooltip: (
       <Trans
-        id="Dividends you can claim from the revenue of Terms your voting results applied. For more detail, please click <0>here</0>."
+        id="Rewards you can claim from the revenue of Terms your voting results applied. For more detail, please click <0>here</0>."
         components={[<Link key="0" href={DOCS_VELAY_CLAIM} />]}
       />
     ),

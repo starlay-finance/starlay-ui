@@ -41,11 +41,11 @@ const REALTIME_COLUMNS = [
     widthRatio: 3,
   },
   {
-    id: 'dividends',
-    name: t`Your Dividend`,
+    id: 'rewards',
+    name: t`Your Reward`,
     tooltip: (
       <Trans
-        id="Dividend you earned so far in the current Term. You can claim after the Term ends. For more detail, please click <0>here</0>."
+        id="Reward you earned so far in the current Term. You can claim after the Term ends. For more detail, please click <0>here</0>."
         components={[<Link key="0" href={DOCS_VELAY_CLAIM} />]}
       />
     ),
@@ -127,7 +127,7 @@ const realtimeRow = ({
       weight: userShare
         ? `${formatAmtShort(userAssetVoteData.vote)}(${formatPct(userShare)})`
         : '-',
-      dividends: userShare
+      rewards: userShare
         ? formatUSD(assetVoteData.lastWeekRevenueInUSD.times(userShare), {
             decimalPlaces: 2,
           })

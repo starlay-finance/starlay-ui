@@ -314,6 +314,12 @@ msgid "To repay all, you will pay more than the amount shown because of the inte
 msgstr "To repay all, you will pay more than the amount shown because of the interest charged per second."
 
 #: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
+#: src/components/screens/Dashboard/modals/DepositModal/Body.tsx
+#: src/components/screens/Makai/modals/LoopingModal/Body.tsx
+msgid "Suspended"
+msgstr "Suspended"
+
+#: src/components/screens/Dashboard/modals/BorrowModal/Body.tsx
 msgid "Liquidity"
 msgstr "Liquidity"
 
@@ -425,9 +431,6 @@ msgstr "Max"
 
 #: src/components/screens/Dashboard/parts/Market.tsx
 #: src/components/screens/Dashboard/parts/Market.tsx
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Assets.tsx
 #: src/components/screens/Lay/Tables/Realtime.tsx
 #: src/components/screens/Lay/Tables/Stats.tsx
 #: src/components/screens/Lay/Tables/Votes.tsx
@@ -708,88 +711,6 @@ msgstr "Your Limit Price = {0}"
 msgid "Price Per LAY"
 msgstr "Price Per LAY"
 
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Tables/Stats.tsx
-msgid "Last Term Revenue"
-msgstr "Last Term Revenue"
-
-#: src/components/screens/Lay/Assets.tsx
-msgid "The revenue of the protocol in the last term. For more detail, please refer <0>here</0>."
-msgstr "The revenue of the protocol in the last term. For more detail, please refer <0>here</0>."
-
-#: src/components/screens/Lay/Assets.tsx
-msgid "Dividend APR"
-msgstr "Dividend APR"
-
-#: src/components/screens/Lay/Assets.tsx
-msgid "Estimated APR of dividends calculated from Last Term Revenue."
-msgstr "Estimated APR of dividends calculated from Last Term Revenue."
-
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Tables/Stats.tsx
-#: src/components/screens/Lay/Tables/Votes.tsx
-msgid "Total Weight"
-msgstr "Total Weight"
-
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Tables/Realtime.tsx
-msgid "The total number and percentage of voting power each asset obtained."
-msgstr "The total number and percentage of voting power each asset obtained."
-
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Tables/Stats.tsx
-msgid "Your Weight"
-msgstr "Your Weight"
-
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Tables/Realtime.tsx
-msgid "The number of voting power you voted for each asset."
-msgstr "The number of voting power you voted for each asset."
-
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Tables/Stats.tsx
-msgid "Claimable Amount"
-msgstr "Claimable Amount"
-
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Assets.tsx
-msgid "Dividends you can claim from the revenue of the term your voting results applied. For more detail, please click <0>here</0>."
-msgstr "Dividends you can claim from the revenue of the term your voting results applied. For more detail, please click <0>here</0>."
-
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Tables/Realtime.tsx
-msgid "Earned Revenue"
-msgstr "Earned Revenue"
-
-#: src/components/screens/Lay/Assets.tsx
-msgid "The revenue of the protocol in this term. For more detail, please refer <0>here</0>."
-msgstr "The revenue of the protocol in this term. For more detail, please refer <0>here</0>."
-
-#: src/components/screens/Lay/Assets.tsx
-msgid "You Dividend"
-msgstr "You Dividend"
-
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Tables/Votes.tsx
-msgid "Voted Weight"
-msgstr "Voted Weight"
-
-#: src/components/screens/Lay/Assets.tsx
-#: src/components/screens/Lay/Tables/Votes.tsx
-msgid "Voting Allocations"
-msgstr "Voting Allocations"
-
-#: src/components/screens/Lay/Assets.tsx
-msgid "The number and percentage of voting power you apply for each asset."
-msgstr "The number and percentage of voting power you apply for each asset."
-
 #: src/components/screens/Lay/LayBalance.tsx
 #: src/components/screens/Makai/UnclaimedReward.tsx
 msgid "Unclaimed LAY"
@@ -866,12 +787,16 @@ msgid "Extend"
 msgstr "Extend"
 
 #: src/components/screens/Lay/LayBalance.tsx
-msgid "Please Claim Dividends Before Withdrawing LAY"
-msgstr "Please Claim Dividends Before Withdrawing LAY"
+msgid "Please Claim Rewards Before Withdrawing LAY"
+msgstr "Please Claim Rewards Before Withdrawing LAY"
 
 #: src/components/screens/Lay/LayBalance.tsx
-msgid "You need to claim dividends before withdrawing unlocked LAY."
-msgstr "You need to claim dividends before withdrawing unlocked LAY."
+msgid "You need to claim rewards before withdrawing unlocked LAY."
+msgstr "You need to claim rewards before withdrawing unlocked LAY."
+
+#: src/components/screens/Lay/Tables/Realtime.tsx
+msgid "Earned Revenue"
+msgstr "Earned Revenue"
 
 #: src/components/screens/Lay/Tables/Realtime.tsx
 msgid "The revenue of the protocol so far in the current Term. For more detail, please refer <0>here</0>."
@@ -882,20 +807,32 @@ msgid "Applied Total Weight"
 msgstr "Applied Total Weight"
 
 #: src/components/screens/Lay/Tables/Realtime.tsx
+msgid "The total number and percentage of voting power each asset obtained."
+msgstr "The total number and percentage of voting power each asset obtained."
+
+#: src/components/screens/Lay/Tables/Realtime.tsx
 msgid "Your Applied Weight"
 msgstr "Your Applied Weight"
 
 #: src/components/screens/Lay/Tables/Realtime.tsx
-msgid "Your Dividend"
-msgstr "Your Dividend"
+msgid "The number of voting power you voted for each asset."
+msgstr "The number of voting power you voted for each asset."
 
 #: src/components/screens/Lay/Tables/Realtime.tsx
-msgid "Dividend you earned so far in the current Term. You can claim after the Term ends. For more detail, please click <0>here</0>."
-msgstr "Dividend you earned so far in the current Term. You can claim after the Term ends. For more detail, please click <0>here</0>."
+msgid "Your Reward"
+msgstr "Your Reward"
+
+#: src/components/screens/Lay/Tables/Realtime.tsx
+msgid "Reward you earned so far in the current Term. You can claim after the Term ends. For more detail, please click <0>here</0>."
+msgstr "Reward you earned so far in the current Term. You can claim after the Term ends. For more detail, please click <0>here</0>."
 
 #: src/components/screens/Lay/Tables/Realtime.tsx
 msgid "Term: {0} - {1}"
 msgstr "Term: {0} - {1}"
+
+#: src/components/screens/Lay/Tables/Stats.tsx
+msgid "Last Term Revenue"
+msgstr "Last Term Revenue"
 
 #: src/components/screens/Lay/Tables/Stats.tsx
 msgid "The revenue of the protocol in the last Term. For more detail, please refer <0>here</0>."
@@ -910,12 +847,17 @@ msgid "The percentage of voting power each asset obtained in the last Term."
 msgstr "The percentage of voting power each asset obtained in the last Term."
 
 #: src/components/screens/Lay/Tables/Stats.tsx
-msgid "Est. Dividend APR"
-msgstr "Est. Dividend APR"
+msgid "Est. Reward APR"
+msgstr "Est. Reward APR"
 
 #: src/components/screens/Lay/Tables/Stats.tsx
-msgid "Estimated APR of dividends calculated from Last Term Revenue and Total Weight."
-msgstr "Estimated APR of dividends calculated from Last Term Revenue and Total Weight."
+msgid "Estimated APR of rewards calculated from Last Term Revenue and Total Weight."
+msgstr "Estimated APR of rewards calculated from Last Term Revenue and Total Weight."
+
+#: src/components/screens/Lay/Tables/Stats.tsx
+#: src/components/screens/Lay/Tables/Votes.tsx
+msgid "Total Weight"
+msgstr "Total Weight"
 
 #: src/components/screens/Lay/Tables/Stats.tsx
 #: src/components/screens/Lay/Tables/Votes.tsx
@@ -923,17 +865,33 @@ msgid "The total number and percentage of voting power of each asset planned to 
 msgstr "The total number and percentage of voting power of each asset planned to be applied for the next Term."
 
 #: src/components/screens/Lay/Tables/Stats.tsx
+msgid "Your Weight"
+msgstr "Your Weight"
+
+#: src/components/screens/Lay/Tables/Stats.tsx
 #: src/components/screens/Lay/Tables/Votes.tsx
 msgid "The number of voting power you voted for each asset which will be applied for the next Term."
 msgstr "The number of voting power you voted for each asset which will be applied for the next Term."
 
 #: src/components/screens/Lay/Tables/Stats.tsx
-msgid "Dividends you can claim from the revenue of Terms your voting results applied. For more detail, please click <0>here</0>."
-msgstr "Dividends you can claim from the revenue of Terms your voting results applied. For more detail, please click <0>here</0>."
+msgid "Claimable Amount"
+msgstr "Claimable Amount"
+
+#: src/components/screens/Lay/Tables/Stats.tsx
+msgid "Rewards you can claim from the revenue of Terms your voting results applied. For more detail, please click <0>here</0>."
+msgstr "Rewards you can claim from the revenue of Terms your voting results applied. For more detail, please click <0>here</0>."
 
 #: src/components/screens/Lay/Tables/Stats.tsx
 msgid "Total Claimable: {0}"
 msgstr "Total Claimable: {0}"
+
+#: src/components/screens/Lay/Tables/Votes.tsx
+msgid "Voted Weight"
+msgstr "Voted Weight"
+
+#: src/components/screens/Lay/Tables/Votes.tsx
+msgid "Voting Allocations"
+msgstr "Voting Allocations"
 
 #: src/components/screens/Lay/Tables/Votes.tsx
 msgid "The number and percentage of voting power you apply for each asset for the next Term."
