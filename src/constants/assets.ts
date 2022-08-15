@@ -120,9 +120,7 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
   },
 } as const
 
-export const ASSETS: Asset[] = Object.values(ASSETS_DICT).filter(
-  ({ symbol }) => symbol !== 'aUSD',
-)
+export const ASSETS: Asset[] = Object.values(ASSETS_DICT)
 
 export const ARTHSWAP_ASSETS_DICT: {
   [key in string]: { symbol: string; icon: StaticImageData }
