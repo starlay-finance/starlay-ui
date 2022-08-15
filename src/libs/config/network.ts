@@ -68,8 +68,8 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
     name: 'Astar Network',
     publicJsonRPCUrl: ['https://evm.astar.network'],
     addresses: {
-      walletBalanceProvider: '0x1650Fb7a01f7763c259cd6559507B043ec0A480c',
-      uiPoolDataProvider: '0xf05c3767E8a136890fa991e520287D8eB46391f4',
+      walletBalanceProvider: '0x449b5A2c9c75d77283253625C03aE6336c957a0c',
+      uiPoolDataProvider: '0x97Fc9e6aFB9d7A9C9898a2b6F97Da43EB5f56331',
       uiIncentiveDataProvider: '0x08ba69145938dD3CB0EE94c0D59EF6364059956B',
       stakeUiHelper: '0xa6FAB9Dfd104a6582c049266E7eCCB0b908c55E4',
       priceAggregatorAdapterAddress:
