@@ -114,6 +114,7 @@ export const VotesTable: VFC<VotesTableProps> = ({
             onClick={
               votingData
                 ? () =>
+                    // TODO warn if voting for frozen assets
                     vote(
                       Object.keys(votingData).reduce(
                         (res, key) => ({
@@ -217,7 +218,12 @@ const votingRow = ({
           current={votingWeight || 0}
           setValue={(num) => setWeight(lTokenAddress.toLowerCase(), num)}
           remaining={1 - currentVotingTotal}
-          disabled={!assetWeight || !votingData || !votingPowerAvailable}
+          disabled={
+            !assetWeight ||
+            (asset.isFrozen && votingWeight === 0) ||
+            !votingData ||
+            !votingPowerAvailable
+          }
         />
       ),
     },
