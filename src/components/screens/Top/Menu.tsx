@@ -6,7 +6,6 @@ import {
   IconGithub,
   IconMedium,
   IconProtocol,
-  IconTelegram,
   IconTwitter,
 } from 'src/assets/svgs'
 import { Link } from 'src/components/elements/Link'
@@ -23,7 +22,6 @@ import {
   GITHUB,
   GOVERNANCE,
   MEDIUM,
-  TELEGRAM,
   TWITTER,
 } from 'src/utils/routes'
 import { Z_MODAL } from 'src/utils/zIndex'
@@ -63,11 +61,6 @@ export const MobileMenu: VFC<{
       <IconLinks>
         <IconLink Icon={IconTwitter} href={TWITTER} aria-label={t`Twitter`} />
         <IconLink Icon={IconDiscord} href={DISCORD} aria-label={t`Discord`} />
-        <IconLink
-          Icon={IconTelegram}
-          href={TELEGRAM}
-          aria-label={t`Telegram`}
-        />
         <IconLink Icon={IconMedium} href={MEDIUM} aria-label={t`Medium`} />
         <IconLink Icon={IconGithub} href={GITHUB} aria-label={t`Github`} />
       </IconLinks>

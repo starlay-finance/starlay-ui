@@ -14,7 +14,6 @@ export const DISCORD = 'https://discord.gg/M4NjBJZ94b'
 export const GITHUB = 'https://github.com/starlay-finance'
 export const MEDIA_KIT = 'https://github.com/starlay-finance/media-kit'
 export const TWITTER = 'https://twitter.com/starlay_fi'
-export const TELEGRAM = 'https://t.me/starlay_fi'
 export const MEDIUM = 'http://medium.com/@starlay_fi'
 
 export const ARTHSWAP_SWAP_URL = 'https://app.arthswap.org/#/swap'
