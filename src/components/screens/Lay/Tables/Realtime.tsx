@@ -105,7 +105,9 @@ const realtimeRow = ({
   const userShare =
     userAssetVoteData &&
     assetVoteData &&
-    userAssetVoteData.vote.div(assetVoteData.weight)
+    (assetVoteData.weight.isZero()
+      ? BN_ZERO
+      : userAssetVoteData.vote.div(assetVoteData.weight))
   return {
     id: symbol,
     data: {

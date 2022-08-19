@@ -166,7 +166,9 @@ const statsRow = ({
       weight:
         userAssetVoteData && assetVoteData
           ? `${formatAmtShort(userAssetVoteData.vote)}(${formatPct(
-              userAssetVoteData.vote.div(assetVoteData.weight),
+              assetVoteData.weight.isZero()
+                ? BN_ZERO
+                : userAssetVoteData.vote.div(assetVoteData.weight),
             )})`
           : '-',
       claimable: userAssetVoteData
