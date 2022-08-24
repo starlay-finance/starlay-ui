@@ -22,7 +22,7 @@ export const useMarketData = () => {
   )
 }
 
-const getMarketData = async (
+export const getMarketData = async (
   provider: PoolDataProviderInterface,
   chainId: ChainId,
   layPriceInUSD: BigNumber,
