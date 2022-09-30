@@ -23,6 +23,7 @@ export const LISTED_ASSET_SYMBOLS = [
   'DAI',
   'USDC',
   'USDT',
+  'ceUSDT',
   'BUSD',
   'WETH',
   'WBTC',
@@ -81,6 +82,11 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     name: 'Tether USD',
     icon: SymbolUsdt,
   },
+  ceUSDT: {
+    symbol: 'ceUSDT',
+    name: 'Celer USDT',
+    icon: SymbolUsdt,
+  },
   DAI: {
     symbol: 'DAI',
     name: 'DAI',
@@ -117,6 +123,14 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     name: 'Starlay Token',
     icon: SymbolLay,
     borrowUnsupported: true,
+  },
+} as const
+
+export const ASSETS_BY_ADDRESS_DICT: Partial<Record<string, Asset>> = {
+  '0x3795c36e7d12a8c252a20c5a7b455f7c57b60283': {
+    symbol: 'ceUSDT',
+    name: 'Celer USDT',
+    icon: SymbolUsdt,
   },
 } as const
 
