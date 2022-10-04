@@ -6,9 +6,12 @@ import {
 } from '@starlay-finance/math-utils'
 import { ChainId } from 'src/libs/config'
 import { PoolDataProviderInterface } from 'src/libs/pool-data-provider/types'
-import { User } from 'src/types/models'
+import { AssetSymbol, User } from 'src/types/models'
 import { EthereumAddress } from 'src/types/web3'
-import { EMPTY_BALANCE_BY_ASSET } from 'src/utils/assets'
+import {
+  assetFromSymbolAndAddress,
+  EMPTY_BALANCE_BY_ASSET,
+} from 'src/utils/assets'
 import { calculateNetAPY } from 'src/utils/calculator'
 import { BN_ZERO } from 'src/utils/number'
 import useSWR from 'swr'
@@ -103,9 +106,10 @@ const toUser = (
 
 const toBalanceByAsset = (userReservesData: ComputedUserReserve[]) =>
   userReservesData.reduce(
-    (prev, { reserve: { symbol }, ...userReserve }) => ({
+    (prev, { reserve: { symbol, underlyingAsset }, ...userReserve }) => ({
       ...prev,
-      [symbol]: {
+      [assetFromSymbolAndAddress(symbol as AssetSymbol, underlyingAsset)
+        .symbol]: {
         deposited: valueToBigNumber(userReserve.underlyingBalance),
         borrowed: valueToBigNumber(userReserve.totalBorrows),
         usageAsCollateralEnabled: userReserve.usageAsCollateralEnabledOnUser,
