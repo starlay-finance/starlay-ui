@@ -1,4 +1,9 @@
-import { ASSETS, ASSETS_DICT, LISTED_ASSET_SYMBOLS } from 'src/constants/assets'
+import {
+  ASSETS,
+  ASSETS_BY_ADDRESS_DICT,
+  ASSETS_DICT,
+  LISTED_ASSET_SYMBOLS,
+} from 'src/constants/assets'
 import { Asset, AssetSymbol, User } from 'src/types/models'
 import { BN_ZERO } from './number'
 
@@ -9,8 +14,10 @@ export const onlyListed = <P extends { symbol: any }>(
   value: P,
 ): value is P & { symbol: AssetSymbol } => isListed(value.symbol)
 
-export const assetFromSymbol = (symbol: AssetSymbol): Asset =>
-  ASSETS_DICT[symbol]
+export const assetFromSymbolAndAddress = (
+  symbol: AssetSymbol,
+  underlyingAsset: string,
+): Asset => ASSETS_BY_ADDRESS_DICT[underlyingAsset] || ASSETS_DICT[symbol]
 
 export const generateSymbolDict = <T>(value: T): { [key in AssetSymbol]: T } =>
   ASSETS.reduce(

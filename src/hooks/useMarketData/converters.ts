@@ -6,7 +6,7 @@ import {
 import { FormattedReserveData } from 'src/libs/pool-data-provider'
 import { AssetMarketData, AssetSymbol } from 'src/types/models'
 import { EthereumAddress } from 'src/types/web3'
-import { assetFromSymbol } from 'src/utils/assets'
+import { assetFromSymbolAndAddress } from 'src/utils/assets'
 import { convertToUSDBulk } from 'src/utils/calculator'
 import { ValueOf } from 'type-fest'
 
@@ -30,7 +30,7 @@ export const toAssetMarketData = (
       valueToBigNumber(reserve.totalVariableDebt).plus(reserve.totalStableDebt),
     )
   return {
-    ...assetFromSymbol(reserve.symbol),
+    ...assetFromSymbolAndAddress(reserve.symbol, reserve.underlyingAsset),
     underlyingAsset: reserve.underlyingAsset.toLowerCase() as EthereumAddress,
     depositAPY: valueToBigNumber(reserve.supplyAPY),
     variableBorrowAPY: valueToBigNumber(reserve.variableBorrowAPY),
