@@ -2,7 +2,7 @@ import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import { VFC } from 'react'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
-import { assetFromSymbol } from 'src/utils/assets'
+import { assetFromSymbolAndAddress } from 'src/utils/assets'
 import styled from 'styled-components'
 import { useLaunchpadContext } from '../LaunchpadContext'
 import { Market, ProjectData, Status } from '../types'
@@ -35,7 +35,7 @@ export const Sale: VFC<SaleProps> = ({
       maxAmount,
       biddingAssets: sale.biddingAssets.map((asset) => ({
         ...asset,
-        icon: assetFromSymbol(asset.symbol).icon,
+        icon: assetFromSymbolAndAddress(asset.symbol, asset.address).icon,
       })),
       currentEstimatedPrice: market?.currentPriceInUSD,
       boostedRaisedAmount: market?.boostedRaisedAmountInUSD,
