@@ -66,7 +66,7 @@ export type NetworkConfig = {
 export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
   [CHAIN_ID.astar]: {
     name: 'Astar Network',
-    publicJsonRPCUrl: ['https://evm.astar.network'],
+    publicJsonRPCUrl: ['https://astar.public.blastapi.io'],
     addresses: {
       walletBalanceProvider: '0x449b5A2c9c75d77283253625C03aE6336c957a0c',
       uiPoolDataProvider: '0x97Fc9e6aFB9d7A9C9898a2b6F97Da43EB5f56331',
