@@ -95,8 +95,8 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
     },
     snapshotProvider: {
       endpoint:
-        'https://xok6alsasvgthgl5ozss7upnuu.appsync-api.us-east-1.amazonaws.com/graphql',
-      apiKey: 'da2-qvw2m7hf6jhonms4rhtqgix7ri',
+        'https://33ikriwlbzcxpp76t242xedcvu.appsync-api.us-east-1.amazonaws.com/graphql',
+      apiKey: 'da2-vfzww7t765hfla6tdrzx6w4pvq',
     },
     launchpadDataProvider: {
       endpoint:
@@ -104,8 +104,8 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
     },
     launchpadHistoricalDataProvider: {
       endpoint:
-        'https://7fkvk2oqm5ewxbiealg7orclku.appsync-api.us-east-1.amazonaws.com/graphql',
-      apiKey: 'da2-vm7th2zcezdmbpkbkcbmm766pe',
+        'https://urdn7gyh2bfgbh4cg72eddclrq.appsync-api.us-east-1.amazonaws.com/graphql',
+      apiKey: 'da2-eeucjwshhbh3vg44ovhg27x54m',
     },
     arthswapDataProvider: {
       endpoint: 'https://arthswap-apr-api.vercel.app/api/graphql',
