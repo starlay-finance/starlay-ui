@@ -8,6 +8,7 @@ import {
 } from 'src/components/compositions/Markets/MarketTable'
 import { Link } from 'src/components/elements/Link'
 import { useVoter } from 'src/hooks/contracts/useVoter'
+import { useSwitchChainIfUnsupported } from 'src/hooks/useUnsupportedChainAlert'
 import { useVoteData } from 'src/hooks/useVoteData'
 import { darkRed, skyBlue } from 'src/styles/colors'
 import { AssetMarketData, UserVoteData, VoteData } from 'src/types/models'
@@ -85,6 +86,7 @@ export const StatsTable: VFC<StatsTableProps> = ({
   layPrice,
   changeTab,
 }) => {
+  const { switchChainIfUnsupported } = useSwitchChainIfUnsupported()
   const { claim } = useVoter()
   const { data: lastTermVoteData } = useVoteData(-2)
   return (
@@ -96,7 +98,7 @@ export const StatsTable: VFC<StatsTableProps> = ({
             userVoteData ? formatUSD(userVoteData.claimableTotalInUSD) : '-'
           }`}</span>
           <button
-            onClick={claim}
+            onClick={switchChainIfUnsupported(claim)}
             disabled={!userVoteData?.claimableTotalInUSD.gt(BN_ZERO)}
           >{t`Claim`}</button>
         </Control>
