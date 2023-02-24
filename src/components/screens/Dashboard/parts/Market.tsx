@@ -9,7 +9,6 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { Toggle } from 'src/components/parts/Toggle'
-import { useArthswapData } from 'src/hooks/useArthswapData'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
@@ -49,8 +48,6 @@ export const Market = asStyled(({ className }) => {
     marketReferenceCurrencyDecimals = 0,
   } = marketData || {}
   const markets = assets.filter((each) => each.isActive).sort(symbolSorter)
-
-  const { data: arthswapData } = useArthswapData()
 
   const { data: user } = useUserData()
   const { data: balance } = useWalletBalance()
