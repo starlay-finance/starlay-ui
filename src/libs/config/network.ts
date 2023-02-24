@@ -108,7 +108,7 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
       apiKey: 'da2-eeucjwshhbh3vg44ovhg27x54m',
     },
     arthswapDataProvider: {
-      endpoint: 'https://arthswap-apr-api.vercel.app/api/graphql',
+      endpoint: 'https://arthswap-graphql.starlay.finance/api/graphql',
     },
     explorerLinks: ['https://blockscout.com/astar'],
   },
