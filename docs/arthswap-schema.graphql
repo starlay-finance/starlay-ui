@@ -1,12 +1,3 @@
-type Apr {
-  lpName: String
-  apr: Float
-  liquidity: Int
-  multiplier: Float
-  updatedAt: Float
-  liquidityProvidingURL: String
-}
-
 type Token {
   address: String!
   symbol: String!
@@ -36,8 +27,6 @@ input PricesQueryInput {
 }
 
 type Query {
-  getApr(liquidityPair: String): Apr
-  getAprs: [Apr]
   getPairs: [Pair!]
   getPrices(input: PricesQueryInput!): Prices!
 }
