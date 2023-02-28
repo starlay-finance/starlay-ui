@@ -13,6 +13,7 @@ import { useClaimer } from 'src/hooks/contracts/useClaimer'
 import { useTokenSaleVesting } from 'src/hooks/contracts/useTokenSaleVesting'
 import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
+import { useSwitchChainIfUnsupported } from 'src/hooks/useUnsupportedChainAlert'
 import { useVoteData } from 'src/hooks/useVoteData'
 import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
@@ -41,6 +42,8 @@ export const UnclaimedLAY = asStyled(({ className }) => {
   const { symbol } = ASSETS_DICT.LAY
   const { data, claim } = useClaimer()
   const { rewards, ido, tokenSale } = data || EMTPY_DATA
+
+  const { switchChainIfUnsupported } = useSwitchChainIfUnsupported()
   return (
     <LayBalance
       className={className}
@@ -60,7 +63,13 @@ export const UnclaimedLAY = asStyled(({ className }) => {
           value: formatAmt(tokenSale, { symbol, decimalPlaces: 2 }),
         },
       ]}
-      actions={[{ label: t`Claim`, onClick: claim, disabled: !data }]}
+      actions={[
+        {
+          label: t`Claim`,
+          onClick: switchChainIfUnsupported(claim),
+          disabled: !data,
+        },
+      ]}
     />
   )
 })``

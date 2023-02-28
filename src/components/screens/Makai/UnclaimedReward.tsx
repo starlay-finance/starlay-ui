@@ -5,6 +5,7 @@ import { Reel } from 'src/components/parts/Number/Reel'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { useClaimer } from 'src/hooks/contracts/useClaimer'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
+import { useSwitchChainIfUnsupported } from 'src/hooks/useUnsupportedChainAlert'
 import { purple, trueBlack } from 'src/styles/colors'
 import {
   fontWeightBold,
@@ -15,6 +16,7 @@ import { BN_ZERO, formatAmt, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
 
 export const UnclaimedReward = asStyled(({ className }) => {
+  const { switchChainIfUnsupported } = useSwitchChainIfUnsupported()
   const { data, claim } = useClaimer()
 
   const { icon, name, symbol } = ASSETS_DICT.LAY
@@ -28,7 +30,9 @@ export const UnclaimedReward = asStyled(({ className }) => {
         <Image src={icon} alt={name} width={32} height={32} />
         <Reel text={formatAmt(unclaimed, { symbol, decimalPlaces: 2 })} />
       </UnclaimedAmount>
-      <ClaimButton onClick={claim}>{t`Claim`}</ClaimButton>
+      <ClaimButton
+        onClick={switchChainIfUnsupported(claim)}
+      >{t`Claim`}</ClaimButton>
     </UnclaimedRewardDiv>
   )
 })``
