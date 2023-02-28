@@ -7,6 +7,7 @@ import { ASSETS_DICT } from 'src/constants/assets'
 import { useClaimer } from 'src/hooks/contracts/useClaimer'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
+import { useSwitchChainIfUnsupported } from 'src/hooks/useUnsupportedChainAlert'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { trueBlack } from 'src/styles/colors'
 import { fontWeightMedium, fontWeightSemiBold } from 'src/styles/font'
@@ -26,6 +27,7 @@ const Reward: VFC<ModalContentProps> = ({ close }) => {
 }
 
 const RewardModalBody = () => {
+  const { switchChainIfUnsupported } = useSwitchChainIfUnsupported()
   const { data: marketData } = useMarketData()
   const { data: balance } = useWalletBalance()
   const { data, claim } = useClaimer()
@@ -82,7 +84,9 @@ const RewardModalBody = () => {
         num={priceInUSD}
         format={(num) => formatUSD(num, { decimalPlaces: 8 })}
       />
-      <SimpleCtaButton onClick={claim}>{t`Claim`}</SimpleCtaButton>
+      <SimpleCtaButton
+        onClick={switchChainIfUnsupported(claim)}
+      >{t`Claim`}</SimpleCtaButton>
     </BodyDiv>
   )
 }

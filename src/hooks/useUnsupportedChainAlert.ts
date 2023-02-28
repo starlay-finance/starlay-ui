@@ -4,7 +4,7 @@ import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { isSupportedChain } from 'src/libs/config'
 import { DEFAULT_CHAIN_ID } from 'src/utils/env'
-import { useWallet } from './useWallet'
+import { useWallet, WalletInterface } from './useWallet'
 
 export const useUnsupportedChainAlert = (params?: {
   forceChangeChain: boolean
@@ -24,30 +24,7 @@ export const useUnsupportedChainAlert = (params?: {
 
   useEffect(() => {
     if (!params?.forceChangeChain || !isUnsupportedChain) return
-    if (!switchChain) {
-      openMessageModal({
-        type: 'Alert',
-        title: t`You need to change to a supported chain`,
-        message: t`Please switch the chain with your wallet.`,
-      })
-      return
-    }
-    openMessageModal({
-      type: 'Loading',
-      title: t`You need to change to a supported chain`,
-      message: t`Please switch the chain with your wallet...`,
-    })
-    switchChain(DEFAULT_CHAIN_ID).then(({ error }) => {
-      if (!error) {
-        close()
-        return
-      }
-      openMessageModal({
-        title: t`Failed to switch the chain`,
-        message: error,
-        type: 'Alert',
-      })
-    })
+    requestSwitchChain({ switchChain, openMessageModal, onSuccess: close })
   }, [isUnsupportedChain, params])
 
   useEffect(() => {
@@ -55,4 +32,57 @@ export const useUnsupportedChainAlert = (params?: {
   }, [isUnsupportedChain, isOpen])
 
   return { isUnsupportedChain }
+}
+
+export const useSwitchChainIfUnsupported = () => {
+  const { chainId, switchChain } = useWallet()
+  const { open: openMessageModal, close } = useMessageModal()
+
+  const switchChainIfUnsupported = (fn: VoidFunction) => () => {
+    if (chainId && !isSupportedChain(chainId)) {
+      requestSwitchChain({
+        switchChain,
+        openMessageModal,
+        onSuccess: close,
+      })
+      return
+    }
+    fn()
+  }
+  return { switchChainIfUnsupported }
+}
+
+const requestSwitchChain = ({
+  switchChain,
+  openMessageModal,
+  onSuccess,
+}: {
+  switchChain: WalletInterface['switchChain']
+  openMessageModal: ReturnType<typeof useMessageModal>['open']
+  onSuccess?: VoidFunction
+}) => {
+  if (!switchChain) {
+    openMessageModal({
+      type: 'Alert',
+      title: t`You need to change to a supported chain`,
+      message: t`Please switch the chain with your wallet.`,
+    })
+    return
+  }
+  openMessageModal({
+    type: 'Loading',
+    title: t`You need to change to a supported chain`,
+    message: t`Please switch the chain with your wallet...`,
+  })
+  switchChain(DEFAULT_CHAIN_ID).then(({ error }) => {
+    if (!error) {
+      onSuccess && onSuccess()
+      return
+    }
+    openMessageModal({
+      title: t`Failed to switch the chain`,
+      message: error,
+      type: 'Alert',
+    })
+  })
 }

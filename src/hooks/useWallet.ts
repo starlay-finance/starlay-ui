@@ -11,7 +11,7 @@ type ActiveWallet = {
   type: WalletType
   onDisconnect?: VoidFunction
 }
-type WalletInterface = {
+export type WalletInterface = {
   error: Error | undefined
   active: boolean
   chainId: number | undefined
