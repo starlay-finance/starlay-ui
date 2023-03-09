@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { Thing, WithContext } from 'schema-dts'
 
 type MetaItem = {
@@ -20,7 +20,7 @@ export type SEOProps = {
   noindex?: boolean
 }
 
-export const SEO: VFC<SEOProps> = (props) => {
+export const SEO: FC<SEOProps> = (props) => {
   const {
     path,
     pageTitle,

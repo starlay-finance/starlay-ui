@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
-import { useState, VFC } from 'react'
+import { FC, useState } from 'react'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import {
   NumberItem,
@@ -37,7 +37,7 @@ export type BorrowModalBodyProps = Omit<EstimationParam, 'amount'> & {
   borrow: (amount: BigNumber) => void
   repay: (amount: BigNumber, all?: boolean) => void
 }
-export const BorrowModalBody: VFC<BorrowModalBodyProps> = ({
+export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
   borrow,
   repay,
   ...estimationParams

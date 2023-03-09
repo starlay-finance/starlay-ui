@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { requireSupportedChain } from 'src/components/hoc/requireSupportedChain'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { AssetLabel } from 'src/components/parts/Modal/parts'
@@ -7,7 +7,7 @@ import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useWallet } from 'src/hooks/useWallet'
 import { CollateralModalBody, CollateralModalBodyProps } from './Body'
 
-export const Collateral: VFC<
+export const Collateral: FC<
   ModalContentProps<Omit<CollateralModalBodyProps, 'setUsageAsCollateral'>>
 > = ({ close, ...props }) => {
   const { account, signer } = useWallet()

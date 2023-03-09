@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { BN_ZERO, formatAmt, formatPct, formatUSD } from 'src/utils/number'
 import { Bid, Market, ProjectData } from '../types'
@@ -25,7 +25,7 @@ type BidSecionProps = {
   refundableAmount?: BigNumber
   requestRefund: VoidFunction
 }
-export const BidSecion: VFC<BidSecionProps> = ({
+export const BidSecion: FC<BidSecionProps> = ({
   bid,
   market,
   token,

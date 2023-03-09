@@ -1,270 +1,443 @@
-import { GraphQLClient } from 'graphql-request';
-import * as Dom from 'graphql-request/dist/types.dom';
-import gql from 'graphql-tag';
-export type Maybe<T> = T | null;
-export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+import { GraphQLClient } from 'graphql-request'
+import * as Dom from 'graphql-request/src/types.dom'
+import gql from 'graphql-tag'
+export type Maybe<T> = T | null
+export type InputMaybe<T> = Maybe<T>
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K]
+}
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]?: Maybe<T[SubKey]> }
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
+  { [SubKey in K]: Maybe<T[SubKey]> }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-};
+  ID: string
+  String: string
+  Boolean: boolean
+  Int: number
+  Float: number
+}
 
 export type AssetData = {
-  __typename?: 'AssetData';
-  id: Scalars['ID'];
-  poolData: PoolData;
-  reservesIncentives: Array<ReservesIncentivesData>;
-  timestamp: Scalars['String'];
-};
+  __typename?: 'AssetData'
+  id: Scalars['ID']
+  poolData: PoolData
+  reservesIncentives: Array<ReservesIncentivesData>
+  timestamp: Scalars['String']
+}
 
 export type BaseCurrencyData = {
-  __typename?: 'BaseCurrencyData';
-  marketReferenceCurrencyDecimals: Scalars['Int'];
-  marketReferenceCurrencyPriceInUsd: Scalars['String'];
-  networkBaseTokenPriceDecimals: Scalars['Int'];
-  networkBaseTokenPriceInUsd: Scalars['String'];
-};
+  __typename?: 'BaseCurrencyData'
+  marketReferenceCurrencyDecimals: Scalars['Int']
+  marketReferenceCurrencyPriceInUsd: Scalars['String']
+  networkBaseTokenPriceDecimals: Scalars['Int']
+  networkBaseTokenPriceInUsd: Scalars['String']
+}
 
 export type HealthFactor = {
-  __typename?: 'HealthFactor';
+  __typename?: 'HealthFactor'
   /**  # health factor */
-  borrowed: Scalars['String'];
-  id: Scalars['ID'];
-  number: Scalars['Float'];
+  borrowed: Scalars['String']
+  id: Scalars['ID']
+  number: Scalars['Float']
   /**  # account address */
-  timestamp: Scalars['String'];
-};
+  timestamp: Scalars['String']
+}
 
 export type HealthFactorsOutput = {
-  __typename?: 'HealthFactorsOutput';
-  items: Array<HealthFactor>;
-  nextToken?: Maybe<Scalars['String']>;
-};
+  __typename?: 'HealthFactorsOutput'
+  items: Array<HealthFactor>
+  nextToken?: Maybe<Scalars['String']>
+}
 
 export type IncentivesWithFeeds = {
-  __typename?: 'IncentivesWithFeeds';
-  emissionEndTimestamp: Scalars['Int'];
-  emissionPerSecond: Scalars['String'];
-  incentiveControllerAddress: Scalars['String'];
-  incentivesLastUpdateTimestamp: Scalars['Int'];
-  precision: Scalars['Int'];
-  priceFeed: Scalars['String'];
-  rewardTokenAddress: Scalars['String'];
-  rewardTokenDecimals: Scalars['Int'];
-  tokenAddress: Scalars['String'];
-  tokenIncentivesIndex: Scalars['String'];
-};
+  __typename?: 'IncentivesWithFeeds'
+  emissionEndTimestamp: Scalars['Int']
+  emissionPerSecond: Scalars['String']
+  incentiveControllerAddress: Scalars['String']
+  incentivesLastUpdateTimestamp: Scalars['Int']
+  precision: Scalars['Int']
+  priceFeed: Scalars['String']
+  rewardTokenAddress: Scalars['String']
+  rewardTokenDecimals: Scalars['Int']
+  tokenAddress: Scalars['String']
+  tokenIncentivesIndex: Scalars['String']
+}
 
 export type PageInput = {
-  limit?: InputMaybe<Scalars['Int']>;
-  nextToken?: InputMaybe<Scalars['String']>;
-};
+  limit?: InputMaybe<Scalars['Int']>
+  nextToken?: InputMaybe<Scalars['String']>
+}
 
 export type PoolData = {
-  __typename?: 'PoolData';
-  baseCurrencyData: BaseCurrencyData;
-  reservesData: Array<ReservesData>;
-};
+  __typename?: 'PoolData'
+  baseCurrencyData: BaseCurrencyData
+  reservesData: Array<ReservesData>
+}
 
 export type Query = {
-  __typename?: 'Query';
-  getAssetData?: Maybe<AssetData>;
-  getStatistics?: Maybe<Statistics>;
-  healthFactors: HealthFactorsOutput;
-};
-
+  __typename?: 'Query'
+  getAssetData?: Maybe<AssetData>
+  getStatistics?: Maybe<Statistics>
+  healthFactors: HealthFactorsOutput
+}
 
 export type QueryGetAssetDataArgs = {
-  date: Scalars['String'];
-};
-
+  date: Scalars['String']
+}
 
 export type QueryGetStatisticsArgs = {
-  dateAndTime: Scalars['String'];
-};
-
+  dateAndTime: Scalars['String']
+}
 
 export type QueryHealthFactorsArgs = {
-  PageInput?: InputMaybe<PageInput>;
-};
+  PageInput?: InputMaybe<PageInput>
+}
 
 export type ReservesData = {
-  __typename?: 'ReservesData';
-  availableLiquidity: Scalars['String'];
-  averageStableRate: Scalars['String'];
-  baseLTVasCollateral: Scalars['String'];
-  borrowingEnabled: Scalars['Boolean'];
-  decimals: Scalars['Int'];
-  id: Scalars['String'];
-  interestRateStrategyAddress: Scalars['String'];
-  isActive: Scalars['Boolean'];
-  isFrozen: Scalars['Boolean'];
-  lTokenAddress: Scalars['String'];
-  lastUpdateTimestamp: Scalars['Int'];
-  liquidityIndex: Scalars['String'];
-  liquidityRate: Scalars['String'];
-  name: Scalars['String'];
-  priceInMarketReferenceCurrency: Scalars['String'];
-  reserveFactor: Scalars['String'];
-  reserveLiquidationBonus: Scalars['String'];
-  reserveLiquidationThreshold: Scalars['String'];
-  stableBorrowRate: Scalars['String'];
-  stableBorrowRateEnabled: Scalars['Boolean'];
-  stableDebtLastUpdateTimestamp: Scalars['Int'];
-  stableDebtTokenAddress: Scalars['String'];
-  stableRateSlope1: Scalars['String'];
-  stableRateSlope2: Scalars['String'];
-  symbol: Scalars['String'];
-  totalPrincipalStableDebt: Scalars['String'];
-  totalScaledVariableDebt: Scalars['String'];
-  underlyingAsset: Scalars['String'];
-  usageAsCollateralEnabled: Scalars['Boolean'];
-  variableBorrowIndex: Scalars['String'];
-  variableBorrowRate: Scalars['String'];
-  variableDebtTokenAddress: Scalars['String'];
-  variableRateSlope1: Scalars['String'];
-  variableRateSlope2: Scalars['String'];
-};
+  __typename?: 'ReservesData'
+  availableLiquidity: Scalars['String']
+  averageStableRate: Scalars['String']
+  baseLTVasCollateral: Scalars['String']
+  borrowingEnabled: Scalars['Boolean']
+  decimals: Scalars['Int']
+  id: Scalars['String']
+  interestRateStrategyAddress: Scalars['String']
+  isActive: Scalars['Boolean']
+  isFrozen: Scalars['Boolean']
+  lTokenAddress: Scalars['String']
+  lastUpdateTimestamp: Scalars['Int']
+  liquidityIndex: Scalars['String']
+  liquidityRate: Scalars['String']
+  name: Scalars['String']
+  priceInMarketReferenceCurrency: Scalars['String']
+  reserveFactor: Scalars['String']
+  reserveLiquidationBonus: Scalars['String']
+  reserveLiquidationThreshold: Scalars['String']
+  stableBorrowRate: Scalars['String']
+  stableBorrowRateEnabled: Scalars['Boolean']
+  stableDebtLastUpdateTimestamp: Scalars['Int']
+  stableDebtTokenAddress: Scalars['String']
+  stableRateSlope1: Scalars['String']
+  stableRateSlope2: Scalars['String']
+  symbol: Scalars['String']
+  totalPrincipalStableDebt: Scalars['String']
+  totalScaledVariableDebt: Scalars['String']
+  underlyingAsset: Scalars['String']
+  usageAsCollateralEnabled: Scalars['Boolean']
+  variableBorrowIndex: Scalars['String']
+  variableBorrowRate: Scalars['String']
+  variableDebtTokenAddress: Scalars['String']
+  variableRateSlope1: Scalars['String']
+  variableRateSlope2: Scalars['String']
+}
 
 export type ReservesIncentivesData = {
-  __typename?: 'ReservesIncentivesData';
-  lIncentiveData: IncentivesWithFeeds;
-  sdIncentiveData: IncentivesWithFeeds;
-  underlyingAsset: Scalars['String'];
-  vdIncentiveData: IncentivesWithFeeds;
-};
+  __typename?: 'ReservesIncentivesData'
+  lIncentiveData: IncentivesWithFeeds
+  sdIncentiveData: IncentivesWithFeeds
+  underlyingAsset: Scalars['String']
+  vdIncentiveData: IncentivesWithFeeds
+}
 
 export type Statistics = {
-  __typename?: 'Statistics';
-  borrowTxCount: Scalars['Int'];
-  data: Scalars['String'];
-  depositTxCount: Scalars['Int'];
-  id: Scalars['ID'];
-  timestamp: Scalars['String'];
-  uniqueBorrowedUsers: Scalars['Int'];
-  uniqueDepositedUsers: Scalars['Int'];
-};
+  __typename?: 'Statistics'
+  borrowTxCount: Scalars['Int']
+  data: Scalars['String']
+  depositTxCount: Scalars['Int']
+  id: Scalars['ID']
+  timestamp: Scalars['String']
+  uniqueBorrowedUsers: Scalars['Int']
+  uniqueDepositedUsers: Scalars['Int']
+}
 
 export type GetAssetDataQueryVariables = Exact<{
-  date: Scalars['String'];
-}>;
+  date: Scalars['String']
+}>
 
+export type GetAssetDataQuery = {
+  __typename?: 'Query'
+  getAssetData?: {
+    __typename?: 'AssetData'
+    id: string
+    timestamp: string
+    poolData: {
+      __typename?: 'PoolData'
+      baseCurrencyData: {
+        __typename?: 'BaseCurrencyData'
+        marketReferenceCurrencyDecimals: number
+        marketReferenceCurrencyPriceInUsd: string
+        networkBaseTokenPriceDecimals: number
+        networkBaseTokenPriceInUsd: string
+      }
+      reservesData: Array<{
+        __typename?: 'ReservesData'
+        availableLiquidity: string
+        averageStableRate: string
+        baseLTVasCollateral: string
+        borrowingEnabled: boolean
+        decimals: number
+        id: string
+        interestRateStrategyAddress: string
+        isActive: boolean
+        isFrozen: boolean
+        lTokenAddress: string
+        lastUpdateTimestamp: number
+        liquidityIndex: string
+        liquidityRate: string
+        name: string
+        priceInMarketReferenceCurrency: string
+        reserveFactor: string
+        reserveLiquidationBonus: string
+        reserveLiquidationThreshold: string
+        stableBorrowRate: string
+        stableBorrowRateEnabled: boolean
+        stableDebtLastUpdateTimestamp: number
+        stableDebtTokenAddress: string
+        stableRateSlope1: string
+        stableRateSlope2: string
+        symbol: string
+        totalPrincipalStableDebt: string
+        totalScaledVariableDebt: string
+        underlyingAsset: string
+        usageAsCollateralEnabled: boolean
+        variableBorrowIndex: string
+        variableBorrowRate: string
+        variableDebtTokenAddress: string
+        variableRateSlope1: string
+        variableRateSlope2: string
+      }>
+    }
+    reservesIncentives: Array<{
+      __typename?: 'ReservesIncentivesData'
+      underlyingAsset: string
+      lIncentiveData: {
+        __typename?: 'IncentivesWithFeeds'
+        emissionEndTimestamp: number
+        emissionPerSecond: string
+        incentiveControllerAddress: string
+        incentivesLastUpdateTimestamp: number
+        precision: number
+        priceFeed: string
+        rewardTokenAddress: string
+        rewardTokenDecimals: number
+        tokenAddress: string
+        tokenIncentivesIndex: string
+      }
+      sdIncentiveData: {
+        __typename?: 'IncentivesWithFeeds'
+        emissionEndTimestamp: number
+        emissionPerSecond: string
+        incentiveControllerAddress: string
+        incentivesLastUpdateTimestamp: number
+        precision: number
+        priceFeed: string
+        rewardTokenAddress: string
+        rewardTokenDecimals: number
+        tokenAddress: string
+        tokenIncentivesIndex: string
+      }
+      vdIncentiveData: {
+        __typename?: 'IncentivesWithFeeds'
+        emissionEndTimestamp: number
+        emissionPerSecond: string
+        incentiveControllerAddress: string
+        incentivesLastUpdateTimestamp: number
+        precision: number
+        priceFeed: string
+        rewardTokenAddress: string
+        rewardTokenDecimals: number
+        tokenAddress: string
+        tokenIncentivesIndex: string
+      }
+    }>
+  } | null
+}
 
-export type GetAssetDataQuery = { __typename?: 'Query', getAssetData?: { __typename?: 'AssetData', id: string, timestamp: string, poolData: { __typename?: 'PoolData', baseCurrencyData: { __typename?: 'BaseCurrencyData', marketReferenceCurrencyDecimals: number, marketReferenceCurrencyPriceInUsd: string, networkBaseTokenPriceDecimals: number, networkBaseTokenPriceInUsd: string }, reservesData: Array<{ __typename?: 'ReservesData', availableLiquidity: string, averageStableRate: string, baseLTVasCollateral: string, borrowingEnabled: boolean, decimals: number, id: string, interestRateStrategyAddress: string, isActive: boolean, isFrozen: boolean, lTokenAddress: string, lastUpdateTimestamp: number, liquidityIndex: string, liquidityRate: string, name: string, priceInMarketReferenceCurrency: string, reserveFactor: string, reserveLiquidationBonus: string, reserveLiquidationThreshold: string, stableBorrowRate: string, stableBorrowRateEnabled: boolean, stableDebtLastUpdateTimestamp: number, stableDebtTokenAddress: string, stableRateSlope1: string, stableRateSlope2: string, symbol: string, totalPrincipalStableDebt: string, totalScaledVariableDebt: string, underlyingAsset: string, usageAsCollateralEnabled: boolean, variableBorrowIndex: string, variableBorrowRate: string, variableDebtTokenAddress: string, variableRateSlope1: string, variableRateSlope2: string }> }, reservesIncentives: Array<{ __typename?: 'ReservesIncentivesData', underlyingAsset: string, lIncentiveData: { __typename?: 'IncentivesWithFeeds', emissionEndTimestamp: number, emissionPerSecond: string, incentiveControllerAddress: string, incentivesLastUpdateTimestamp: number, precision: number, priceFeed: string, rewardTokenAddress: string, rewardTokenDecimals: number, tokenAddress: string, tokenIncentivesIndex: string }, sdIncentiveData: { __typename?: 'IncentivesWithFeeds', emissionEndTimestamp: number, emissionPerSecond: string, incentiveControllerAddress: string, incentivesLastUpdateTimestamp: number, precision: number, priceFeed: string, rewardTokenAddress: string, rewardTokenDecimals: number, tokenAddress: string, tokenIncentivesIndex: string }, vdIncentiveData: { __typename?: 'IncentivesWithFeeds', emissionEndTimestamp: number, emissionPerSecond: string, incentiveControllerAddress: string, incentivesLastUpdateTimestamp: number, precision: number, priceFeed: string, rewardTokenAddress: string, rewardTokenDecimals: number, tokenAddress: string, tokenIncentivesIndex: string } }> } | null };
+export type BaseCurrencyDataFragment = {
+  __typename?: 'BaseCurrencyData'
+  marketReferenceCurrencyDecimals: number
+  marketReferenceCurrencyPriceInUsd: string
+  networkBaseTokenPriceDecimals: number
+  networkBaseTokenPriceInUsd: string
+}
 
-export type BaseCurrencyDataFragment = { __typename?: 'BaseCurrencyData', marketReferenceCurrencyDecimals: number, marketReferenceCurrencyPriceInUsd: string, networkBaseTokenPriceDecimals: number, networkBaseTokenPriceInUsd: string };
+export type ReservesDataFragment = {
+  __typename?: 'ReservesData'
+  availableLiquidity: string
+  averageStableRate: string
+  baseLTVasCollateral: string
+  borrowingEnabled: boolean
+  decimals: number
+  id: string
+  interestRateStrategyAddress: string
+  isActive: boolean
+  isFrozen: boolean
+  lTokenAddress: string
+  lastUpdateTimestamp: number
+  liquidityIndex: string
+  liquidityRate: string
+  name: string
+  priceInMarketReferenceCurrency: string
+  reserveFactor: string
+  reserveLiquidationBonus: string
+  reserveLiquidationThreshold: string
+  stableBorrowRate: string
+  stableBorrowRateEnabled: boolean
+  stableDebtLastUpdateTimestamp: number
+  stableDebtTokenAddress: string
+  stableRateSlope1: string
+  stableRateSlope2: string
+  symbol: string
+  totalPrincipalStableDebt: string
+  totalScaledVariableDebt: string
+  underlyingAsset: string
+  usageAsCollateralEnabled: boolean
+  variableBorrowIndex: string
+  variableBorrowRate: string
+  variableDebtTokenAddress: string
+  variableRateSlope1: string
+  variableRateSlope2: string
+}
 
-export type ReservesDataFragment = { __typename?: 'ReservesData', availableLiquidity: string, averageStableRate: string, baseLTVasCollateral: string, borrowingEnabled: boolean, decimals: number, id: string, interestRateStrategyAddress: string, isActive: boolean, isFrozen: boolean, lTokenAddress: string, lastUpdateTimestamp: number, liquidityIndex: string, liquidityRate: string, name: string, priceInMarketReferenceCurrency: string, reserveFactor: string, reserveLiquidationBonus: string, reserveLiquidationThreshold: string, stableBorrowRate: string, stableBorrowRateEnabled: boolean, stableDebtLastUpdateTimestamp: number, stableDebtTokenAddress: string, stableRateSlope1: string, stableRateSlope2: string, symbol: string, totalPrincipalStableDebt: string, totalScaledVariableDebt: string, underlyingAsset: string, usageAsCollateralEnabled: boolean, variableBorrowIndex: string, variableBorrowRate: string, variableDebtTokenAddress: string, variableRateSlope1: string, variableRateSlope2: string };
-
-export type IncentivesWithFeedsFragment = { __typename?: 'IncentivesWithFeeds', emissionEndTimestamp: number, emissionPerSecond: string, incentiveControllerAddress: string, incentivesLastUpdateTimestamp: number, precision: number, priceFeed: string, rewardTokenAddress: string, rewardTokenDecimals: number, tokenAddress: string, tokenIncentivesIndex: string };
+export type IncentivesWithFeedsFragment = {
+  __typename?: 'IncentivesWithFeeds'
+  emissionEndTimestamp: number
+  emissionPerSecond: string
+  incentiveControllerAddress: string
+  incentivesLastUpdateTimestamp: number
+  precision: number
+  priceFeed: string
+  rewardTokenAddress: string
+  rewardTokenDecimals: number
+  tokenAddress: string
+  tokenIncentivesIndex: string
+}
 
 export const BaseCurrencyDataFragmentDoc = gql`
-    fragment BaseCurrencyData on BaseCurrencyData {
-  marketReferenceCurrencyDecimals
-  marketReferenceCurrencyPriceInUsd
-  networkBaseTokenPriceDecimals
-  networkBaseTokenPriceInUsd
-}
-    `;
+  fragment BaseCurrencyData on BaseCurrencyData {
+    marketReferenceCurrencyDecimals
+    marketReferenceCurrencyPriceInUsd
+    networkBaseTokenPriceDecimals
+    networkBaseTokenPriceInUsd
+  }
+`
 export const ReservesDataFragmentDoc = gql`
-    fragment ReservesData on ReservesData {
-  availableLiquidity
-  averageStableRate
-  baseLTVasCollateral
-  borrowingEnabled
-  decimals
-  id
-  interestRateStrategyAddress
-  isActive
-  isFrozen
-  lTokenAddress
-  lastUpdateTimestamp
-  liquidityIndex
-  liquidityRate
-  name
-  priceInMarketReferenceCurrency
-  reserveFactor
-  reserveLiquidationBonus
-  reserveLiquidationThreshold
-  stableBorrowRate
-  stableBorrowRateEnabled
-  stableDebtLastUpdateTimestamp
-  stableDebtTokenAddress
-  stableRateSlope1
-  stableRateSlope2
-  symbol
-  totalPrincipalStableDebt
-  totalScaledVariableDebt
-  underlyingAsset
-  usageAsCollateralEnabled
-  variableBorrowIndex
-  variableBorrowRate
-  variableDebtTokenAddress
-  variableRateSlope1
-  variableRateSlope2
-}
-    `;
-export const IncentivesWithFeedsFragmentDoc = gql`
-    fragment IncentivesWithFeeds on IncentivesWithFeeds {
-  emissionEndTimestamp
-  emissionPerSecond
-  incentiveControllerAddress
-  incentivesLastUpdateTimestamp
-  precision
-  priceFeed
-  rewardTokenAddress
-  rewardTokenDecimals
-  tokenAddress
-  tokenIncentivesIndex
-}
-    `;
-export const GetAssetDataDocument = gql`
-    query GetAssetData($date: String!) {
-  getAssetData(date: $date) {
+  fragment ReservesData on ReservesData {
+    availableLiquidity
+    averageStableRate
+    baseLTVasCollateral
+    borrowingEnabled
+    decimals
     id
-    timestamp
-    poolData {
-      baseCurrencyData {
-        ...BaseCurrencyData
+    interestRateStrategyAddress
+    isActive
+    isFrozen
+    lTokenAddress
+    lastUpdateTimestamp
+    liquidityIndex
+    liquidityRate
+    name
+    priceInMarketReferenceCurrency
+    reserveFactor
+    reserveLiquidationBonus
+    reserveLiquidationThreshold
+    stableBorrowRate
+    stableBorrowRateEnabled
+    stableDebtLastUpdateTimestamp
+    stableDebtTokenAddress
+    stableRateSlope1
+    stableRateSlope2
+    symbol
+    totalPrincipalStableDebt
+    totalScaledVariableDebt
+    underlyingAsset
+    usageAsCollateralEnabled
+    variableBorrowIndex
+    variableBorrowRate
+    variableDebtTokenAddress
+    variableRateSlope1
+    variableRateSlope2
+  }
+`
+export const IncentivesWithFeedsFragmentDoc = gql`
+  fragment IncentivesWithFeeds on IncentivesWithFeeds {
+    emissionEndTimestamp
+    emissionPerSecond
+    incentiveControllerAddress
+    incentivesLastUpdateTimestamp
+    precision
+    priceFeed
+    rewardTokenAddress
+    rewardTokenDecimals
+    tokenAddress
+    tokenIncentivesIndex
+  }
+`
+export const GetAssetDataDocument = gql`
+  query GetAssetData($date: String!) {
+    getAssetData(date: $date) {
+      id
+      timestamp
+      poolData {
+        baseCurrencyData {
+          ...BaseCurrencyData
+        }
+        reservesData {
+          ...ReservesData
+        }
       }
-      reservesData {
-        ...ReservesData
-      }
-    }
-    reservesIncentives {
-      underlyingAsset
-      lIncentiveData {
-        ...IncentivesWithFeeds
-      }
-      sdIncentiveData {
-        ...IncentivesWithFeeds
-      }
-      vdIncentiveData {
-        ...IncentivesWithFeeds
+      reservesIncentives {
+        underlyingAsset
+        lIncentiveData {
+          ...IncentivesWithFeeds
+        }
+        sdIncentiveData {
+          ...IncentivesWithFeeds
+        }
+        vdIncentiveData {
+          ...IncentivesWithFeeds
+        }
       }
     }
   }
-}
-    ${BaseCurrencyDataFragmentDoc}
-${ReservesDataFragmentDoc}
-${IncentivesWithFeedsFragmentDoc}`;
+  ${BaseCurrencyDataFragmentDoc}
+  ${ReservesDataFragmentDoc}
+  ${IncentivesWithFeedsFragmentDoc}
+`
 
-export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
+export type SdkFunctionWrapper = <T>(
+  action: (requestHeaders?: Record<string, string>) => Promise<T>,
+  operationName: string,
+  operationType?: string,
+) => Promise<T>
 
+const defaultWrapper: SdkFunctionWrapper = (
+  action,
+  _operationName,
+  _operationType,
+) => action()
 
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
-
-export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
+export function getSdk(
+  client: GraphQLClient,
+  withWrapper: SdkFunctionWrapper = defaultWrapper,
+) {
   return {
-    GetAssetData(variables: GetAssetDataQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAssetDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetAssetDataQuery>(GetAssetDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAssetData');
-    }
-  };
+    GetAssetData(
+      variables: GetAssetDataQueryVariables,
+      requestHeaders?: Dom.RequestInit['headers'],
+    ): Promise<GetAssetDataQuery> {
+      return withWrapper(
+        (wrappedRequestHeaders) =>
+          client.request<GetAssetDataQuery>(GetAssetDataDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders,
+          }),
+        'GetAssetData',
+        'query',
+      )
+    },
+  }
 }
-export type Sdk = ReturnType<typeof getSdk>;
+export type Sdk = ReturnType<typeof getSdk>

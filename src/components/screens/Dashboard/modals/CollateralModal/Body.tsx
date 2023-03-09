@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import { NumberItemWithDiff } from 'src/components/parts/Modal/parts'
 import { ItemWithDiff } from 'src/components/parts/Modal/parts/Item'
@@ -22,7 +22,7 @@ export type CollateralModalBodyProps = Omit<EstimationParam, 'amount'> & {
   ) => Promise<{ error: number } | undefined>
 }
 
-export const CollateralModalBody: VFC<CollateralModalBodyProps> = ({
+export const CollateralModalBody: FC<CollateralModalBodyProps> = ({
   setUsageAsCollateral,
   ...estimationParams
 }) => {

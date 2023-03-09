@@ -47,7 +47,7 @@ export const useClaimer = () => {
       claimer &&
       account &&
       assets && ['claimer-data', provider.chainId, account],
-    async (_1, _2, account) => {
+    async ([_1, _2, account]) => {
       const res = await claimer!.releasable({
         user: account,
         reserves: assets!,

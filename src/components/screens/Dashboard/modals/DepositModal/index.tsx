@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { requireSupportedChain } from 'src/components/hoc/requireSupportedChain'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { AssetLabel } from 'src/components/parts/Modal/parts'
@@ -8,7 +8,7 @@ import { useTracking } from 'src/hooks/useTracking'
 import { useWallet } from 'src/hooks/useWallet'
 import { DepositModalBody, DepositModalBodyProps } from './Body'
 
-export const Deposit: VFC<
+export const Deposit: FC<
   ModalContentProps<Omit<DepositModalBodyProps, 'deposit' | 'withdraw'>>
 > = ({ close, ...props }) => {
   const { account, signer } = useWallet()

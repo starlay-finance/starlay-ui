@@ -1,5 +1,5 @@
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
 import { assetFromSymbolAndAddress } from 'src/utils/assets'
@@ -17,7 +17,7 @@ type SaleProps = {
   maxAmount: BigNumber
 }
 
-export const Sale: VFC<SaleProps> = ({
+export const Sale: FC<SaleProps> = ({
   data: { token, sale, vesting },
   status,
   market,

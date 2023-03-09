@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, VFC } from 'react'
+import { createContext, FC, ReactNode, useContext } from 'react'
 import { EthereumAddress } from 'src/types/web3'
 import { ProjectData } from './types'
 type LaunchpadContextInterface = {
@@ -11,7 +11,7 @@ const DEFAULT_VALUE: LaunchpadContextInterface = {
 
 const LaunchpadContext = createContext(DEFAULT_VALUE)
 
-export const LaunchpadContextProvider: VFC<{
+export const LaunchpadContextProvider: FC<{
   launchpadAddress: EthereumAddress | undefined
   children: ReactNode
 }> = ({ launchpadAddress, children }) => (
@@ -23,8 +23,8 @@ export const LaunchpadContextProvider: VFC<{
 export const useLaunchpadContext = () => useContext(LaunchpadContext)
 
 type WithLaunchpadContextHOC = <T extends { data: ProjectData }>(
-  Component: VFC<T>,
-) => VFC<T>
+  Component: FC<T>,
+) => FC<T>
 export const withLaunchpadContext: WithLaunchpadContextHOC =
   (Component) => (props) =>
     (

@@ -32,12 +32,12 @@ export const useLaunchpad = (params?: {
   const { data: launchpad } = useSWRImmutable(
     provider &&
       launchpadAddress && ['launchpad', provider.chainId, launchpadAddress],
-    (_key, _chainId, launchpadAddress) => {
+    ([_key, _chainId, launchpadAddress]) => {
       return launchpadContract(provider!, launchpadAddress)
     },
   )
 
-  const { data: userResult } = useSWRImmutable<UserResult>(
+  const { data: userResult } = useSWRImmutable(
     provider &&
       launchpadAddress &&
       launchpad &&
@@ -47,7 +47,7 @@ export const useLaunchpad = (params?: {
         launchpadAddress,
         account,
       ],
-    (_key, _chainId, _launchpadAddress, account) =>
+    ([_key, _chainId, _launchpadAddress, account]) =>
       fetchUserResult(launchpad!, account),
   )
 

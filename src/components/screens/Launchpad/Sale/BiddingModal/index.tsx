@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { requireSupportedChain } from 'src/components/hoc/requireSupportedChain'
 import { GlassModalContent } from 'src/components/parts/Modal/base/Content/Glass'
 import { useLaunchpad } from 'src/hooks/contracts/useLaunchpad'
@@ -23,7 +23,7 @@ type BiddingModalProps = {
   currentBid?: Bid
 }
 
-const BiddingModal: VFC<ModalContentProps & BiddingModalProps> = ({
+const BiddingModal: FC<ModalContentProps & BiddingModalProps> = ({
   launchpadAddress,
   close,
   receivingAsset,

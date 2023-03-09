@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
-import { ReactNode, VFC } from 'react'
+import { FC, ReactNode } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
@@ -222,7 +222,7 @@ type LayBalanceProps = {
     disabled?: boolean
   }[]
 }
-const LayBalance = styled<VFC<LayBalanceProps & { className?: string }>>(
+const LayBalance = styled<FC<LayBalanceProps & { className?: string }>>(
   ({ label, amount, actions, details, className }) => {
     const { account } = useWallet()
     const { icon, name, symbol } = ASSETS_DICT.LAY

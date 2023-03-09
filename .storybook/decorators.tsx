@@ -34,6 +34,7 @@ export const MOCK_SWR_RESPONSE: SWRResponse<any, any> = {
   data: undefined,
   error: undefined,
   isValidating: false,
+  isLoading: false,
   mutate: async () => {},
 }
 

@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { valueToBigNumber } from '@starlay-finance/math-utils'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { useWallet } from 'src/hooks/useWallet'
 import { formatWithTZ } from 'src/utils/date'
@@ -18,7 +18,7 @@ type SaleInformationProps = {
   hasBidded?: boolean
 }
 
-export const SaleInformation: VFC<SaleInformationProps> = ({
+export const SaleInformation: FC<SaleInformationProps> = ({
   token,
   information,
   status,

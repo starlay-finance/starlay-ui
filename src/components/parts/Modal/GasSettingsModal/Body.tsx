@@ -2,7 +2,7 @@ import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import { utils } from 'ethers'
-import { useState, VFC } from 'react'
+import { FC, useState } from 'react'
 import { Link } from 'src/components/elements/Link'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import { RatioControl } from 'src/components/parts/Modal/parts/RatioControl'
@@ -30,7 +30,7 @@ export type GasSettingsModalBodyProps = {
   baseGasPrice: BigNumber | undefined
 }
 
-export const GasSettingsModalBody: VFC<GasSettingsModalBodyProps> = ({
+export const GasSettingsModalBody: FC<GasSettingsModalBodyProps> = ({
   currentMultiplier,
   currentManualValue,
   save,

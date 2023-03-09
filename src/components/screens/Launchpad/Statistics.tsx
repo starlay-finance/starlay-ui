@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import dayjs, { Dayjs } from 'dayjs'
-import { CSSProperties, ReactNode, VFC } from 'react'
+import { CSSProperties, FC, ReactNode } from 'react'
 import Countdown from 'react-countdown'
 import {
   Area,
@@ -48,7 +48,7 @@ type StatisticsProps = {
   saleEnd: Dayjs
 }
 
-export const Statistics: VFC<StatisticsProps> = ({
+export const Statistics: FC<StatisticsProps> = ({
   token,
   market,
   priceChartData = [],
@@ -180,7 +180,7 @@ Bottom Price = Total Bids without Canceling or Limit Price Options / Amount of T
   )
 }
 
-const TooltipRenderer: VFC<TooltipProps<number, string>> = ({
+const TooltipRenderer: FC<TooltipProps<number, string>> = ({
   active,
   payload,
   coordinate,
@@ -206,7 +206,7 @@ const TooltipRenderer: VFC<TooltipProps<number, string>> = ({
 }
 
 const FORMAT = 'MMM, D HH:mm z'
-const ChartTooltip: VFC<{
+const ChartTooltip: FC<{
   priceInUSD: number
   bottomPriceInUSD: number
   timestamp: number
@@ -247,7 +247,7 @@ const TooltipDiv = styled.div`
 `
 
 const Item = styled<
-  VFC<{
+  FC<{
     label: string
     children: ReactNode | undefined
     tooltip?: string

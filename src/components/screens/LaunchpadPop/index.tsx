@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { darkRed, primary, skyBlue } from 'src/styles/colors'
 import { fontWeightBold } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
@@ -9,7 +9,7 @@ import { ProjectData } from '../Launchpad/types'
 
 const DATE_FORMAT = 'hh:mm a z on MMM DD'
 
-export const LaunchpadPop: VFC<{ data: ProjectData }> = ({
+export const LaunchpadPop: FC<{ data: ProjectData }> = ({
   data: { id, projectName, icon, token, sale },
 }) => (
   <>
@@ -30,7 +30,7 @@ export const LaunchpadPop: VFC<{ data: ProjectData }> = ({
     </a>
   </>
 )
-const Background: VFC<{ icon: ProjectData['icon'] }> = ({ icon }) => (
+const Background: FC<{ icon: ProjectData['icon'] }> = ({ icon }) => (
   <BackgroundDiv>
     <svg xmlns="http://www.w3.org/2000/svg" width="320" height="240">
       <defs>
@@ -95,7 +95,8 @@ const PopDiv = styled.div`
   }
 `
 
-const Styles = createGlobalStyle`
+// avoid type error: https://github.com/styled-components/styled-components/issues/3738
+const Styles: any = createGlobalStyle`
   body {
    width: 320px;
    height: 240px;

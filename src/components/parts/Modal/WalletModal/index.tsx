@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
-import { useEffect, useState, VFC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { IconMetamask } from 'src/assets/svgs'
 import { Link } from 'src/components/elements/Link'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
@@ -15,7 +15,7 @@ import styled from 'styled-components'
 import { LoadingProtocolIcon } from '../../Loading'
 import { ItemLabel } from '../parts'
 
-const Wallet: VFC<ModalContentProps> = ({ close }) => {
+const Wallet: FC<ModalContentProps> = ({ close }) => {
   const { account, connect } = useWallet()
 
   const [connecting, setConnecting] = useState(false)
@@ -41,14 +41,14 @@ const Wallet: VFC<ModalContentProps> = ({ close }) => {
   )
 }
 
-const BodyLoading: VFC = () => (
+const BodyLoading: FC = () => (
   <BodyDiv>
     <LoadingProtocolIcon />
     <p>{t`Connecting the wallet...`}</p>
   </BodyDiv>
 )
 
-const BodyConnect: VFC<{ connect: (type: WalletType) => void }> = ({
+const BodyConnect: FC<{ connect: (type: WalletType) => void }> = ({
   connect,
 }) => (
   <BodyDiv>

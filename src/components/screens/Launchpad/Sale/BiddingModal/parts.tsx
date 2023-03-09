@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { Toggle } from 'src/components/parts/Toggle'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { hoverBackgroundKeyframes } from 'src/styles/animation'
@@ -26,7 +26,7 @@ import {
 } from 'src/utils/number'
 import styled, { css } from 'styled-components'
 
-export const AmountInput: VFC<{
+export const AmountInput: FC<{
   value: string
   decimals: number
   step: number

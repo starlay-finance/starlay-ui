@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { ItemLabel } from 'src/components/parts/Modal/parts'
 import { Item } from 'src/components/parts/Modal/parts/Item'
 import { Action } from 'src/components/screens/Dashboard/modals/parts'
@@ -13,7 +13,7 @@ export type AssetMarketDetailsModalBodyProps = {
   asset: AssetMarketData
   marketReferenceCurrencyPriceInUSD?: BigNumber
 }
-export const AssetMarketDetailsModalBody: VFC<AssetMarketDetailsModalBodyProps> =
+export const AssetMarketDetailsModalBody: FC<AssetMarketDetailsModalBodyProps> =
   ({
     asset: {
       borrowingEnabled,

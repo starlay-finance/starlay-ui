@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { requireSupportedChain } from 'src/components/hoc/requireSupportedChain'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
@@ -16,7 +16,7 @@ import { filterFalsy } from 'src/utils/array'
 import styled from 'styled-components'
 import { LockModalBody, LockModalBodyProps } from './Body'
 
-export const Lock: VFC<
+export const Lock: FC<
   ModalContentProps & Pick<LockModalBodyProps, 'current' | 'mode'>
 > = ({ close, ...props }) => {
   const { lock } = useVotingEscrow()

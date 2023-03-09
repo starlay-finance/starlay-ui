@@ -11,8 +11,8 @@ export const GlobalStyles = () => {
   }, [])
   return <Styles ready={ready} />
 }
-
-const Styles = createGlobalStyle<{ ready: boolean }>`
+// avoid type error: https://github.com/styled-components/styled-components/issues/3738
+const Styles: any = createGlobalStyle<{ ready: boolean }>`
   html {
     visibility: ${({ ready }) => (ready ? 'visible' : 'hidden')};
     height:100%;

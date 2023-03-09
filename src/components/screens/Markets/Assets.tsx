@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { VFC } from 'react'
+import { FC } from 'react'
 import {
   AssetTd,
   MarketTable,
@@ -142,16 +142,15 @@ const detailsRow = ({
   }
 }
 
-const ValueWithPercentageChange: VFC<
-  { value: string } & PercentageChangeProps
-> = ({ value, ...props }) => {
-  return (
-    <ValuesTd>
-      {value}
-      <PercentageChange {...props} />
-    </ValuesTd>
-  )
-}
+const ValueWithPercentageChange: FC<{ value: string } & PercentageChangeProps> =
+  ({ value, ...props }) => {
+    return (
+      <ValuesTd>
+        {value}
+        <PercentageChange {...props} />
+      </ValuesTd>
+    )
+  }
 const ValuesTd = styled.div`
   display: flex;
   flex-direction: column;

@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { useEffect, VFC } from 'react'
+import { FC, useEffect } from 'react'
 import {
   IconClose,
   IconDiscord,
@@ -27,7 +27,7 @@ import {
 import { Z_MODAL } from 'src/utils/zIndex'
 import styled, { css, keyframes } from 'styled-components'
 
-export const MobileMenu: VFC<{
+export const MobileMenu: FC<{
   isOpen: boolean
   close: VoidFunction
 }> = ({ isOpen, close }) => {

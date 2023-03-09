@@ -1,9 +1,9 @@
 import {
+  FC,
   ForwardRefExoticComponent,
   ReactNode,
   RefAttributes,
   useRef,
-  VFC,
 } from 'react'
 
 type ModalOption = {
@@ -19,7 +19,7 @@ type ModalOpener<P> = Partial<P> extends P
   : (props: ModalProps<P>) => void
 
 type UseModal = <P>(
-  Component: VFC<ModalContentProps<P>>,
+  Component: FC<ModalContentProps<P>>,
   option?: ModalOption,
 ) => {
   isOpen: boolean
@@ -32,7 +32,7 @@ export type ModalContentProps<T = {}> = T & {
 }
 
 export type ModalState<T = any> = {
-  Component: VFC<ModalContentProps<T>>
+  Component: FC<ModalContentProps<T>>
   props: T
   option?: ModalOption
 }

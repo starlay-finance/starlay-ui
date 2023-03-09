@@ -1,10 +1,10 @@
-import { ButtonHTMLAttributes, VFC } from 'react'
+import { ButtonHTMLAttributes, FC } from 'react'
 import { IconArrowBottom } from 'src/assets/svgs'
 import { purple } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import styled from 'styled-components'
 
-export const DropdownButton: VFC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
+export const DropdownButton: FC<ButtonHTMLAttributes<HTMLButtonElement>> = ({
   children,
   ...props
 }) => (

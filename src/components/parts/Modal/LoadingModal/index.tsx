@@ -1,9 +1,9 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { useLoadingModal as useLoadingModalPortal } from 'src/hooks/useModal'
 import { LoadingProtocolIcon } from '../../Loading'
 
-const LoadingModal: VFC = () => (
+const LoadingModal: FC = () => (
   <DefaultModalContent bodyNode={<LoadingProtocolIcon />} />
 )
 
