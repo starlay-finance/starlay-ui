@@ -32,7 +32,7 @@ export const useTokenSaleVesting = () => {
     account &&
       provider &&
       contracts && ['votingescrow-userdata', provider.chainId, account],
-    async (_1, _2, account) => fetchUserData(contracts!, account),
+    async ([_1, _2, account]) => fetchUserData(contracts!, account),
   )
 
   const handler = useTxHandler()

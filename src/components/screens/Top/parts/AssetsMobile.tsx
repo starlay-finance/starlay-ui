@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { asStyled, AsStyledProps } from 'src/components/hoc/asStyled'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { breakpoint } from 'src/styles/mixins'
@@ -28,7 +28,7 @@ type AssetsComponentProps = {
     'symbol' | 'depositAPY' | 'variableBorrowAPY'
   >[]
 }
-export const AssetsComponent: VFC<AssetsComponentProps & AsStyledProps> = ({
+export const AssetsComponent: FC<AssetsComponentProps & AsStyledProps> = ({
   assets,
   markets,
   className,

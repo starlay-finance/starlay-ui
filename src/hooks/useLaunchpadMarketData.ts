@@ -34,7 +34,7 @@ export const useLaunchpadMarketData = ({
         provider.chainId,
         launchpadAddress,
       ],
-    (_key: string, chainId: ChainId, launchpadAddress: EthereumAddress) =>
+    ([_key, chainId, launchpadAddress]) =>
       fetchLaunchpadMarketData(chainId, launchpadAddress, saleStart),
   )
 

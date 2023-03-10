@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { CSSProperties, useState, VFC } from 'react'
+import { CSSProperties, FC, useState } from 'react'
 import { useDeviceSelectors } from 'react-device-detect'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
@@ -38,7 +38,7 @@ type AssetsComponentProps = {
     'symbol' | 'depositAPY' | 'variableBorrowAPY'
   >[]
 }
-export const AssetsComponent: VFC<AssetsComponentProps & AsStyledProps> = ({
+export const AssetsComponent: FC<AssetsComponentProps & AsStyledProps> = ({
   assets,
   markets,
   className,
@@ -82,7 +82,7 @@ type AssetItemProps = {
   market?: Pick<AssetMarketData, 'symbol' | 'depositAPY' | 'variableBorrowAPY'>
   disabled?: boolean
 }
-export const AssetItem: VFC<AssetItemProps> = ({
+export const AssetItem: FC<AssetItemProps> = ({
   appeared,
   onAnimationEnd,
   symbolStyle,
@@ -120,7 +120,7 @@ export const AssetItem: VFC<AssetItemProps> = ({
   </AssetItemLink>
 )
 
-const Rate: VFC<{ label: string; value: string | undefined }> = ({
+const Rate: FC<{ label: string; value: string | undefined }> = ({
   label,
   value = '',
 }) => (

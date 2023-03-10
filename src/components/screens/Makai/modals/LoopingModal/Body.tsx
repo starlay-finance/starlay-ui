@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
 import { BigNumber } from '@starlay-finance/math-utils'
-import { useEffect, useState, VFC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Link } from 'src/components/elements/Link'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import {
@@ -41,7 +41,7 @@ export type LoopingModalBodyProps = Omit<EstimationParam, 'amount'> & {
   max?: boolean
 }
 
-export const LoopingModalBody: VFC<LoopingModalBodyProps> = ({
+export const LoopingModalBody: FC<LoopingModalBodyProps> = ({
   loop,
   close,
   max,

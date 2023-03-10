@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { VFC } from 'react'
+import { FC } from 'react'
 import {
   IconArrowRight,
   IconDiscord,
@@ -19,7 +19,7 @@ import styled from 'styled-components'
 import { ProjectData } from './types'
 
 export const ProjectInformation = styled<
-  VFC<
+  FC<
     {
       information: ProjectData['information']
       token: ProjectData['token']
@@ -48,7 +48,7 @@ export const ProjectInformation = styled<
   </ProjectInformationDiv>
 ))``
 
-const Urls: VFC<{ urls: ProjectData['information']['urls'] }> = ({ urls }) => (
+const Urls: FC<{ urls: ProjectData['information']['urls'] }> = ({ urls }) => (
   <UrlsDiv>
     <Link href={urls.website}>{t`Web`}</Link>
     {urls.docs && <Link href={urls.docs}>{t`Docs`}</Link>}

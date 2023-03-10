@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { BarChart } from 'src/components/parts/Chart'
 import { SHIMMER_DARA_URI } from 'src/components/parts/Loading'
@@ -37,7 +37,7 @@ export const AssetBarChartWithPlaceholder = asStyled<{
   )
 })``
 
-const LabelWithPlaceholder: VFC<{
+const LabelWithPlaceholder: FC<{
   label?: string
   value: string
 }> = ({ label, value }) => (

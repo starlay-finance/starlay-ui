@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { LogoProtocol } from 'src/assets/svgs'
 import {
   BackgroundGradient,
@@ -15,7 +15,7 @@ import { reasonToMessage } from './reasons'
 type SorryProps = {
   reason: FromQuery<SorryReason>
 }
-export const Sorry: VFC<SorryProps> = ({ reason }) => (
+export const Sorry: FC<SorryProps> = ({ reason }) => (
   <Main>
     <BackgroundGradient1 />
     <BackgroundGradient2 />

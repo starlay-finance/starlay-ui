@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
-import { ReactNode, VFC } from 'react'
+import { FC, ReactNode } from 'react'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import { NumberItem, NumberItemPair } from 'src/components/parts/Modal/parts'
 import { Item } from 'src/components/parts/Modal/parts/Item'
@@ -31,7 +31,7 @@ export type SuggestModalBodyProps = {
   openDeposit: VoidFunction
   openMakai: VoidFunction
 }
-export const SuggestModalBody: VFC<SuggestModalBodyProps> = ({
+export const SuggestModalBody: FC<SuggestModalBodyProps> = ({
   asset,
   arthswapPair,
   inWallet,

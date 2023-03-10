@@ -1,6 +1,6 @@
 import { valueToBigNumber } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { AppBackground } from 'src/components/parts/Background'
 import { AppFooter } from 'src/components/parts/Footer'
 import { AppHeader } from 'src/components/parts/Header/AppHeader'
@@ -23,7 +23,7 @@ const judgeStatus = (sale: ProjectData['sale']): Status => {
   return 'Open'
 }
 
-export const Launchpad: VFC<{ data: ProjectData }> = withLaunchpadContext(
+export const Launchpad: FC<{ data: ProjectData }> = withLaunchpadContext(
   ({ data }) => {
     const status = judgeStatus(data.sale)
     const { data: marketData } = useLaunchpadMarketData({

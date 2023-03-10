@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
-import { useEffect, useState, VFC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useRecentGasPrice } from 'src/hooks/useRecentGasPrice'
@@ -16,7 +16,7 @@ import {
 } from 'src/utils/localStorage'
 import { GasSettingsModalBody } from './Body'
 
-export const GasSettings: VFC<ModalContentProps> = ({ close }) => {
+export const GasSettings: FC<ModalContentProps> = ({ close }) => {
   const { data } = useStaticRPCProvider()
   const { baseAsset } = getNetworkConfig(data?.chainId || DEFAULT_CHAIN_ID)
   const { data: balance } = useWalletBalance()

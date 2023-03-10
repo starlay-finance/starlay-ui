@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { ASSETS_DICT } from 'src/constants/assets'
@@ -16,7 +16,7 @@ import styled from 'styled-components'
 import { SimpleCtaButton } from '../../Cta'
 import { NumberItem } from '../parts'
 
-const Reward: VFC<ModalContentProps> = ({ close }) => {
+const Reward: FC<ModalContentProps> = ({ close }) => {
   return (
     <DefaultModalContent
       headerNode={t`LAY Balance`}

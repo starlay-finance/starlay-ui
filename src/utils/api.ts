@@ -26,7 +26,11 @@ export const asHandler =
     const { validator, headers } = options
     try {
       const parameters = validator ? validator(request) : request.query
-      if (parameters && 'error' in parameters) {
+      if (
+        parameters &&
+        typeof parameters == 'object' &&
+        'error' in parameters
+      ) {
         response.status(400).json(jsonify(parameters))
         return
       }

@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, VFC } from 'react'
+import { ButtonHTMLAttributes, FC } from 'react'
 import { Link, LinkFC } from 'src/components/elements/Link'
 import { darkPurple, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
@@ -10,7 +10,7 @@ export const SimpleCtaLink = styled<LinkFC>(({ children, ...props }) => (
 ))``
 
 export const SimpleCtaButton = styled<
-  VFC<ButtonHTMLAttributes<HTMLButtonElement>>
+  FC<ButtonHTMLAttributes<HTMLButtonElement>>
 >(({ children, ...props }) => <CtaButton {...props}>{children}</CtaButton>)``
 
 const ctaStyle = css`

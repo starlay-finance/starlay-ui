@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { Barometer } from 'src/components/parts/Chart/Barometer'
 import { gray, primary, purple } from 'src/styles/colors'
 import styled, { css } from 'styled-components'
@@ -14,7 +14,7 @@ const inputProps = {
   max: 1,
   step: 0.0001,
 }
-export const Slider = styled<VFC<SliderProps & { className?: string }>>(
+export const Slider = styled<FC<SliderProps & { className?: string }>>(
   ({ current, setValue, remaining, disabled, className }) => {
     return (
       <Barometer

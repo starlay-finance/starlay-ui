@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, VFC } from 'react'
+import { ButtonHTMLAttributes, FC } from 'react'
 import { Link, LinkFC } from 'src/components/elements/Link'
 import { darkRed, skyBlue, trueWhite } from 'src/styles/colors'
 import { fontWeightBlack } from 'src/styles/font'
@@ -13,7 +13,7 @@ export const GradientCtaLink = styled<LinkFC>(({ children, ...props }) => (
 ))``
 
 export const GradientCtaButton = styled<
-  VFC<ButtonHTMLAttributes<HTMLButtonElement>>
+  FC<ButtonHTMLAttributes<HTMLButtonElement>>
 >(({ children, ...props }) => (
   <CtaButton {...props}>
     <Content>{children}</Content>

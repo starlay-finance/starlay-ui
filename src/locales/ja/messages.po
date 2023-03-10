@@ -54,12 +54,6 @@ msgid "Discord"
 msgstr ""
 
 #: src/components/parts/Footer/TopFooter.tsx
-#: src/components/parts/Footer/TopFooter.tsx
-#: src/components/screens/Top/Menu.tsx
-msgid "Telegram"
-msgstr ""
-
-#: src/components/parts/Footer/TopFooter.tsx
 #: src/components/screens/Top/Menu.tsx
 msgid "Medium"
 msgstr ""
@@ -92,6 +86,12 @@ msgstr "ブランド"
 #: src/components/parts/Footer/TopFooter.tsx
 msgid "Media Kit"
 msgstr "メディアキット"
+
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/parts/Footer/TopFooter.tsx
+#: src/components/screens/Top/Menu.tsx
+#~ msgid "Telegram"
+#~ msgstr ""
 
 #: src/components/parts/Header/AppHeader.tsx
 msgid "Dashboard"

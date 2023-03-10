@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
-import { ReactNode, VFC } from 'react'
+import { FC, ReactNode } from 'react'
 import { Link } from 'src/components/elements/Link'
 import { ShimmerPlaceholder } from 'src/components/parts/Loading'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
@@ -50,7 +50,7 @@ export const CtaButton = styled.button`
 `
 
 export const InformationItem = styled<
-  VFC<{
+  FC<{
     label: string
     value: ReactNode | undefined
     tooltip?: ReactNode

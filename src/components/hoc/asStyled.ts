@@ -1,9 +1,9 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import styled from 'styled-components'
 
 export type AsStyledProps = {
   className?: string
 }
 
-export const asStyled = <T>(Component: VFC<T & AsStyledProps>) =>
-  styled<VFC<T & AsStyledProps>>(Component)
+export const asStyled = <T>(Component: FC<T & AsStyledProps>) =>
+  styled<FC<T & AsStyledProps>>(Component)

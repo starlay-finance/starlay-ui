@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { IconMenu, LogoProtocol } from 'src/assets/svgs'
 import { Link } from 'src/components/elements/Link'
 import { purple } from 'src/styles/colors'
@@ -8,7 +8,7 @@ import { APP, BUG_BOUNTY, DISCORD, DOCS, GOVERNANCE } from 'src/utils/routes'
 import styled from 'styled-components'
 import { HeaderWrapper } from './common'
 
-export const TopHeader: VFC<{ openMenu: VoidFunction }> = ({ openMenu }) => (
+export const TopHeader: FC<{ openMenu: VoidFunction }> = ({ openMenu }) => (
   <StyledHeaderWrapper>
     <LogoDiv>
       <LogoProtocol />

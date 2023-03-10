@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { AssetLabel } from 'src/components/parts/Modal/parts'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
@@ -8,7 +8,7 @@ import {
   AssetMarketDetailsModalBodyProps,
 } from './Body'
 
-export const AssetMarketDetails: VFC<
+export const AssetMarketDetails: FC<
   ModalContentProps & AssetMarketDetailsModalBodyProps
 > = ({ close, asset, marketReferenceCurrencyPriceInUSD }) => (
   <DefaultModalContent

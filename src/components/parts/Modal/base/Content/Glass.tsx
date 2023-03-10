@@ -1,8 +1,8 @@
-import { ReactNode, VFC } from 'react'
+import { FC, ReactNode } from 'react'
 import { IconCloseAlt } from 'src/assets/svgs'
 import styled from 'styled-components'
 
-export const GlassModalContent: VFC<{
+export const GlassModalContent: FC<{
   children: ReactNode
   closeModal?: VoidFunction
 }> = ({ closeModal, children }) => (

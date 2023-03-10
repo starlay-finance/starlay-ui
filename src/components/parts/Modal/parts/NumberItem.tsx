@@ -1,4 +1,5 @@
 import { BigNumber } from '@starlay-finance/math-utils'
+import { StaticImageData } from 'next/image'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { Item, ItemDiv, ItemWithDiff } from './Item'
 import { ItemLabelPair, ItemLabelProps } from './ItemLabel'

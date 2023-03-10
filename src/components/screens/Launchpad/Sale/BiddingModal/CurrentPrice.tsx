@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { darkRed, lightBlack, skyBlue, trueBlack } from 'src/styles/colors'
 import { fontWeightRegular } from 'src/styles/font'
@@ -9,7 +9,7 @@ import { Asset } from 'src/types/models'
 import { formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
 
-export const CurrentPrice: VFC<{
+export const CurrentPrice: FC<{
   receivingAsset: Asset
   currentEstimatedPrice: BigNumber
 }> = ({ receivingAsset, currentEstimatedPrice }) => (

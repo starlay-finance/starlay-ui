@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { useState, VFC } from 'react'
+import { FC, useState } from 'react'
 import { GradientCtaLink } from 'src/components/parts/Cta'
 import { TopFooter } from 'src/components/parts/Footer'
 import { TopHeader } from 'src/components/parts/Header'
@@ -16,7 +16,7 @@ import { CurrentMarkets } from './parts/CurrentMarkets'
 import { FirstView } from './parts/FirstView'
 export type TopProps = BackersProps
 
-export const Top: VFC<TopProps> = ({ backers }) => {
+export const Top: FC<TopProps> = ({ backers }) => {
   const { locale } = useRouter()
   const [isMenuOpen, setMenuOpen] = useState(false)
   return (

@@ -1,4 +1,4 @@
-import { ReactNode, VFC } from 'react'
+import { FC, ReactNode } from 'react'
 import { IconTips } from 'src/assets/svgs'
 import { primary, purple } from 'src/styles/colors'
 import { fontWeightRegular } from 'src/styles/font'
@@ -10,7 +10,7 @@ type TooltipProps = {
   position?: ToolTipPosition
   label?: string
 }
-export const Tooltip: VFC<TooltipProps> = ({
+export const Tooltip: FC<TooltipProps> = ({
   children,
   position = 'center',
   label,
@@ -25,7 +25,7 @@ export const Tooltip: VFC<TooltipProps> = ({
 )
 
 export const TooltipMessage = styled<
-  VFC<{
+  FC<{
     message: ReactNode
     label?: string
     position?: ToolTipPosition

@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
 import { BigNumber } from '@starlay-finance/math-utils'
-import { useState, VFC } from 'react'
+import { FC, useState } from 'react'
 import { Link } from 'src/components/elements/Link'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import {
@@ -42,7 +42,7 @@ export type DepositModalBodyProps = Omit<EstimationParam, 'amount'> & {
   deposit: (amount: BigNumber) => void
   withdraw: (amount: BigNumber, all?: boolean) => void
 }
-export const DepositModalBody: VFC<DepositModalBodyProps> = ({
+export const DepositModalBody: FC<DepositModalBodyProps> = ({
   deposit,
   withdraw,
   ...estimationParams

@@ -1,5 +1,5 @@
 module.exports = {
-  siteUrl: 'https://starlay.fi',
+  siteUrl: 'https://starlay.finance',
   generateRobotsTxt: true,
   robotsTxtOptions: {},
   exclude: ['/sorry'],

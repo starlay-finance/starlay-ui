@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { darkPurple, purple, trueWhite } from 'src/styles/colors'
 import styled, { css, SimpleInterpolation } from 'styled-components'
 
@@ -8,7 +8,7 @@ type ToggleProps = {
   disabled?: boolean
   checkedStyle?: SimpleInterpolation
 }
-export const Toggle = styled<VFC<ToggleProps & { className?: string }>>(
+export const Toggle = styled<FC<ToggleProps & { className?: string }>>(
   ({ checked, onClick, disabled, checkedStyle, className }) => (
     <Button
       className={className}

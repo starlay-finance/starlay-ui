@@ -11,7 +11,7 @@ export const useMarketDataSnapshot = () => {
   const { data } = useStaticRPCProvider()
   return useSWRImmutable(
     () => data && ['marketdatasnapshot', data?.chainId],
-    (_key: string, chainId: ChainId) => getMarketDataSnapshot(chainId),
+    ([_key, chainId]) => getMarketDataSnapshot(chainId),
   )
 }
 

@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { AssetBarChartWithPlaceholder } from 'src/components/compositions/Markets/MarketBarChart'
 import { TableContainer } from 'src/components/compositions/Markets/MarketTable'
 import { asStyled } from 'src/components/hoc/asStyled'
@@ -39,7 +39,7 @@ export const Overview = asStyled(({ className }) => {
   )
 })``
 
-const OverViewItem: VFC<{
+const OverViewItem: FC<{
   caption: string
   chartCaption: string
   market: MarketComposition
