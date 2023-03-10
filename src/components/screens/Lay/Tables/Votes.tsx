@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
-import { VFC } from 'react'
+import { FC } from 'react'
 import {
   AssetTd,
   MarketTable,
@@ -50,7 +50,7 @@ type VotesTableProps = {
   touch: () => void
   setVotingData: (data: Partial<Record<string, number>>) => void
 }
-export const VotesTable: VFC<VotesTableProps> = ({
+export const VotesTable: FC<VotesTableProps> = ({
   markets,
   voteData,
   userVoteData,

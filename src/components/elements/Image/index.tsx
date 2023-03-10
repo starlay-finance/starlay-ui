@@ -1,5 +1,8 @@
-import NextImage, { ImageProps as NextImageProps } from 'next/image'
-import React, { ReactText, VFC } from 'react'
+import NextImage, {
+  ImageProps as NextImageProps,
+  StaticImageData,
+} from 'next/image'
+import { FC, ReactText } from 'react'
 import styled from 'styled-components'
 
 export type ImageInfo = {
@@ -12,7 +15,7 @@ export type ImageInfo = {
 }
 type ImageProps = ImageInfo & Partial<NextImageProps>
 
-export const Image: VFC<ImageProps> = ({
+export const Image: FC<ImageProps> = ({
   src,
   alt,
   objectFit = 'cover',

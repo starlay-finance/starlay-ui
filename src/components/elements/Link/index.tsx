@@ -28,7 +28,7 @@ export const Link: LinkFC = styled(({ children, ...props }) => {
       </StyledAnchor>
     )
   return (
-    <NextLink href={props.href} locale={props.locale} passHref>
+    <NextLink href={props.href} locale={props.locale} passHref legacyBehavior>
       <StyledAnchor {...props} $disabled={!props.href}>
         {children}
       </StyledAnchor>

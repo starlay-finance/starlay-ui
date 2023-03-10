@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { secondary } from 'src/styles/colors'
 import { fontWeightHeavy, fontWeightRegular } from 'src/styles/font'
@@ -12,7 +12,7 @@ type MessageModalGradientProps = {
   message: string
   closeLabel?: string
 }
-const MessageModalGradient: VFC<ModalContentProps<MessageModalGradientProps>> =
+const MessageModalGradient: FC<ModalContentProps<MessageModalGradientProps>> =
   ({ title, message, close, closeLabel = t`Close` }) => (
     <MessageContent>
       <Title>{title}</Title>

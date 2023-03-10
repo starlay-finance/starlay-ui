@@ -1,7 +1,7 @@
 import { i18n } from '@lingui/core'
 import { I18nProvider as LinguijsProvider } from '@lingui/react'
 import * as plurals from 'make-plural/plurals'
-import { ReactNode, VFC } from 'react'
+import { FC, ReactNode } from 'react'
 import {
   DEFAULT_LOCALE,
   isSupportedLocale,
@@ -10,7 +10,7 @@ import {
   SUPPORTED_LOCALES,
 } from 'src/locales'
 
-export const I18nProvider: VFC<{
+export const I18nProvider: FC<{
   children: ReactNode
 }> = ({ children }) => {
   return <LinguijsProvider i18n={i18n}>{children}</LinguijsProvider>

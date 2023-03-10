@@ -1,9 +1,9 @@
-import { ReactNode, VFC } from 'react'
+import { FC, ReactNode } from 'react'
 import { IconClose } from 'src/assets/svgs'
 import { breakpoint } from 'src/styles/mixins'
 import styled from 'styled-components'
 
-export const PopContainer: VFC<{
+export const PopContainer: FC<{
   isOpen: boolean
   close: VoidFunction
   children: ReactNode

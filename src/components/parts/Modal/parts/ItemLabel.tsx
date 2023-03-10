@@ -1,3 +1,4 @@
+import { StaticImageData } from 'next/image'
 import { Image } from 'src/components/elements/Image'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { darkPurple } from 'src/styles/colors'

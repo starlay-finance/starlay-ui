@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { isDesktop, useDeviceSelectors } from 'react-device-detect'
 import {
   BackgroundDotsTop,
@@ -47,7 +47,7 @@ const GRADIENT1_BOTTOM = [21, 40, 64, 36] as const
 const GRADIENT2_TOP = [41, 38, 81, 100] as const
 const GRADIENT2_BOTTOM = [80, 38, 81, 100] as const
 
-export const Background: VFC = () => {
+export const Background: FC = () => {
   if (typeof window === 'undefined')
     return (
       <>

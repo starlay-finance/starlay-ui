@@ -1,11 +1,11 @@
-import { ReactNode, VFC } from 'react'
+import { FC, ReactNode } from 'react'
 import { IconClose } from 'src/assets/svgs'
 import { darkPurple, trueBlack, trueWhite } from 'src/styles/colors'
 import { fontWeightBold } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import styled, { SimpleInterpolation } from 'styled-components'
 
-export const DefaultModalContent: VFC<{
+export const DefaultModalContent: FC<{
   headerNode?: ReactNode
   headerStyle?: SimpleInterpolation
   bodyNode: ReactNode

@@ -16,8 +16,7 @@ export const useMarketData = () => {
   const { data: layPriceInUSD } = useLAYPrice()
   return useSWR(
     () => data && layPriceInUSD && ['marketdata', data?.chainId],
-    (_key: string, chainId: ChainId) =>
-      getMarketData(data!.provider, chainId, layPriceInUSD!),
+    ([_key, chainId]) => getMarketData(data!.provider, chainId, layPriceInUSD!),
     { dedupingInterval: 10000, refreshInterval: 15000 },
   )
 }

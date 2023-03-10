@@ -1,4 +1,4 @@
-import { ReactNode, VFC } from 'react'
+import { FC, ReactNode } from 'react'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { ModalContentProps } from 'src/hooks/useModal'
 import { fadeIn } from 'src/styles/animation'
@@ -15,19 +15,22 @@ export type MessageModalBaseProps = {
   onClose?: VoidFunction
 }
 
-export const MessageModalBase: VFC<ModalContentProps<MessageModalBaseProps>> =
-  ({ close, title, ...props }) => (
-    <DefaultModalContent
-      headerNode={title}
-      bodyNode={<Body {...props} />}
-      closeModal={() => {
-        close()
-        props.onClose && props.onClose()
-      }}
-    />
-  )
+export const MessageModalBase: FC<ModalContentProps<MessageModalBaseProps>> = ({
+  close,
+  title,
+  ...props
+}) => (
+  <DefaultModalContent
+    headerNode={title}
+    bodyNode={<Body {...props} />}
+    closeModal={() => {
+      close()
+      props.onClose && props.onClose()
+    }}
+  />
+)
 
-const Body: VFC<Omit<MessageModalBaseProps, 'title'>> = ({
+const Body: FC<Omit<MessageModalBaseProps, 'title'>> = ({
   message,
   iconColor,
   children,

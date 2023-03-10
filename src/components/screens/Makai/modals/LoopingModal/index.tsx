@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { requireSupportedChain } from 'src/components/hoc/requireSupportedChain'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { AssetLabel } from 'src/components/parts/Modal/parts'
@@ -12,7 +12,7 @@ import {
 } from 'src/utils/calculator'
 import { LoopingModalBody, LoopingModalBodyProps } from './Body'
 
-export const Looping: VFC<
+export const Looping: FC<
   ModalContentProps<Omit<LoopingModalBodyProps, 'loop' | 'close'>>
 > = ({ close, ...props }) => {
   const { account, signer } = useWallet()

@@ -1,4 +1,4 @@
-import { ChainId, isSupportedChain } from 'src/libs/config'
+import { isSupportedChain } from 'src/libs/config'
 import { getProvider } from 'src/libs/static-rpc-provider'
 import { DEFAULT_CHAIN_ID } from 'src/utils/env'
 import useSWRImmutable from 'swr/immutable'
@@ -9,7 +9,7 @@ export const useStaticRPCProvider = () => {
   const currentChainId = isSupportedChain(chainId) ? chainId : DEFAULT_CHAIN_ID
   return useSWRImmutable(
     ['staticrpcprovider', currentChainId],
-    (_key: string, chainId: ChainId) => ({
+    ([_key, chainId]) => ({
       chainId,
       provider: getProvider(chainId),
     }),

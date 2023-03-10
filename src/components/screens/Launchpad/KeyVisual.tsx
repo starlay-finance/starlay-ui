@@ -1,9 +1,9 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { LAUNCHPAD_BG_DATA_URI } from 'src/assets/images/launchpad_bg'
 import { Image } from 'src/components/elements/Image'
 import styled from 'styled-components'
 
-export const KeyVisual: VFC<{ src: string; alt: string }> = ({ src, alt }) => (
+export const KeyVisual: FC<{ src: string; alt: string }> = ({ src, alt }) => (
   <KeyVisualDiv>
     <div>
       <Image src={src} alt={alt} />

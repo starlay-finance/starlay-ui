@@ -38,7 +38,7 @@ export const useVotingEscrow = (offset = 0) => {
     isValidating: isValidatingData,
   } = useSWRImmutable(
     provider && votingEscrow && ['votingescrow-data', provider.chainId, term],
-    async (_1, _2, term) => fetchData(votingEscrow!, term),
+    async ([_1, _2, term]) => fetchData(votingEscrow!, term),
   )
   const {
     data: userData,
@@ -51,7 +51,7 @@ export const useVotingEscrow = (offset = 0) => {
       account,
       term,
     ],
-    async (_1, _2, account, term) =>
+    async ([_1, _2, account, term]) =>
       fetchUserData(votingEscrow!, account, term),
   )
 

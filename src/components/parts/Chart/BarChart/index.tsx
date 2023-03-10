@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { AsStyledProps } from 'src/components/hoc/asStyled'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { trueWhite } from 'src/styles/colors'
@@ -14,7 +14,7 @@ export type BarChartProps = {
     | { bgColor: Color; color?: Color }
     | { gte: number; bgColor: Color; color?: Color }[]
 }
-export const BarChart = styled<VFC<BarChartProps & AsStyledProps>>(
+export const BarChart = styled<FC<BarChartProps & AsStyledProps>>(
   ({ showLabel, ratio, filledStyles, className, ...props }) => {
     const ratioPct = Math.floor(ratio * 100)
     const { bgColor, color = trueWhite } = extractStyle(filledStyles, ratioPct)

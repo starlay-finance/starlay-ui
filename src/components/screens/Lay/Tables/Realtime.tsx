@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
 import dayjs from 'dayjs'
-import { VFC } from 'react'
+import { FC } from 'react'
 import {
   AssetTd,
   MarketTable,
@@ -58,7 +58,7 @@ type RealtimeTableProps = {
   markets: AssetMarketData[]
   changeTab: (tab: string) => void
 }
-export const RealtimeTable: VFC<RealtimeTableProps> = ({
+export const RealtimeTable: FC<RealtimeTableProps> = ({
   markets,
   changeTab,
 }) => {

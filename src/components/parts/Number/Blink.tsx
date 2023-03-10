@@ -1,4 +1,4 @@
-import { ReactNode, useState, VFC } from 'react'
+import { FC, ReactNode, useState } from 'react'
 import { trueWhite } from 'src/styles/colors'
 import styled, { css, keyframes } from 'styled-components'
 
@@ -6,7 +6,7 @@ type BlinkWrapperProps = {
   value: string | number
   children: ReactNode
 }
-export const BlinkWrapper: VFC<BlinkWrapperProps> = ({ value, children }) => {
+export const BlinkWrapper: FC<BlinkWrapperProps> = ({ value, children }) => {
   const [prev, setPrev] = useState(value)
   return (
     <BlinkSpan animate={value !== prev} onAnimationEnd={() => setPrev(value)}>

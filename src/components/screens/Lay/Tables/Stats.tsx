@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
 import { BigNumber } from '@starlay-finance/math-utils'
-import { VFC } from 'react'
+import { FC } from 'react'
 import {
   AssetTd,
   MarketTable,
@@ -79,7 +79,7 @@ type StatsTableProps = {
   layPrice: BigNumber | undefined
   changeTab: (tab: string) => void
 }
-export const StatsTable: VFC<StatsTableProps> = ({
+export const StatsTable: FC<StatsTableProps> = ({
   voteData,
   userVoteData,
   markets,

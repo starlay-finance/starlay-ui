@@ -1,6 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { Image } from 'src/components/elements/Image'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { Toggle } from 'src/components/parts/Toggle'
@@ -32,7 +32,7 @@ type BiddingFormProps = {
   submit: (bid: Bid & { asset: EthereumAddress }) => any
 }
 
-export const BiddingForm: VFC<BiddingFormProps> = (props) => {
+export const BiddingForm: FC<BiddingFormProps> = (props) => {
   const biddingAsset = props.biddingAssets[0]
   const { currentBid, receivingAsset } = props
   const {

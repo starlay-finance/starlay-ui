@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from 'dayjs'
-import { VFC } from 'react'
+import { FC } from 'react'
 import Countdown from 'react-countdown'
 import { attention } from 'src/styles/colors'
 import { fontWeightBold } from 'src/styles/font'
@@ -23,7 +23,7 @@ export type LaunchPadPopData = {
 
 const DATE_FORMAT = 'HH:mm z on MMM DD'
 
-export const LaunchPadPopContent: VFC<{ data: LaunchPadPopData }> = ({
+export const LaunchPadPopContent: FC<{ data: LaunchPadPopData }> = ({
   data: { id, projectName, token, sale },
 }) => (
   <a href={toLaunchpad(id)} target="_blank" rel="noreferrer">
@@ -59,7 +59,7 @@ export const LaunchPadPopContent: VFC<{ data: LaunchPadPopData }> = ({
     </PopDiv>
   </a>
 )
-const Background: VFC = () => (
+const Background: FC = () => (
   <BackgroundDiv>
     <svg xmlns="http://www.w3.org/2000/svg" width="320" height="240">
       <defs>

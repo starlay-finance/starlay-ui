@@ -1,4 +1,4 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { LoadingProtocolIcon } from 'src/components/parts/Loading/ProtocolIcon'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { attention, success } from 'src/styles/colors'
@@ -9,7 +9,7 @@ type MessageType = 'Message' | 'Success' | 'Alert' | 'Loading'
 type MessageModalProps = MessageModalBaseProps & {
   type?: MessageType
 }
-export const MessageModal: VFC<ModalContentProps<MessageModalProps>> = ({
+export const MessageModal: FC<ModalContentProps<MessageModalProps>> = ({
   type = 'Message',
   ...props
 }) => <MessageModalBase {...props} {...MESSAGE_TYPE_PROPS_DICT[type]} />

@@ -22,6 +22,8 @@ type Bid {
 }
 
 input Bid_filter {
+  """Filter for the block changed event."""
+  _change_block: BlockChangedFilter
   amount: BigDecimal
   amount_gt: BigDecimal
   amount_gte: BigDecimal
@@ -59,6 +61,7 @@ input Bid_filter {
   multiplied_not: BigDecimal
   multiplied_not_in: [BigDecimal!]
   project: String
+  project_: Project_filter
   project_contains: String
   project_contains_nocase: String
   project_ends_with: String
@@ -102,15 +105,13 @@ scalar BigDecimal
 
 scalar BigInt
 
-"""The block at which the query should be executed."""
+input BlockChangedFilter {
+  number_gte: Int!
+}
+
 input Block_height {
-  """Value containing a block hash"""
   hash: Bytes
-
-  """Value containing a block number"""
   number: Int
-
-  "Value containing the minimum block number. \nIn the case of `number_gte`, the query will be executed on the latest block only if\nthe subgraph has progressed to or past the minimum block number.\nDefaults to the latest block when omitted.\n"
   number_gte: Int
 }
 
@@ -123,6 +124,8 @@ type LockedBidSummary {
 }
 
 input LockedBidSummary_filter {
+  """Filter for the block changed event."""
+  _change_block: BlockChangedFilter
   amount: BigDecimal
   amount_gt: BigDecimal
   amount_gte: BigDecimal
@@ -183,6 +186,8 @@ type ProjectResult {
 }
 
 input ProjectResult_filter {
+  """Filter for the block changed event."""
+  _change_block: BlockChangedFilter
   bottomPrice: BigDecimal
   bottomPrice_gt: BigDecimal
   bottomPrice_gte: BigDecimal
@@ -251,6 +256,8 @@ type ProjectStatistic {
 }
 
 input ProjectStatistic_filter {
+  """Filter for the block changed event."""
+  _change_block: BlockChangedFilter
   bottomPrice: BigDecimal
   bottomPrice_gt: BigDecimal
   bottomPrice_gte: BigDecimal
@@ -302,6 +309,9 @@ enum ProjectStatistic_orderBy {
 }
 
 input Project_filter {
+  """Filter for the block changed event."""
+  _change_block: BlockChangedFilter
+  bids_: Bid_filter
   deleted: Boolean
   deleted_in: [Boolean!]
   deleted_not: Boolean
@@ -343,6 +353,7 @@ input Project_filter {
   no_not: Int
   no_not_in: [Int!]
   paymentToken: String
+  paymentToken_: Token_filter
   paymentToken_contains: String
   paymentToken_contains_nocase: String
   paymentToken_ends_with: String
@@ -754,6 +765,8 @@ type Token {
 }
 
 input Token_filter {
+  """Filter for the block changed event."""
+  _change_block: BlockChangedFilter
   decimals: Int
   decimals_gt: Int
   decimals_gte: Int
@@ -825,6 +838,9 @@ type _Block_ {
 
   """The block number"""
   number: Int!
+
+  """Integer representation of the timestamp stored in blocks for the chain"""
+  timestamp: Int
 }
 
 """The type for the top-level _meta field"""

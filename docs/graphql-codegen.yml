@@ -7,8 +7,8 @@ config:
 generates:
   docs/pool-snapshots-schema.graphql:
     schema:
-      - ? https://xok6alsasvgthgl5ozss7upnuu.appsync-api.us-east-1.amazonaws.com/graphql
-        : headers: { x-api-key: da2-qvw2m7hf6jhonms4rhtqgix7ri }
+      - ? https://33ikriwlbzcxpp76t242xedcvu.appsync-api.us-east-1.amazonaws.com/graphql
+        : headers: { x-api-key: da2-vfzww7t765hfla6tdrzx6w4pvq }
     plugins:
       - schema-ast
   docs/launchpad-stats-schema.graphql:
@@ -17,14 +17,14 @@ generates:
       - schema-ast
   docs/launchpad-price-data-schema.graphql:
     schema:
-      - ? https://7fkvk2oqm5ewxbiealg7orclku.appsync-api.us-east-1.amazonaws.com/graphql
-        : headers: { x-api-key: da2-vm7th2zcezdmbpkbkcbmm766pe }
+      - ? https://urdn7gyh2bfgbh4cg72eddclrq.appsync-api.us-east-1.amazonaws.com/graphql
+        : headers: { x-api-key: da2-eeucjwshhbh3vg44ovhg27x54m }
     plugins:
       - schema-ast
   src/libs/pool-data-provider/snapshots-provider/__generated__/graphql.ts:
     schema:
-      - ? https://xok6alsasvgthgl5ozss7upnuu.appsync-api.us-east-1.amazonaws.com/graphql
-        : headers: { x-api-key: da2-qvw2m7hf6jhonms4rhtqgix7ri }
+      - ? https://33ikriwlbzcxpp76t242xedcvu.appsync-api.us-east-1.amazonaws.com/graphql
+        : headers: { x-api-key: da2-vfzww7t765hfla6tdrzx6w4pvq }
     documents: 'src/libs/pool-data-provider/snapshots-provider/graphql/**/*.graphql'
     plugins:
       - typescript
@@ -39,8 +39,8 @@ generates:
       - typescript-graphql-request
   src/libs/launchpad-price-data-provider/__generated__/graphql.ts:
     schema:
-      - ? https://7fkvk2oqm5ewxbiealg7orclku.appsync-api.us-east-1.amazonaws.com/graphql
-        : headers: { x-api-key: da2-vm7th2zcezdmbpkbkcbmm766pe }
+      - ? https://urdn7gyh2bfgbh4cg72eddclrq.appsync-api.us-east-1.amazonaws.com/graphql
+        : headers: { x-api-key: da2-eeucjwshhbh3vg44ovhg27x54m }
     documents: 'src/libs/launchpad-price-data-provider/graphql/**/*.graphql'
     plugins:
       - typescript

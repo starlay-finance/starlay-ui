@@ -1,10 +1,10 @@
-import { VFC } from 'react'
+import { FC } from 'react'
 import { IconLoading } from 'src/assets/svgs'
 import { purple } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import styled, { keyframes } from 'styled-components'
 
-export const LoadingDots: VFC = () => (
+export const LoadingDots: FC = () => (
   <IconDiv>
     <IconLoading />
   </IconDiv>

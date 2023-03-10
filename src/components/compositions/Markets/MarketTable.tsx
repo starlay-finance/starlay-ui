@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { Table, TableFC } from 'src/components/parts/Table'
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { hoverBackgroundKeyframes } from 'src/styles/animation'
@@ -103,7 +103,7 @@ const StyledTable = styled(Table)<StyleProps>`
     `}
 `
 
-export const AssetTd: VFC<Pick<Asset, 'icon' | 'name'>> = ({ icon, name }) => (
+export const AssetTd: FC<Pick<Asset, 'icon' | 'name'>> = ({ icon, name }) => (
   <AssetDiv>
     <Image src={icon} alt={name} width={32} height={32} />
     {name}

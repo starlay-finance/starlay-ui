@@ -30,7 +30,8 @@ export const useVoter = (offset = 0) => {
 
   const { data, mutate: mutateData } = useSWRImmutable(
     provider && voter && ['voter-data', provider.chainId, term],
-    async (_1, _2, term) => fetchData(voter!, term, offset ? term : undefined),
+    async ([_1, _2, term]) =>
+      fetchData(voter!, term, offset ? term : undefined),
   )
 
   const { data: userData, mutate: mutateUserData } = useSWRImmutable(
@@ -44,7 +45,7 @@ export const useVoter = (offset = 0) => {
         account,
         userLockData.lockerId.toString(),
       ],
-    async (_1, _2, term, account, lockerId) =>
+    async ([_1, _2, term, account, lockerId]) =>
       fetchUserData(voter!, term, account, lockerId),
   )
 

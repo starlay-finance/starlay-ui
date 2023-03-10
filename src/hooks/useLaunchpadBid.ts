@@ -1,6 +1,5 @@
 import { useLaunchpadContext } from 'src/components/screens/Launchpad/LaunchpadContext'
 import { useStaticRPCProvider } from 'src/hooks/useStaticRPCProvider'
-import { ChainId } from 'src/libs/config'
 import { getBid } from 'src/libs/launchpad-stats-provider'
 import { EthereumAddress } from 'src/types/web3'
 import useSWRImmutable from 'swr/immutable'
@@ -23,11 +22,7 @@ export const useLaunchpadBid = (params?: {
         launchpadAddress,
         account,
       ],
-    (
-      _key: string,
-      chainId: ChainId,
-      launchpadAddress: EthereumAddress,
-      account: EthereumAddress,
-    ) => getBid(chainId, launchpadAddress, account),
+    ([_key, chainId, launchpadAddress, account]) =>
+      getBid(chainId, launchpadAddress, account),
   )
 }

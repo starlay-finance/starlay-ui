@@ -1,7 +1,7 @@
 import { Web3ReactProvider } from '@web3-react/core'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { useEffect, VFC } from 'react'
+import { FC, useEffect } from 'react'
 import { isMobile } from 'react-device-detect'
 import TagManager from 'react-gtm-module'
 import { Favicons } from 'src/components/parts/Favicons'
@@ -20,7 +20,7 @@ import { PageStaticProps } from 'src/types/page'
 import { GTM_ID } from 'src/utils/env'
 import { isMobileSupported, sorryFor } from 'src/utils/routes'
 
-const MyApp: VFC<Omit<AppProps, 'pageProps'> & { pageProps: PageStaticProps }> =
+const MyApp: FC<Omit<AppProps, 'pageProps'> & { pageProps: PageStaticProps }> =
   ({ Component, pageProps, router }) => {
     const jumpToSorry = isMobile && !isMobileSupported(router.pathname)
     useEffect(() => {

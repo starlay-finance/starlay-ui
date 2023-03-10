@@ -1,13 +1,13 @@
 import { t } from '@lingui/macro'
 import { BigNumber } from '@starlay-finance/math-utils'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { css } from 'styled-components'
 import { SuggestModalBody, SuggestModalBodyProps } from './Body'
 
-export const Suggest: VFC<
+export const Suggest: FC<
   ModalContentProps &
     Omit<SuggestModalBodyProps, 'close' | 'arthswapPair'> & {
       arthswapPair?: {

@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { VFC } from 'react'
+import { FC } from 'react'
 import { ScalingInput } from 'src/components/parts/Input'
 import { trueBlack } from 'src/styles/colors'
 import { fontWeightBold } from 'src/styles/font'
@@ -18,7 +18,7 @@ type AmountInputProps = {
   disabled?: boolean
   hideValue?: boolean
 }
-export const AmountInput: VFC<AmountInputProps> = ({
+export const AmountInput: FC<AmountInputProps> = ({
   value,
   onChange,
   setMaxValue,

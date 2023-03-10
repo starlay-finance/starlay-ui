@@ -1,4 +1,4 @@
-import { ReactNode, VFC } from 'react'
+import { FC, ReactNode } from 'react'
 import { flexCenter } from 'src/styles/mixins'
 import { Color } from 'src/styles/types'
 import styled from 'styled-components'
@@ -13,7 +13,7 @@ type DonutChartProps = {
   elements: DonutChartElement[]
   children: ReactNode
 }
-export const DonutChart = styled<VFC<DonutChartProps & { className?: string }>>(
+export const DonutChart = styled<FC<DonutChartProps & { className?: string }>>(
   ({ elements, children, className }) => (
     <DonutChartDiv className={className}>
       <ElementsDiv>
@@ -54,7 +54,7 @@ type DonutChart2Props = {
   children: ReactNode
 }
 export const DonutChart2 = styled<
-  VFC<DonutChart2Props & { className?: string }>
+  FC<DonutChart2Props & { className?: string }>
 >(({ elements, children, className }) => {
   return (
     <DonutChartDiv className={className}>

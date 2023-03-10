@@ -5,7 +5,7 @@ import {
   WEI_DECIMALS,
 } from '@starlay-finance/math-utils'
 import dayjs, { Dayjs } from 'dayjs'
-import { useMemo, useState, VFC } from 'react'
+import { FC, useMemo, useState } from 'react'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import { RatioControl } from 'src/components/parts/Modal/parts/RatioControl'
 import { ASSETS_DICT } from 'src/constants/assets'
@@ -50,7 +50,7 @@ export type LockModalBodyProps = {
   >
 }
 
-export const LockModalBody: VFC<LockModalBodyProps> = ({
+export const LockModalBody: FC<LockModalBodyProps> = ({
   mode,
   current,
   inWallet,

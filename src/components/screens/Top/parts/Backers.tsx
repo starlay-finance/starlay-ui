@@ -1,4 +1,5 @@
 import { t } from '@lingui/macro'
+import { StaticImageData } from 'next/image'
 import { useState } from 'react'
 import { useInView } from 'react-hook-inview'
 import { Image } from 'src/components/elements/Image'
