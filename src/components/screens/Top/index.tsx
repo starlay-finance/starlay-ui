@@ -39,10 +39,10 @@ const Main = styled.main<{ $locale?: Locale }>`
   position: relative;
   width: 100%;
   padding: 0 24px 120px;
-  ${FirstView} {
+  section:nth-of-type(1) {
     padding-top: 40px;
   }
-  ${CurrentMarkets},${Backers} {
+  section:nth-of-type(n + 2) {
     margin-top: 80px;
   }
   h1 {
@@ -64,13 +64,13 @@ const Main = styled.main<{ $locale?: Locale }>`
   }
   @media ${breakpoint.xl} {
     padding: 0 0 240px;
-    ${FirstView} {
+    section:nth-of-type(1) {
       padding-top: 210px;
     }
-    ${CurrentMarkets} {
+    section:nth-of-type(2) {
       margin-top: 282px;
     }
-    ${Backers} {
+    section:nth-of-type(3) {
       margin-top: 240px;
     }
     h1 {
