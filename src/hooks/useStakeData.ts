@@ -1,4 +1,3 @@
-import { ChainId } from 'src/libs/config'
 import {
   stakeUiHelperContract,
   StakeUiHelperInterface,
@@ -21,7 +20,7 @@ export const useStakeData = () => {
   const { data: provider } = useStakeUiHelper()
   return useSWR(
     () => account && provider && ['stakedata', provider.chainId, account],
-    (_key: string, _chainId: ChainId, account: EthereumAddress) =>
+    ([_key, _chainId, account]) =>
       getUnclaimedBalance(provider!.provider, account),
     { fallbackData: EMPTY_STAKE_DATA },
   ) as SWRResponseWithFallback<StakeData>

@@ -4,7 +4,6 @@ import {
   FormatUserSummaryResponse,
   valueToBigNumber,
 } from '@starlay-finance/math-utils'
-import { ChainId } from 'src/libs/config'
 import { PoolDataProviderInterface } from 'src/libs/pool-data-provider/types'
 import { AssetSymbol, User } from 'src/types/models'
 import { EthereumAddress } from 'src/types/web3'
@@ -32,7 +31,7 @@ export const useUserData = () => {
         data.chainId,
         account,
       ],
-    (_key: string, _chainId: ChainId, account: EthereumAddress) =>
+    ([_key, _chainId, account]) =>
       getUserData(data!.provider, account, marketData!),
   )
 }

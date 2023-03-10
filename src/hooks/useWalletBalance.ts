@@ -1,6 +1,6 @@
 import { normalizeBN } from '@starlay-finance/math-utils'
 import { ASSETS_DICT } from 'src/constants/assets'
-import { ChainId, getNetworkConfig } from 'src/libs/config'
+import { getNetworkConfig } from 'src/libs/config'
 import {
   walletBalanceProviderContract,
   WalletBalanceProviderInterface,
@@ -31,7 +31,7 @@ export const useWalletBalance = (withFallback = true) => {
         provider.chainId,
         account,
       ],
-    (_key: string, chainId: ChainId, account: EthereumAddress) => {
+    ([_key, chainId, account]) => {
       const { rewardToken } = getNetworkConfig(chainId)
       return getWalletBalance(provider!.provider, account, marketData!.assets, {
         symbol: ASSETS_DICT.LAY.symbol,
