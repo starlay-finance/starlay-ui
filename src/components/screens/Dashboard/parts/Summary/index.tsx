@@ -1,8 +1,8 @@
 import { t } from '@lingui/macro'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
+import { useEVMWallet } from 'src/hooks/useEVMWallet'
 import { useUserData } from 'src/hooks/useUserData'
-import { useWallet } from 'src/hooks/useWallet'
 import { lightYellow, purple } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { UserSummary } from 'src/types/models'
@@ -13,7 +13,7 @@ import { HealthFactor } from './HealthFactor'
 import { NetAPY } from './NetAPY'
 
 export const Summary = asStyled(({ className }) => {
-  const { account } = useWallet()
+  const { account } = useEVMWallet()
   const { data: user } = useUserData()
   const { open } = useWalletModal()
   const summary: Partial<UserSummary> = user?.summary || {}

@@ -1,6 +1,6 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
-import { ChainId, getNetworkConfig } from 'src/libs/config'
+import { EVMChainId, getNetworkConfig } from 'src/libs/config'
 import { PoolDataProviderInterface } from 'src/libs/pool-data-provider'
 import { onlyListed } from 'src/utils/assets'
 import useSWR from 'swr'
@@ -23,7 +23,7 @@ export const useMarketData = () => {
 
 export const getMarketData = async (
   provider: PoolDataProviderInterface,
-  chainId: ChainId,
+  chainId: EVMChainId,
   layPriceInUSD: BigNumber,
 ): Promise<MarketData> => {
   const currentTimestamp = dayjs().unix()

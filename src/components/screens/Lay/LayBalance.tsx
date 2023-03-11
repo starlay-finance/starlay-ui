@@ -12,10 +12,10 @@ import { ASSETS_DICT } from 'src/constants/assets'
 import { useClaimer } from 'src/hooks/contracts/useClaimer'
 import { useTokenSaleVesting } from 'src/hooks/contracts/useTokenSaleVesting'
 import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
+import { useEVMWallet } from 'src/hooks/useEVMWallet'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
 import { useSwitchChainIfUnsupported } from 'src/hooks/useUnsupportedChainAlert'
 import { useVoteData } from 'src/hooks/useVoteData'
-import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { darkGray, primary, purple, trueBlack } from 'src/styles/colors'
 import {
@@ -224,7 +224,7 @@ type LayBalanceProps = {
 }
 const LayBalance = styled<FC<LayBalanceProps & { className?: string }>>(
   ({ label, amount, actions, details, className }) => {
-    const { account } = useWallet()
+    const { account } = useEVMWallet()
     const { icon, name, symbol } = ASSETS_DICT.LAY
     const { data: priceInUSD = BN_ZERO } = useLAYPrice()
     return (

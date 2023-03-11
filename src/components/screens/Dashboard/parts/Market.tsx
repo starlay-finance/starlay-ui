@@ -9,9 +9,9 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { Toggle } from 'src/components/parts/Toggle'
+import { useEVMWallet } from 'src/hooks/useEVMWallet'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useUserData } from 'src/hooks/useUserData'
-import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { lightYellow, purple } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
@@ -40,7 +40,7 @@ const BORROW_MARKET_COLUMNS = [
 ]
 
 export const Market = asStyled(({ className }) => {
-  const { account } = useWallet()
+  const { account } = useEVMWallet()
   const { data: marketData } = useMarketData()
   const {
     assets = [],

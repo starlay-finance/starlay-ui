@@ -2,7 +2,7 @@ import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { GraphQLClient } from 'graphql-request'
 import { Market, PriceChartData } from 'src/components/screens/Launchpad/types'
 import { BN_ZERO } from 'src/utils/number'
-import { ChainId, getNetworkConfig } from '../config'
+import { EVMChainId, getNetworkConfig } from '../config'
 import { getSdk } from './__generated__/graphql'
 
 const graphqlClient = (endpoint: string, apiKey?: string) =>
@@ -13,7 +13,7 @@ const graphqlClient = (endpoint: string, apiKey?: string) =>
   )
 
 export const getCurrentPrice = async (
-  chainId: ChainId,
+  chainId: EVMChainId,
   projectId: string,
 ): Promise<Omit<Market, 'numOfBids'> | undefined> => {
   const { launchpadHistoricalDataProvider } = getNetworkConfig(chainId)
@@ -41,7 +41,7 @@ export const getCurrentPrice = async (
 }
 
 export const listPricesHistorical = async (
-  chainId: ChainId,
+  chainId: EVMChainId,
   projectId: string,
   fromTimestamp?: number,
 ): Promise<PriceChartData[]> => {

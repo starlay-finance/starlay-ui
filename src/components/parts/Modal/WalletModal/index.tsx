@@ -4,8 +4,8 @@ import { FC, useEffect, useState } from 'react'
 import { IconMetamask } from 'src/assets/svgs'
 import { Link } from 'src/components/elements/Link'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
+import { useEVMWallet } from 'src/hooks/useEVMWallet'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
-import { useWallet } from 'src/hooks/useWallet'
 import { WalletType } from 'src/libs/wallet-provider'
 import { darkPurple, purple, trueBlack } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
@@ -16,7 +16,7 @@ import { LoadingProtocolIcon } from '../../Loading'
 import { ItemLabel } from '../parts'
 
 const Wallet: FC<ModalContentProps> = ({ close }) => {
-  const { account, connect } = useWallet()
+  const { account, connect } = useEVMWallet()
 
   const [connecting, setConnecting] = useState(false)
   const onClickConnect = async (type: WalletType) => {

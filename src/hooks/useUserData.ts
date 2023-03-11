@@ -14,12 +14,12 @@ import {
 import { calculateNetAPY } from 'src/utils/calculator'
 import { BN_ZERO } from 'src/utils/number'
 import useSWR from 'swr'
+import { useEVMWallet } from './useEVMWallet'
 import { MarketData, useMarketData } from './useMarketData'
 import { usePoolDataProvider } from './usePoolDataProvider'
-import { useWallet } from './useWallet'
 
 export const useUserData = () => {
-  const { account } = useWallet()
+  const { account } = useEVMWallet()
   const { data } = usePoolDataProvider()
   const { data: marketData } = useMarketData()
   return useSWR(

@@ -3,9 +3,9 @@ import { requireSupportedChain } from 'src/components/hoc/requireSupportedChain'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { AssetLabel } from 'src/components/parts/Modal/parts'
 import { useLendingPool } from 'src/hooks/contracts/useLendingPool'
+import { useEVMWallet } from 'src/hooks/useEVMWallet'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useTracking } from 'src/hooks/useTracking'
-import { useWallet } from 'src/hooks/useWallet'
 import { BorrowModalBody, BorrowModalBodyProps } from './Body'
 
 export const Borrow: FC<
@@ -15,7 +15,7 @@ export const Borrow: FC<
     }
   >
 > = ({ close, openSuggestModal, ...props }) => {
-  const { account, signer } = useWallet()
+  const { account, signer } = useEVMWallet()
   const { borrow, repay } = useLendingPool(account, signer)
 
   const { withTracking } = useTracking()

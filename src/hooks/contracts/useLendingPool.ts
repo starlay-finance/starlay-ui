@@ -1,7 +1,7 @@
 import { InterestRate } from '@starlay-finance/contract-helpers'
 import { BigNumber } from '@starlay-finance/math-utils'
 import { ethers } from 'ethers'
-import { ChainId, getMarketConfig, getNetworkConfig } from 'src/libs/config'
+import { EVMChainId, getMarketConfig, getNetworkConfig } from 'src/libs/config'
 import { lendingPoolContract } from 'src/libs/lending-pool'
 import { leveragerContract } from 'src/libs/leverager'
 import { BASE_ASSET_DUMMY_ADDRESS } from 'src/libs/pool-data-provider/converters/constants'
@@ -171,7 +171,7 @@ export const useLendingPool = (
   }
 }
 
-const reserveAddress = (underlyingAsset: string, chainId: ChainId) => {
+const reserveAddress = (underlyingAsset: string, chainId: EVMChainId) => {
   if (!equals(underlyingAsset, BASE_ASSET_DUMMY_ADDRESS)) return underlyingAsset
   const {
     baseAsset: { wrapperAddress },

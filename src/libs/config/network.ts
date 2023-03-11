@@ -2,16 +2,16 @@ import { AssetSymbol } from 'src/types/models'
 import { EthereumAddress } from 'src/types/web3'
 import { ValueOf } from 'type-fest'
 
-export const CHAIN_ID = {
+export const EVM_CHAIN_ID = {
   astar: 592,
 } as const
 
-export type ChainId = ValueOf<typeof CHAIN_ID>
+export type EVMChainId = ValueOf<typeof EVM_CHAIN_ID>
 
-export const isSupportedChain = (arg: any): arg is ChainId =>
-  Object.values(CHAIN_ID).includes(arg)
+export const isSupportedChain = (arg: any): arg is EVMChainId =>
+  Object.values(EVM_CHAIN_ID).includes(arg)
 
-export type NetworkConfig = {
+export type EVMNetworkConfig = {
   name: string
   privateJsonRPCUrl?: string
   privateJsonRPCWSUrl?: string
@@ -63,8 +63,8 @@ export type NetworkConfig = {
   isTestnet?: boolean
 }
 
-export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
-  [CHAIN_ID.astar]: {
+export const NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
+  [EVM_CHAIN_ID.astar]: {
     name: 'Astar Network',
     publicJsonRPCUrl: ['https://astar.public.blastapi.io'],
     privateJsonRPCUrl:

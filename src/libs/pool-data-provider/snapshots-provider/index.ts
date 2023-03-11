@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs'
 import { GraphQLClient } from 'graphql-request'
-import { ChainId, getNetworkConfig } from 'src/libs/config'
+import { EVMChainId, getNetworkConfig } from 'src/libs/config'
 import { formatReserves } from '..'
 import { getSdk } from './__generated__/graphql'
 
@@ -11,7 +11,7 @@ const graphqlClient = (endpoint: string, apiKey?: string) =>
     }),
   )
 
-export const getPoolDataSnapshot = async (chainId: ChainId, date: Dayjs) => {
+export const getPoolDataSnapshot = async (chainId: EVMChainId, date: Dayjs) => {
   const { baseAsset, rewardToken, snapshotProvider } = getNetworkConfig(chainId)
   if (!snapshotProvider) return undefined
   const client = graphqlClient(

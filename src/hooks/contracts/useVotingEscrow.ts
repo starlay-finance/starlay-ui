@@ -14,8 +14,8 @@ import { StaticRPCProvider } from 'src/libs/pool-data-provider'
 import { votingEscrowContract } from 'src/libs/voting-escrow'
 import { SECONDS_OF_WEEK } from 'src/utils/date'
 import useSWRImmutable from 'swr/immutable'
+import { useEVMWallet } from '../useEVMWallet'
 import { useStaticRPCProvider } from '../useStaticRPCProvider'
-import { useWallet } from '../useWallet'
 import { useTxHandler } from './txHandler'
 
 export const TERM_UNIT = SECONDS_OF_WEEK * 2
@@ -24,7 +24,7 @@ export const useVotingEscrow = (offset = 0) => {
     Math.ceil(dayjs().unix() / TERM_UNIT) * TERM_UNIT + TERM_UNIT * offset
 
   const { data: provider } = useStaticRPCProvider()
-  const { account, signer } = useWallet()
+  const { account, signer } = useEVMWallet()
   const { data: votingEscrow } = useSWRImmutable(
     provider && ['votingescrow', provider.chainId],
     async () => init(provider!),

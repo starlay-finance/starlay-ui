@@ -8,9 +8,9 @@ import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
 import { useRewardModal } from 'src/components/parts/Modal/RewardModal'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
+import { useEVMWallet } from 'src/hooks/useEVMWallet'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
 import { useUserData } from 'src/hooks/useUserData'
-import { useWallet } from 'src/hooks/useWallet'
 import { darkGray, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
@@ -30,7 +30,7 @@ import { HeaderWrapper } from './common'
 
 export const AppHeader = () => {
   const { pathname } = useRouter()
-  const { account } = useWallet()
+  const { account } = useEVMWallet()
   const { data: user } = useUserData()
   const [isSetingsOpen, setIsSettingsOpen] = useState(false)
   const { open: openRewardModal } = useRewardModal()

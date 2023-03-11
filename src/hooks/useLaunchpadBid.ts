@@ -3,13 +3,13 @@ import { useStaticRPCProvider } from 'src/hooks/useStaticRPCProvider'
 import { getBid } from 'src/libs/launchpad-stats-provider'
 import { EthereumAddress } from 'src/types/web3'
 import useSWRImmutable from 'swr/immutable'
-import { useWallet } from './useWallet'
+import { useEVMWallet } from './useEVMWallet'
 
 export const useLaunchpadBid = (params?: {
   launchpadAddress: EthereumAddress
 }) => {
   const { data: provider } = useStaticRPCProvider()
-  const { account } = useWallet()
+  const { account } = useEVMWallet()
   const context = useLaunchpadContext()
   const launchpadAddress = params?.launchpadAddress || context.launchpadAddress
   return useSWRImmutable(

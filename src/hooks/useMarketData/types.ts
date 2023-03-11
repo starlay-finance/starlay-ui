@@ -4,7 +4,7 @@ import {
   ReserveIncentiveWithFeedsResponse,
 } from '@starlay-finance/contract-helpers'
 import { BigNumber } from '@starlay-finance/math-utils'
-import { ChainId } from 'src/libs/config'
+import { EVMChainId } from 'src/libs/config'
 import { AssetMarketData } from 'src/types/models'
 
 export type MarketData = {
@@ -12,7 +12,7 @@ export type MarketData = {
   marketReferenceCurrencyPriceInUSD: BigNumber
   marketReferenceCurrencyDecimals: number
   marketTimestamp: number
-  chainId: ChainId
+  chainId: EVMChainId
 } & MarketDataRaw
 
 export type MarketDataRaw = {

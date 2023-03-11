@@ -13,15 +13,15 @@ import { getNetworkConfig } from 'src/libs/config'
 import { StaticRPCProvider } from 'src/libs/pool-data-provider'
 import { tokenSaleVestingContract } from 'src/libs/token-sale-vesting'
 import useSWRImmutable from 'swr/immutable'
+import { useEVMWallet } from '../useEVMWallet'
 import { useStaticRPCProvider } from '../useStaticRPCProvider'
-import { useWallet } from '../useWallet'
 import { useTxHandler } from './txHandler'
 import { useVotingEscrow } from './useVotingEscrow'
 
 type TokenSaleType = 'ido' | 'tokenSale'
 export const useTokenSaleVesting = () => {
   const { data: provider } = useStaticRPCProvider()
-  const { account, signer } = useWallet()
+  const { account, signer } = useEVMWallet()
   const { userData: userLockData, mutate: mutateVe } = useVotingEscrow()
 
   const { data: contracts } = useSWRImmutable(

@@ -1,8 +1,8 @@
 import { useWeb3React } from '@web3-react/core'
 import { ethers } from 'ethers'
 import { useCallback, useEffect, useMemo } from 'react'
-import { ChainId } from 'src/libs/config'
-import { getChainInfo } from 'src/libs/config/chain'
+import { EVMChainId } from 'src/libs/config'
+import { getEVMChainInfo } from 'src/libs/config/chain'
 import { getConnector, metamask, WalletType } from 'src/libs/wallet-provider'
 import { EthereumAddress } from 'src/types/web3'
 import { useSWRLocal } from './base/useSWRLocal'
@@ -11,7 +11,7 @@ type ActiveWallet = {
   type: WalletType
   onDisconnect?: VoidFunction
 }
-export type WalletInterface = {
+export type EVMWalletInterface = {
   error: Error | undefined
   active: boolean
   chainId: number | undefined
@@ -21,11 +21,11 @@ export type WalletInterface = {
   activeWalletType: WalletType | null | undefined
   connect: (type: WalletType) => Promise<void>
   disconnect: () => void
-  switchChain?: (chainId: ChainId) => Promise<{ error?: string }>
+  switchChain?: (chainId: EVMChainId) => Promise<{ error?: string }>
 }
 const useActiveWallet = () => useSWRLocal<ActiveWallet | null>('wallet-active')
 
-export const useWallet = (): WalletInterface => {
+export const useEVMWallet = (): EVMWalletInterface => {
   const { library, error, account, active, chainId, activate, deactivate } =
     useWeb3React<ethers.providers.Web3Provider>()
 
@@ -49,8 +49,8 @@ export const useWallet = (): WalletInterface => {
   }, [activeWallet, deactivate])
 
   const switchChain = useCallback(
-    async (chainId: ChainId) => {
-      return metamask.requestSwitchChain(chainId, getChainInfo(chainId))
+    async (chainId: EVMChainId) => {
+      return metamask.requestSwitchChain(chainId, getEVMChainInfo(chainId))
     },
     [activeWallet],
   )
@@ -70,7 +70,7 @@ export const useWallet = (): WalletInterface => {
     error,
     active,
     chainId,
-    account: account as WalletInterface['account'],
+    account: account as EVMWalletInterface['account'],
     library,
     signer,
     activeWalletType: activeWallet?.type,

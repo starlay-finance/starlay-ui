@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useLaunchpadContext } from 'src/components/screens/Launchpad/LaunchpadContext'
 import { Market, PriceChartData } from 'src/components/screens/Launchpad/types'
 import { useStaticRPCProvider } from 'src/hooks/useStaticRPCProvider'
-import { ChainId } from 'src/libs/config'
+import { EVMChainId } from 'src/libs/config'
 import {
   getCurrentPrice,
   listPricesHistorical,
@@ -70,7 +70,7 @@ export const useLaunchpadMarketData = ({
 }
 
 const fetchLaunchpadMarketData = async (
-  chainId: ChainId,
+  chainId: EVMChainId,
   launchpadAddress: EthereumAddress,
   saleStart: Dayjs,
 ) => {
@@ -88,7 +88,7 @@ const fetchLaunchpadMarketData = async (
 
 const updateLaunchpadMarketData = async (
   current: { market?: Market; chartData: PriceChartData[] },
-  chainId: ChainId,
+  chainId: EVMChainId,
   launchpadAddress: EthereumAddress,
   latestTimestamp: number,
   saleEnd: Dayjs,

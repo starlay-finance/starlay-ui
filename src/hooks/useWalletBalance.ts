@@ -12,14 +12,14 @@ import { generateSymbolDict } from 'src/utils/assets'
 import { BN_ZERO } from 'src/utils/number'
 import useSWR from 'swr'
 import useSWRImmutable from 'swr/immutable'
+import { useEVMWallet } from './useEVMWallet'
 import { useMarketData } from './useMarketData'
 import { useStaticRPCProvider } from './useStaticRPCProvider'
-import { useWallet } from './useWallet'
 
 const EMPTY_WALLET_BALANCE: WalletBalance = generateSymbolDict(BN_ZERO)
 
 export const useWalletBalance = (withFallback = true) => {
-  const { account } = useWallet()
+  const { account } = useEVMWallet()
   const { data: provider } = useWalletBalanceProvider()
   const { data: marketData } = useMarketData()
   return useSWR(

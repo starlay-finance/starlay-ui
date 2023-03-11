@@ -1,5 +1,5 @@
 import { useStaticRPCProvider } from 'src/hooks/useStaticRPCProvider'
-import { ChainId } from 'src/libs/config'
+import { EVMChainId } from 'src/libs/config'
 import { getPoolDataSnapshot } from 'src/libs/pool-data-provider/snapshots-provider'
 import { onlyListed } from 'src/utils/assets'
 import { utcStartOfDate } from 'src/utils/date'
@@ -16,7 +16,7 @@ export const useMarketDataSnapshot = () => {
 }
 
 const getMarketDataSnapshot = async (
-  chainId: ChainId,
+  chainId: EVMChainId,
 ): Promise<Omit<MarketData, keyof MarketDataRaw> | undefined> => {
   const timestamp = utcStartOfDate()
   const res = await getPoolDataSnapshot(chainId, timestamp)

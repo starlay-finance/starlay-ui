@@ -11,7 +11,7 @@ import {
 } from '@starlay-finance/math-utils'
 import { ethers } from 'ethers'
 import { EthereumAddress } from 'src/types/web3'
-import { ChainId } from '../config'
+import { EVMChainId } from '../config'
 
 export type FormattedReserveData = ReserveDataHumanized & FormatReserveResponse
 
@@ -52,6 +52,6 @@ export type PoolReservesData = {
 }
 
 export type StaticRPCProvider = {
-  chainId: ChainId
+  chainId: EVMChainId
   provider: ethers.providers.Provider
 }

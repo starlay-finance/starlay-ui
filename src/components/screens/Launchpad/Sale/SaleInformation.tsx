@@ -2,7 +2,7 @@ import { t } from '@lingui/macro'
 import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { FC } from 'react'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
-import { useWallet } from 'src/hooks/useWallet'
+import { useEVMWallet } from 'src/hooks/useEVMWallet'
 import { formatWithTZ } from 'src/utils/date'
 import { formatAmt, formatPct } from 'src/utils/number'
 import { ProjectData, Status } from '../types'
@@ -25,7 +25,7 @@ export const SaleInformation: FC<SaleInformationProps> = ({
   openBiddingModal,
   hasBidded,
 }) => {
-  const { account } = useWallet()
+  const { account } = useEVMWallet()
   const { open: openWalletModal } = useWalletModal()
   const started = status !== 'Upcoming'
   return (

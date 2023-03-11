@@ -1,16 +1,16 @@
-import { CHAIN_MARKET_CONFIG, MarketDataType } from './market'
+import { CHAIN_MARKET_CONFIG, EVMMarketConfig } from './market'
 import {
-  ChainId,
+  EVMChainId,
+  EVMNetworkConfig,
   isSupportedChain,
-  NetworkConfig,
   NETWORK_CONFIG,
 } from './network'
 
-export type { ChainId, NetworkConfig, MarketDataType }
+export type { EVMChainId, EVMNetworkConfig, EVMMarketConfig }
 export { isSupportedChain }
 
-export const getNetworkConfig = (chainId: ChainId): NetworkConfig =>
+export const getNetworkConfig = (chainId: EVMChainId): EVMNetworkConfig =>
   NETWORK_CONFIG[chainId]
 
-export const getMarketConfig = (chainId: ChainId): MarketDataType =>
+export const getMarketConfig = (chainId: EVMChainId): EVMMarketConfig =>
   CHAIN_MARKET_CONFIG[chainId]
