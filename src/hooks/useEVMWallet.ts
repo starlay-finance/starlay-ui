@@ -25,7 +25,9 @@ export type EVMWalletInterface = {
 }
 const useActiveWallet = () => useSWRLocal<ActiveWallet | null>('wallet-active')
 
-export const useEVMWallet = (): EVMWalletInterface => {
+export const useEVMWallet = (
+  isNetworkActive: boolean = true, // TODO temporarily
+): EVMWalletInterface => {
   const { library, error, account, active, chainId, activate, deactivate } =
     useWeb3React<ethers.providers.Web3Provider>()
 
@@ -56,15 +58,17 @@ export const useEVMWallet = (): EVMWalletInterface => {
   )
 
   useEffect(() => {
-    if (library && activeWallet?.type !== 'Metamask') return
+    if (!isNetworkActive || (library && activeWallet?.type !== 'Metamask'))
+      return
     metamask.addListenersOnConnected(connect, disconnect)
     return metamask.removeAllListeners
-  }, [library, activeWallet, connect, disconnect])
+  }, [isNetworkActive, library, activeWallet, connect, disconnect])
 
   useEffect(() => {
-    if (!connect || activeWallet?.type === 'Metamask') return
+    if (!isNetworkActive || !connect || activeWallet?.type === 'Metamask')
+      return
     metamask.connectIfAuthorized(connect)
-  }, [connect, activeWallet])
+  }, [isNetworkActive, connect, activeWallet])
 
   return {
     error,
