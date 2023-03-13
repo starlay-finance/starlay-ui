@@ -3,12 +3,16 @@ import { ethers } from 'ethers'
 import { useCallback, useEffect, useMemo } from 'react'
 import { EVMChainId } from 'src/libs/config'
 import { getEVMChainInfo } from 'src/libs/config/chain'
-import { getConnector, metamask, WalletType } from 'src/libs/wallet-provider'
+import {
+  EVMWalletType,
+  getConnector,
+  metamask,
+} from 'src/libs/wallet-provider-evm'
 import { EthereumAddress } from 'src/types/web3'
 import { useSWRLocal } from './base/useSWRLocal'
 
 type ActiveWallet = {
-  type: WalletType
+  type: EVMWalletType
   onDisconnect?: VoidFunction
 }
 export type EVMWalletInterface = {
@@ -18,8 +22,8 @@ export type EVMWalletInterface = {
   account: EthereumAddress | null | undefined
   library: ethers.providers.Web3Provider | undefined
   signer: ethers.providers.JsonRpcSigner | undefined
-  activeWalletType: WalletType | null | undefined
-  connect: (type: WalletType) => Promise<void>
+  activeWalletType: EVMWalletType | null | undefined
+  connect: (type: EVMWalletType) => Promise<void>
   disconnect: () => void
   switchChain?: (chainId: EVMChainId) => Promise<{ error?: string }>
 }
@@ -35,7 +39,7 @@ export const useEVMWallet = (
   const { data: activeWallet, mutate: mutateActiveWallet } = useActiveWallet()
 
   const connect = useCallback(
-    async (type: WalletType) => {
+    async (type: EVMWalletType) => {
       const { connector, onConnect, onDisconnect } = getConnector(type)
       if (onConnect) await onConnect()
       await activate(connector, undefined, true)

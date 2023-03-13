@@ -1,4 +1,5 @@
 import { NetworkType } from 'src/libs/config'
+import { EVMWalletType } from 'src/libs/wallet-provider-evm'
 import { EthereumAddress, PolkadotAddress } from 'src/types/web3'
 import { EVMWalletInterface, useEVMWallet } from './useEVMWallet'
 import { useNetworkType } from './useNetwork'

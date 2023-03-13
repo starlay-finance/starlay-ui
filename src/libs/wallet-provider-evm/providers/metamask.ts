@@ -1,7 +1,7 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
 import { InjectedConnector } from '@web3-react/injected-connector'
-import { WalletConnector, WalletType } from '../types'
+import { EVMWalletConnector, EVMWalletType } from '../types'
 
 const onConnect = async () => {
   const { ethereum } = window
@@ -12,14 +12,14 @@ const onConnect = async () => {
 
 const connector = new InjectedConnector({})
 
-export const metamaskConnector: WalletConnector<InjectedConnector> = {
+export const metamaskConnector: EVMWalletConnector<InjectedConnector> = {
   type: 'Metamask',
   connector,
   onConnect,
 }
 
 export const connectIfAuthorized = (
-  connect: (type: WalletType) => Promise<void>,
+  connect: (type: EVMWalletType) => Promise<void>,
 ) => {
   metamaskConnector.connector.isAuthorized().then((isAuthorized) => {
     if (!isAuthorized) return
@@ -37,7 +37,7 @@ export const removeAllListeners = () => {
 }
 
 export const addListenersOnConnected = (
-  connect: (type: WalletType) => Promise<void>,
+  connect: (type: EVMWalletType) => Promise<void>,
   disconnect: VoidFunction,
 ) => {
   const { ethereum } = window
