@@ -4,10 +4,13 @@ import { useEffect } from 'react'
 import { PolkadotAddress } from 'src/types/web3'
 import { useSWRLocal } from './base/useSWRLocal'
 
+const APP_NAME = 'Starlay Finance'
+export type PolkadotWalletType = 'polkadot-js'
+
 export type PolkadotWalletInterface = {
   account: PolkadotAddress | undefined
   signer: Signer | undefined
-  connect: VoidFunction
+  connect: (type: PolkadotWalletType) => Promise<void>
   accounts: () => Promise<PolkadotAddress[]>
   changeActiveAccount: (address: PolkadotAddress) => void
 }
@@ -28,9 +31,15 @@ export const usePolkadotWallet = (
       ?.web3Accounts()
       .then((accounts) => accounts.map(({ address }) => address)) || []
 
-  const connect = async () => {
+  const connect = async (type: PolkadotWalletType) => {
     if (!polkadot) return
-    await polkadot.web3Enable('Starlay Finance')
+    // TODO handle errors
+    try {
+      await polkadot.web3Enable(APP_NAME)
+    } catch (e) {
+      console.error(e)
+      return
+    }
     const accounts = await polkadot.web3Accounts()
     changeActiveAccount(accounts[0].address)
   }
@@ -41,13 +50,8 @@ export const usePolkadotWallet = (
   }
 
   useEffect(() => {
-    if (!isNetworkActive) return
-    if (!polkadot) {
-      import('@polkadot/extension-dapp').then(setPolkadotProvider)
-    }
-    // TODO if already enabled, connect automatically
-    connect()
-  }, [polkadot, isNetworkActive])
+    import('@polkadot/extension-dapp').then(setPolkadotProvider)
+  }, [])
 
   return {
     account,

@@ -3,7 +3,11 @@ import { EVMWalletType } from 'src/libs/wallet-provider-evm'
 import { EthereumAddress, PolkadotAddress } from 'src/types/web3'
 import { EVMWalletInterface, useEVMWallet } from './useEVMWallet'
 import { useNetworkType } from './useNetwork'
-import { PolkadotWalletInterface, usePolkadotWallet } from './usePolkadotWallet'
+import {
+  PolkadotWalletInterface,
+  PolkadotWalletType,
+  usePolkadotWallet,
+} from './usePolkadotWallet'
 
 export type WalletAdaptor = EVMWallet | PolkadotWallet
 
@@ -12,7 +16,13 @@ export type WalletAdaptorInterface<T extends NetworkType, A extends string, W> =
     networkType: T
     account: A | null | undefined
     wallet: W | null
+    connect: WalletConnector
   }
+
+export type WalletConnector = {
+  (networkType: 'EVM', walletType: EVMWalletType): Promise<void>
+  (networkType: 'Polkadot', walletType: PolkadotWalletType): Promise<void>
+}
 
 export type EVMWallet = WalletAdaptorInterface<
   'EVM',
@@ -31,21 +41,38 @@ export const DEFAULT_NETWORK: NetworkType = 'EVM'
 export const useWallet = (
   defaultNetwork: NetworkType = DEFAULT_NETWORK,
 ): WalletAdaptor => {
-  const { data: networkType = defaultNetwork } = useNetworkType()
+  const { data: networkType = defaultNetwork, mutate: setNetworkType } =
+    useNetworkType()
 
   const evmWallet = useEVMWallet(networkType === 'EVM')
   const polkadotWallet = usePolkadotWallet(networkType === 'Polkadot')
+
+  const connect: WalletAdaptor['connect'] = async (networkType, walletType) => {
+    try {
+      if (networkType === 'Polkadot') {
+        await polkadotWallet.connect(walletType as PolkadotWalletType)
+      } else {
+        await evmWallet.connect(walletType as EVMWalletType)
+      }
+    } catch (e) {
+      console.log(e)
+      return
+    }
+    setNetworkType(networkType)
+  }
 
   if (networkType === 'Polkadot')
     return {
       networkType,
       account: polkadotWallet.account,
       wallet: polkadotWallet,
+      connect,
     }
 
   return {
     networkType,
     account: evmWallet.account,
     wallet: evmWallet,
+    connect,
   }
 }

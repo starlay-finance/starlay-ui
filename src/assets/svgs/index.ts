@@ -9,6 +9,7 @@ import IconLoading from 'public/assets/svgs/icon_loading.svg'
 import IconMedium from 'public/assets/svgs/icon_medium.svg'
 import IconMenu from 'public/assets/svgs/icon_menu.svg'
 import IconMetamask from 'public/assets/svgs/icon_metamask.svg'
+import IconPolkadotJs from 'public/assets/svgs/icon_polkadot-js.svg'
 import IconProtocol from 'public/assets/svgs/icon_protocol.svg'
 import IconSettings from 'public/assets/svgs/icon_settings.svg'
 import IconSuccess from 'public/assets/svgs/icon_success.svg'
@@ -29,6 +30,7 @@ export {
   IconMetamask,
   IconMenu,
   IconMedium,
+  IconPolkadotJs,
   IconProtocol,
   IconSettings,
   IconSuccess,

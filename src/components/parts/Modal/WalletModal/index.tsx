@@ -1,12 +1,11 @@
 import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
-import { FC, useEffect, useState } from 'react'
-import { IconMetamask } from 'src/assets/svgs'
+import { FC, useState } from 'react'
+import { IconMetamask, IconPolkadotJs } from 'src/assets/svgs'
 import { Link } from 'src/components/elements/Link'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
-import { useEVMWallet } from 'src/hooks/useEVMWallet'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
-import { WalletType } from 'src/libs/wallet-provider'
+import { useWallet, WalletConnector } from 'src/hooks/useWallet'
 import { darkPurple, purple, trueBlack } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
@@ -16,19 +15,15 @@ import { LoadingProtocolIcon } from '../../Loading'
 import { ItemLabel } from '../parts'
 
 const Wallet: FC<ModalContentProps> = ({ close }) => {
-  const { account, connect } = useEVMWallet()
+  const { account, connect } = useWallet()
 
   const [connecting, setConnecting] = useState(false)
-  const onClickConnect = async (type: WalletType) => {
+  const onClickConnect = async (networkType: any, walletType: any) => {
     setConnecting(true)
-    await connect(type).catch(() => {})
-    setConnecting(false)
+    await connect(networkType, walletType).then(close, () => {
+      setConnecting(false)
+    })
   }
-
-  useEffect(() => {
-    if (!account) return
-    close()
-  }, [account])
 
   return (
     <DefaultModalContent
@@ -48,14 +43,15 @@ const BodyLoading: FC = () => (
   </BodyDiv>
 )
 
-const BodyConnect: FC<{ connect: (type: WalletType) => void }> = ({
-  connect,
-}) => (
+const BodyConnect: FC<{ connect: WalletConnector }> = ({ connect }) => (
   <BodyDiv>
-    <Heading>{t`We currently supports Metamask only.`}</Heading>
+    <Heading>{t`We currently supports Metamask only on EVM.`}</Heading>
     <WalletsDiv>
-      <button onClick={() => connect('Metamask')}>
+      <button onClick={() => connect('EVM', 'Metamask')}>
         <ItemLabel label={t`Metamask`} IconSVG={IconMetamask} />
+      </button>
+      <button onClick={() => connect('Polkadot', 'polkadot-js')}>
+        <ItemLabel label={t`Polkadot`} IconSVG={IconPolkadotJs} />
       </button>
     </WalletsDiv>
     <TermsP>
@@ -79,7 +75,8 @@ const TermsP = styled.div`
 const WalletsDiv = styled.div`
   width: 100%;
   button {
-    display: block;
+    display: flex;
+    align-items: center;
     text-align: left;
     width: 100%;
     color: ${trueBlack};
@@ -87,6 +84,10 @@ const WalletsDiv = styled.div`
     border-bottom: 1px solid ${darkPurple}3a;
     ${ItemLabel} {
       justify-content: flex-start;
+    }
+    svg {
+      width: 32px;
+      /* height: 32px; */
     }
     transition: all 0.2s ease-in;
     :hover {
@@ -105,14 +106,14 @@ const BodyDiv = styled.div`
   font-weight: ${fontWeightSemiBold};
   ${flexCenter};
   flex-direction: column;
-  p {
-    margin-top: 16px;
-  }
   ${WalletsDiv} {
     margin-top: 48px;
   }
   ${TermsP} {
     margin-top: 64px;
+    p {
+      margin-top: 16px;
+    }
   }
 `
 

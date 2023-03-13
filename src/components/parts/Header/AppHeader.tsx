@@ -30,7 +30,7 @@ import { HeaderWrapper } from './common'
 
 export const AppHeader = () => {
   const { pathname } = useRouter()
-  const { account } = useWallet('Polkadot')
+  const { account } = useWallet()
   const { data: user } = useUserData()
   const [isSetingsOpen, setIsSettingsOpen] = useState(false)
   const { open: openRewardModal } = useRewardModal()
@@ -59,7 +59,7 @@ export const AppHeader = () => {
           <Image src={SymbolLay} alt="Starlay" width={20} height={20} />
           {layPriceInUSD ? formatUSD(layPriceInUSD, { decimalPlaces: 3 }) : '-'}
         </MenuButtonSmall>
-        <MenuButton onClick={() => openWalletModal()} disabled={!!account}>
+        <MenuButton onClick={() => openWalletModal()}>
           {account ? shortenAddress(account) : t`Connect`}
         </MenuButton>
         <div>
