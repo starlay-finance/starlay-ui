@@ -9,6 +9,7 @@ import { IconLink } from 'src/components/parts/Link'
 import { useRewardModal } from 'src/components/parts/Modal/RewardModal'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
+import { useNetworkType } from 'src/hooks/useNetwork'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { darkGray, purple, trueWhite } from 'src/styles/colors'
@@ -30,6 +31,7 @@ import { HeaderWrapper } from './common'
 
 export const AppHeader = () => {
   const { pathname } = useRouter()
+  const { data: network } = useNetworkType()
   const { account } = useWallet()
   const { data: user } = useUserData()
   const [isSetingsOpen, setIsSettingsOpen] = useState(false)
@@ -48,10 +50,12 @@ export const AppHeader = () => {
           <Link href={MARKETS}>{t`Markets`}</Link>
         </Tab>
         <Tab $active={pathname === MAKAI}>
-          <Link href={MAKAI}>{t`Makai`}</Link>
+          <Link href={network === 'EVM' ? MAKAI : undefined}>{t`Makai`}</Link>
         </Tab>
         <Tab $active={pathname === LAY_VELAY}>
-          <Link href={LAY_VELAY}>{t`LAY/veLAY`}</Link>
+          <Link
+            href={network === 'EVM' ? LAY_VELAY : undefined}
+          >{t`LAY/veLAY`}</Link>
         </Tab>
       </Nav>
       <Menu>
