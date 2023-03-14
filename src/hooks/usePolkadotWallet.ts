@@ -2,6 +2,7 @@ import { Signer } from '@polkadot/api/types'
 import type * as PolkadotProvider from '@polkadot/extension-dapp'
 import { useEffect } from 'react'
 import { PolkadotAddress } from 'src/types/web3'
+import { POLKADOT_JS_EXT_URL } from 'src/utils/routes'
 import { useSWRLocal } from './base/useSWRLocal'
 
 const APP_NAME = 'Starlay Finance'
@@ -31,16 +32,22 @@ export const usePolkadotWallet = (
       ?.web3Accounts()
       .then((accounts) => accounts.map(({ address }) => address)) || []
 
-  const connect = async (type: PolkadotWalletType) => {
-    if (!polkadot) return
-    // TODO handle errors
-    try {
-      await polkadot.web3Enable(APP_NAME)
-    } catch (e) {
-      console.error(e)
+  const connect = async (type: PolkadotWalletType, autoConnect?: boolean) => {
+    if (
+      !autoConnect &&
+      (!window.injectedWeb3 || !Object.keys(window.injectedWeb3).length)
+    ) {
+      window.open(POLKADOT_JS_EXT_URL, '_blank', 'noopener')
       return
     }
+    if (!polkadot) return
+    // TODO handle errors
+    await polkadot.web3Enable(APP_NAME)
     const accounts = await polkadot.web3Accounts()
+    if (!accounts.length) {
+      // TODO display an error message: no available accounts found
+      return
+    }
     changeActiveAccount(accounts[0].address)
   }
 
@@ -52,6 +59,11 @@ export const usePolkadotWallet = (
   useEffect(() => {
     import('@polkadot/extension-dapp').then(setPolkadotProvider)
   }, [])
+
+  useEffect(() => {
+    if (!polkadot || !isNetworkActive || account) return
+    connect('polkadot-js', true)
+  }, [isNetworkActive, polkadot])
 
   return {
     account,

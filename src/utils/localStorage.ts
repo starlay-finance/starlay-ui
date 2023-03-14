@@ -1,4 +1,5 @@
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
+import { NetworkType } from 'src/libs/config'
 
 export const getManualGasPrice = () => {
   const value = localStorage.getItem('gasPriceMultiplier')
@@ -19,3 +20,9 @@ export const setGasPriceMultiplier = (value: BigNumber | undefined) =>
   value
     ? localStorage.setItem('gasPriceMultiplier_v2', value.toString())
     : localStorage.removeItem('gasPriceMultiplier_v2')
+
+export const getLastConnectedNetwork = () =>
+  localStorage.getItem('lastConnectedNetwork')
+
+export const setLastConnectedNetwork = (value: NetworkType) =>
+  localStorage.setItem('lastConnectedNetwork', value)
