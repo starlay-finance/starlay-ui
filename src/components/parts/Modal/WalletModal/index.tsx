@@ -5,7 +5,9 @@ import { IconMetamask, IconPolkadotJs } from 'src/assets/svgs'
 import { Link } from 'src/components/elements/Link'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
+import { useNetworkType } from 'src/hooks/useNetwork'
 import { useWallet, WalletConnector } from 'src/hooks/useWallet'
+import { NetworkType } from 'src/libs/config'
 import { darkPurple, purple, trueBlack } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
@@ -15,6 +17,7 @@ import { LoadingProtocolIcon } from '../../Loading'
 import { ItemLabel } from '../parts'
 
 const Wallet: FC<ModalContentProps> = ({ close }) => {
+  const { data: network } = useNetworkType()
   const { account, connect } = useWallet()
 
   const [connecting, setConnecting] = useState(false)
@@ -29,7 +32,11 @@ const Wallet: FC<ModalContentProps> = ({ close }) => {
     <DefaultModalContent
       headerNode={t`Connect Wallet`}
       bodyNode={
-        !connecting ? <BodyConnect connect={onClickConnect} /> : <BodyLoading />
+        !connecting ? (
+          <BodyConnect connect={onClickConnect} network={network} />
+        ) : (
+          <BodyLoading />
+        )
       }
       closeModal={close}
     />
@@ -43,16 +50,25 @@ const BodyLoading: FC = () => (
   </BodyDiv>
 )
 
-const BodyConnect: FC<{ connect: WalletConnector }> = ({ connect }) => (
+const BodyConnect: FC<{ connect: WalletConnector; network: NetworkType }> = ({
+  connect,
+  network,
+}) => (
   <BodyDiv>
-    <Heading>{t`We currently supports Metamask only on EVM.`}</Heading>
+    {network === 'EVM' && (
+      <Heading>{t`We currently supports Metamask only on EVM.`}</Heading>
+    )}
     <WalletsDiv>
-      <button onClick={() => connect('EVM', 'Metamask')}>
-        <ItemLabel label={t`Metamask`} IconSVG={IconMetamask} />
-      </button>
-      <button onClick={() => connect('Polkadot', 'polkadot-js')}>
-        <ItemLabel label={t`Polkadot`} IconSVG={IconPolkadotJs} />
-      </button>
+      {network === 'EVM' && (
+        <button onClick={() => connect('EVM', 'Metamask')}>
+          <ItemLabel label={t`Metamask`} IconSVG={IconMetamask} />
+        </button>
+      )}
+      {network === 'Polkadot' && (
+        <button onClick={() => connect('Polkadot', 'polkadot-js')}>
+          <ItemLabel label={t`Polkadot`} IconSVG={IconPolkadotJs} />
+        </button>
+      )}
     </WalletsDiv>
     <TermsP>
       <Trans
