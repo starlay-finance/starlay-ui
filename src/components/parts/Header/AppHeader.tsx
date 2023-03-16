@@ -2,13 +2,17 @@ import { t } from '@lingui/macro'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { SymbolLay } from 'src/assets/images'
-import { IconSettings, LogoProtocol } from 'src/assets/svgs'
+import {
+  IconMetamask,
+  IconPolkadotJs,
+  IconSettings,
+  LogoProtocol,
+} from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
 import { useRewardModal } from 'src/components/parts/Modal/RewardModal'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
-import { useLAYPrice } from 'src/hooks/useLAYPrice'
 import { useNetworkType } from 'src/hooks/useNetwork'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
@@ -16,7 +20,6 @@ import { darkGray, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
-import { formatUSD } from 'src/utils/number'
 import {
   APP,
   LAUNCHPAD,
@@ -27,6 +30,7 @@ import {
 } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import { useGasSettingsModal } from '../Modal/GasSettingsModal'
+import { useNetworkModal } from '../Modal/NetworkModal'
 import { HeaderWrapper } from './common'
 
 export const AppHeader = () => {
@@ -36,6 +40,7 @@ export const AppHeader = () => {
   const { data: user } = useUserData()
   const [isSetingsOpen, setIsSettingsOpen] = useState(false)
   const { open: openRewardModal } = useRewardModal()
+  const { open: openNetworkModal } = useNetworkModal()
   const { open: openWalletModal } = useWalletModal()
   const { open: openGasSettingsModal } = useGasSettingsModal()
   const { data: layPriceInUSD } = useLAYPrice()
@@ -62,10 +67,15 @@ export const AppHeader = () => {
         <MenuButtonSmall onClick={() => openRewardModal()} disabled={!user}>
           <Image src={SymbolLay} alt="Starlay" width={20} height={20} />
           {layPriceInUSD ? formatUSD(layPriceInUSD, { decimalPlaces: 3 }) : '-'}
+        <MenuButtonSmall onClick={() => openNetworkModal()}>
+          {network === 'EVM' ? <IconMetamask /> : <IconPolkadotJs />}
         </MenuButtonSmall>
         <MenuButton onClick={() => openWalletModal()}>
           {account ? shortenAddress(account) : t`Connect`}
         </MenuButton>
+        <MenuButtonSmall onClick={() => openRewardModal()} disabled={!user}>
+          <Image src={SymbolLay} alt="LAY" width={20} height={20} />
+        </MenuButtonSmall>
         <div>
           <MenuButtonSmall onClick={() => setIsSettingsOpen(!isSetingsOpen)}>
             <IconSettings />
@@ -103,7 +113,12 @@ const MenuButton = styled.button`
   column-gap: 8px;
 `
 const MenuButtonSmall = styled(MenuButton)`
-  padding: 12px;
+  width: 42px;
+  height: 42px;
+  padding: unset;
+  svg {
+    height: 18px;
+  }
 `
 
 const Menu = styled.div`
