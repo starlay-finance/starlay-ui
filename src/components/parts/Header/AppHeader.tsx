@@ -102,6 +102,7 @@ export const AppHeader = () => {
                     afterClose: () => setIsSettingsOpen(false),
                   })
                 }}
+                disabled={network !== 'EVM'}
               >{t`Set Gas Fee`}</button>
             </SettingsDiv>
           </SettingsContainer>
@@ -146,6 +147,9 @@ const SettingsDiv = styled.div`
     transition: color 0.15s ease-in;
     :hover {
       color: ${purple};
+    }
+    :disabled {
+      color: ${trueWhite}80;
     }
   }
 `
