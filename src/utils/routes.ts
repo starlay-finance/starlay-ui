@@ -44,5 +44,7 @@ export const isMobileSupported = (path: string) =>
 export const GAS_GUIDE_URL =
   'https://metamask.zendesk.com/hc/en-us/articles/4404600179227-User-Guide-Gas'
 
+export const METAMASK_EXT_URL =
+  'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn'
 export const POLKADOT_JS_EXT_URL =
   'https://chrome.google.com/webstore/detail/polkadot%7Bjs%7D-extension/mopnmbcafieddcagagdcbnhejhlodfdd'

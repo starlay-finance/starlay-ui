@@ -1,12 +1,15 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
 import { InjectedConnector } from '@web3-react/injected-connector'
+import { METAMASK_EXT_URL } from 'src/utils/routes'
 import { EVMWalletConnector, EVMWalletType } from '../types'
 
 const onConnect = async () => {
   const { ethereum } = window
-  if (!(ethereum && ethereum.isMetaMask))
+  if (!(ethereum && ethereum.isMetaMask)) {
+    window.open(METAMASK_EXT_URL, '_blank', 'noopener')
     return Promise.reject('Please make Metamask available')
+  }
   await ethereum.request({ method: 'eth_requestAccounts' })
 }
 
