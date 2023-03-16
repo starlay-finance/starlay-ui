@@ -29,6 +29,7 @@ import {
   SWAP,
 } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
+import { useAccountsModal } from '../Modal/AccountsModal'
 import { useGasSettingsModal } from '../Modal/GasSettingsModal'
 import { useNetworkModal } from '../Modal/NetworkModal'
 import { HeaderWrapper } from './common'
@@ -42,8 +43,8 @@ export const AppHeader = () => {
   const { open: openRewardModal } = useRewardModal()
   const { open: openNetworkModal } = useNetworkModal()
   const { open: openWalletModal } = useWalletModal()
+  const { open: openAccountsModal } = useAccountsModal()
   const { open: openGasSettingsModal } = useGasSettingsModal()
-  const { data: layPriceInUSD } = useLAYPrice()
   return (
     <AppHeaderWrapper>
       <LogoLink href={APP} Icon={LogoProtocol} aria-label="App" />
@@ -64,13 +65,19 @@ export const AppHeader = () => {
         </Tab>
       </Nav>
       <Menu>
-        <MenuButtonSmall onClick={() => openRewardModal()} disabled={!user}>
-          <Image src={SymbolLay} alt="Starlay" width={20} height={20} />
-          {layPriceInUSD ? formatUSD(layPriceInUSD, { decimalPlaces: 3 }) : '-'}
         <MenuButtonSmall onClick={() => openNetworkModal()}>
           {network === 'EVM' ? <IconMetamask /> : <IconPolkadotJs />}
         </MenuButtonSmall>
-        <MenuButton onClick={() => openWalletModal()}>
+        <MenuButton
+          onClick={() =>
+            !account
+              ? openWalletModal()
+              : network === 'Polkadot'
+              ? openAccountsModal()
+              : {}
+          }
+          disabled={!!account && network !== 'Polkadot'}
+        >
           {account ? shortenAddress(account) : t`Connect`}
         </MenuButton>
         <MenuButtonSmall onClick={() => openRewardModal()} disabled={!user}>

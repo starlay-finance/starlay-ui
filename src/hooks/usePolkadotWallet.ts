@@ -7,12 +7,13 @@ import { useSWRLocal } from './base/useSWRLocal'
 
 const APP_NAME = 'Starlay Finance'
 export type PolkadotWalletType = 'polkadot-js'
+export type PolkadotAccountWithMeta = { address: PolkadotAddress; meta: string }
 
 export type PolkadotWalletInterface = {
   account: PolkadotAddress | undefined
   signer: Signer | undefined
   connect: (type: PolkadotWalletType) => Promise<void>
-  accounts: () => Promise<PolkadotAddress[]>
+  accounts: () => Promise<PolkadotAccountWithMeta[]>
   changeActiveAccount: (address: PolkadotAddress) => void
 }
 
@@ -28,9 +29,12 @@ export const usePolkadotWallet = (
   )
 
   const accounts = async () =>
-    polkadot
-      ?.web3Accounts()
-      .then((accounts) => accounts.map(({ address }) => address)) || []
+    polkadot?.web3Accounts().then((accounts) =>
+      accounts.map(({ address, meta }) => ({
+        address,
+        meta: meta.name || 'No Name',
+      })),
+    )
 
   const connect = async (type: PolkadotWalletType, autoConnect?: boolean) => {
     if (
