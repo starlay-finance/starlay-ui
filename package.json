@@ -55,6 +55,7 @@
     "web3": "^1.8.2"
   },
   "devDependencies": {
+    "@727-ventures/typechain-types": "^0.0.23",
     "@graphql-codegen/cli": "^3.2.2",
     "@graphql-codegen/schema-ast": "^3.0.1",
     "@graphql-codegen/typescript": "^3.0.2",
