@@ -2,8 +2,7 @@ import { FC } from 'react'
 import { requireSupportedChain } from 'src/components/hoc/requireSupportedChain'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { AssetLabel } from 'src/components/parts/Modal/parts'
-import { useLendingPool } from 'src/hooks/contracts/useLendingPool'
-import { useEVMWallet } from 'src/hooks/useEVMWallet'
+import { useLeverager } from 'src/hooks/contracts/useLeverager'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useTracking } from 'src/hooks/useTracking'
 import {
@@ -15,8 +14,7 @@ import { LoopingModalBody, LoopingModalBodyProps } from './Body'
 export const Looping: FC<
   ModalContentProps<Omit<LoopingModalBodyProps, 'loop' | 'close'>>
 > = ({ close, ...props }) => {
-  const { account, signer } = useEVMWallet()
-  const { loop, closeLoop } = useLendingPool(account, signer)
+  const { loop, closeLoop } = useLeverager()
   const { withTracking } = useTracking()
   const { asset } = props
 
@@ -31,7 +29,7 @@ export const Looping: FC<
           loop={(amount, leverage) =>
             loopWithTracking({
               amount,
-              underlyingAsset: asset.underlyingAsset,
+              asset: asset.underlyingAsset,
               debtToken: asset.vdTokenAddress,
               borrowRatio: loopingLeverageToLtv(leverage),
               loopCount: significantLoopingCount(leverage),

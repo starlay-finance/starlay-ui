@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { Launchpad, ProjectData } from 'src/components/screens/Launchpad'
+import { asEVMPage } from 'src/contexts/StarlayContextProviderEVM'
 import { Page, PageStaticProps } from 'src/types/page'
 
 type LaunchpadPageStaticProps = {
@@ -63,4 +64,4 @@ const LaunchpadPage: Page<LaunchpadPageStaticProps> = ({ data }) => (
   />
 )
 
-export default LaunchpadPage
+export default asEVMPage(LaunchpadPage)

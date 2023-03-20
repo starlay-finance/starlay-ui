@@ -1,5 +1,6 @@
 import { Markets } from 'src/components/screens/Markets'
+import { asEVMPage } from 'src/contexts/StarlayContextProviderEVM'
 
 const MarketsPage = () => <Markets />
 
-export default MarketsPage
+export default asEVMPage(MarketsPage)

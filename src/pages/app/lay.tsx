@@ -1,5 +1,6 @@
 import { Lay } from 'src/components/screens/Lay'
+import { asEVMPage } from 'src/contexts/StarlayContextProviderEVM'
 
 const LayPage = () => <Lay />
 
-export default LayPage
+export default asEVMPage(LayPage)

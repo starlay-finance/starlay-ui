@@ -10,8 +10,8 @@ import { CollateralModalBody, CollateralModalBodyProps } from './Body'
 export const Collateral: FC<
   ModalContentProps<Omit<CollateralModalBodyProps, 'setUsageAsCollateral'>>
 > = ({ close, ...props }) => {
-  const { account, signer } = useEVMWallet()
-  const { setUsageAsCollateral } = useLendingPool(account, signer)
+  const { account } = useEVMWallet()
+  const { setUsageAsCollateral } = useLendingPool(account)
 
   const { asset } = props
   return (
@@ -21,7 +21,10 @@ export const Collateral: FC<
         <CollateralModalBody
           {...props}
           setUsageAsCollateral={(enabled) =>
-            setUsageAsCollateral(enabled, asset.underlyingAsset)
+            setUsageAsCollateral({
+              usageAsCollateral: enabled,
+              asset: asset.underlyingAsset,
+            })
           }
         />
       }

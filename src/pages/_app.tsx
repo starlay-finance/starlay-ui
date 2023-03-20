@@ -1,4 +1,3 @@
-import { Web3ReactProvider } from '@web3-react/core'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { FC, useEffect } from 'react'
@@ -7,9 +6,7 @@ import TagManager from 'react-gtm-module'
 import { Favicons } from 'src/components/parts/Favicons'
 import { SEO } from 'src/components/parts/SEO'
 import { COMMON_SEO_DATA } from 'src/constants/seo'
-import { ModalPortal } from 'src/hooks/useModal'
 import { I18nProvider, loadSync } from 'src/libs/i18n-provider'
-import { getLibrary } from 'src/libs/wallet-provider-evm'
 import { Locale } from 'src/locales'
 import { notoSansJpPath, notoSansScPath } from 'src/styles/font'
 import { GlobalStyles } from 'src/styles/global-styles'
@@ -40,15 +37,12 @@ const MyApp: FC<Omit<AppProps, 'pageProps'> & { pageProps: PageStaticProps }> =
           <link rel="stylesheet" href={notoSansJpPath} />
           <link rel="stylesheet" href={notoSansScPath} />
         </Head>
-        <Web3ReactProvider getLibrary={getLibrary}>
-          <I18nProvider>
-            <SEO {...COMMON_SEO_DATA} {...pageProps.seoProps} />
-            {!jumpToSorry && (
-              <Component {...(pageProps as any)} router={router} />
-            )}
-            <ModalPortal />
-          </I18nProvider>
-        </Web3ReactProvider>
+        <I18nProvider>
+          <SEO {...COMMON_SEO_DATA} {...pageProps.seoProps} />
+          {!jumpToSorry && (
+            <Component {...(pageProps as any)} router={router} />
+          )}
+        </I18nProvider>
       </>
     )
   }
