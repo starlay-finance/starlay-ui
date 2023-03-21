@@ -13,12 +13,26 @@ export type Asset = {
   borrowUnsupported?: boolean
   makaiUnsupported?: boolean
 }
+
+export type AssetMetadata = {
+  address: string
+  symbol: AssetSymbol
+  decimals: number
+}
+
 export type ERC20Asset = {
   symbol: AssetSymbol
   icon: StaticImageData
   name: string
   address: EthereumAddress
   decimals: number
+}
+
+export type MarketData = {
+  assets: AssetMarketData[]
+  marketReferenceCurrencyPriceInUSD: BigNumber
+  marketReferenceCurrencyDecimals: number
+  marketTimestamp: number
 }
 
 export type AssetMarketData = Asset & {

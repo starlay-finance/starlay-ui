@@ -6,9 +6,10 @@ import { ModalPortal } from 'src/hooks/useModal'
 import { useRecentGasPrice } from 'src/hooks/useRecentGasPrice'
 import { StarlayContext } from 'src/hooks/useStarlay'
 import { useStaticRPCProvider } from 'src/hooks/useStaticRPCProvider'
+import { DataProviderEVM } from 'src/libs/data-provider'
 import { LendingPoolEVM } from 'src/libs/lending-pool'
 import { getLibrary } from 'src/libs/wallet-provider-evm'
-import { LendingPool, TxItem } from 'src/types/starlay'
+import { DataProvider, LendingPool, TxItem } from 'src/types/starlay'
 import useSWRImmutable from 'swr/immutable'
 import { executeTx } from './utils'
 
@@ -32,6 +33,10 @@ export const StarlayContextProviderEVM: FC<{
     provider && ['evm', 'lendingpool', provider.chainId],
     () => LendingPoolEVM.new(provider!),
   )
+  const { data: dataProvider } = useSWRImmutable<DataProvider>(
+    provider && ['evm', 'dataprovider', provider.chainId],
+    () => DataProviderEVM.new(provider!),
+  )
 
   const txExecutor = useCallback(
     async (item: TxItem<transactionType>) =>
@@ -43,6 +48,7 @@ export const StarlayContextProviderEVM: FC<{
   return (
     <StarlayContext.Provider
       value={{
+        dataProvider,
         lendingPool,
         txExecutor,
       }}

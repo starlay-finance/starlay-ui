@@ -1,96 +1,39 @@
-import { normalizeBN } from '@starlay-finance/math-utils'
-import { ASSETS_DICT } from 'src/constants/assets'
-import { getNetworkConfig } from 'src/libs/config'
-import {
-  walletBalanceProviderContract,
-  WalletBalanceProviderInterface,
-} from 'src/libs/wallet-balance-provider'
-import { AssetSymbol, WalletBalance } from 'src/types/models'
+import { WalletBalance } from 'src/types/models'
 import { SWRResponseWithFallback } from 'src/types/swr'
-import { EthereumAddress } from 'src/types/web3'
 import { generateSymbolDict } from 'src/utils/assets'
 import { BN_ZERO } from 'src/utils/number'
 import useSWR from 'swr'
-import useSWRImmutable from 'swr/immutable'
 import { useEVMWallet } from './useEVMWallet'
 import { useMarketData } from './useMarketData'
-import { useStaticRPCProvider } from './useStaticRPCProvider'
+import { useStarlay } from './useStarlay'
 
 const EMPTY_WALLET_BALANCE: WalletBalance = generateSymbolDict(BN_ZERO)
 
 export const useWalletBalance = (withFallback = true) => {
   const { account } = useEVMWallet()
-  const { data: provider } = useWalletBalanceProvider()
+  const { dataProvider } = useStarlay()
   const { data: marketData } = useMarketData()
   return useSWR(
     () =>
       account &&
-      provider &&
-      provider.chainId === marketData?.chainId && [
+      dataProvider &&
+      dataProvider.chainId === marketData?.chainId && [
         'wallet-balance',
-        provider.chainId,
         account,
+        dataProvider.chainId,
       ],
-    ([_key, chainId, account]) => {
-      const { rewardToken } = getNetworkConfig(chainId)
-      return getWalletBalance(provider!.provider, account, marketData!.assets, {
-        symbol: ASSETS_DICT.LAY.symbol,
-        underlyingAsset: rewardToken.underlyingAsset,
-        decimals: rewardToken.decimals,
+    ([_key, account, _chainId]) => {
+      return dataProvider?.getWalletBalance({
+        account,
+        assets: marketData!.assets.map(
+          ({ underlyingAsset, symbol, decimals }) => ({
+            address: underlyingAsset,
+            symbol,
+            decimals,
+          }),
+        ),
       })
     },
     withFallback ? { fallbackData: EMPTY_WALLET_BALANCE } : undefined,
   ) as SWRResponseWithFallback<WalletBalance>
-}
-
-const useWalletBalanceProvider = () => {
-  const { data: provider } = useStaticRPCProvider()
-  return useSWRImmutable(
-    provider && ['walletbalanceprovider', provider.chainId],
-    () => ({
-      chainId: provider!.chainId,
-      provider: walletBalanceProviderContract(provider!),
-    }),
-  )
-}
-
-const getWalletBalance = async (
-  walletBalanceProvider: WalletBalanceProviderInterface,
-  account: EthereumAddress,
-  assets: {
-    symbol: AssetSymbol
-    underlyingAsset: EthereumAddress
-    decimals: number
-  }[],
-  rewardToken: {
-    symbol: AssetSymbol
-    underlyingAsset: EthereumAddress
-    decimals: number
-  },
-): Promise<WalletBalance> => {
-  const balancesDict =
-    await walletBalanceProvider.getBeforeNormalizedWalletBalance(account)
-  walletBalanceProvider
-  const balances = assets.reduce((prev, asset) => {
-    const balance =
-      balancesDict[asset.underlyingAsset.toLowerCase() as EthereumAddress]
-    return {
-      ...prev,
-      [asset.symbol]: balance
-        ? normalizeBN(balance.toString(), asset.decimals)
-        : BN_ZERO,
-    }
-  }, {}) as WalletBalance
-
-  const rewardBalance = await walletBalanceProvider.getBalance(
-    account,
-    rewardToken.underlyingAsset,
-  )
-  return {
-    ...balances,
-    [ASSETS_DICT.LAY.symbol]: normalizeBN(
-      rewardBalance.toString(),
-      rewardToken.decimals,
-    ),
-  }
 }

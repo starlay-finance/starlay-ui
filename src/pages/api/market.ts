@@ -1,6 +1,5 @@
-import { getMarketData } from 'src/hooks/useMarketData'
 import { getLAYPrice } from 'src/libs/arthswap-data-provider'
-import { getPoolDataProvider } from 'src/libs/pool-data-provider'
+import { DataProviderEVM } from 'src/libs/data-provider'
 import { getProvider } from 'src/libs/static-rpc-provider'
 import { asHandler, cacheControl } from 'src/utils/api'
 import { DEFAULT_CHAIN_ID } from 'src/utils/env'
@@ -8,14 +7,12 @@ import { DEFAULT_CHAIN_ID } from 'src/utils/env'
 const getMarketDataForAPI = async () => {
   const chainId = DEFAULT_CHAIN_ID
   const provider = getProvider(chainId)
-  const poolDataProvider = getPoolDataProvider({ chainId, provider })
-  const layPrice = await getLAYPrice(chainId)
-  if (!layPrice) throw new Error('Failed to fetch the price of LAY.')
-  const { assets, marketTimestamp } = await getMarketData(
-    poolDataProvider.provider,
-    chainId,
-    layPrice,
-  )
+  const poolDataProvider = DataProviderEVM.new({ chainId, provider })
+  const layPriceInUSD = await getLAYPrice(chainId)
+  if (!layPriceInUSD) throw new Error('Failed to fetch the price of LAY.')
+  const { assets, marketTimestamp } = await poolDataProvider.getMarketData({
+    layPriceInUSD,
+  })
   return {
     timestamp: marketTimestamp,
     assets: assets

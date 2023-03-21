@@ -1,10 +1,8 @@
 import { createContext, useContext } from 'react'
-import { LendingPool, TxItem } from 'src/types/starlay'
+import { DataProvider, LendingPool, TxItem } from 'src/types/starlay'
 
 export type StarlayContext = {
-  // marketData: MarketData
-  // userData: User
-  // walletBalance: WalletBalance
+  dataProvider: DataProvider
   lendingPool: LendingPool
   txExecutor: (item: TxItem) => Promise<any>
 }

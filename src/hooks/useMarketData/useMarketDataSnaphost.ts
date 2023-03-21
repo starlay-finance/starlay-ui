@@ -1,11 +1,12 @@
 import { useStaticRPCProvider } from 'src/hooks/useStaticRPCProvider'
 import { EVMChainId } from 'src/libs/config'
+import { MarketDataRawEVM } from 'src/libs/data-provider'
+import { toAssetMarketData } from 'src/libs/data-provider/utils'
 import { getPoolDataSnapshot } from 'src/libs/pool-data-provider/snapshots-provider'
+import { MarketData } from 'src/types/models'
 import { onlyListed } from 'src/utils/assets'
 import { utcStartOfDate } from 'src/utils/date'
 import useSWRImmutable from 'swr/immutable'
-import { toAssetMarketData } from './converters'
-import { MarketData, MarketDataRaw } from './types'
 
 export const useMarketDataSnapshot = () => {
   const { data } = useStaticRPCProvider()
@@ -17,7 +18,9 @@ export const useMarketDataSnapshot = () => {
 
 const getMarketDataSnapshot = async (
   chainId: EVMChainId,
-): Promise<Omit<MarketData, keyof MarketDataRaw> | undefined> => {
+): Promise<
+  Omit<MarketData & { chainId: EVMChainId }, keyof MarketDataRawEVM> | undefined
+> => {
   const timestamp = utcStartOfDate()
   const res = await getPoolDataSnapshot(chainId, timestamp)
   if (!res) return
