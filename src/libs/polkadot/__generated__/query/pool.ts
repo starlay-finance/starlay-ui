@@ -13,7 +13,7 @@ import type * as ArgumentTypes from '../types-arguments/pool'
 import type * as ReturnTypes from '../types-returns/pool'
 //@ts-ignore
 import { ReturnNumber } from '@727-ventures/typechain-types'
-import { getTypeDescription } from '../shared/utils'
+import TYPE_DESCRIPTIONS from '../data/pool.json'
 
 export default class Methods {
   private __nativeContract: ContractPromise
@@ -53,7 +53,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(12, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[12])
       },
     )
   }
@@ -74,7 +74,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(16, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[16])
       },
     )
   }
@@ -101,7 +101,7 @@ export default class Methods {
       [account],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(17, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[17])
       },
     )
   }
@@ -128,7 +128,7 @@ export default class Methods {
       [borrowAmount],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(19, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[19])
       },
     )
   }
@@ -149,7 +149,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(21, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[21])
       },
     )
   }
@@ -172,7 +172,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(22, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[22])
       },
     )
   }
@@ -195,7 +195,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(22, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[22])
       },
     )
   }
@@ -218,7 +218,7 @@ export default class Methods {
       [account],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(21, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[21])
       },
     )
   }
@@ -245,7 +245,7 @@ export default class Methods {
       [repayAmount],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(19, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[19])
       },
     )
   }
@@ -272,7 +272,7 @@ export default class Methods {
       [mintAmount],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(19, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[19])
       },
     )
   }
@@ -299,7 +299,7 @@ export default class Methods {
       [account],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(17, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[17])
       },
     )
   }
@@ -322,7 +322,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(23, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[23])
       },
     )
   }
@@ -343,7 +343,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(21, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[21])
       },
     )
   }
@@ -366,7 +366,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(22, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[22])
       },
     )
   }
@@ -393,7 +393,7 @@ export default class Methods {
       [redeemAmount],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(19, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[19])
       },
     )
   }
@@ -416,7 +416,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(23, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[23])
       },
     )
   }
@@ -437,7 +437,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(21, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[21])
       },
     )
   }
@@ -468,7 +468,7 @@ export default class Methods {
       [borrower, repayAmount, collateral],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(19, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[19])
       },
     )
   }
@@ -491,7 +491,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(23, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[23])
       },
     )
   }
@@ -514,7 +514,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(23, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[23])
       },
     )
   }
@@ -541,7 +541,7 @@ export default class Methods {
       [amount],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(19, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[19])
       },
     )
   }
@@ -570,7 +570,7 @@ export default class Methods {
       [borrower, repayAmount],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(19, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[19])
       },
     )
   }
@@ -601,7 +601,7 @@ export default class Methods {
       [liquidator, borrower, seizeTokens],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(19, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[19])
       },
     )
   }
@@ -628,7 +628,7 @@ export default class Methods {
       [redeemTokens],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(19, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[19])
       },
     )
   }
@@ -653,7 +653,7 @@ export default class Methods {
       [owner, spender],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(21, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[21])
       },
     )
   }
@@ -676,7 +676,7 @@ export default class Methods {
       [owner],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(21, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[21])
       },
     )
   }
@@ -709,7 +709,7 @@ export default class Methods {
       [from, to, value, data],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(24, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[24])
       },
     )
   }
@@ -738,7 +738,7 @@ export default class Methods {
       [spender, value],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(24, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[24])
       },
     )
   }
@@ -767,7 +767,7 @@ export default class Methods {
       [spender, deltaValue],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(24, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[24])
       },
     )
   }
@@ -798,7 +798,7 @@ export default class Methods {
       [to, value, data],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(24, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[24])
       },
     )
   }
@@ -819,7 +819,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(21, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[21])
       },
     )
   }
@@ -848,7 +848,7 @@ export default class Methods {
       [spender, deltaValue],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(24, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[24])
       },
     )
   }
@@ -871,7 +871,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(26, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[26])
       },
     )
   }
@@ -894,7 +894,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(26, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[26])
       },
     )
   }
@@ -915,7 +915,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(28, 'pool'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[28])
       },
     )
   }

@@ -1,7 +1,6 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { Dayjs } from 'dayjs'
 import { LISTED_ASSET_SYMBOLS } from 'src/constants/assets'
-import { EthereumAddress } from './web3'
 
 export type AssetSymbol = typeof LISTED_ASSET_SYMBOLS[number]
 
@@ -24,7 +23,7 @@ export type ERC20Asset = {
   symbol: AssetSymbol
   icon: StaticImageData
   name: string
-  address: EthereumAddress
+  address: string
   decimals: number
 }
 
@@ -50,10 +49,10 @@ export type AssetMarketData = Asset & {
   usageAsCollateralEnabled: boolean
   reserveFactor: BigNumber
   liquidationPenalty: BigNumber
-  underlyingAsset: EthereumAddress
+  underlyingAsset: string
   decimals: number
-  lTokenAddress: EthereumAddress
-  vdTokenAddress: EthereumAddress
+  lTokenAddress: string
+  vdTokenAddress: string
   isActive: boolean
   isFrozen: boolean
   borrowingEnabled: boolean
@@ -78,8 +77,8 @@ export type User = {
     [key in AssetSymbol]: Omit<UserAssetBalance, 'inWallet'>
   }
   rewards: {
-    address: EthereumAddress
-    underlyingAsset: EthereumAddress
+    address: string
+    underlyingAsset: string
     unclaimedBalance: BigNumber
   }
 }

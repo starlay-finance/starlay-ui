@@ -13,7 +13,7 @@ import type * as ArgumentTypes from '../types-arguments/psp22_token'
 import type * as ReturnTypes from '../types-returns/psp22_token'
 //@ts-ignore
 import { ReturnNumber } from '@727-ventures/typechain-types'
-import { getTypeDescription } from '../shared/utils'
+import TYPE_DESCRIPTIONS from '../data/psp22_token.json'
 
 export default class Methods {
   private __nativeContract: ContractPromise
@@ -54,7 +54,7 @@ export default class Methods {
       [account, amount],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(9, 'psp22_token'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[9])
       },
     )
   }
@@ -85,7 +85,7 @@ export default class Methods {
       [to, value, data],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(9, 'psp22_token'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[9])
       },
     )
   }
@@ -114,7 +114,7 @@ export default class Methods {
       [spender, value],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(9, 'psp22_token'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[9])
       },
     )
   }
@@ -139,7 +139,7 @@ export default class Methods {
       [owner, spender],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(12, 'psp22_token'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[12])
       },
     )
   }
@@ -160,7 +160,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(12, 'psp22_token'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[12])
       },
     )
   }
@@ -189,7 +189,7 @@ export default class Methods {
       [spender, deltaValue],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(9, 'psp22_token'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[9])
       },
     )
   }
@@ -222,7 +222,7 @@ export default class Methods {
       [from, to, value, data],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(9, 'psp22_token'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[9])
       },
     )
   }
@@ -245,7 +245,7 @@ export default class Methods {
       [owner],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(12, 'psp22_token'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[12])
       },
     )
   }
@@ -274,7 +274,7 @@ export default class Methods {
       [spender, deltaValue],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(9, 'psp22_token'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[9])
       },
     )
   }
@@ -297,7 +297,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(13, 'psp22_token'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[13])
       },
     )
   }
@@ -320,7 +320,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(13, 'psp22_token'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[13])
       },
     )
   }
@@ -341,7 +341,7 @@ export default class Methods {
       [],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(14, 'psp22_token'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[14])
       },
     )
   }

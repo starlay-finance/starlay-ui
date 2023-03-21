@@ -2,6 +2,10 @@ import { ApiPromise, HttpProvider, WsProvider } from '@polkadot/api'
 import { getNetworkConfigPokadot } from '../config'
 import { PolkadotChainId } from '../config/network'
 
+export type StaticRPCProviderPolkadot = {
+  chainId: PolkadotChainId
+  provider: ApiPromise
+}
 export const getProviderWs = (chainId: PolkadotChainId) =>
   ApiPromise.create({
     provider: new WsProvider(

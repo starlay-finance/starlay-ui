@@ -1,23 +1,36 @@
 import { SubmittableExtrinsic } from '@polkadot/api/types'
-import { FC, useCallback } from 'react'
+import { waitReady } from '@polkadot/wasm-crypto'
+import { FC, useCallback, useEffect, useState } from 'react'
 import { ModalPortal } from 'src/hooks/useModal'
 import { usePolkadotWallet } from 'src/hooks/usePolkadotWallet'
 import { StarlayContext } from 'src/hooks/useStarlay'
 import { useStaticRPCProviderPolkadot } from 'src/hooks/useStaticRPCProviderPolkadot'
+import { getNetworkConfigPokadot } from 'src/libs/config'
+import { DataProviderPolkadot } from 'src/libs/data-provider-polkadot'
 import { LendingPoolPolkadot } from 'src/libs/lending-pool-polkadot'
-import { LendingPool, TxItem } from 'src/types/starlay'
+import { DataProvider, LendingPool, TxItem } from 'src/types/starlay'
 import useSWRImmutable from 'swr/immutable'
 import { executeTx } from './utils'
 
 export const StarlayContextProviderPolkadot: FC<{
   children: JSX.Element
 }> = ({ children }) => {
+  const [isReady, setIsReady] = useState(false)
   const { data: provider } = useStaticRPCProviderPolkadot()
   const { account, signer } = usePolkadotWallet(true)
 
   const { data: lendingPool } = useSWRImmutable<LendingPool>(
-    provider && ['evm', 'lendingpool', provider.chainId],
+    isReady && provider && ['polkadot', 'lendingpool', provider.chainId],
     () => LendingPoolPolkadot.new({ api: provider!.provider }),
+  )
+
+  const { data: dataProvider } = useSWRImmutable<DataProvider>(
+    isReady && provider && ['polkadot', 'dataprovider', provider.chainId],
+    () =>
+      DataProviderPolkadot.new(
+        provider!,
+        getNetworkConfigPokadot(provider!.chainId).addresses.lens,
+      ),
   )
 
   const txExecutor = useCallback(
@@ -26,9 +39,13 @@ export const StarlayContextProviderPolkadot: FC<{
     [account, signer],
   )
 
+  useEffect(() => {
+    waitReady().then(() => setIsReady(true))
+  }, [])
   return (
     <StarlayContext.Provider
       value={{
+        dataProvider,
         lendingPool,
         txExecutor,
       }}

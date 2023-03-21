@@ -1,14 +1,17 @@
 import { TxItem, TxType } from 'src/types/starlay'
 
 type ContactBase = {
-	 query: any
-	 buildExtrinsic: any
-	 tx: any
-	 methods: any
-	 events: any
+  query: any
+  buildExtrinsic: any
+  tx: any
+  methods: any
+  events: any
 }
 
-export const buildUnsignedTx = async <C extends ContactBase, const F extends keyof C['tx']>(
+export const buildUnsignedTx = async <
+  C extends ContactBase,
+  F extends keyof C['tx'],
+>(
   contract: C,
   fn: F,
   args: Parameters<C['tx'][F]>,
@@ -19,4 +22,7 @@ export const buildUnsignedTx = async <C extends ContactBase, const F extends key
   return contract.buildExtrinsic[fn](...args, { gasLimit: gasRequired })
 }
 
-export const toTxItem = (type:TxType,tx: () =>Promise<any>): TxItem => ({type, tx})
+export const toTxItem = (type: TxType, tx: () => Promise<any>): TxItem => ({
+  type,
+  tx,
+})

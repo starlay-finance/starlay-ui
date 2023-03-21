@@ -11,7 +11,7 @@ import type { ContractPromise } from '@polkadot/api-contract'
 import type * as ArgumentTypes from '../types-arguments/lens'
 import type * as ReturnTypes from '../types-returns/lens'
 //@ts-ignore
-import { getTypeDescription } from '../shared/utils'
+import TYPE_DESCRIPTIONS from '../data/lens.json'
 
 export default class Methods {
   private __nativeContract: ContractPromise
@@ -48,7 +48,7 @@ export default class Methods {
       [pool],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(6, 'lens'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[6])
       },
     )
   }
@@ -75,7 +75,7 @@ export default class Methods {
       [pools],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(16, 'lens'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[16])
       },
     )
   }
@@ -102,7 +102,7 @@ export default class Methods {
       [pool, account],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(18, 'lens'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[18])
       },
     )
   }
@@ -131,7 +131,7 @@ export default class Methods {
       [pools, account],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(20, 'lens'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[20])
       },
     )
   }
@@ -158,7 +158,7 @@ export default class Methods {
       [pool],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(22, 'lens'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[22])
       },
     )
   }
@@ -185,7 +185,7 @@ export default class Methods {
       [pools],
       __options,
       (result) => {
-        return handleReturnType(result, getTypeDescription(24, 'lens'))
+        return handleReturnType(result, TYPE_DESCRIPTIONS[24])
       },
     )
   }
