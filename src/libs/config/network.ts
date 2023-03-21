@@ -1,12 +1,18 @@
 import { AssetSymbol } from 'src/types/models'
-import { EthereumAddress } from 'src/types/web3'
+import { EthereumAddress, PolkadotAddress } from 'src/types/web3'
 import { ValueOf } from 'type-fest'
 
 export const EVM_CHAIN_ID = {
   astar: 592,
 } as const
-
 export type EVMChainId = ValueOf<typeof EVM_CHAIN_ID>
+
+export const POLKADOT_CHAIN_ID = {
+  // astar: "Astar",
+  // shibuya: 'Shibuya Testnet',
+  local: 'Development',
+} as const
+export type PolkadotChainId = ValueOf<typeof POLKADOT_CHAIN_ID>
 
 export const isSupportedChain = (arg: any): arg is EVMChainId =>
   Object.values(EVM_CHAIN_ID).includes(arg)
@@ -114,6 +120,42 @@ export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
     },
     arthswapDataProvider: {
       endpoint: 'https://arthswap-graphql.starlay.finance/api/graphql',
+    },
+    explorerLinks: ['https://blockscout.com/astar'],
+  },
+}
+
+export type PolkadotNetworkConfig = NetworkConfig<
+  PolkadotAddress,
+  // | 'walletBalanceProvider'
+  'uiPoolDataProvider'
+  // | 'priceAggregatorAdapterAddress'
+  // | 'multicallAddress'
+>
+
+export const POLKADOT_NETWORK_CONFIG: Record<
+  PolkadotChainId,
+  PolkadotNetworkConfig
+> = {
+  [POLKADOT_CHAIN_ID.local]: {
+    name: 'Development',
+    publicJsonRPCUrl: ['ws://127.0.0.1:9933'],
+    publicJsonRPCWSUrl: 'ws://127.0.0.1:9944',
+    addresses: {
+      // TODO
+      uiPoolDataProvider: '0x97Fc9e6aFB9d7A9C9898a2b6F97Da43EB5f56331',
+    },
+    baseAsset: {
+      symbol: 'ASTR',
+      // TODO
+      wrapperAddress: '0xAeaaf0e2c81Af264101B9129C00F4440cCF0F720',
+    },
+    // TODO
+    rewardToken: {
+      symbol: 'stkLAY',
+      address: '0x6FD65f71B3FB5Aa9d794f010AFc65F174012994F',
+      underlyingAsset: '0xc4335B1b76fA6d52877b3046ECA68F6E708a27dd',
+      decimals: 18,
     },
     explorerLinks: ['https://blockscout.com/astar'],
   },

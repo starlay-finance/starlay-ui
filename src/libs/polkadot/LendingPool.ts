@@ -19,7 +19,7 @@ export class LendingPool extends PolkadotContractBase<Contract> {
     super(Contract, api, address, signer)
   }
 
-  deposit = async (
+  mint = async (
     params: {
       amount: BigNumber
       asset: PolkadotAddress
@@ -34,6 +34,45 @@ export class LendingPool extends PolkadotContractBase<Contract> {
     )
     const tx = () => buildUnsignedTx(this.contract, 'mint', [amountBN])
     return [approvalTxItem, toTxItem('Pool', tx)].filter(filterFalsy)
+  }
+
+  redeem = async (
+    params: {
+      amount: BigNumber
+      asset: PolkadotAddress
+    },
+    _with: { address: PolkadotAddress },
+  ): Promise<TxItem[]> => {
+    this.with(_with)
+    const amountBN = new BN(params.amount.toString())
+    const tx = () => buildUnsignedTx(this.contract, 'redeem', [amountBN])
+    return [toTxItem('Pool', tx)]
+  }
+
+  borrow = async (
+    params: {
+      amount: BigNumber
+      asset: PolkadotAddress
+    },
+    _with: { address: PolkadotAddress },
+  ): Promise<TxItem[]> => {
+    this.with(_with)
+    const amountBN = new BN(params.amount.toString())
+    const tx = () => buildUnsignedTx(this.contract, 'borrow', [amountBN])
+    return [toTxItem('Pool', tx)]
+  }
+
+  repayBorrow = async (
+    params: {
+      amount: BigNumber
+      asset: PolkadotAddress
+    },
+    _with: { address: PolkadotAddress },
+  ): Promise<TxItem[]> => {
+    this.with(_with)
+    const amountBN = new BN(params.amount.toString())
+    const tx = () => buildUnsignedTx(this.contract, 'repayBorrow', [amountBN])
+    return [toTxItem('Pool', tx)]
   }
 
   token = (address: PolkadotAddress) =>
