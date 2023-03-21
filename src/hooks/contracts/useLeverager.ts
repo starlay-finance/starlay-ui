@@ -7,11 +7,11 @@ import { EthereumAddress } from 'src/types/web3'
 import { equals } from 'src/utils/address'
 import useSWRImmutable from 'swr/immutable'
 import { useEVMWallet } from '../useEVMWallet'
-import { useStaticRPCProvider } from '../useStaticRPCProvider'
+import { useStaticRPCProviderEVM } from '../useStaticRPCProviderEVM'
 import { useTxHandler } from './txHandler'
 
 export const useLeverager = () => {
-  const { data: provider } = useStaticRPCProvider()
+  const { data: provider } = useStaticRPCProviderEVM()
   const { account, signer } = useEVMWallet()
   const { data: leverager } = useSWRImmutable(
     provider && ['leverager', provider.chainId],

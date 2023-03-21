@@ -1,6 +1,11 @@
 import { ethers } from 'ethers'
 import { EVMChainId, getNetworkConfig } from 'src/libs/config'
 
+export type StaticRPCProviderEVM = {
+  chainId: EVMChainId
+  provider: ethers.providers.Provider
+}
+
 export const getProvider = (chainId: EVMChainId): ethers.providers.Provider => {
   const config = getNetworkConfig(chainId)
   if (config.privateJsonRPCUrl) {

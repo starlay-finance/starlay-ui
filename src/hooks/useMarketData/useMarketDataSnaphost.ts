@@ -1,4 +1,3 @@
-import { useStaticRPCProvider } from 'src/hooks/useStaticRPCProvider'
 import { EVMChainId } from 'src/libs/config'
 import { MarketDataRawEVM } from 'src/libs/data-provider'
 import { toAssetMarketData } from 'src/libs/data-provider/utils'
@@ -7,9 +6,10 @@ import { MarketData } from 'src/types/models'
 import { onlyListed } from 'src/utils/assets'
 import { utcStartOfDate } from 'src/utils/date'
 import useSWRImmutable from 'swr/immutable'
+import { useStaticRPCProviderEVM } from '../useStaticRPCProviderEVM'
 
 export const useMarketDataSnapshot = () => {
-  const { data } = useStaticRPCProvider()
+  const { data } = useStaticRPCProviderEVM()
   return useSWRImmutable(
     () => data && ['marketdatasnapshot', data?.chainId],
     ([_key, chainId]) => getMarketDataSnapshot(chainId),

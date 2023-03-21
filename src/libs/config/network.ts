@@ -10,37 +10,27 @@ export type EVMChainId = ValueOf<typeof EVM_CHAIN_ID>
 
 export const isSupportedChain = (arg: any): arg is EVMChainId =>
   Object.values(EVM_CHAIN_ID).includes(arg)
+export const supportedChainOr = (arg: any, _default: EVMChainId): EVMChainId =>
+  isSupportedChain(arg) ? arg : _default
 
-export type EVMNetworkConfig = {
+export type NetworkConfig<ADDRESS extends string, C extends string> = {
   name: string
   privateJsonRPCUrl?: string
   privateJsonRPCWSUrl?: string
   publicJsonRPCUrl: string[]
   publicJsonRPCWSUrl?: string
-  addresses: {
-    walletBalanceProvider: EthereumAddress
-    uiPoolDataProvider: EthereumAddress
-    uiIncentiveDataProvider: EthereumAddress
-    stakeUiHelper: EthereumAddress
-    priceAggregatorAdapterAddress: EthereumAddress
-    voterAddress: EthereumAddress
-    votingEscrowAddress: EthereumAddress
-    claimerAddress: EthereumAddress
-    idoVestingAddress: EthereumAddress
-    tokenSaleVestingAddress: EthereumAddress
-    multicallAddress: EthereumAddress
-  }
+  addresses: Record<C, ADDRESS>
   protocolDataUrl?: string
   cachingServerUrl?: string
   cachingWSServerUrl?: string
   baseAsset: {
     symbol: AssetSymbol
-    wrapperAddress: EthereumAddress
+    wrapperAddress: ADDRESS
   }
   rewardToken: {
     symbol: string
-    address: EthereumAddress
-    underlyingAsset: EthereumAddress
+    address: ADDRESS
+    underlyingAsset: ADDRESS
     decimals: number
   }
   snapshotProvider?: {
@@ -63,7 +53,22 @@ export type EVMNetworkConfig = {
   isTestnet?: boolean
 }
 
-export const NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
+export type EVMNetworkConfig = NetworkConfig<
+  EthereumAddress,
+  | 'walletBalanceProvider'
+  | 'uiPoolDataProvider'
+  | 'uiIncentiveDataProvider'
+  | 'stakeUiHelper'
+  | 'priceAggregatorAdapterAddress'
+  | 'voterAddress'
+  | 'votingEscrowAddress'
+  | 'claimerAddress'
+  | 'idoVestingAddress'
+  | 'tokenSaleVestingAddress'
+  | 'multicallAddress'
+>
+
+export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
   [EVM_CHAIN_ID.astar]: {
     name: 'Astar Network',
     publicJsonRPCUrl: ['https://astar.public.blastapi.io'],

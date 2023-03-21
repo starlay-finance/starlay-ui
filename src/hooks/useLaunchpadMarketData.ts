@@ -2,7 +2,6 @@ import dayjs, { Dayjs } from 'dayjs'
 import { useEffect } from 'react'
 import { useLaunchpadContext } from 'src/components/screens/Launchpad/LaunchpadContext'
 import { Market, PriceChartData } from 'src/components/screens/Launchpad/types'
-import { useStaticRPCProvider } from 'src/hooks/useStaticRPCProvider'
 import { EVMChainId } from 'src/libs/config'
 import {
   getCurrentPrice,
@@ -11,6 +10,7 @@ import {
 import { getCurrentStats } from 'src/libs/launchpad-stats-provider'
 import { EthereumAddress } from 'src/types/web3'
 import useSWRImmutable from 'swr/immutable'
+import { useStaticRPCProviderEVM } from './useStaticRPCProviderEVM'
 
 const INTERVAL = 60000
 
@@ -23,7 +23,7 @@ export const useLaunchpadMarketData = ({
   saleStart: Dayjs
   saleEnd: Dayjs
 }) => {
-  const { data: provider } = useStaticRPCProvider()
+  const { data: provider } = useStaticRPCProviderEVM()
   const context = useLaunchpadContext()
   const launchpadAddress = params?.launchpadAddress || context.launchpadAddress
   const { data, mutate } = useSWRImmutable(

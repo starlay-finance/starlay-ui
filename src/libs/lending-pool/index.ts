@@ -7,8 +7,8 @@ import {
 import { LendingPool, TxItem, TxType } from 'src/types/starlay'
 import { equals } from 'src/utils/address'
 import { EVMChainId, getMarketConfig, getNetworkConfig } from '../config'
-import { StaticRPCProvider } from '../pool-data-provider'
 import { BASE_ASSET_DUMMY_ADDRESS } from '../pool-data-provider/converters/constants'
+import { StaticRPCProviderEVM } from '../static-rpc-provider'
 
 export class LendingPoolEVM implements LendingPool {
   constructor(
@@ -16,7 +16,7 @@ export class LendingPoolEVM implements LendingPool {
     private chainId: EVMChainId,
   ) {}
 
-  static new = ({ chainId, provider }: StaticRPCProvider) =>
+  static new = ({ chainId, provider }: StaticRPCProviderEVM) =>
     new LendingPoolEVM(
       new LendingPoolContract(provider, getMarketConfig(chainId).addresses),
       chainId,

@@ -4,7 +4,7 @@ import { FC, useEffect, useState } from 'react'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useRecentGasPrice } from 'src/hooks/useRecentGasPrice'
-import { useStaticRPCProvider } from 'src/hooks/useStaticRPCProvider'
+import { useStaticRPCProviderEVM } from 'src/hooks/useStaticRPCProviderEVM'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { getNetworkConfig } from 'src/libs/config'
 import { DEFAULT_CHAIN_ID } from 'src/utils/env'
@@ -17,7 +17,7 @@ import {
 import { GasSettingsModalBody } from './Body'
 
 export const GasSettings: FC<ModalContentProps> = ({ close }) => {
-  const { data } = useStaticRPCProvider()
+  const { data } = useStaticRPCProviderEVM()
   const { baseAsset } = getNetworkConfig(data?.chainId || DEFAULT_CHAIN_ID)
   const { data: balance } = useWalletBalance()
   const multiplier = getGasPriceMultiplier()

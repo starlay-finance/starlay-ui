@@ -5,7 +5,7 @@ import { useEVMWallet } from 'src/hooks/useEVMWallet'
 import { ModalPortal } from 'src/hooks/useModal'
 import { useRecentGasPrice } from 'src/hooks/useRecentGasPrice'
 import { StarlayContext } from 'src/hooks/useStarlay'
-import { useStaticRPCProvider } from 'src/hooks/useStaticRPCProvider'
+import { useStaticRPCProviderEVM } from 'src/hooks/useStaticRPCProviderEVM'
 import { DataProviderEVM } from 'src/libs/data-provider'
 import { LendingPoolEVM } from 'src/libs/lending-pool'
 import { getLibrary } from 'src/libs/wallet-provider-evm'
@@ -25,7 +25,7 @@ const withWeb3ReactProvider =
 export const StarlayContextProviderEVM: FC<{
   children: JSX.Element
 }> = withWeb3ReactProvider(({ children }) => {
-  const { data: provider } = useStaticRPCProvider()
+  const { data: provider } = useStaticRPCProviderEVM()
   const { signer } = useEVMWallet()
 
   const { getRecentGasPrice } = useRecentGasPrice()

@@ -4,23 +4,23 @@ import {
 } from '@starlay-finance/contract-helpers'
 import {
   BigNumber,
+  WEI_DECIMALS,
   normalizeBN,
   valueToBigNumber,
-  WEI_DECIMALS,
 } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
 import { ethers } from 'ethers'
 import { getNetworkConfig } from 'src/libs/config'
-import { StaticRPCProvider } from 'src/libs/pool-data-provider'
+import { StaticRPCProviderEVM } from 'src/libs/static-rpc-provider'
 import { voterContract } from 'src/libs/voter'
 import useSWRImmutable from 'swr/immutable'
 import { useEVMWallet } from '../useEVMWallet'
-import { useStaticRPCProvider } from '../useStaticRPCProvider'
+import { useStaticRPCProviderEVM } from '../useStaticRPCProviderEVM'
 import { useTxHandler } from './txHandler'
 import { TERM_UNIT, useVotingEscrow } from './useVotingEscrow'
 
 export const useVoter = (offset = 0) => {
-  const { data: provider } = useStaticRPCProvider()
+  const { data: provider } = useStaticRPCProviderEVM()
   const { account, signer } = useEVMWallet()
   const { term, userData: userLockData } = useVotingEscrow(offset)
   const { data: voter } = useSWRImmutable(
@@ -103,7 +103,7 @@ export const useVoter = (offset = 0) => {
   return { data, userData, vote, poke, claim }
 }
 
-const init = async (provider: StaticRPCProvider) => {
+const init = async (provider: StaticRPCProviderEVM) => {
   const { addresses } = getNetworkConfig(provider.chainId)
   return voterContract(
     provider!,

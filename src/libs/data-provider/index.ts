@@ -11,13 +11,13 @@ import { onlyListed } from 'src/utils/assets'
 import { BN_ZERO } from 'src/utils/number'
 import { EVMChainId, getNetworkConfig } from '../config'
 import {
-  getPoolDataProvider,
   PoolDataProviderInterface,
-  StaticRPCProvider,
+  getPoolDataProvider,
 } from '../pool-data-provider'
+import { StaticRPCProviderEVM } from '../static-rpc-provider'
 import {
-  walletBalanceProviderContract,
   WalletBalanceProviderInterface,
+  walletBalanceProviderContract,
 } from '../wallet-balance-provider'
 import { toAssetMarketData, toUser, toWalletBalance } from './utils'
 
@@ -34,7 +34,7 @@ export class DataProviderEVM implements DataProvider<MarketDataRawEVM> {
     private walletBalanceProvider: WalletBalanceProviderInterface,
   ) {}
 
-  static new = (provider: StaticRPCProvider) =>
+  static new = (provider: StaticRPCProviderEVM) =>
     new DataProviderEVM(
       provider.chainId,
       getPoolDataProvider(provider).provider,

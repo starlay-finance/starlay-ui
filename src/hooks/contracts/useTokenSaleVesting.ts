@@ -4,23 +4,23 @@ import {
 } from '@starlay-finance/contract-helpers'
 import {
   BigNumber,
-  normalizeBN,
   WEI_DECIMALS,
+  normalizeBN,
 } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
 import { ethers } from 'ethers'
 import { getNetworkConfig } from 'src/libs/config'
-import { StaticRPCProvider } from 'src/libs/pool-data-provider'
+import { StaticRPCProviderEVM } from 'src/libs/static-rpc-provider'
 import { tokenSaleVestingContract } from 'src/libs/token-sale-vesting'
 import useSWRImmutable from 'swr/immutable'
 import { useEVMWallet } from '../useEVMWallet'
-import { useStaticRPCProvider } from '../useStaticRPCProvider'
+import { useStaticRPCProviderEVM } from '../useStaticRPCProviderEVM'
 import { useTxHandler } from './txHandler'
 import { useVotingEscrow } from './useVotingEscrow'
 
 type TokenSaleType = 'ido' | 'tokenSale'
 export const useTokenSaleVesting = () => {
-  const { data: provider } = useStaticRPCProvider()
+  const { data: provider } = useStaticRPCProviderEVM()
   const { account, signer } = useEVMWallet()
   const { userData: userLockData, mutate: mutateVe } = useVotingEscrow()
 
@@ -71,7 +71,7 @@ export const useTokenSaleVesting = () => {
   return { userData, lock }
 }
 
-const init = async (provider: StaticRPCProvider) => {
+const init = async (provider: StaticRPCProviderEVM) => {
   const { addresses, rewardToken } = getNetworkConfig(provider.chainId)
   const ido = tokenSaleVestingContract(
     provider!,

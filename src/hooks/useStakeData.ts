@@ -9,7 +9,7 @@ import { BN_ZERO } from 'src/utils/number'
 import useSWR from 'swr'
 import useSWRImmutable from 'swr/immutable'
 import { useEVMWallet } from './useEVMWallet'
-import { useStaticRPCProvider } from './useStaticRPCProvider'
+import { useStaticRPCProviderEVM } from './useStaticRPCProviderEVM'
 
 const EMPTY_STAKE_DATA: StakeData = {
   userIncentivesToClaim: BN_ZERO,
@@ -27,7 +27,7 @@ export const useStakeData = () => {
 }
 
 const useStakeUiHelper = () => {
-  const { data: provider } = useStaticRPCProvider()
+  const { data: provider } = useStaticRPCProviderEVM()
   return useSWRImmutable(
     provider && ['stakeuihelper', provider.chainId],
     () => ({

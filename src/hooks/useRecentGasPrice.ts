@@ -1,12 +1,12 @@
 import { BigNumber } from 'ethers'
 import { useCallback } from 'react'
 import { useBlockNumber } from './useBlockNumber'
-import { useStaticRPCProvider } from './useStaticRPCProvider'
+import { useStaticRPCProviderEVM } from './useStaticRPCProviderEVM'
 
 const DEFAULT_GAS_PRICE = BigNumber.from('1000000000')
 
 export const useRecentGasPrice = () => {
-  const { data: provider } = useStaticRPCProvider()
+  const { data: provider } = useStaticRPCProviderEVM()
   const blockNumber = useBlockNumber()
   const getRecentGasPrice = useCallback(async () => {
     if (!provider || !blockNumber) return DEFAULT_GAS_PRICE

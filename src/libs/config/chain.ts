@@ -1,5 +1,5 @@
 import { BigNumber } from 'ethers'
-import { EVMChainId, EVM_CHAIN_ID, NETWORK_CONFIG } from './network'
+import { EVMChainId, EVM_CHAIN_ID, EVM_NETWORK_CONFIG } from './network'
 
 export const getEVMChainInfo = (chainId: number) =>
   // @ts-expect-error
@@ -11,13 +11,13 @@ const toChainIdHex = (chainId: number) =>
 const CHIAN_INFO: Record<EVMChainId, AddEthereumChainParameter> = {
   [EVM_CHAIN_ID.astar]: {
     chainId: toChainIdHex(EVM_CHAIN_ID.astar),
-    chainName: NETWORK_CONFIG[EVM_CHAIN_ID.astar].name,
+    chainName: EVM_NETWORK_CONFIG[EVM_CHAIN_ID.astar].name,
     nativeCurrency: {
       name: 'Astar',
-      symbol: NETWORK_CONFIG[EVM_CHAIN_ID.astar].baseAsset.symbol,
+      symbol: EVM_NETWORK_CONFIG[EVM_CHAIN_ID.astar].baseAsset.symbol,
       decimals: 18,
     },
-    rpcUrls: [...NETWORK_CONFIG[EVM_CHAIN_ID.astar].publicJsonRPCUrl],
-    blockExplorerUrls: NETWORK_CONFIG[EVM_CHAIN_ID.astar].explorerLinks,
+    rpcUrls: [...EVM_NETWORK_CONFIG[EVM_CHAIN_ID.astar].publicJsonRPCUrl],
+    blockExplorerUrls: EVM_NETWORK_CONFIG[EVM_CHAIN_ID.astar].explorerLinks,
   },
 }
