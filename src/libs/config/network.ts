@@ -125,13 +125,7 @@ export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
   },
 }
 
-export type PolkadotNetworkConfig = NetworkConfig<
-  PolkadotAddress,
-  // | 'walletBalanceProvider'
-  'uiPoolDataProvider'
-  // | 'priceAggregatorAdapterAddress'
-  // | 'multicallAddress'
->
+export type PolkadotNetworkConfig = NetworkConfig<PolkadotAddress, 'lens'>
 
 export const POLKADOT_NETWORK_CONFIG: Record<
   PolkadotChainId,
@@ -139,23 +133,20 @@ export const POLKADOT_NETWORK_CONFIG: Record<
 > = {
   [POLKADOT_CHAIN_ID.local]: {
     name: 'Development',
-    publicJsonRPCUrl: ['ws://127.0.0.1:9933'],
+    publicJsonRPCUrl: ['http://127.0.0.1:9933'],
     publicJsonRPCWSUrl: 'ws://127.0.0.1:9944',
     addresses: {
-      // TODO
-      uiPoolDataProvider: '0x97Fc9e6aFB9d7A9C9898a2b6F97Da43EB5f56331',
+      lens: '5GzoxgGTdjRdnwHd9HgMABhkqEcHwHd8NRTZrNQPF3QdNYp9',
     },
     baseAsset: {
       symbol: 'ASTR',
-      // TODO
-      wrapperAddress: '0xAeaaf0e2c81Af264101B9129C00F4440cCF0F720',
+      wrapperAddress: '',
     },
-    // TODO
     rewardToken: {
-      symbol: 'stkLAY',
-      address: '0x6FD65f71B3FB5Aa9d794f010AFc65F174012994F',
-      underlyingAsset: '0xc4335B1b76fA6d52877b3046ECA68F6E708a27dd',
-      decimals: 18,
+      symbol: '',
+      address: '',
+      underlyingAsset: '',
+      decimals: 0,
     },
     explorerLinks: ['https://blockscout.com/astar'],
   },

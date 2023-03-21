@@ -29,6 +29,7 @@ export const GOVERNANCE = ''
 export const GOVERNANCE_OVERVIEW = ''
 export const BUG_BOUNTY = ''
 export const SUPPORT = DISCORD
+export const POLKADOT_PREFIX = '/wasm'
 
 export const toLaunchpad = (token: string) => `${LAUNCHPAD}/${token}`
 export const toMakaiLoop = (symbol: string) => `${MAKAI}?asset=${symbol}`

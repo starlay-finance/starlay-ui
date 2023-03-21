@@ -1,9 +1,11 @@
 import { ApiPromise, Keyring } from '@polkadot/api'
 import { KeyringPair } from '@polkadot/keyring/types'
+import { waitReady } from '@polkadot/wasm-crypto'
 import { PolkadotAddress } from 'src/types/web3'
 
 const keyring = new Keyring({ type: 'sr25519' })
-const dummySigner = keyring.addFromUri('//Alice')
+let dummySigner: KeyringPair
+waitReady().then(() => (dummySigner = keyring.addFromUri('//Alice')))
 
 export type Contract<T> = {
   new (address: string, signer: KeyringPair, nativeAPI: ApiPromise): T
