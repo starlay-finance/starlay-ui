@@ -71,19 +71,6 @@ export const Market = asStyled(({ className }) => {
   }
 
   const borrow = (user: User, asset: AssetMarketData) => {
-    // const arthswapPair = arthswapData
-    //   ?.filter(
-    //     (each) =>
-    //       each.symbols.includes(asset.displaySymbol || asset.symbol) &&
-    //       each.symbols.every((each) => !!ARTHSWAP_ASSETS_DICT[each]),
-    //   )
-    //   .sort(aprSorter)[0]
-
-    // if (arthswapPair)
-    //   arthswapPair.symbols = arthswapPair.symbols.map((e) =>
-    //     e === asset.displaySymbol ? asset.symbol : e,
-    //   ) as [string, string]
-
     openBorrowModal({
       asset,
       userSummary: user.summary,
@@ -97,7 +84,6 @@ export const Market = asStyled(({ className }) => {
         openSuggestModal({
           asset,
           inWallet: balance[asset.symbol],
-          // arthswapPair,
           openDeposit: () => deposit(user, asset),
           openMakai: () => router.push(toMakaiLoop(asset.symbol)),
         }),
