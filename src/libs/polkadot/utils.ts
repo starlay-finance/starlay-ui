@@ -1,11 +1,14 @@
-import { TxItem, TxType } from "./types"
+import { TxItem, TxType } from 'src/types/starlay'
 
 type ContactBase = {
-  query: any
-  tx: any
+	 query: any
+	 buildExtrinsic: any
+	 tx: any
+	 methods: any
+	 events: any
 }
 
-export const sendTxWithEstimate = async <C extends ContactBase, const F extends keyof C["tx"]>(
+export const buildUnsignedTx = async <C extends ContactBase, const F extends keyof C['tx']>(
   contract: C,
   fn: F,
   args: Parameters<C['tx'][F]>,
@@ -13,11 +16,7 @@ export const sendTxWithEstimate = async <C extends ContactBase, const F extends 
   const { gasRequired, value } = await contract.query[fn](...args)
   // TODO handle error
   if (value.err) return Promise.reject()
-  const res = await contract.tx[fn](...args, {
-    gasLimit: gasRequired,
-  })
-  // TODO handle error
-  if (res.result?.isError) return Promise.reject()
+  return contract.buildExtrinsic[fn](...args, { gasLimit: gasRequired })
 }
 
 export const toTxItem = (type:TxType,tx: () =>Promise<any>): TxItem => ({type, tx})

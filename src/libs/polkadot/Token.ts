@@ -1,18 +1,16 @@
 import { ApiPromise } from '@polkadot/api'
 import { KeyringPair } from '@polkadot/keyring/types'
 import BN from 'bn.js'
+import { TxItem } from 'src/types/starlay'
 import { PolkadotAddress } from 'src/types/web3'
 import { PolkadotContractBase } from './ContractBase'
 import Contract from './__generated__/contracts/psp22_token'
-import { TxItem } from './types'
-import { sendTxWithEstimate } from './utils'
+import { buildUnsignedTx } from './utils'
 
 export class Token extends PolkadotContractBase<Contract> {
   constructor(api: ApiPromise, address: PolkadotAddress, signer: KeyringPair) {
-    super(api, address, signer)
+    super(Contract, api, address, signer)
   }
-
-  new = () => new Contract(this.address!, this.signer!, this.api)
 
   approveIfNeeded = async (
     pool: PolkadotAddress,
@@ -25,7 +23,7 @@ export class Token extends PolkadotContractBase<Contract> {
     if (!allowance || allowance.rawNumber.lt(amount))
       return {
         type: 'Approval',
-        tx: () => sendTxWithEstimate(contract, 'approve', [pool, amount]),
+        tx: () => buildUnsignedTx(contract, 'approve', [pool, amount]),
       }
   }
 }

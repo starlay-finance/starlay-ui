@@ -2,12 +2,13 @@ import { ApiPromise } from '@polkadot/api'
 import { KeyringPair } from '@polkadot/keyring/types'
 import { BigNumber } from '@starlay-finance/math-utils'
 import BN from 'bn.js'
+import { TxItem } from 'src/types/starlay'
 import { PolkadotAddress } from 'src/types/web3'
+import { filterFalsy } from 'src/utils/array'
 import { PolkadotContractBase } from './ContractBase'
 import { Token } from './Token'
 import Contract from './__generated__/contracts/pool'
-import { TxItem } from './types'
-import { sendTxWithEstimate, toTxItem } from './utils'
+import { buildUnsignedTx, toTxItem } from './utils'
 
 export class LendingPool extends PolkadotContractBase<Contract> {
   constructor(
@@ -15,25 +16,24 @@ export class LendingPool extends PolkadotContractBase<Contract> {
     address?: PolkadotAddress,
     signer?: KeyringPair,
   ) {
-    super(api, address, signer)
+    super(Contract, api, address, signer)
   }
-
-  new = () => new Contract(this.address!, this.signer!, this.api)
 
   deposit = async (
     params: {
       amount: BigNumber
-      underlyingAsset: PolkadotAddress
+      asset: PolkadotAddress
     },
-    _with: { address: PolkadotAddress; signer: KeyringPair },
-  ): Promise<(TxItem | undefined)[]> => {
+    _with: { address: PolkadotAddress },
+  ): Promise<TxItem[]> => {
     this.with(_with)
     const amountBN = new BN(params.amount.toString())
-    const approvalTxItem = await this.token(
-      params.underlyingAsset,
-    ).approveIfNeeded(_with.address, amountBN)
-    const tx = () => sendTxWithEstimate(this.contract, 'mint', [amountBN])
-    return [approvalTxItem, toTxItem('Pool', tx)]
+    const approvalTxItem = await this.token(params.asset).approveIfNeeded(
+      _with.address,
+      amountBN,
+    )
+    const tx = () => buildUnsignedTx(this.contract, 'mint', [amountBN])
+    return [approvalTxItem, toTxItem('Pool', tx)].filter(filterFalsy)
   }
 
   token = (address: PolkadotAddress) =>
