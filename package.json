@@ -10,6 +10,7 @@
     "test": "jest --watch",
     "test:once": "jest",
     "postinstall": "yarn i18n:extract && yarn i18n:compile",
+    "prebuild": "./prebuild.sh",
     "postbuild": "next-sitemap",
     "i18n:extract": "lingui extract",
     "i18n:compile": "lingui compile",
