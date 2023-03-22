@@ -1,6 +1,7 @@
 import type * as EventTypes from '../event-types/controller';
 import type {ContractPromise} from "@polkadot/api-contract";
 import type {ApiPromise} from "@polkadot/api";
+import EVENT_DATA_TYPE_DESCRIPTIONS from '../event-data/controller.json';
 import {getEventTypeDescription} from "../shared/utils";
 import {handleEventReturn} from "@727-ventures/typechain-types";
 
@@ -24,7 +25,7 @@ export default class EventsClass {
 				_event[event.args[i]!.name] = args[i]!.toJSON();
 			}
 
-			callback(handleEventReturn(_event, getEventTypeDescription('MarketListed', 'controller')) as EventTypes.MarketListed);
+			callback(handleEventReturn(_event, getEventTypeDescription('MarketListed', EVENT_DATA_TYPE_DESCRIPTIONS)) as EventTypes.MarketListed);
 		};
 
 		return this.__subscribeOnEvent(callbackWrapper, (eventName : string) => eventName == 'MarketListed');

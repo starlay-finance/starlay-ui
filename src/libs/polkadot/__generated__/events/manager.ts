@@ -1,6 +1,7 @@
 import type * as EventTypes from '../event-types/manager';
 import type {ContractPromise} from "@polkadot/api-contract";
 import type {ApiPromise} from "@polkadot/api";
+import EVENT_DATA_TYPE_DESCRIPTIONS from '../event-data/manager.json';
 import {getEventTypeDescription} from "../shared/utils";
 import {handleEventReturn} from "@727-ventures/typechain-types";
 
@@ -24,7 +25,7 @@ export default class EventsClass {
 				_event[event.args[i]!.name] = args[i]!.toJSON();
 			}
 
-			callback(handleEventReturn(_event, getEventTypeDescription('RoleAdminChanged', 'manager')) as EventTypes.RoleAdminChanged);
+			callback(handleEventReturn(_event, getEventTypeDescription('RoleAdminChanged', EVENT_DATA_TYPE_DESCRIPTIONS)) as EventTypes.RoleAdminChanged);
 		};
 
 		return this.__subscribeOnEvent(callbackWrapper, (eventName : string) => eventName == 'RoleAdminChanged');
@@ -38,7 +39,7 @@ export default class EventsClass {
 				_event[event.args[i]!.name] = args[i]!.toJSON();
 			}
 
-			callback(handleEventReturn(_event, getEventTypeDescription('RoleGranted', 'manager')) as EventTypes.RoleGranted);
+			callback(handleEventReturn(_event, getEventTypeDescription('RoleGranted', EVENT_DATA_TYPE_DESCRIPTIONS)) as EventTypes.RoleGranted);
 		};
 
 		return this.__subscribeOnEvent(callbackWrapper, (eventName : string) => eventName == 'RoleGranted');
@@ -52,7 +53,7 @@ export default class EventsClass {
 				_event[event.args[i]!.name] = args[i]!.toJSON();
 			}
 
-			callback(handleEventReturn(_event, getEventTypeDescription('RoleRevoked', 'manager')) as EventTypes.RoleRevoked);
+			callback(handleEventReturn(_event, getEventTypeDescription('RoleRevoked', EVENT_DATA_TYPE_DESCRIPTIONS)) as EventTypes.RoleRevoked);
 		};
 
 		return this.__subscribeOnEvent(callbackWrapper, (eventName : string) => eventName == 'RoleRevoked');

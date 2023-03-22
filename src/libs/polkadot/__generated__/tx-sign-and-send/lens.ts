@@ -10,6 +10,7 @@ import type BN from 'bn.js';
 // @ts-ignore
 import type {EventRecord} from "@polkadot/api/submittable";
 import {decodeEvents} from "../shared/utils";
+import EVENT_DATA_TYPE_DESCRIPTIONS from '../event-data/lens.json';
 
 
 export default class Methods {
@@ -37,7 +38,7 @@ export default class Methods {
 		__options ? : GasLimit,
 	){
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "poolMetadata", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, "lens");
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [pool], __options);
 	}
 
@@ -51,7 +52,7 @@ export default class Methods {
 		__options ? : GasLimit,
 	){
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "poolMetadataAll", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, "lens");
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [pools], __options);
 	}
 
@@ -67,7 +68,7 @@ export default class Methods {
 		__options ? : GasLimit,
 	){
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "poolBalances", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, "lens");
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [pool, account], __options);
 	}
 
@@ -83,7 +84,7 @@ export default class Methods {
 		__options ? : GasLimit,
 	){
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "poolBalancesAll", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, "lens");
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [pools, account], __options);
 	}
 
@@ -97,7 +98,7 @@ export default class Methods {
 		__options ? : GasLimit,
 	){
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "poolUnderlyingPrice", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, "lens");
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [pool], __options);
 	}
 
@@ -111,7 +112,7 @@ export default class Methods {
 		__options ? : GasLimit,
 	){
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "poolUnderlyingPriceAll", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, "lens");
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [pools], __options);
 	}
 

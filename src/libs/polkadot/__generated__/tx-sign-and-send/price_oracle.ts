@@ -10,6 +10,7 @@ import type BN from 'bn.js';
 // @ts-ignore
 import type {EventRecord} from "@polkadot/api/submittable";
 import {decodeEvents} from "../shared/utils";
+import EVENT_DATA_TYPE_DESCRIPTIONS from '../event-data/price_oracle.json';
 
 
 export default class Methods {
@@ -37,7 +38,7 @@ export default class Methods {
 		__options ? : GasLimit,
 	){
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "priceOracle::getPrice", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, "price_oracle");
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [asset], __options);
 	}
 

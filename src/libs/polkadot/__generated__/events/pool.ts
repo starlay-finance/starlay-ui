@@ -1,6 +1,7 @@
 import type * as EventTypes from '../event-types/pool';
 import type {ContractPromise} from "@polkadot/api-contract";
 import type {ApiPromise} from "@polkadot/api";
+import EVENT_DATA_TYPE_DESCRIPTIONS from '../event-data/pool.json';
 import {getEventTypeDescription} from "../shared/utils";
 import {handleEventReturn} from "@727-ventures/typechain-types";
 
@@ -24,7 +25,7 @@ export default class EventsClass {
 				_event[event.args[i]!.name] = args[i]!.toJSON();
 			}
 
-			callback(handleEventReturn(_event, getEventTypeDescription('Mint', 'pool')) as EventTypes.Mint);
+			callback(handleEventReturn(_event, getEventTypeDescription('Mint', EVENT_DATA_TYPE_DESCRIPTIONS)) as EventTypes.Mint);
 		};
 
 		return this.__subscribeOnEvent(callbackWrapper, (eventName : string) => eventName == 'Mint');
@@ -38,7 +39,7 @@ export default class EventsClass {
 				_event[event.args[i]!.name] = args[i]!.toJSON();
 			}
 
-			callback(handleEventReturn(_event, getEventTypeDescription('Redeem', 'pool')) as EventTypes.Redeem);
+			callback(handleEventReturn(_event, getEventTypeDescription('Redeem', EVENT_DATA_TYPE_DESCRIPTIONS)) as EventTypes.Redeem);
 		};
 
 		return this.__subscribeOnEvent(callbackWrapper, (eventName : string) => eventName == 'Redeem');
@@ -52,7 +53,7 @@ export default class EventsClass {
 				_event[event.args[i]!.name] = args[i]!.toJSON();
 			}
 
-			callback(handleEventReturn(_event, getEventTypeDescription('Borrow', 'pool')) as EventTypes.Borrow);
+			callback(handleEventReturn(_event, getEventTypeDescription('Borrow', EVENT_DATA_TYPE_DESCRIPTIONS)) as EventTypes.Borrow);
 		};
 
 		return this.__subscribeOnEvent(callbackWrapper, (eventName : string) => eventName == 'Borrow');
@@ -66,7 +67,7 @@ export default class EventsClass {
 				_event[event.args[i]!.name] = args[i]!.toJSON();
 			}
 
-			callback(handleEventReturn(_event, getEventTypeDescription('RepayBorrow', 'pool')) as EventTypes.RepayBorrow);
+			callback(handleEventReturn(_event, getEventTypeDescription('RepayBorrow', EVENT_DATA_TYPE_DESCRIPTIONS)) as EventTypes.RepayBorrow);
 		};
 
 		return this.__subscribeOnEvent(callbackWrapper, (eventName : string) => eventName == 'RepayBorrow');
@@ -80,7 +81,7 @@ export default class EventsClass {
 				_event[event.args[i]!.name] = args[i]!.toJSON();
 			}
 
-			callback(handleEventReturn(_event, getEventTypeDescription('LiquidateBorrow', 'pool')) as EventTypes.LiquidateBorrow);
+			callback(handleEventReturn(_event, getEventTypeDescription('LiquidateBorrow', EVENT_DATA_TYPE_DESCRIPTIONS)) as EventTypes.LiquidateBorrow);
 		};
 
 		return this.__subscribeOnEvent(callbackWrapper, (eventName : string) => eventName == 'LiquidateBorrow');
@@ -94,7 +95,7 @@ export default class EventsClass {
 				_event[event.args[i]!.name] = args[i]!.toJSON();
 			}
 
-			callback(handleEventReturn(_event, getEventTypeDescription('ReservesAdded', 'pool')) as EventTypes.ReservesAdded);
+			callback(handleEventReturn(_event, getEventTypeDescription('ReservesAdded', EVENT_DATA_TYPE_DESCRIPTIONS)) as EventTypes.ReservesAdded);
 		};
 
 		return this.__subscribeOnEvent(callbackWrapper, (eventName : string) => eventName == 'ReservesAdded');

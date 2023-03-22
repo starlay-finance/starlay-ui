@@ -10,6 +10,7 @@ import type BN from 'bn.js';
 // @ts-ignore
 import type {EventRecord} from "@polkadot/api/submittable";
 import {decodeEvents} from "../shared/utils";
+import EVENT_DATA_TYPE_DESCRIPTIONS from '../event-data/default_interest_rate_model.json';
 
 
 export default class Methods {
@@ -41,7 +42,7 @@ export default class Methods {
 		__options ? : GasLimit,
 	){
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "interestRateModel::getBorrowRate", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, "default_interest_rate_model");
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [cash, borrows, reserves], __options);
 	}
 
@@ -61,7 +62,7 @@ export default class Methods {
 		__options ? : GasLimit,
 	){
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "interestRateModel::getSupplyRate", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, "default_interest_rate_model");
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [cash, borrows, reserves, reserveFactorMantissa], __options);
 	}
 

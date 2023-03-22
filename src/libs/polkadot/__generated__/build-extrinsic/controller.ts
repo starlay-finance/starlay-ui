@@ -21,47 +21,45 @@ export default class Methods {
 		this.__apiPromise = apiPromise;
 	}
 	/**
-	 * supportMarket
+	 * setCollateralFactorMantissa
 	 *
 	 * @param { ArgumentTypes.AccountId } pool,
+	 * @param { ArgumentTypes.WrappedU256 } newCollateralFactorMantissa,
 	*/
-	"supportMarket" (
+	"setCollateralFactorMantissa" (
 		pool: ArgumentTypes.AccountId,
+		newCollateralFactorMantissa: ArgumentTypes.WrappedU256,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::supportMarket", [pool], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::setCollateralFactorMantissa", [pool, newCollateralFactorMantissa], __options);
 	}
 
 	/**
-	 * collateralFactorMantissa
+	 * borrowCap
 	 *
 	 * @param { ArgumentTypes.AccountId } pool,
 	*/
-	"collateralFactorMantissa" (
+	"borrowCap" (
 		pool: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::collateralFactorMantissa", [pool], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::borrowCap", [pool], __options);
 	}
 
 	/**
-	 * liquidateBorrowAllowed
+	 * borrowAllowed
 	 *
-	 * @param { ArgumentTypes.AccountId } poolBorrowed,
-	 * @param { ArgumentTypes.AccountId } poolCollateral,
-	 * @param { ArgumentTypes.AccountId } liquidator,
+	 * @param { ArgumentTypes.AccountId } pool,
 	 * @param { ArgumentTypes.AccountId } borrower,
-	 * @param { (string | number | BN) } repayAmount,
+	 * @param { (string | number | BN) } borrowAmount,
 	*/
-	"liquidateBorrowAllowed" (
-		poolBorrowed: ArgumentTypes.AccountId,
-		poolCollateral: ArgumentTypes.AccountId,
-		liquidator: ArgumentTypes.AccountId,
+	"borrowAllowed" (
+		pool: ArgumentTypes.AccountId,
 		borrower: ArgumentTypes.AccountId,
-		repayAmount: (string | number | BN),
+		borrowAmount: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::liquidateBorrowAllowed", [poolBorrowed, poolCollateral, liquidator, borrower, repayAmount], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::borrowAllowed", [pool, borrower, borrowAmount], __options);
 	}
 
 	/**
@@ -83,33 +81,53 @@ export default class Methods {
 	}
 
 	/**
-	 * mintGuardianPaused
+	 * collateralFactorMantissa
 	 *
 	 * @param { ArgumentTypes.AccountId } pool,
 	*/
-	"mintGuardianPaused" (
+	"collateralFactorMantissa" (
 		pool: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::mintGuardianPaused", [pool], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::collateralFactorMantissa", [pool], __options);
 	}
 
 	/**
-	 * repayBorrowAllowed
+	 * seizeAllowed
 	 *
-	 * @param { ArgumentTypes.AccountId } pool,
-	 * @param { ArgumentTypes.AccountId } payer,
+	 * @param { ArgumentTypes.AccountId } poolCollateral,
+	 * @param { ArgumentTypes.AccountId } poolBorrowed,
+	 * @param { ArgumentTypes.AccountId } liquidator,
 	 * @param { ArgumentTypes.AccountId } borrower,
+	 * @param { (string | number | BN) } seizeTokens,
+	*/
+	"seizeAllowed" (
+		poolCollateral: ArgumentTypes.AccountId,
+		poolBorrowed: ArgumentTypes.AccountId,
+		liquidator: ArgumentTypes.AccountId,
+		borrower: ArgumentTypes.AccountId,
+		seizeTokens: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::seizeAllowed", [poolCollateral, poolBorrowed, liquidator, borrower, seizeTokens], __options);
+	}
+
+	/**
+	 * liquidateCalculateSeizeTokens
+	 *
+	 * @param { ArgumentTypes.AccountId } poolBorrowed,
+	 * @param { ArgumentTypes.AccountId } poolCollateral,
+	 * @param { ArgumentTypes.WrappedU256 } exchangeRateMantissa,
 	 * @param { (string | number | BN) } repayAmount,
 	*/
-	"repayBorrowAllowed" (
-		pool: ArgumentTypes.AccountId,
-		payer: ArgumentTypes.AccountId,
-		borrower: ArgumentTypes.AccountId,
+	"liquidateCalculateSeizeTokens" (
+		poolBorrowed: ArgumentTypes.AccountId,
+		poolCollateral: ArgumentTypes.AccountId,
+		exchangeRateMantissa: ArgumentTypes.WrappedU256,
 		repayAmount: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::repayBorrowAllowed", [pool, payer, borrower, repayAmount], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::liquidateCalculateSeizeTokens", [poolBorrowed, poolCollateral, exchangeRateMantissa, repayAmount], __options);
 	}
 
 	/**
@@ -122,166 +140,6 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::setLiquidationIncentiveMantissa", [newLiquidationIncentiveMantissa], __options);
-	}
-
-	/**
-	 * isListed
-	 *
-	 * @param { ArgumentTypes.AccountId } pool,
-	*/
-	"isListed" (
-		pool: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::isListed", [pool], __options);
-	}
-
-	/**
-	 * setCollateralFactorMantissa
-	 *
-	 * @param { ArgumentTypes.AccountId } pool,
-	 * @param { ArgumentTypes.WrappedU256 } newCollateralFactorMantissa,
-	*/
-	"setCollateralFactorMantissa" (
-		pool: ArgumentTypes.AccountId,
-		newCollateralFactorMantissa: ArgumentTypes.WrappedU256,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::setCollateralFactorMantissa", [pool, newCollateralFactorMantissa], __options);
-	}
-
-	/**
-	 * repayBorrowVerify
-	 *
-	 * @param { ArgumentTypes.AccountId } pool,
-	 * @param { ArgumentTypes.AccountId } payer,
-	 * @param { ArgumentTypes.AccountId } borrower,
-	 * @param { (string | number | BN) } repayAmount,
-	 * @param { (string | number | BN) } borrowerIndex,
-	*/
-	"repayBorrowVerify" (
-		pool: ArgumentTypes.AccountId,
-		payer: ArgumentTypes.AccountId,
-		borrower: ArgumentTypes.AccountId,
-		repayAmount: (string | number | BN),
-		borrowerIndex: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::repayBorrowVerify", [pool, payer, borrower, repayAmount, borrowerIndex], __options);
-	}
-
-	/**
-	 * manager
-	 *
-	*/
-	"manager" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::manager", [], __options);
-	}
-
-	/**
-	 * mintAllowed
-	 *
-	 * @param { ArgumentTypes.AccountId } pool,
-	 * @param { ArgumentTypes.AccountId } minter,
-	 * @param { (string | number | BN) } mintAmount,
-	*/
-	"mintAllowed" (
-		pool: ArgumentTypes.AccountId,
-		minter: ArgumentTypes.AccountId,
-		mintAmount: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::mintAllowed", [pool, minter, mintAmount], __options);
-	}
-
-	/**
-	 * setPriceOracle
-	 *
-	 * @param { ArgumentTypes.AccountId } newOracle,
-	*/
-	"setPriceOracle" (
-		newOracle: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::setPriceOracle", [newOracle], __options);
-	}
-
-	/**
-	 * markets
-	 *
-	*/
-	"markets" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::markets", [], __options);
-	}
-
-	/**
-	 * closeFactorMantissa
-	 *
-	*/
-	"closeFactorMantissa" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::closeFactorMantissa", [], __options);
-	}
-
-	/**
-	 * setMintGuardianPaused
-	 *
-	 * @param { ArgumentTypes.AccountId } pool,
-	 * @param { boolean } paused,
-	*/
-	"setMintGuardianPaused" (
-		pool: ArgumentTypes.AccountId,
-		paused: boolean,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::setMintGuardianPaused", [pool, paused], __options);
-	}
-
-	/**
-	 * setBorrowGuardianPaused
-	 *
-	 * @param { ArgumentTypes.AccountId } pool,
-	 * @param { boolean } paused,
-	*/
-	"setBorrowGuardianPaused" (
-		pool: ArgumentTypes.AccountId,
-		paused: boolean,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::setBorrowGuardianPaused", [pool, paused], __options);
-	}
-
-	/**
-	 * redeemAllowed
-	 *
-	 * @param { ArgumentTypes.AccountId } pool,
-	 * @param { ArgumentTypes.AccountId } redeemer,
-	 * @param { (string | number | BN) } redeemAmount,
-	*/
-	"redeemAllowed" (
-		pool: ArgumentTypes.AccountId,
-		redeemer: ArgumentTypes.AccountId,
-		redeemAmount: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::redeemAllowed", [pool, redeemer, redeemAmount], __options);
-	}
-
-	/**
-	 * setCloseFactorMantissa
-	 *
-	 * @param { ArgumentTypes.WrappedU256 } newCloseFactorMantissa,
-	*/
-	"setCloseFactorMantissa" (
-		newCloseFactorMantissa: ArgumentTypes.WrappedU256,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::setCloseFactorMantissa", [newCloseFactorMantissa], __options);
 	}
 
 	/**
@@ -323,71 +181,77 @@ export default class Methods {
 	}
 
 	/**
-	 * liquidationIncentiveMantissa
+	 * markets
 	 *
 	*/
-	"liquidationIncentiveMantissa" (
+	"markets" (
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::liquidationIncentiveMantissa", [], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::markets", [], __options);
 	}
 
 	/**
-	 * borrowGuardianPaused
+	 * closeFactorMantissa
 	 *
-	 * @param { ArgumentTypes.AccountId } pool,
 	*/
-	"borrowGuardianPaused" (
-		pool: ArgumentTypes.AccountId,
+	"closeFactorMantissa" (
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::borrowGuardianPaused", [pool], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::closeFactorMantissa", [], __options);
 	}
 
 	/**
-	 * borrowAllowed
+	 * redeemVerify
 	 *
 	 * @param { ArgumentTypes.AccountId } pool,
-	 * @param { ArgumentTypes.AccountId } borrower,
-	 * @param { (string | number | BN) } borrowAmount,
+	 * @param { ArgumentTypes.AccountId } redeemer,
+	 * @param { (string | number | BN) } redeemAmount,
+	 * @param { (string | number | BN) } redeemTokens,
 	*/
-	"borrowAllowed" (
+	"redeemVerify" (
 		pool: ArgumentTypes.AccountId,
-		borrower: ArgumentTypes.AccountId,
-		borrowAmount: (string | number | BN),
+		redeemer: ArgumentTypes.AccountId,
+		redeemAmount: (string | number | BN),
+		redeemTokens: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::borrowAllowed", [pool, borrower, borrowAmount], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::redeemVerify", [pool, redeemer, redeemAmount, redeemTokens], __options);
 	}
 
 	/**
-	 * transferVerify
+	 * isListed
 	 *
 	 * @param { ArgumentTypes.AccountId } pool,
-	 * @param { ArgumentTypes.AccountId } src,
-	 * @param { ArgumentTypes.AccountId } dst,
-	 * @param { (string | number | BN) } transferTokens,
 	*/
-	"transferVerify" (
+	"isListed" (
 		pool: ArgumentTypes.AccountId,
-		src: ArgumentTypes.AccountId,
-		dst: ArgumentTypes.AccountId,
-		transferTokens: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::transferVerify", [pool, src, dst, transferTokens], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::isListed", [pool], __options);
 	}
 
 	/**
-	 * borrowCap
+	 * setMintGuardianPaused
 	 *
 	 * @param { ArgumentTypes.AccountId } pool,
+	 * @param { boolean } paused,
 	*/
-	"borrowCap" (
+	"setMintGuardianPaused" (
 		pool: ArgumentTypes.AccountId,
+		paused: boolean,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::borrowCap", [pool], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::setMintGuardianPaused", [pool, paused], __options);
+	}
+
+	/**
+	 * oracle
+	 *
+	*/
+	"oracle" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::oracle", [], __options);
 	}
 
 	/**
@@ -409,45 +273,205 @@ export default class Methods {
 	}
 
 	/**
-	 * oracle
+	 * liquidateBorrowAllowed
 	 *
+	 * @param { ArgumentTypes.AccountId } poolBorrowed,
+	 * @param { ArgumentTypes.AccountId } poolCollateral,
+	 * @param { ArgumentTypes.AccountId } liquidator,
+	 * @param { ArgumentTypes.AccountId } borrower,
+	 * @param { (string | number | BN) } repayAmount,
 	*/
-	"oracle" (
+	"liquidateBorrowAllowed" (
+		poolBorrowed: ArgumentTypes.AccountId,
+		poolCollateral: ArgumentTypes.AccountId,
+		liquidator: ArgumentTypes.AccountId,
+		borrower: ArgumentTypes.AccountId,
+		repayAmount: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::oracle", [], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::liquidateBorrowAllowed", [poolBorrowed, poolCollateral, liquidator, borrower, repayAmount], __options);
 	}
 
 	/**
-	 * setBorrowCap
+	 * setBorrowGuardianPaused
 	 *
 	 * @param { ArgumentTypes.AccountId } pool,
-	 * @param { (string | number | BN) } newCap,
+	 * @param { boolean } paused,
 	*/
-	"setBorrowCap" (
+	"setBorrowGuardianPaused" (
 		pool: ArgumentTypes.AccountId,
-		newCap: (string | number | BN),
+		paused: boolean,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::setBorrowCap", [pool, newCap], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::setBorrowGuardianPaused", [pool, paused], __options);
 	}
 
 	/**
-	 * redeemVerify
+	 * repayBorrowVerify
+	 *
+	 * @param { ArgumentTypes.AccountId } pool,
+	 * @param { ArgumentTypes.AccountId } payer,
+	 * @param { ArgumentTypes.AccountId } borrower,
+	 * @param { (string | number | BN) } repayAmount,
+	 * @param { (string | number | BN) } borrowerIndex,
+	*/
+	"repayBorrowVerify" (
+		pool: ArgumentTypes.AccountId,
+		payer: ArgumentTypes.AccountId,
+		borrower: ArgumentTypes.AccountId,
+		repayAmount: (string | number | BN),
+		borrowerIndex: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::repayBorrowVerify", [pool, payer, borrower, repayAmount, borrowerIndex], __options);
+	}
+
+	/**
+	 * mintAllowed
+	 *
+	 * @param { ArgumentTypes.AccountId } pool,
+	 * @param { ArgumentTypes.AccountId } minter,
+	 * @param { (string | number | BN) } mintAmount,
+	*/
+	"mintAllowed" (
+		pool: ArgumentTypes.AccountId,
+		minter: ArgumentTypes.AccountId,
+		mintAmount: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::mintAllowed", [pool, minter, mintAmount], __options);
+	}
+
+	/**
+	 * setPriceOracle
+	 *
+	 * @param { ArgumentTypes.AccountId } newOracle,
+	*/
+	"setPriceOracle" (
+		newOracle: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::setPriceOracle", [newOracle], __options);
+	}
+
+	/**
+	 * setCloseFactorMantissa
+	 *
+	 * @param { ArgumentTypes.WrappedU256 } newCloseFactorMantissa,
+	*/
+	"setCloseFactorMantissa" (
+		newCloseFactorMantissa: ArgumentTypes.WrappedU256,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::setCloseFactorMantissa", [newCloseFactorMantissa], __options);
+	}
+
+	/**
+	 * mintGuardianPaused
+	 *
+	 * @param { ArgumentTypes.AccountId } pool,
+	*/
+	"mintGuardianPaused" (
+		pool: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::mintGuardianPaused", [pool], __options);
+	}
+
+	/**
+	 * redeemAllowed
 	 *
 	 * @param { ArgumentTypes.AccountId } pool,
 	 * @param { ArgumentTypes.AccountId } redeemer,
 	 * @param { (string | number | BN) } redeemAmount,
-	 * @param { (string | number | BN) } redeemTokens,
 	*/
-	"redeemVerify" (
+	"redeemAllowed" (
 		pool: ArgumentTypes.AccountId,
 		redeemer: ArgumentTypes.AccountId,
 		redeemAmount: (string | number | BN),
-		redeemTokens: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::redeemVerify", [pool, redeemer, redeemAmount, redeemTokens], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::redeemAllowed", [pool, redeemer, redeemAmount], __options);
+	}
+
+	/**
+	 * borrowGuardianPaused
+	 *
+	 * @param { ArgumentTypes.AccountId } pool,
+	*/
+	"borrowGuardianPaused" (
+		pool: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::borrowGuardianPaused", [pool], __options);
+	}
+
+	/**
+	 * liquidationIncentiveMantissa
+	 *
+	*/
+	"liquidationIncentiveMantissa" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::liquidationIncentiveMantissa", [], __options);
+	}
+
+	/**
+	 * transferVerify
+	 *
+	 * @param { ArgumentTypes.AccountId } pool,
+	 * @param { ArgumentTypes.AccountId } src,
+	 * @param { ArgumentTypes.AccountId } dst,
+	 * @param { (string | number | BN) } transferTokens,
+	*/
+	"transferVerify" (
+		pool: ArgumentTypes.AccountId,
+		src: ArgumentTypes.AccountId,
+		dst: ArgumentTypes.AccountId,
+		transferTokens: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::transferVerify", [pool, src, dst, transferTokens], __options);
+	}
+
+	/**
+	 * repayBorrowAllowed
+	 *
+	 * @param { ArgumentTypes.AccountId } pool,
+	 * @param { ArgumentTypes.AccountId } payer,
+	 * @param { ArgumentTypes.AccountId } borrower,
+	 * @param { (string | number | BN) } repayAmount,
+	*/
+	"repayBorrowAllowed" (
+		pool: ArgumentTypes.AccountId,
+		payer: ArgumentTypes.AccountId,
+		borrower: ArgumentTypes.AccountId,
+		repayAmount: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::repayBorrowAllowed", [pool, payer, borrower, repayAmount], __options);
+	}
+
+	/**
+	 * manager
+	 *
+	*/
+	"manager" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::manager", [], __options);
+	}
+
+	/**
+	 * supportMarket
+	 *
+	 * @param { ArgumentTypes.AccountId } pool,
+	*/
+	"supportMarket" (
+		pool: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::supportMarket", [pool], __options);
 	}
 
 	/**
@@ -471,41 +495,17 @@ export default class Methods {
 	}
 
 	/**
-	 * liquidateCalculateSeizeTokens
+	 * setBorrowCap
 	 *
-	 * @param { ArgumentTypes.AccountId } poolBorrowed,
-	 * @param { ArgumentTypes.AccountId } poolCollateral,
-	 * @param { ArgumentTypes.WrappedU256 } exchangeRateMantissa,
-	 * @param { (string | number | BN) } repayAmount,
+	 * @param { ArgumentTypes.AccountId } pool,
+	 * @param { (string | number | BN) } newCap,
 	*/
-	"liquidateCalculateSeizeTokens" (
-		poolBorrowed: ArgumentTypes.AccountId,
-		poolCollateral: ArgumentTypes.AccountId,
-		exchangeRateMantissa: ArgumentTypes.WrappedU256,
-		repayAmount: (string | number | BN),
+	"setBorrowCap" (
+		pool: ArgumentTypes.AccountId,
+		newCap: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::liquidateCalculateSeizeTokens", [poolBorrowed, poolCollateral, exchangeRateMantissa, repayAmount], __options);
-	}
-
-	/**
-	 * seizeAllowed
-	 *
-	 * @param { ArgumentTypes.AccountId } poolCollateral,
-	 * @param { ArgumentTypes.AccountId } poolBorrowed,
-	 * @param { ArgumentTypes.AccountId } liquidator,
-	 * @param { ArgumentTypes.AccountId } borrower,
-	 * @param { (string | number | BN) } seizeTokens,
-	*/
-	"seizeAllowed" (
-		poolCollateral: ArgumentTypes.AccountId,
-		poolBorrowed: ArgumentTypes.AccountId,
-		liquidator: ArgumentTypes.AccountId,
-		borrower: ArgumentTypes.AccountId,
-		seizeTokens: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::seizeAllowed", [poolCollateral, poolBorrowed, liquidator, borrower, seizeTokens], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "controller::setBorrowCap", [pool, newCap], __options);
 	}
 
 }
