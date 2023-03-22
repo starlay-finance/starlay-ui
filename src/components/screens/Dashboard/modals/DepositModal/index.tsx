@@ -28,14 +28,14 @@ export const Deposit: FC<
           deposit={(amount) =>
             depositWithTracking({
               amount,
-              pool: '', // TODO
+              pool: asset.pool,
               asset: asset.underlyingAsset,
             })
           }
           withdraw={(amount, all) =>
             withdrawWithTracking({
               amount,
-              pool: '', // TODO
+              pool: asset.pool,
               asset: asset.underlyingAsset,
               collateral: asset.lTokenAddress,
               all,

@@ -26,11 +26,12 @@ export const StarlayContextProviderPolkadot: FC<{
 
   const { data: dataProvider } = useSWRImmutable<DataProvider>(
     isReady && provider && ['polkadot', 'dataprovider', provider.chainId],
-    () =>
-      DataProviderPolkadot.new(
-        provider!,
-        getNetworkConfigPokadot(provider!.chainId).addresses.lens,
-      ),
+    () => {
+      const { lens, controller } = getNetworkConfigPokadot(
+        provider!.chainId,
+      ).addresses
+      return DataProviderPolkadot.new(provider!, lens, controller)
+    },
   )
 
   const txExecutor = useCallback(

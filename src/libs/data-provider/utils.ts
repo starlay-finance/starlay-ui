@@ -45,6 +45,7 @@ export const toAssetMarketData = (
       valueToBigNumber(reserve.totalVariableDebt).plus(reserve.totalStableDebt),
     )
   return {
+    pool: '', // unused
     ...assetFromSymbolAndAddress(reserve.symbol, reserve.underlyingAsset),
     underlyingAsset: reserve.underlyingAsset.toLowerCase() as EthereumAddress,
     depositAPY: valueToBigNumber(reserve.supplyAPY),

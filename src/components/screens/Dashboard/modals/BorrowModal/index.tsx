@@ -32,7 +32,7 @@ export const Borrow: FC<
           borrow={(amount) =>
             borrowWithTracking({
               amount,
-              pool: '', // TODO
+              pool: asset.pool,
               asset: asset.underlyingAsset,
               debt: asset.vdTokenAddress,
               onSucceeded: openSuggestModal,
@@ -41,7 +41,7 @@ export const Borrow: FC<
           repay={(amount, all) =>
             repayWithTracking({
               amount,
-              pool: '', // TODO
+              pool: asset.pool,
               asset: asset.underlyingAsset,
               all,
             })

@@ -35,6 +35,7 @@ export type MarketData = {
 }
 
 export type AssetMarketData = Asset & {
+  pool: string
   depositAPY: BigNumber
   variableBorrowAPY: BigNumber
   depositIncentiveAPR: BigNumber

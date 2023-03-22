@@ -18,34 +18,51 @@ import { calculateNetAPY } from 'src/utils/calculator'
 import { BN_ONE, BN_ZERO } from 'src/utils/number'
 import { PolkadotChainId } from '../config/network'
 import { Lens } from '../polkadot/Lens'
-import { PoolBalances } from '../polkadot/__generated__/types-returns/lens'
+import {
+  PoolBalances,
+  PoolMetadata,
+} from '../polkadot/__generated__/types-returns/lens'
 import { StaticRPCProviderPolkadot } from '../static-rpc-provider-polkadot'
 
 export class DataProviderPolkadot implements DataProvider {
-  private constructor(readonly chainId: PolkadotChainId, private lens: Lens) {}
+  private constructor(
+    readonly chainId: PolkadotChainId,
+    private lens: Lens,
+    private controller: PolkadotAddress,
+    private pools: PolkadotAddress[] = [],
+    private poolUnderlyingDict: Record<
+      PolkadotAddress,
+      { address: PolkadotAddress; symbol: AssetSymbol }
+    > = {},
+  ) {}
 
   static new = (
     { chainId, provider }: StaticRPCProviderPolkadot,
     lens: PolkadotAddress,
-  ) => new DataProviderPolkadot(chainId, new Lens(provider, lens))
+    controller: PolkadotAddress,
+  ) => new DataProviderPolkadot(chainId, new Lens(provider, lens), controller)
 
   getMarketData: DataProvider['getMarketData'] = async () => {
-    const { metadata, prices } = await this.lens.poolData()
+    const pools = await this.lens.pools(this.controller)
+    const { metadata, prices } = await this.lens.poolData(pools)
+    this.updatePools(metadata)
+    const marketTimestamp = dayjs().unix()
     return {
       chainId: this.chainId,
-      marketTimestamp: dayjs().unix(),
+      marketTimestamp,
       marketReferenceCurrencyDecimals: 0,
       marketReferenceCurrencyPriceInUSD: BN_ONE,
       assets: metadata.map((data, idx) => ({
-        // TODO
+        pool: data.pool as string,
         ...assetFromSymbolAndAddress(
-          'ASTR',
+          this.underlyingOf(data.pool as string)
+            .symbol as unknown as AssetSymbol,
           data.underlyingAssetAddress as string,
         ),
         decimals: data.underlyingDecimals,
         // TODO calculation
-        depositAPY: toBigNumber(data.supplyRatePerSec),
-        variableBorrowAPY: toBigNumber(data.borrowRatePerSec),
+        depositAPY: toBigNumber(data.supplyRatePerMsec),
+        variableBorrowAPY: toBigNumber(data.borrowRatePerMsec),
         liquidity: toBigNumber(data.totalCash),
         liquidityInUSD: toBigNumber(data.totalCash),
         totalDepositedInUSD: toBigNumber(data.totalSupply),
@@ -60,6 +77,7 @@ export class DataProviderPolkadot implements DataProvider {
         underlyingAsset: data.underlyingAssetAddress as string,
         lTokenAddress: data.pool as string,
         vdTokenAddress: '',
+        // TODO
         usageAsCollateralEnabled: true,
         isActive: true,
         isFrozen: false,
@@ -76,8 +94,8 @@ export class DataProviderPolkadot implements DataProvider {
     account,
     marketData,
   }) => {
-    const data = await this.lens.userData({ account })
-    const balanceByAsset = toBalanceByAsset(data)
+    const data = await this.lens.userData(this.pools, account)
+    const balanceByAsset = this.toBalanceByAsset(data)
     return {
       summary: toSummary(balanceByAsset, marketData),
       balanceByAsset,
@@ -93,11 +111,11 @@ export class DataProviderPolkadot implements DataProvider {
     account,
     assets,
   }) => {
-    const data = await this.lens.userData({ account })
+    const data = await this.lens.underlyingBalance(this.pools, account)
     const balancesDict = data.reduce<Record<string, BigNumber>>(
-      (res, { balanceOfUnderlying, pool }) => ({
+      (res, balance, idx) => ({
         ...res,
-        [pool as string]: toBigNumber(balanceOfUnderlying),
+        [this.underlyingOf(this.pools[idx]).address]: toBigNumber(balance),
       }),
       {},
     )
@@ -109,6 +127,35 @@ export class DataProviderPolkadot implements DataProvider {
       {},
     ) as WalletBalance
   }
+
+  underlyingOf = (pool: PolkadotAddress) => this.poolUnderlyingDict[pool]
+
+  private updatePools = (metadata: PoolMetadata[]) => {
+    this.poolUnderlyingDict = metadata.reduce(
+      (res, { pool, underlyingAssetAddress, underlyingSymbol }) => ({
+        ...res,
+        [pool as string]: {
+          address: underlyingAssetAddress,
+          symbol: toString(underlyingSymbol),
+        },
+      }),
+      {},
+    )
+    this.pools = Object.keys(this.poolUnderlyingDict)
+  }
+
+  private toBalanceByAsset = (data: PoolBalances[]) =>
+    data.reduce((prev, { pool, balanceOf, borrowBalanceCurrent }) => {
+      const { address, symbol } = this.underlyingOf(pool as string)
+      return {
+        ...prev,
+        [assetFromSymbolAndAddress(symbol, address).symbol]: {
+          deposited: toBigNumber(balanceOf),
+          borrowed: toBigNumber(borrowBalanceCurrent),
+          usageAsCollateralEnabled: true,
+        },
+      }
+    }, EMPTY_BALANCE_BY_ASSET)
 }
 
 const toSummary = (
@@ -170,18 +217,10 @@ const toSummary = (
   }
 }
 
-const toBalanceByAsset = (data: PoolBalances[]) =>
-  data.reduce(
-    (prev, { balanceOf, borrowBalanceCurrent }) => ({
-      ...prev,
-      [assetFromSymbolAndAddress('TODO' as AssetSymbol, 'TODO underlying')
-        .symbol]: {
-        deposited: toBigNumber(balanceOf),
-        borrowed: toBigNumber(borrowBalanceCurrent),
-        usageAsCollateralEnabled: true,
-      },
-    }),
-    EMPTY_BALANCE_BY_ASSET,
-  )
-
 const toBigNumber = (num: ReturnNumber) => valueToBigNumber(num.toString())
+
+const toString = (maybeString: string | number[]) => {
+  const hexStr =
+    typeof maybeString === 'string' ? maybeString : maybeString.toString()
+  return Buffer.from(hexStr.replace('0x', ''), 'hex').toString('utf-8')
+}

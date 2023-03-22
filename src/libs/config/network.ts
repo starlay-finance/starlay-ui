@@ -125,7 +125,10 @@ export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
   },
 }
 
-export type PolkadotNetworkConfig = NetworkConfig<PolkadotAddress, 'lens'>
+export type PolkadotNetworkConfig = NetworkConfig<
+  PolkadotAddress,
+  'controller' | 'lens'
+>
 
 export const POLKADOT_NETWORK_CONFIG: Record<
   PolkadotChainId,
@@ -136,7 +139,8 @@ export const POLKADOT_NETWORK_CONFIG: Record<
     publicJsonRPCUrl: ['http://127.0.0.1:9933'],
     publicJsonRPCWSUrl: 'ws://127.0.0.1:9944',
     addresses: {
-      lens: '5GzoxgGTdjRdnwHd9HgMABhkqEcHwHd8NRTZrNQPF3QdNYp9',
+      controller: '5GvhpTPdfhDgfghvHVWvMBDThqAYA6LMi7DWC5wBfaJfLZ5F',
+      lens: '5DkTNiiK7qBia7B45jvUVQkvJf98jVhpBhjvWjc4sSDTRzdH',
     },
     baseAsset: {
       symbol: 'ASTR',
