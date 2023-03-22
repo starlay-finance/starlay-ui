@@ -42,7 +42,7 @@ export const useBiddingForm = ({
 
   const biddingAsset = biddingAssets[0]
   const bid = newBid(
-    biddingAsset.address,
+    biddingAsset.address as EthereumAddress,
     amount,
     noPriceLimitEnabled,
     limitPrice,

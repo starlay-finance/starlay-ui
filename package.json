@@ -23,8 +23,8 @@
   "dependencies": {
     "@lingui/macro": "^3.17.2",
     "@lingui/react": "^3.17.2",
-    "@polkadot/api": "^10.0.1",
-    "@polkadot/api-contract": "^10.0.1",
+    "@polkadot/api": "^9.13.14",
+    "@polkadot/api-contract": "^9.13.14",
     "@polkadot/extension-dapp": "^0.45.1",
     "@polkadot/keyring": "^11.0.1",
     "@polkadot/wasm-crypto": "^7.0.2",

@@ -5,6 +5,7 @@ import { AssetLabel } from 'src/components/parts/Modal/parts'
 import { useLeverager } from 'src/hooks/contracts/useLeverager'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useTracking } from 'src/hooks/useTracking'
+import { EthereumAddress } from 'src/types/web3'
 import {
   loopingLeverageToLtv,
   significantLoopingCount,
@@ -29,16 +30,16 @@ export const Looping: FC<
           loop={(amount, leverage) =>
             loopWithTracking({
               amount,
-              asset: asset.underlyingAsset,
-              debtToken: asset.vdTokenAddress,
+              asset: asset.underlyingAsset as EthereumAddress,
+              debtToken: asset.vdTokenAddress as EthereumAddress,
               borrowRatio: loopingLeverageToLtv(leverage),
               loopCount: significantLoopingCount(leverage),
             })
           }
           close={() =>
             closeLoop({
-              underlyingAsset: asset.underlyingAsset,
-              lToken: asset.lTokenAddress,
+              underlyingAsset: asset.underlyingAsset as EthereumAddress,
+              lToken: asset.lTokenAddress as EthereumAddress,
             })
           }
         />
