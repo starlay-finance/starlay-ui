@@ -38,6 +38,19 @@ export default class Methods {
 	}
 
 	/**
+	* pools
+	*
+	* @param { ArgumentTypes.AccountId } controller,
+	* @returns { Result<Array<ReturnTypes.AccountId>, ReturnTypes.LangError> }
+	*/
+	"pools" (
+		controller: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	): Promise< QueryReturnType< Result<Array<ReturnTypes.AccountId>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pools", [controller], __options, (result) => { return handleReturnType(result, getTypeDescription(6, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
 	* poolMetadata
 	*
 	* @param { ArgumentTypes.AccountId } pool,
@@ -47,7 +60,7 @@ export default class Methods {
 		pool: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	): Promise< QueryReturnType< Result<ReturnTypes.PoolMetadata, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "poolMetadata", [pool], __options, (result) => { return handleReturnType(result, getTypeDescription(6, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "poolMetadata", [pool], __options, (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -60,7 +73,7 @@ export default class Methods {
 		pools: Array<ArgumentTypes.AccountId>,
 		__options: GasLimit,
 	): Promise< QueryReturnType< Result<Array<ReturnTypes.PoolMetadata>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "poolMetadataAll", [pools], __options, (result) => { return handleReturnType(result, getTypeDescription(16, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "poolMetadataAll", [pools], __options, (result) => { return handleReturnType(result, getTypeDescription(18, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -75,7 +88,7 @@ export default class Methods {
 		account: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	): Promise< QueryReturnType< Result<ReturnTypes.PoolBalances, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "poolBalances", [pool, account], __options, (result) => { return handleReturnType(result, getTypeDescription(18, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "poolBalances", [pool, account], __options, (result) => { return handleReturnType(result, getTypeDescription(20, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -90,7 +103,37 @@ export default class Methods {
 		account: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	): Promise< QueryReturnType< Result<Array<ReturnTypes.PoolBalances>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "poolBalancesAll", [pools, account], __options, (result) => { return handleReturnType(result, getTypeDescription(20, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "poolBalancesAll", [pools, account], __options, (result) => { return handleReturnType(result, getTypeDescription(22, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* underlyingBalance
+	*
+	* @param { ArgumentTypes.AccountId } pool,
+	* @param { ArgumentTypes.AccountId } account,
+	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
+	*/
+	"underlyingBalance" (
+		pool: ArgumentTypes.AccountId,
+		account: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "underlyingBalance", [pool, account], __options, (result) => { return handleReturnType(result, getTypeDescription(24, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* underlyingBalanceAll
+	*
+	* @param { Array<ArgumentTypes.AccountId> } pools,
+	* @param { ArgumentTypes.AccountId } account,
+	* @returns { Result<Array<ReturnNumber>, ReturnTypes.LangError> }
+	*/
+	"underlyingBalanceAll" (
+		pools: Array<ArgumentTypes.AccountId>,
+		account: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	): Promise< QueryReturnType< Result<Array<ReturnNumber>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "underlyingBalanceAll", [pools, account], __options, (result) => { return handleReturnType(result, getTypeDescription(25, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -103,7 +146,7 @@ export default class Methods {
 		pool: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	): Promise< QueryReturnType< Result<ReturnTypes.PoolUnderlyingPrice, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "poolUnderlyingPrice", [pool], __options, (result) => { return handleReturnType(result, getTypeDescription(22, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "poolUnderlyingPrice", [pool], __options, (result) => { return handleReturnType(result, getTypeDescription(27, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -116,7 +159,7 @@ export default class Methods {
 		pools: Array<ArgumentTypes.AccountId>,
 		__options: GasLimit,
 	): Promise< QueryReturnType< Result<Array<ReturnTypes.PoolUnderlyingPrice>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "poolUnderlyingPriceAll", [pools], __options, (result) => { return handleReturnType(result, getTypeDescription(24, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "poolUnderlyingPriceAll", [pools], __options, (result) => { return handleReturnType(result, getTypeDescription(29, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 }

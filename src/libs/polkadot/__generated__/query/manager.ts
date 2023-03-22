@@ -30,31 +30,18 @@ export default class Methods {
 	}
 
 	/**
-	* supportMarket
+	* reduceReserves
 	*
 	* @param { ArgumentTypes.AccountId } pool,
+	* @param { (string | number | BN) } amount,
 	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
 	*/
-	"supportMarket" (
+	"reduceReserves" (
 		pool: ArgumentTypes.AccountId,
+		amount: (string | number | BN),
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::supportMarket", [pool], __options , (result) => { return handleReturnType(result, getTypeDescription(7, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* setMintGuardianPaused
-	*
-	* @param { ArgumentTypes.AccountId } pool,
-	* @param { boolean } paused,
-	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
-	*/
-	"setMintGuardianPaused" (
-		pool: ArgumentTypes.AccountId,
-		paused: boolean,
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setMintGuardianPaused", [pool, paused], __options , (result) => { return handleReturnType(result, getTypeDescription(7, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::reduceReserves", [pool, amount], __options , (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -69,32 +56,6 @@ export default class Methods {
 	}
 
 	/**
-	* setController
-	*
-	* @param { ArgumentTypes.AccountId } address,
-	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
-	*/
-	"setController" (
-		address: ArgumentTypes.AccountId,
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setController", [address], __options , (result) => { return handleReturnType(result, getTypeDescription(7, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* setPriceOracle
-	*
-	* @param { ArgumentTypes.AccountId } newOracle,
-	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
-	*/
-	"setPriceOracle" (
-		newOracle: ArgumentTypes.AccountId,
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setPriceOracle", [newOracle], __options , (result) => { return handleReturnType(result, getTypeDescription(7, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
 	* setBorrowGuardianPaused
 	*
 	* @param { ArgumentTypes.AccountId } pool,
@@ -106,35 +67,20 @@ export default class Methods {
 		paused: boolean,
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setBorrowGuardianPaused", [pool, paused], __options , (result) => { return handleReturnType(result, getTypeDescription(7, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setBorrowGuardianPaused", [pool, paused], __options , (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
-	* setLiquidationIncentiveMantissa
-	*
-	* @param { ArgumentTypes.WrappedU256 } newLiquidationIncentiveMantissa,
-	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
-	*/
-	"setLiquidationIncentiveMantissa" (
-		newLiquidationIncentiveMantissa: ArgumentTypes.WrappedU256,
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setLiquidationIncentiveMantissa", [newLiquidationIncentiveMantissa], __options , (result) => { return handleReturnType(result, getTypeDescription(7, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* reduceReserves
+	* supportMarket
 	*
 	* @param { ArgumentTypes.AccountId } pool,
-	* @param { (string | number | BN) } amount,
 	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
 	*/
-	"reduceReserves" (
+	"supportMarket" (
 		pool: ArgumentTypes.AccountId,
-		amount: (string | number | BN),
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::reduceReserves", [pool, amount], __options , (result) => { return handleReturnType(result, getTypeDescription(7, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::supportMarket", [pool], __options , (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -147,7 +93,7 @@ export default class Methods {
 		newCloseFactorMantissa: ArgumentTypes.WrappedU256,
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setCloseFactorMantissa", [newCloseFactorMantissa], __options , (result) => { return handleReturnType(result, getTypeDescription(7, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setCloseFactorMantissa", [newCloseFactorMantissa], __options , (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -162,7 +108,61 @@ export default class Methods {
 		newCap: (string | number | BN),
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setBorrowCap", [pool, newCap], __options , (result) => { return handleReturnType(result, getTypeDescription(7, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setBorrowCap", [pool, newCap], __options , (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* setController
+	*
+	* @param { ArgumentTypes.AccountId } address,
+	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
+	*/
+	"setController" (
+		address: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setController", [address], __options , (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* setPriceOracle
+	*
+	* @param { ArgumentTypes.AccountId } newOracle,
+	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
+	*/
+	"setPriceOracle" (
+		newOracle: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setPriceOracle", [newOracle], __options , (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* setLiquidationIncentiveMantissa
+	*
+	* @param { ArgumentTypes.WrappedU256 } newLiquidationIncentiveMantissa,
+	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
+	*/
+	"setLiquidationIncentiveMantissa" (
+		newLiquidationIncentiveMantissa: ArgumentTypes.WrappedU256,
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setLiquidationIncentiveMantissa", [newLiquidationIncentiveMantissa], __options , (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* setMintGuardianPaused
+	*
+	* @param { ArgumentTypes.AccountId } pool,
+	* @param { boolean } paused,
+	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
+	*/
+	"setMintGuardianPaused" (
+		pool: ArgumentTypes.AccountId,
+		paused: boolean,
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "manager::setMintGuardianPaused", [pool, paused], __options , (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -181,6 +181,19 @@ export default class Methods {
 	}
 
 	/**
+	* getRoleAdmin
+	*
+	* @param { (number | string | BN) } role,
+	* @returns { Result<number, ReturnTypes.LangError> }
+	*/
+	"getRoleAdmin" (
+		role: (number | string | BN),
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<number, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accessControl::getRoleAdmin", [role], __options , (result) => { return handleReturnType(result, getTypeDescription(20, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
 	* renounceRole
 	*
 	* @param { (number | string | BN) } role,
@@ -193,21 +206,6 @@ export default class Methods {
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.AccessControlError>, ReturnTypes.LangError> > >{
 		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accessControl::renounceRole", [role, account], __options , (result) => { return handleReturnType(result, getTypeDescription(18, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* hasRole
-	*
-	* @param { (number | string | BN) } role,
-	* @param { ArgumentTypes.AccountId } address,
-	* @returns { Result<boolean, ReturnTypes.LangError> }
-	*/
-	"hasRole" (
-		role: (number | string | BN),
-		address: ArgumentTypes.AccountId,
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<boolean, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accessControl::hasRole", [role, address], __options , (result) => { return handleReturnType(result, getTypeDescription(20, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -226,16 +224,18 @@ export default class Methods {
 	}
 
 	/**
-	* getRoleAdmin
+	* hasRole
 	*
 	* @param { (number | string | BN) } role,
-	* @returns { Result<number, ReturnTypes.LangError> }
+	* @param { ArgumentTypes.AccountId } address,
+	* @returns { Result<boolean, ReturnTypes.LangError> }
 	*/
-	"getRoleAdmin" (
+	"hasRole" (
 		role: (number | string | BN),
+		address: ArgumentTypes.AccountId,
 		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<number, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accessControl::getRoleAdmin", [role], __options , (result) => { return handleReturnType(result, getTypeDescription(21, DATA_TYPE_DESCRIPTIONS)); });
+	): Promise< QueryReturnType< Result<boolean, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "accessControl::hasRole", [role, address], __options , (result) => { return handleReturnType(result, getTypeDescription(21, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 }

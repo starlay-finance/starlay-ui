@@ -29,6 +29,20 @@ export default class Methods {
 	}
 
 	/**
+	* pools
+	*
+	* @param { ArgumentTypes.AccountId } controller,
+	*/
+	"pools" (
+		controller: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pools", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [controller], __options);
+	}
+
+	/**
 	* poolMetadata
 	*
 	* @param { ArgumentTypes.AccountId } pool,
@@ -84,6 +98,38 @@ export default class Methods {
 		__options ? : GasLimit,
 	){
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "poolBalancesAll", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [pools, account], __options);
+	}
+
+	/**
+	* underlyingBalance
+	*
+	* @param { ArgumentTypes.AccountId } pool,
+	* @param { ArgumentTypes.AccountId } account,
+	*/
+	"underlyingBalance" (
+		pool: ArgumentTypes.AccountId,
+		account: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "underlyingBalance", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [pool, account], __options);
+	}
+
+	/**
+	* underlyingBalanceAll
+	*
+	* @param { Array<ArgumentTypes.AccountId> } pools,
+	* @param { ArgumentTypes.AccountId } account,
+	*/
+	"underlyingBalanceAll" (
+		pools: Array<ArgumentTypes.AccountId>,
+		account: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "underlyingBalanceAll", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [pools, account], __options);
 	}

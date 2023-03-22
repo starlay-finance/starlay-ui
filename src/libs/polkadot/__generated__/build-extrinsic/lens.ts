@@ -21,6 +21,18 @@ export default class Methods {
 		this.__apiPromise = apiPromise;
 	}
 	/**
+	 * pools
+	 *
+	 * @param { ArgumentTypes.AccountId } controller,
+	*/
+	"pools" (
+		controller: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pools", [controller], __options);
+	}
+
+	/**
 	 * poolMetadata
 	 *
 	 * @param { ArgumentTypes.AccountId } pool,
@@ -70,6 +82,34 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "poolBalancesAll", [pools, account], __options);
+	}
+
+	/**
+	 * underlyingBalance
+	 *
+	 * @param { ArgumentTypes.AccountId } pool,
+	 * @param { ArgumentTypes.AccountId } account,
+	*/
+	"underlyingBalance" (
+		pool: ArgumentTypes.AccountId,
+		account: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "underlyingBalance", [pool, account], __options);
+	}
+
+	/**
+	 * underlyingBalanceAll
+	 *
+	 * @param { Array<ArgumentTypes.AccountId> } pools,
+	 * @param { ArgumentTypes.AccountId } account,
+	*/
+	"underlyingBalanceAll" (
+		pools: Array<ArgumentTypes.AccountId>,
+		account: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "underlyingBalanceAll", [pools, account], __options);
 	}
 
 	/**

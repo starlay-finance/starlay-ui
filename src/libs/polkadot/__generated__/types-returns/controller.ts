@@ -14,11 +14,14 @@ export enum LangError {
 export enum Error {
 	mintIsPaused = 'MintIsPaused',
 	borrowIsPaused = 'BorrowIsPaused',
+	seizeIsPaused = 'SeizeIsPaused',
+	transferIsPaused = 'TransferIsPaused',
 	marketNotListed = 'MarketNotListed',
 	controllerMismatch = 'ControllerMismatch',
 	priceError = 'PriceError',
 	tooMuchRepay = 'TooMuchRepay',
 	borrowCapReached = 'BorrowCapReached',
-	callerIsNotManager = 'CallerIsNotManager'
+	callerIsNotManager = 'CallerIsNotManager',
+	invalidCollateralFactor = 'InvalidCollateralFactor'
 }
 

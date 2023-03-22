@@ -7,3 +7,7 @@ export enum LangError {
 
 export type AccountId = string | number[]
 
+export enum Error {
+	
+}
+

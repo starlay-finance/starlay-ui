@@ -32,4 +32,30 @@ export default class Methods {
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "priceOracle::getPrice", [asset], __options);
 	}
 
+	/**
+	 * setFixedPrice
+	 *
+	 * @param { ArgumentTypes.AccountId } asset,
+	 * @param { (string | number | BN) } value,
+	*/
+	"setFixedPrice" (
+		asset: ArgumentTypes.AccountId,
+		value: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "priceOracle::setFixedPrice", [asset, value], __options);
+	}
+
+	/**
+	 * getUnderlyingPrice
+	 *
+	 * @param { ArgumentTypes.AccountId } asset,
+	*/
+	"getUnderlyingPrice" (
+		asset: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "priceOracle::getUnderlyingPrice", [asset], __options);
+	}
+
 }
