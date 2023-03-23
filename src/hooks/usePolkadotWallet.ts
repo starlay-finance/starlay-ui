@@ -1,6 +1,10 @@
 import { Signer } from '@polkadot/api/types'
 import type * as PolkadotProvider from '@polkadot/extension-dapp'
 import { useEffect } from 'react'
+import {
+  DEFAULT_CHAIN_ID_POLKADOT,
+  PolkadotChainId,
+} from 'src/libs/config/network'
 import { PolkadotAddress } from 'src/types/web3'
 import { POLKADOT_JS_EXT_URL } from 'src/utils/routes'
 import { useSWRLocal } from './base/useSWRLocal'
@@ -11,6 +15,7 @@ export type PolkadotAccountWithMeta = { address: PolkadotAddress; meta: string }
 
 export type PolkadotWalletInterface = {
   account: PolkadotAddress | undefined
+  chainId: PolkadotChainId | undefined
   signer: Signer | undefined
   connect: (type: PolkadotWalletType) => Promise<void>
   accounts: () => Promise<PolkadotAccountWithMeta[]>
@@ -27,6 +32,8 @@ export const usePolkadotWallet = (
   const { data: signer, mutate: setSigner } = useSWRLocal<Signer>(
     'polkadot-active-signer',
   )
+  // TODO
+  const chainId: PolkadotChainId = DEFAULT_CHAIN_ID_POLKADOT
 
   const accounts = async () =>
     polkadot?.web3Accounts().then((accounts) =>
@@ -71,6 +78,7 @@ export const usePolkadotWallet = (
 
   return {
     account,
+    chainId,
     signer,
     connect,
     accounts,

@@ -3,10 +3,9 @@ import useSWRImmutable from 'swr/immutable'
 import { usePolkadotWallet } from './usePolkadotWallet'
 
 export const useStaticRPCProviderPolkadot = () => {
-  const {} = usePolkadotWallet(true)
-  const chainId = 'Development' as const // TODO
+  const { chainId } = usePolkadotWallet(true)
   return useSWRImmutable(
-    ['polkadot', 'staticrpcprovider', chainId],
+    chainId && ['polkadot', 'staticrpcprovider', chainId],
     async ([_key1, _key2, chainId]) => ({
       chainId,
       provider: await getProvider(chainId),

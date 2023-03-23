@@ -5,10 +5,12 @@ import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
 import { isSupportedChain } from 'src/libs/config'
 import { DEFAULT_CHAIN_ID } from 'src/utils/env'
 import { EVMWalletInterface, useEVMWallet } from './useEVMWallet'
+import { useNetworkType } from './useNetwork'
 
 export const useUnsupportedChainAlert = (params?: {
   forceChangeChain: boolean
 }) => {
+  const { data: network } = useNetworkType()
   const { chainId, switchChain } = useEVMWallet()
   const isUnsupportedChain = useMemo(
     () => chainId && !isSupportedChain(chainId),
@@ -18,12 +20,13 @@ export const useUnsupportedChainAlert = (params?: {
   const { isOpen, open: openMessageModal, close } = useMessageModal()
 
   useEffect(() => {
-    if (!params?.forceChangeChain || chainId) return
+    if (network !== 'EVM' || !params?.forceChangeChain || chainId) return
     openWalletModal()
   }, [chainId])
 
   useEffect(() => {
-    if (!params?.forceChangeChain || !isUnsupportedChain) return
+    if (network !== 'EVM' || !params?.forceChangeChain || !isUnsupportedChain)
+      return
     requestSwitchChain({ switchChain, openMessageModal, onSuccess: close })
   }, [isUnsupportedChain, params])
 

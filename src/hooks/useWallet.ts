@@ -16,6 +16,7 @@ export type WalletAdaptorInterface<T extends NetworkType, A extends string, W> =
     networkType: T
     account: A | null | undefined
     wallet: W | null
+    chainId: any
     connect: WalletConnector
   }
 
@@ -65,6 +66,7 @@ export const useWallet = (
     return {
       networkType,
       account: polkadotWallet.account,
+      chainId: polkadotWallet.chainId,
       wallet: polkadotWallet,
       connect,
     }
@@ -72,6 +74,7 @@ export const useWallet = (
   return {
     networkType,
     account: evmWallet.account,
+    chainId: evmWallet.chainId,
     wallet: evmWallet,
     connect,
   }
