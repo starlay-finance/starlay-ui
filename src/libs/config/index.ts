@@ -20,6 +20,6 @@ export const getNetworkConfigEVM = (chainId: EVMChainId): EVMNetworkConfig =>
 export const getMarketConfigEVM = (chainId: EVMChainId): EVMMarketConfig =>
   CHAIN_MARKET_CONFIG[chainId]
 
-export const getNetworkConfigPokadot = (
+export const getNetworkConfigPolkadot = (
   chainId: PolkadotChainId,
 ): PolkadotNetworkConfig => POLKADOT_NETWORK_CONFIG[chainId]

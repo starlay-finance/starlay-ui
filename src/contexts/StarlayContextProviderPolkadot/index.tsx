@@ -5,7 +5,7 @@ import { ModalPortal } from 'src/hooks/useModal'
 import { usePolkadotWallet } from 'src/hooks/usePolkadotWallet'
 import { StarlayContext } from 'src/hooks/useStarlay'
 import { useStaticRPCProviderPolkadot } from 'src/hooks/useStaticRPCProviderPolkadot'
-import { getNetworkConfigPokadot } from 'src/libs/config'
+import { getNetworkConfigPolkadot } from 'src/libs/config'
 import { DataProviderPolkadot } from 'src/libs/data-provider-polkadot'
 import { LendingPoolPolkadot } from 'src/libs/lending-pool-polkadot'
 import { DataProvider, LendingPool, TxItem } from 'src/types/starlay'
@@ -27,7 +27,7 @@ export const StarlayContextProviderPolkadot: FC<{
   const { data: dataProvider } = useSWRImmutable<DataProvider>(
     isReady && provider && ['polkadot', 'dataprovider', provider.chainId],
     () => {
-      const { lens, controller } = getNetworkConfigPokadot(
+      const { lens, controller } = getNetworkConfigPolkadot(
         provider!.chainId,
       ).addresses
       return DataProviderPolkadot.new(provider!, lens, controller)

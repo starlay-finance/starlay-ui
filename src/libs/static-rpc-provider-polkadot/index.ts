@@ -1,5 +1,5 @@
 import { ApiPromise, HttpProvider, WsProvider } from '@polkadot/api'
-import { getNetworkConfigPokadot } from '../config'
+import { getNetworkConfigPolkadot } from '../config'
 import { PolkadotChainId } from '../config/network'
 
 export type StaticRPCProviderPolkadot = {
@@ -9,7 +9,7 @@ export type StaticRPCProviderPolkadot = {
 export const getProviderWs = (chainId: PolkadotChainId) =>
   ApiPromise.create({
     provider: new WsProvider(
-      getNetworkConfigPokadot(chainId).publicJsonRPCWSUrl,
+      getNetworkConfigPolkadot(chainId).publicJsonRPCWSUrl,
     ),
     throwOnConnect: true,
   })
@@ -17,7 +17,7 @@ export const getProviderWs = (chainId: PolkadotChainId) =>
 export const getProvider = (chainId: PolkadotChainId) =>
   ApiPromise.create({
     provider: new HttpProvider(
-      getNetworkConfigPokadot(chainId).publicJsonRPCUrl[0],
+      getNetworkConfigPolkadot(chainId).publicJsonRPCUrl[0],
     ),
     throwOnConnect: true,
   })
