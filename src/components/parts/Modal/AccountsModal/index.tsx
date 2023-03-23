@@ -90,10 +90,6 @@ const AccountsDiv = styled.div`
     }
   }
 `
-const Heading = styled.div`
-  text-align: center;
-  color: ${trueBlack};
-`
 
 const BodyDiv = styled.div`
   padding: 32px;
