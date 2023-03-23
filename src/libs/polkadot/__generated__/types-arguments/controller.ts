@@ -16,10 +16,13 @@ export enum Error {
 	seizeIsPaused = 'SeizeIsPaused',
 	transferIsPaused = 'TransferIsPaused',
 	marketNotListed = 'MarketNotListed',
+	marketAlreadyListed = 'MarketAlreadyListed',
 	controllerMismatch = 'ControllerMismatch',
 	priceError = 'PriceError',
 	tooMuchRepay = 'TooMuchRepay',
 	borrowCapReached = 'BorrowCapReached',
+	insufficientLiquidity = 'InsufficientLiquidity',
+	insufficientShortfall = 'InsufficientShortfall',
 	callerIsNotManager = 'CallerIsNotManager',
 	invalidCollateralFactor = 'InvalidCollateralFactor'
 }

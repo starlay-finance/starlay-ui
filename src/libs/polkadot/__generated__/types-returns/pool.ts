@@ -24,6 +24,7 @@ export interface Error {
 	reduceReservesCashNotAvailable ? : null,
 	reduceReservesCashValidation ? : null,
 	borrowRateIsAbsurdlyHigh ? : null,
+	setReserveFactorBoundsCheck ? : null,
 	callerIsNotManager ? : null,
 	psp22 ? : PSP22Error,
 	lang ? : LangError
@@ -88,6 +89,11 @@ export class ErrorBuilder {
 	static BorrowRateIsAbsurdlyHigh(): Error {
 		return {
 			borrowRateIsAbsurdlyHigh: null,
+		};
+	}
+	static SetReserveFactorBoundsCheck(): Error {
+		return {
+			setReserveFactorBoundsCheck: null,
 		};
 	}
 	static CallerIsNotManager(): Error {

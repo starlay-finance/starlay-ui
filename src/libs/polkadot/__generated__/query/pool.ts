@@ -30,79 +30,27 @@ export default class Methods {
 	}
 
 	/**
-	* getAccountSnapshot
+	* borrowBalanceCurrent
 	*
 	* @param { ArgumentTypes.AccountId } account,
-	* @returns { Result<[ReturnNumber, ReturnNumber, ReturnTypes.U256], ReturnTypes.LangError> }
+	* @returns { Result<Result<ReturnNumber, ReturnTypes.Error>, ReturnTypes.LangError> }
 	*/
-	"getAccountSnapshot" (
+	"borrowBalanceCurrent" (
 		account: ArgumentTypes.AccountId,
 		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<[ReturnNumber, ReturnNumber, ReturnTypes.U256], ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::getAccountSnapshot", [account], __options , (result) => { return handleReturnType(result, getTypeDescription(12, DATA_TYPE_DESCRIPTIONS)); });
+	): Promise< QueryReturnType< Result<Result<ReturnNumber, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::borrowBalanceCurrent", [account], __options , (result) => { return handleReturnType(result, getTypeDescription(12, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
-	* supplyRatePerMsec
+	* exchageRateStored
 	*
 	* @returns { Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> }
 	*/
-	"supplyRatePerMsec" (
+	"exchageRateStored" (
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::supplyRatePerMsec", [], __options , (result) => { return handleReturnType(result, getTypeDescription(14, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* mint
-	*
-	* @param { (string | number | BN) } mintAmount,
-	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
-	*/
-	"mint" (
-		mintAmount: (string | number | BN),
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::mint", [mintAmount], __options , (result) => { return handleReturnType(result, getTypeDescription(15, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* totalReserves
-	*
-	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
-	*/
-	"totalReserves" (
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::totalReserves", [], __options , (result) => { return handleReturnType(result, getTypeDescription(19, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* getAccrualBlockTimestamp
-	*
-	* @returns { Result<number, ReturnTypes.LangError> }
-	*/
-	"getAccrualBlockTimestamp" (
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<number, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::getAccrualBlockTimestamp", [], __options , (result) => { return handleReturnType(result, getTypeDescription(20, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* liquidateBorrow
-	*
-	* @param { ArgumentTypes.AccountId } borrower,
-	* @param { (string | number | BN) } repayAmount,
-	* @param { ArgumentTypes.AccountId } collateral,
-	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
-	*/
-	"liquidateBorrow" (
-		borrower: ArgumentTypes.AccountId,
-		repayAmount: (string | number | BN),
-		collateral: ArgumentTypes.AccountId,
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::liquidateBorrow", [borrower, repayAmount, collateral], __options , (result) => { return handleReturnType(result, getTypeDescription(15, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::exchageRateStored", [], __options , (result) => { return handleReturnType(result, getTypeDescription(16, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -115,138 +63,18 @@ export default class Methods {
 		borrowAmount: (string | number | BN),
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::borrow", [borrowAmount], __options , (result) => { return handleReturnType(result, getTypeDescription(15, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::borrow", [borrowAmount], __options , (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
-	* manager
+	* exchangeRateCurrent
 	*
-	* @returns { Result<ReturnTypes.AccountId, ReturnTypes.LangError> }
+	* @returns { Result<Result<ReturnTypes.WrappedU256, ReturnTypes.Error>, ReturnTypes.LangError> }
 	*/
-	"manager" (
+	"exchangeRateCurrent" (
 		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<ReturnTypes.AccountId, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::manager", [], __options , (result) => { return handleReturnType(result, getTypeDescription(21, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* redeem
-	*
-	* @param { (string | number | BN) } redeemTokens,
-	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
-	*/
-	"redeem" (
-		redeemTokens: (string | number | BN),
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::redeem", [redeemTokens], __options , (result) => { return handleReturnType(result, getTypeDescription(15, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* borrowBalanceStored
-	*
-	* @param { ArgumentTypes.AccountId } account,
-	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
-	*/
-	"borrowBalanceStored" (
-		account: ArgumentTypes.AccountId,
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::borrowBalanceStored", [account], __options , (result) => { return handleReturnType(result, getTypeDescription(19, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* borrowRatePerMsec
-	*
-	* @returns { Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> }
-	*/
-	"borrowRatePerMsec" (
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::borrowRatePerMsec", [], __options , (result) => { return handleReturnType(result, getTypeDescription(14, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* underlying
-	*
-	* @returns { Result<ReturnTypes.AccountId, ReturnTypes.LangError> }
-	*/
-	"underlying" (
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<ReturnTypes.AccountId, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::underlying", [], __options , (result) => { return handleReturnType(result, getTypeDescription(21, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* redeemUnderlying
-	*
-	* @param { (string | number | BN) } redeemAmount,
-	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
-	*/
-	"redeemUnderlying" (
-		redeemAmount: (string | number | BN),
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::redeemUnderlying", [redeemAmount], __options , (result) => { return handleReturnType(result, getTypeDescription(15, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* controller
-	*
-	* @returns { Result<ReturnTypes.AccountId, ReturnTypes.LangError> }
-	*/
-	"controller" (
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<ReturnTypes.AccountId, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::controller", [], __options , (result) => { return handleReturnType(result, getTypeDescription(21, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* reduceReserves
-	*
-	* @param { (string | number | BN) } amount,
-	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
-	*/
-	"reduceReserves" (
-		amount: (string | number | BN),
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::reduceReserves", [amount], __options , (result) => { return handleReturnType(result, getTypeDescription(15, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* getCashPrior
-	*
-	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
-	*/
-	"getCashPrior" (
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::getCashPrior", [], __options , (result) => { return handleReturnType(result, getTypeDescription(19, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* totalBorrows
-	*
-	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
-	*/
-	"totalBorrows" (
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::totalBorrows", [], __options , (result) => { return handleReturnType(result, getTypeDescription(19, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* repayBorrow
-	*
-	* @param { (string | number | BN) } repayAmount,
-	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
-	*/
-	"repayBorrow" (
-		repayAmount: (string | number | BN),
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::repayBorrow", [repayAmount], __options , (result) => { return handleReturnType(result, getTypeDescription(15, DATA_TYPE_DESCRIPTIONS)); });
+	): Promise< QueryReturnType< Result<Result<ReturnTypes.WrappedU256, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::exchangeRateCurrent", [], __options , (result) => { return handleReturnType(result, getTypeDescription(19, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -257,33 +85,7 @@ export default class Methods {
 	"reserveFactorMantissa" (
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::reserveFactorMantissa", [], __options , (result) => { return handleReturnType(result, getTypeDescription(14, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* borrowBalanceCurrent
-	*
-	* @param { ArgumentTypes.AccountId } account,
-	* @returns { Result<Result<ReturnNumber, ReturnTypes.Error>, ReturnTypes.LangError> }
-	*/
-	"borrowBalanceCurrent" (
-		account: ArgumentTypes.AccountId,
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<ReturnNumber, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::borrowBalanceCurrent", [account], __options , (result) => { return handleReturnType(result, getTypeDescription(22, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* balanceOfUnderlyingCurrent
-	*
-	* @param { ArgumentTypes.AccountId } account,
-	* @returns { Result<Result<ReturnNumber, ReturnTypes.Error>, ReturnTypes.LangError> }
-	*/
-	"balanceOfUnderlyingCurrent" (
-		account: ArgumentTypes.AccountId,
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<ReturnNumber, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::balanceOfUnderlyingCurrent", [account], __options , (result) => { return handleReturnType(result, getTypeDescription(22, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::reserveFactorMantissa", [], __options , (result) => { return handleReturnType(result, getTypeDescription(16, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -300,29 +102,90 @@ export default class Methods {
 		seizeTokens: (string | number | BN),
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::seize", [liquidator, borrower, seizeTokens], __options , (result) => { return handleReturnType(result, getTypeDescription(15, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::seize", [liquidator, borrower, seizeTokens], __options , (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
-	* exchageRateStored
+	* supplyRatePerMsec
 	*
 	* @returns { Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> }
 	*/
-	"exchageRateStored" (
+	"supplyRatePerMsec" (
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::exchageRateStored", [], __options , (result) => { return handleReturnType(result, getTypeDescription(14, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::supplyRatePerMsec", [], __options , (result) => { return handleReturnType(result, getTypeDescription(16, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
-	* exchangeRateCurrent
+	* reduceReserves
 	*
-	* @returns { Result<Result<ReturnTypes.WrappedU256, ReturnTypes.Error>, ReturnTypes.LangError> }
+	* @param { (string | number | BN) } amount,
+	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
 	*/
-	"exchangeRateCurrent" (
+	"reduceReserves" (
+		amount: (string | number | BN),
 		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<ReturnTypes.WrappedU256, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::exchangeRateCurrent", [], __options , (result) => { return handleReturnType(result, getTypeDescription(24, DATA_TYPE_DESCRIPTIONS)); });
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::reduceReserves", [amount], __options , (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* controller
+	*
+	* @returns { Result<ReturnTypes.AccountId, ReturnTypes.LangError> }
+	*/
+	"controller" (
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<ReturnTypes.AccountId, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::controller", [], __options , (result) => { return handleReturnType(result, getTypeDescription(21, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* mint
+	*
+	* @param { (string | number | BN) } mintAmount,
+	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
+	*/
+	"mint" (
+		mintAmount: (string | number | BN),
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::mint", [mintAmount], __options , (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* getCashPrior
+	*
+	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
+	*/
+	"getCashPrior" (
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::getCashPrior", [], __options , (result) => { return handleReturnType(result, getTypeDescription(22, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* borrowRatePerMsec
+	*
+	* @returns { Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> }
+	*/
+	"borrowRatePerMsec" (
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::borrowRatePerMsec", [], __options , (result) => { return handleReturnType(result, getTypeDescription(16, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* repayBorrow
+	*
+	* @param { (string | number | BN) } repayAmount,
+	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
+	*/
+	"repayBorrow" (
+		repayAmount: (string | number | BN),
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::repayBorrow", [repayAmount], __options , (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -337,61 +200,170 @@ export default class Methods {
 		repayAmount: (string | number | BN),
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::repayBorrowBehalf", [borrower, repayAmount], __options , (result) => { return handleReturnType(result, getTypeDescription(15, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::repayBorrowBehalf", [borrower, repayAmount], __options , (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
-	* increaseAllowance
+	* addReserves
 	*
-	* @param { ArgumentTypes.AccountId } spender,
-	* @param { (string | number | BN) } deltaValue,
-	* @returns { Result<Result<null, ReturnTypes.PSP22Error>, ReturnTypes.LangError> }
+	* @param { (string | number | BN) } amount,
+	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
 	*/
-	"increaseAllowance" (
-		spender: ArgumentTypes.AccountId,
-		deltaValue: (string | number | BN),
+	"addReserves" (
+		amount: (string | number | BN),
 		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.PSP22Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22::increaseAllowance", [spender, deltaValue], __options , (result) => { return handleReturnType(result, getTypeDescription(26, DATA_TYPE_DESCRIPTIONS)); });
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::addReserves", [amount], __options , (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
-	* allowance
+	* setReserveFactorMantissa
 	*
-	* @param { ArgumentTypes.AccountId } owner,
-	* @param { ArgumentTypes.AccountId } spender,
+	* @param { ArgumentTypes.WrappedU256 } newReserveFactorMantissa,
+	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
+	*/
+	"setReserveFactorMantissa" (
+		newReserveFactorMantissa: ArgumentTypes.WrappedU256,
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::setReserveFactorMantissa", [newReserveFactorMantissa], __options , (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* redeem
+	*
+	* @param { (string | number | BN) } redeemTokens,
+	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
+	*/
+	"redeem" (
+		redeemTokens: (string | number | BN),
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::redeem", [redeemTokens], __options , (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* manager
+	*
+	* @returns { Result<ReturnTypes.AccountId, ReturnTypes.LangError> }
+	*/
+	"manager" (
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<ReturnTypes.AccountId, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::manager", [], __options , (result) => { return handleReturnType(result, getTypeDescription(21, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* getAccrualBlockTimestamp
+	*
+	* @returns { Result<number, ReturnTypes.LangError> }
+	*/
+	"getAccrualBlockTimestamp" (
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<number, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::getAccrualBlockTimestamp", [], __options , (result) => { return handleReturnType(result, getTypeDescription(23, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* balanceOfUnderlyingCurrent
+	*
+	* @param { ArgumentTypes.AccountId } account,
+	* @returns { Result<Result<ReturnNumber, ReturnTypes.Error>, ReturnTypes.LangError> }
+	*/
+	"balanceOfUnderlyingCurrent" (
+		account: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Result<ReturnNumber, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::balanceOfUnderlyingCurrent", [account], __options , (result) => { return handleReturnType(result, getTypeDescription(12, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* redeemUnderlying
+	*
+	* @param { (string | number | BN) } redeemAmount,
+	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
+	*/
+	"redeemUnderlying" (
+		redeemAmount: (string | number | BN),
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::redeemUnderlying", [redeemAmount], __options , (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* underlying
+	*
+	* @returns { Result<ReturnTypes.AccountId, ReturnTypes.LangError> }
+	*/
+	"underlying" (
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<ReturnTypes.AccountId, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::underlying", [], __options , (result) => { return handleReturnType(result, getTypeDescription(21, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* totalBorrows
+	*
 	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
 	*/
-	"allowance" (
-		owner: ArgumentTypes.AccountId,
-		spender: ArgumentTypes.AccountId,
+	"totalBorrows" (
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22::allowance", [owner, spender], __options , (result) => { return handleReturnType(result, getTypeDescription(19, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::totalBorrows", [], __options , (result) => { return handleReturnType(result, getTypeDescription(22, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
-	* balanceOf
+	* liquidateBorrow
 	*
-	* @param { ArgumentTypes.AccountId } owner,
-	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
+	* @param { ArgumentTypes.AccountId } borrower,
+	* @param { (string | number | BN) } repayAmount,
+	* @param { ArgumentTypes.AccountId } collateral,
+	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
 	*/
-	"balanceOf" (
-		owner: ArgumentTypes.AccountId,
+	"liquidateBorrow" (
+		borrower: ArgumentTypes.AccountId,
+		repayAmount: (string | number | BN),
+		collateral: ArgumentTypes.AccountId,
 		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22::balanceOf", [owner], __options , (result) => { return handleReturnType(result, getTypeDescription(19, DATA_TYPE_DESCRIPTIONS)); });
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::liquidateBorrow", [borrower, repayAmount, collateral], __options , (result) => { return handleReturnType(result, getTypeDescription(17, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
-	* totalSupply
+	* totalReserves
 	*
 	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
 	*/
-	"totalSupply" (
+	"totalReserves" (
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22::totalSupply", [], __options , (result) => { return handleReturnType(result, getTypeDescription(19, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::totalReserves", [], __options , (result) => { return handleReturnType(result, getTypeDescription(22, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* getAccountSnapshot
+	*
+	* @param { ArgumentTypes.AccountId } account,
+	* @returns { Result<[ReturnNumber, ReturnNumber, ReturnTypes.U256], ReturnTypes.LangError> }
+	*/
+	"getAccountSnapshot" (
+		account: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<[ReturnNumber, ReturnNumber, ReturnTypes.U256], ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::getAccountSnapshot", [account], __options , (result) => { return handleReturnType(result, getTypeDescription(24, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* borrowBalanceStored
+	*
+	* @param { ArgumentTypes.AccountId } account,
+	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
+	*/
+	"borrowBalanceStored" (
+		account: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "pool::borrowBalanceStored", [account], __options , (result) => { return handleReturnType(result, getTypeDescription(22, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -412,18 +384,16 @@ export default class Methods {
 	}
 
 	/**
-	* approve
+	* balanceOf
 	*
-	* @param { ArgumentTypes.AccountId } spender,
-	* @param { (string | number | BN) } value,
-	* @returns { Result<Result<null, ReturnTypes.PSP22Error>, ReturnTypes.LangError> }
+	* @param { ArgumentTypes.AccountId } owner,
+	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
 	*/
-	"approve" (
-		spender: ArgumentTypes.AccountId,
-		value: (string | number | BN),
+	"balanceOf" (
+		owner: ArgumentTypes.AccountId,
 		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.PSP22Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22::approve", [spender, value], __options , (result) => { return handleReturnType(result, getTypeDescription(26, DATA_TYPE_DESCRIPTIONS)); });
+	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22::balanceOf", [owner], __options , (result) => { return handleReturnType(result, getTypeDescription(22, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -439,6 +409,32 @@ export default class Methods {
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.PSP22Error>, ReturnTypes.LangError> > >{
 		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22::decreaseAllowance", [spender, deltaValue], __options , (result) => { return handleReturnType(result, getTypeDescription(26, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* increaseAllowance
+	*
+	* @param { ArgumentTypes.AccountId } spender,
+	* @param { (string | number | BN) } deltaValue,
+	* @returns { Result<Result<null, ReturnTypes.PSP22Error>, ReturnTypes.LangError> }
+	*/
+	"increaseAllowance" (
+		spender: ArgumentTypes.AccountId,
+		deltaValue: (string | number | BN),
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.PSP22Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22::increaseAllowance", [spender, deltaValue], __options , (result) => { return handleReturnType(result, getTypeDescription(26, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* totalSupply
+	*
+	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
+	*/
+	"totalSupply" (
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22::totalSupply", [], __options , (result) => { return handleReturnType(result, getTypeDescription(22, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -461,14 +457,33 @@ export default class Methods {
 	}
 
 	/**
-	* tokenName
+	* allowance
 	*
-	* @returns { Result<Array<number> | null, ReturnTypes.LangError> }
+	* @param { ArgumentTypes.AccountId } owner,
+	* @param { ArgumentTypes.AccountId } spender,
+	* @returns { Result<ReturnNumber, ReturnTypes.LangError> }
 	*/
-	"tokenName" (
+	"allowance" (
+		owner: ArgumentTypes.AccountId,
+		spender: ArgumentTypes.AccountId,
 		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Array<number> | null, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22Metadata::tokenName", [], __options , (result) => { return handleReturnType(result, getTypeDescription(28, DATA_TYPE_DESCRIPTIONS)); });
+	): Promise< QueryReturnType< Result<ReturnNumber, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22::allowance", [owner, spender], __options , (result) => { return handleReturnType(result, getTypeDescription(22, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* approve
+	*
+	* @param { ArgumentTypes.AccountId } spender,
+	* @param { (string | number | BN) } value,
+	* @returns { Result<Result<null, ReturnTypes.PSP22Error>, ReturnTypes.LangError> }
+	*/
+	"approve" (
+		spender: ArgumentTypes.AccountId,
+		value: (string | number | BN),
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.PSP22Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22::approve", [spender, value], __options , (result) => { return handleReturnType(result, getTypeDescription(26, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -491,6 +506,17 @@ export default class Methods {
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<number, ReturnTypes.LangError> > >{
 		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22Metadata::tokenDecimals", [], __options , (result) => { return handleReturnType(result, getTypeDescription(30, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* tokenName
+	*
+	* @returns { Result<Array<number> | null, ReturnTypes.LangError> }
+	*/
+	"tokenName" (
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<Array<number> | null, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "psp22Metadata::tokenName", [], __options , (result) => { return handleReturnType(result, getTypeDescription(28, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 }

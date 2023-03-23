@@ -4,8 +4,8 @@ import type {ApiPromise} from "@polkadot/api";
 import {_genValidGasLimitAndValue, _signAndSend, SignAndSendSuccessResponse} from "@727-ventures/typechain-types";
 import type {ConstructorOptions} from "@727-ventures/typechain-types";
 import type {WeightV2} from "@polkadot/types/interfaces";
-import type * as ArgumentTypes from '../types-arguments/default_interest_rate_model';
-import { ContractFile } from '../contract-info/default_interest_rate_model';
+import type * as ArgumentTypes from '../types-arguments/faucet';
+import { ContractFile } from '../contract-info/faucet';
 import type BN from 'bn.js';
 
 export default class Constructors {
@@ -23,16 +23,8 @@ export default class Constructors {
 	/**
 	* new
 	*
-	* @param { ArgumentTypes.WrappedU256 } baseRatePerYear,
-	* @param { ArgumentTypes.WrappedU256 } multiplierPerYearSlope1,
-	* @param { ArgumentTypes.WrappedU256 } multiplierPerYearSlope2,
-	* @param { ArgumentTypes.WrappedU256 } kink,
 	*/
    	async "new" (
-		baseRatePerYear: ArgumentTypes.WrappedU256,
-		multiplierPerYearSlope1: ArgumentTypes.WrappedU256,
-		multiplierPerYearSlope2: ArgumentTypes.WrappedU256,
-		kink: ArgumentTypes.WrappedU256,
 		__options ? : ConstructorOptions,
    	) {
    		const __contract = JSON.parse(ContractFile);
@@ -40,7 +32,7 @@ export default class Constructors {
 		const gasLimit = (await _genValidGasLimitAndValue(this.nativeAPI, __options)).gasLimit as WeightV2;
 
 		const storageDepositLimit = __options?.storageDepositLimit;
-			const tx = code.tx["new"]!({ gasLimit, storageDepositLimit, value: __options?.value }, baseRatePerYear, multiplierPerYearSlope1, multiplierPerYearSlope2, kink);
+			const tx = code.tx["new"]!({ gasLimit, storageDepositLimit, value: __options?.value }, );
 			let response;
 
 			try {
