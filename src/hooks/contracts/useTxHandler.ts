@@ -40,7 +40,7 @@ export const useTxHandler = () => {
               ? t`Approve the contract to borrow ERC-20 assets on your credit.`
               : t`Confirm the transaction.`,
         })
-        const txPromise = executor(tx)
+        const txPromise = await executor(tx)
         open({
           type: 'Loading',
           title: t`Transaction Pending`,

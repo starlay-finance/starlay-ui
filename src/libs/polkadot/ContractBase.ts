@@ -18,7 +18,10 @@ export abstract class PolkadotContractBase<T> {
     protected address?: PolkadotAddress,
     protected signer: KeyringPair = dummySigner,
   ) {
-    if (!dummySigner) dummySigner = keyring.addFromUri('//Alice')
+    if (!dummySigner) {
+      dummySigner = keyring.addFromUri('//Alice')
+      this.signer = dummySigner
+    }
   }
 
   get contract() {
