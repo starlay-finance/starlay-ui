@@ -13,6 +13,7 @@ import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
 import { useRewardModal } from 'src/components/parts/Modal/RewardModal'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
+import { useFaucet } from 'src/hooks/contracts/useFaucet'
 import { useNetworkType } from 'src/hooks/useNetwork'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
@@ -37,8 +38,9 @@ import { HeaderWrapper } from './common'
 export const AppHeader = () => {
   const { pathname } = useRouter()
   const { data: network } = useNetworkType()
-  const { account } = useWallet()
+  const { account, chainId } = useWallet()
   const { data: user } = useUserData()
+  const { mint } = useFaucet()
   const [isSetingsOpen, setIsSettingsOpen] = useState(false)
   const { open: openRewardModal } = useRewardModal()
   const { open: openNetworkModal } = useNetworkModal()
@@ -105,6 +107,11 @@ export const AppHeader = () => {
                 disabled={network !== 'EVM'}
               >{t`Set Gas Fee`}</button>
             </SettingsDiv>
+            {mint && (
+              <SettingsDiv>
+                <button onClick={mint}>{t`Faucet`}</button>
+              </SettingsDiv>
+            )}
           </SettingsContainer>
         </div>
       </Menu>
@@ -137,6 +144,8 @@ const Menu = styled.div`
   }
 `
 const SettingsDiv = styled.div`
+  display: flex;
+  flex-direction: column;
   > a,
   button {
     display: block;

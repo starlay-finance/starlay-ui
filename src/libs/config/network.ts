@@ -127,7 +127,7 @@ export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
 
 export type PolkadotNetworkConfig = NetworkConfig<
   PolkadotAddress,
-  'controller' | 'lens'
+  'controller' | 'lens' | 'faucet'
 >
 
 export const POLKADOT_NETWORK_CONFIG: Record<
@@ -139,8 +139,9 @@ export const POLKADOT_NETWORK_CONFIG: Record<
     publicJsonRPCUrl: ['http://127.0.0.1:9933'],
     publicJsonRPCWSUrl: 'ws://127.0.0.1:9944',
     addresses: {
-      controller: '5GvhpTPdfhDgfghvHVWvMBDThqAYA6LMi7DWC5wBfaJfLZ5F',
-      lens: '5DkTNiiK7qBia7B45jvUVQkvJf98jVhpBhjvWjc4sSDTRzdH',
+      lens: 'WR7tR4wWrcVC1dYgNESK2QazHrN1it6PAhDkMVgoG3o6tJN',
+      controller: 'acvtuW9tPSCFrGEfZscbAAkDPPzWAbhasgVz147gHhKjr6S',
+      faucet: 'aVrsTCWi7gbqJ6JosxFzcZKHCyCkdH74M687xvK375rPoj8',
     },
     baseAsset: {
       symbol: 'ASTR',

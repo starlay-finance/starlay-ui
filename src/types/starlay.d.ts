@@ -49,3 +49,13 @@ export type DataProvider<R = any> = {
     assets: AssetMetadata[]
   }) => Promise<WalletBalance>
 }
+
+export type Faucet = {
+  mint: (
+    amount: BigNumber,
+    option?: {
+      account?: string
+      assets?: string[]
+    },
+  ) => Promise<TxItem[]>
+}

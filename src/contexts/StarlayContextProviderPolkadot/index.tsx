@@ -7,8 +7,9 @@ import { StarlayContext } from 'src/hooks/useStarlay'
 import { useStaticRPCProviderPolkadot } from 'src/hooks/useStaticRPCProviderPolkadot'
 import { getNetworkConfigPolkadot } from 'src/libs/config'
 import { DataProviderPolkadot } from 'src/libs/data-provider-polkadot'
+import { FaucetPolkadot } from 'src/libs/faucet-polkadot'
 import { LendingPoolPolkadot } from 'src/libs/lending-pool-polkadot'
-import { DataProvider, LendingPool, TxItem } from 'src/types/starlay'
+import { DataProvider, Faucet, LendingPool, TxItem } from 'src/types/starlay'
 import useSWRImmutable from 'swr/immutable'
 import { executeTx } from './utils'
 
@@ -34,6 +35,15 @@ export const StarlayContextProviderPolkadot: FC<{
     },
   )
 
+  const { data: faucet } = useSWRImmutable<Faucet | undefined>(
+    isReady && provider && ['polkadot', 'faucet', provider.chainId],
+    () => {
+      const { isTestnet } = getNetworkConfigPolkadot(provider!.chainId)
+      if (!isTestnet) return undefined
+      return FaucetPolkadot.new(provider!)
+    },
+  )
+
   const txExecutor = useCallback(
     async (item: TxItem<SubmittableExtrinsic<'promise'>>) =>
       executeTx(item, account, signer),
@@ -49,6 +59,7 @@ export const StarlayContextProviderPolkadot: FC<{
         dataProvider,
         lendingPool,
         txExecutor,
+        faucet,
       }}
     >
       {children}
