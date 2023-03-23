@@ -153,5 +153,6 @@ export const POLKADOT_NETWORK_CONFIG: Record<
       decimals: 0,
     },
     explorerLinks: ['https://blockscout.com/astar'],
+    isTestnet: true,
   },
 }

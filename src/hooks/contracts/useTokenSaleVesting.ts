@@ -4,12 +4,12 @@ import {
 } from '@starlay-finance/contract-helpers'
 import {
   BigNumber,
-  WEI_DECIMALS,
   normalizeBN,
+  WEI_DECIMALS,
 } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
 import { ethers } from 'ethers'
-import { getNetworkConfig } from 'src/libs/config'
+import { getNetworkConfigEVM } from 'src/libs/config'
 import { StaticRPCProviderEVM } from 'src/libs/static-rpc-provider'
 import { tokenSaleVestingContract } from 'src/libs/token-sale-vesting'
 import useSWRImmutable from 'swr/immutable'
@@ -72,7 +72,7 @@ export const useTokenSaleVesting = () => {
 }
 
 const init = async (provider: StaticRPCProviderEVM) => {
-  const { addresses, rewardToken } = getNetworkConfig(provider.chainId)
+  const { addresses, rewardToken } = getNetworkConfigEVM(provider.chainId)
   const ido = tokenSaleVestingContract(
     provider!,
     addresses.idoVestingAddress,

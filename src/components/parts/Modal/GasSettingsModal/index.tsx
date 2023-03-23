@@ -6,7 +6,7 @@ import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useRecentGasPrice } from 'src/hooks/useRecentGasPrice'
 import { useStaticRPCProviderEVM } from 'src/hooks/useStaticRPCProviderEVM'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
-import { getNetworkConfig } from 'src/libs/config'
+import { getNetworkConfigEVM } from 'src/libs/config'
 import { DEFAULT_CHAIN_ID } from 'src/utils/env'
 import {
   getGasPriceMultiplier,
@@ -18,7 +18,7 @@ import { GasSettingsModalBody } from './Body'
 
 export const GasSettings: FC<ModalContentProps> = ({ close }) => {
   const { data } = useStaticRPCProviderEVM()
-  const { baseAsset } = getNetworkConfig(data?.chainId || DEFAULT_CHAIN_ID)
+  const { baseAsset } = getNetworkConfigEVM(data?.chainId || DEFAULT_CHAIN_ID)
   const { data: balance } = useWalletBalance()
   const multiplier = getGasPriceMultiplier()
   const manual = getManualGasPrice()

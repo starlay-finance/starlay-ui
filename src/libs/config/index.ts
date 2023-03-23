@@ -3,10 +3,10 @@ import {
   EVMChainId,
   EVMNetworkConfig,
   EVM_NETWORK_CONFIG,
-  POLKADOT_NETWORK_CONFIG,
+  isSupportedChain,
   PolkadotChainId,
   PolkadotNetworkConfig,
-  isSupportedChain,
+  POLKADOT_NETWORK_CONFIG,
 } from './network'
 
 export { isSupportedChain }
@@ -14,10 +14,10 @@ export type { EVMChainId, EVMMarketConfig, EVMNetworkConfig }
 
 export type NetworkType = 'EVM' | 'Polkadot'
 
-export const getNetworkConfig = (chainId: EVMChainId): EVMNetworkConfig =>
+export const getNetworkConfigEVM = (chainId: EVMChainId): EVMNetworkConfig =>
   EVM_NETWORK_CONFIG[chainId]
 
-export const getMarketConfig = (chainId: EVMChainId): EVMMarketConfig =>
+export const getMarketConfigEVM = (chainId: EVMChainId): EVMMarketConfig =>
   CHAIN_MARKET_CONFIG[chainId]
 
 export const getNetworkConfigPokadot = (

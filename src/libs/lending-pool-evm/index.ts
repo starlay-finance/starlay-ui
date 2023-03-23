@@ -1,12 +1,12 @@
 import {
+  eEthereumTxType,
   EthereumTransactionTypeExtended,
   InterestRate,
   LendingPool as LendingPoolContract,
-  eEthereumTxType,
 } from '@starlay-finance/contract-helpers'
 import { LendingPool, TxItem, TxType } from 'src/types/starlay'
 import { equals } from 'src/utils/address'
-import { EVMChainId, getMarketConfig, getNetworkConfig } from '../config'
+import { EVMChainId, getMarketConfigEVM, getNetworkConfigEVM } from '../config'
 import { BASE_ASSET_DUMMY_ADDRESS } from '../pool-data-provider/converters/constants'
 import { StaticRPCProviderEVM } from '../static-rpc-provider'
 
@@ -18,7 +18,7 @@ export class LendingPoolEVM implements LendingPool {
 
   static new = ({ chainId, provider }: StaticRPCProviderEVM) =>
     new LendingPoolEVM(
-      new LendingPoolContract(provider, getMarketConfig(chainId).addresses),
+      new LendingPoolContract(provider, getMarketConfigEVM(chainId).addresses),
       chainId,
     )
 
@@ -100,6 +100,6 @@ const reserveAddress = (underlyingAsset: string, chainId: EVMChainId) => {
   if (!equals(underlyingAsset, BASE_ASSET_DUMMY_ADDRESS)) return underlyingAsset
   const {
     baseAsset: { wrapperAddress },
-  } = getNetworkConfig(chainId)
+  } = getNetworkConfigEVM(chainId)
   return wrapperAddress
 }

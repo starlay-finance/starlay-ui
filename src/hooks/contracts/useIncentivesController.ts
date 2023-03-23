@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import { getMarketConfig } from 'src/libs/config'
+import { getMarketConfigEVM } from 'src/libs/config'
 import { incentivesControllerContract } from 'src/libs/incentives-controller'
 import { EthereumAddress } from 'src/types/web3'
 import useSWRImmutable from 'swr/immutable'
@@ -26,7 +26,7 @@ export const useIncentivesController = (
       throw new Error('Unexpected state')
     const {
       addresses: { INCENTIVES_CONTROLLER },
-    } = getMarketConfig(provider!.chainId)
+    } = getMarketConfigEVM(provider!.chainId)
     const assets =
       !userData || !marketData
         ? []

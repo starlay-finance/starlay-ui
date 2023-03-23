@@ -1,13 +1,13 @@
 import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { GraphQLClient } from 'graphql-request'
-import { EVMChainId, getNetworkConfig } from 'src/libs/config'
+import { EVMChainId, getNetworkConfigEVM } from 'src/libs/config'
 import { getSdk } from './__generated__/graphql'
 
 const graphqlClient = (endpoint: string) => getSdk(new GraphQLClient(endpoint))
 
 export const getLAYPrice = async (chainId: EVMChainId) => {
   const { arthswapDataProvider, baseAsset, rewardToken } =
-    getNetworkConfig(chainId)
+    getNetworkConfigEVM(chainId)
   if (!arthswapDataProvider) return undefined
   const client = graphqlClient(arthswapDataProvider.endpoint)
   const res = await client.ListPrices({

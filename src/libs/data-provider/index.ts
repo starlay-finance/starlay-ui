@@ -9,15 +9,15 @@ import { DataProvider } from 'src/types/starlay'
 import { EthereumAddress } from 'src/types/web3'
 import { onlyListed } from 'src/utils/assets'
 import { BN_ZERO } from 'src/utils/number'
-import { EVMChainId, getNetworkConfig } from '../config'
+import { EVMChainId, getNetworkConfigEVM } from '../config'
 import {
-  PoolDataProviderInterface,
   getPoolDataProvider,
+  PoolDataProviderInterface,
 } from '../pool-data-provider'
 import { StaticRPCProviderEVM } from '../static-rpc-provider'
 import {
-  WalletBalanceProviderInterface,
   walletBalanceProviderContract,
+  WalletBalanceProviderInterface,
 } from '../wallet-balance-provider'
 import { toAssetMarketData, toUser, toWalletBalance } from './utils'
 
@@ -45,7 +45,7 @@ export class DataProviderEVM implements DataProvider<MarketDataRawEVM> {
     layPriceInUSD = BN_ZERO,
   } = {}) => {
     const currentTimestamp = dayjs().unix()
-    const { rewardToken } = getNetworkConfig(this.chainId)
+    const { rewardToken } = getNetworkConfigEVM(this.chainId)
     const {
       reservesData,
       incentivesByUnderlyingAsset,
@@ -98,7 +98,7 @@ export class DataProviderEVM implements DataProvider<MarketDataRawEVM> {
     account,
     assets,
   }) => {
-    const { rewardToken } = getNetworkConfig(this.chainId)
+    const { rewardToken } = getNetworkConfigEVM(this.chainId)
     const balancesDict =
       await this.walletBalanceProvider.getBeforeNormalizedWalletBalance(account)
 

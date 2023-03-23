@@ -4,13 +4,13 @@ import {
 } from '@starlay-finance/contract-helpers'
 import {
   BigNumber,
-  WEI_DECIMALS,
   normalizeBN,
   valueToBigNumber,
+  WEI_DECIMALS,
 } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
 import { ethers } from 'ethers'
-import { getNetworkConfig } from 'src/libs/config'
+import { getNetworkConfigEVM } from 'src/libs/config'
 import { StaticRPCProviderEVM } from 'src/libs/static-rpc-provider'
 import { voterContract } from 'src/libs/voter'
 import useSWRImmutable from 'swr/immutable'
@@ -104,7 +104,7 @@ export const useVoter = (offset = 0) => {
 }
 
 const init = async (provider: StaticRPCProviderEVM) => {
-  const { addresses } = getNetworkConfig(provider.chainId)
+  const { addresses } = getNetworkConfigEVM(provider.chainId)
   return voterContract(
     provider!,
     addresses.voterAddress,

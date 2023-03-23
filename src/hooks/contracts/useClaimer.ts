@@ -7,7 +7,7 @@ import {
 import { ethers } from 'ethers'
 import { useMemo } from 'react'
 import { claimerContract } from 'src/libs/claimer'
-import { getNetworkConfig } from 'src/libs/config'
+import { getNetworkConfigEVM } from 'src/libs/config'
 import { StaticRPCProviderEVM } from 'src/libs/static-rpc-provider'
 import useSWR from 'swr'
 import useSWRImmutable from 'swr/immutable'
@@ -85,6 +85,6 @@ export const useClaimer = () => {
 }
 
 const init = async (provider: StaticRPCProviderEVM) => {
-  const { addresses } = getNetworkConfig(provider.chainId)
+  const { addresses } = getNetworkConfigEVM(provider.chainId)
   return claimerContract(provider!, addresses.claimerAddress)
 }

@@ -10,7 +10,7 @@ import {
   valueToBigNumber,
 } from '@starlay-finance/math-utils'
 import { BN_ZERO } from 'src/utils/number'
-import { getNetworkConfig } from '../config'
+import { getNetworkConfigEVM } from '../config'
 import { StaticRPCProviderEVM } from '../static-rpc-provider'
 
 export const stakeUiHelperContract = (
@@ -27,7 +27,7 @@ class StakeUiHelperWrapper implements StakeUiHelperInterface {
   static new = ({ chainId, provider }: StaticRPCProviderEVM) => {
     const {
       addresses: { stakeUiHelper },
-    } = getNetworkConfig(chainId)
+    } = getNetworkConfigEVM(chainId)
     return new StakeUiHelperWrapper(
       new StakeUiHelper({
         stakeUiHelperAddress: stakeUiHelper || '0x000',

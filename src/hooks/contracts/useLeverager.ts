@@ -1,6 +1,6 @@
 import { InterestRate } from '@starlay-finance/contract-helpers'
 import { BigNumber } from '@starlay-finance/math-utils'
-import { getMarketConfig, getNetworkConfig } from 'src/libs/config'
+import { getMarketConfigEVM, getNetworkConfigEVM } from 'src/libs/config'
 import { leveragerContract } from 'src/libs/leverager'
 import { BASE_ASSET_DUMMY_ADDRESS } from 'src/libs/pool-data-provider/converters/constants'
 import { EthereumAddress } from 'src/types/web3'
@@ -16,7 +16,7 @@ export const useLeverager = () => {
   const { data: leverager } = useSWRImmutable(
     provider && ['leverager', provider.chainId],
     () => {
-      const { LEVERAGER } = getMarketConfig(provider!.chainId).addresses
+      const { LEVERAGER } = getMarketConfigEVM(provider!.chainId).addresses
       if (!LEVERAGER) return undefined
       return leveragerContract(provider!, LEVERAGER)
     },
@@ -51,7 +51,7 @@ export const useLeverager = () => {
     lToken: EthereumAddress
   }) => {
     if (!leverager || !account || !signer) throw new Error('Unexpected state')
-    const { baseAsset } = getNetworkConfig(provider!.chainId)
+    const { baseAsset } = getNetworkConfigEVM(provider!.chainId)
 
     return handleTx(
       await leverager.close({
