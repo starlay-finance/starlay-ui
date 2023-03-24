@@ -46,8 +46,8 @@ export const StarlayContextProviderPolkadot: FC<{
 
   const txExecutor = useCallback(
     async (item: TxItem<SubmittableExtrinsic<'promise'>>) =>
-      executeTx(item, account, signer),
-    [account, signer],
+      executeTx(item, account, signer, provider!.provider),
+    [account, signer, provider],
   )
 
   useEffect(() => {
