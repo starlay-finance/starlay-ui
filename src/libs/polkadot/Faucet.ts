@@ -4,8 +4,8 @@ import { BigNumber } from '@starlay-finance/math-utils'
 import { TxItem } from 'src/types/starlay'
 import { PolkadotAddress } from 'src/types/web3'
 import { PolkadotContractBase } from './ContractBase'
+import { toTxItem } from './utils'
 import Contract from './__generated__/contracts/faucet'
-import { buildUnsignedTx, toTxItem } from './utils'
 
 export class Faucet extends PolkadotContractBase<Contract> {
   constructor(api: ApiPromise, address: PolkadotAddress, signer?: KeyringPair) {
@@ -17,7 +17,7 @@ export class Faucet extends PolkadotContractBase<Contract> {
     amount: BigNumber,
   ): Promise<TxItem[]> => {
     const tx = () =>
-      buildUnsignedTx(this.contract, 'mintUnderlyingAll', [
+      this.buildUnsignedTx('mintUnderlyingAll', [
         controller,
         amount.toString(),
         null,

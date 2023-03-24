@@ -5,7 +5,6 @@ import { TxItem } from 'src/types/starlay'
 import { PolkadotAddress } from 'src/types/web3'
 import { PolkadotContractBase } from './ContractBase'
 import Contract from './__generated__/contracts/psp22_token'
-import { buildUnsignedTx } from './utils'
 
 export class Token extends PolkadotContractBase<Contract> {
   constructor(api: ApiPromise, address: PolkadotAddress, signer: KeyringPair) {
@@ -23,7 +22,7 @@ export class Token extends PolkadotContractBase<Contract> {
     if (!allowance || allowance.rawNumber.lt(amount))
       return {
         type: 'Approval',
-        tx: () => buildUnsignedTx(contract, 'approve', [pool, amount]),
+        tx: () => this.buildUnsignedTx('approve', [pool, amount]),
       }
   }
 }

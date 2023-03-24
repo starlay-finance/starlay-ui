@@ -7,8 +7,8 @@ import { PolkadotAddress } from 'src/types/web3'
 import { filterFalsy } from 'src/utils/array'
 import { PolkadotContractBase } from './ContractBase'
 import { Token } from './Token'
+import { toTxItem } from './utils'
 import Contract from './__generated__/contracts/pool'
-import { buildUnsignedTx, toTxItem } from './utils'
 
 export class LendingPool extends PolkadotContractBase<Contract> {
   constructor(
@@ -32,7 +32,7 @@ export class LendingPool extends PolkadotContractBase<Contract> {
       _with.address,
       amountBN,
     )
-    const tx = () => buildUnsignedTx(this.contract, 'mint', [amountBN])
+    const tx = () => this.buildUnsignedTx('mint', [amountBN])
     return [approvalTxItem, toTxItem('Pool', tx)].filter(filterFalsy)
   }
 
@@ -45,7 +45,7 @@ export class LendingPool extends PolkadotContractBase<Contract> {
   ): Promise<TxItem[]> => {
     this.with(_with)
     const amountBN = new BN(params.amount.toString())
-    const tx = () => buildUnsignedTx(this.contract, 'redeem', [amountBN])
+    const tx = () => this.buildUnsignedTx('redeem', [amountBN])
     return [toTxItem('Pool', tx)]
   }
 
@@ -58,7 +58,7 @@ export class LendingPool extends PolkadotContractBase<Contract> {
   ): Promise<TxItem[]> => {
     this.with(_with)
     const amountBN = new BN(params.amount.toString())
-    const tx = () => buildUnsignedTx(this.contract, 'borrow', [amountBN])
+    const tx = () => this.buildUnsignedTx('borrow', [amountBN])
     return [toTxItem('Pool', tx)]
   }
 
@@ -71,7 +71,7 @@ export class LendingPool extends PolkadotContractBase<Contract> {
   ): Promise<TxItem[]> => {
     this.with(_with)
     const amountBN = new BN(params.amount.toString())
-    const tx = () => buildUnsignedTx(this.contract, 'repayBorrow', [amountBN])
+    const tx = () => this.buildUnsignedTx('repayBorrow', [amountBN])
     return [toTxItem('Pool', tx)]
   }
 
