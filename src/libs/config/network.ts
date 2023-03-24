@@ -9,10 +9,11 @@ export type EVMChainId = ValueOf<typeof EVM_CHAIN_ID>
 
 export const POLKADOT_CHAIN_ID = {
   // astar: "Astar",
-  // shibuya: 'Shibuya Testnet',
-  local: 'Development',
+  shibuya: 'Shibuya Testnet',
+  // local: 'Development',
 } as const
 export type PolkadotChainId = ValueOf<typeof POLKADOT_CHAIN_ID>
+export const DEFAULT_CHAIN_ID_POLKADOT = POLKADOT_CHAIN_ID.shibuya
 
 export const isSupportedChain = (arg: any): arg is EVMChainId =>
   Object.values(EVM_CHAIN_ID).includes(arg)
@@ -134,14 +135,14 @@ export const POLKADOT_NETWORK_CONFIG: Record<
   PolkadotChainId,
   PolkadotNetworkConfig
 > = {
-  [POLKADOT_CHAIN_ID.local]: {
-    name: 'Development',
-    publicJsonRPCUrl: ['http://127.0.0.1:9933'],
-    publicJsonRPCWSUrl: 'ws://127.0.0.1:9944',
+  [POLKADOT_CHAIN_ID.shibuya]: {
+    name: 'Shibuya Testnet',
+    publicJsonRPCUrl: ['https://shibuya-rpc.dwellir.com'],
+    publicJsonRPCWSUrl: 'wss://shibuya-rpc.dwellir.com',
     addresses: {
-      lens: 'WR7tR4wWrcVC1dYgNESK2QazHrN1it6PAhDkMVgoG3o6tJN',
-      controller: 'acvtuW9tPSCFrGEfZscbAAkDPPzWAbhasgVz147gHhKjr6S',
-      faucet: 'aVrsTCWi7gbqJ6JosxFzcZKHCyCkdH74M687xvK375rPoj8',
+      lens: 'ajLoPupEuQaZotK8SNRGpcBTYMeDsQGWBAQpa2giM26vwXC',
+      controller: 'W1M8b4DXf544Z7TrPMNx4JBJSipkLtXS9gqi8LfiJLM3j1n',
+      faucet: 'YwnPYnuK1ob9tcBzW8zEqGSSYHnGwbbXSqwN4q4jLeHGRvC',
     },
     baseAsset: {
       symbol: 'ASTR',
