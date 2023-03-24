@@ -11,8 +11,8 @@ import {
 import { DataProvider } from 'src/types/starlay'
 import { PolkadotAddress } from 'src/types/web3'
 import {
-  EMPTY_BALANCE_BY_ASSET,
   assetFromSymbolAndAddress,
+  EMPTY_BALANCE_BY_ASSET,
 } from 'src/utils/assets'
 import { calculateNetAPY } from 'src/utils/calculator'
 import { BN_ONE, BN_ZERO } from 'src/utils/number'
@@ -201,8 +201,8 @@ const toSummary = (
 
   return {
     totalDepositedInUSD: acc.totalDepositedInUSD,
-    totalBorrowedInMarketReferenceCurrency: acc.totalDepositedInUSD,
-    totalBorrowedInUSD: acc.totalDepositedInUSD,
+    totalBorrowedInMarketReferenceCurrency: acc.totalBorrowedInUSD,
+    totalBorrowedInUSD: acc.totalBorrowedInUSD,
     totalCollateralInMarketReferenceCurrency: acc.totalDepositedInUSD,
     availableBorrowsInUSD,
     borrowLimitInUSD: acc.borrowLimitInUSD,
