@@ -8,31 +8,18 @@ export const executeTx = async (
 ) => {
   if (!account) throw new Error('Unexpected state')
   const tx = await item.tx()
-  return new Promise<void>(async (res, rej) => {
-    try {
-      await tx.signAndSend(account, { signer }, (result) => {
+  return new Promise<{ wait: () => Promise<void> }>(async (res, rej) => {
+    const txPromise = new Promise<void>(async (resTx, rejTx) => {
+      try {
+        await tx.signAndSend(account, { signer }, (result) => {
+          if (result.isError) return rejTx('Transaction Failed')
+          if (result.isCompleted) return resTx()
+        })
+        res({ wait: () => txPromise })
+      } catch (e) {
         // TODO
-        if (result.isError) return rej('Transaction Failed')
-
-        waitUntil(() => {
-          console.log(result.status.isInBlock, result.status.isFinalized)
-          return result.status.isInBlock
-        }, 1000).then(() => res())
-      })
-    } catch (e) {
-      // TODO
-      rej(e)
-    }
-  })
-}
-
-const waitUntil = async (cb: () => boolean, interval: number) => {
-  let timer: any
-  return new Promise<void>((res) => {
-    timer = setInterval(() => {
-      if (!cb()) return
-      clearInterval(timer)
-      res()
-    }, interval)
+        rej(e)
+      }
+    })
   })
 }

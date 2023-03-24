@@ -21,7 +21,7 @@ export const executeTx = async (
     value: tx.value ? ethers.BigNumber.from(tx.value) : undefined,
     gasPrice,
   })
-  return txPromise.wait(1)
+  return { wait: () => txPromise.wait(1) }
 }
 
 export const getMultipliedGasPrice = async (

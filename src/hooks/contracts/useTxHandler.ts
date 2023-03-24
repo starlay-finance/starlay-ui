@@ -19,7 +19,7 @@ export const useTxHandler = () => {
 
   const handleTx = async <T = any>(
     txs: TxItem<T>[],
-    executor: (item: TxItem<T>) => Promise<any>,
+    executor: (item: TxItem<T>) => Promise<{ wait: () => Promise<void> }>,
     onSucceeded?: VoidFunction,
   ) => {
     open({
@@ -46,7 +46,7 @@ export const useTxHandler = () => {
           title: t`Transaction Pending`,
           message: t`Waiting for the transaction to be confirmed...`,
         })
-        await txPromise
+        await txPromise.wait()
       }
       revalidate()
       open({
