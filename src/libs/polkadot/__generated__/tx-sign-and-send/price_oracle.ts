@@ -29,17 +29,19 @@ export default class Methods {
 	}
 
 	/**
-	* getUnderlyingPrice
+	* setFixedPrice
 	*
 	* @param { ArgumentTypes.AccountId } asset,
+	* @param { (string | number | BN) } value,
 	*/
-	"getUnderlyingPrice" (
+	"setFixedPrice" (
 		asset: ArgumentTypes.AccountId,
+		value: (string | number | BN),
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "priceOracle::getUnderlyingPrice", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "priceOracle::setFixedPrice", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [asset], __options);
+		}, [asset, value], __options);
 	}
 
 	/**
@@ -57,19 +59,17 @@ export default class Methods {
 	}
 
 	/**
-	* setFixedPrice
+	* getUnderlyingPrice
 	*
 	* @param { ArgumentTypes.AccountId } asset,
-	* @param { (string | number | BN) } value,
 	*/
-	"setFixedPrice" (
+	"getUnderlyingPrice" (
 		asset: ArgumentTypes.AccountId,
-		value: (string | number | BN),
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "priceOracle::setFixedPrice", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "priceOracle::getUnderlyingPrice", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [asset, value], __options);
+		}, [asset], __options);
 	}
 
 }

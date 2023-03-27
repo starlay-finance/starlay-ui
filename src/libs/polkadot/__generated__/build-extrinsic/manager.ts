@@ -21,65 +21,41 @@ export default class Methods {
 		this.__apiPromise = apiPromise;
 	}
 	/**
-	 * setPriceOracle
+	 * setLiquidationIncentiveMantissa
 	 *
-	 * @param { ArgumentTypes.AccountId } newOracle,
+	 * @param { ArgumentTypes.WrappedU256 } newLiquidationIncentiveMantissa,
 	*/
-	"setPriceOracle" (
-		newOracle: ArgumentTypes.AccountId,
+	"setLiquidationIncentiveMantissa" (
+		newLiquidationIncentiveMantissa: ArgumentTypes.WrappedU256,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::setPriceOracle", [newOracle], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::setLiquidationIncentiveMantissa", [newLiquidationIncentiveMantissa], __options);
 	}
 
 	/**
-	 * setCollateralFactorMantissa
+	 * sweepToken
 	 *
 	 * @param { ArgumentTypes.AccountId } pool,
-	 * @param { ArgumentTypes.WrappedU256 } newCollateralFactorMantissa,
+	 * @param { ArgumentTypes.AccountId } asset,
 	*/
-	"setCollateralFactorMantissa" (
+	"sweepToken" (
 		pool: ArgumentTypes.AccountId,
-		newCollateralFactorMantissa: ArgumentTypes.WrappedU256,
+		asset: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::setCollateralFactorMantissa", [pool, newCollateralFactorMantissa], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::sweepToken", [pool, asset], __options);
 	}
 
 	/**
-	 * controller
+	 * setController
 	 *
+	 * @param { ArgumentTypes.AccountId } address,
 	*/
-	"controller" (
+	"setController" (
+		address: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::controller", [], __options);
-	}
-
-	/**
-	 * supportMarket
-	 *
-	 * @param { ArgumentTypes.AccountId } pool,
-	*/
-	"supportMarket" (
-		pool: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::supportMarket", [pool], __options);
-	}
-
-	/**
-	 * setMintGuardianPaused
-	 *
-	 * @param { ArgumentTypes.AccountId } pool,
-	 * @param { boolean } paused,
-	*/
-	"setMintGuardianPaused" (
-		pool: ArgumentTypes.AccountId,
-		paused: boolean,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::setMintGuardianPaused", [pool, paused], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::setController", [address], __options);
 	}
 
 	/**
@@ -97,18 +73,6 @@ export default class Methods {
 	}
 
 	/**
-	 * setLiquidationIncentiveMantissa
-	 *
-	 * @param { ArgumentTypes.WrappedU256 } newLiquidationIncentiveMantissa,
-	*/
-	"setLiquidationIncentiveMantissa" (
-		newLiquidationIncentiveMantissa: ArgumentTypes.WrappedU256,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::setLiquidationIncentiveMantissa", [newLiquidationIncentiveMantissa], __options);
-	}
-
-	/**
 	 * setBorrowGuardianPaused
 	 *
 	 * @param { ArgumentTypes.AccountId } pool,
@@ -120,6 +84,70 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::setBorrowGuardianPaused", [pool, paused], __options);
+	}
+
+	/**
+	 * setMintGuardianPaused
+	 *
+	 * @param { ArgumentTypes.AccountId } pool,
+	 * @param { boolean } paused,
+	*/
+	"setMintGuardianPaused" (
+		pool: ArgumentTypes.AccountId,
+		paused: boolean,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::setMintGuardianPaused", [pool, paused], __options);
+	}
+
+	/**
+	 * setCollateralFactorMantissa
+	 *
+	 * @param { ArgumentTypes.AccountId } pool,
+	 * @param { ArgumentTypes.WrappedU256 } newCollateralFactorMantissa,
+	*/
+	"setCollateralFactorMantissa" (
+		pool: ArgumentTypes.AccountId,
+		newCollateralFactorMantissa: ArgumentTypes.WrappedU256,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::setCollateralFactorMantissa", [pool, newCollateralFactorMantissa], __options);
+	}
+
+	/**
+	 * setPriceOracle
+	 *
+	 * @param { ArgumentTypes.AccountId } newOracle,
+	*/
+	"setPriceOracle" (
+		newOracle: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::setPriceOracle", [newOracle], __options);
+	}
+
+	/**
+	 * supportMarket
+	 *
+	 * @param { ArgumentTypes.AccountId } pool,
+	*/
+	"supportMarket" (
+		pool: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::supportMarket", [pool], __options);
+	}
+
+	/**
+	 * setCloseFactorMantissa
+	 *
+	 * @param { ArgumentTypes.WrappedU256 } newCloseFactorMantissa,
+	*/
+	"setCloseFactorMantissa" (
+		newCloseFactorMantissa: ArgumentTypes.WrappedU256,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::setCloseFactorMantissa", [newCloseFactorMantissa], __options);
 	}
 
 	/**
@@ -137,44 +165,6 @@ export default class Methods {
 	}
 
 	/**
-	 * reduceReserves
-	 *
-	 * @param { ArgumentTypes.AccountId } pool,
-	 * @param { (string | number | BN) } amount,
-	*/
-	"reduceReserves" (
-		pool: ArgumentTypes.AccountId,
-		amount: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::reduceReserves", [pool, amount], __options);
-	}
-
-	/**
-	 * setController
-	 *
-	 * @param { ArgumentTypes.AccountId } address,
-	*/
-	"setController" (
-		address: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::setController", [address], __options);
-	}
-
-	/**
-	 * setCloseFactorMantissa
-	 *
-	 * @param { ArgumentTypes.WrappedU256 } newCloseFactorMantissa,
-	*/
-	"setCloseFactorMantissa" (
-		newCloseFactorMantissa: ArgumentTypes.WrappedU256,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::setCloseFactorMantissa", [newCloseFactorMantissa], __options);
-	}
-
-	/**
 	 * setReserveFactorMantissa
 	 *
 	 * @param { ArgumentTypes.AccountId } pool,
@@ -189,6 +179,30 @@ export default class Methods {
 	}
 
 	/**
+	 * controller
+	 *
+	*/
+	"controller" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::controller", [], __options);
+	}
+
+	/**
+	 * reduceReserves
+	 *
+	 * @param { ArgumentTypes.AccountId } pool,
+	 * @param { (string | number | BN) } amount,
+	*/
+	"reduceReserves" (
+		pool: ArgumentTypes.AccountId,
+		amount: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "manager::reduceReserves", [pool, amount], __options);
+	}
+
+	/**
 	 * getRoleAdmin
 	 *
 	 * @param { (number | string | BN) } role,
@@ -198,20 +212,6 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::getRoleAdmin", [role], __options);
-	}
-
-	/**
-	 * grantRole
-	 *
-	 * @param { (number | string | BN) } role,
-	 * @param { ArgumentTypes.AccountId } account,
-	*/
-	"grantRole" (
-		role: (number | string | BN),
-		account: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::grantRole", [role, account], __options);
 	}
 
 	/**
@@ -229,20 +229,6 @@ export default class Methods {
 	}
 
 	/**
-	 * renounceRole
-	 *
-	 * @param { (number | string | BN) } role,
-	 * @param { ArgumentTypes.AccountId } account,
-	*/
-	"renounceRole" (
-		role: (number | string | BN),
-		account: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::renounceRole", [role, account], __options);
-	}
-
-	/**
 	 * hasRole
 	 *
 	 * @param { (number | string | BN) } role,
@@ -254,6 +240,34 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::hasRole", [role, address], __options);
+	}
+
+	/**
+	 * grantRole
+	 *
+	 * @param { (number | string | BN) } role,
+	 * @param { ArgumentTypes.AccountId } account,
+	*/
+	"grantRole" (
+		role: (number | string | BN),
+		account: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::grantRole", [role, account], __options);
+	}
+
+	/**
+	 * renounceRole
+	 *
+	 * @param { (number | string | BN) } role,
+	 * @param { ArgumentTypes.AccountId } account,
+	*/
+	"renounceRole" (
+		role: (number | string | BN),
+		account: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::renounceRole", [role, account], __options);
 	}
 
 }

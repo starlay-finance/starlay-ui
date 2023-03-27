@@ -6,6 +6,10 @@ export enum LangError {
 	couldNotReadInput = 'CouldNotReadInput'
 }
 
+export type WrappedU256 = U256;
+
+export type U256 = Array<(number | string | BN)>;
+
 export interface Error {
 	accessControl ? : AccessControlError
 }
@@ -23,8 +27,4 @@ export enum AccessControlError {
 	missingRole = 'MissingRole',
 	roleRedundant = 'RoleRedundant'
 }
-
-export type WrappedU256 = U256;
-
-export type U256 = Array<(number | string | BN)>;
 

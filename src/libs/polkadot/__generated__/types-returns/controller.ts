@@ -28,3 +28,11 @@ export enum Error {
 	invalidCollateralFactor = 'InvalidCollateralFactor'
 }
 
+export type PoolAttributes = {
+	underlying: AccountId,
+	accountBalance: ReturnNumber,
+	accountBorrowBalance: ReturnNumber,
+	exchangeRate: U256,
+	totalBorrows: ReturnNumber
+}
+

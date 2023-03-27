@@ -33,7 +33,6 @@ export type U256 = ReturnNumber;
 export type PoolBalances = {
 	pool: AccountId,
 	balanceOf: ReturnNumber,
-	balanceOfUnderlying: ReturnNumber,
 	borrowBalanceCurrent: ReturnNumber,
 	tokenBalance: ReturnNumber,
 	tokenAllowance: ReturnNumber

@@ -32,7 +32,6 @@ export type U256 = Array<(number | string | BN)>;
 export type PoolBalances = {
 	pool: AccountId,
 	balanceOf: (string | number | BN),
-	balanceOfUnderlying: (string | number | BN),
 	borrowBalanceCurrent: (string | number | BN),
 	tokenBalance: (string | number | BN),
 	tokenAllowance: (string | number | BN)

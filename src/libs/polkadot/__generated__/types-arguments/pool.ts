@@ -10,7 +10,7 @@ export enum LangError {
 	couldNotReadInput = 'CouldNotReadInput'
 }
 
-export interface Error {
+export interface pool_Error {
 	notImplemented ? : null,
 	invalidParameter ? : null,
 	onlyEitherRedeemTokensOrRedeemAmountIsZero ? : null,
@@ -24,92 +24,121 @@ export interface Error {
 	reduceReservesCashValidation ? : null,
 	borrowRateIsAbsurdlyHigh ? : null,
 	setReserveFactorBoundsCheck ? : null,
+	cannotSweepUnderlyingToken ? : null,
 	callerIsNotManager ? : null,
+	controller ? : controller_Error,
 	psp22 ? : PSP22Error,
 	lang ? : LangError
 }
 
-export class ErrorBuilder {
-	static NotImplemented(): Error {
+export class pool_ErrorBuilder {
+	static NotImplemented(): pool_Error {
 		return {
 			notImplemented: null,
 		};
 	}
-	static InvalidParameter(): Error {
+	static InvalidParameter(): pool_Error {
 		return {
 			invalidParameter: null,
 		};
 	}
-	static OnlyEitherRedeemTokensOrRedeemAmountIsZero(): Error {
+	static OnlyEitherRedeemTokensOrRedeemAmountIsZero(): pool_Error {
 		return {
 			onlyEitherRedeemTokensOrRedeemAmountIsZero: null,
 		};
 	}
-	static BorrowCashNotAvailable(): Error {
+	static BorrowCashNotAvailable(): pool_Error {
 		return {
 			borrowCashNotAvailable: null,
 		};
 	}
-	static RedeemTransferOutNotPossible(): Error {
+	static RedeemTransferOutNotPossible(): pool_Error {
 		return {
 			redeemTransferOutNotPossible: null,
 		};
 	}
-	static LiquidateLiquidatorIsBorrower(): Error {
+	static LiquidateLiquidatorIsBorrower(): pool_Error {
 		return {
 			liquidateLiquidatorIsBorrower: null,
 		};
 	}
-	static LiquidateCloseAmountIsZero(): Error {
+	static LiquidateCloseAmountIsZero(): pool_Error {
 		return {
 			liquidateCloseAmountIsZero: null,
 		};
 	}
-	static AccrualBlockNumberIsNotFresh(): Error {
+	static AccrualBlockNumberIsNotFresh(): pool_Error {
 		return {
 			accrualBlockNumberIsNotFresh: null,
 		};
 	}
-	static LiquidateSeizeLiquidatorIsBorrower(): Error {
+	static LiquidateSeizeLiquidatorIsBorrower(): pool_Error {
 		return {
 			liquidateSeizeLiquidatorIsBorrower: null,
 		};
 	}
-	static ReduceReservesCashNotAvailable(): Error {
+	static ReduceReservesCashNotAvailable(): pool_Error {
 		return {
 			reduceReservesCashNotAvailable: null,
 		};
 	}
-	static ReduceReservesCashValidation(): Error {
+	static ReduceReservesCashValidation(): pool_Error {
 		return {
 			reduceReservesCashValidation: null,
 		};
 	}
-	static BorrowRateIsAbsurdlyHigh(): Error {
+	static BorrowRateIsAbsurdlyHigh(): pool_Error {
 		return {
 			borrowRateIsAbsurdlyHigh: null,
 		};
 	}
-	static SetReserveFactorBoundsCheck(): Error {
+	static SetReserveFactorBoundsCheck(): pool_Error {
 		return {
 			setReserveFactorBoundsCheck: null,
 		};
 	}
-	static CallerIsNotManager(): Error {
+	static CannotSweepUnderlyingToken(): pool_Error {
+		return {
+			cannotSweepUnderlyingToken: null,
+		};
+	}
+	static CallerIsNotManager(): pool_Error {
 		return {
 			callerIsNotManager: null,
 		};
 	}
-	static PSP22(value: PSP22Error): Error {
+	static Controller(value: controller_Error): pool_Error {
+		return {
+			controller: value,
+		};
+	}
+	static PSP22(value: PSP22Error): pool_Error {
 		return {
 			psp22: value,
 		};
 	}
-	static Lang(value: LangError): Error {
+	static Lang(value: LangError): pool_Error {
 		return {
 			lang: value,
 		};
 	}
+}
+
+export enum controller_Error {
+	mintIsPaused = 'MintIsPaused',
+	borrowIsPaused = 'BorrowIsPaused',
+	seizeIsPaused = 'SeizeIsPaused',
+	transferIsPaused = 'TransferIsPaused',
+	marketNotListed = 'MarketNotListed',
+	marketAlreadyListed = 'MarketAlreadyListed',
+	controllerMismatch = 'ControllerMismatch',
+	priceError = 'PriceError',
+	tooMuchRepay = 'TooMuchRepay',
+	borrowCapReached = 'BorrowCapReached',
+	insufficientLiquidity = 'InsufficientLiquidity',
+	insufficientShortfall = 'InsufficientShortfall',
+	callerIsNotManager = 'CallerIsNotManager',
+	invalidCollateralFactor = 'InvalidCollateralFactor'
 }
 
 export interface PSP22Error {

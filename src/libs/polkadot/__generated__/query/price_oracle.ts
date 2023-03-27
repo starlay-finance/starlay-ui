@@ -30,16 +30,18 @@ export default class Methods {
 	}
 
 	/**
-	* getUnderlyingPrice
+	* setFixedPrice
 	*
 	* @param { ArgumentTypes.AccountId } asset,
-	* @returns { Result<ReturnNumber | null, ReturnTypes.LangError> }
+	* @param { (string | number | BN) } value,
+	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
 	*/
-	"getUnderlyingPrice" (
+	"setFixedPrice" (
 		asset: ArgumentTypes.AccountId,
+		value: (string | number | BN),
 		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<ReturnNumber | null, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "priceOracle::getUnderlyingPrice", [asset], __options , (result) => { return handleReturnType(result, getTypeDescription(7, DATA_TYPE_DESCRIPTIONS)); });
+	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "priceOracle::setFixedPrice", [asset, value], __options , (result) => { return handleReturnType(result, getTypeDescription(7, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
@@ -52,22 +54,20 @@ export default class Methods {
 		asset: ArgumentTypes.AccountId,
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<ReturnNumber | null, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "priceOracle::getPrice", [asset], __options , (result) => { return handleReturnType(result, getTypeDescription(7, DATA_TYPE_DESCRIPTIONS)); });
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "priceOracle::getPrice", [asset], __options , (result) => { return handleReturnType(result, getTypeDescription(10, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 	/**
-	* setFixedPrice
+	* getUnderlyingPrice
 	*
 	* @param { ArgumentTypes.AccountId } asset,
-	* @param { (string | number | BN) } value,
-	* @returns { Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> }
+	* @returns { Result<ReturnNumber | null, ReturnTypes.LangError> }
 	*/
-	"setFixedPrice" (
+	"getUnderlyingPrice" (
 		asset: ArgumentTypes.AccountId,
-		value: (string | number | BN),
 		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<Result<null, ReturnTypes.Error>, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "priceOracle::setFixedPrice", [asset, value], __options , (result) => { return handleReturnType(result, getTypeDescription(9, DATA_TYPE_DESCRIPTIONS)); });
+	): Promise< QueryReturnType< Result<ReturnNumber | null, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "priceOracle::getUnderlyingPrice", [asset], __options , (result) => { return handleReturnType(result, getTypeDescription(10, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 }
