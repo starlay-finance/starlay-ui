@@ -27,6 +27,8 @@ import {
   LAY_VELAY,
   MAKAI,
   MARKETS,
+  POLKADOT_APP,
+  POLKADOT_MARKETS,
   SWAP,
 } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
@@ -51,11 +53,15 @@ export const AppHeader = () => {
     <AppHeaderWrapper>
       <LogoLink href={APP} Icon={LogoProtocol} aria-label="App" />
       <Nav>
-        <Tab $active={pathname === APP}>
-          <Link href={APP}>{t`Dashboard`}</Link>
+        <Tab $active={pathname === APP || pathname === POLKADOT_APP}>
+          <Link
+            href={network === 'EVM' ? APP : POLKADOT_APP}
+          >{t`Dashboard`}</Link>
         </Tab>
-        <Tab $active={pathname === MARKETS}>
-          <Link href={MARKETS}>{t`Markets`}</Link>
+        <Tab $active={pathname === MARKETS || pathname === POLKADOT_MARKETS}>
+          <Link
+            href={network === 'EVM' ? MARKETS : POLKADOT_MARKETS}
+          >{t`Markets`}</Link>
         </Tab>
         <Tab $active={pathname === MAKAI}>
           <Link href={network === 'EVM' ? MAKAI : undefined}>{t`Makai`}</Link>
