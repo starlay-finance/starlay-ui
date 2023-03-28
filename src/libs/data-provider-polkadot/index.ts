@@ -91,7 +91,8 @@ export class DataProviderPolkadot implements DataProvider {
           // TODO
           usageAsCollateralEnabled: true,
           isActive: true,
-          isFrozen: false,
+          isDepositInactive: data.mintGuardianPaused,
+          isBorrowInactive: data.borrowGuardianPaused,
           borrowingEnabled: true,
           // incentives
           depositIncentiveAPR: BN_ZERO,

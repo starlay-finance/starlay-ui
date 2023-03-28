@@ -114,7 +114,8 @@ const marketRow = ({
     variableBorrowIncentiveAPR,
     baseLTVasCollateral,
     usageAsCollateralEnabled,
-    isFrozen,
+    isDepositInactive,
+    isBorrowInactive,
     borrowUnsupported,
     makaiUnsupported,
   } = asset
@@ -134,13 +135,16 @@ const marketRow = ({
       borrowUnsupported ||
       makaiUnsupported ||
       !usageAsCollateralEnabled ||
-      isFrozen,
+      isDepositInactive ||
+      isBorrowInactive,
     data: {
       asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
       makaiAPR:
         borrowUnsupported || makaiUnsupported ? (
           'Coming soon'
-        ) : !usageAsCollateralEnabled || isFrozen ? (
+        ) : !usageAsCollateralEnabled ||
+          isDepositInactive ||
+          isBorrowInactive ? (
           '-'
         ) : (
           <BlinkWrapper value={displayMakaiAPR}>{displayMakaiAPR}</BlinkWrapper>

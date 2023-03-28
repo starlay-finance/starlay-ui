@@ -55,7 +55,8 @@ export type AssetMarketData = Asset & {
   lTokenAddress: string
   vdTokenAddress: string
   isActive: boolean
-  isFrozen: boolean
+  isDepositInactive: boolean
+  isBorrowInactive: boolean
   borrowingEnabled: boolean
 }
 

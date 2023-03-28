@@ -72,7 +72,8 @@ export const toAssetMarketData = (
     lTokenAddress: reserve.lTokenAddress as EthereumAddress,
     vdTokenAddress: reserve.variableDebtTokenAddress as EthereumAddress,
     isActive: reserve.isActive,
-    isFrozen: reserve.isFrozen,
+    isDepositInactive: reserve.isFrozen,
+    isBorrowInactive: reserve.isFrozen,
     borrowingEnabled: reserve.borrowingEnabled,
   }
 }

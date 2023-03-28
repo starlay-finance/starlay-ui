@@ -24,6 +24,7 @@ export const MOCK_ASSET_MARKET: AssetMarketData = {
   lTokenAddress: '0x0000000000000000000000000000000000000000',
   vdTokenAddress: '0x0000000000000000000000000000000000000000',
   isActive: true,
-  isFrozen: false,
+  isDepositInactive: false,
+  isBorrowInactive: false,
   borrowingEnabled: true,
 }

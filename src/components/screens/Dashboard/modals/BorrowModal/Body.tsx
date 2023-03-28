@@ -8,16 +8,16 @@ import {
 } from 'src/components/parts/Modal/parts'
 import { ASSETS_DICT } from 'src/constants/assets'
 import {
+  EstimationParam,
   estimateBorrow,
   estimateRepayment,
-  EstimationParam,
 } from 'src/utils/estimationHelper'
 import {
   formatAmt,
   formatAmtShort,
   formatPct,
-  formattedToBigNumber,
   formatUSD,
+  formattedToBigNumber,
 } from 'src/utils/number'
 import {
   Action,
@@ -50,7 +50,7 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
     variableBorrowIncentiveAPR,
     liquidity,
     borrowingEnabled,
-    isFrozen,
+    isBorrowInactive,
     decimals,
     icon,
     name,
@@ -58,7 +58,7 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
   const { totalBorrowedInUSD, borrowLimitUsed, healthFactor } = userSummary
   const { borrowed } = userAssetBalance
 
-  const borrowable = borrowingEnabled && !isFrozen
+  const borrowable = borrowingEnabled && !isBorrowInactive
   const [activeTab, setActiveTab] = useState<TabType>(
     borrowable ? 'borrow' : 'repay',
   )

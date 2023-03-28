@@ -48,13 +48,18 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
   ...estimationParams
 }) => {
   const { asset, userSummary, userAssetBalance } = estimationParams
-  const { symbol, displaySymbol, depositAPY, depositIncentiveAPR, isFrozen } =
-    asset
+  const {
+    symbol,
+    displaySymbol,
+    depositAPY,
+    depositIncentiveAPR,
+    isDepositInactive,
+  } = asset
   const { availableBorrowsInUSD, borrowLimitUsed, healthFactor } = userSummary
   const { inWallet, deposited } = userAssetBalance
 
   const [activeTab, setActiveTab] = useState<TabType>(
-    !isFrozen ? 'deposit' : 'withdraw',
+    !isDepositInactive ? 'deposit' : 'withdraw',
   )
   const [depositAmount, setDepositAmount] = useState('')
   const [withdrawalAmount, setWithdrawalAmount] = useState('')
@@ -102,7 +107,7 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
       <ActionTab
         tabs={TABS}
         contents={{
-          deposit: { label: t`Deposit`, disabled: isFrozen },
+          deposit: { label: t`Deposit`, disabled: isDepositInactive },
           withdraw: { label: t`Withdraw` },
         }}
         activeTab={activeTab}

@@ -13,12 +13,18 @@ export class Lens extends PolkadotContractBase<Contract> {
   pools = async (controller: PolkadotAddress) =>
     (await this.contract.query.pools(controller)).value.ok || []
 
-  poolData = async (pools: AccountId[]) => {
-    const [metadata, prices] = await Promise.all([
+  poolData = async (controller: PolkadotAddress) => {
+    const pools = await this.pools(controller)
+    const [metadata, prices, configuration] = await Promise.all([
       this.contract.query.poolMetadataAll(pools),
       this.contract.query.poolUnderlyingPriceAll(pools),
+      this.contract.query.configuration(controller),
     ])
-    return { metadata: metadata.value.ok || [], prices: prices.value.ok || [] }
+    return {
+      metadata: metadata.value.ok || [],
+      prices: prices.value.ok || [],
+      configuration: configuration.value.ok!,
+    }
   }
 
   userData = async (pools: AccountId[], account: PolkadotAddress) =>
