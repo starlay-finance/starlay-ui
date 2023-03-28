@@ -11,8 +11,8 @@ import {
 import { DataProvider } from 'src/types/starlay'
 import { PolkadotAddress } from 'src/types/web3'
 import {
-  assetFromSymbolAndAddress,
   EMPTY_BALANCE_BY_ASSET,
+  assetFromSymbolAndAddress,
 } from 'src/utils/assets'
 import { calculateNetAPY } from 'src/utils/calculator'
 import { BN_ONE, BN_ZERO } from 'src/utils/number'
@@ -32,7 +32,7 @@ export class DataProviderPolkadot implements DataProvider {
     private pools: PolkadotAddress[] = [],
     private poolUnderlyingDict: Record<
       PolkadotAddress,
-      { address: PolkadotAddress; symbol: AssetSymbol }
+      { address: PolkadotAddress; symbol: AssetSymbol; decimals: number }
     > = {},
   ) {}
 
@@ -52,40 +52,52 @@ export class DataProviderPolkadot implements DataProvider {
       marketTimestamp,
       marketReferenceCurrencyDecimals: 0,
       marketReferenceCurrencyPriceInUSD: BN_ONE,
-      assets: metadata.map((data, idx) => ({
-        pool: data.pool as string,
-        ...assetFromSymbolAndAddress(
-          this.underlyingOf(data.pool as string)
-            .symbol as unknown as AssetSymbol,
-          data.underlyingAssetAddress as string,
-        ),
-        decimals: data.underlyingDecimals,
-        // TODO calculation
-        depositAPY: toBigNumber(data.supplyRatePerMsec),
-        variableBorrowAPY: toBigNumber(data.borrowRatePerMsec),
-        liquidity: toBigNumber(data.totalCash),
-        liquidityInUSD: toBigNumber(data.totalCash),
-        totalDepositedInUSD: toBigNumber(data.totalSupply),
-        totalBorrowedInUSD: toBigNumber(data.totalBorrows),
-        baseLTVasCollateral: toBigNumber(data.collateralFactorMantissa),
-        priceInMarketReferenceCurrency: toBigNumber(
+      assets: metadata.map((data, idx) => {
+        const { address, symbol, decimals } = this.underlyingOf(
+          data.pool as string,
+        )
+        const priceInMarketReferenceCurrency = toBigNumber(
           prices[idx].underlyingPrice,
-        ),
-        reserveLiquidationThreshold: toBigNumber(data.collateralFactorMantissa),
-        reserveFactor: toBigNumber(data.reserveFactorMantissa),
-        liquidationPenalty: BN_ZERO,
-        underlyingAsset: data.underlyingAssetAddress as string,
-        lTokenAddress: data.pool as string,
-        vdTokenAddress: '',
-        // TODO
-        usageAsCollateralEnabled: true,
-        isActive: true,
-        isFrozen: false,
-        borrowingEnabled: true,
-        // incentives
-        depositIncentiveAPR: BN_ZERO,
-        variableBorrowIncentiveAPR: BN_ZERO,
-      })),
+        )
+        return {
+          pool: data.pool as string,
+          ...assetFromSymbolAndAddress(symbol as AssetSymbol, address),
+          decimals,
+          // TODO calculation
+          depositAPY: toBigNumber(data.supplyRatePerMsec),
+          variableBorrowAPY: toBigNumber(data.borrowRatePerMsec),
+          liquidity: toBigNumber(data.totalCash, -decimals),
+          liquidityInUSD: toBigNumber(data.totalCash, -decimals).times(
+            priceInMarketReferenceCurrency,
+          ),
+          totalDepositedInUSD: toBigNumber(data.totalSupply, -decimals).times(
+            priceInMarketReferenceCurrency,
+          ),
+          totalBorrowedInUSD: toBigNumber(data.totalBorrows, -decimals).times(
+            priceInMarketReferenceCurrency,
+          ),
+          baseLTVasCollateral: toBigNumber(data.collateralFactorMantissa),
+          priceInMarketReferenceCurrency: toBigNumber(
+            prices[idx].underlyingPrice,
+          ),
+          reserveLiquidationThreshold: toBigNumber(
+            data.collateralFactorMantissa,
+          ),
+          reserveFactor: toBigNumber(data.reserveFactorMantissa),
+          liquidationPenalty: BN_ZERO,
+          underlyingAsset: data.underlyingAssetAddress as string,
+          lTokenAddress: data.pool as string,
+          vdTokenAddress: '',
+          // TODO
+          usageAsCollateralEnabled: true,
+          isActive: true,
+          isFrozen: false,
+          borrowingEnabled: true,
+          // incentives
+          depositIncentiveAPR: BN_ZERO,
+          variableBorrowIncentiveAPR: BN_ZERO,
+        }
+      }),
       raw: {},
     }
   }
@@ -107,36 +119,27 @@ export class DataProviderPolkadot implements DataProvider {
     }
   }
 
-  getWalletBalance: DataProvider['getWalletBalance'] = async ({
-    account,
-    assets,
-  }) => {
+  getWalletBalance: DataProvider['getWalletBalance'] = async ({ account }) => {
     const data = await this.lens.underlyingBalance(this.pools, account)
-    const balancesDict = data.reduce<Record<string, BigNumber>>(
-      (res, balance, idx) => ({
-        ...res,
-        [this.underlyingOf(this.pools[idx]).address]: toBigNumber(balance),
-      }),
-      {},
-    )
-    return assets.reduce(
-      (res, { symbol, address, decimals }) => ({
-        ...res,
-        [symbol]: balancesDict[address].shiftedBy(-decimals),
-      }),
-      {},
-    ) as WalletBalance
+    return data.reduce<Record<string, BigNumber>>((res, balance, idx) => {
+      const { symbol, decimals } = this.underlyingOf(this.pools[idx])
+      return { ...res, [symbol]: toBigNumber(balance, -decimals) }
+    }, {}) as WalletBalance
   }
 
   underlyingOf = (pool: PolkadotAddress) => this.poolUnderlyingDict[pool]
 
   private updatePools = (metadata: PoolMetadata[]) => {
     this.poolUnderlyingDict = metadata.reduce(
-      (res, { pool, underlyingAssetAddress, underlyingSymbol }) => ({
+      (
+        res,
+        { pool, underlyingAssetAddress, underlyingSymbol, underlyingDecimals },
+      ) => ({
         ...res,
         [pool as string]: {
           address: underlyingAssetAddress,
           symbol: toString(underlyingSymbol),
+          decimals: underlyingDecimals,
         },
       }),
       {},
@@ -146,12 +149,12 @@ export class DataProviderPolkadot implements DataProvider {
 
   private toBalanceByAsset = (data: PoolBalances[]) =>
     data.reduce((prev, { pool, balanceOf, borrowBalanceCurrent }) => {
-      const { address, symbol } = this.underlyingOf(pool as string)
+      const { address, symbol, decimals } = this.underlyingOf(pool as string)
       return {
         ...prev,
         [assetFromSymbolAndAddress(symbol, address).symbol]: {
-          deposited: toBigNumber(balanceOf),
-          borrowed: toBigNumber(borrowBalanceCurrent),
+          deposited: toBigNumber(balanceOf, -decimals),
+          borrowed: toBigNumber(borrowBalanceCurrent, -decimals),
           usageAsCollateralEnabled: true,
         },
       }
@@ -212,12 +215,16 @@ const toSummary = (
     currentLiquidationThreshold: acc.totalDepositedInUSD.gt(BN_ZERO)
       ? acc.thresholdInUSD.div(acc.totalDepositedInUSD)
       : BN_ZERO,
-    healthFactor: BN_ZERO,
+    healthFactor: acc.totalBorrowedInUSD.gt(BN_ZERO)
+      ? acc.borrowLimitInUSD.div(acc.totalBorrowedInUSD)
+      : undefined,
     netAPY,
   }
 }
 
-const toBigNumber = (num: ReturnNumber) => valueToBigNumber(num.toString())
+const DEFAULT_SCALE = 18
+const toBigNumber = (num: ReturnNumber, shift: number = -DEFAULT_SCALE) =>
+  valueToBigNumber(num.toString()).shiftedBy(shift)
 
 const toString = (maybeString: string | number[]) => {
   const hexStr =

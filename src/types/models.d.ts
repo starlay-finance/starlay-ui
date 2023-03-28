@@ -93,7 +93,7 @@ export type UserSummary = {
   borrowLimitInUSD: BigNumber
   borrowLimitUsed?: BigNumber
   currentLiquidationThreshold: BigNumber
-  healthFactor: BigNumber
+  healthFactor?: BigNumber
   netAPY: BigNumber
 }
 
