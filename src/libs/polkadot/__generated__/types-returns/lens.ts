@@ -23,7 +23,9 @@ export type PoolMetadata = {
 	borrowRatePerMsec: WrappedU256,
 	collateralFactorMantissa: WrappedU256,
 	reserveFactorMantissa: WrappedU256,
-	borrowCap: ReturnNumber | null
+	borrowCap: ReturnNumber | null,
+	mintGuardianPaused: boolean,
+	borrowGuardianPaused: boolean
 }
 
 export type WrappedU256 = U256;
@@ -41,5 +43,20 @@ export type PoolBalances = {
 export type PoolUnderlyingPrice = {
 	pool: AccountId,
 	underlyingPrice: ReturnNumber
+}
+
+export type AccountLimits = {
+	pools: Array<AccountId>,
+	liquidity: ReturnNumber,
+	shortfall: ReturnNumber
+}
+
+export type Configuration = {
+	manager: AccountId,
+	oracle: AccountId,
+	seizeGuardianPaused: boolean,
+	transferGuardianPaused: boolean,
+	liquidationIncentiveMantissa: WrappedU256,
+	closeFactorMantissa: WrappedU256
 }
 

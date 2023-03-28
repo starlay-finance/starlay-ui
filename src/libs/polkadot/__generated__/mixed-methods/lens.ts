@@ -162,4 +162,32 @@ export default class Methods {
 		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "poolUnderlyingPriceAll", [pools], __options, (result) => { return handleReturnType(result, getTypeDescription(29, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
+	/**
+	* getAccountLimits
+	*
+	* @param { ArgumentTypes.AccountId } controller,
+	* @param { ArgumentTypes.AccountId } account,
+	* @returns { Result<ReturnTypes.AccountLimits, ReturnTypes.LangError> }
+	*/
+	"getAccountLimits" (
+		controller: ArgumentTypes.AccountId,
+		account: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	): Promise< QueryReturnType< Result<ReturnTypes.AccountLimits, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "getAccountLimits", [controller, account], __options, (result) => { return handleReturnType(result, getTypeDescription(31, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
+	* configuration
+	*
+	* @param { ArgumentTypes.AccountId } controller,
+	* @returns { Result<ReturnTypes.Configuration, ReturnTypes.LangError> }
+	*/
+	"configuration" (
+		controller: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	): Promise< QueryReturnType< Result<ReturnTypes.Configuration, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "configuration", [controller], __options, (result) => { return handleReturnType(result, getTypeDescription(33, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
 }

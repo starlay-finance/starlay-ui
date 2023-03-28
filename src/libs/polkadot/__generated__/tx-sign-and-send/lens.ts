@@ -162,4 +162,34 @@ export default class Methods {
 		}, [pools], __options);
 	}
 
+	/**
+	* getAccountLimits
+	*
+	* @param { ArgumentTypes.AccountId } controller,
+	* @param { ArgumentTypes.AccountId } account,
+	*/
+	"getAccountLimits" (
+		controller: ArgumentTypes.AccountId,
+		account: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "getAccountLimits", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [controller, account], __options);
+	}
+
+	/**
+	* configuration
+	*
+	* @param { ArgumentTypes.AccountId } controller,
+	*/
+	"configuration" (
+		controller: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "configuration", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [controller], __options);
+	}
+
 }

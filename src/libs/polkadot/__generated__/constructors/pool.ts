@@ -26,6 +26,7 @@ export default class Constructors {
 	* @param { ArgumentTypes.AccountId } underlying,
 	* @param { ArgumentTypes.AccountId } controller,
 	* @param { ArgumentTypes.AccountId } rateModel,
+	* @param { ArgumentTypes.WrappedU256 } initialExchangeRateMantissa,
 	* @param { Array<(number | string | BN)> } name,
 	* @param { Array<(number | string | BN)> } symbol,
 	* @param { (number | string | BN) } decimals,
@@ -34,6 +35,7 @@ export default class Constructors {
 		underlying: ArgumentTypes.AccountId,
 		controller: ArgumentTypes.AccountId,
 		rateModel: ArgumentTypes.AccountId,
+		initialExchangeRateMantissa: ArgumentTypes.WrappedU256,
 		name: Array<(number | string | BN)>,
 		symbol: Array<(number | string | BN)>,
 		decimals: (number | string | BN),
@@ -44,7 +46,7 @@ export default class Constructors {
 		const gasLimit = (await _genValidGasLimitAndValue(this.nativeAPI, __options)).gasLimit as WeightV2;
 
 		const storageDepositLimit = __options?.storageDepositLimit;
-			const tx = code.tx["new"]!({ gasLimit, storageDepositLimit, value: __options?.value }, underlying, controller, rateModel, name, symbol, decimals);
+			const tx = code.tx["new"]!({ gasLimit, storageDepositLimit, value: __options?.value }, underlying, controller, rateModel, initialExchangeRateMantissa, name, symbol, decimals);
 			let response;
 
 			try {
@@ -66,11 +68,13 @@ export default class Constructors {
 	* @param { ArgumentTypes.AccountId } underlying,
 	* @param { ArgumentTypes.AccountId } controller,
 	* @param { ArgumentTypes.AccountId } rateModel,
+	* @param { ArgumentTypes.WrappedU256 } initialExchangeRateMantissa,
 	*/
    	async "newFromAsset" (
 		underlying: ArgumentTypes.AccountId,
 		controller: ArgumentTypes.AccountId,
 		rateModel: ArgumentTypes.AccountId,
+		initialExchangeRateMantissa: ArgumentTypes.WrappedU256,
 		__options ? : ConstructorOptions,
    	) {
    		const __contract = JSON.parse(ContractFile);
@@ -78,7 +82,7 @@ export default class Constructors {
 		const gasLimit = (await _genValidGasLimitAndValue(this.nativeAPI, __options)).gasLimit as WeightV2;
 
 		const storageDepositLimit = __options?.storageDepositLimit;
-			const tx = code.tx["newFromAsset"]!({ gasLimit, storageDepositLimit, value: __options?.value }, underlying, controller, rateModel);
+			const tx = code.tx["newFromAsset"]!({ gasLimit, storageDepositLimit, value: __options?.value }, underlying, controller, rateModel, initialExchangeRateMantissa);
 			let response;
 
 			try {

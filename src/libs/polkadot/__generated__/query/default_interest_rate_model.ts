@@ -30,6 +30,23 @@ export default class Methods {
 	}
 
 	/**
+	* getBorrowRate
+	*
+	* @param { (string | number | BN) } cash,
+	* @param { (string | number | BN) } borrows,
+	* @param { (string | number | BN) } reserves,
+	* @returns { Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> }
+	*/
+	"getBorrowRate" (
+		cash: (string | number | BN),
+		borrows: (string | number | BN),
+		reserves: (string | number | BN),
+		__options ? : GasLimit,
+	): Promise< QueryReturnType< Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> > >{
+		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "interestRateModel::getBorrowRate", [cash, borrows, reserves], __options , (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
+	}
+
+	/**
 	* getSupplyRate
 	*
 	* @param { (string | number | BN) } cash,
@@ -46,23 +63,6 @@ export default class Methods {
 		__options ? : GasLimit,
 	): Promise< QueryReturnType< Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> > >{
 		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "interestRateModel::getSupplyRate", [cash, borrows, reserves, reserveFactorMantissa], __options , (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
-	}
-
-	/**
-	* getBorrowRate
-	*
-	* @param { (string | number | BN) } cash,
-	* @param { (string | number | BN) } borrows,
-	* @param { (string | number | BN) } reserves,
-	* @returns { Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> }
-	*/
-	"getBorrowRate" (
-		cash: (string | number | BN),
-		borrows: (string | number | BN),
-		reserves: (string | number | BN),
-		__options ? : GasLimit,
-	): Promise< QueryReturnType< Result<ReturnTypes.WrappedU256, ReturnTypes.LangError> > >{
-		return queryOkJSON( this.__apiPromise, this.__nativeContract, this.__callerAddress, "interestRateModel::getBorrowRate", [cash, borrows, reserves], __options , (result) => { return handleReturnType(result, getTypeDescription(8, DATA_TYPE_DESCRIPTIONS)); });
 	}
 
 }

@@ -29,6 +29,24 @@ export default class Methods {
 	}
 
 	/**
+	* getBorrowRate
+	*
+	* @param { (string | number | BN) } cash,
+	* @param { (string | number | BN) } borrows,
+	* @param { (string | number | BN) } reserves,
+	*/
+	"getBorrowRate" (
+		cash: (string | number | BN),
+		borrows: (string | number | BN),
+		reserves: (string | number | BN),
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "interestRateModel::getBorrowRate", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [cash, borrows, reserves], __options);
+	}
+
+	/**
 	* getSupplyRate
 	*
 	* @param { (string | number | BN) } cash,
@@ -46,24 +64,6 @@ export default class Methods {
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "interestRateModel::getSupplyRate", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [cash, borrows, reserves, reserveFactorMantissa], __options);
-	}
-
-	/**
-	* getBorrowRate
-	*
-	* @param { (string | number | BN) } cash,
-	* @param { (string | number | BN) } borrows,
-	* @param { (string | number | BN) } reserves,
-	*/
-	"getBorrowRate" (
-		cash: (string | number | BN),
-		borrows: (string | number | BN),
-		reserves: (string | number | BN),
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "interestRateModel::getBorrowRate", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [cash, borrows, reserves], __options);
 	}
 
 }
