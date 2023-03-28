@@ -64,11 +64,12 @@ export abstract class PolkadotContractBase<T extends Contract> {
   ) => {
     const { gasRequired, value } = await this.contract.query[fn](...args)
     if (value.err) return Promise.reject()
+    if (value.ok?.err) return Promise.reject(parseError(value.ok.err))
     const gasLimit = this.api.registry.createType('WeightV2', {
       refTime: withMargin(gasRequired.refTime.toString()),
       proofSize: withMargin(gasRequired.proofSize.toString()),
     })
-    return this.contract.buildExtrinsic[fn](...args, { gasLimit: gasLimit })
+    return this.contract.buildExtrinsic[fn](...args, { gasLimit })
   }
 }
 
@@ -76,3 +77,8 @@ const DEFAULT_MARGIN = new BN(105)
 const MARGIN_SCALE = new BN(100)
 const withMargin = (value: string, margin = DEFAULT_MARGIN) =>
   new BN(value).mul(margin).div(MARGIN_SCALE)
+
+const parseError = (obj: Record<string, any>): string =>
+  Object.keys(obj)
+    .flatMap((key) => (obj[key] ? [key, parseError(obj[key])] : key))
+    .join('.')

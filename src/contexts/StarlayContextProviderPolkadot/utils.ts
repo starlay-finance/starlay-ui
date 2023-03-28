@@ -35,7 +35,7 @@ const callback =
   ) =>
   ({ status, dispatchError }: SubmittableResultValue) => {
     console.log(status.toHuman())
-    if (!(status.isInBlock || status.isFinalized)) return
+    if (!status.isFinalized) return
     if (!dispatchError) return res()
     if (!dispatchError.isModule) {
       console.log(dispatchError.toString())
