@@ -43,8 +43,9 @@ export class DataProviderPolkadot implements DataProvider {
   ) => new DataProviderPolkadot(chainId, new Lens(provider, lens), controller)
 
   getMarketData: DataProvider['getMarketData'] = async () => {
-    const pools = await this.lens.pools(this.controller)
-    const { metadata, prices } = await this.lens.poolData(pools)
+    const { metadata, prices, configuration } = await this.lens.poolData(
+      this.controller,
+    )
     this.updatePools(metadata)
     const marketTimestamp = dayjs().unix()
     return {
@@ -84,7 +85,9 @@ export class DataProviderPolkadot implements DataProvider {
             data.collateralFactorMantissa,
           ),
           reserveFactor: toBigNumber(data.reserveFactorMantissa),
-          liquidationPenalty: BN_ZERO,
+          liquidationPenalty: toBigNumber(
+            configuration.liquidationIncentiveMantissa,
+          ),
           underlyingAsset: data.underlyingAssetAddress as string,
           lTokenAddress: data.pool as string,
           vdTokenAddress: '',
