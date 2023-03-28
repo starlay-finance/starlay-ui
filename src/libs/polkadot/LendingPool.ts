@@ -7,8 +7,8 @@ import { PolkadotAddress } from 'src/types/web3'
 import { filterFalsy } from 'src/utils/array'
 import { PolkadotContractBase } from './ContractBase'
 import { Token } from './Token'
-import { toTxItem } from './utils'
 import Contract from './__generated__/contracts/pool'
+import { toTxItem } from './utils'
 
 export class LendingPool extends PolkadotContractBase<Contract> {
   constructor(
@@ -19,62 +19,56 @@ export class LendingPool extends PolkadotContractBase<Contract> {
     super(Contract, api, address, signer)
   }
 
-  mint = async (
-    params: {
-      amount: BigNumber
-      asset: PolkadotAddress
-    },
-    _with: { address: PolkadotAddress },
-  ): Promise<TxItem[]> => {
-    this.with(_with)
+  mint = async (params: {
+    pool: PolkadotAddress
+    account: PolkadotAddress
+    amount: BigNumber
+    asset: PolkadotAddress
+  }): Promise<TxItem[]> => {
     const amountBN = new BN(params.amount.toString())
     const approvalTxItem = await this.token(params.asset).approveIfNeeded(
-      _with.address,
+      params.account,
+      params.pool,
       amountBN,
     )
     const tx = () => this.buildUnsignedTx('mint', [amountBN])
     return [approvalTxItem, toTxItem('Pool', tx)].filter(filterFalsy)
   }
 
-  redeem = async (
-    params: {
-      amount: BigNumber
-      asset: PolkadotAddress
-    },
-    _with: { address: PolkadotAddress },
-  ): Promise<TxItem[]> => {
-    this.with(_with)
+  redeemUnderlying = async (params: {
+    amount: BigNumber
+    asset: PolkadotAddress
+  }): Promise<TxItem[]> => {
     const amountBN = new BN(params.amount.toString())
-    const tx = () => this.buildUnsignedTx('redeem', [amountBN])
+    const tx = () => this.buildUnsignedTx('redeemUnderlying', [amountBN])
     return [toTxItem('Pool', tx)]
   }
 
-  borrow = async (
-    params: {
-      amount: BigNumber
-      asset: PolkadotAddress
-    },
-    _with: { address: PolkadotAddress },
-  ): Promise<TxItem[]> => {
-    this.with(_with)
+  borrow = async (params: {
+    amount: BigNumber
+    asset: PolkadotAddress
+  }): Promise<TxItem[]> => {
     const amountBN = new BN(params.amount.toString())
     const tx = () => this.buildUnsignedTx('borrow', [amountBN])
     return [toTxItem('Pool', tx)]
   }
 
-  repayBorrow = async (
-    params: {
-      amount: BigNumber
-      asset: PolkadotAddress
-    },
-    _with: { address: PolkadotAddress },
-  ): Promise<TxItem[]> => {
-    this.with(_with)
+  repayBorrow = async (params: {
+    pool: PolkadotAddress
+    account: PolkadotAddress
+    amount: BigNumber
+    asset: PolkadotAddress
+  }): Promise<TxItem[]> => {
     const amountBN = new BN(params.amount.toString())
+    const approvalTxItem = await this.token(params.asset).approveIfNeeded(
+      params.account,
+      params.pool,
+      amountBN,
+    )
     const tx = () => this.buildUnsignedTx('repayBorrow', [amountBN])
-    return [toTxItem('Pool', tx)]
+    return [approvalTxItem, toTxItem('Pool', tx)].filter(filterFalsy)
   }
 
-  token = (address: PolkadotAddress) =>
+  private token = (address: PolkadotAddress) =>
     new Token(this.api, address, this.signer!)
 }

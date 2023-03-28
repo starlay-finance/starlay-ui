@@ -12,17 +12,18 @@ export class Token extends PolkadotContractBase<Contract> {
   }
 
   approveIfNeeded = async (
-    pool: PolkadotAddress,
+    owner: PolkadotAddress,
+    spender: PolkadotAddress,
     amount: BN,
   ): Promise<TxItem | undefined> => {
     const contract = this.contract
     const {
       value: { ok: allowance },
-    } = await contract.query.allowance(this.signer!.address, pool)
+    } = await contract.query.allowance(owner, spender)
     if (!allowance || allowance.rawNumber.lt(amount))
       return {
         type: 'Approval',
-        tx: () => this.buildUnsignedTx('approve', [pool, amount]),
+        tx: () => this.buildUnsignedTx('approve', [spender, amount]),
       }
   }
 }

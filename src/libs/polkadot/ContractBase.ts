@@ -40,11 +40,22 @@ export abstract class PolkadotContractBase<T extends Contract> {
 
   new = () => new this.Contract(this.address!, this.signer!, this.api)
 
-  with(option?: { address?: PolkadotAddress; signer?: KeyringPair }) {
-    if (!option) return
+  with(option?: {
+    address?: PolkadotAddress
+    signer?: KeyringPair
+    caller?: PolkadotAddress
+  }) {
+    if (!option) return this
     if (option.address) this.address = option.address
-    if (option.signer) this.signer = option.signer
+    if (option.signer || option.caller) {
+      const signer = option.signer || this.signer
+      this.signer = {
+        ...signer,
+        address: option.caller || signer.address,
+      }
+    }
     this._contract = new this.Contract(this.address!, this.signer!, this.api)
+    return this
   }
 
   buildUnsignedTx = async <F extends keyof T['tx']>(

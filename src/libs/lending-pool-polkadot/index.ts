@@ -8,18 +8,25 @@ export class LendingPoolPolkadot implements LendingPool {
   static new = ({ api }: { api: ApiPromise }) =>
     new LendingPoolPolkadot(new LendingPoolContract(api))
 
-  deposit: LendingPool['deposit'] = async ({ amount, asset, pool }) =>
-    this.contract.mint({ amount, asset }, { address: pool })
+  deposit: LendingPool['deposit'] = async (params) =>
+    this.contract
+      .with({ address: params.pool, caller: params.account })
+      .mint(params)
 
-  // TODO redeeem underlying
-  withdraw: LendingPool['withdraw'] = async ({ amount, asset, pool }) =>
-    this.contract.redeem({ amount, asset }, { address: pool })
+  withdraw: LendingPool['withdraw'] = async (params) =>
+    this.contract
+      .with({ address: params.pool, caller: params.account })
+      .redeemUnderlying(params)
 
-  borrow: LendingPool['borrow'] = async ({ amount, asset, pool }) =>
-    this.contract.borrow({ amount, asset }, { address: pool })
+  borrow: LendingPool['borrow'] = async (params) =>
+    this.contract
+      .with({ address: params.pool, caller: params.account })
+      .borrow(params)
 
-  repay: LendingPool['repay'] = async ({ amount, asset, pool }) =>
-    this.contract.repayBorrow({ amount, asset }, { address: pool })
+  repay: LendingPool['repay'] = async (params) =>
+    this.contract
+      .with({ address: params.pool, caller: params.account })
+      .repayBorrow(params)
 
   setUsageAsCollateral: LendingPool['setUsageAsCollateral'] = async () => {
     throw new Error('Unsupported')
