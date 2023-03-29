@@ -12,6 +12,7 @@ export type LendingPoolCommonParams = {
   pool: string
   asset: string
   amount: BigNumber
+  decimals: number
 }
 export type LendingPool = {
   deposit: (params: LendingPoolCommonParams) => Promise<TxItem[]>

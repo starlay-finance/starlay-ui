@@ -23,9 +23,10 @@ export class LendingPool extends PolkadotContractBase<Contract> {
     pool: PolkadotAddress
     account: PolkadotAddress
     amount: BigNumber
+    decimals: number
     asset: PolkadotAddress
   }): Promise<TxItem[]> => {
-    const amountBN = new BN(params.amount.toString())
+    const amountBN = toBN(params.amount, params.decimals)
     const approvalTxItem = await this.token(params.asset).approveIfNeeded(
       params.account,
       params.pool,
@@ -38,8 +39,9 @@ export class LendingPool extends PolkadotContractBase<Contract> {
   redeemUnderlying = async (params: {
     amount: BigNumber
     asset: PolkadotAddress
+    decimals: number
   }): Promise<TxItem[]> => {
-    const amountBN = new BN(params.amount.toString())
+    const amountBN = toBN(params.amount, params.decimals)
     const tx = () => this.buildUnsignedTx('redeemUnderlying', [amountBN])
     return [toTxItem('Pool', tx)]
   }
@@ -47,8 +49,9 @@ export class LendingPool extends PolkadotContractBase<Contract> {
   borrow = async (params: {
     amount: BigNumber
     asset: PolkadotAddress
+    decimals: number
   }): Promise<TxItem[]> => {
-    const amountBN = new BN(params.amount.toString())
+    const amountBN = toBN(params.amount, params.decimals)
     const tx = () => this.buildUnsignedTx('borrow', [amountBN])
     return [toTxItem('Pool', tx)]
   }
@@ -58,8 +61,9 @@ export class LendingPool extends PolkadotContractBase<Contract> {
     account: PolkadotAddress
     amount: BigNumber
     asset: PolkadotAddress
+    decimals: number
   }): Promise<TxItem[]> => {
-    const amountBN = new BN(params.amount.toString())
+    const amountBN = toBN(params.amount, params.decimals)
     const approvalTxItem = await this.token(params.asset).approveIfNeeded(
       params.account,
       params.pool,
@@ -72,3 +76,6 @@ export class LendingPool extends PolkadotContractBase<Contract> {
   private token = (address: PolkadotAddress) =>
     new Token(this.api, address, this.signer!)
 }
+
+const toBN = (num: BigNumber, decimals: number) =>
+  new BN(num.shiftedBy(decimals).integerValue(BigNumber.ROUND_FLOOR).toString())

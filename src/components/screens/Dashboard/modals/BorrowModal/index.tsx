@@ -34,6 +34,7 @@ export const Borrow: FC<
               amount,
               pool: asset.pool,
               asset: asset.underlyingAsset,
+              decimals: asset.decimals,
               debt: asset.vdTokenAddress,
               onSucceeded: openSuggestModal,
             })
@@ -43,6 +44,7 @@ export const Borrow: FC<
               amount,
               pool: asset.pool,
               asset: asset.underlyingAsset,
+              decimals: asset.decimals,
               all,
             })
           }

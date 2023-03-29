@@ -30,6 +30,7 @@ export const Deposit: FC<
               amount,
               pool: asset.pool,
               asset: asset.underlyingAsset,
+              decimals: asset.decimals,
             })
           }
           withdraw={(amount, all) =>
@@ -37,6 +38,7 @@ export const Deposit: FC<
               amount,
               pool: asset.pool,
               asset: asset.underlyingAsset,
+              decimals: asset.decimals,
               collateral: asset.lTokenAddress,
               all,
             })

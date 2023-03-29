@@ -10,6 +10,7 @@ export const useLendingPool = (account: string | null | undefined) => {
     amount: BigNumber
     asset: string
     pool: string
+    decimals: number
   }) => {
     if (!lendingPool || !txExecutor || !account)
       throw new Error('Unexpected state')
@@ -23,6 +24,7 @@ export const useLendingPool = (account: string | null | undefined) => {
     amount: BigNumber
     pool: string
     asset: string
+    decimals: number
     collateral: string
     all?: boolean
   }) => {
@@ -38,6 +40,7 @@ export const useLendingPool = (account: string | null | undefined) => {
     amount: BigNumber
     pool: string
     asset: string
+    decimals: number
     debt?: string
     onSucceeded?: VoidFunction
   }) => {
@@ -53,6 +56,7 @@ export const useLendingPool = (account: string | null | undefined) => {
     amount: BigNumber
     pool: string
     asset: string
+    decimals: number
     all?: boolean
   }) => {
     if (!lendingPool || !txExecutor || !account)
