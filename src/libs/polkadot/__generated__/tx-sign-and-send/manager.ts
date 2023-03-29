@@ -29,6 +29,50 @@ export default class Methods {
 	}
 
 	/**
+	* setController
+	*
+	* @param { ArgumentTypes.AccountId } address,
+	*/
+	"setController" (
+		address: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::setController", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [address], __options);
+	}
+
+	/**
+	* setPriceOracle
+	*
+	* @param { ArgumentTypes.AccountId } newOracle,
+	*/
+	"setPriceOracle" (
+		newOracle: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::setPriceOracle", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [newOracle], __options);
+	}
+
+	/**
+	* setMintGuardianPaused
+	*
+	* @param { ArgumentTypes.AccountId } pool,
+	* @param { boolean } paused,
+	*/
+	"setMintGuardianPaused" (
+		pool: ArgumentTypes.AccountId,
+		paused: boolean,
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::setMintGuardianPaused", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [pool, paused], __options);
+	}
+
+	/**
 	* setBorrowGuardianPaused
 	*
 	* @param { ArgumentTypes.AccountId } pool,
@@ -59,6 +103,18 @@ export default class Methods {
 	}
 
 	/**
+	* controller
+	*
+	*/
+	"controller" (
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::controller", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [], __options);
+	}
+
+	/**
 	* setBorrowCap
 	*
 	* @param { ArgumentTypes.AccountId } pool,
@@ -72,6 +128,38 @@ export default class Methods {
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::setBorrowCap", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [pool, newCap], __options);
+	}
+
+	/**
+	* setCollateralFactorMantissa
+	*
+	* @param { ArgumentTypes.AccountId } pool,
+	* @param { ArgumentTypes.WrappedU256 } newCollateralFactorMantissa,
+	*/
+	"setCollateralFactorMantissa" (
+		pool: ArgumentTypes.AccountId,
+		newCollateralFactorMantissa: ArgumentTypes.WrappedU256,
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::setCollateralFactorMantissa", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [pool, newCollateralFactorMantissa], __options);
+	}
+
+	/**
+	* setReserveFactorMantissa
+	*
+	* @param { ArgumentTypes.AccountId } pool,
+	* @param { ArgumentTypes.WrappedU256 } newReserveFactorMantissa,
+	*/
+	"setReserveFactorMantissa" (
+		pool: ArgumentTypes.AccountId,
+		newReserveFactorMantissa: ArgumentTypes.WrappedU256,
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::setReserveFactorMantissa", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [pool, newReserveFactorMantissa], __options);
 	}
 
 	/**
@@ -107,22 +195,6 @@ export default class Methods {
 	}
 
 	/**
-	* supportMarketWithCollateralFactorMantissa
-	*
-	* @param { ArgumentTypes.AccountId } pool,
-	* @param { ArgumentTypes.WrappedU256 } collateralFactorMantissa,
-	*/
-	"supportMarketWithCollateralFactorMantissa" (
-		pool: ArgumentTypes.AccountId,
-		collateralFactorMantissa: ArgumentTypes.WrappedU256,
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::supportMarketWithCollateralFactorMantissa", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [pool, collateralFactorMantissa], __options);
-	}
-
-	/**
 	* setLiquidationIncentiveMantissa
 	*
 	* @param { ArgumentTypes.WrappedU256 } newLiquidationIncentiveMantissa,
@@ -134,18 +206,6 @@ export default class Methods {
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::setLiquidationIncentiveMantissa", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [newLiquidationIncentiveMantissa], __options);
-	}
-
-	/**
-	* controller
-	*
-	*/
-	"controller" (
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::controller", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [], __options);
 	}
 
 	/**
@@ -163,79 +223,51 @@ export default class Methods {
 	}
 
 	/**
-	* setPriceOracle
-	*
-	* @param { ArgumentTypes.AccountId } newOracle,
-	*/
-	"setPriceOracle" (
-		newOracle: ArgumentTypes.AccountId,
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::setPriceOracle", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [newOracle], __options);
-	}
-
-	/**
-	* setReserveFactorMantissa
+	* supportMarketWithCollateralFactorMantissa
 	*
 	* @param { ArgumentTypes.AccountId } pool,
-	* @param { ArgumentTypes.WrappedU256 } newReserveFactorMantissa,
+	* @param { ArgumentTypes.WrappedU256 } collateralFactorMantissa,
 	*/
-	"setReserveFactorMantissa" (
+	"supportMarketWithCollateralFactorMantissa" (
 		pool: ArgumentTypes.AccountId,
-		newReserveFactorMantissa: ArgumentTypes.WrappedU256,
+		collateralFactorMantissa: ArgumentTypes.WrappedU256,
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::setReserveFactorMantissa", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::supportMarketWithCollateralFactorMantissa", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [pool, newReserveFactorMantissa], __options);
+		}, [pool, collateralFactorMantissa], __options);
 	}
 
 	/**
-	* setCollateralFactorMantissa
+	* renounceRole
 	*
-	* @param { ArgumentTypes.AccountId } pool,
-	* @param { ArgumentTypes.WrappedU256 } newCollateralFactorMantissa,
+	* @param { (number | string | BN) } role,
+	* @param { ArgumentTypes.AccountId } account,
 	*/
-	"setCollateralFactorMantissa" (
-		pool: ArgumentTypes.AccountId,
-		newCollateralFactorMantissa: ArgumentTypes.WrappedU256,
+	"renounceRole" (
+		role: (number | string | BN),
+		account: ArgumentTypes.AccountId,
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::setCollateralFactorMantissa", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "accessControl::renounceRole", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [pool, newCollateralFactorMantissa], __options);
+		}, [role, account], __options);
 	}
 
 	/**
-	* setController
+	* hasRole
 	*
+	* @param { (number | string | BN) } role,
 	* @param { ArgumentTypes.AccountId } address,
 	*/
-	"setController" (
+	"hasRole" (
+		role: (number | string | BN),
 		address: ArgumentTypes.AccountId,
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::setController", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "accessControl::hasRole", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [address], __options);
-	}
-
-	/**
-	* setMintGuardianPaused
-	*
-	* @param { ArgumentTypes.AccountId } pool,
-	* @param { boolean } paused,
-	*/
-	"setMintGuardianPaused" (
-		pool: ArgumentTypes.AccountId,
-		paused: boolean,
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "manager::setMintGuardianPaused", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [pool, paused], __options);
+		}, [role, address], __options);
 	}
 
 	/**
@@ -282,38 +314,6 @@ export default class Methods {
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "accessControl::getRoleAdmin", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [role], __options);
-	}
-
-	/**
-	* renounceRole
-	*
-	* @param { (number | string | BN) } role,
-	* @param { ArgumentTypes.AccountId } account,
-	*/
-	"renounceRole" (
-		role: (number | string | BN),
-		account: ArgumentTypes.AccountId,
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "accessControl::renounceRole", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [role, account], __options);
-	}
-
-	/**
-	* hasRole
-	*
-	* @param { (number | string | BN) } role,
-	* @param { ArgumentTypes.AccountId } address,
-	*/
-	"hasRole" (
-		role: (number | string | BN),
-		address: ArgumentTypes.AccountId,
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "accessControl::hasRole", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [role, address], __options);
 	}
 
 }

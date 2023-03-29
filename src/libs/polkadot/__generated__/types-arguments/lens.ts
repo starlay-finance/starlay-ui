@@ -44,12 +44,6 @@ export type PoolUnderlyingPrice = {
 	underlyingPrice: (string | number | BN)
 }
 
-export type AccountLimits = {
-	pools: Array<AccountId>,
-	liquidity: (string | number | BN),
-	shortfall: (string | number | BN)
-}
-
 export type Configuration = {
 	manager: AccountId,
 	oracle: AccountId,

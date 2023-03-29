@@ -29,6 +29,7 @@ export enum Error {
 
 export type PoolAttributes = {
 	underlying: AccountId,
+	decimals: (number | string | BN),
 	accountBalance: (string | number | BN),
 	accountBorrowBalance: (string | number | BN),
 	exchangeRate: U256,

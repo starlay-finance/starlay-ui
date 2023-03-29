@@ -137,20 +137,6 @@ export default class Methods {
 	}
 
 	/**
-	 * getAccountLimits
-	 *
-	 * @param { ArgumentTypes.AccountId } controller,
-	 * @param { ArgumentTypes.AccountId } account,
-	*/
-	"getAccountLimits" (
-		controller: ArgumentTypes.AccountId,
-		account: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "getAccountLimits", [controller, account], __options);
-	}
-
-	/**
 	 * configuration
 	 *
 	 * @param { ArgumentTypes.AccountId } controller,
