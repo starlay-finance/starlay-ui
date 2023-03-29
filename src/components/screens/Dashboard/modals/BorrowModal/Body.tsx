@@ -144,7 +144,7 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
           />
           <NumberItemWithDiff
             label={t`Health Factor`}
-            current={healthFactor.isPositive() ? healthFactor : undefined}
+            current={healthFactor?.isPositive() ? healthFactor : undefined}
             after={
               !estimation.healthFactor
                 ? undefined

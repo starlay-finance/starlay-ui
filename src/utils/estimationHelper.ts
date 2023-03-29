@@ -523,7 +523,8 @@ const unusedCollateralOnWithdraw = ({
   if (
     !userAssetBalance.usageAsCollateralEnabled ||
     !asset.usageAsCollateralEnabled ||
-    userSummary.totalBorrowedInMarketReferenceCurrency.isZero()
+    userSummary.totalBorrowedInMarketReferenceCurrency.isZero() ||
+    !userSummary.healthFactor
   )
     return valueToBigNumber(Infinity)
   const excessHF = userSummary.healthFactor.minus('1')

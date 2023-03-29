@@ -5,6 +5,7 @@ import { BN_ZERO } from 'src/utils/number'
 
 export const MOCK_ASSET_MARKET: AssetMarketData = {
   ...ASSETS_DICT.ASTR,
+  pool: '',
   depositAPY: valueToBigNumber(0.1215),
   variableBorrowAPY: valueToBigNumber(0.293),
   depositIncentiveAPR: valueToBigNumber(0.3181),

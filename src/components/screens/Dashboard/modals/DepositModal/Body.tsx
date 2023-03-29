@@ -141,7 +141,7 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
           />
           <NumberItemWithDiff
             label={t`Health Factor`}
-            current={healthFactor.isPositive() ? healthFactor : undefined}
+            current={healthFactor?.isPositive() ? healthFactor : undefined}
             after={
               !estimation.healthFactor
                 ? undefined

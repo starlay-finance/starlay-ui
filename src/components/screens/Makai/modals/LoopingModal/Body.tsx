@@ -11,7 +11,7 @@ import {
 import { RatioControl } from 'src/components/parts/Modal/parts/RatioControl'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { blue, darkRed, lightYellow, purple } from 'src/styles/colors'
-import { estimateLooping, EstimationParam } from 'src/utils/estimationHelper'
+import { EstimationParam, estimateLooping } from 'src/utils/estimationHelper'
 import {
   BN_ONE,
   BN_ZERO,
@@ -131,7 +131,7 @@ export const LoopingModalBody: FC<LoopingModalBodyProps> = ({
             />
             <NumberItemWithDiff
               label={t`Health Factor`}
-              current={healthFactor.isPositive() ? healthFactor : undefined}
+              current={healthFactor?.isPositive() ? healthFactor : undefined}
               after={
                 !estimation.healthFactor
                   ? undefined
