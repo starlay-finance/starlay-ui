@@ -2,9 +2,14 @@ import { ApiPromise } from '@polkadot/api'
 import { KeyringPair } from '@polkadot/keyring/types'
 import { PolkadotAddress } from 'src/types/web3'
 import { AccountId } from '../polkadot/__generated__/types-arguments/pool'
+import {
+  PoolMetadata,
+  PoolUnderlyingPrice,
+} from './../wasm/__generated__/types-returns/lens'
 import { PolkadotContractBase } from './ContractBase'
 import Contract from './__generated__/contracts/lens'
 
+const poolChunkSize = 3
 export class Lens extends PolkadotContractBase<Contract> {
   constructor(api: ApiPromise, address: PolkadotAddress, signer?: KeyringPair) {
     super(Contract, api, address, signer)
@@ -15,15 +20,23 @@ export class Lens extends PolkadotContractBase<Contract> {
 
   poolData = async (controller: PolkadotAddress) => {
     const pools = await this.pools(controller)
-    const [metadata, prices, configuration] = await Promise.all([
-      this.contract.query.poolMetadataAll(pools),
-      this.contract.query.poolUnderlyingPriceAll(pools),
-      this.contract.query.configuration(controller),
-    ])
+
+    const metadata: PoolMetadata[] = []
+    const prices: PoolUnderlyingPrice[] = []
+    for (let cursor = 0; cursor < pools.length; cursor += poolChunkSize) {
+      const targetPools = pools.slice(cursor, cursor + poolChunkSize)
+      const [_metadata, _prices] = await Promise.all([
+        this.contract.query.poolMetadataAll(targetPools),
+        this.contract.query.poolUnderlyingPriceAll(targetPools),
+      ])
+      metadata.push(...(_metadata.value.ok || []))
+      prices.push(...(_prices.value.ok || []))
+    }
     return {
-      metadata: metadata.value.ok || [],
-      prices: prices.value.ok || [],
-      configuration: configuration.value.ok!,
+      metadata,
+      prices,
+      configuration: (await this.contract.query.configuration(controller)).value
+        .ok!,
     }
   }
 
