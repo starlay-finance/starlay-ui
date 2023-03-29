@@ -5,7 +5,7 @@ import { AccountId } from '../polkadot/__generated__/types-arguments/pool'
 import {
   PoolMetadata,
   PoolUnderlyingPrice,
-} from './../wasm/__generated__/types-returns/lens'
+} from '../polkadot/__generated__/types-returns/lens'
 import { PolkadotContractBase } from './ContractBase'
 import Contract from './__generated__/contracts/lens'
 
