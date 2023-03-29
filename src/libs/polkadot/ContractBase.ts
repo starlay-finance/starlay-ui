@@ -62,6 +62,7 @@ export abstract class PolkadotContractBase<T extends Contract> {
     fn: F,
     args: Parameters<T['tx'][F]>,
   ) => {
+    console.log(`${fn as string}(${JSON.stringify(args)})`)
     const { gasRequired, value } = await this.contract.query[fn](...args)
     if (value.err) return Promise.reject()
     if (value.ok?.err) return Promise.reject(parseError(value.ok.err))

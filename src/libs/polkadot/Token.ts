@@ -23,7 +23,13 @@ export class Token extends PolkadotContractBase<Contract> {
     if (!allowance || allowance.rawNumber.lt(amount))
       return {
         type: 'Approval',
-        tx: () => this.buildUnsignedTx('approve', [spender, amount]),
+        tx: () =>
+          this.buildUnsignedTx('approve', [
+            spender,
+            // TODO temporarily
+            '0xffffffffffffffffffffffffffffffff',
+            // amount
+          ]),
       }
   }
 }
