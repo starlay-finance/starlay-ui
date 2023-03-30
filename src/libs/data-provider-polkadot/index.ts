@@ -1,5 +1,10 @@
 import { ReturnNumber } from '@727-ventures/typechain-types'
-import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
+import {
+  BigNumber,
+  BigNumberValue,
+  valueToBigNumber,
+  valueToZDBigNumber,
+} from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
 import {
   AssetSymbol,
@@ -65,8 +70,8 @@ export class DataProviderPolkadot implements DataProvider {
           ...assetFromSymbolAndAddress(symbol, address),
           decimals,
           // TODO calculation
-          depositAPY: toBigNumber(data.supplyRatePerMsec),
-          variableBorrowAPY: toBigNumber(data.borrowRatePerMsec),
+          depositAPY: toAPY(toBigNumber(data.supplyRatePerMsec)),
+          variableBorrowAPY: toAPY(toBigNumber(data.borrowRatePerMsec)),
           liquidity: toBigNumber(data.totalCash, -decimals),
           liquidityInUSD: toBigNumber(data.totalCash, -decimals).times(
             priceInMarketReferenceCurrency,
@@ -237,4 +242,33 @@ const toString = (maybeString: string | number[]) => {
   const hexStr =
     typeof maybeString === 'string' ? maybeString : maybeString.toString()
   return Buffer.from(hexStr.replace('0x', ''), 'hex').toString('utf-8')
+}
+
+const MSECS_PER_YEAR = 60 * 60 * 24 * 365 * 1000
+const toAPY = (rate: BigNumber) =>
+  rate.isZero()
+    ? BN_ZERO
+    : wadPow(rate.div(MSECS_PER_YEAR).plus(WAD), MSECS_PER_YEAR).minus(WAD)
+
+// TODO tmp
+const WAD = valueToZDBigNumber(10).pow(18)
+const HALF_WAD = WAD.dividedBy(2)
+
+const wadMul = (a: BigNumberValue, b: BigNumberValue): BigNumber =>
+  HALF_WAD.plus(valueToZDBigNumber(a).multipliedBy(b)).div(WAD)
+
+const wadPow = (a: BigNumberValue, p: BigNumberValue): BigNumber => {
+  let x = valueToZDBigNumber(a)
+  let n = valueToZDBigNumber(p)
+  let z = n.modulo(2).eq(0) ? valueToZDBigNumber(WAD) : x
+
+  for (n = n.div(2); !n.eq(0); n = n.div(2)) {
+    x = wadMul(x, x)
+
+    if (!n.modulo(2).eq(0)) {
+      z = wadMul(z, x)
+    }
+  }
+
+  return z
 }
