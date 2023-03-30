@@ -11,8 +11,8 @@ import {
 import { DataProvider } from 'src/types/starlay'
 import { PolkadotAddress } from 'src/types/web3'
 import {
-  EMPTY_BALANCE_BY_ASSET,
   assetFromSymbolAndAddress,
+  EMPTY_BALANCE_BY_ASSET,
 } from 'src/utils/assets'
 import { calculateNetAPY } from 'src/utils/calculator'
 import { BN_ONE, BN_ZERO } from 'src/utils/number'
@@ -62,7 +62,7 @@ export class DataProviderPolkadot implements DataProvider {
         )
         return {
           pool: data.pool as string,
-          ...assetFromSymbolAndAddress(symbol as AssetSymbol, address),
+          ...assetFromSymbolAndAddress(symbol, address),
           decimals,
           // TODO calculation
           depositAPY: toBigNumber(data.supplyRatePerMsec),
@@ -141,8 +141,11 @@ export class DataProviderPolkadot implements DataProvider {
       ) => ({
         ...res,
         [pool as string]: {
-          address: underlyingAssetAddress,
-          symbol: toString(underlyingSymbol),
+          address: underlyingAssetAddress as string,
+          symbol: assetFromSymbolAndAddress(
+            toString(underlyingSymbol) as AssetSymbol,
+            underlyingAssetAddress as string,
+          ).symbol,
           decimals: underlyingDecimals,
         },
       }),
@@ -153,10 +156,10 @@ export class DataProviderPolkadot implements DataProvider {
 
   private toBalanceByAsset = (data: PoolBalances[]) =>
     data.reduce((prev, { pool, balanceOf, borrowBalanceCurrent }) => {
-      const { address, symbol, decimals } = this.underlyingOf(pool as string)
+      const { symbol, decimals } = this.underlyingOf(pool as string)
       return {
         ...prev,
-        [assetFromSymbolAndAddress(symbol, address).symbol]: {
+        [symbol]: {
           deposited: toBigNumber(balanceOf, -decimals),
           borrowed: toBigNumber(borrowBalanceCurrent, -decimals),
           usageAsCollateralEnabled: true,

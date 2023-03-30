@@ -73,6 +73,17 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     name: 'Wrapped SDN',
     icon: SymbolWsdn,
   },
+  WASTR: {
+    symbol: 'ASTR',
+    name: 'Astar',
+    icon: SymbolAstr,
+  },
+  WSDN: {
+    symbol: 'SDN',
+    displaySymbol: 'WSDN',
+    name: 'Wrapped SDN',
+    icon: SymbolWsdn,
+  },
   USDC: {
     symbol: 'USDC',
     name: 'USD Coin',
