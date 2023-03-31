@@ -1,6 +1,15 @@
-import { Dashboard } from 'src/components/screens/Dashboard'
-import { asEVMPage } from 'src/contexts/StarlayContextProviderEVM'
+import router from 'next/router'
+import { getLastConnectedNetwork } from 'src/utils/localStorage'
+import { APP, POLKADOT_APP } from 'src/utils/routes'
 
-const AppPage = () => <Dashboard />
+const App = () => {
+  if (typeof window === 'undefined') return <></>
+  if (getLastConnectedNetwork() === 'Polkadot') {
+    router.replace(POLKADOT_APP)
+  } else {
+    router.replace(APP)
+  }
+  return <></>
+}
 
-export default asEVMPage(AppPage)
+export default App

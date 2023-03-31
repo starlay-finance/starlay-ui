@@ -1,9 +1,8 @@
 import { Dashboard } from 'src/components/screens/Dashboard'
-import { PolkadotPageLayout } from 'src/contexts/StarlayContextProviderPolkadot'
+import { EVMPageLayout } from 'src/contexts/StarlayContextProviderEVM'
 import { NextPageWithLayout } from 'src/pages/_app'
 
 const AppPage: NextPageWithLayout = () => <Dashboard />
-
-AppPage.getLayout = PolkadotPageLayout
+AppPage.getLayout = EVMPageLayout
 
 export default AppPage

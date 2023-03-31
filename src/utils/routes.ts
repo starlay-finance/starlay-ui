@@ -19,18 +19,19 @@ export const MEDIUM = 'http://medium.com/@starlay_fi'
 export const ARTHSWAP_SWAP_URL = 'https://app.arthswap.org/#/swap'
 
 export const TOP = '/'
-export const APP = '/app'
+export const APP = '/app/evm'
 export const POLKADOT_APP = '/app/wasm'
-export const MARKETS = '/app/markets'
+export const MARKETS = '/app/evm/markets'
 export const POLKADOT_MARKETS = '/app/wasm/markets'
-export const MAKAI = '/app/makai'
-export const LAY_VELAY = '/app/lay'
-export const LAUNCHPAD = '/app/launchpad'
+export const MAKAI = '/app/evm/makai'
+export const LAY_VELAY = '/app/evm/lay'
+export const LAUNCHPAD = '/app/evm/launchpad'
 export const SWAP = ARTHSWAP_SWAP_URL
 export const GOVERNANCE = ''
 export const GOVERNANCE_OVERVIEW = ''
 export const BUG_BOUNTY = ''
 export const SUPPORT = DISCORD
+export const EVM_PREFIX = '/evm'
 export const POLKADOT_PREFIX = '/wasm'
 
 export const POLKADOT_SUPPORTED_PAGES = [APP, MARKETS]

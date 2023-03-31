@@ -1,6 +1,6 @@
 import { SubmittableExtrinsic } from '@polkadot/api/types'
 import { waitReady } from '@polkadot/wasm-crypto'
-import { FC, useCallback, useEffect, useState } from 'react'
+import { FC, ReactElement, useCallback, useEffect, useState } from 'react'
 import { ModalPortal } from 'src/hooks/useModal'
 import { usePolkadotWallet } from 'src/hooks/usePolkadotWallet'
 import { StarlayContext } from 'src/hooks/useStarlay'
@@ -67,14 +67,11 @@ export const StarlayContextProviderPolkadot: FC<{
   )
 }
 
-export const asPolkadotPage =
-  <P extends {}>(Component: FC<P>) =>
-  (props: P) =>
-    (
-      <StarlayContextProviderPolkadot>
-        <>
-          <Component {...props} />
-          <ModalPortal />
-        </>
-      </StarlayContextProviderPolkadot>
-    )
+export const PolkadotPageLayout = (page: ReactElement) => (
+  <StarlayContextProviderPolkadot>
+    <>
+      {page}
+      <ModalPortal />
+    </>
+  </StarlayContextProviderPolkadot>
+)

@@ -1,6 +1,6 @@
 import { transactionType } from '@starlay-finance/contract-helpers'
 import { Web3ReactProvider } from '@web3-react/core'
-import { FC, useCallback } from 'react'
+import { FC, ReactElement, useCallback } from 'react'
 import { useEVMWallet } from 'src/hooks/useEVMWallet'
 import { ModalPortal } from 'src/hooks/useModal'
 import { useRecentGasPrice } from 'src/hooks/useRecentGasPrice'
@@ -58,14 +58,11 @@ export const StarlayContextProviderEVM: FC<{
   )
 })
 
-export const asEVMPage =
-  <P extends {}>(Component: FC<P>) =>
-  (props: P) =>
-    (
-      <StarlayContextProviderEVM>
-        <>
-          <Component {...props} />
-          <ModalPortal />
-        </>
-      </StarlayContextProviderEVM>
-    )
+export const EVMPageLayout = (page: ReactElement) => (
+  <StarlayContextProviderEVM>
+    <>
+      {page}
+      <ModalPortal />
+    </>
+  </StarlayContextProviderEVM>
+)
