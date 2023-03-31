@@ -4,8 +4,8 @@ import {
 } from '@starlay-finance/contract-helpers'
 import {
   BigNumber,
-  normalizeBN,
   WEI_DECIMALS,
+  normalizeBN,
 } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
 import { ethers } from 'ethers'
@@ -21,7 +21,7 @@ import { useVotingEscrow } from './useVotingEscrow'
 type TokenSaleType = 'ido' | 'tokenSale'
 export const useTokenSaleVesting = () => {
   const { data: provider } = useStaticRPCProviderEVM()
-  const { account, signer } = useEVMWallet()
+  const { account, signer } = useEVMWallet(true)
   const { userData: userLockData, mutate: mutateVe } = useVotingEscrow()
 
   const { data: contracts } = useSWRImmutable(

@@ -11,7 +11,7 @@ export const useUnsupportedChainAlert = (params?: {
   forceChangeChain: boolean
 }) => {
   const { data: network } = useNetworkType()
-  const { chainId, switchChain } = useEVMWallet()
+  const { chainId, switchChain } = useEVMWallet(true)
   const isUnsupportedChain = useMemo(
     () => chainId && !isSupportedChain(chainId),
     [chainId],
@@ -38,7 +38,7 @@ export const useUnsupportedChainAlert = (params?: {
 }
 
 export const useSwitchChainIfUnsupported = () => {
-  const { chainId, switchChain } = useEVMWallet()
+  const { chainId, switchChain } = useEVMWallet(true)
   const { open: openMessageModal, close } = useMessageModal()
 
   const switchChainIfUnsupported = (fn: VoidFunction) => () => {

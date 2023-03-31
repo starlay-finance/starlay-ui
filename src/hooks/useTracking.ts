@@ -23,7 +23,7 @@ export const useTracking = () => {
   const withTracking =
     <T extends TrackingParams>(
       event: EventType,
-      fn: (param: T) => Promise<{ error: number } | undefined>,
+      fn: (param: T) => Promise<{ error: any } | undefined>,
     ) =>
     async (param: T) => {
       const res = await fn(param)

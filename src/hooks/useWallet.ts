@@ -13,7 +13,7 @@ export type WalletAdaptor = EVMWallet | PolkadotWallet
 
 export type WalletAdaptorInterface<T extends NetworkType, A extends string, W> =
   {
-    networkType: T
+    networkType: T | undefined
     account: A | null | undefined
     wallet: W | null
     chainId: any
@@ -37,9 +37,7 @@ export type PolkadotWallet = WalletAdaptorInterface<
   PolkadotWalletInterface
 >
 
-export const DEFAULT_NETWORK: NetworkType = 'EVM'
-
-export const useWallet = (defaultNetwork: NetworkType): WalletAdaptor => {
+export const useWallet = (defaultNetwork?: NetworkType): WalletAdaptor => {
   const { data: networkType = defaultNetwork } = useNetworkType()
 
   const evmWallet = useEVMWallet(networkType === 'EVM')

@@ -17,7 +17,7 @@ export const useTxHandler = () => {
     mutateWalletBalance()
   }
 
-  const handleTx = async <T = any,>(
+  const handleTx = async <T = any>(
     txs: TxItem<T>[],
     executor: (item: TxItem<T>) => Promise<{ wait: () => Promise<void> }>,
     onSucceeded?: VoidFunction,
@@ -62,7 +62,7 @@ export const useTxHandler = () => {
           title: t`Transaction Canceled`,
           message: e.message || t`You have canceled the transaction.`,
         })
-        return
+        return { error: e }
       }
       open({
         type: 'Alert',
@@ -70,7 +70,7 @@ export const useTxHandler = () => {
         message: t`Something went wrong...`,
       })
       console.error(e)
-      return
+      return { error: e }
     }
   }
 

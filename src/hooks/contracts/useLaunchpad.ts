@@ -26,7 +26,7 @@ export const useLaunchpad = (params?: {
   const context = useLaunchpadContext()
   const launchpadAddress = params?.launchpadAddress || context.launchpadAddress
   const { data: provider } = useStaticRPCProviderEVM()
-  const { account, signer } = useEVMWallet()
+  const { account, signer } = useEVMWallet(true)
   const { data: currentBid, mutate: mutateBid } = useLaunchpadBid(params)
 
   const { data: launchpad } = useSWRImmutable(

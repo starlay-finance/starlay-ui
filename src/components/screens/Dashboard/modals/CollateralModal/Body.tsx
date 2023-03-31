@@ -19,7 +19,7 @@ const TABS = ['collateral'] as const
 export type CollateralModalBodyProps = Omit<EstimationParam, 'amount'> & {
   setUsageAsCollateral: (
     enabled: boolean,
-  ) => Promise<{ error: number } | undefined>
+  ) => Promise<{ error: any } | undefined>
 }
 
 export const CollateralModalBody: FC<CollateralModalBodyProps> = ({

@@ -19,7 +19,7 @@ import { useTxHandler } from './txHandler'
 
 export const useClaimer = () => {
   const { data: provider } = useStaticRPCProviderEVM()
-  const { account, signer } = useEVMWallet()
+  const { account, signer } = useEVMWallet(true)
   const { data: claimer } = useSWRImmutable(
     provider && ['claimer', provider.chainId],
     async () => init(provider!),

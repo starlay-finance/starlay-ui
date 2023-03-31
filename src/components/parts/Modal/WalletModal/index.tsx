@@ -6,7 +6,7 @@ import { Link } from 'src/components/elements/Link'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useNetworkType } from 'src/hooks/useNetwork'
-import { useWallet, WalletConnector } from 'src/hooks/useWallet'
+import { WalletConnector, useWallet } from 'src/hooks/useWallet'
 import { NetworkType } from 'src/libs/config'
 import { darkPurple, purple, trueBlack } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
@@ -18,7 +18,7 @@ import { ItemLabel } from '../parts'
 
 const Wallet: FC<ModalContentProps> = ({ close }) => {
   const { data: network } = useNetworkType()
-  const { account, connect } = useWallet()
+  const { connect } = useWallet(network)
 
   const [connecting, setConnecting] = useState(false)
   const onClickConnect = async (networkType: any, walletType: any) => {

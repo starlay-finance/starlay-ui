@@ -4,9 +4,9 @@ import {
 } from '@starlay-finance/contract-helpers'
 import {
   BigNumber,
+  WEI_DECIMALS,
   normalizeBN,
   valueToBigNumber,
-  WEI_DECIMALS,
 } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
 import { ethers } from 'ethers'
@@ -21,7 +21,7 @@ import { TERM_UNIT, useVotingEscrow } from './useVotingEscrow'
 
 export const useVoter = (offset = 0) => {
   const { data: provider } = useStaticRPCProviderEVM()
-  const { account, signer } = useEVMWallet()
+  const { account, signer } = useEVMWallet(true)
   const { term, userData: userLockData } = useVotingEscrow(offset)
   const { data: voter } = useSWRImmutable(
     provider && ['voter', provider.chainId],

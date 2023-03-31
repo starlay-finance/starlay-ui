@@ -5,7 +5,7 @@ import useSWRImmutable from 'swr/immutable'
 import { useEVMWallet } from './useEVMWallet'
 
 export const useStaticRPCProviderEVM = () => {
-  const { chainId } = useEVMWallet()
+  const { chainId } = useEVMWallet(true)
   const activeChainId = supportedChainOr(chainId, DEFAULT_CHAIN_ID)
   return useSWRImmutable(
     ['evm', 'staticrpcprovider', activeChainId],

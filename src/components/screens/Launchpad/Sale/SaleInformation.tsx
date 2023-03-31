@@ -25,7 +25,7 @@ export const SaleInformation: FC<SaleInformationProps> = ({
   openBiddingModal,
   hasBidded,
 }) => {
-  const { account } = useEVMWallet()
+  const { account } = useEVMWallet(true)
   const { open: openWalletModal } = useWalletModal()
   const started = status !== 'Upcoming'
   return (
