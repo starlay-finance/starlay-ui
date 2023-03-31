@@ -19,7 +19,7 @@ const Accounts: FC<ModalContentProps> = ({ close }) => {
     account,
     accounts: getAccounts,
     changeActiveAccount,
-  } = usePolkadotWallet(true)
+  } = usePolkadotWallet()
 
   const [accounts, setAccounts] = useState<PolkadotAccountWithMeta[]>([])
   useEffect(() => {

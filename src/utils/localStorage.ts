@@ -30,5 +30,5 @@ export const setLastConnectedNetwork = (value: NetworkType) =>
 export const getHasConnected = (network: NetworkType) =>
   localStorage.getItem('hasConnected_' + network) === 'true'
 
-export const setHasConnected = (value: NetworkType) =>
-  localStorage.setItem('hasConnected_' + value, 'true')
+export const setHasConnected = (network: NetworkType, value = true) =>
+  localStorage.setItem('hasConnected_' + network, `${value}`)

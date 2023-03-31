@@ -44,15 +44,10 @@ export const useWallet = (defaultNetwork?: NetworkType): WalletAdaptor => {
   const polkadotWallet = usePolkadotWallet(networkType === 'Polkadot')
 
   const connect: WalletAdaptor['connect'] = async (networkType, walletType) => {
-    try {
-      if (networkType === 'Polkadot') {
-        await polkadotWallet.connect(walletType as PolkadotWalletType)
-      } else {
-        await evmWallet.connect(walletType as EVMWalletType)
-      }
-    } catch (e) {
-      console.log(e)
-      return
+    if (networkType === 'Polkadot') {
+      await polkadotWallet.connect(walletType as PolkadotWalletType)
+    } else {
+      await evmWallet.connect(walletType as EVMWalletType)
     }
   }
 

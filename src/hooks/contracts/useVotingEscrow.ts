@@ -24,7 +24,7 @@ export const useVotingEscrow = (offset = 0) => {
     Math.ceil(dayjs().unix() / TERM_UNIT) * TERM_UNIT + TERM_UNIT * offset
 
   const { data: provider } = useStaticRPCProviderEVM()
-  const { account, signer } = useEVMWallet(true)
+  const { account, signer } = useEVMWallet()
   const { data: votingEscrow } = useSWRImmutable(
     provider && ['votingescrow', provider.chainId],
     async () => init(provider!),

@@ -224,7 +224,7 @@ type LayBalanceProps = {
 }
 const LayBalance = styled<FC<LayBalanceProps & { className?: string }>>(
   ({ label, amount, actions, details, className }) => {
-    const { account } = useEVMWallet(true)
+    const { account } = useEVMWallet()
     const { icon, name, symbol } = ASSETS_DICT.LAY
     const { data: priceInUSD = BN_ZERO } = useLAYPrice()
     return (

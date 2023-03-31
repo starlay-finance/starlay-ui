@@ -9,7 +9,7 @@ export const useLaunchpadBid = (params?: {
   launchpadAddress: EthereumAddress
 }) => {
   const { data: provider } = useStaticRPCProviderEVM()
-  const { account } = useEVMWallet(true)
+  const { account } = useEVMWallet()
   const context = useLaunchpadContext()
   const launchpadAddress = params?.launchpadAddress || context.launchpadAddress
   return useSWRImmutable(

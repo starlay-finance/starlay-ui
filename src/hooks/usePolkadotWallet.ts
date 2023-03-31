@@ -57,22 +57,19 @@ export const usePolkadotWallet = (
       return
     }
     if (!polkadot) return
-    // TODO handle errors
-    try {
-      console.log('connecting...')
-      const accounts = await polkadot
-        .web3Enable(APP_NAME)
-        .then(() => polkadot.web3Accounts())
-      if (!accounts.length) {
-        // TODO display an error message: no available accounts found
-        return
-      }
-      changeActiveAccount(accounts[0].address)
-      setLastConnectedNetwork('Polkadot')
-      setHasConnected('Polkadot')
-    } catch (e) {
-      console.log(e)
+    const extensions = await polkadot.web3Enable(APP_NAME)
+    if (!extensions.length) {
+      setHasConnected('Polkadot', false)
+      throw new Error()
     }
+    const accounts = await polkadot.web3Accounts()
+    if (!accounts.length) {
+      setHasConnected('Polkadot', false)
+      throw new Error()
+    }
+    changeActiveAccount(accounts[0].address)
+    setLastConnectedNetwork('Polkadot')
+    setHasConnected('Polkadot')
   }
 
   const changeActiveAccount = async (address: PolkadotAddress) => {

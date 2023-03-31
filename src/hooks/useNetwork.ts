@@ -5,7 +5,7 @@ import {
   getLastConnectedNetwork,
   setLastConnectedNetwork,
 } from 'src/utils/localStorage'
-import { POLKADOT_PREFIX } from 'src/utils/routes'
+import { POLKADOT_PREFIX, POLKADOT_SUPPORTED_PAGES } from 'src/utils/routes'
 import { useSWRLocal } from './base/useSWRLocal'
 
 export const DEFAULT_NETWORK: NetworkType = 'EVM'
@@ -22,7 +22,11 @@ export const useNetworkType = () => {
   useEffect(() => {
     if (values.data === 'EVM' && asPath.includes(POLKADOT_PREFIX))
       push(asPath.replace(POLKADOT_PREFIX, ''))
-    if (values.data === 'Polkadot' && !asPath.includes(POLKADOT_PREFIX))
+    if (
+      values.data === 'Polkadot' &&
+      !asPath.includes(POLKADOT_PREFIX) &&
+      POLKADOT_SUPPORTED_PAGES.includes(asPath)
+    )
       push(asPath.replace('/app', `/app${POLKADOT_PREFIX}`))
   }, [values.data, asPath])
 

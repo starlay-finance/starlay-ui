@@ -12,7 +12,7 @@ import { useTxHandler } from './txHandler'
 
 export const useLeverager = () => {
   const { data: provider } = useStaticRPCProviderEVM()
-  const { account, signer } = useEVMWallet(true)
+  const { account, signer } = useEVMWallet()
   const { data: leverager } = useSWRImmutable(
     provider && ['leverager', provider.chainId],
     () => {

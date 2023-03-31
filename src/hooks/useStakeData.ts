@@ -16,7 +16,7 @@ const EMPTY_STAKE_DATA: StakeData = {
 }
 
 export const useStakeData = () => {
-  const { account } = useEVMWallet(true)
+  const { account } = useEVMWallet()
   const { data: provider } = useStakeUiHelper()
   return useSWR(
     () => account && provider && ['stakedata', provider.chainId, account],

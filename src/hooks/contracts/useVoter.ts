@@ -21,7 +21,7 @@ import { TERM_UNIT, useVotingEscrow } from './useVotingEscrow'
 
 export const useVoter = (offset = 0) => {
   const { data: provider } = useStaticRPCProviderEVM()
-  const { account, signer } = useEVMWallet(true)
+  const { account, signer } = useEVMWallet()
   const { term, userData: userLockData } = useVotingEscrow(offset)
   const { data: voter } = useSWRImmutable(
     provider && ['voter', provider.chainId],

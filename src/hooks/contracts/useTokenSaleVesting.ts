@@ -21,7 +21,7 @@ import { useVotingEscrow } from './useVotingEscrow'
 type TokenSaleType = 'ido' | 'tokenSale'
 export const useTokenSaleVesting = () => {
   const { data: provider } = useStaticRPCProviderEVM()
-  const { account, signer } = useEVMWallet(true)
+  const { account, signer } = useEVMWallet()
   const { userData: userLockData, mutate: mutateVe } = useVotingEscrow()
 
   const { data: contracts } = useSWRImmutable(

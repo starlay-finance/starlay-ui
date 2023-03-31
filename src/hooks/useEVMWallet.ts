@@ -1,6 +1,7 @@
 import { useWeb3React } from '@web3-react/core'
 import { ethers } from 'ethers'
 import { useCallback, useEffect, useMemo } from 'react'
+import { useNetworkType } from 'src/hooks/useNetwork'
 import { EVMChainId } from 'src/libs/config'
 import { getEVMChainInfo } from 'src/libs/config/chain'
 import {
@@ -33,7 +34,12 @@ export type EVMWalletInterface = {
 }
 const useActiveWallet = () => useSWRLocal<ActiveWallet | null>('wallet-active')
 
-export const useEVMWallet = (isNetworkActive: boolean): EVMWalletInterface => {
+export const useEVMWallet = (
+  forceNetworkActive: boolean = false,
+): EVMWalletInterface => {
+  const { data: networkType } = useNetworkType()
+  const isNetworkActive = networkType === 'EVM' || forceNetworkActive
+
   const { library, error, account, active, chainId, activate, deactivate } =
     useWeb3React<ethers.providers.Web3Provider>()
 

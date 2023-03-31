@@ -99,10 +99,10 @@ export const AppHeader = () => {
           </MenuButtonSmall>
           <SettingsContainer $isOpen={isSetingsOpen}>
             <SettingsDiv as="div">
-              <Link href={evmOnly(SWAP, network)}>{t`Swap`}</Link>
+              <Link href={SWAP}>{t`Swap`}</Link>
             </SettingsDiv>
             <SettingsDiv as="div">
-              <Link href={evmOnly(LAUNCHPAD, network)}>{t`Launchpad`}</Link>
+              <Link href={LAUNCHPAD}>{t`Launchpad`}</Link>
             </SettingsDiv>
             <SettingsDiv>
               <button

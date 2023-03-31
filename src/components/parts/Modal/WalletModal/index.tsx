@@ -14,17 +14,25 @@ import { flexCenter } from 'src/styles/mixins'
 import { DOCS } from 'src/utils/routes'
 import styled from 'styled-components'
 import { LoadingProtocolIcon } from '../../Loading'
+import { useMessageModal } from '../MessageModal'
 import { ItemLabel } from '../parts'
 
 const Wallet: FC<ModalContentProps> = ({ close }) => {
   const { data: network } = useNetworkType()
   const { connect } = useWallet(network)
 
+  const { open } = useMessageModal()
+
   const [connecting, setConnecting] = useState(false)
   const onClickConnect = async (networkType: any, walletType: any) => {
     setConnecting(true)
     await connect(networkType, walletType).then(close, () => {
       setConnecting(false)
+      open({
+        type: 'Alert',
+        title: t`Failed to connect to wallet`,
+        message: t`Please check your wallet settings and try again.`,
+      })
     })
   }
 
