@@ -40,7 +40,7 @@ const BORROW_MARKET_COLUMNS = [
 ]
 
 export const Market = asStyled(({ className }) => {
-  const { account } = useWallet()
+  const { account, networkType } = useWallet()
   const { data: marketData } = useMarketData()
   const {
     assets = [],
@@ -80,13 +80,16 @@ export const Market = asStyled(({ className }) => {
       },
       marketReferenceCurrencyPriceInUSD,
       marketReferenceCurrencyDecimals,
-      openSuggestModal: () =>
-        openSuggestModal({
-          asset,
-          inWallet: balance[asset.symbol],
-          openDeposit: () => deposit(user, asset),
-          openMakai: () => router.push(toMakaiLoop(asset.symbol)),
-        }),
+      openSuggestModal:
+        networkType === 'EVM'
+          ? () =>
+              openSuggestModal({
+                asset,
+                inWallet: balance[asset.symbol],
+                openDeposit: () => deposit(user, asset),
+                openMakai: () => router.push(toMakaiLoop(asset.symbol)),
+              })
+          : undefined,
     })
   }
   const setUsageAsCollateral = (user: User, asset: AssetMarketData) => {

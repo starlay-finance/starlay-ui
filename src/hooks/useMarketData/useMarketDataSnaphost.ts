@@ -6,12 +6,14 @@ import { MarketData } from 'src/types/models'
 import { onlyListed } from 'src/utils/assets'
 import { utcStartOfDate } from 'src/utils/date'
 import useSWRImmutable from 'swr/immutable'
+import { useNetworkType } from '../useNetwork'
 import { useStaticRPCProviderEVM } from '../useStaticRPCProviderEVM'
 
 export const useMarketDataSnapshot = () => {
+  const { data: network } = useNetworkType()
   const { data } = useStaticRPCProviderEVM()
   return useSWRImmutable(
-    () => data && ['marketdatasnapshot', data?.chainId],
+    () => network === 'EVM' && data && ['marketdatasnapshot', data?.chainId],
     ([_key, chainId]) => getMarketDataSnapshot(chainId),
   )
 }
