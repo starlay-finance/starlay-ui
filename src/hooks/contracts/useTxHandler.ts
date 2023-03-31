@@ -1,8 +1,8 @@
 import { t } from '@lingui/macro'
-import { serializeError } from 'eth-rpc-errors'
 import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
 import { TxItem } from 'src/types/starlay'
 import { useMarketData } from '../useMarketData'
+import { isStarlayTxError } from '../useStarlay'
 import { useUserData } from '../useUserData'
 import { useWalletBalance } from '../useWalletBalance'
 
@@ -17,7 +17,7 @@ export const useTxHandler = () => {
     mutateWalletBalance()
   }
 
-  const handleTx = async <T = any>(
+  const handleTx = async <T = any,>(
     txs: TxItem<T>[],
     executor: (item: TxItem<T>) => Promise<{ wait: () => Promise<void> }>,
     onSucceeded?: VoidFunction,
@@ -56,14 +56,13 @@ export const useTxHandler = () => {
         onClose: onSucceeded,
       })
     } catch (e) {
-      const error = serializeError(e)
-      if (error.code === 4001) {
+      if (isStarlayTxError(e) && e.type === 'Cancelled') {
         open({
           type: 'Alert',
           title: t`Transaction Canceled`,
-          message: t`You have canceled the transaction.`,
+          message: e.message || t`You have canceled the transaction.`,
         })
-        return { error: error.code }
+        return
       }
       open({
         type: 'Alert',
@@ -71,7 +70,7 @@ export const useTxHandler = () => {
         message: t`Something went wrong...`,
       })
       console.error(e)
-      return { error: error.code }
+      return
     }
   }
 

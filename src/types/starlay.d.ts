@@ -7,6 +7,12 @@ export type TxItem<T = any> = {
   tx: () => Promise<T>
 }
 
+export type StarlayTxError = {
+  isStarlayTxError: true
+  type: 'Cancelled'
+  message?: string
+}
+
 export type LendingPoolCommonParams = {
   account: string
   pool: string

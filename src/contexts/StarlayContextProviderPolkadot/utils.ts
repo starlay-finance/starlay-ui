@@ -4,6 +4,7 @@ import {
   SubmittableExtrinsic,
   SubmittableResultValue,
 } from '@polkadot/api/types'
+import { error } from 'src/hooks/useStarlay'
 import { TxItem } from 'src/types/starlay'
 
 export const executeTx = async (
@@ -19,8 +20,8 @@ export const executeTx = async (
       try {
         await tx.signAndSend(account, { signer }, callback(api, ...executor))
         res({ wait: () => txPromise })
-      } catch (e) {
-        // TODO
+      } catch (e: any) {
+        if (e.message === 'Cancelled') rej(error('Cancelled'))
         rej(e)
       }
     })
