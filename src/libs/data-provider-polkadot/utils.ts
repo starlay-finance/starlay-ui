@@ -36,7 +36,11 @@ export const toAPY = (_ratePerMilliSec: ReturnNumber) => {
     .times(expMinusTwo)
     .times(basePowerThree)
     .idiv(6)
-  return UNIT.plus(ratePerMilliSec.times(exp)).plus(secondTerm).plus(thirdTerm)
+  return ratePerMilliSec
+    .times(exp)
+    .plus(secondTerm)
+    .plus(thirdTerm)
+    .shiftedBy(-UNIT_DECIMALS)
 }
 
 const UNIT_DECIMALS = 27
