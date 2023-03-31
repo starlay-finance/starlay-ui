@@ -17,6 +17,7 @@ import { useFaucet } from 'src/hooks/contracts/useFaucet'
 import { useNetworkType } from 'src/hooks/useNetwork'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
+import { getNetworkConfig } from 'src/libs/config'
 import { darkGray, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
@@ -40,7 +41,7 @@ import { HeaderWrapper } from './common'
 export const AppHeader = () => {
   const { pathname } = useRouter()
   const { data: network } = useNetworkType()
-  const { account, chainId } = useWallet()
+  const { account, chainId } = useWallet(network)
   const { data: user } = useUserData()
   const { mint } = useFaucet()
   const [isSetingsOpen, setIsSettingsOpen] = useState(false)
@@ -113,9 +114,9 @@ export const AppHeader = () => {
                 disabled={network !== 'EVM'}
               >{t`Set Gas Fee`}</button>
             </SettingsDiv>
-            {mint && (
+            {getNetworkConfig(network, chainId)?.isTestnet && (
               <SettingsDiv>
-                <button onClick={mint}>{t`Faucet`}</button>
+                <button onClick={mint} disabled={!mint}>{t`Faucet`}</button>
               </SettingsDiv>
             )}
           </SettingsContainer>

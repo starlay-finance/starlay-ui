@@ -26,7 +26,7 @@ export const StarlayContextProviderEVM: FC<{
   children: JSX.Element
 }> = withWeb3ReactProvider(({ children }) => {
   const { data: provider } = useStaticRPCProviderEVM()
-  const { signer } = useEVMWallet()
+  const { signer } = useEVMWallet(true)
 
   const { getRecentGasPrice } = useRecentGasPrice()
   const { data: lendingPool } = useSWRImmutable<LendingPool>(
