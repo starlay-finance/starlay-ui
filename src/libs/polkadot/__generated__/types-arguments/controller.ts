@@ -36,3 +36,8 @@ export type PoolAttributes = {
 	totalBorrows: (string | number | BN)
 }
 
+export type PoolAttributesForSeizeCalculation = {
+	underlying: AccountId,
+	decimals: (number | string | BN)
+}
+

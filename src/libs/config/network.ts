@@ -140,9 +140,9 @@ export const POLKADOT_NETWORK_CONFIG: Record<
     publicJsonRPCUrl: ['https://shibuya-rpc.dwellir.com'],
     publicJsonRPCWSUrl: 'wss://shibuya-rpc.dwellir.com',
     addresses: {
-      controller: 'bPHkbZpc6f5Sg3XSMuDsMX6ehvqNnbUyccabfv31JynM21g',
-      lens: 'WnXvT5yNtGwCsfycJDfHMFc6qgFYVfJrWuMEXJSVLhoifJm',
-      faucet: 'YbTm4hxCT57zaEW5jiJfnPPq6uZinPt7QcGiwkzfaL8uMTk',
+      controller: 'YDoD9DEaGEMx4KRtJdmvDfN5D8BfgZzDMWmm3PSh5PELdM2',
+      lens: 'Xtg9zUQRJTq9EsQi92c7QJNFC8sEZ4oHuQV2ieYyn8riQGz',
+      faucet: 'Wv8YqN2odAfjkEyL5NTK2fPZZoxJTZors9Kh5KLTxSoL5r7',
     },
     baseAsset: {
       symbol: 'ASTR',

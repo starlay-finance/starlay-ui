@@ -37,3 +37,8 @@ export type PoolAttributes = {
 	totalBorrows: ReturnNumber
 }
 
+export type PoolAttributesForSeizeCalculation = {
+	underlying: AccountId,
+	decimals: number
+}
+
