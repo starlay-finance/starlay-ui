@@ -17,7 +17,7 @@ import { useFaucet } from 'src/hooks/contracts/useFaucet'
 import { useNetworkType } from 'src/hooks/useNetwork'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
-import { getNetworkConfig } from 'src/libs/config'
+import { NetworkType, getNetworkConfig } from 'src/libs/config'
 import { darkGray, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
@@ -56,26 +56,24 @@ export const AppHeader = () => {
       <Nav>
         <Tab $active={pathname === APP || pathname === POLKADOT_APP}>
           <Link
-            href={network === 'EVM' ? APP : POLKADOT_APP}
+            href={network === 'Polkadot' ? POLKADOT_APP : APP}
           >{t`Dashboard`}</Link>
         </Tab>
         <Tab $active={pathname === MARKETS || pathname === POLKADOT_MARKETS}>
           <Link
-            href={network === 'EVM' ? MARKETS : POLKADOT_MARKETS}
+            href={network === 'Polkadot' ? POLKADOT_MARKETS : MARKETS}
           >{t`Markets`}</Link>
         </Tab>
         <Tab $active={pathname === MAKAI}>
-          <Link href={network === 'EVM' ? MAKAI : undefined}>{t`Makai`}</Link>
+          <Link href={evmOnly(MAKAI, network)}>{t`Makai`}</Link>
         </Tab>
         <Tab $active={pathname === LAY_VELAY}>
-          <Link
-            href={network === 'EVM' ? LAY_VELAY : undefined}
-          >{t`LAY/veLAY`}</Link>
+          <Link href={evmOnly(LAY_VELAY, network)}>{t`LAY/veLAY`}</Link>
         </Tab>
       </Nav>
       <Menu>
         <MenuButtonSmall onClick={() => openNetworkModal()}>
-          {network === 'EVM' ? <IconMetamask /> : <IconPolkadotJs />}
+          {network === 'Polkadot' ? <IconPolkadotJs /> : <IconMetamask />}
         </MenuButtonSmall>
         <MenuButton
           onClick={() =>
@@ -89,7 +87,10 @@ export const AppHeader = () => {
         >
           {account ? shortenAddress(account) : t`Connect`}
         </MenuButton>
-        <MenuButtonSmall onClick={() => openRewardModal()} disabled={!user}>
+        <MenuButtonSmall
+          onClick={() => openRewardModal()}
+          disabled={!user || network !== 'EVM'}
+        >
           <Image src={SymbolLay} alt="LAY" width={20} height={20} />
         </MenuButtonSmall>
         <div>
@@ -98,10 +99,10 @@ export const AppHeader = () => {
           </MenuButtonSmall>
           <SettingsContainer $isOpen={isSetingsOpen}>
             <SettingsDiv as="div">
-              <Link href={SWAP}>{t`Swap`}</Link>
+              <Link href={evmOnly(SWAP, network)}>{t`Swap`}</Link>
             </SettingsDiv>
             <SettingsDiv as="div">
-              <Link href={LAUNCHPAD}>{t`Launchpad`}</Link>
+              <Link href={evmOnly(LAUNCHPAD, network)}>{t`Launchpad`}</Link>
             </SettingsDiv>
             <SettingsDiv>
               <button
@@ -125,6 +126,8 @@ export const AppHeader = () => {
     </AppHeaderWrapper>
   )
 }
+const evmOnly = (url: string, network: NetworkType | undefined) =>
+  network === 'EVM' ? url : undefined
 
 const MenuButton = styled.button`
   ${flexCenter};
