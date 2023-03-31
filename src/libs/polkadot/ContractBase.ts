@@ -70,6 +70,7 @@ export abstract class PolkadotContractBase<T extends Contract> {
       refTime: withMargin(gasRequired.refTime.toString()),
       proofSize: withMargin(gasRequired.proofSize.toString()),
     })
+    console.log(JSON.stringify(gasRequired))
     return this.contract.buildExtrinsic[fn](...args, { gasLimit })
   }
 }
