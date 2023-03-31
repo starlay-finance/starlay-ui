@@ -1,10 +1,6 @@
 import { NetworkType } from 'src/libs/config'
 import { EVMWalletType } from 'src/libs/wallet-provider-evm'
 import { EthereumAddress, PolkadotAddress } from 'src/types/web3'
-import {
-  setHasConnected,
-  setLastConnectedNetwork,
-} from 'src/utils/localStorage'
 import { EVMWalletInterface, useEVMWallet } from './useEVMWallet'
 import { useNetworkType } from './useNetwork'
 import {
@@ -43,9 +39,7 @@ export type PolkadotWallet = WalletAdaptorInterface<
 
 export const DEFAULT_NETWORK: NetworkType = 'EVM'
 
-export const useWallet = (
-  defaultNetwork: NetworkType = DEFAULT_NETWORK,
-): WalletAdaptor => {
+export const useWallet = (defaultNetwork: NetworkType): WalletAdaptor => {
   const { data: networkType = defaultNetwork } = useNetworkType()
 
   const evmWallet = useEVMWallet(networkType === 'EVM')
@@ -58,8 +52,6 @@ export const useWallet = (
       } else {
         await evmWallet.connect(walletType as EVMWalletType)
       }
-      setLastConnectedNetwork(networkType)
-      setHasConnected(networkType)
     } catch (e) {
       console.log(e)
       return

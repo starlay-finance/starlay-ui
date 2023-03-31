@@ -33,9 +33,7 @@ export type EVMWalletInterface = {
 }
 const useActiveWallet = () => useSWRLocal<ActiveWallet | null>('wallet-active')
 
-export const useEVMWallet = (
-  isNetworkActive: boolean = true, // TODO temporarily
-): EVMWalletInterface => {
+export const useEVMWallet = (isNetworkActive: boolean): EVMWalletInterface => {
   const { library, error, account, active, chainId, activate, deactivate } =
     useWeb3React<ethers.providers.Web3Provider>()
 
