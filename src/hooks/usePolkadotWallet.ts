@@ -6,6 +6,11 @@ import {
   PolkadotChainId,
 } from 'src/libs/config/network'
 import { PolkadotAddress } from 'src/types/web3'
+import {
+  getHasConnected,
+  setHasConnected,
+  setLastConnectedNetwork,
+} from 'src/utils/localStorage'
 import { POLKADOT_JS_EXT_URL } from 'src/utils/routes'
 import { useSWRLocal } from './base/useSWRLocal'
 
@@ -60,6 +65,8 @@ export const usePolkadotWallet = (
       return
     }
     changeActiveAccount(accounts[0].address)
+    setLastConnectedNetwork('Polkadot')
+    setHasConnected('Polkadot')
   }
 
   const changeActiveAccount = async (address: PolkadotAddress) => {
@@ -72,7 +79,13 @@ export const usePolkadotWallet = (
   }, [])
 
   useEffect(() => {
-    if (!polkadot || !isNetworkActive || account) return
+    if (
+      !polkadot ||
+      !isNetworkActive ||
+      account ||
+      !getHasConnected('Polkadot')
+    )
+      return
     connect('polkadot-js', true)
   }, [isNetworkActive, polkadot])
 

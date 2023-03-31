@@ -77,7 +77,7 @@ const IconButton = styled.button<{ $loading?: boolean }>`
     filter: blur(24px);
     transition: all 0.3s ease-in-out;
   }
-  :hover {
+  :enabled:hover {
     cursor: pointer;
     span {
       opacity: 1;

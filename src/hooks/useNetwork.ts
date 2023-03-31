@@ -12,7 +12,25 @@ export const DEFAULT_NETWORK: NetworkType = 'EVM'
 
 export const useNetworkType = () => {
   const { asPath, push } = useRouter()
-  const values = useSWRLocal<NetworkType>('network-type', {
+  const last = useLastConnectedNetworkType()
+  const values = useSWRLocal<NetworkType>('current-network')
+
+  useEffect(() => {
+    if (!values.data && last.data) values.mutate(last.data)
+  }, [last.data])
+
+  useEffect(() => {
+    if (values.data === 'EVM' && asPath.includes(POLKADOT_PREFIX))
+      push(asPath.replace(POLKADOT_PREFIX, ''))
+    if (values.data === 'Polkadot' && !asPath.includes(POLKADOT_PREFIX))
+      push(asPath.replace('/app', `/app${POLKADOT_PREFIX}`))
+  }, [values.data, asPath])
+
+  return values
+}
+
+export const useLastConnectedNetworkType = () => {
+  const values = useSWRLocal<NetworkType>('last-connected-network', {
     fallbackData:
       (typeof window !== 'undefined' && getLastConnectedNetwork()) ||
       DEFAULT_NETWORK,
@@ -21,13 +39,6 @@ export const useNetworkType = () => {
   useEffect(() => {
     if (values.data) setLastConnectedNetwork(values.data)
   }, [values.data])
-
-  useEffect(() => {
-    if (values.data === 'EVM' && asPath.includes(POLKADOT_PREFIX))
-      push(asPath.replace(POLKADOT_PREFIX, ''))
-    if (values.data === 'Polkadot' && !asPath.includes(POLKADOT_PREFIX))
-      push(asPath.replace('/app', `/app${POLKADOT_PREFIX}`))
-  }, [values.data, asPath])
 
   return values
 }

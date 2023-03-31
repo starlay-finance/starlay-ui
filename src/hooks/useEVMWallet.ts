@@ -9,6 +9,10 @@ import {
   metamask,
 } from 'src/libs/wallet-provider-evm'
 import { EthereumAddress } from 'src/types/web3'
+import {
+  setHasConnected,
+  setLastConnectedNetwork,
+} from 'src/utils/localStorage'
 import { useSWRLocal } from './base/useSWRLocal'
 
 type ActiveWallet = {
@@ -44,6 +48,8 @@ export const useEVMWallet = (
       if (onConnect) await onConnect()
       await activate(connector, undefined, true)
       await mutateActiveWallet({ type, onDisconnect })
+      setLastConnectedNetwork('EVM')
+      setHasConnected('EVM')
     },
     [activate],
   )
