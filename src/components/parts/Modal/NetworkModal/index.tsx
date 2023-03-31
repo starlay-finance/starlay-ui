@@ -4,10 +4,12 @@ import { IconMetamask, IconPolkadotJs } from 'src/assets/svgs'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useNetworkType } from 'src/hooks/useNetwork'
-import { NetworkType } from 'src/libs/config'
+import { NetworkType, getNetworkConfig } from 'src/libs/config'
+import { DEFAULT_CHAIN_ID_POLKADOT } from 'src/libs/config/network'
 import { darkPurple, trueBlack } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
+import { DEFAULT_CHAIN_ID } from 'src/utils/env'
 import styled from 'styled-components'
 import { ItemLabel } from '../parts'
 
@@ -37,13 +39,19 @@ const BodyConnect: FC<{
   <BodyDiv>
     <NetworksDiv>
       <button onClick={() => setNetwork('EVM')} disabled={network === 'EVM'}>
-        <ItemLabel label={t`Astar(EVM)`} IconSVG={IconMetamask} />
+        <ItemLabel
+          label={getNetworkConfig('EVM', DEFAULT_CHAIN_ID).name}
+          IconSVG={IconMetamask}
+        />
       </button>
       <button
         onClick={() => setNetwork('Polkadot')}
         disabled={network === 'Polkadot'}
       >
-        <ItemLabel label={t`Astar(WASM)`} IconSVG={IconPolkadotJs} />
+        <ItemLabel
+          label={getNetworkConfig('Polkadot', DEFAULT_CHAIN_ID_POLKADOT).name}
+          IconSVG={IconPolkadotJs}
+        />
       </button>
     </NetworksDiv>
   </BodyDiv>

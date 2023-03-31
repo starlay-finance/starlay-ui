@@ -77,7 +77,7 @@ export type EVMNetworkConfig = NetworkConfig<
 
 export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
   [EVM_CHAIN_ID.astar]: {
-    name: 'Astar Network',
+    name: 'Astar Mainnet / EVM',
     publicJsonRPCUrl: ['https://astar.public.blastapi.io'],
     privateJsonRPCUrl:
       'https://astar.blastapi.io/b783cb07-7f1a-48dc-88fb-cedca75fafa0',
@@ -136,7 +136,7 @@ export const POLKADOT_NETWORK_CONFIG: Record<
   PolkadotNetworkConfig
 > = {
   [POLKADOT_CHAIN_ID.shibuya]: {
-    name: 'Shibuya Testnet',
+    name: 'Shibuya Testnet / WASM',
     publicJsonRPCUrl: ['https://shibuya-rpc.dwellir.com'],
     publicJsonRPCWSUrl: 'wss://shibuya-rpc.dwellir.com',
     addresses: {
