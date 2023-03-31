@@ -8,7 +8,9 @@ import {
 import { PolkadotAddress } from 'src/types/web3'
 import {
   getHasConnected,
+  getLastConnectedAccount,
   setHasConnected,
+  setLastConnectedAccount,
   setLastConnectedNetwork,
 } from 'src/utils/localStorage'
 import { POLKADOT_JS_EXT_URL } from 'src/utils/routes'
@@ -67,13 +69,18 @@ export const usePolkadotWallet = (
       setHasConnected('Polkadot', false)
       throw new Error()
     }
-    changeActiveAccount(accounts[0].address)
+    const lastConnectedAccount = getLastConnectedAccount('Polkadot')
+    changeActiveAccount(
+      accounts.find((acct) => acct.address === lastConnectedAccount)?.address ||
+        accounts[0].address,
+    )
     setLastConnectedNetwork('Polkadot')
     setHasConnected('Polkadot')
   }
 
   const changeActiveAccount = async (address: PolkadotAddress) => {
     setActiveAccount(address)
+    setLastConnectedAccount('Polkadot', address)
     setSigner((await polkadot!.web3FromAddress(address)).signer)
   }
 
