@@ -1,10 +1,4 @@
-import { ReturnNumber } from '@727-ventures/typechain-types'
-import {
-  BigNumber,
-  BigNumberValue,
-  valueToBigNumber,
-  valueToZDBigNumber,
-} from '@starlay-finance/math-utils'
+import { BigNumber } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
 import {
   AssetSymbol,
@@ -16,8 +10,8 @@ import {
 import { DataProvider } from 'src/types/starlay'
 import { PolkadotAddress } from 'src/types/web3'
 import {
-  assetFromSymbolAndAddress,
   EMPTY_BALANCE_BY_ASSET,
+  assetFromSymbolAndAddress,
 } from 'src/utils/assets'
 import { calculateNetAPY } from 'src/utils/calculator'
 import { BN_ONE, BN_ZERO } from 'src/utils/number'
@@ -28,6 +22,7 @@ import {
   PoolMetadata,
 } from '../polkadot/__generated__/types-returns/lens'
 import { StaticRPCProviderPolkadot } from '../static-rpc-provider-polkadot'
+import { toAPY, toBigNumber, toString } from './utils'
 
 export class DataProviderPolkadot implements DataProvider {
   private constructor(
@@ -69,9 +64,8 @@ export class DataProviderPolkadot implements DataProvider {
           pool: data.pool as string,
           ...assetFromSymbolAndAddress(symbol, address),
           decimals,
-          // TODO calculation
-          depositAPY: toAPY(toBigNumber(data.supplyRatePerMsec)),
-          variableBorrowAPY: toAPY(toBigNumber(data.borrowRatePerMsec)),
+          depositAPY: toAPY(data.supplyRatePerMsec),
+          variableBorrowAPY: toAPY(data.borrowRatePerMsec),
           liquidity: toBigNumber(data.totalCash, -decimals),
           liquidityInUSD: toBigNumber(data.totalCash, -decimals).times(
             priceInMarketReferenceCurrency,
@@ -232,43 +226,4 @@ const toSummary = (
       : undefined,
     netAPY,
   }
-}
-
-const DEFAULT_SCALE = 18
-const toBigNumber = (num: ReturnNumber, shift: number = -DEFAULT_SCALE) =>
-  valueToBigNumber(num.toString()).shiftedBy(shift)
-
-const toString = (maybeString: string | number[]) => {
-  const hexStr =
-    typeof maybeString === 'string' ? maybeString : maybeString.toString()
-  return Buffer.from(hexStr.replace('0x', ''), 'hex').toString('utf-8')
-}
-
-const MSECS_PER_YEAR = 60 * 60 * 24 * 365 * 1000
-const toAPY = (rate: BigNumber) =>
-  rate.isZero()
-    ? BN_ZERO
-    : wadPow(rate.div(MSECS_PER_YEAR).plus(WAD), MSECS_PER_YEAR).minus(WAD)
-
-// TODO tmp
-const WAD = valueToZDBigNumber(10).pow(18)
-const HALF_WAD = WAD.dividedBy(2)
-
-const wadMul = (a: BigNumberValue, b: BigNumberValue): BigNumber =>
-  HALF_WAD.plus(valueToZDBigNumber(a).multipliedBy(b)).div(WAD)
-
-const wadPow = (a: BigNumberValue, p: BigNumberValue): BigNumber => {
-  let x = valueToZDBigNumber(a)
-  let n = valueToZDBigNumber(p)
-  let z = n.modulo(2).eq(0) ? valueToZDBigNumber(WAD) : x
-
-  for (n = n.div(2); !n.eq(0); n = n.div(2)) {
-    x = wadMul(x, x)
-
-    if (!n.modulo(2).eq(0)) {
-      z = wadMul(z, x)
-    }
-  }
-
-  return z
 }
