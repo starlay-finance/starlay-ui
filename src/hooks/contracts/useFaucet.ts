@@ -1,4 +1,3 @@
-import { symbolSorter } from 'src/utils/market'
 import { BN_HUNDRED } from 'src/utils/number'
 import { useMarketData } from '../useMarketData'
 import { useStarlay } from '../useStarlay'
@@ -14,11 +13,7 @@ export const useFaucet = () => {
       ? async () => {
           if (!txExecutor) throw new Error('Unexpected state')
           return handleTx(
-            await faucet.mint(BN_HUNDRED.shiftedBy(18), {
-              assets: data.assets
-                .sort(symbolSorter)
-                .map(({ underlyingAsset }) => underlyingAsset),
-            }),
+            await faucet.mint(BN_HUNDRED.shiftedBy(18)),
             txExecutor,
           )
         }

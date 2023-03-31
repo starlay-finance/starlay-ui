@@ -18,5 +18,9 @@ export class FaucetPolkadot implements Faucet {
   }
 
   mint: Faucet['mint'] = async (amount, option) =>
-    this.contract.mint(option?.assets || [], amount)
+    this.contract.mint({
+      assets: option?.assets,
+      amount,
+      controller: this.controller,
+    })
 }
