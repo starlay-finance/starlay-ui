@@ -7,6 +7,20 @@ const nextConfig = {
     locales,
     defaultLocale: sourceLocale,
   },
+  redirects: () => [
+    {
+      source: '/app/launchpad',
+      destination: '/app/evm/launchpad',
+      permanent: true,
+    },
+    { source: '/app/lay', destination: '/app/evm/lay', permanent: true },
+    {
+      source: '/app/markets',
+      destination: '/app/evm/markets',
+      permanent: true,
+    },
+    { source: '/app/makai', destination: '/app/evm/makai', permanent: true },
+  ],
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.svg$/,

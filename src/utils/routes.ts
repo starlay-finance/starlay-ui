@@ -19,6 +19,7 @@ export const MEDIUM = 'http://medium.com/@starlay_fi'
 export const ARTHSWAP_SWAP_URL = 'https://app.arthswap.org/#/swap'
 
 export const TOP = '/'
+export const APP_ROOT = '/app'
 export const APP = '/app/evm'
 export const POLKADOT_APP = '/app/wasm'
 export const MARKETS = '/app/evm/markets'

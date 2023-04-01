@@ -52,7 +52,11 @@ export const AppHeader = () => {
   const { open: openGasSettingsModal } = useGasSettingsModal()
   return (
     <AppHeaderWrapper>
-      <LogoLink href={APP} Icon={LogoProtocol} aria-label="App" />
+      <LogoLink
+        href={network === 'Polkadot' ? POLKADOT_APP : APP}
+        Icon={LogoProtocol}
+        aria-label="App"
+      />
       <Nav>
         <Tab $active={pathname === APP || pathname === POLKADOT_APP}>
           <Link
