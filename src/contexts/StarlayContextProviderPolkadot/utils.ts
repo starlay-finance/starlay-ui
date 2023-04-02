@@ -40,11 +40,11 @@ const callback =
     if (!dispatchError) return res()
     if (!dispatchError.isModule) {
       console.log(dispatchError.toString())
-      return rej()
+      return rej(dispatchError)
     }
     // for module errors, we have the section indexed, lookup
     const decoded = api.registry.findMetaError(dispatchError.asModule)
+    console.log(decoded)
     const { docs, method, section } = decoded
-    console.log(`${section}.${method}: ${docs.join(' ')}`)
-    rej()
+    rej(`${section}.${method}: ${docs.join(' ')}`)
   }

@@ -75,7 +75,7 @@ export abstract class PolkadotContractBase<T extends Contract> {
   }
 }
 
-const DEFAULT_MARGIN = new BN(105)
+const DEFAULT_MARGIN = new BN(110)
 const MARGIN_SCALE = new BN(100)
 const withMargin = (value: string, margin = DEFAULT_MARGIN) =>
   new BN(value).mul(margin).div(MARGIN_SCALE)
