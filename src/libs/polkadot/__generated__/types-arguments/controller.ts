@@ -10,6 +10,11 @@ export enum LangError {
 	couldNotReadInput = 'CouldNotReadInput'
 }
 
+export type PoolAttributesForSeizeCalculation = {
+	underlying: AccountId,
+	decimals: (number | string | BN)
+}
+
 export enum Error {
 	mintIsPaused = 'MintIsPaused',
 	borrowIsPaused = 'BorrowIsPaused',
@@ -34,10 +39,5 @@ export type PoolAttributes = {
 	accountBorrowBalance: (string | number | BN),
 	exchangeRate: U256,
 	totalBorrows: (string | number | BN)
-}
-
-export type PoolAttributesForSeizeCalculation = {
-	underlying: AccountId,
-	decimals: (number | string | BN)
 }
 

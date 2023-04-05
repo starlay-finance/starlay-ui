@@ -21,22 +21,6 @@ export default class Methods {
 		this.__apiPromise = apiPromise;
 	}
 	/**
-	 * getBorrowRate
-	 *
-	 * @param { (string | number | BN) } cash,
-	 * @param { (string | number | BN) } borrows,
-	 * @param { (string | number | BN) } reserves,
-	*/
-	"getBorrowRate" (
-		cash: (string | number | BN),
-		borrows: (string | number | BN),
-		reserves: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "interestRateModel::getBorrowRate", [cash, borrows, reserves], __options);
-	}
-
-	/**
 	 * getSupplyRate
 	 *
 	 * @param { (string | number | BN) } cash,
@@ -52,6 +36,22 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "interestRateModel::getSupplyRate", [cash, borrows, reserves, reserveFactorMantissa], __options);
+	}
+
+	/**
+	 * getBorrowRate
+	 *
+	 * @param { (string | number | BN) } cash,
+	 * @param { (string | number | BN) } borrows,
+	 * @param { (string | number | BN) } reserves,
+	*/
+	"getBorrowRate" (
+		cash: (string | number | BN),
+		borrows: (string | number | BN),
+		reserves: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "interestRateModel::getBorrowRate", [cash, borrows, reserves], __options);
 	}
 
 }

@@ -21,18 +21,6 @@ export default class Methods {
 		this.__apiPromise = apiPromise;
 	}
 	/**
-	 * getUnderlyingPrice
-	 *
-	 * @param { ArgumentTypes.AccountId } asset,
-	*/
-	"getUnderlyingPrice" (
-		asset: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "priceOracle::getUnderlyingPrice", [asset], __options);
-	}
-
-	/**
 	 * setFixedPrice
 	 *
 	 * @param { ArgumentTypes.AccountId } asset,
@@ -44,6 +32,18 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "priceOracle::setFixedPrice", [asset, value], __options);
+	}
+
+	/**
+	 * getUnderlyingPrice
+	 *
+	 * @param { ArgumentTypes.AccountId } pool,
+	*/
+	"getUnderlyingPrice" (
+		pool: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "priceOracle::getUnderlyingPrice", [pool], __options);
 	}
 
 	/**

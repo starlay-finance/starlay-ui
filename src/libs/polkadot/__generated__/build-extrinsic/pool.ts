@@ -21,37 +21,85 @@ export default class Methods {
 		this.__apiPromise = apiPromise;
 	}
 	/**
-	 * initialExchangeRateMantissa
+	 * seize
 	 *
+	 * @param { ArgumentTypes.AccountId } liquidator,
+	 * @param { ArgumentTypes.AccountId } borrower,
+	 * @param { (string | number | BN) } seizeTokens,
 	*/
-	"initialExchangeRateMantissa" (
+	"seize" (
+		liquidator: ArgumentTypes.AccountId,
+		borrower: ArgumentTypes.AccountId,
+		seizeTokens: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::initialExchangeRateMantissa", [], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::seize", [liquidator, borrower, seizeTokens], __options);
 	}
 
 	/**
-	 * principalBalanceOf
+	 * mint
 	 *
-	 * @param { ArgumentTypes.AccountId } account,
+	 * @param { (string | number | BN) } mintAmount,
 	*/
-	"principalBalanceOf" (
-		account: ArgumentTypes.AccountId,
+	"mint" (
+		mintAmount: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::principalBalanceOf", [account], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::mint", [mintAmount], __options);
 	}
 
 	/**
-	 * setController
+	 * totalBorrows
 	 *
-	 * @param { ArgumentTypes.AccountId } newController,
 	*/
-	"setController" (
-		newController: ArgumentTypes.AccountId,
+	"totalBorrows" (
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::setController", [newController], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::totalBorrows", [], __options);
+	}
+
+	/**
+	 * repayBorrow
+	 *
+	 * @param { (string | number | BN) } repayAmount,
+	*/
+	"repayBorrow" (
+		repayAmount: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::repayBorrow", [repayAmount], __options);
+	}
+
+	/**
+	 * exchangeRateCurrent
+	 *
+	*/
+	"exchangeRateCurrent" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::exchangeRateCurrent", [], __options);
+	}
+
+	/**
+	 * sweepToken
+	 *
+	 * @param { ArgumentTypes.AccountId } asset,
+	*/
+	"sweepToken" (
+		asset: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::sweepToken", [asset], __options);
+	}
+
+	/**
+	 * accrueInterest
+	 *
+	*/
+	"accrueInterest" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::accrueInterest", [], __options);
 	}
 
 	/**
@@ -62,6 +110,58 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::controller", [], __options);
+	}
+
+	/**
+	 * redeemAll
+	 *
+	*/
+	"redeemAll" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::redeemAll", [], __options);
+	}
+
+	/**
+	 * reserveFactorMantissa
+	 *
+	*/
+	"reserveFactorMantissa" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::reserveFactorMantissa", [], __options);
+	}
+
+	/**
+	 * getCashPrior
+	 *
+	*/
+	"getCashPrior" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::getCashPrior", [], __options);
+	}
+
+	/**
+	 * initialExchangeRateMantissa
+	 *
+	*/
+	"initialExchangeRateMantissa" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::initialExchangeRateMantissa", [], __options);
+	}
+
+	/**
+	 * addReserves
+	 *
+	 * @param { (string | number | BN) } amount,
+	*/
+	"addReserves" (
+		amount: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::addReserves", [amount], __options);
 	}
 
 	/**
@@ -77,111 +177,39 @@ export default class Methods {
 	}
 
 	/**
-	 * getAccountSnapshot
+	 * setReserveFactorMantissa
 	 *
-	 * @param { ArgumentTypes.AccountId } account,
+	 * @param { ArgumentTypes.WrappedU256 } newReserveFactorMantissa,
 	*/
-	"getAccountSnapshot" (
-		account: ArgumentTypes.AccountId,
+	"setReserveFactorMantissa" (
+		newReserveFactorMantissa: ArgumentTypes.WrappedU256,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::getAccountSnapshot", [account], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::setReserveFactorMantissa", [newReserveFactorMantissa], __options);
 	}
 
 	/**
-	 * accrueInterest
+	 * setController
 	 *
+	 * @param { ArgumentTypes.AccountId } newController,
 	*/
-	"accrueInterest" (
+	"setController" (
+		newController: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::accrueInterest", [], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::setController", [newController], __options);
 	}
 
 	/**
-	 * redeem
+	 * reduceReserves
 	 *
-	 * @param { (string | number | BN) } redeemTokens,
+	 * @param { (string | number | BN) } amount,
 	*/
-	"redeem" (
-		redeemTokens: (string | number | BN),
+	"reduceReserves" (
+		amount: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::redeem", [redeemTokens], __options);
-	}
-
-	/**
-	 * liquidateBorrow
-	 *
-	 * @param { ArgumentTypes.AccountId } borrower,
-	 * @param { (string | number | BN) } repayAmount,
-	 * @param { ArgumentTypes.AccountId } collateral,
-	*/
-	"liquidateBorrow" (
-		borrower: ArgumentTypes.AccountId,
-		repayAmount: (string | number | BN),
-		collateral: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::liquidateBorrow", [borrower, repayAmount, collateral], __options);
-	}
-
-	/**
-	 * repayBorrowBehalf
-	 *
-	 * @param { ArgumentTypes.AccountId } borrower,
-	 * @param { (string | number | BN) } repayAmount,
-	*/
-	"repayBorrowBehalf" (
-		borrower: ArgumentTypes.AccountId,
-		repayAmount: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::repayBorrowBehalf", [borrower, repayAmount], __options);
-	}
-
-	/**
-	 * reserveFactorMantissa
-	 *
-	*/
-	"reserveFactorMantissa" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::reserveFactorMantissa", [], __options);
-	}
-
-	/**
-	 * redeemUnderlying
-	 *
-	 * @param { (string | number | BN) } redeemAmount,
-	*/
-	"redeemUnderlying" (
-		redeemAmount: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::redeemUnderlying", [redeemAmount], __options);
-	}
-
-	/**
-	 * borrow
-	 *
-	 * @param { (string | number | BN) } borrowAmount,
-	*/
-	"borrow" (
-		borrowAmount: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::borrow", [borrowAmount], __options);
-	}
-
-	/**
-	 * getCashPrior
-	 *
-	*/
-	"getCashPrior" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::getCashPrior", [], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::reduceReserves", [amount], __options);
 	}
 
 	/**
@@ -207,93 +235,35 @@ export default class Methods {
 	}
 
 	/**
-	 * repayBorrow
+	 * exchangeRateStored
 	 *
-	 * @param { (string | number | BN) } repayAmount,
 	*/
-	"repayBorrow" (
-		repayAmount: (string | number | BN),
+	"exchangeRateStored" (
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::repayBorrow", [repayAmount], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::exchangeRateStored", [], __options);
 	}
 
 	/**
-	 * exchageRateStored
+	 * repayBorrowAll
 	 *
 	*/
-	"exchageRateStored" (
+	"repayBorrowAll" (
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::exchageRateStored", [], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::repayBorrowAll", [], __options);
 	}
 
 	/**
-	 * seize
+	 * redeem
 	 *
-	 * @param { ArgumentTypes.AccountId } liquidator,
-	 * @param { ArgumentTypes.AccountId } borrower,
-	 * @param { (string | number | BN) } seizeTokens,
+	 * @param { (string | number | BN) } redeemTokens,
 	*/
-	"seize" (
-		liquidator: ArgumentTypes.AccountId,
-		borrower: ArgumentTypes.AccountId,
-		seizeTokens: (string | number | BN),
+	"redeem" (
+		redeemTokens: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::seize", [liquidator, borrower, seizeTokens], __options);
-	}
-
-	/**
-	 * totalBorrows
-	 *
-	*/
-	"totalBorrows" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::totalBorrows", [], __options);
-	}
-
-	/**
-	 * sweepToken
-	 *
-	 * @param { ArgumentTypes.AccountId } asset,
-	*/
-	"sweepToken" (
-		asset: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::sweepToken", [asset], __options);
-	}
-
-	/**
-	 * underlying
-	 *
-	*/
-	"underlying" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::underlying", [], __options);
-	}
-
-	/**
-	 * borrowRatePerMsec
-	 *
-	*/
-	"borrowRatePerMsec" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::borrowRatePerMsec", [], __options);
-	}
-
-	/**
-	 * exchangeRateCurrent
-	 *
-	*/
-	"exchangeRateCurrent" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::exchangeRateCurrent", [], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::redeem", [redeemTokens], __options);
 	}
 
 	/**
@@ -307,15 +277,59 @@ export default class Methods {
 	}
 
 	/**
-	 * setReserveFactorMantissa
+	 * borrow
 	 *
-	 * @param { ArgumentTypes.WrappedU256 } newReserveFactorMantissa,
+	 * @param { (string | number | BN) } borrowAmount,
 	*/
-	"setReserveFactorMantissa" (
-		newReserveFactorMantissa: ArgumentTypes.WrappedU256,
+	"borrow" (
+		borrowAmount: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::setReserveFactorMantissa", [newReserveFactorMantissa], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::borrow", [borrowAmount], __options);
+	}
+
+	/**
+	 * underlying
+	 *
+	*/
+	"underlying" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::underlying", [], __options);
+	}
+
+	/**
+	 * totalReserves
+	 *
+	*/
+	"totalReserves" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::totalReserves", [], __options);
+	}
+
+	/**
+	 * repayBorrowBehalf
+	 *
+	 * @param { ArgumentTypes.AccountId } borrower,
+	 * @param { (string | number | BN) } repayAmount,
+	*/
+	"repayBorrowBehalf" (
+		borrower: ArgumentTypes.AccountId,
+		repayAmount: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::repayBorrowBehalf", [borrower, repayAmount], __options);
+	}
+
+	/**
+	 * borrowsScaled
+	 *
+	*/
+	"borrowsScaled" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::borrowsScaled", [], __options);
 	}
 
 	/**
@@ -329,39 +343,15 @@ export default class Methods {
 	}
 
 	/**
-	 * addReserves
+	 * redeemUnderlying
 	 *
-	 * @param { (string | number | BN) } amount,
+	 * @param { (string | number | BN) } redeemAmount,
 	*/
-	"addReserves" (
-		amount: (string | number | BN),
+	"redeemUnderlying" (
+		redeemAmount: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::addReserves", [amount], __options);
-	}
-
-	/**
-	 * mint
-	 *
-	 * @param { (string | number | BN) } mintAmount,
-	*/
-	"mint" (
-		mintAmount: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::mint", [mintAmount], __options);
-	}
-
-	/**
-	 * reduceReserves
-	 *
-	 * @param { (string | number | BN) } amount,
-	*/
-	"reduceReserves" (
-		amount: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::reduceReserves", [amount], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::redeemUnderlying", [redeemAmount], __options);
 	}
 
 	/**
@@ -377,39 +367,63 @@ export default class Methods {
 	}
 
 	/**
-	 * totalReserves
+	 * borrowRatePerMsec
 	 *
 	*/
-	"totalReserves" (
+	"borrowRatePerMsec" (
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::totalReserves", [], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::borrowRatePerMsec", [], __options);
 	}
 
 	/**
-	 * approve
+	 * liquidateBorrow
 	 *
-	 * @param { ArgumentTypes.AccountId } spender,
-	 * @param { (string | number | BN) } value,
+	 * @param { ArgumentTypes.AccountId } borrower,
+	 * @param { (string | number | BN) } repayAmount,
+	 * @param { ArgumentTypes.AccountId } collateral,
 	*/
-	"approve" (
-		spender: ArgumentTypes.AccountId,
-		value: (string | number | BN),
+	"liquidateBorrow" (
+		borrower: ArgumentTypes.AccountId,
+		repayAmount: (string | number | BN),
+		collateral: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::approve", [spender, value], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::liquidateBorrow", [borrower, repayAmount, collateral], __options);
 	}
 
 	/**
-	 * balanceOf
+	 * getAccountSnapshot
 	 *
-	 * @param { ArgumentTypes.AccountId } owner,
+	 * @param { ArgumentTypes.AccountId } account,
 	*/
-	"balanceOf" (
-		owner: ArgumentTypes.AccountId,
+	"getAccountSnapshot" (
+		account: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::balanceOf", [owner], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::getAccountSnapshot", [account], __options);
+	}
+
+	/**
+	 * principalBalanceOf
+	 *
+	 * @param { ArgumentTypes.AccountId } account,
+	*/
+	"principalBalanceOf" (
+		account: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "pool::principalBalanceOf", [account], __options);
+	}
+
+	/**
+	 * totalSupply
+	 *
+	*/
+	"totalSupply" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::totalSupply", [], __options);
 	}
 
 	/**
@@ -431,55 +445,15 @@ export default class Methods {
 	}
 
 	/**
-	 * decreaseAllowance
-	 *
-	 * @param { ArgumentTypes.AccountId } spender,
-	 * @param { (string | number | BN) } deltaValue,
-	*/
-	"decreaseAllowance" (
-		spender: ArgumentTypes.AccountId,
-		deltaValue: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::decreaseAllowance", [spender, deltaValue], __options);
-	}
-
-	/**
-	 * totalSupply
-	 *
-	*/
-	"totalSupply" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::totalSupply", [], __options);
-	}
-
-	/**
-	 * increaseAllowance
-	 *
-	 * @param { ArgumentTypes.AccountId } spender,
-	 * @param { (string | number | BN) } deltaValue,
-	*/
-	"increaseAllowance" (
-		spender: ArgumentTypes.AccountId,
-		deltaValue: (string | number | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::increaseAllowance", [spender, deltaValue], __options);
-	}
-
-	/**
-	 * allowance
+	 * balanceOf
 	 *
 	 * @param { ArgumentTypes.AccountId } owner,
-	 * @param { ArgumentTypes.AccountId } spender,
 	*/
-	"allowance" (
+	"balanceOf" (
 		owner: ArgumentTypes.AccountId,
-		spender: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::allowance", [owner, spender], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::balanceOf", [owner], __options);
 	}
 
 	/**
@@ -499,13 +473,59 @@ export default class Methods {
 	}
 
 	/**
-	 * tokenDecimals
+	 * approve
 	 *
+	 * @param { ArgumentTypes.AccountId } spender,
+	 * @param { (string | number | BN) } value,
 	*/
-	"tokenDecimals" (
+	"approve" (
+		spender: ArgumentTypes.AccountId,
+		value: (string | number | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22Metadata::tokenDecimals", [], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::approve", [spender, value], __options);
+	}
+
+	/**
+	 * allowance
+	 *
+	 * @param { ArgumentTypes.AccountId } owner,
+	 * @param { ArgumentTypes.AccountId } spender,
+	*/
+	"allowance" (
+		owner: ArgumentTypes.AccountId,
+		spender: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::allowance", [owner, spender], __options);
+	}
+
+	/**
+	 * increaseAllowance
+	 *
+	 * @param { ArgumentTypes.AccountId } spender,
+	 * @param { (string | number | BN) } deltaValue,
+	*/
+	"increaseAllowance" (
+		spender: ArgumentTypes.AccountId,
+		deltaValue: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::increaseAllowance", [spender, deltaValue], __options);
+	}
+
+	/**
+	 * decreaseAllowance
+	 *
+	 * @param { ArgumentTypes.AccountId } spender,
+	 * @param { (string | number | BN) } deltaValue,
+	*/
+	"decreaseAllowance" (
+		spender: ArgumentTypes.AccountId,
+		deltaValue: (string | number | BN),
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22::decreaseAllowance", [spender, deltaValue], __options);
 	}
 
 	/**
@@ -526,6 +546,16 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22Metadata::tokenSymbol", [], __options);
+	}
+
+	/**
+	 * tokenDecimals
+	 *
+	*/
+	"tokenDecimals" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "psp22Metadata::tokenDecimals", [], __options);
 	}
 
 }

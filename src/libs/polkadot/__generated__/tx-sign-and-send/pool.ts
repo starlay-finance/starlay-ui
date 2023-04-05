@@ -29,43 +29,99 @@ export default class Methods {
 	}
 
 	/**
-	* initialExchangeRateMantissa
+	* seize
 	*
+	* @param { ArgumentTypes.AccountId } liquidator,
+	* @param { ArgumentTypes.AccountId } borrower,
+	* @param { (string | number | BN) } seizeTokens,
 	*/
-	"initialExchangeRateMantissa" (
+	"seize" (
+		liquidator: ArgumentTypes.AccountId,
+		borrower: ArgumentTypes.AccountId,
+		seizeTokens: (string | number | BN),
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::initialExchangeRateMantissa", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::seize", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [liquidator, borrower, seizeTokens], __options);
+	}
+
+	/**
+	* mint
+	*
+	* @param { (string | number | BN) } mintAmount,
+	*/
+	"mint" (
+		mintAmount: (string | number | BN),
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::mint", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [mintAmount], __options);
+	}
+
+	/**
+	* totalBorrows
+	*
+	*/
+	"totalBorrows" (
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::totalBorrows", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [], __options);
 	}
 
 	/**
-	* principalBalanceOf
+	* repayBorrow
 	*
-	* @param { ArgumentTypes.AccountId } account,
+	* @param { (string | number | BN) } repayAmount,
 	*/
-	"principalBalanceOf" (
-		account: ArgumentTypes.AccountId,
+	"repayBorrow" (
+		repayAmount: (string | number | BN),
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::principalBalanceOf", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::repayBorrow", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [account], __options);
+		}, [repayAmount], __options);
 	}
 
 	/**
-	* setController
+	* exchangeRateCurrent
 	*
-	* @param { ArgumentTypes.AccountId } newController,
 	*/
-	"setController" (
-		newController: ArgumentTypes.AccountId,
+	"exchangeRateCurrent" (
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::setController", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::exchangeRateCurrent", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [newController], __options);
+		}, [], __options);
+	}
+
+	/**
+	* sweepToken
+	*
+	* @param { ArgumentTypes.AccountId } asset,
+	*/
+	"sweepToken" (
+		asset: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::sweepToken", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [asset], __options);
+	}
+
+	/**
+	* accrueInterest
+	*
+	*/
+	"accrueInterest" (
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::accrueInterest", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [], __options);
 	}
 
 	/**
@@ -78,6 +134,68 @@ export default class Methods {
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::controller", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [], __options);
+	}
+
+	/**
+	* redeemAll
+	*
+	*/
+	"redeemAll" (
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::redeemAll", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [], __options);
+	}
+
+	/**
+	* reserveFactorMantissa
+	*
+	*/
+	"reserveFactorMantissa" (
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::reserveFactorMantissa", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [], __options);
+	}
+
+	/**
+	* getCashPrior
+	*
+	*/
+	"getCashPrior" (
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::getCashPrior", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [], __options);
+	}
+
+	/**
+	* initialExchangeRateMantissa
+	*
+	*/
+	"initialExchangeRateMantissa" (
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::initialExchangeRateMantissa", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [], __options);
+	}
+
+	/**
+	* addReserves
+	*
+	* @param { (string | number | BN) } amount,
+	*/
+	"addReserves" (
+		amount: (string | number | BN),
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::addReserves", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [amount], __options);
 	}
 
 	/**
@@ -95,129 +213,45 @@ export default class Methods {
 	}
 
 	/**
-	* getAccountSnapshot
+	* setReserveFactorMantissa
 	*
-	* @param { ArgumentTypes.AccountId } account,
+	* @param { ArgumentTypes.WrappedU256 } newReserveFactorMantissa,
 	*/
-	"getAccountSnapshot" (
-		account: ArgumentTypes.AccountId,
+	"setReserveFactorMantissa" (
+		newReserveFactorMantissa: ArgumentTypes.WrappedU256,
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::getAccountSnapshot", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::setReserveFactorMantissa", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [account], __options);
+		}, [newReserveFactorMantissa], __options);
 	}
 
 	/**
-	* accrueInterest
+	* setController
 	*
+	* @param { ArgumentTypes.AccountId } newController,
 	*/
-	"accrueInterest" (
+	"setController" (
+		newController: ArgumentTypes.AccountId,
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::accrueInterest", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::setController", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [], __options);
+		}, [newController], __options);
 	}
 
 	/**
-	* redeem
+	* reduceReserves
 	*
-	* @param { (string | number | BN) } redeemTokens,
+	* @param { (string | number | BN) } amount,
 	*/
-	"redeem" (
-		redeemTokens: (string | number | BN),
+	"reduceReserves" (
+		amount: (string | number | BN),
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::redeem", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::reduceReserves", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [redeemTokens], __options);
-	}
-
-	/**
-	* liquidateBorrow
-	*
-	* @param { ArgumentTypes.AccountId } borrower,
-	* @param { (string | number | BN) } repayAmount,
-	* @param { ArgumentTypes.AccountId } collateral,
-	*/
-	"liquidateBorrow" (
-		borrower: ArgumentTypes.AccountId,
-		repayAmount: (string | number | BN),
-		collateral: ArgumentTypes.AccountId,
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::liquidateBorrow", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [borrower, repayAmount, collateral], __options);
-	}
-
-	/**
-	* repayBorrowBehalf
-	*
-	* @param { ArgumentTypes.AccountId } borrower,
-	* @param { (string | number | BN) } repayAmount,
-	*/
-	"repayBorrowBehalf" (
-		borrower: ArgumentTypes.AccountId,
-		repayAmount: (string | number | BN),
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::repayBorrowBehalf", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [borrower, repayAmount], __options);
-	}
-
-	/**
-	* reserveFactorMantissa
-	*
-	*/
-	"reserveFactorMantissa" (
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::reserveFactorMantissa", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [], __options);
-	}
-
-	/**
-	* redeemUnderlying
-	*
-	* @param { (string | number | BN) } redeemAmount,
-	*/
-	"redeemUnderlying" (
-		redeemAmount: (string | number | BN),
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::redeemUnderlying", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [redeemAmount], __options);
-	}
-
-	/**
-	* borrow
-	*
-	* @param { (string | number | BN) } borrowAmount,
-	*/
-	"borrow" (
-		borrowAmount: (string | number | BN),
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::borrow", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [borrowAmount], __options);
-	}
-
-	/**
-	* getCashPrior
-	*
-	*/
-	"getCashPrior" (
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::getCashPrior", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [], __options);
+		}, [amount], __options);
 	}
 
 	/**
@@ -247,109 +281,41 @@ export default class Methods {
 	}
 
 	/**
-	* repayBorrow
-	*
-	* @param { (string | number | BN) } repayAmount,
-	*/
-	"repayBorrow" (
-		repayAmount: (string | number | BN),
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::repayBorrow", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [repayAmount], __options);
-	}
-
-	/**
-	* exchageRateStored
+	* exchangeRateStored
 	*
 	*/
-	"exchageRateStored" (
+	"exchangeRateStored" (
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::exchageRateStored", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::exchangeRateStored", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [], __options);
 	}
 
 	/**
-	* seize
-	*
-	* @param { ArgumentTypes.AccountId } liquidator,
-	* @param { ArgumentTypes.AccountId } borrower,
-	* @param { (string | number | BN) } seizeTokens,
-	*/
-	"seize" (
-		liquidator: ArgumentTypes.AccountId,
-		borrower: ArgumentTypes.AccountId,
-		seizeTokens: (string | number | BN),
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::seize", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [liquidator, borrower, seizeTokens], __options);
-	}
-
-	/**
-	* totalBorrows
+	* repayBorrowAll
 	*
 	*/
-	"totalBorrows" (
+	"repayBorrowAll" (
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::totalBorrows", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::repayBorrowAll", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [], __options);
 	}
 
 	/**
-	* sweepToken
+	* redeem
 	*
-	* @param { ArgumentTypes.AccountId } asset,
+	* @param { (string | number | BN) } redeemTokens,
 	*/
-	"sweepToken" (
-		asset: ArgumentTypes.AccountId,
+	"redeem" (
+		redeemTokens: (string | number | BN),
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::sweepToken", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::redeem", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [asset], __options);
-	}
-
-	/**
-	* underlying
-	*
-	*/
-	"underlying" (
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::underlying", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [], __options);
-	}
-
-	/**
-	* borrowRatePerMsec
-	*
-	*/
-	"borrowRatePerMsec" (
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::borrowRatePerMsec", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [], __options);
-	}
-
-	/**
-	* exchangeRateCurrent
-	*
-	*/
-	"exchangeRateCurrent" (
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::exchangeRateCurrent", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [], __options);
+		}, [redeemTokens], __options);
 	}
 
 	/**
@@ -365,17 +331,69 @@ export default class Methods {
 	}
 
 	/**
-	* setReserveFactorMantissa
+	* borrow
 	*
-	* @param { ArgumentTypes.WrappedU256 } newReserveFactorMantissa,
+	* @param { (string | number | BN) } borrowAmount,
 	*/
-	"setReserveFactorMantissa" (
-		newReserveFactorMantissa: ArgumentTypes.WrappedU256,
+	"borrow" (
+		borrowAmount: (string | number | BN),
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::setReserveFactorMantissa", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::borrow", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [newReserveFactorMantissa], __options);
+		}, [borrowAmount], __options);
+	}
+
+	/**
+	* underlying
+	*
+	*/
+	"underlying" (
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::underlying", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [], __options);
+	}
+
+	/**
+	* totalReserves
+	*
+	*/
+	"totalReserves" (
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::totalReserves", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [], __options);
+	}
+
+	/**
+	* repayBorrowBehalf
+	*
+	* @param { ArgumentTypes.AccountId } borrower,
+	* @param { (string | number | BN) } repayAmount,
+	*/
+	"repayBorrowBehalf" (
+		borrower: ArgumentTypes.AccountId,
+		repayAmount: (string | number | BN),
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::repayBorrowBehalf", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [borrower, repayAmount], __options);
+	}
+
+	/**
+	* borrowsScaled
+	*
+	*/
+	"borrowsScaled" (
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::borrowsScaled", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [], __options);
 	}
 
 	/**
@@ -391,45 +409,17 @@ export default class Methods {
 	}
 
 	/**
-	* addReserves
+	* redeemUnderlying
 	*
-	* @param { (string | number | BN) } amount,
+	* @param { (string | number | BN) } redeemAmount,
 	*/
-	"addReserves" (
-		amount: (string | number | BN),
+	"redeemUnderlying" (
+		redeemAmount: (string | number | BN),
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::addReserves", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::redeemUnderlying", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [amount], __options);
-	}
-
-	/**
-	* mint
-	*
-	* @param { (string | number | BN) } mintAmount,
-	*/
-	"mint" (
-		mintAmount: (string | number | BN),
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::mint", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [mintAmount], __options);
-	}
-
-	/**
-	* reduceReserves
-	*
-	* @param { (string | number | BN) } amount,
-	*/
-	"reduceReserves" (
-		amount: (string | number | BN),
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::reduceReserves", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [amount], __options);
+		}, [redeemAmount], __options);
 	}
 
 	/**
@@ -447,45 +437,73 @@ export default class Methods {
 	}
 
 	/**
-	* totalReserves
+	* borrowRatePerMsec
 	*
 	*/
-	"totalReserves" (
+	"borrowRatePerMsec" (
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::totalReserves", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::borrowRatePerMsec", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [], __options);
 	}
 
 	/**
-	* approve
+	* liquidateBorrow
 	*
-	* @param { ArgumentTypes.AccountId } spender,
-	* @param { (string | number | BN) } value,
+	* @param { ArgumentTypes.AccountId } borrower,
+	* @param { (string | number | BN) } repayAmount,
+	* @param { ArgumentTypes.AccountId } collateral,
 	*/
-	"approve" (
-		spender: ArgumentTypes.AccountId,
-		value: (string | number | BN),
+	"liquidateBorrow" (
+		borrower: ArgumentTypes.AccountId,
+		repayAmount: (string | number | BN),
+		collateral: ArgumentTypes.AccountId,
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22::approve", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::liquidateBorrow", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [spender, value], __options);
+		}, [borrower, repayAmount, collateral], __options);
 	}
 
 	/**
-	* balanceOf
+	* getAccountSnapshot
 	*
-	* @param { ArgumentTypes.AccountId } owner,
+	* @param { ArgumentTypes.AccountId } account,
 	*/
-	"balanceOf" (
-		owner: ArgumentTypes.AccountId,
+	"getAccountSnapshot" (
+		account: ArgumentTypes.AccountId,
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22::balanceOf", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::getAccountSnapshot", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [owner], __options);
+		}, [account], __options);
+	}
+
+	/**
+	* principalBalanceOf
+	*
+	* @param { ArgumentTypes.AccountId } account,
+	*/
+	"principalBalanceOf" (
+		account: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "pool::principalBalanceOf", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [account], __options);
+	}
+
+	/**
+	* totalSupply
+	*
+	*/
+	"totalSupply" (
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22::totalSupply", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [], __options);
 	}
 
 	/**
@@ -509,63 +527,17 @@ export default class Methods {
 	}
 
 	/**
-	* decreaseAllowance
-	*
-	* @param { ArgumentTypes.AccountId } spender,
-	* @param { (string | number | BN) } deltaValue,
-	*/
-	"decreaseAllowance" (
-		spender: ArgumentTypes.AccountId,
-		deltaValue: (string | number | BN),
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22::decreaseAllowance", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [spender, deltaValue], __options);
-	}
-
-	/**
-	* totalSupply
-	*
-	*/
-	"totalSupply" (
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22::totalSupply", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [], __options);
-	}
-
-	/**
-	* increaseAllowance
-	*
-	* @param { ArgumentTypes.AccountId } spender,
-	* @param { (string | number | BN) } deltaValue,
-	*/
-	"increaseAllowance" (
-		spender: ArgumentTypes.AccountId,
-		deltaValue: (string | number | BN),
-		__options ? : GasLimit,
-	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22::increaseAllowance", (events: EventRecord) => {
-			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [spender, deltaValue], __options);
-	}
-
-	/**
-	* allowance
+	* balanceOf
 	*
 	* @param { ArgumentTypes.AccountId } owner,
-	* @param { ArgumentTypes.AccountId } spender,
 	*/
-	"allowance" (
+	"balanceOf" (
 		owner: ArgumentTypes.AccountId,
-		spender: ArgumentTypes.AccountId,
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22::allowance", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22::balanceOf", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [owner, spender], __options);
+		}, [owner], __options);
 	}
 
 	/**
@@ -587,15 +559,67 @@ export default class Methods {
 	}
 
 	/**
-	* tokenDecimals
+	* approve
 	*
+	* @param { ArgumentTypes.AccountId } spender,
+	* @param { (string | number | BN) } value,
 	*/
-	"tokenDecimals" (
+	"approve" (
+		spender: ArgumentTypes.AccountId,
+		value: (string | number | BN),
 		__options ? : GasLimit,
 	){
-		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22Metadata::tokenDecimals", (events: EventRecord) => {
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22::approve", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
-		}, [], __options);
+		}, [spender, value], __options);
+	}
+
+	/**
+	* allowance
+	*
+	* @param { ArgumentTypes.AccountId } owner,
+	* @param { ArgumentTypes.AccountId } spender,
+	*/
+	"allowance" (
+		owner: ArgumentTypes.AccountId,
+		spender: ArgumentTypes.AccountId,
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22::allowance", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [owner, spender], __options);
+	}
+
+	/**
+	* increaseAllowance
+	*
+	* @param { ArgumentTypes.AccountId } spender,
+	* @param { (string | number | BN) } deltaValue,
+	*/
+	"increaseAllowance" (
+		spender: ArgumentTypes.AccountId,
+		deltaValue: (string | number | BN),
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22::increaseAllowance", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [spender, deltaValue], __options);
+	}
+
+	/**
+	* decreaseAllowance
+	*
+	* @param { ArgumentTypes.AccountId } spender,
+	* @param { (string | number | BN) } deltaValue,
+	*/
+	"decreaseAllowance" (
+		spender: ArgumentTypes.AccountId,
+		deltaValue: (string | number | BN),
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22::decreaseAllowance", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [spender, deltaValue], __options);
 	}
 
 	/**
@@ -618,6 +642,18 @@ export default class Methods {
 		__options ? : GasLimit,
 	){
 		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22Metadata::tokenSymbol", (events: EventRecord) => {
+			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
+		}, [], __options);
+	}
+
+	/**
+	* tokenDecimals
+	*
+	*/
+	"tokenDecimals" (
+		__options ? : GasLimit,
+	){
+		return txSignAndSend( this.__apiPromise, this.__nativeContract, this.__keyringPair, "psp22Metadata::tokenDecimals", (events: EventRecord) => {
 			return decodeEvents(events, this.__nativeContract, EVENT_DATA_TYPE_DESCRIPTIONS);
 		}, [], __options);
 	}
