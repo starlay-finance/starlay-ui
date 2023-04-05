@@ -15,7 +15,7 @@ export const useUserData = () => {
       dataProvider.chainId === marketData?.chainId
         ? ['userdata', network, account, dataProvider.chainId]
         : undefined,
-    ([_key, _chainId, account]) =>
+    ([_key, _network, account]) =>
       dataProvider!.getUserData({ account, marketData: marketData! }),
   )
 }

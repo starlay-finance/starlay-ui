@@ -21,7 +21,7 @@ export const useWalletBalance = (withFallback = true) => {
       dataProvider.chainId === marketData?.chainId
         ? ['wallet-balance', network, account, dataProvider.chainId]
         : undefined,
-    ([_key, account, _chainId]) => {
+    ([_key, _network, account, _chainId]) => {
       return dataProvider?.getWalletBalance({
         account,
         assets: marketData!.assets.map(
