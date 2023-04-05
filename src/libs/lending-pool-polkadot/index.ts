@@ -13,21 +13,28 @@ export class LendingPoolPolkadot implements LendingPool {
       .with({ address: params.pool, caller: params.account })
       .mint(params)
 
-  withdraw: LendingPool['withdraw'] = async (params) =>
-    this.contract
-      .with({ address: params.pool, caller: params.account })
-      .redeemUnderlying(params)
+  withdraw: LendingPool['withdraw'] = async (params) => {
+    const contract = this.contract.with({
+      address: params.pool,
+      caller: params.account,
+    })
+    if (params.all) return contract.redeemAll()
+    return contract.redeemUnderlying(params)
+  }
 
   borrow: LendingPool['borrow'] = async (params) =>
     this.contract
       .with({ address: params.pool, caller: params.account })
       .borrow(params)
 
-  repay: LendingPool['repay'] = async (params) =>
-    this.contract
-      .with({ address: params.pool, caller: params.account })
-      .repayBorrow(params)
-
+  repay: LendingPool['repay'] = async (params) => {
+    const contract = this.contract.with({
+      address: params.pool,
+      caller: params.account,
+    })
+    if (params.all) return contract.repayBorrowAll(params)
+    return contract.repayBorrow(params)
+  }
   setUsageAsCollateral: LendingPool['setUsageAsCollateral'] = async () => {
     throw new Error('Unsupported')
   }

@@ -1,6 +1,6 @@
 import { ApiPromise } from '@polkadot/api'
 import { KeyringPair } from '@polkadot/keyring/types'
-import { BigNumber } from '@starlay-finance/math-utils'
+import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import BN from 'bn.js'
 import { TxItem } from 'src/types/starlay'
 import { PolkadotAddress } from 'src/types/web3'
@@ -46,6 +46,11 @@ export class LendingPool extends PolkadotContractBase<Contract> {
     return [toTxItem('Pool', tx)]
   }
 
+  redeemAll = async (): Promise<TxItem[]> => {
+    const tx = () => this.buildUnsignedTx('redeemAll', [])
+    return [toTxItem('Pool', tx)]
+  }
+
   borrow = async (params: {
     amount: BigNumber
     asset: PolkadotAddress
@@ -70,6 +75,25 @@ export class LendingPool extends PolkadotContractBase<Contract> {
       amountBN,
     )
     const tx = () => this.buildUnsignedTx('repayBorrow', [amountBN])
+    return [approvalTxItem, toTxItem('Pool', tx)].filter(filterFalsy)
+  }
+
+  repayBorrowAll = async (params: {
+    pool: PolkadotAddress
+    account: PolkadotAddress
+    amount: BigNumber
+    asset: PolkadotAddress
+    decimals: number
+  }): Promise<TxItem[]> => {
+    const amountBN = toBN(params.amount, params.decimals).add(
+      toBN(valueToBigNumber('1'), params.decimals),
+    )
+    const approvalTxItem = await this.token(params.asset).approveIfNeeded(
+      params.account,
+      params.pool,
+      amountBN,
+    )
+    const tx = () => this.buildUnsignedTx('repayBorrowAll', [])
     return [approvalTxItem, toTxItem('Pool', tx)].filter(filterFalsy)
   }
 
