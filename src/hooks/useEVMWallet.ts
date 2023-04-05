@@ -79,8 +79,7 @@ export const useEVMWallet = (
   }, [isNetworkActive, library, activeWallet, connect, disconnect])
 
   useEffect(() => {
-    if (!isNetworkActive || !connect || activeWallet?.type === 'Metamask')
-      return
+    if (!isNetworkActive || !connect) return
     metamask.connectIfAuthorized(connect)
   }, [isNetworkActive, connect, activeWallet])
 
