@@ -11,12 +11,15 @@ const EMPTY_WALLET_BALANCE: WalletBalance = generateSymbolDict(BN_ZERO)
 
 export const useWalletBalance = (withFallback = true) => {
   const { account } = useWallet()
-  const { dataProvider } = useStarlay()
+  const { network, dataProvider } = useStarlay()
   const { data: marketData } = useMarketData()
   return useSWR(
     () =>
-      account && dataProvider && dataProvider.chainId === marketData?.chainId
-        ? ['wallet-balance', account, dataProvider.chainId]
+      network &&
+      account &&
+      dataProvider &&
+      dataProvider.chainId === marketData?.chainId
+        ? ['wallet-balance', network, account, dataProvider.chainId]
         : undefined,
     ([_key, account, _chainId]) => {
       return dataProvider?.getWalletBalance({

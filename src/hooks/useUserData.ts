@@ -5,12 +5,15 @@ import { useWallet } from './useWallet'
 
 export const useUserData = () => {
   const { account } = useWallet()
-  const { dataProvider } = useStarlay()
+  const { network, dataProvider } = useStarlay()
   const { data: marketData } = useMarketData()
   return useSWR(
     () =>
-      dataProvider && account && dataProvider.chainId === marketData?.chainId
-        ? ['userdata', dataProvider.chainId, account]
+      network &&
+      dataProvider &&
+      account &&
+      dataProvider.chainId === marketData?.chainId
+        ? ['userdata', network, account, dataProvider.chainId]
         : undefined,
     ([_key, _chainId, account]) =>
       dataProvider!.getUserData({ account, marketData: marketData! }),

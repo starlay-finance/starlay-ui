@@ -29,7 +29,7 @@ export const useNetworkType = () => {
   }, [last.data])
 
   useEffect(() => {
-    if (values.data === 'EVM' && asPath.includes(EVM_PREFIX))
+    if (values.data === 'EVM' && !asPath.includes(EVM_PREFIX))
       push(asPath.replace(POLKADOT_PREFIX, EVM_PREFIX))
 
     if (values.data === 'Polkadot' && !asPath.includes(POLKADOT_PREFIX)) {

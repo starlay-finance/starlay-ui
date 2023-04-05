@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react'
+import { NetworkType } from 'src/libs/config'
 import {
   DataProvider,
   Faucet,
@@ -8,6 +9,7 @@ import {
 } from 'src/types/starlay'
 
 export type StarlayContextValue = {
+  network: NetworkType
   dataProvider: DataProvider
   lendingPool: LendingPool
   txExecutor: (item: TxItem) => Promise<any>

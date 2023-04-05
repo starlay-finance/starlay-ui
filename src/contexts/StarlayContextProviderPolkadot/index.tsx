@@ -56,6 +56,7 @@ export const StarlayContextProviderPolkadot: FC<{
   return (
     <StarlayContext.Provider
       value={{
+        network: 'Polkadot',
         dataProvider,
         lendingPool,
         txExecutor,

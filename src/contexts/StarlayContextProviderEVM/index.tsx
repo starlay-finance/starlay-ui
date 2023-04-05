@@ -48,6 +48,7 @@ export const StarlayContextProviderEVM: FC<{
   return (
     <StarlayContext.Provider
       value={{
+        network: 'EVM',
         dataProvider,
         lendingPool,
         txExecutor,
