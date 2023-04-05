@@ -151,6 +151,7 @@ export const Market = asStyled(({ className }) => {
                             .usageAsCollateralEnabled
                         }
                         onClick={() => setUsageAsCollateral(user, asset)}
+                        disabled={networkType !== 'EVM'}
                       />
                     </ClickDisableWrapper>
                   )
