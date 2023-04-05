@@ -32,7 +32,7 @@ const MyApp: FC<
   const jumpToSorry = isMobile && !isMobileSupported(router.pathname)
   useEffect(() => {
     if (GTM_ID) TagManager.initialize({ gtmId: GTM_ID })
-    if (jumpToSorry) router.replace(sorryFor('mobile-not-supported'))
+    if (jumpToSorry) window.location.replace(sorryFor('mobile-not-supported'))
   }, [])
 
   const getLayout = Component.getLayout ?? ((page) => page)
