@@ -10,12 +10,12 @@ import {
 } from 'src/assets/svgs'
 import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
-import { useMessageModalGradient } from 'src/components/parts/Modal/MessageModalGradient'
 import { fadeIn, sequentialFadeIn } from 'src/styles/animation'
 import { purple, trueWhite } from 'src/styles/colors'
 import { fontWeightBold, fontWeightRegular } from 'src/styles/font'
 import { disableScroll, enableScroll } from 'src/utils/handleScroll'
 import {
+  APP,
   BUG_BOUNTY,
   DISCORD,
   DOCS,
@@ -31,7 +31,6 @@ export const MobileMenu: FC<{
   isOpen: boolean
   close: VoidFunction
 }> = ({ isOpen, close }) => {
-  const { open } = useMessageModalGradient()
   useEffect(() => {
     if (isOpen) disableScroll()
     else enableScroll()
@@ -45,14 +44,7 @@ export const MobileMenu: FC<{
         </button>
       </MenuHeaderDiv>
       <Nav>
-        <button
-          onClick={() =>
-            open({
-              title: t`Sorry`,
-              message: t`Starlay Finance does not support mobile access currently. Please connect to this website using your PC.`,
-            })
-          }
-        >{t`Launch App`}</button>
+        <Link href={APP} newTab>{t`Launch App`}</Link>
         <Link href={DISCORD}>{t`Discord`}</Link>
         <Link href={DOCS}>{t`Docs`}</Link>
         <Link href={GOVERNANCE}>{t`Governance`}</Link>

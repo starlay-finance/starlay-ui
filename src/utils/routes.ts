@@ -43,10 +43,15 @@ export const toMakaiLoop = (symbol: string) => `${MAKAI}?asset=${symbol}`
 export const SORRY = '/sorry'
 export const sorryFor = (reason: SorryReason) => `${SORRY}?reason=${reason}`
 
-const MOBILE_SUPPORTED_PATHS = [TOP, SORRY]
+const MOBILE_NOT_SUPPORTED_PATHS = [
+  POLKADOT_APP,
+  POLKADOT_MARKETS,
+  LAY_VELAY,
+  LAUNCHPAD,
+]
 
 export const isMobileSupported = (path: string) =>
-  MOBILE_SUPPORTED_PATHS.includes(path)
+  !MOBILE_NOT_SUPPORTED_PATHS.includes(path)
 
 export const GAS_GUIDE_URL =
   'https://metamask.zendesk.com/hc/en-us/articles/4404600179227-User-Guide-Gas'
