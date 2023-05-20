@@ -39,7 +39,6 @@ export const HealthFactor = asStyled<{
 })``
 const HealthFactorDiv = styled.div<{ show: boolean }>`
   transition: all 0.2s ease-out;
-  padding: 24px 104px;
   height: 0;
   > figure {
     transition: all 1s ease-in;

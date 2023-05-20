@@ -7,7 +7,7 @@ import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { lightYellow, purple, secondary } from 'src/styles/colors'
 import { fontWeightBold, fontWeightSemiBold } from 'src/styles/font'
-import { flexCenter } from 'src/styles/mixins'
+import { breakpoint, flexCenter } from 'src/styles/mixins'
 import { formatPct } from 'src/utils/number'
 import styled, { css } from 'styled-components'
 
@@ -15,35 +15,38 @@ type NetAPYProps = {
   openWalletModal?: VoidFunction
   netAPY: BigNumber | undefined
 }
-export const NetAPY = asStyled<NetAPYProps>(({ netAPY, openWalletModal }) => {
-  const ratio = calcRatioForAPYChart(netAPY?.toNumber())
-  const displayValue = netAPY ? formatPct(netAPY) : undefined
-  return (
-    <NetAPYDonutChart
-      elements={[
-        { ratio: ratio.deposit, color: purple },
-        { ratio: ratio.borrow, color: lightYellow },
-      ]}
-    >
-      <IconButton
-        $loading={!displayValue}
-        disabled={!openWalletModal}
-        onClick={() => openWalletModal!()}
+export const NetAPY = asStyled<NetAPYProps>(
+  ({ netAPY, openWalletModal, className }) => {
+    const ratio = calcRatioForAPYChart(netAPY?.toNumber())
+    const displayValue = netAPY ? formatPct(netAPY) : undefined
+    return (
+      <NetAPYDonutChart
+        className={className}
+        elements={[
+          { ratio: ratio.deposit, color: purple },
+          { ratio: ratio.borrow, color: lightYellow },
+        ]}
       >
-        <LoadingProtocolIcon />
-        <span>Connect</span>
-      </IconButton>
-      {displayValue && (
-        <ChartCaptionDiv>
-          <span>{t`Net APY`}</span>
-          <BlinkWrapper value={displayValue}>
-            <Reel text={displayValue} />
-          </BlinkWrapper>
-        </ChartCaptionDiv>
-      )}
-    </NetAPYDonutChart>
-  )
-})``
+        <IconButton
+          $loading={!displayValue}
+          disabled={!openWalletModal}
+          onClick={() => openWalletModal!()}
+        >
+          <LoadingProtocolIcon />
+          <span>Connect</span>
+        </IconButton>
+        {displayValue && (
+          <ChartCaptionDiv>
+            <span>{t`Net APY`}</span>
+            <BlinkWrapper value={displayValue}>
+              <Reel text={displayValue} />
+            </BlinkWrapper>
+          </ChartCaptionDiv>
+        )}
+      </NetAPYDonutChart>
+    )
+  },
+)``
 const CHART_FILLED_RATIO = 0.3
 
 const calcRatioForAPYChart = (netAPY: number | undefined) => {
@@ -98,16 +101,34 @@ const ChartCaptionDiv = styled.div`
   flex-direction: column;
   row-gap: 8px;
   span:first-child {
-    font-size: 16px;
     font-weight: ${fontWeightBold};
     color: ${secondary};
   }
   span:last-child {
-    font-size: 32px;
     font-weight: ${fontWeightSemiBold};
   }
 `
 const NetAPYDonutChart = styled(DonutChart2)`
-  width: 164px;
-  height: 164px;
+  width: 96px;
+  height: 96px;
+  ${ChartCaptionDiv} {
+    span:first-child {
+      font-size: 12px;
+    }
+    span:last-child {
+      font-size: 20px;
+    }
+  }
+  @media ${breakpoint.m} {
+    width: 164px;
+    height: 164px;
+    ${ChartCaptionDiv} {
+      span:first-child {
+        font-size: 16px;
+      }
+      span:last-child {
+        font-size: 32px;
+      }
+    }
+  }
 `

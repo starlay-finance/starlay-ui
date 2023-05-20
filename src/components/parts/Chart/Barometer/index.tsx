@@ -1,10 +1,10 @@
 import { CSSProperties, InputHTMLAttributes, ReactNode } from 'react'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { trueBlack } from 'src/styles/colors'
-import { flexCenter } from 'src/styles/mixins'
+import { breakpoint, flexCenter } from 'src/styles/mixins'
 import { Color } from 'src/styles/types'
 import { pickColorInGradient } from 'src/utils/color'
-import styled, { css, SimpleInterpolation } from 'styled-components'
+import styled, { SimpleInterpolation, css } from 'styled-components'
 
 export type BarometerProps = {
   label?: string
@@ -98,8 +98,13 @@ const BarometerFigure = styled.figure<BarometerFigureProps>`
       cursor: not-allowed;
     }
   }
+  font-size: 12px;
   figcaption {
-    width: 128px;
+    width: 72px;
+    white-space: nowrap;
+    :last-child {
+      width: fit-content;
+    }
   }
   > div {
     position: relative;
@@ -117,4 +122,11 @@ const BarometerFigure = styled.figure<BarometerFigureProps>`
       }
     }
   `}
+
+  @media ${breakpoint.l} {
+    font-size: 16px;
+    figcaption {
+      width: 96px;
+    }
+  }
 `

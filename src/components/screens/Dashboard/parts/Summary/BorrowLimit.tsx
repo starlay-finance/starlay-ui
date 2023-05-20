@@ -13,7 +13,7 @@ import {
   secondary,
   trueBlack,
 } from 'src/styles/colors'
-import { flexCenter } from 'src/styles/mixins'
+import { breakpoint, flexCenter } from 'src/styles/mixins'
 import { formatUSD } from 'src/utils/number'
 import styled, { css } from 'styled-components'
 
@@ -63,16 +63,18 @@ const CHART_COMPOSITION: BarChartProps['filledStyles'] = [
 
 const BorrowLimitFigure = styled.figure<{ show: boolean }>`
   transition: all 0.2s ease-in;
-  margin: 80px auto 0;
-  padding: 24px 80px;
   ${flexCenter};
   position: relative;
   width: 100%;
   column-gap: 16px;
   backdrop-filter: blur(8px) brightness(0.8);
+  font-size: 12px;
   figcaption {
-    width: 96px;
+    width: 72px;
     color: ${secondary};
+    :last-child {
+      width: fit-content;
+    }
   }
   > ${BarChart} {
     flex: 1;
@@ -86,4 +88,10 @@ const BorrowLimitFigure = styled.figure<{ show: boolean }>`
       height: 0;
       margin: 0;
     `}
+  @media ${breakpoint.xl} {
+    font-size: 16px;
+    figcaption {
+      width: 96px;
+    }
+  }
 `
