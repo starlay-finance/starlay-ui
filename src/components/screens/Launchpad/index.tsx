@@ -78,7 +78,7 @@ const Main = styled.main`
   width: 100%;
   max-width: var(${contentMaxWidthCssVar});
   margin: 88px auto 0;
-  padding-bottom: 320px;
+  padding: 0 24px 320px;
   ${Content} {
     margin-top: 64px;
   }

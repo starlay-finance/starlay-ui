@@ -72,7 +72,7 @@ const Content = styled.div`
   position: relative;
   max-width: var(${contentMaxWidthCssVar});
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 48px;
 `
 const SubTitle = styled.p`
   margin-top: 16px;

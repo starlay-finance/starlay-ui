@@ -162,6 +162,7 @@ const CurrentMarketsSection = styled.section`
   width: 100%;
   max-width: var(${contentMaxWidthCssVar});
   margin: 0 auto;
+  padding: 0 24px;
   ${MarketViewDiv} {
     margin-top: 40px;
   }

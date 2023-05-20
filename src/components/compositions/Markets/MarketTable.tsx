@@ -118,7 +118,7 @@ const AssetDiv = styled.div`
 
 export const TableContainer = styled.div`
   border-radius: 8px;
-  backdrop-filter: blur(8px) brightness(1.16);
-  background-color: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px) brightness(1.08);
+  background-color: rgba(255, 255, 255, 0.08);
   overflow: hidden;
 `

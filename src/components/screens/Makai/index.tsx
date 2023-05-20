@@ -35,7 +35,7 @@ const Main = styled.main`
   width: 100%;
   max-width: var(${contentMaxWidthCssVar});
   margin: 0 auto;
-  padding-bottom: 64px;
+  padding: 0 24px 64px;
   h2 {
     font-size: 20px;
     font-weight: ${fontWeightHeavy};

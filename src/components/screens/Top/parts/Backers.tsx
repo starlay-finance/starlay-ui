@@ -12,7 +12,7 @@ import {
   contentMaxWidthCssVar,
   flexCenter,
 } from 'src/styles/mixins'
-import styled, { css, CSSProperties, keyframes } from 'styled-components'
+import styled, { CSSProperties, css, keyframes } from 'styled-components'
 import { RequireExactlyOne } from 'type-fest'
 import { backersAnimation } from './animation'
 
@@ -161,6 +161,7 @@ const BackersSection = styled.section`
   width: 100%;
   max-width: var(${contentMaxWidthCssVar});
   margin: 0 auto;
+  padding: 0 24px;
   h2,
   h2 + p {
     text-align: center;

@@ -21,6 +21,7 @@ export const Dashboard = () => (
 const Main = styled.main`
   width: 100%;
   max-width: var(${contentMaxWidthCssVar});
+  padding: 0 24px;
   margin: 0 auto;
   padding-bottom: 160px;
   ${Summary}, ${Market} {

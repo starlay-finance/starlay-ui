@@ -39,6 +39,7 @@ const StyledHeader = styled.header`
     position: relative;
     max-width: var(${contentMaxWidthCssVar});
     margin: 0 auto;
+    padding: 0 24px;
   }
 `
 

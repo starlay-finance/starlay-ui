@@ -4,16 +4,16 @@ import { useReducer } from 'react'
 import { InternalLink, Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { useBlockNumber } from 'src/hooks/useBlockNumber'
-import { DEFAULT_LOCALE, Locale, LOCALES_DICT } from 'src/locales'
+import { DEFAULT_LOCALE, LOCALES_DICT, Locale } from 'src/locales'
 import { purple } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
 import { contentMaxWidthCssVar } from 'src/styles/mixins'
 import { DOCS, GOVERNANCE, SUPPORT } from 'src/utils/routes'
 import styled from 'styled-components'
-import { DropdownButton } from '../Button'
-import { LocaleSelect } from './LocaleSelect'
+import { DropdownButton } from '../../Button'
+import { LocaleSelect } from '../LocaleSelect'
 
-export const AppFooter = asStyled(({ className }) => {
+export const AppFooterWide = asStyled(({ className }) => {
   const { locale = DEFAULT_LOCALE, asPath } = useRouter()
   const [isLocaleMenuOpen, toggleLocaleMenuOpen] = useReducer(
     (state: boolean) => !state,
@@ -21,26 +21,24 @@ export const AppFooter = asStyled(({ className }) => {
   )
   const blockNumber = useBlockNumber()
   return (
-    <StyledFooter className={className}>
-      <Content>
-        <Nav>
-          <LatestBlock>{t`Latest Block: ${blockNumber}`}</LatestBlock>
-          <Link href={DOCS}>{t`Docs`}</Link>
-          <Link href={GOVERNANCE}>{t`Governance`}</Link>
-          <Link href={SUPPORT}>{t`Support`}</Link>
-        </Nav>
-        <Control>
-          <DropdownButton onClick={toggleLocaleMenuOpen}>
-            {LOCALES_DICT[locale as Locale]}
-          </DropdownButton>
-          <LocaleSelect
-            visible={isLocaleMenuOpen}
-            toggle={toggleLocaleMenuOpen}
-            path={asPath as InternalLink}
-          />
-        </Control>
-      </Content>
-    </StyledFooter>
+    <Content className={className}>
+      <Nav>
+        <LatestBlock>{t`Latest Block: ${blockNumber}`}</LatestBlock>
+        <Link href={DOCS}>{t`Docs`}</Link>
+        <Link href={GOVERNANCE}>{t`Governance`}</Link>
+        <Link href={SUPPORT}>{t`Support`}</Link>
+      </Nav>
+      <Control>
+        <DropdownButton onClick={toggleLocaleMenuOpen}>
+          {LOCALES_DICT[locale as Locale]}
+        </DropdownButton>
+        <LocaleSelect
+          visible={isLocaleMenuOpen}
+          toggle={toggleLocaleMenuOpen}
+          path={asPath as InternalLink}
+        />
+      </Control>
+    </Content>
   )
 })``
 
@@ -73,11 +71,11 @@ const Control = styled.div`
 `
 
 const Content = styled.div`
+  flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 0;
-  margin: 0 auto;
+  padding: 24px;
   max-width: var(${contentMaxWidthCssVar});
 
   font-size: 16px;
@@ -89,6 +87,10 @@ const Content = styled.div`
 
 const StyledFooter = styled.footer`
   position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   backdrop-filter: blur(48px) brightness(0.52);
   background: rgba(0, 0, 0, 0.52);
   z-index: 1;

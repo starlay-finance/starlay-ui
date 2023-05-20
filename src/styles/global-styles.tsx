@@ -15,10 +15,11 @@ export const GlobalStyles = () => {
 const Styles: any = createGlobalStyle<{ ready: boolean }>`
   html {
     visibility: ${({ ready }) => (ready ? 'visible' : 'hidden')};
-    height:100%;
+    height:100%; 
+    overflow-x: hidden;
   }
   body {
-    ${contentMaxWidthCssVar}: 1200px;
+    ${contentMaxWidthCssVar}: 1248px;
     height: 100%;
 
     background: ${trueBlack};

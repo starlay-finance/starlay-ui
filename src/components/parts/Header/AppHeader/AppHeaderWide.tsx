@@ -33,12 +33,12 @@ import {
   SWAP,
 } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
-import { useAccountsModal } from '../Modal/AccountsModal'
-import { useGasSettingsModal } from '../Modal/GasSettingsModal'
-import { useNetworkModal } from '../Modal/NetworkModal'
-import { HeaderWrapper } from './common'
+import { useAccountsModal } from '../../Modal/AccountsModal'
+import { useGasSettingsModal } from '../../Modal/GasSettingsModal'
+import { useNetworkModal } from '../../Modal/NetworkModal'
+import { MenuButton, MenuButtonSmall } from './styles'
 
-export const AppHeader = () => {
+export const AppHeaderWide = styled(({ className }) => {
   const { pathname } = useRouter()
   const { data: network } = useNetworkType()
   const { account, chainId } = useWallet(network)
@@ -51,7 +51,7 @@ export const AppHeader = () => {
   const { open: openAccountsModal } = useAccountsModal()
   const { open: openGasSettingsModal } = useGasSettingsModal()
   return (
-    <AppHeaderWrapper>
+    <HeaderContainer className={className}>
       <LogoLink
         href={network === 'Polkadot' ? POLKADOT_APP : APP}
         Icon={LogoProtocol}
@@ -127,28 +127,12 @@ export const AppHeader = () => {
           </SettingsContainer>
         </div>
       </Menu>
-    </AppHeaderWrapper>
+    </HeaderContainer>
   )
-}
+})``
+
 const evmOnly = (url: string, network: NetworkType | undefined) =>
   network === 'EVM' ? url : undefined
-
-const MenuButton = styled.button`
-  ${flexCenter};
-  padding: 12px 20px;
-  border-radius: 4px;
-  backdrop-filter: blur(16px) brightness(1.16);
-  background-color: rgba(255, 255, 255, 0.16);
-  column-gap: 8px;
-`
-const MenuButtonSmall = styled(MenuButton)`
-  width: 42px;
-  height: 42px;
-  padding: unset;
-  svg {
-    height: 18px;
-  }
-`
 
 const Menu = styled.div`
   display: flex;
@@ -222,16 +206,18 @@ const Nav = styled.nav`
 const LogoLink = styled(IconLink)`
   display: block;
   height: 32px;
+  svg {
+    height: 32px;
+    width: fit-content;
+  }
   :hover {
     color: ${trueWhite};
   }
-  svg {
-    height: 32px;
-    width: 100px;
-  }
 `
 
-const AppHeaderWrapper = styled(HeaderWrapper)`
+const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
   > {
     :first-child {
       flex: 1;

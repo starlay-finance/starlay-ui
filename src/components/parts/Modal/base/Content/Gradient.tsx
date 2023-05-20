@@ -22,8 +22,8 @@ const Body = styled.div`
   padding: 40px 24px 48px;
   border-radius: 16px;
   overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(32px) brightness(1.16);
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(32px) brightness(1.08);
   ${Background} {
     position: absolute;
     inset: 0;

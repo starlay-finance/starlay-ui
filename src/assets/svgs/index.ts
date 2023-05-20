@@ -16,6 +16,7 @@ import IconSuccess from 'public/assets/svgs/icon_success.svg'
 import IconTelegram from 'public/assets/svgs/icon_telegram.svg'
 import IconTips from 'public/assets/svgs/icon_tips.svg'
 import IconTwitter from 'public/assets/svgs/icon_twitter.svg'
+import IconWallet from 'public/assets/svgs/icon_wallet.svg'
 import LogoProtocol from 'public/assets/svgs/logo_protocol.svg'
 
 export {
@@ -37,5 +38,6 @@ export {
   IconTelegram,
   IconTips,
   IconTwitter,
+  IconWallet,
   LogoProtocol,
 }
