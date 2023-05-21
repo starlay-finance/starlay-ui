@@ -1,4 +1,6 @@
 import { t } from '@lingui/macro'
+import { useEffect, useState } from 'react'
+import { isMobile } from 'react-device-detect'
 import {
   AssetTd,
   MarketTable,
@@ -9,18 +11,32 @@ import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { Toggle } from 'src/components/parts/Toggle'
 import { NetworkType } from 'src/libs/config'
 import { purple } from 'src/styles/colors'
-import { flexCenter } from 'src/styles/mixins'
+import { breakpoint } from 'src/styles/mixins'
 import { AssetMarketData, User } from 'src/types/models'
-import { formatAmt, formatPct } from 'src/utils/number'
+import { BN_ZERO, formatAmt, formatPct } from 'src/utils/number'
 import styled from 'styled-components'
 
-const DEPOSIT_MARKET_COLUMNS = [
+const DEPOSIT_COLUMNS = [
   { id: 'asset', name: t`Asset`, widthRatio: 4 },
   { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
   { id: 'apy', name: t`APY_Deposit`, widthRatio: 2.5 },
   { id: 'deposited', name: t`Deposited`, widthRatio: 3.5 },
   { id: 'collateral', name: t`Collateral`, widthRatio: 3 },
 ]
+const DEPOSIT_MARKET_COLUMNS = [
+  { id: 'asset', name: t`Asset`, widthRatio: 4 },
+  { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
+  { id: 'apy', name: t`APY_Deposit`, widthRatio: 2.5 },
+]
+const DEPOSIT_POSITION_COLUMNS = [
+  { id: 'asset', name: t`Asset`, widthRatio: 4 },
+  { id: 'deposited', name: t`Deposited`, widthRatio: 3.5 },
+  { id: 'collateral', name: t`Collateral`, widthRatio: 3 },
+]
+const DEPOSIT_TABS = [
+  { id: 'markets', label: t`Deposit Markets` },
+  { id: 'position', label: t`Your Position` },
+] as const
 
 type DepositProps = {
   markets: AssetMarketData[]
@@ -42,25 +58,53 @@ export const Deposit = asStyled<DepositProps>(
     setUsageAsCollateral,
     openWalletModal,
   }) => {
+    const [activeTab, setTab] = useState<string>()
+    useEffect(() => {
+      if (!isMobile || activeTab || !user) return
+      if (!user.summary.totalDepositedInUSD.gt(BN_ZERO))
+        return setTab(DEPOSIT_TABS[0].id)
+      setTab(DEPOSIT_TABS[1].id)
+    }, [user])
+
+    const rows = depositRows({
+      account,
+      markets,
+      networkType,
+      user,
+      onClickRow: user
+        ? (asset) => deposit(user, asset)
+        : () => openWalletModal(),
+      onClickCollateral: user
+        ? (asset) => setUsageAsCollateral(user, asset)
+        : undefined,
+    })
     return (
       <TableContainer>
         <MarketTable
           hoverColor={purple}
-          caption={t`Deposit Markets`}
-          columns={DEPOSIT_MARKET_COLUMNS}
+          caption={!isMobile ? t`Deposit Markets` : undefined}
+          tabs={
+            isMobile
+              ? {
+                  items: DEPOSIT_TABS,
+                  activeTab: activeTab || DEPOSIT_TABS[0].id,
+                  setTab,
+                }
+              : undefined
+          }
+          columns={
+            !isMobile
+              ? DEPOSIT_COLUMNS
+              : activeTab === 'markets'
+              ? DEPOSIT_MARKET_COLUMNS
+              : DEPOSIT_POSITION_COLUMNS
+          }
           placeholderLength={3}
-          rows={depositRows({
-            account,
-            markets,
-            networkType,
-            user,
-            onClickRow: user
-              ? (asset) => deposit(user, asset)
-              : () => openWalletModal(),
-            onClickCollateral: user
-              ? (asset) => setUsageAsCollateral(user, asset)
-              : undefined,
-          })}
+          rows={
+            activeTab === 'position'
+              ? rows.filter((row) => row.hasPosition)
+              : rows
+          }
         />
       </TableContainer>
     )
@@ -90,6 +134,7 @@ const depositRows = ({
     return {
       id: symbol,
       onClick: () => onClickRow(asset),
+      hasPosition: user?.balanceByAsset[asset.symbol].deposited.gt(BN_ZERO),
       data: {
         asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
         apr: <BlinkWrapper value={apr}>{apr}</BlinkWrapper>,
@@ -128,6 +173,12 @@ const depositRows = ({
 const ClickDisableWrapper = styled.div`
   position: absolute;
   inset: 0;
-  ${flexCenter};
   cursor: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+  @media ${breakpoint.xl} {
+    padding-right: 32px;
+  }
 `

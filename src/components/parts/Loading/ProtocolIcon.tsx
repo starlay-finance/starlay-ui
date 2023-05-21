@@ -2,13 +2,13 @@ import { ICON_PROTOCL_ROTATED_DATA_URI } from 'src/assets/images/icon_protocol_r
 import { lightYellow, purple, trueWhite } from 'src/styles/colors'
 import styled, { keyframes } from 'styled-components'
 
-export const LoadingProtocolIcon = () => (
-  <IconDiv>
+export const LoadingProtocolIcon = styled(({ className }) => (
+  <IconDiv className={className}>
     <div />
     <div />
     <div />
   </IconDiv>
-)
+))``
 
 const bgKeyframes = keyframes`
   0% {

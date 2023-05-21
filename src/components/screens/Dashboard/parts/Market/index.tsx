@@ -1,4 +1,5 @@
 import { asStyled } from 'src/components/hoc/asStyled'
+import { breakpoint } from 'src/styles/mixins'
 import styled from 'styled-components'
 import { Borrow } from './Borrow'
 import { Deposit } from './Deposit'
@@ -39,9 +40,14 @@ export const Market = asStyled(({ className }) => {
 
 const MarketSecion = styled.section`
   display: flex;
-  justify-content: space-between;
-  column-gap: 24px;
+  flex-direction: column;
+  row-gap: 16px;
   > * {
     flex: 1;
+  }
+  @media ${breakpoint.xl} {
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 24px;
   }
 `

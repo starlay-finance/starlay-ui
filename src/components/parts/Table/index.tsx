@@ -2,9 +2,10 @@ import { t } from '@lingui/macro'
 import { ReactNode } from 'react'
 import { AsStyledProps } from 'src/components/hoc/asStyled'
 import { offWhite, purple } from 'src/styles/colors'
-import styled, { css, SimpleInterpolation } from 'styled-components'
+import { breakpoint } from 'src/styles/mixins'
+import styled, { SimpleInterpolation, css } from 'styled-components'
 import { ShimmerPlaceholder } from '../Loading'
-import { TooltipMessage, ToolTipPosition } from '../ToolTip'
+import { ToolTipPosition, TooltipMessage } from '../ToolTip'
 
 export type TableFC = <T extends string>(
   props: {
@@ -119,6 +120,7 @@ export const Table: TableFC = ({
     </StyledTable>
   )
 }
+
 const Tabs = styled.div`
   display: flex;
   align-items: center;
@@ -126,13 +128,20 @@ const Tabs = styled.div`
   margin-bottom: -24px;
   > button {
     padding-bottom: 24px;
-    border-bottom: 2px solid;
     :enabled {
       cursor: pointer;
-      color: ${offWhite};
-      border-color: transparent;
+      color: ${offWhite}8f;
       :hover {
         color: ${purple};
+      }
+    }
+  }
+  @media ${breakpoint.xl} {
+    > button {
+      border-bottom: 2px solid;
+      :enabled {
+        color: ${offWhite};
+        border-color: transparent;
       }
     }
   }

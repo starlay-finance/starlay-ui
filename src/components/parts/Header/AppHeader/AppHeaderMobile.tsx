@@ -65,7 +65,7 @@ const HeaderContainer = styled.div`
     ${IconLink} {
       svg {
         height: 32px;
-        width: fit-content;
+        width: 32px;
       }
     }
     button {

@@ -88,12 +88,20 @@ const IconButton = styled.button<{ $loading?: boolean }>`
       backdrop-filter: blur(4px) brightness(0.8);
     }
   }
+  ${LoadingProtocolIcon} {
+    width: 96px;
+    height: 96px;
+  }
   ${({ $loading }) =>
     !$loading &&
     css`
       opacity: 0;
       visibility: hidden;
     `};
+  @media ${breakpoint.xl} {
+    width: 120px;
+    height: 120px;
+  }
 `
 const ChartCaptionDiv = styled.div`
   position: relative;
