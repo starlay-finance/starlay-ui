@@ -214,7 +214,6 @@ const NoCollateralMessage = styled.p`
     background-color: ${darkPurple}80;
   }
   p {
-    color: ${trueWhite};
     position: relative;
     text-align: center;
     line-height: 1.5;

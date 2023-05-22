@@ -1,6 +1,7 @@
 import { AsStyledProps } from 'src/components/hoc/asStyled'
-import { purple, secondary } from 'src/styles/colors'
+import { darkPurple, purple, secondary } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
+import { breakpoint } from 'src/styles/mixins'
 import styled, { css } from 'styled-components'
 
 export type TabFC = <T extends readonly string[]>(
@@ -36,8 +37,8 @@ export const Tab = styled<TabFC>(
 
 const TabButton = styled.button<{ isActive: boolean }>`
   position: relative;
-  padding-bottom: 20px;
-  font-size: 20px;
+  padding-bottom: 8px;
+  font-size: 14px;
   font-weight: ${fontWeightHeavy};
   text-align: center;
   :first-child {
@@ -54,16 +55,30 @@ const TabButton = styled.button<{ isActive: boolean }>`
     color: ${secondary};
     cursor: not-allowed;
   }
+  ::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    border-bottom: 1px solid ${darkPurple}3d;
+  }
+  @media ${breakpoint.xl} {
+    padding-bottom: 20px;
+    font-size: 20px;
+    ::after {
+      content: unset;
+    }
+  }
   ${({ isActive }) =>
     isActive &&
     css`
       color: ${purple};
       ::after {
         content: '';
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        left: 0;
+        border-color: ${purple};
+      }
+      @media ${breakpoint.xl} {
         border-bottom: 3px solid;
       }
     `}

@@ -1,8 +1,9 @@
 import { t } from '@lingui/macro'
 import { FC } from 'react'
 import { ScalingInput } from 'src/components/parts/Input'
-import { trueBlack } from 'src/styles/colors'
+import { offWhite, trueBlack } from 'src/styles/colors'
 import { fontWeightBold } from 'src/styles/font'
+import { breakpoint } from 'src/styles/mixins'
 import { parseInput } from 'src/utils/number'
 import styled from 'styled-components'
 
@@ -62,7 +63,7 @@ export const AmountInput: FC<AmountInputProps> = ({
                 onChange={() => setAll(!all)}
                 disabled={disabled}
               />
-              <span>{allLabel}</span>
+              <div>{allLabel}</div>
             </label>
           )}
         </Control>
@@ -76,29 +77,38 @@ const Control = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+  width: 3em;
+  text-align: center;
+  white-space: pre-wrap;
+  font-size: 14px;
   row-gap: 8px;
   > * {
-    width: fit-content;
-  }
-  button {
-    font-size: 16px;
-    text-align: center;
-    white-space: pre-wrap;
+    width: 3em;
+    height: 1.2em;
   }
   button,
   label {
     transition: all 0.2s ease-in;
     cursor: pointer;
     :hover {
-      color: ${trueBlack};
+      color: ${offWhite};
     }
     :disabled {
       color: unset;
       cursor: not-allowed;
     }
+    input {
+      display: none;
+    }
   }
-  input:checked + span {
-    color: ${trueBlack};
+  input:checked + div {
+    color: ${offWhite};
+  }
+  @media ${breakpoint.xl} {
+    font-size: 16px;
+    input:checked + div {
+      color: ${trueBlack};
+    }
   }
 `
 
@@ -111,7 +121,7 @@ const InputDiv = styled.div`
     margin: 0 auto;
     font-weight: ${fontWeightBold};
     text-align: center;
-    color: ${trueBlack};
+    color: ${offWhite};
     :disabled {
       cursor: not-allowed;
     }
@@ -121,5 +131,10 @@ const InputDiv = styled.div`
     top: 50%;
     transform: translateY(-50%);
     right: 32px;
+  }
+  @media ${breakpoint.xl} {
+    ${ScalingInput} {
+      color: ${trueBlack};
+    }
   }
 `

@@ -1,10 +1,23 @@
-import React, { forwardRef } from 'react'
+import { forwardRef } from 'react'
+import { isMobile } from 'react-device-detect'
 import { ModalContainerProps, ModalHandler } from 'src/hooks/useModal'
 import { trueBlack } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { Color } from 'src/styles/types'
 import { Z_MODAL } from 'src/utils/zIndex'
 import styled, { css } from 'styled-components'
+import { SwipeableModalContainer } from './SwipeableModalContainer'
+
+export const ResponsiveModalContainer = forwardRef<
+  ModalHandler,
+  ModalContainerProps
+>((props, ref) =>
+  isMobile ? (
+    <SwipeableModalContainer {...props} ref={ref} />
+  ) : (
+    <DefaultModalContainer {...props} ref={ref} />
+  ),
+)
 
 export const DefaultModalContainer = forwardRef<
   ModalHandler,

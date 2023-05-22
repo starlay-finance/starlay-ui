@@ -9,9 +9,11 @@ import { IconLink } from 'src/components/parts/Link'
 import { useNetworkType } from 'src/hooks/useNetwork'
 import { useWallet } from 'src/hooks/useWallet'
 import { NetworkType } from 'src/libs/config'
-import { fontWeightBold } from 'src/styles/font'
+import { fontWeightBold, fontWeightMedium } from 'src/styles/font'
+import { shortenAddress } from 'src/utils/address'
 import { APP, POLKADOT_APP } from 'src/utils/routes'
 import styled from 'styled-components'
+import { useWalletModal } from '../../Modal/WalletModal'
 import { MenuButtonSmall } from './styles'
 
 const NETWORK: Record<NetworkType, string> = {
@@ -23,6 +25,7 @@ export const AppHeaderMobile = styled(({ className }) => {
   const { pathname } = useRouter()
   const { data: network } = useNetworkType()
   const { account, chainId } = useWallet(network)
+  const { open } = useWalletModal()
   return (
     <HeaderContainer className={className}>
       <div>
@@ -37,9 +40,16 @@ export const AppHeaderMobile = styled(({ className }) => {
         </button>
       </div>
       <div>
-        <MenuButtonSmall>
-          <IconWallet />
-        </MenuButtonSmall>
+        {account ? (
+          <AccountDiv>
+            <IconWallet />
+            <div>{shortenAddress(account)}</div>
+          </AccountDiv>
+        ) : (
+          <MenuButtonSmall onClick={() => open()}>
+            <IconWallet />
+          </MenuButtonSmall>
+        )}
         <MenuButtonSmall>
           <IconMenu />
         </MenuButtonSmall>
@@ -47,6 +57,18 @@ export const AppHeaderMobile = styled(({ className }) => {
     </HeaderContainer>
   )
 })``
+
+const AccountDiv = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  padding: 12px 10px;
+  border-radius: 16px;
+  backdrop-filter: blur(8px) brightness(1.08);
+  background-color: rgba(255, 255, 255, 0.08);
+  font-size: 12px;
+  font-weight: ${fontWeightMedium};
+`
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -83,6 +105,9 @@ const HeaderContainer = styled.div`
     width: 32px;
     height: 32px;
     border-radius: 50%;
+  }
+  ${AccountDiv},
+  ${MenuButtonSmall} {
     svg {
       height: 10px;
     }

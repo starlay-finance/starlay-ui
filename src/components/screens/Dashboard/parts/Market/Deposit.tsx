@@ -86,7 +86,9 @@ export const Deposit = asStyled<DepositProps>(
           tabs={
             isMobile
               ? {
-                  items: DEPOSIT_TABS,
+                  items: user?.summary.totalDepositedInUSD.gt(BN_ZERO)
+                    ? DEPOSIT_TABS
+                    : [DEPOSIT_TABS[0]],
                   activeTab: activeTab || DEPOSIT_TABS[0].id,
                   setTab,
                 }

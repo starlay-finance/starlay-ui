@@ -1,7 +1,13 @@
 import { IconArrowRight } from 'src/assets/svgs'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { darkPurple, purple, trueBlack } from 'src/styles/colors'
-import { flexCenter } from 'src/styles/mixins'
+import {
+  darkPurple,
+  lightPurple,
+  offWhite,
+  purple,
+  trueBlack,
+} from 'src/styles/colors'
+import { breakpoint, flexCenter } from 'src/styles/mixins'
 import styled, { keyframes } from 'styled-components'
 import { ItemLabel, ItemLabelProps } from './ItemLabel'
 
@@ -40,7 +46,6 @@ export const ItemWithDiff = asStyled<ItemWithDiffProps>(
 const BeforeAfterDiv = styled.div`
   display: flex;
   column-gap: 4px;
-  color: ${trueBlack};
 `
 const AnimatedArrows = () => (
   <ArrowsSpan>
@@ -65,7 +70,7 @@ const ArrowsSpan = styled.span`
   svg {
     width: 8px;
     height: 8px;
-    color: ${purple};
+    color: ${lightPurple};
     animation: ${blinkKeyframes} 1.5s infinite;
     :nth-child(2) {
       animation-delay: 0.375s;
@@ -74,15 +79,24 @@ const ArrowsSpan = styled.span`
       animation-delay: 0.75s;
     }
   }
+  @media ${breakpoint.xl} {
+    color: ${purple};
+  }
 `
 
 export const ItemDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 0;
+  padding: 16px 0;
   border-bottom: 1px solid ${darkPurple}3a;
   > div:last-child {
-    color: ${trueBlack};
+    color: ${offWhite};
+  }
+  @media ${breakpoint.xl} {
+    padding: 24px 0;
+    > div:last-child {
+      color: ${trueBlack};
+    }
   }
 `

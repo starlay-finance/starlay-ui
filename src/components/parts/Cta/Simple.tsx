@@ -2,6 +2,7 @@ import { ButtonHTMLAttributes, FC } from 'react'
 import { Link, LinkFC } from 'src/components/elements/Link'
 import { darkPurple, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
+import { breakpoint } from 'src/styles/mixins'
 import styled, { css } from 'styled-components'
 
 export const SimpleCtaLink = styled<LinkFC>(({ children, ...props }) => (
@@ -15,17 +16,21 @@ export const SimpleCtaButton = styled<
 
 const ctaStyle = css`
   width: 100%;
-  height: 64px;
+  height: 40px;
   border-radius: 8px;
 
   background: ${purple};
   color: ${trueWhite};
 
-  font-size: 18px;
+  font-size: 12px;
   font-weight: ${fontWeightHeavy};
   text-align: center;
   :disabled {
     background: ${darkPurple}8f;
+  }
+  @media ${breakpoint.xl} {
+    height: 64px;
+    font-size: 18px;
   }
 `
 

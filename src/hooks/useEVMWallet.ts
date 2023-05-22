@@ -50,7 +50,13 @@ export const useEVMWallet = (
     async (type: EVMWalletType) => {
       const { connector, onConnect, onDisconnect } = getConnector(type)
       if (onConnect) await onConnect()
-      await activate(connector, undefined, true)
+      await activate(
+        connector,
+        (err) => {
+          console.log(err)
+        },
+        true,
+      )
       await mutateActiveWallet({ type, onDisconnect })
       setLastConnectedNetwork('EVM')
       setHasConnected('EVM')

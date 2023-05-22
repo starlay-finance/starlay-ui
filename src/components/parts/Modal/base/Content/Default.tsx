@@ -1,8 +1,8 @@
 import { FC, ReactNode } from 'react'
 import { IconClose } from 'src/assets/svgs'
-import { darkPurple, trueBlack, trueWhite } from 'src/styles/colors'
+import { darkPurple, gray, trueBlack, trueWhite } from 'src/styles/colors'
 import { fontWeightBold } from 'src/styles/font'
-import { flexCenter } from 'src/styles/mixins'
+import { breakpoint, flexCenter } from 'src/styles/mixins'
 import styled, { SimpleInterpolation } from 'styled-components'
 
 export const DefaultModalContent: FC<{
@@ -29,29 +29,35 @@ export const DefaultModalContent: FC<{
 const Content = styled.div`
   width: 100%;
   margin: 0 auto;
-  border-radius: 8px;
+  border-radius: 16px 16px 0 0;
+  backdrop-filter: blur(32px) brightness(1.08);
+  background-color: rgba(255, 255, 255, 0.08);
   overflow: hidden;
-  backdrop-filter: blur(24px) brightness(1.48);
-  background-color: rgba(255, 255, 255, 0.88);
-  color: ${darkPurple}8f;
+  color: ${gray};
+  @media ${breakpoint.xl} {
+    border-radius: 8px;
+    backdrop-filter: blur(24px) brightness(1.48);
+    background-color: rgba(255, 255, 255, 0.88);
+    color: ${darkPurple}8f;
+  }
 `
 
 const Header = styled.div<{ headerStyle?: SimpleInterpolation }>`
   position: relative;
-  padding: 32px 32px 24px;
+  padding: 20px 24px;
   border-bottom: 1px solid ${darkPurple}7a;
-  color: ${trueBlack};
-  height: 88px;
+  color: ${gray};
+  height: 68px;
 
-  font-size: 20px;
+  font-size: 16px;
   font-weight: ${fontWeightBold};
   text-align: center;
   button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 32px;
-    padding: 12px;
+    right: 24px;
+    padding: 0 6px 6px;
     ${flexCenter};
     transition: all 0.2s ease-in;
     border-radius: 8px;
@@ -60,11 +66,25 @@ const Header = styled.div<{ headerStyle?: SimpleInterpolation }>`
       color: ${trueWhite};
     }
     svg {
-      width: 16px;
-      height: 16px;
+      width: 14px;
+      height: 14px;
     }
   }
   ${({ headerStyle }) => headerStyle};
+  @media ${breakpoint.xl} {
+    height: 88px;
+    padding: 32px 32px 24px;
+    color: ${trueBlack};
+    font-size: 20px;
+    button {
+      right: 32px;
+      padding: 12px;
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  }
 `
 
 const Body = styled.div``

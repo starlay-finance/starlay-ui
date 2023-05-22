@@ -69,7 +69,9 @@ export const Borrow = asStyled<BorrowProps>(
           tabs={
             isMobile
               ? {
-                  items: BORROW_TABS,
+                  items: user?.summary.totalDepositedInUSD.gt(BN_ZERO)
+                    ? BORROW_TABS
+                    : [BORROW_TABS[0]],
                   activeTab: activeTab || BORROW_TABS[0].id,
                   setTab,
                 }

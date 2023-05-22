@@ -1,5 +1,6 @@
 import { ethers } from 'ethers'
 import { metamaskConnector } from './providers/metamask'
+import { walletConnectConnector } from './providers/walletConnect'
 import { EVMWalletType } from './types'
 
 export * as metamask from './providers/metamask'
@@ -7,6 +8,8 @@ export * from './types'
 
 export const getConnector = (type: EVMWalletType) => {
   switch (type) {
+    case 'WalletConnect':
+      return walletConnectConnector
     case 'Metamask':
     default:
       return metamaskConnector
