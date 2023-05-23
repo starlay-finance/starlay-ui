@@ -18,20 +18,21 @@ import { DISCORD, GITHUB, MEDIUM, TWITTER } from 'src/utils/routes'
 import { Z_MODAL } from 'src/utils/zIndex'
 import styled, { css, keyframes } from 'styled-components'
 
-const SWIPEOUT_PX = 150
-
 export type MenuProps = {
   isOpen: boolean
   close: VoidFunction
-  items: {
-    header?: FC<{ back: VoidFunction }>
-    content: ReactNode
-  }[]
-  index?: number
-  back?: VoidFunction
 }
 
-export const MobileMenu: FC<MenuProps> = ({
+export const MobileMenu: FC<
+  MenuProps & {
+    items: {
+      header?: FC<{ back: VoidFunction }>
+      content: ReactNode
+    }[]
+    index?: number
+    back?: VoidFunction
+  }
+> = ({
   isOpen,
   close,
   // children,

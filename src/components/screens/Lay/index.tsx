@@ -16,7 +16,7 @@ export const Lay = () => {
   }, [data])
   return (
     <>
-      <AppHeader />
+      <AppHeader openMenu={() => {}} />
       <Main>
         <LAYBalances />
         <Assets />

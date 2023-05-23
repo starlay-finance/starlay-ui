@@ -33,7 +33,7 @@ export const Launchpad: FC<{ data: ProjectData }> = withLaunchpadContext(
     const { market, chartData } = marketData || {}
     return (
       <>
-        <AppHeader />
+        <AppHeader openMenu={() => {}} />
         <Main>
           <AppBackground />
           {status === 'Upcoming' ? (
