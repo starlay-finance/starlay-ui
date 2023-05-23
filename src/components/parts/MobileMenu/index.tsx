@@ -1,4 +1,5 @@
 import { t } from '@lingui/macro'
+import { a, useSpringRef, useTransition } from '@react-spring/web'
 import { FC, ReactNode, useEffect } from 'react'
 import {
   IconClose,
@@ -17,15 +18,26 @@ import { DISCORD, GITHUB, MEDIUM, TWITTER } from 'src/utils/routes'
 import { Z_MODAL } from 'src/utils/zIndex'
 import styled, { css, keyframes } from 'styled-components'
 
+const SWIPEOUT_PX = 150
+
 export type MenuProps = {
   isOpen: boolean
   close: VoidFunction
+  items: {
+    header?: FC<{ back: VoidFunction }>
+    content: ReactNode
+  }[]
+  index?: number
+  back?: VoidFunction
 }
 
-export const MobileMenu: FC<MenuProps & { children: ReactNode }> = ({
+export const MobileMenu: FC<MenuProps> = ({
   isOpen,
   close,
-  children,
+  // children,
+  items,
+  index = 0,
+  back,
 }) => {
   useEffect(() => {
     if (isOpen) disableScroll()
@@ -34,15 +46,48 @@ export const MobileMenu: FC<MenuProps & { children: ReactNode }> = ({
       enableScroll()
     }
   }, [isOpen])
+
+  const transRef = useSpringRef()
+  const transitions = useTransition(index, {
+    ref: transRef,
+    keys: null,
+    from: {
+      transform: index === 0 ? 'translateX(-50%)' : 'translateX(150%)',
+    },
+    enter: { transform: 'translateX(0%)' },
+    leave: {
+      transform: index === 0 ? 'translateX(150%)' : 'translateX(-50%)',
+    },
+  })
+  useEffect(() => {
+    transRef.set({ transform: 'translateX(0%)' })
+  }, [])
+
+  useEffect(() => {
+    transRef.start()
+  }, [index])
+
   return (
     <MenuContainer isOpen={isOpen}>
-      <MenuHeaderDiv>
-        <h3>{t`Menu`}</h3>
-        <button onClick={close}>
-          <IconClose />
-        </button>
-      </MenuHeaderDiv>
-      <Content>{children}</Content>
+      <TransitionContainer>
+        {transitions((style, i) => {
+          const { content, header: Header } = items[i]
+          return (
+            <a.div style={style}>
+              <MenuHeaderDiv>
+                {Header && back ? (
+                  <Header back={back} />
+                ) : (
+                  <>
+                    <h3>{t`Menu`}</h3>
+                  </>
+                )}
+              </MenuHeaderDiv>
+              <Content>{content}</Content>
+            </a.div>
+          )
+        })}
+      </TransitionContainer>
       <IconLinks>
         <IconLink Icon={IconTwitter} href={TWITTER} aria-label={t`Twitter`} />
         <IconLink Icon={IconDiscord} href={DISCORD} aria-label={t`Discord`} />
@@ -52,9 +97,28 @@ export const MobileMenu: FC<MenuProps & { children: ReactNode }> = ({
       <BgIcon>
         <IconProtocol />
       </BgIcon>
+      <CloseButton show={index === 0} onClick={() => close()}>
+        <IconClose />
+      </CloseButton>
     </MenuContainer>
   )
 }
+const CloseButton = styled.button<{ show?: boolean }>`
+  opacity: 0;
+  transition: all 0.5s;
+  ${({ show }) =>
+    show &&
+    css`
+      opacity: 1;
+    `}
+`
+const TransitionContainer = styled.div`
+  position: relative;
+  > div {
+    position: absolute;
+    inset: 0;
+  }
+`
 const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -66,7 +130,8 @@ const Content = styled.div`
   a[href=''] {
     color: ${trueWhite}80;
   }
-  > * {
+  > a,
+  > button {
     opacity: 0;
   }
 `
@@ -87,10 +152,6 @@ const MenuHeaderDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  button {
-    width: 16px;
-    height: 16px;
-  }
 `
 const BgIcon = styled.div`
   position: absolute;
@@ -119,10 +180,11 @@ const bgiconFadeIn = keyframes`
 
 const contentFadeInAnimation = css`
   ${MenuHeaderDiv} {
-    opacity: 0;
-    animation: ${fadeIn} 0.25s 0.5s ease-in forwards;
+    /* opacity: 0; */
+    /* animation: ${fadeIn} 0.25s 0.5s ease-in forwards; */
   }
-  ${Content} > * {
+  ${Content} > a,
+  ${Content} > button {
     ${sequentialFadeIn({
       numOfItems: 5,
       duration: 0.25,
@@ -149,8 +211,8 @@ const MenuContainer = styled.div<{ isOpen: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  row-gap: 64px;
   ${Content} {
+    margin-top: 64px;
     flex: 1;
   }
 
@@ -160,6 +222,14 @@ const MenuContainer = styled.div<{ isOpen: boolean }>`
   }
   button:hover {
     color: ${purple};
+  }
+
+  ${CloseButton} {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 16px;
+    height: 16px;
   }
 
   background-color: rgba(0, 0, 0, 0.64);

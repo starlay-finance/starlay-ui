@@ -11,13 +11,13 @@ import { onlyListed } from 'src/utils/assets'
 import { BN_ZERO } from 'src/utils/number'
 import { EVMChainId, getNetworkConfigEVM } from '../config'
 import {
-  getPoolDataProvider,
   PoolDataProviderInterface,
+  getPoolDataProvider,
 } from '../pool-data-provider'
 import { StaticRPCProviderEVM } from '../static-rpc-provider'
 import {
-  walletBalanceProviderContract,
   WalletBalanceProviderInterface,
+  walletBalanceProviderContract,
 } from '../wallet-balance-provider'
 import { toAssetMarketData, toUser, toWalletBalance } from './utils'
 
@@ -104,7 +104,7 @@ export class DataProviderEVM implements DataProvider<MarketDataRawEVM> {
 
     const rewardBalance = await this.walletBalanceProvider.getBalance(
       account,
-      rewardToken.address,
+      rewardToken.underlyingAsset,
     )
     return toWalletBalance(balancesDict, rewardBalance, assets, {
       symbol: ASSETS_DICT.LAY.symbol,

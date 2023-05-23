@@ -86,7 +86,7 @@ const RewardModalBody = () => {
       />
       <SimpleCtaButton
         onClick={switchChainIfUnsupported(claim)}
-      >{t`Claim`}</SimpleCtaButton>
+      >{t`CLAIM`}</SimpleCtaButton>
     </BodyDiv>
   )
 }
