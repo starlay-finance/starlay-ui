@@ -6,6 +6,7 @@ import { Barometer } from 'src/components/parts/Chart/Barometer'
 import {
   cream,
   darkPurple,
+  offWhite,
   purple,
   trueBlack,
   trueWhite,
@@ -218,7 +219,7 @@ const Label = styled.div`
   justify-content: space-between;
   align-items: center;
   > span {
-    color: ${trueBlack};
+    color: ${offWhite};
   }
   p {
     display: flex;

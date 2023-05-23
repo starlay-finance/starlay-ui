@@ -3,6 +3,7 @@ import { cream } from 'src/styles/colors'
 import { fontWeightRegular, fontWeightSemiBold } from 'src/styles/font'
 import { breakpoint } from 'src/styles/mixins'
 import styled from 'styled-components'
+import { AmountInput } from './AmountInput'
 import { Balance } from './Balance'
 import { Tab } from './Tab'
 
@@ -15,9 +16,11 @@ export const ContentDiv = styled.div`
   ${Tab} {
     margin-top: 32px;
   }
-  input {
-    font-size: 20px !important;
-    width: 240px !important;
+  ${AmountInput} {
+    input {
+      font-size: 20px !important;
+      width: 240px !important;
+    }
   }
   ${SimpleCtaButton} {
     margin-top: 16px;

@@ -17,7 +17,7 @@ import { useFaucet } from 'src/hooks/contracts/useFaucet'
 import { useNetworkType } from 'src/hooks/useNetwork'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
-import { NetworkType, getNetworkConfig } from 'src/libs/config'
+import { getNetworkConfig } from 'src/libs/config'
 import { darkGray, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
@@ -31,6 +31,7 @@ import {
   MARKETS,
   SWAP,
   byNetwork,
+  evmOnly,
   matchPath,
 } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
@@ -127,9 +128,6 @@ export const AppHeaderWide = styled(({ className }) => {
     </HeaderContainer>
   )
 })``
-
-const evmOnly = (url: string, network: NetworkType | undefined) =>
-  network === 'EVM' ? url : undefined
 
 const Menu = styled.div`
   display: flex;

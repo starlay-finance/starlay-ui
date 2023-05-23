@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { FC } from 'react'
+import { asStyled } from 'src/components/hoc/asStyled'
 import { ScalingInput } from 'src/components/parts/Input'
 import { offWhite, trueBlack } from 'src/styles/colors'
 import { fontWeightBold } from 'src/styles/font'
@@ -19,58 +19,61 @@ type AmountInputProps = {
   disabled?: boolean
   hideValue?: boolean
 }
-export const AmountInput: FC<AmountInputProps> = ({
-  value,
-  onChange,
-  setMaxValue,
-  maxLabel,
-  significantDigits,
-  setAll,
-  allLabel = 'label',
-  all,
-  disabled,
-  hideValue,
-}) => {
-  return (
-    <InputDiv>
-      <ScalingInput
-        width={360}
-        maxFontSize={40}
-        value={hideValue ? '-' : value}
-        placeholder={'0'}
-        onChange={({ target: { value } }) => {
-          const parsed = parseInput(value, significantDigits)
-          if (parsed == null) return
-          onChange(parsed)
-        }}
-        disabled={disabled || all}
-      />
-      {!disabled && (
-        <Control>
-          <button
-            onClick={() => {
-              if (setAll) setAll(false)
-              setMaxValue()
-            }}
-          >
-            {maxLabel || t`Max`}
-          </button>
-          {setAll && (
-            <label>
-              <input
-                type="checkbox"
-                checked={all}
-                onChange={() => setAll(!all)}
-                disabled={disabled}
-              />
-              <div>{allLabel}</div>
-            </label>
-          )}
-        </Control>
-      )}
-    </InputDiv>
-  )
-}
+export const AmountInput = asStyled<AmountInputProps>(
+  ({
+    value,
+    onChange,
+    setMaxValue,
+    maxLabel,
+    significantDigits,
+    setAll,
+    allLabel = 'label',
+    all,
+    disabled,
+    hideValue,
+    className,
+  }) => {
+    return (
+      <InputDiv className={className}>
+        <ScalingInput
+          width={360}
+          maxFontSize={40}
+          value={hideValue ? '-' : value}
+          placeholder={'0'}
+          onChange={({ target: { value } }) => {
+            const parsed = parseInput(value, significantDigits)
+            if (parsed == null) return
+            onChange(parsed)
+          }}
+          disabled={disabled || all}
+        />
+        {!disabled && (
+          <Control>
+            <button
+              onClick={() => {
+                if (setAll) setAll(false)
+                setMaxValue()
+              }}
+            >
+              {maxLabel || t`Max`}
+            </button>
+            {setAll && (
+              <label>
+                <input
+                  type="checkbox"
+                  checked={all}
+                  onChange={() => setAll(!all)}
+                  disabled={disabled}
+                />
+                <div>{allLabel}</div>
+              </label>
+            )}
+          </Control>
+        )}
+      </InputDiv>
+    )
+  },
+)``
 
 const Control = styled.div`
   display: flex;
