@@ -37,15 +37,11 @@ export const Summary = asStyled(({ className }) => {
           />
         </div>
       </BalanceDiv>
-      <BorrowLimitDiv>
-        <BorrowLimit
-          borrowLimitUsed={summary.borrowLimitUsed}
-          borrowLimitInUSD={summary.borrowLimitInUSD}
-        />
-      </BorrowLimitDiv>
-      <HealthFactorDiv>
-        <HealthFactor healthFactor={summary.healthFactor} />
-      </HealthFactorDiv>
+      <BorrowLimit
+        borrowLimitUsed={summary.borrowLimitUsed}
+        borrowLimitInUSD={summary.borrowLimitInUSD}
+      />
+      <HealthFactor healthFactor={summary.healthFactor} />
     </BalanceSection>
   )
 })``
@@ -67,12 +63,6 @@ const BalanceSection = styled.section`
       row-gap: 10px;
     }
   }
-  ${BorrowLimitDiv} {
-    margin-top: 32px;
-  }
-  ${HealthFactorDiv} {
-    margin-top: 16px;
-  }
   @media ${breakpoint.m} {
     ${BalanceDiv} {
       > div {
@@ -91,14 +81,6 @@ const BalanceSection = styled.section`
         left: 50%;
         transform: translate(-50%, -50%);
       }
-    }
-    ${BorrowLimitDiv} {
-      margin: 80px auto 0;
-      padding: 24px 80px;
-    }
-    ${HealthFactorDiv} {
-      margin-top: 0px;
-      padding: 24px 104px;
     }
   }
 `

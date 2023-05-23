@@ -5,6 +5,7 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { Barometer } from 'src/components/parts/Chart/Barometer'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { blue, darkRed, lightYellow } from 'src/styles/colors'
+import { breakpoint } from 'src/styles/mixins'
 import { formatAmtShort } from 'src/utils/number'
 import styled, { css } from 'styled-components'
 
@@ -40,6 +41,7 @@ export const HealthFactor = asStyled<{
 const HealthFactorDiv = styled.div<{ show: boolean }>`
   transition: all 0.2s ease-out;
   height: 0;
+  margin-top: 16px;
   > figure {
     transition: all 1s ease-in;
     opacity: 0;
@@ -51,6 +53,10 @@ const HealthFactorDiv = styled.div<{ show: boolean }>`
         clip-path: circle(0%);
       }
     }
+  }
+  @media ${breakpoint.m} {
+    margin-top: 0px;
+    padding: 24px 104px;
   }
   ${({ show }) =>
     show &&

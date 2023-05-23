@@ -93,11 +93,13 @@ const StyledTable = styled(Table)<StyleProps>`
     hoverGradients &&
     css`
       tbody > tr {
-        :hover {
-          background: linear-gradient(90deg, ${hoverGradients.join(',')});
-          background-size: ${hoverGradients.length}00%;
-          animation: ${hoverBackgroundKeyframes(hoverGradients.length)}
-            ${(hoverGradients.length * 5) / 3}s infinite linear;
+        @media ${breakpoint.xl} {
+          :hover {
+            background: linear-gradient(90deg, ${hoverGradients.join(',')});
+            background-size: ${hoverGradients.length}00%;
+            animation: ${hoverBackgroundKeyframes(hoverGradients.length)}
+              ${(hoverGradients.length * 5) / 3}s infinite linear;
+          }
         }
       }
     `}

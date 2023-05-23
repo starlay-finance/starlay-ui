@@ -35,7 +35,7 @@ const Main = styled.main`
     font-weight: ${fontWeightHeavy};
   }
   ${Overview} {
-    margin-top: 24px;
+    margin-top: 40px;
   }
   ${Assets} {
     margin-top: 24px;

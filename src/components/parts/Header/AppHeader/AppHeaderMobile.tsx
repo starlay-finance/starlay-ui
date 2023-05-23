@@ -1,10 +1,5 @@
 import { FC } from 'react'
-import {
-  IconArrowBottom,
-  IconMenu,
-  IconProtocol,
-  IconWallet,
-} from 'src/assets/svgs'
+import { IconMenu, IconWallet, LogoProtocol } from 'src/assets/svgs'
 import { IconLink } from 'src/components/parts/Link'
 import { useNetworkType } from 'src/hooks/useNetwork'
 import { useWallet } from 'src/hooks/useWallet'
@@ -32,13 +27,14 @@ export const AppHeaderMobile = styled<
       <div>
         <IconLink
           href={byNetwork(APP_ROOT, network)}
-          Icon={IconProtocol}
-          aria-label="App"
+          // Icon={IconProtocol}
+          Icon={LogoProtocol}
+          aria-label="Dashboard"
         />
-        <button>
+        {/* <button>
           {NETWORK[network]}
           <IconArrowBottom />
-        </button>
+        </button> */}
       </div>
       <div>
         {account ? (
@@ -88,7 +84,7 @@ const HeaderContainer = styled.div`
     ${IconLink} {
       svg {
         height: 32px;
-        width: 32px;
+        width: 100px;
       }
     }
     button {

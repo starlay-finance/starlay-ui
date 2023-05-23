@@ -20,7 +20,7 @@ export const MEDIUM = 'http://medium.com/@starlay_fi'
 export const ARTHSWAP_SWAP_URL = 'https://app.arthswap.org/#/swap'
 
 export const TOP = '/'
-export const APP_ROOT = '/'
+export const APP_ROOT = ''
 export const APP = '/app/evm'
 export const MARKETS = '/markets'
 export const MAKAI = '/makai'
@@ -45,7 +45,7 @@ export const byNetwork = (path: string, network: NetworkType) => {
 }
 
 export const matchPath = (pathname: string, path: string) =>
-  path === pathname.split('/').pop()
+  new RegExp(`(${APP}|${POLKADOT_APP})${path}$`).test(pathname)
 
 export const POLKADOT_SUPPORTED_PAGES = [APP, MARKETS]
 

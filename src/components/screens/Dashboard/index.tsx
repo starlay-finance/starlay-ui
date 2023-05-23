@@ -40,8 +40,11 @@ const Main = styled.main`
     }
   }
   @media ${breakpoint.l} {
-    ${Summary}, ${Market} {
+    ${Summary} {
       margin-top: 118px;
+    }
+    ${Market} {
+      margin-top: 80px;
     }
   }
 `

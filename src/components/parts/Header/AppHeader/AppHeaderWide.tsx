@@ -24,6 +24,7 @@ import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
 import {
   APP,
+  APP_ROOT,
   LAUNCHPAD,
   LAY_VELAY,
   MAKAI,
@@ -59,7 +60,7 @@ export const AppHeaderWide = styled(({ className }) => {
       />
       <Nav>
         <Tab $active={matchPath(pathname, APP)}>
-          <Link href={byNetwork(APP, network)}>{t`Dashboard`}</Link>
+          <Link href={byNetwork(APP_ROOT, network)}>{t`Dashboard`}</Link>
         </Tab>
         <Tab $active={matchPath(pathname, MARKETS)}>
           <Link href={byNetwork(MARKETS, network)}>{t`Markets`}</Link>

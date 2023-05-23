@@ -65,6 +65,7 @@ const BorrowLimitFigure = styled.figure<{ show: boolean }>`
   transition: all 0.2s ease-in;
   ${flexCenter};
   position: relative;
+  margin-top: 32px;
   width: 100%;
   column-gap: 16px;
   backdrop-filter: blur(8px) brightness(0.8);
@@ -81,17 +82,22 @@ const BorrowLimitFigure = styled.figure<{ show: boolean }>`
     height: 3px;
     color: ${primary};
   }
-  ${({ show }) =>
-    !show &&
-    css`
-      opacity: 0;
-      height: 0;
-      margin: 0;
-    `}
+
+  @media ${breakpoint.m} {
+    margin: 118px auto 0;
+    padding: 24px 80px;
+  }
   @media ${breakpoint.xl} {
     font-size: 16px;
     figcaption {
       width: 96px;
     }
   }
+  ${({ show }) =>
+    !show &&
+    css`
+      opacity: 0;
+      height: 0;
+      margin: 38px auto 0 !important;
+    `}
 `
