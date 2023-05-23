@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { AppMenu } from 'src/components/compositions/AppMenu'
 import { AppBackground } from 'src/components/parts/Background'
 import { AppFooter } from 'src/components/parts/Footer'
 import { AppHeader } from 'src/components/parts/Header/AppHeader'
@@ -6,17 +8,21 @@ import styled from 'styled-components'
 import { Market } from './parts/Market'
 import { Summary } from './parts/Summary'
 
-export const Dashboard = () => (
-  <>
-    <AppHeader />
-    <Main>
-      <AppBackground />
-      <Summary />
-      <Market />
-    </Main>
-    <AppFooter />
-  </>
-)
+export const Dashboard = () => {
+  const [isMenuOpen, setMenuOpen] = useState(false)
+  return (
+    <>
+      <AppHeader openMenu={() => setMenuOpen(true)} />
+      <Main>
+        <AppBackground />
+        <Summary />
+        <Market />
+        <AppMenu isOpen={isMenuOpen} close={() => setMenuOpen(false)} />
+      </Main>
+      <AppFooter />
+    </>
+  )
+}
 
 const Main = styled.main`
   width: 100%;

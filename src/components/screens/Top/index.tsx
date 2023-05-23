@@ -9,7 +9,7 @@ import { secondary } from 'src/styles/colors'
 import { fontWeightHeavy, fontWeightRegular } from 'src/styles/font'
 import { breakpoint } from 'src/styles/mixins'
 import styled, { css } from 'styled-components'
-import { MobileMenu } from './Menu'
+import { Menu } from './Menu'
 import { Backers, BackersProps } from './parts/Backers'
 import { Background } from './parts/Background'
 import { CurrentMarkets } from './parts/CurrentMarkets'
@@ -27,7 +27,7 @@ export const Top: FC<TopProps> = ({ backers }) => {
         <FirstView />
         <CurrentMarkets />
         {backers.length > 0 && <Backers backers={backers} />}
-        <MobileMenu isOpen={isMenuOpen} close={() => setMenuOpen(false)} />
+        <Menu isOpen={isMenuOpen} close={() => setMenuOpen(false)} />
       </Main>
       <TopFooter />
       <LaunchPadPop />

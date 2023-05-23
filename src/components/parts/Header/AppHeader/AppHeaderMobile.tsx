@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import { FC } from 'react'
 import {
   IconArrowBottom,
   IconMenu,
@@ -21,10 +21,11 @@ const NETWORK: Record<NetworkType, string> = {
   Polkadot: 'WASM',
 }
 
-export const AppHeaderMobile = styled(({ className }) => {
-  const { pathname } = useRouter()
+export const AppHeaderMobile = styled<
+  FC<{ openMenu: VoidFunction } & { className?: string }>
+>(({ className, openMenu }) => {
   const { data: network } = useNetworkType()
-  const { account, chainId } = useWallet(network)
+  const { account } = useWallet(network)
   const { open } = useWalletModal()
   return (
     <HeaderContainer className={className}>
@@ -50,7 +51,7 @@ export const AppHeaderMobile = styled(({ className }) => {
             <IconWallet />
           </MenuButtonSmall>
         )}
-        <MenuButtonSmall>
+        <MenuButtonSmall onClick={openMenu}>
           <IconMenu />
         </MenuButtonSmall>
       </div>

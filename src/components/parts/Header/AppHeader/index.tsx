@@ -1,13 +1,14 @@
+import { FC } from 'react'
 import { breakpoint } from 'src/styles/mixins'
 import styled from 'styled-components'
 import { HeaderWrapper } from '../common'
 import { AppHeaderMobile } from './AppHeaderMobile'
 import { AppHeaderWide } from './AppHeaderWide'
 
-export const AppHeader = () => {
+export const AppHeader: FC<{ openMenu: VoidFunction }> = ({ openMenu }) => {
   return (
     <AppHeaderWrapper>
-      <AppHeaderMobile />
+      <AppHeaderMobile openMenu={openMenu} />
       <AppHeaderWide />
     </AppHeaderWrapper>
   )
