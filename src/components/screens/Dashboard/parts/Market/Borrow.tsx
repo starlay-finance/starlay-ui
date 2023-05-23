@@ -80,9 +80,9 @@ export const Borrow = asStyled<BorrowProps>(
           columns={
             !isMobile
               ? BORROW_COLUMNS
-              : activeTab === 'markets'
-              ? BORROW_MARKET_COLUMNS
-              : BORROW_POSITION_COLUMNS
+              : activeTab === 'position'
+              ? BORROW_POSITION_COLUMNS
+              : BORROW_MARKET_COLUMNS
           }
           placeholderLength={3}
           rowDisabledStyle={rowDisabledStyle}

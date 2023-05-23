@@ -97,9 +97,9 @@ export const Deposit = asStyled<DepositProps>(
           columns={
             !isMobile
               ? DEPOSIT_COLUMNS
-              : activeTab === 'markets'
-              ? DEPOSIT_MARKET_COLUMNS
-              : DEPOSIT_POSITION_COLUMNS
+              : activeTab === 'position'
+              ? DEPOSIT_POSITION_COLUMNS
+              : DEPOSIT_MARKET_COLUMNS
           }
           placeholderLength={3}
           rows={
