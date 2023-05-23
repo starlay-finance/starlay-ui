@@ -11,7 +11,7 @@ import { useWallet } from 'src/hooks/useWallet'
 import { NetworkType } from 'src/libs/config'
 import { fontWeightBold, fontWeightMedium } from 'src/styles/font'
 import { shortenAddress } from 'src/utils/address'
-import { APP, POLKADOT_APP } from 'src/utils/routes'
+import { APP_ROOT, byNetwork } from 'src/utils/routes'
 import styled from 'styled-components'
 import { useWalletModal } from '../../Modal/WalletModal'
 import { MenuButtonSmall } from './styles'
@@ -31,7 +31,7 @@ export const AppHeaderMobile = styled<
     <HeaderContainer className={className}>
       <div>
         <IconLink
-          href={network === 'Polkadot' ? POLKADOT_APP : APP}
+          href={byNetwork(APP_ROOT, network)}
           Icon={IconProtocol}
           aria-label="App"
         />

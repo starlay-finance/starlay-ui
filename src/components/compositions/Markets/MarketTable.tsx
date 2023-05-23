@@ -137,12 +137,15 @@ export const AssetTd: FC<Pick<Asset, 'icon' | 'name'>> = ({ icon, name }) => (
 const AssetDiv = styled.div`
   display: flex;
   align-items: center;
-  column-gap: 16px;
+  column-gap: 8px;
   > div:first-child {
     position: relative;
     width: 28px;
     height: 28px;
-    @media ${breakpoint.xl} {
+  }
+  @media ${breakpoint.xl} {
+    column-gap: 16px;
+    > div:first-child {
       width: 32px;
       height: 32px;
     }

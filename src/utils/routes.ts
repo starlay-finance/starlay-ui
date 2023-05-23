@@ -1,3 +1,4 @@
+import { NetworkType } from 'src/libs/config'
 import { SorryReason } from 'src/types/page'
 
 export const DEVELOPERS = 'https://docs.starlay.finance/development/repository'
@@ -19,14 +20,12 @@ export const MEDIUM = 'http://medium.com/@starlay_fi'
 export const ARTHSWAP_SWAP_URL = 'https://app.arthswap.org/#/swap'
 
 export const TOP = '/'
-export const APP_ROOT = '/app'
+export const APP_ROOT = '/'
 export const APP = '/app/evm'
-export const POLKADOT_APP = '/app/wasm'
-export const MARKETS = '/app/evm/markets'
-export const POLKADOT_MARKETS = '/app/wasm/markets'
-export const MAKAI = '/app/evm/makai'
-export const LAY_VELAY = '/app/evm/lay'
-export const LAUNCHPAD = '/app/evm/launchpad'
+export const MARKETS = '/markets'
+export const MAKAI = '/makai'
+export const LAY_VELAY = '/lay'
+export const LAUNCHPAD = '/launchpad'
 export const SWAP = ARTHSWAP_SWAP_URL
 export const GOVERNANCE = ''
 export const GOVERNANCE_OVERVIEW = ''
@@ -34,6 +33,19 @@ export const BUG_BOUNTY = ''
 export const SUPPORT = DISCORD
 export const EVM_PREFIX = '/evm'
 export const POLKADOT_PREFIX = '/wasm'
+export const POLKADOT_APP = '/app/wasm'
+export const POLKADOT_MARKETS = '/app/wasm/markets'
+
+export const evmOnly = (path: string, network: NetworkType | undefined) =>
+  network === 'EVM' ? `${APP}${path}` : undefined
+
+export const byNetwork = (path: string, network: NetworkType) => {
+  const prefix = network === 'Polkadot' ? POLKADOT_APP : APP
+  return `${prefix}${path}`
+}
+
+export const matchPath = (pathname: string, path: string) =>
+  path === pathname.split('/').pop()
 
 export const POLKADOT_SUPPORTED_PAGES = [APP, MARKETS]
 

@@ -28,9 +28,9 @@ import {
   LAY_VELAY,
   MAKAI,
   MARKETS,
-  POLKADOT_APP,
-  POLKADOT_MARKETS,
   SWAP,
+  byNetwork,
+  matchPath,
 } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import { useAccountsModal } from '../../Modal/AccountsModal'
@@ -53,25 +53,21 @@ export const AppHeaderWide = styled(({ className }) => {
   return (
     <HeaderContainer className={className}>
       <LogoLink
-        href={network === 'Polkadot' ? POLKADOT_APP : APP}
+        href={byNetwork(APP, network)}
         Icon={LogoProtocol}
         aria-label="App"
       />
       <Nav>
-        <Tab $active={pathname === APP || pathname === POLKADOT_APP}>
-          <Link
-            href={network === 'Polkadot' ? POLKADOT_APP : APP}
-          >{t`Dashboard`}</Link>
+        <Tab $active={matchPath(pathname, APP)}>
+          <Link href={byNetwork(APP, network)}>{t`Dashboard`}</Link>
         </Tab>
-        <Tab $active={pathname === MARKETS || pathname === POLKADOT_MARKETS}>
-          <Link
-            href={network === 'Polkadot' ? POLKADOT_MARKETS : MARKETS}
-          >{t`Markets`}</Link>
+        <Tab $active={matchPath(pathname, MARKETS)}>
+          <Link href={byNetwork(MARKETS, network)}>{t`Markets`}</Link>
         </Tab>
-        <Tab $active={pathname === MAKAI}>
+        <Tab $active={matchPath(pathname, MAKAI)}>
           <Link href={evmOnly(MAKAI, network)}>{t`Makai`}</Link>
         </Tab>
-        <Tab $active={pathname === LAY_VELAY}>
+        <Tab $active={matchPath(pathname, LAY_VELAY)}>
           <Link href={evmOnly(LAY_VELAY, network)}>{t`LAY/veLAY`}</Link>
         </Tab>
       </Nav>

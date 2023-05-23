@@ -3,13 +3,19 @@ import { FC } from 'react'
 import { AssetBarChartWithPlaceholder } from 'src/components/compositions/Markets/MarketBarChart'
 import { TableContainer } from 'src/components/compositions/Markets/MarketTable'
 import { asStyled } from 'src/components/hoc/asStyled'
+import { BarChart } from 'src/components/parts/Chart'
 import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { PercentageChange } from 'src/components/parts/Number/PercentageChange'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useMarketDataSnapshot } from 'src/hooks/useMarketData/useMarketDataSnaphost'
 import { darkPurple, secondary } from 'src/styles/colors'
-import { fontWeightBold, fontWeightRegular } from 'src/styles/font'
+import {
+  fontWeightBold,
+  fontWeightHeavy,
+  fontWeightRegular,
+} from 'src/styles/font'
+import { breakpoint } from 'src/styles/mixins'
 import { MarketComposition } from 'src/types/models'
 import { amountByAssetsSorter, toMarketCompositions } from 'src/utils/market'
 import { formatUSD } from 'src/utils/number'
@@ -56,7 +62,7 @@ const OverViewItem: FC<{
   })
   return (
     <OverviewItemContainer>
-      <h2>{caption}</h2>
+      <div>{caption}</div>
       <AmountDiv>
         <BlinkWrapper value={displayTotal}>
           <Reel text={displayTotal} />
@@ -88,11 +94,29 @@ const Composition = styled.div`
   font-weight: ${fontWeightBold};
   color: ${secondary};
 
-  > p {
-    margin-bottom: 24px;
-  }
   ${AssetBarChartWithPlaceholder} {
-    margin-top: 16px;
+    margin-top: 12px;
+    p {
+      span:first-child {
+        font-size: 14px;
+      }
+    }
+    ${BarChart} {
+      margin-top: 8px;
+    }
+  }
+  @media ${breakpoint.xl} {
+    ${AssetBarChartWithPlaceholder} {
+      margin-top: 16px;
+      p {
+        span:first-child {
+          font-size: 16px;
+        }
+      }
+      ${BarChart} {
+        margin-top: 14px;
+      }
+    }
   }
 `
 
@@ -100,31 +124,61 @@ const AmountDiv = styled.div`
   display: flex;
   align-items: center;
   column-gap: 12px;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: ${fontWeightBold};
   > span:last-child {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: ${fontWeightRegular};
+  }
+  @media ${breakpoint.xl} {
+    font-size: 24px;
+    > span:last-child {
+      font-size: 18px;
+    }
   }
 `
 
 const OverviewItemContainer = styled(TableContainer)`
-  padding: 24px 32px 32px;
-  h2 {
-    padding: 0 32px 24px;
-    margin: 0 -32px 32px;
+  padding: 16px 20px 24px;
+  > div:first-child {
+    padding: 0 24px 16px;
+    margin: 0 -24px 16px;
     border-bottom: 1px solid ${darkPurple}3d;
+    font-size: 16px;
+    font-weight: ${fontWeightHeavy};
   }
   ${Composition} {
-    margin-top: 32px;
+    margin-top: 20px;
+    > p {
+      margin-bottom: 16px;
+    }
+  }
+  @media ${breakpoint.xl} {
+    padding: 24px 32px 32px;
+    > div:first-child {
+      font-size: 20px;
+      padding: 0 32px 24px;
+      margin: 0 -32px 32px;
+    }
+    ${Composition} {
+      margin-top: 32px;
+      > p {
+        margin-bottom: 24px;
+      }
+    }
   }
 `
 
 const OverviewSection = styled.section`
   display: flex;
-  justify-content: space-between;
-  column-gap: 24px;
+  flex-direction: column;
+  row-gap: 16px;
   > * {
     flex: 1;
+  }
+  @media ${breakpoint.xl} {
+    flex-direction: row;
+    justify-content: space-between;
+    column-gap: 24px;
   }
 `

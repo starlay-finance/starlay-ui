@@ -30,6 +30,9 @@ export const MobileMenu: FC<MenuProps & { children: ReactNode }> = ({
   useEffect(() => {
     if (isOpen) disableScroll()
     else enableScroll()
+    return () => {
+      enableScroll()
+    }
   }, [isOpen])
   return (
     <MenuContainer isOpen={isOpen}>
