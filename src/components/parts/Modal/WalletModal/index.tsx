@@ -35,6 +35,7 @@ const Wallet: FC<ModalContentProps> = ({ close }) => {
     setConnecting(true)
     await connect(networkType, walletType).then(close, (err) => {
       setConnecting(false)
+      console.log(err)
       if (err && err.name === 'UnsupportedChainIdError') {
         open({
           type: 'Alert',
