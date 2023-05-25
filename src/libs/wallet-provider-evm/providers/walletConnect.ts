@@ -5,10 +5,12 @@ import { EVMWalletConnector } from '../types'
 
 const config = getNetworkConfigEVM(DEFAULT_CHAIN_ID)
 const connector = new WalletConnectConnector({
+  chainId: DEFAULT_CHAIN_ID,
   rpc: {
     [DEFAULT_CHAIN_ID]: config.publicJsonRPCUrl[0],
     // config.privateJsonRPCUrl ||
   },
+  supportedChainIds: [DEFAULT_CHAIN_ID],
 })
 const beforeConnect = async () => {
   localStorage.removeItem('walletconnect')
