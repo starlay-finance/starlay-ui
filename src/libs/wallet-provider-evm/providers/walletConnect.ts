@@ -10,6 +10,9 @@ const connector = new WalletConnectConnector({
     // config.privateJsonRPCUrl ||
   },
 })
+const beforeConnect = async () => {
+  localStorage.removeItem('walletconnect')
+}
 const onDisconnect = () => {
   connector.getProvider().then((provider) => {
     provider.removeAllListeners()
@@ -32,6 +35,7 @@ export const walletConnectConnector: EVMWalletConnector<WalletConnectConnector> 
   {
     type: 'WalletConnect',
     connector,
+    beforeConnect,
     onDisconnect,
     listen,
   }
