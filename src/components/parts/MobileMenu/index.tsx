@@ -75,12 +75,15 @@ export const MobileMenu: FC<
           const { content, header: Header } = items[i]
           return (
             <a.div style={style}>
-              <MenuHeaderDiv>
+              <MenuHeaderDiv $animate={i === 1}>
                 {Header && back ? (
                   <Header back={back} />
                 ) : (
                   <>
                     <h3>{t`Menu`}</h3>
+                    <CloseButton $hidden={index !== 0} onClick={() => close()}>
+                      <IconClose />
+                    </CloseButton>
                   </>
                 )}
               </MenuHeaderDiv>
@@ -98,19 +101,18 @@ export const MobileMenu: FC<
       <BgIcon>
         <IconProtocol />
       </BgIcon>
-      <CloseButton show={index === 0} onClick={() => close()}>
-        <IconClose />
-      </CloseButton>
     </MenuContainer>
   )
 }
-const CloseButton = styled.button<{ show?: boolean }>`
+const CloseButton = styled.button<{ $hidden?: boolean }>`
+  width: 16px;
+  height: 16px;
   opacity: 0;
-  transition: all 0.5s;
-  ${({ show }) =>
-    show &&
+  ${({ $hidden }) =>
+    $hidden &&
     css`
-      opacity: 1;
+      opacity: 0 !important;
+      visibility: hidden;
     `}
 `
 const TransitionContainer = styled.div`
@@ -150,10 +152,16 @@ const IconLinks = styled.div`
     }
   }
 `
-const MenuHeaderDiv = styled.div`
+const MenuHeaderDiv = styled.div<{ $animate?: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${({ $animate }) =>
+    $animate &&
+    css`
+      animation: none !important;
+      opacity: 1 !important;
+    `}
 `
 const BgIcon = styled.div`
   position: absolute;
@@ -181,7 +189,7 @@ const bgiconFadeIn = keyframes`
 `
 
 const contentFadeInAnimation = css`
-  ${MenuHeaderDiv} {
+  ${MenuHeaderDiv}, ${CloseButton} {
     opacity: 0;
     animation: ${fadeIn} 0.25s 0.5s ease-in forwards;
   }
@@ -224,14 +232,6 @@ const MenuContainer = styled.div<{ isOpen: boolean }>`
   }
   button:hover {
     color: ${purple};
-  }
-
-  ${CloseButton} {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    width: 16px;
-    height: 16px;
   }
 
   background-color: rgba(0, 0, 0, 0.64);
