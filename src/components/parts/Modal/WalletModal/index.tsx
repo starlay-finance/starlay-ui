@@ -33,17 +33,8 @@ const Wallet: FC<ModalContentProps> = ({ close }) => {
   const [connecting, setConnecting] = useState(false)
   const onClickConnect = async (networkType: any, walletType: any) => {
     setConnecting(true)
-    await connect(networkType, walletType).then(close, (err) => {
+    await connect(networkType, walletType).then(close, () => {
       setConnecting(false)
-      console.log(err)
-      if (err && err.name === 'UnsupportedChainIdError') {
-        open({
-          type: 'Alert',
-          title: t`You need to change to a supported chain`,
-          message: t`Please switch the chain with your wallet.`,
-        })
-        return
-      }
       open({
         type: 'Alert',
         title: t`Failed to connect to wallet`,
@@ -70,12 +61,16 @@ const Wallet: FC<ModalContentProps> = ({ close }) => {
   )
 }
 
-const BodyLoading: FC = () => (
-  <BodyDiv>
+const BodyLoading = styled(({ className }) => (
+  <BodyDiv className={className}>
     <LoadingProtocolIcon />
     <p>{t`Connecting the wallet...`}</p>
   </BodyDiv>
-)
+))`
+  > p {
+    margin-top: 48px;
+  }
+`
 
 const BodyConnect: FC<{
   connect: WalletConnector

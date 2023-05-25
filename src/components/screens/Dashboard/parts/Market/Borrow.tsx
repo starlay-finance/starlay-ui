@@ -47,7 +47,7 @@ export const Borrow = asStyled<BorrowProps>(
   ({ className, account, markets, user, borrow, openWalletModal }) => {
     const [activeTab, setTab] = useState<string>()
     useEffect(() => {
-      if (!isMobile || activeTab || !user) return
+      if (!isMobile || !user) return
       if (!user.summary.totalBorrowedInUSD.gt(BN_ZERO))
         return setTab(BORROW_TABS[0].id)
       setTab(BORROW_TABS[1].id)

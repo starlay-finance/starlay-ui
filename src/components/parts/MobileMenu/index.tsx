@@ -128,7 +128,8 @@ const Content = styled.div`
   font-size: 18px;
   font-size: ${fontWeightRegular};
 
-  a[href=''] {
+  a[href=''],
+  button:disabled {
     color: ${trueWhite}80;
   }
   > a,
@@ -181,8 +182,8 @@ const bgiconFadeIn = keyframes`
 
 const contentFadeInAnimation = css`
   ${MenuHeaderDiv} {
-    /* opacity: 0; */
-    /* animation: ${fadeIn} 0.25s 0.5s ease-in forwards; */
+    opacity: 0;
+    animation: ${fadeIn} 0.25s 0.5s ease-in forwards;
   }
   ${Content} > a,
   ${Content} > button {

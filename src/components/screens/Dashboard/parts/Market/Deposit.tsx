@@ -60,7 +60,7 @@ export const Deposit = asStyled<DepositProps>(
   }) => {
     const [activeTab, setTab] = useState<string>()
     useEffect(() => {
-      if (!isMobile || activeTab || !user) return
+      if (!isMobile || !user) return
       if (!user.summary.totalDepositedInUSD.gt(BN_ZERO))
         return setTab(DEPOSIT_TABS[0].id)
       setTab(DEPOSIT_TABS[1].id)

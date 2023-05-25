@@ -18,13 +18,14 @@ const healthFactorRatio = (healthFactor: BigNumber) => {
 
 export const HealthFactor = asStyled<{
   healthFactor: BigNumber | undefined
-}>(({ healthFactor, className }) => {
+  shouldShow: boolean
+}>(({ healthFactor, shouldShow, className }) => {
   const [show, setShow] = useState(false)
   useEffect(() => {
     setTimeout(() => {
-      setShow(!!healthFactor?.isPositive())
+      setShow(shouldShow)
     }, 100)
-  }, [healthFactor])
+  }, [shouldShow])
   return (
     <HealthFactorDiv show={show} className={className}>
       {healthFactor && (

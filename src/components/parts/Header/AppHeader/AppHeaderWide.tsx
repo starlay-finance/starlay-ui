@@ -2,12 +2,7 @@ import { t } from '@lingui/macro'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { SymbolLay } from 'src/assets/images'
-import {
-  IconMetamask,
-  IconPolkadotJs,
-  IconSettings,
-  LogoProtocol,
-} from 'src/assets/svgs'
+import { IconSettings, LogoProtocol } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
@@ -74,9 +69,9 @@ export const AppHeaderWide = styled(({ className }) => {
         </Tab>
       </Nav>
       <Menu>
-        <MenuButtonSmall onClick={() => openNetworkModal()}>
+        {/* <MenuButtonSmall onClick={() => openNetworkModal()}>
           {network === 'Polkadot' ? <IconPolkadotJs /> : <IconMetamask />}
-        </MenuButtonSmall>
+        </MenuButtonSmall> */}
         <MenuButton
           onClick={() =>
             !account

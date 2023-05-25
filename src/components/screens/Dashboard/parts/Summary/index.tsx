@@ -6,6 +6,7 @@ import { useWallet } from 'src/hooks/useWallet'
 import { lightYellow, purple } from 'src/styles/colors'
 import { breakpoint } from 'src/styles/mixins'
 import { UserSummary } from 'src/types/models'
+import { BN_ZERO } from 'src/utils/number'
 import styled from 'styled-components'
 import { BalanceItem } from './BalanceItem'
 import { BorrowLimit } from './BorrowLimit'
@@ -40,8 +41,17 @@ export const Summary = asStyled(({ className }) => {
       <BorrowLimit
         borrowLimitUsed={summary.borrowLimitUsed}
         borrowLimitInUSD={summary.borrowLimitInUSD}
+        shouldShow={
+          !!(
+            summary.totalDepositedInUSD?.gt(BN_ZERO) ||
+            summary.totalBorrowedInUSD?.gt(BN_ZERO)
+          )
+        }
       />
-      <HealthFactor healthFactor={summary.healthFactor} />
+      <HealthFactor
+        healthFactor={summary.healthFactor}
+        shouldShow={!!summary.totalBorrowedInUSD?.gt(BN_ZERO)}
+      />
     </BalanceSection>
   )
 })``

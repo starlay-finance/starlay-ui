@@ -36,9 +36,6 @@ const Content = styled.div`
   color: ${gray};
   @media ${breakpoint.xl} {
     border-radius: 8px;
-    backdrop-filter: blur(24px) brightness(1.48);
-    background-color: rgba(255, 255, 255, 0.88);
-    color: ${darkPurple}8f;
   }
 `
 
@@ -74,7 +71,6 @@ const Header = styled.div<{ headerStyle?: SimpleInterpolation }>`
   @media ${breakpoint.xl} {
     height: 88px;
     padding: 32px 32px 24px;
-    color: ${trueBlack};
     font-size: 20px;
     button {
       right: 32px;
