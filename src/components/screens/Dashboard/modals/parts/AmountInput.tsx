@@ -46,6 +46,7 @@ export const AmountInput = asStyled<AmountInputProps>(
             onChange(parsed)
           }}
           disabled={disabled || all}
+          inputMode="decimal"
         />
         {!disabled && (
           <Control>
