@@ -33,8 +33,19 @@ const Wallet: FC<ModalContentProps> = ({ close }) => {
   const [connecting, setConnecting] = useState(false)
   const onClickConnect = async (networkType: any, walletType: any) => {
     setConnecting(true)
-    await connect(networkType, walletType).then(close, () => {
+    await connect(networkType, walletType).then(close, (err) => {
       setConnecting(false)
+      if (
+        typeof err?.message === 'string' &&
+        err.message.includes('Unsupported chain')
+      ) {
+        open({
+          type: 'Alert',
+          title: t`You need to change to a supported chain`,
+          message: t`Please switch the chain with your wallet.`,
+        })
+        return
+      }
       open({
         type: 'Alert',
         title: t`Failed to connect to wallet`,

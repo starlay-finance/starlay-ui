@@ -27,7 +27,12 @@ export const executeTx = async (
     return { wait: () => txPromise.wait(1) }
   } catch (e) {
     const err = serializeError(e)
-    if (err.code === 4001 || err.code === -32603) throw error('Cancelled')
+    if (
+      err.code === 4001 ||
+      err.code === -32603 ||
+      err.message === 'User rejected the transaction'
+    )
+      throw error('Cancelled')
     throw e
   }
 }

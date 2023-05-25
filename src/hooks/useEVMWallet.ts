@@ -33,6 +33,7 @@ export type EVMWalletInterface = {
   switchChain?: (chainId: EVMChainId) => Promise<{ error?: string }>
 }
 const useActiveWallet = () => useSWRLocal<ActiveWallet | null>('wallet-active')
+const useActiveChain = () => useSWRLocal<number | null>('chain-active')
 
 export const useEVMWallet = (
   forceNetworkActive: boolean = false,
@@ -45,11 +46,13 @@ export const useEVMWallet = (
 
   const signer = useMemo(() => library?.getSigner(), [library])
   const { data: activeWallet, mutate: mutateActiveWallet } = useActiveWallet()
+  const { data: activeChain, mutate: mutateActiveChain } = useActiveChain()
 
   const connect = useCallback(
     async (type: EVMWalletType) => {
-      const { connector, onConnect, onDisconnect } = getConnector(type)
-      if (onConnect) await onConnect()
+      const { connector, beforeConnect, onDisconnect, listen } =
+        getConnector(type)
+      if (beforeConnect) await beforeConnect()
       await activate(
         connector,
         (err) => {
@@ -60,6 +63,7 @@ export const useEVMWallet = (
       await mutateActiveWallet({ type, onDisconnect })
       setLastConnectedNetwork('EVM')
       setHasConnected('EVM')
+      if (listen) listen({ onChangeChain: mutateActiveChain })
     },
     [activate],
   )
@@ -92,7 +96,7 @@ export const useEVMWallet = (
   return {
     error,
     active,
-    chainId,
+    chainId: activeChain || chainId,
     account: account as EVMWalletInterface['account'],
     library,
     signer,

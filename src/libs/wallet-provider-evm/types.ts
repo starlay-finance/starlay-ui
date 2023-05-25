@@ -7,6 +7,9 @@ export type EVMWalletConnector<
 > = {
   type: EVMWalletType
   connector: T
-  onConnect?: () => Promise<void>
+  beforeConnect?: () => Promise<void>
   onDisconnect?: VoidFunction
+  listen?: (
+    listeners: Partial<{ onChangeChain: (chainId: number) => void }>,
+  ) => void
 }

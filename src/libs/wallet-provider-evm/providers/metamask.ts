@@ -4,7 +4,7 @@ import { InjectedConnector } from '@web3-react/injected-connector'
 import { METAMASK_EXT_URL } from 'src/utils/routes'
 import { EVMWalletConnector, EVMWalletType } from '../types'
 
-const onConnect = async () => {
+const beforeConnect = async () => {
   const { ethereum } = window
   if (!(ethereum && ethereum.isMetaMask)) {
     window.open(METAMASK_EXT_URL, '_blank', 'noopener')
@@ -18,7 +18,7 @@ const connector = new InjectedConnector({})
 export const metamaskConnector: EVMWalletConnector<InjectedConnector> = {
   type: 'Metamask',
   connector,
-  onConnect,
+  beforeConnect,
 }
 
 export const connectIfAuthorized = (

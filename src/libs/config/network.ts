@@ -78,7 +78,7 @@ export type EVMNetworkConfig = NetworkConfig<
 export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
   [EVM_CHAIN_ID.astar]: {
     name: 'Astar Mainnet / EVM',
-    publicJsonRPCUrl: ['https://astar.public.blastapi.io'],
+    publicJsonRPCUrl: ['https://evm.astar.network'],
     privateJsonRPCUrl:
       'https://astar.blastapi.io/b783cb07-7f1a-48dc-88fb-cedca75fafa0',
     addresses: {
