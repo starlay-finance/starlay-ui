@@ -1,10 +1,10 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { withKnobs } from '@storybook/addon-knobs'
 import { useEffect } from 'react'
-import { purple } from 'src/styles/colors'
-import { BN_HUNDRED, BN_ONE, BN_ZERO } from 'src/utils/number'
 import { disableSVGAnimation } from 'src/__tests__/utils/disableAnimation'
 import { bignumber } from 'src/__tests__/utils/knobsHelper'
+import { purple } from 'src/styles/colors'
+import { BN_HUNDRED, BN_ONE, BN_ZERO } from 'src/utils/number'
 import { isScreenshot } from 'storycap'
 import { BalanceItem } from './BalanceItem'
 import { BorrowLimit } from './BorrowLimit'
@@ -45,6 +45,7 @@ export const BorrowLimitComponent = () => {
           ? BigNumber.min(borrowLimitUsed.div(BN_HUNDRED), BN_ONE)
           : undefined
       }
+      shouldShow
     />
   )
 }
