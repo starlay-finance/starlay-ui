@@ -19,7 +19,7 @@ import { darkPurple, gray, offWhite, purple } from 'src/styles/colors'
 import { fontWeightSemiBold } from 'src/styles/font'
 import { breakpoint, flexCenter } from 'src/styles/mixins'
 import { DOCS } from 'src/utils/routes'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { LoadingProtocolIcon } from '../../Loading'
 import { useMessageModal } from '../MessageModal'
 import { ItemLabel } from '../parts'
@@ -56,6 +56,8 @@ const Wallet: FC<ModalContentProps> = ({ close }) => {
 
   return (
     <DefaultModalContent
+      headerNode={!connecting ? undefined : t`Connect Wallet`}
+      headerStyle={hiddenOnMobile}
       bodyNode={
         !connecting ? (
           <BodyConnect
@@ -71,15 +73,10 @@ const Wallet: FC<ModalContentProps> = ({ close }) => {
     />
   )
 }
-
-const BodyLoading = styled(({ className }) => (
-  <BodyDiv className={className}>
-    <LoadingProtocolIcon />
-    <p>{t`Connecting the wallet...`}</p>
-  </BodyDiv>
-))`
-  > p {
-    margin-top: 48px;
+const hiddenOnMobile = css`
+  display: none;
+  @media ${breakpoint.xl} {
+    display: block;
   }
 `
 
@@ -231,6 +228,20 @@ const BodyDiv = styled.div`
     ${TermsP} {
       margin-top: 64px;
     }
+  }
+`
+
+const BodyLoading = styled(({ className }) => (
+  <BodyDiv className={className}>
+    <LoadingProtocolIcon />
+    <p>{t`Connecting the wallet...`}</p>
+  </BodyDiv>
+))`
+  > p {
+    margin-top: 48px;
+  }
+  @media ${breakpoint.xl} {
+    padding: 64px;
   }
 `
 
