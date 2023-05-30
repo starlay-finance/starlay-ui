@@ -1,7 +1,7 @@
 import { StaticImageData } from 'next/image'
 import { Image } from 'src/components/elements/Image'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { darkPurple } from 'src/styles/colors'
+import { lightPurple } from 'src/styles/colors'
 import { breakpoint, flexCenter } from 'src/styles/mixins'
 import { Asset } from 'src/types/models'
 import styled, { css } from 'styled-components'
@@ -92,7 +92,7 @@ const TextDiv = styled.div<{ withNote?: boolean }>`
     withNote &&
     css`
       p:first-child {
-        color: ${darkPurple};
+        color: ${lightPurple};
       }
       p:last-child {
         font-size: 12px;

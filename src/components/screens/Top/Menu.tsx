@@ -21,6 +21,6 @@ export const Menu: FC<MenuProps> = (props) => {
           ),
         },
       ]}
-    ></MobileMenu>
+    />
   )
 }

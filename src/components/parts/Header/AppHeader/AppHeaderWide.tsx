@@ -13,7 +13,7 @@ import { useNetworkType } from 'src/hooks/useNetwork'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { getNetworkConfig } from 'src/libs/config'
-import { darkGray, purple, trueWhite } from 'src/styles/colors'
+import { lightBlack, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
 import { shortenAddress } from 'src/utils/address'
@@ -99,7 +99,7 @@ export const AppHeaderWide = styled(({ className }) => {
               <Link href={SWAP}>{t`Swap`}</Link>
             </SettingsDiv>
             <SettingsDiv as="div">
-              <Link href={LAUNCHPAD}>{t`Launchpad`}</Link>
+              <Link href={evmOnly(LAUNCHPAD, network)}>{t`Launchpad`}</Link>
             </SettingsDiv>
             <SettingsDiv>
               <button
@@ -139,7 +139,7 @@ const SettingsDiv = styled.div`
     display: block;
     padding: 12px 16px;
     white-space: nowrap;
-    background-color: ${darkGray};
+    background-color: ${lightBlack};
     line-height: 1;
     transition: color 0.15s ease-in;
     :hover {

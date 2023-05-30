@@ -29,7 +29,7 @@ export type SuggestModalBodyProps = {
   }
   inWallet: BigNumber
   openDeposit: VoidFunction
-  openMakai: VoidFunction
+  openMakai?: VoidFunction
 }
 export const SuggestModalBody: FC<SuggestModalBodyProps> = ({
   asset,
@@ -73,7 +73,7 @@ export const SuggestModalBody: FC<SuggestModalBodyProps> = ({
       ),
     },
   ]
-  if (!makaiUnsupported)
+  if (!makaiUnsupported || !openMakai)
     actions.push({
       apr: makaiAPR,
       node: (

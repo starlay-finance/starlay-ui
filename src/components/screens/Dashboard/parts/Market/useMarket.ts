@@ -61,7 +61,10 @@ export const useMarket = () => {
                 asset,
                 inWallet: balance[asset.symbol],
                 openDeposit: () => deposit(user, asset),
-                openMakai: () => router.push(toMakaiLoop(asset.symbol)),
+                openMakai:
+                  networkType === 'EVM'
+                    ? () => router.push(toMakaiLoop(asset.symbol, networkType)!)
+                    : undefined,
               })
           : undefined,
     })

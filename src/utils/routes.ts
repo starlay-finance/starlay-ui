@@ -49,8 +49,10 @@ export const matchPath = (pathname: string, path: string) =>
 
 export const POLKADOT_SUPPORTED_PAGES = [APP, MARKETS]
 
-export const toLaunchpad = (token: string) => `${LAUNCHPAD}/${token}`
-export const toMakaiLoop = (symbol: string) => `${MAKAI}?asset=${symbol}`
+export const toLaunchpad = (token: string, network: NetworkType | undefined) =>
+  evmOnly(`${LAUNCHPAD}/${token}`, network)
+export const toMakaiLoop = (symbol: string, network: NetworkType | undefined) =>
+  evmOnly(`${MAKAI}?asset=${symbol}`, network)
 
 export const SORRY = '/sorry'
 export const sorryFor = (reason: SorryReason) => `${SORRY}?reason=${reason}`

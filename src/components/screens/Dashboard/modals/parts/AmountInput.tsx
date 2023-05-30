@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro'
 import { asStyled } from 'src/components/hoc/asStyled'
 import { ScalingInput } from 'src/components/parts/Input'
-import { offWhite, trueBlack } from 'src/styles/colors'
+import { offWhite } from 'src/styles/colors'
 import { fontWeightBold } from 'src/styles/font'
 import { breakpoint } from 'src/styles/mixins'
 import { parseInput } from 'src/utils/number'
@@ -110,9 +110,6 @@ const Control = styled.div`
   }
   @media ${breakpoint.xl} {
     font-size: 16px;
-    input:checked + div {
-      color: ${trueBlack};
-    }
   }
 `
 
@@ -135,10 +132,5 @@ const InputDiv = styled.div`
     top: 50%;
     transform: translateY(-50%);
     right: 32px;
-  }
-  @media ${breakpoint.xl} {
-    ${ScalingInput} {
-      color: ${trueBlack};
-    }
   }
 `

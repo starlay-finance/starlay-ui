@@ -9,7 +9,7 @@ import { useMarketData } from 'src/hooks/useMarketData'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useSwitchChainIfUnsupported } from 'src/hooks/useUnsupportedChainAlert'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
-import { trueBlack } from 'src/styles/colors'
+import { offWhite } from 'src/styles/colors'
 import { fontWeightMedium, fontWeightSemiBold } from 'src/styles/font'
 import { BN_ZERO, formatAmt, formatUSD } from 'src/utils/number'
 import styled from 'styled-components'
@@ -102,7 +102,7 @@ const SummaryDiv = styled.div`
     p:nth-of-type(1) {
       margin-top: 16px;
       font-size: 24px;
-      color: ${trueBlack};
+      color: ${offWhite};
     }
     p:nth-of-type(2) {
       font-size: 14px;

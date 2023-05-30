@@ -34,6 +34,7 @@ export const breakpoint = {
   xxl: `screen and (min-width:${size.xxl}px)`,
   lts: `screen and (max-width:${size.s - 1}px)`,
   ltxs: `screen and (max-width:${size.xs - 1}px)`,
+  ltxl: `screen and (max-width:${size.xl - 1}px)`,
 }
 export const notTouchable = `only screen and (hover: hover) and (pointer: fine)`
 

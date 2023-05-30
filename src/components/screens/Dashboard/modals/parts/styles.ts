@@ -1,5 +1,4 @@
 import { SimpleCtaButton } from 'src/components/parts/Cta'
-import { cream } from 'src/styles/colors'
 import { fontWeightRegular, fontWeightSemiBold } from 'src/styles/font'
 import { breakpoint } from 'src/styles/mixins'
 import styled from 'styled-components'
@@ -15,12 +14,6 @@ export const ContentDiv = styled.div`
   padding-top: 32px;
   ${Tab} {
     margin-top: 32px;
-  }
-  ${AmountInput} {
-    input {
-      font-size: 20px !important;
-      width: 240px !important;
-    }
   }
   ${SimpleCtaButton} {
     margin-top: 16px;
@@ -43,18 +36,21 @@ export const ContentDiv = styled.div`
     ${Tab} {
       margin-top: 48px;
     }
-    input {
-      font-size: unset;
-      width: unset;
-    }
     ${Action} {
       padding: 32px;
       font-size: 18px;
-      background-color: ${cream};
     }
     ${SimpleCtaButton},
     ${Balance} {
       margin-top: 32px;
+    }
+  }
+  @media ${breakpoint.ltxl} {
+    ${AmountInput} {
+      input {
+        font-size: 20px !important;
+        width: 240px !important;
+      }
     }
   }
 `

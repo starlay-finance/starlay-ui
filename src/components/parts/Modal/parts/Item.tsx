@@ -1,12 +1,6 @@
 import { IconArrowRight } from 'src/assets/svgs'
 import { asStyled } from 'src/components/hoc/asStyled'
-import {
-  darkPurple,
-  lightPurple,
-  offWhite,
-  purple,
-  trueBlack,
-} from 'src/styles/colors'
+import { darkPurple, lightPurple, offWhite, purple } from 'src/styles/colors'
 import { breakpoint, flexCenter } from 'src/styles/mixins'
 import styled, { keyframes } from 'styled-components'
 import { ItemLabel, ItemLabelProps } from './ItemLabel'
@@ -95,8 +89,5 @@ export const ItemDiv = styled.div`
   }
   @media ${breakpoint.xl} {
     padding: 24px 0;
-    > div:last-child {
-      color: ${trueBlack};
-    }
   }
 `
