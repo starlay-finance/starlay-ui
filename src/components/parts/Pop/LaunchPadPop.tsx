@@ -26,7 +26,7 @@ const DATE_FORMAT = 'HH:mm z on MMM DD'
 export const LaunchPadPopContent: FC<{ data: LaunchPadPopData }> = ({
   data: { id, projectName, token, sale },
 }) => (
-  <a href={toLaunchpad(id)} target="_blank" rel="noreferrer">
+  <a href={toLaunchpad(id, 'EVM')!} target="_blank" rel="noreferrer">
     <PopDiv>
       <Background />
       <Content>

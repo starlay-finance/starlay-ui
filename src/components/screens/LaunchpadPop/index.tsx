@@ -14,7 +14,7 @@ export const LaunchpadPop: FC<{ data: ProjectData }> = ({
 }) => (
   <>
     <Styles />
-    <a href={toLaunchpad(id)} target="_blank" rel="noreferrer">
+    <a href={toLaunchpad(id, 'EVM')!} target="_blank" rel="noreferrer">
       <PopDiv>
         <Background icon={icon} />
         <Content>
