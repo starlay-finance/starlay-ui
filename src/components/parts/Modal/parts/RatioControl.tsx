@@ -8,7 +8,6 @@ import {
   darkPurple,
   offWhite,
   purple,
-  trueBlack,
   trueWhite,
 } from 'src/styles/colors'
 import { Color } from 'src/styles/types'
@@ -95,6 +94,7 @@ export const RatioControl = asStyled<RatioControlProps>(
                   return (
                     <RatioCheckBox key={value} $checked={checked}>
                       <input
+                        type="radio"
                         onClick={() => setValue(valueToBigNumber(value))}
                         disabled={disabled || max.lt(value)}
                       />
@@ -160,7 +160,7 @@ export const RatioControl = asStyled<RatioControlProps>(
 )`
   margin-top: 24px;
   height: 96px;
-  border-bottom: 1px solid ${trueBlack}3a;
+  border-bottom: 1px solid ${offWhite}3a;
 `
 const barometerStyle = css`
   height: 4px;
@@ -181,6 +181,9 @@ const RatioCheckBox = styled.label<{
         background-color: ${darkPurple};
       }
     `}
+  input {
+    font-size: 16px;
+  }
 `
 
 const CustomRatioButton = styled.button<{ $selected?: boolean }>`

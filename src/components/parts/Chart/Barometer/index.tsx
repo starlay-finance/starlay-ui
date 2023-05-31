@@ -92,7 +92,8 @@ const BarometerFigure = styled.figure<BarometerFigureProps>`
     position: absolute;
     inset: 0;
     margin-top: -6px;
-    height: 16px;
+    height: 24px;
+    padding: 4px 0;
     cursor: pointer;
     :disabled {
       cursor: not-allowed;
