@@ -1,4 +1,5 @@
 import { FC, ReactNode } from 'react'
+import { isMobileSafari, isSafari } from 'react-device-detect'
 import { flexCenter } from 'src/styles/mixins'
 import { Color } from 'src/styles/types'
 import styled from 'styled-components'
@@ -37,7 +38,7 @@ export const DonutChart = styled<FC<DonutChartProps & { className?: string }>>(
                 strokeWidth="4"
                 fill="none"
                 strokeDasharray={CIRCUMFERENCE}
-                strokeDashoffset={-CIRCUMFERENCE * (1 - ratio)}
+                strokeDashoffset={Math.floor(-CIRCUMFERENCE * (1 - ratio))}
                 stroke-mitterlimit="0"
               />
             </svg>
@@ -56,6 +57,7 @@ type DonutChart2Props = {
 export const DonutChart2 = styled<
   FC<DonutChart2Props & { className?: string }>
 >(({ elements, children, className }) => {
+  console.log(isSafari, isMobileSafari)
   return (
     <DonutChartDiv className={className}>
       <ElementsDiv>
@@ -71,9 +73,9 @@ export const DonutChart2 = styled<
                 strokeWidth="4"
                 fill="none"
                 strokeDasharray={CIRCUMFERENCE}
-                strokeDashoffset={
-                  -CIRCUMFERENCE * (1 - ratio) * (idx === 0 ? 1 : -1)
-                }
+                strokeDashoffset={Math.floor(
+                  CIRCUMFERENCE * (1 - ratio * (idx === 0 ? -1 : 1)),
+                )}
                 stroke-mitterlimit="0"
               />
             </svg>
