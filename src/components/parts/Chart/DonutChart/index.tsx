@@ -1,5 +1,4 @@
 import { FC, ReactNode } from 'react'
-import { isMobileSafari, isSafari } from 'react-device-detect'
 import { flexCenter } from 'src/styles/mixins'
 import { Color } from 'src/styles/types'
 import styled from 'styled-components'
@@ -57,7 +56,6 @@ type DonutChart2Props = {
 export const DonutChart2 = styled<
   FC<DonutChart2Props & { className?: string }>
 >(({ elements, children, className }) => {
-  console.log(isSafari, isMobileSafari)
   return (
     <DonutChartDiv className={className}>
       <ElementsDiv>
