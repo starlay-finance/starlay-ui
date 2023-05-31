@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro'
-import { a, useSpringRef, useTransition } from '@react-spring/web'
+import { a, useSpring, useSpringRef, useTransition } from '@react-spring/web'
+import { useDrag } from '@use-gesture/react'
 import { FC, ReactNode, useEffect } from 'react'
 import {
   IconClose,
@@ -18,6 +19,7 @@ import { DISCORD, GITHUB, MEDIUM, TWITTER } from 'src/utils/routes'
 import { Z_MODAL } from 'src/utils/zIndex'
 import styled, { css, keyframes } from 'styled-components'
 
+const SWIPEOUT_PX = 150
 export type MenuProps = {
   isOpen: boolean
   close: VoidFunction
@@ -68,8 +70,22 @@ export const MobileMenu: FC<
     transRef.start()
   }, [index])
 
+  const [{ x }, api] = useSpring(() => ({
+    x: 0,
+    config: { bounce: 0 },
+  }))
+  const bind = useDrag(
+    ({ last, velocity: [vx], direction: [dx], movement: [mx], cancel }) => {
+      if (!back) return
+      if (mx < 0) cancel()
+      if (last) mx > SWIPEOUT_PX || (vx > 0.5 && dx > 0) ? back() : undefined
+      else api.start({ x: mx, immediate: true })
+    },
+    { from: () => [x.get(), 0], filterTaps: true, rubberband: true },
+  )
+
   return (
-    <MenuContainer isOpen={isOpen}>
+    <MenuContainer isOpen={isOpen} {...(back ? bind() : {})}>
       <TransitionContainer>
         {transitions((style, i) => {
           const { content, header: Header } = items[i]
