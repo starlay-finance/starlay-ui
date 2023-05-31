@@ -22,7 +22,7 @@ import styled, { css } from 'styled-components'
 import { useLoopingModal } from './modals/LoopingModal'
 
 const COLUMNS = [
-  { id: 'asset', name: t`Asset`, widthRatio: 3 },
+  { id: 'asset', name: t`Asset`, widthRatio: 4 },
   { id: 'makaiAPR', name: t`Makai APR`, widthRatio: 3 },
   { id: 'wallet', name: t`Wallet_Balance`, widthRatio: 5 },
 ]

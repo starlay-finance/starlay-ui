@@ -1,4 +1,5 @@
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { COMMON_SEO_DATA } from 'src/constants/seo'
 import { getNetworkConfigEVM } from 'src/libs/config'
 import { DEFAULT_CHAIN_ID } from 'src/utils/env'
 import { EVMWalletConnector } from '../types'
@@ -11,6 +12,12 @@ const connector = new WalletConnectConnector({
     // config.privateJsonRPCUrl ||
   },
   supportedChainIds: [DEFAULT_CHAIN_ID],
+  clientMeta: {
+    url: COMMON_SEO_DATA.siteUrl!,
+    name: COMMON_SEO_DATA.siteTitle!,
+    description: COMMON_SEO_DATA.description!,
+    icons: [`${COMMON_SEO_DATA.siteUrl}/${COMMON_SEO_DATA.image}`],
+  },
 })
 const beforeConnect = async () => {
   localStorage.removeItem('walletconnect')
