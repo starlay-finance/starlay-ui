@@ -84,6 +84,6 @@ const Header = styled.div<{ headerStyle?: SimpleInterpolation }>`
 `
 
 const Body = styled.div`
-  max-height: 64vh;
+  max-height: 75vh;
   overflow: auto;
 `
