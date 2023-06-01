@@ -31,7 +31,7 @@ export const useSwipeable = ({ close }: useSwipeableParams) => {
     }) => {
       if (!close) return
       if (my < 0) cancel()
-      if (last) my > SWIPEOUT_PX || (vy > 0.5 && dy > 0) ? close() : open()
+      if (last) my > SWIPEOUT_PX || (vy > 0.8 && dy > 0) ? close() : open()
       else api.start({ y: my, immediate: true })
     },
     { from: () => [0, y.get()], filterTaps: true, rubberband: true },
