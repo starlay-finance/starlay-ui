@@ -7,10 +7,7 @@ import { Color } from 'src/styles/types'
 import { disablePageScroll, enablePageScroll } from 'src/utils/handleScroll'
 import { Z_MODAL } from 'src/utils/zIndex'
 import styled, { css } from 'styled-components'
-import {
-  SwipeableContextProvider,
-  SwipeableModalContainer,
-} from './SwipeableModalContainer'
+import { SwipeableModalContainer } from './SwipeableModalContainer'
 
 export const ResponsiveModalContainer = forwardRef<
   ModalHandler,
@@ -23,14 +20,10 @@ export const ResponsiveModalContainer = forwardRef<
       enablePageScroll()
     }
   }, [props.isOpen])
-  return (
-    <SwipeableContextProvider>
-      {isMobile ? (
-        <SwipeableModalContainer {...props} ref={ref} />
-      ) : (
-        <DefaultModalContainer {...props} ref={ref} />
-      )}
-    </SwipeableContextProvider>
+  return isMobile ? (
+    <SwipeableModalContainer {...props} ref={ref} />
+  ) : (
+    <DefaultModalContainer {...props} ref={ref} />
   )
 })
 export const DefaultModalContainer = forwardRef<
