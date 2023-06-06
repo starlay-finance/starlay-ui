@@ -10,22 +10,23 @@ export const DefaultModalContent: FC<{
   headerStyle?: SimpleInterpolation
   bodyNode: ReactNode
   closeModal?: VoidFunction
-}> = ({ headerNode, headerStyle, bodyNode, closeModal }) => (
-  <Content>
-    {headerNode && (
-      <Header headerStyle={headerStyle}>
-        {headerNode}
-        {closeModal && (
-          <button onClick={closeModal}>
-            <IconClose />
-          </button>
-        )}
-      </Header>
-    )}
-    <Body>{bodyNode}</Body>
-  </Content>
-)
-
+}> = ({ headerNode, headerStyle, bodyNode, closeModal }) => {
+  return (
+    <Content>
+      {headerNode && (
+        <Header headerStyle={headerStyle}>
+          {headerNode}
+          {closeModal && (
+            <button onClick={closeModal}>
+              <IconClose />
+            </button>
+          )}
+        </Header>
+      )}
+      <Body>{bodyNode}</Body>
+    </Content>
+  )
+}
 const Content = styled.div`
   width: 100%;
   margin: 0 auto;
@@ -83,7 +84,4 @@ const Header = styled.div<{ headerStyle?: SimpleInterpolation }>`
   }
 `
 
-const Body = styled.div`
-  max-height: 75vh;
-  overflow: auto;
-`
+const Body = styled.div``

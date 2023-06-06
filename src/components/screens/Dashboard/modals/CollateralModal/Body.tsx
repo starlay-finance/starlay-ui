@@ -66,7 +66,10 @@ export const CollateralModalBody: FC<CollateralModalBodyProps> = ({
         onChangeActiveTab={() => {}}
       />
       <Action>
-        <NumberItems>
+        <NumberItems
+          onPointerMove={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+        >
           <NumberItemWithDiff
             label={t`Collateral_Amount`}
             current={totalCollateralInUSD}

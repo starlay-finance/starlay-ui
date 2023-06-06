@@ -117,7 +117,10 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
         onChangeActiveTab={setActiveTab}
       />
       <Action>
-        <NumberItems>
+        <NumberItems
+          onPointerMove={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+        >
           <NumberItem
             label={t`Borrow APY`}
             num={variableBorrowAPY}

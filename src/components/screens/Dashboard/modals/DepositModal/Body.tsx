@@ -114,7 +114,10 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
         onChangeActiveTab={setActiveTab}
       />
       <Action>
-        <NumberItems>
+        <NumberItems
+          onPointerMove={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+        >
           <NumberItem
             label={t`Deposit APY`}
             num={depositAPY}

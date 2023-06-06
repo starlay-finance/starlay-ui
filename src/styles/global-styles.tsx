@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { createGlobalStyle } from 'styled-components'
 import { primary, purple, trueBlack } from './colors'
 import { fontFamily, fontWeightRegular } from './font'
-import { contentMaxWidthCssVar, noScrollbar } from './mixins'
+import { contentMaxWidthCssVar, iosLikeScrollBar } from './mixins'
 
 export const GlobalStyles = () => {
   const [ready, setReady] = useState(false)
@@ -37,14 +37,14 @@ const Styles: any = createGlobalStyle<{ ready: boolean }>`
         flex: 1;
       }
     }
-    div {
-      ${noScrollbar};
-    }
     a {
       transition: all 0.15s ease-in;
       :hover {
         color: ${purple};
       }
+    }
+    &, *{ 
+      ${iosLikeScrollBar};
     }
   }
 `

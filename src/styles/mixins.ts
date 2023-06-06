@@ -1,5 +1,5 @@
 import { css } from 'styled-components'
-import { darkRed, lightYellow, purple, skyBlue } from './colors'
+import { darkGray, darkRed, lightYellow, purple, skyBlue } from './colors'
 
 export const contentMaxWidthCssVar = '--content-max-width'
 
@@ -55,3 +55,22 @@ export const makaiHoverGradients = [
   `${skyBlue}3d`,
   `${darkRed}3d`,
 ]
+
+export const iosLikeScrollBar = css`
+  ::-webkit-scrollbar-track {
+    border-radius: 99px;
+    width: 10px;
+    margin: 1px 0;
+  }
+  ::-webkit-scrollbar {
+    width: 3px;
+    border-radius: 99px;
+    scrollbar-width: thin;
+  }
+  ::-webkit-scrollbar-thumb {
+    width: 3px;
+    border-radius: 99px;
+    background-color: ${darkGray};
+    scrollbar-width: thin;
+  }
+`
