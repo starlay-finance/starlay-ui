@@ -84,4 +84,9 @@ const Header = styled.div<{ headerStyle?: SimpleInterpolation }>`
   }
 `
 
-const Body = styled.div``
+const Body = styled.div`
+  @media ${breakpoint.xl} {
+    max-height: 82vh;
+    overflow: auto;
+  }
+`

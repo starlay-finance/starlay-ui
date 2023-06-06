@@ -77,5 +77,4 @@ const Contents = styled.div`
   margin: 0 24px;
   width: 100%;
   position: relative;
-  overflow: auto;
 `
