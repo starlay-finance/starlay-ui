@@ -25,8 +25,8 @@ export const MAKAI = '/app/makai'
 export const LAY_VELAY = '/app/lay'
 export const LAUNCHPAD = '/app/launchpad'
 export const SWAP = ARTHSWAP_SWAP_URL
-export const GOVERNANCE = ''
-export const GOVERNANCE_OVERVIEW = ''
+export const GOVERNANCE = 'https://forum.starlay.finance/'
+export const SNAPSHOT = 'https://snapshot.org/#/starlay.eth'
 export const BUG_BOUNTY = ''
 export const SUPPORT = DISCORD
 
