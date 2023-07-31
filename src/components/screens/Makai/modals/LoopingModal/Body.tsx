@@ -11,7 +11,7 @@ import {
 import { RatioControl } from 'src/components/parts/Modal/parts/RatioControl'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { blue, darkRed, lightYellow, purple } from 'src/styles/colors'
-import { estimateLooping, EstimationParam } from 'src/utils/estimationHelper'
+import { EstimationParam, estimateLooping } from 'src/utils/estimationHelper'
 import {
   BN_ONE,
   BN_ZERO,
@@ -159,11 +159,11 @@ export const LoopingModalBody: FC<LoopingModalBodyProps> = ({
           }
           disabled={
             isLooping &&
-            (asset.symbol === 'aUSD' || !!estimation.unavailableReason)
+            (asset.symbol === 'aSEED' || !!estimation.unavailableReason)
           }
         >
           {isLooping
-            ? asset.symbol === 'aUSD'
+            ? asset.symbol === 'aSEED'
               ? t`Suspended`
               : estimation.unavailableReason || t`Start loops`
             : t`Close loops`}

@@ -12,16 +12,16 @@ import { ASSETS_DICT } from 'src/constants/assets'
 import { darkPurple, purple, trueWhite } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import {
+  EstimationParam,
   estimateDeposit,
   estimateWithdrawal,
-  EstimationParam,
 } from 'src/utils/estimationHelper'
 import {
   formatAmt,
   formatAmtShort,
   formatPct,
-  formattedToBigNumber,
   formatUSD,
+  formattedToBigNumber,
 } from 'src/utils/number'
 import { DOCS_RISK } from 'src/utils/routes'
 import styled from 'styled-components'
@@ -162,9 +162,11 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
         {activeTab === 'deposit' ? (
           <SimpleCtaButton
             onClick={() => deposit(depositAmountBn!)}
-            disabled={asset.symbol === 'aUSD' || !!estimation.unavailableReason}
+            disabled={
+              asset.symbol === 'aSEED' || !!estimation.unavailableReason
+            }
           >
-            {asset.symbol === 'aUSD'
+            {asset.symbol === 'aSEED'
               ? t`Suspended`
               : estimation.unavailableReason || t`Deposit`}
           </SimpleCtaButton>
