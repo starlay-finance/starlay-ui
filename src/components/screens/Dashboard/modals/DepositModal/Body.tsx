@@ -170,9 +170,11 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
         {activeTab === 'deposit' ? (
           <SimpleCtaButton
             onClick={() => deposit(depositAmountBn!)}
-            disabled={asset.symbol === 'aUSD' || !!estimation.unavailableReason}
+            disabled={
+              asset.symbol === 'aSEED' || !!estimation.unavailableReason
+            }
           >
-            {asset.symbol === 'aUSD'
+            {asset.symbol === 'aSEED'
               ? t`Suspended`
               : estimation.unavailableReason || t`Deposit`}
           </SimpleCtaButton>

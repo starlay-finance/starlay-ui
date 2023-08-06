@@ -166,9 +166,11 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
         {activeTab === 'borrow' ? (
           <SimpleCtaButton
             onClick={() => borrow(valueToBigNumber(borrowingAmountBn!))}
-            disabled={asset.symbol === 'aUSD' || !!estimation.unavailableReason}
+            disabled={
+              asset.symbol === 'aSEED' || !!estimation.unavailableReason
+            }
           >
-            {asset.symbol === 'aUSD'
+            {asset.symbol === 'aSEED'
               ? t`Suspended`
               : estimation.unavailableReason || t`Borrow`}
           </SimpleCtaButton>

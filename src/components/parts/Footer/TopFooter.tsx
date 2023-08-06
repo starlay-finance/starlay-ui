@@ -17,9 +17,10 @@ import {
   DISCORD,
   DOCS,
   GITHUB,
-  GOVERNANCE_OVERVIEW,
+  GOVERNANCE,
   MEDIA_KIT,
   MEDIUM,
+  SNAPSHOT,
   TWITTER,
 } from 'src/utils/routes'
 import styled from 'styled-components'
@@ -50,7 +51,8 @@ export const TopFooter = asStyled(({ className }) => (
         <NavItem>
           <LinksHeading>{t`Governance`}</LinksHeading>
           <TextLinks>
-            <Link href={GOVERNANCE_OVERVIEW}>{t`Overview`}</Link>
+            <Link href={GOVERNANCE}>{t`Forum`}</Link>
+            <Link href={SNAPSHOT}>{t`Vote`}</Link>
           </TextLinks>
         </NavItem>
         <NavItem>

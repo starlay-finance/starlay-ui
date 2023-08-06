@@ -170,11 +170,11 @@ export const LoopingModalBody: FC<LoopingModalBodyProps> = ({
           }
           disabled={
             isLooping &&
-            (asset.symbol === 'aUSD' || !!estimation.unavailableReason)
+            (asset.symbol === 'aSEED' || !!estimation.unavailableReason)
           }
         >
           {isLooping
-            ? asset.symbol === 'aUSD'
+            ? asset.symbol === 'aSEED'
               ? t`Suspended`
               : estimation.unavailableReason || t`Start loops`
             : t`Close loops`}
