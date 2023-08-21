@@ -23,6 +23,8 @@
   "dependencies": {
     "@lingui/macro": "^3.17.2",
     "@lingui/react": "^3.17.2",
+    "@safe-global/safe-apps-provider": "^0.18.0",
+    "@safe-global/safe-apps-sdk": "^8.1.0",
     "@starlay-finance/contract-helpers": "0.0.18",
     "@starlay-finance/math-utils": "0.0.18",
     "@web3-react/core": "^6.1.9",
