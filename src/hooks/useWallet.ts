@@ -3,7 +3,13 @@ import { ethers } from 'ethers'
 import { useCallback, useEffect, useMemo } from 'react'
 import { ChainId } from 'src/libs/config'
 import { getChainInfo } from 'src/libs/config/chain'
-import { getConnector, metamask, WalletType } from 'src/libs/wallet-provider'
+import {
+  getConnector,
+  safeConnector,
+  matchIsInSafeAppContext,
+  metamask,
+  WalletType,
+} from 'src/libs/wallet-provider'
 import { EthereumAddress } from 'src/types/web3'
 import { useSWRLocal } from './base/useSWRLocal'
 
@@ -62,9 +68,30 @@ export const useWallet = (): WalletInterface => {
   }, [library, activeWallet, connect, disconnect])
 
   useEffect(() => {
-    if (!connect || activeWallet?.type === 'Metamask') return
+    if (!connect || activeWallet?.type !== undefined) return
     metamask.connectIfAuthorized(connect)
   }, [connect, activeWallet])
+
+  useEffect(() => {
+    if (activeWallet?.type === 'Safe') return undefined
+
+      ;
+    (async () => {
+      try {
+        const isInSafeAppContext = await matchIsInSafeAppContext()
+        if (isInSafeAppContext) {
+          if (activeWallet?.onDisconnect !== undefined) {
+            activeWallet.onDisconnect()
+          }
+
+          await activate(safeConnector, undefined, true)
+          await mutateActiveWallet({ type: 'Safe', onDisconnect: safeConnector.deactivate })
+        }
+      } catch (error) {
+        console.error('Error occurred on trying to connect Safe', error)
+      }
+    })()
+  }, [activate, activeWallet])
 
   return {
     error,
