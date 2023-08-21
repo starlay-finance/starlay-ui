@@ -1,6 +1,7 @@
 {
-  "name": "Starlay",
+  "name": "Starlay Finance",
   "short_name": "Starlay",
+  "description": "Low Risk Farming on Astar Network - Starlay Finance is the largest lending protocol in the Polkadot ecosystem.",
   "icons": [
     {
       "src": "/assets/favicons/android-chrome-192x192.png",
