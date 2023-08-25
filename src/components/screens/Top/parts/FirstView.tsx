@@ -13,12 +13,15 @@ import { fontWeightRegular, fontWeightSemiBold } from 'src/styles/font'
 import { breakpoint, contentMaxWidthCssVar } from 'src/styles/mixins'
 import { APP, DOCS } from 'src/utils/routes'
 import styled from 'styled-components'
+import { useMatchIsInSafeAppContext } from 'src/hooks/useMatchIsInSafeAppContext'
 import { contentAnimation, headingAnimation } from './animation'
 import { Assets } from './Assets'
 import { AssetsMobile } from './AssetsMobile'
 
 export const FirstView = asStyled(({ className }) => {
   const { open } = useMessageModalGradient()
+  const isInSafeAppContext = useMatchIsInSafeAppContext()
+
   return (
     <FirstViewSection className={className}>
       <Content>
@@ -28,7 +31,7 @@ export const FirstView = asStyled(({ className }) => {
         <div>
           <SubTitle>{t`The largest lending protocol in the Polkadot ecosystem`}</SubTitle>
           <Control>
-            <GradientCtaLink href={APP} newTab>{t`Launch App`}</GradientCtaLink>
+            <GradientCtaLink href={APP} newTab={!isInSafeAppContext}>{t`Launch App`}</GradientCtaLink>
             <GradientCtaButton
               onClick={() =>
                 open({
