@@ -3,13 +3,15 @@ import { metamaskConnector } from './providers/metamask'
 import { WalletType } from './types'
 
 export * as metamask from './providers/metamask'
+export * from './providers/safe'
 export * from './types'
 
 export const getConnector = (type: WalletType) => {
   switch (type) {
     case 'Metamask':
-    default:
       return metamaskConnector
+    default:
+      throw new Error(`Unexpected WalletType - ${type}`)
   }
 }
 
