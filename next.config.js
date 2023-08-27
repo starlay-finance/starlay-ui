@@ -20,6 +20,15 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: 'frame-ancestors https://safe.astar.network',
+          },
+        ],
+      },
     ]
   },
   webpack: (config, options) => {
