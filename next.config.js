@@ -25,7 +25,8 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: 'frame-ancestors https://safe.astar.network',
+            value:
+              'frame-ancestors https://safe.astar.network https://staging-safe.astar.network',
           },
         ],
       },
