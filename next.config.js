@@ -21,6 +21,31 @@ const nextConfig = {
     },
     { source: '/app/makai', destination: '/app/evm/makai', permanent: true },
   ],
+  headers: async () => {
+    return [
+      {
+        source: '/manifest.json',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET' },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'X-Requested-With, content-type, Authorization',
+          },
+        ],
+      },
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value:
+              'frame-ancestors https://safe.astar.network https://staging-safe.astar.network',
+          },
+        ],
+      },
+    ]
+  },
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.svg$/,

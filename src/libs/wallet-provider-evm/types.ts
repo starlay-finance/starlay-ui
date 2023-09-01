@@ -1,6 +1,6 @@
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
-export type EVMWalletType = 'Metamask' | 'WalletConnect'
+export type EVMWalletType = 'Metamask' | 'WalletConnect' | 'Safe'
 
 export type EVMWalletConnector<
   T extends AbstractConnector = AbstractConnector,

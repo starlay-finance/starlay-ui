@@ -30,6 +30,8 @@
     "@polkadot/keyring": "^11.0.1",
     "@polkadot/wasm-crypto": "^7.0.2",
     "@react-spring/web": "^9.7.2",
+    "@safe-global/safe-apps-provider": "^0.18.0",
+    "@safe-global/safe-apps-sdk": "^8.1.0",
     "@starlay-finance/contract-helpers": "0.0.18",
     "@starlay-finance/math-utils": "0.0.18",
     "@use-gesture/react": "^10.2.27",

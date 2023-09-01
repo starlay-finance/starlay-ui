@@ -7,7 +7,9 @@ import { getEVMChainInfo } from 'src/libs/config/chain'
 import {
   EVMWalletType,
   getConnector,
+  matchIsInSafeAppContext,
   metamask,
+  safeConnector,
 } from 'src/libs/wallet-provider-evm'
 import { EthereumAddress } from 'src/types/web3'
 import {
@@ -82,16 +84,37 @@ export const useEVMWallet = (
   )
 
   useEffect(() => {
-    if (!isNetworkActive || (library && activeWallet?.type !== 'Metamask'))
-      return
+    if (library && activeWallet?.type !== 'Metamask') return
     metamask.addListenersOnConnected(connect, disconnect)
     return metamask.removeAllListeners
-  }, [isNetworkActive, library, activeWallet, connect, disconnect])
+  }, [library, activeWallet, connect, disconnect])
 
   useEffect(() => {
-    if (!isNetworkActive || !connect) return
+    if (!connect || activeWallet?.type !== undefined) return
     metamask.connectIfAuthorized(connect)
-  }, [isNetworkActive, connect, activeWallet])
+  }, [connect, activeWallet])
+
+  useEffect(() => {
+    if (activeWallet?.type === 'Safe') return undefined
+    ;(async () => {
+      try {
+        const isInSafeAppContext = await matchIsInSafeAppContext()
+        if (isInSafeAppContext) {
+          if (activeWallet?.onDisconnect !== undefined) {
+            activeWallet.onDisconnect()
+          }
+
+          await activate(safeConnector, undefined, true)
+          await mutateActiveWallet({
+            type: 'Safe',
+            onDisconnect: safeConnector.deactivate,
+          })
+        }
+      } catch (error) {
+        console.error('Error occurred on trying to connect Safe', error)
+      }
+    })()
+  }, [activate, activeWallet])
 
   return {
     error,

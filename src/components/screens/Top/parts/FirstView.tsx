@@ -7,6 +7,7 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { GradientCtaLink } from 'src/components/parts/Cta'
 import { ASSETS } from 'src/constants/assets'
 import { TOP_ASSETS } from 'src/constants/top'
+import { useMatchIsInSafeAppContext } from 'src/hooks/useMatchIsInSafeAppContext'
 import { secondary } from 'src/styles/colors'
 import { fontWeightRegular, fontWeightSemiBold } from 'src/styles/font'
 import { breakpoint, contentMaxWidthCssVar } from 'src/styles/mixins'
@@ -17,6 +18,8 @@ import { AssetsMobile } from './AssetsMobile'
 import { contentAnimation, headingAnimation } from './animation'
 
 export const FirstView = asStyled(({ className }) => {
+  const isInSafeAppContext = useMatchIsInSafeAppContext()
+
   return (
     <FirstViewSection className={className}>
       <Content>
@@ -26,7 +29,7 @@ export const FirstView = asStyled(({ className }) => {
         <div>
           <SubTitle>{t`The largest lending protocol in the Polkadot ecosystem`}</SubTitle>
           <Control>
-            <GradientCtaLink href={APP} newTab>{t`Launch App`}</GradientCtaLink>
+            <GradientCtaLink href={APP} newTab={!isInSafeAppContext}>{t`Launch App`}</GradientCtaLink>
             <Link href={DOCS}>
               {t`Explore the docs`} <IconArrowRight />
             </Link>

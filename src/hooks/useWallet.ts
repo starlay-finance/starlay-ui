@@ -59,7 +59,6 @@ export const useWallet = (defaultNetwork?: NetworkType): WalletAdaptor => {
       wallet: polkadotWallet,
       connect,
     }
-
   return {
     networkType,
     account: evmWallet.account,

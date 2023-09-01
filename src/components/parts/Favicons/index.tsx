@@ -19,7 +19,7 @@ export const Favicons = () => (
       sizes="16x16"
       href="/assets/favicons/favicon-16x16.png"
     />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="manifest" href="/manifest.json" />
     <link
       rel="mask-icon"
       href="/assets/favicons/safari-pinned-tab.svg"
