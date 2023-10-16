@@ -82,6 +82,7 @@ const requestSwitchChain = ({
       onSuccess && onSuccess()
       return
     }
+    if (error === 'duplicate_request') return
     openMessageModal({
       title: t`Failed to switch the chain`,
       message: error,

@@ -1,5 +1,6 @@
 import { SubmittableExtrinsic } from '@polkadot/api/types'
 import { waitReady } from '@polkadot/wasm-crypto'
+import { Web3ReactProvider } from '@web3-react/core'
 import { FC, ReactElement, useCallback, useEffect, useState } from 'react'
 import { ModalPortal } from 'src/hooks/useModal'
 import { usePolkadotWallet } from 'src/hooks/usePolkadotWallet'
@@ -9,6 +10,7 @@ import { getNetworkConfigPolkadot } from 'src/libs/config'
 import { DataProviderPolkadot } from 'src/libs/data-provider-polkadot'
 import { FaucetPolkadot } from 'src/libs/faucet-polkadot'
 import { LendingPoolPolkadot } from 'src/libs/lending-pool-polkadot'
+import { metamaskConnector } from 'src/libs/wallet-provider-evm/providers/metamask'
 import { DataProvider, Faucet, LendingPool, TxItem } from 'src/types/starlay'
 import useSWRImmutable from 'swr/immutable'
 import { executeTx } from './utils'
@@ -69,10 +71,12 @@ export const StarlayContextProviderPolkadot: FC<{
 }
 
 export const PolkadotPageLayout = (page: ReactElement) => (
-  <StarlayContextProviderPolkadot>
-    <>
-      {page}
-      <ModalPortal />
-    </>
-  </StarlayContextProviderPolkadot>
+  <Web3ReactProvider connectors={[metamaskConnector.connector]}>
+    <StarlayContextProviderPolkadot>
+      <>
+        {page}
+        <ModalPortal />
+      </>
+    </StarlayContextProviderPolkadot>
+  </Web3ReactProvider>
 )

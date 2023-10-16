@@ -8,7 +8,7 @@ import { StarlayContext } from 'src/hooks/useStarlay'
 import { useStaticRPCProviderEVM } from 'src/hooks/useStaticRPCProviderEVM'
 import { DataProviderEVM } from 'src/libs/data-provider'
 import { LendingPoolEVM } from 'src/libs/lending-pool-evm'
-import { getLibrary } from 'src/libs/wallet-provider-evm'
+import { getConnectors } from 'src/libs/wallet-provider-evm'
 import { DataProvider, LendingPool, TxItem } from 'src/types/starlay'
 import useSWRImmutable from 'swr/immutable'
 import { executeTx } from './utils'
@@ -17,7 +17,7 @@ const withWeb3ReactProvider =
   <P extends {}>(Component: FC<P>) =>
   (props: P) =>
     (
-      <Web3ReactProvider getLibrary={getLibrary}>
+      <Web3ReactProvider connectors={getConnectors()}>
         <Component {...props} />
       </Web3ReactProvider>
     )

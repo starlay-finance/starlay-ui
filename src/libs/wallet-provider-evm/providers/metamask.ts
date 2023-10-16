@@ -1,8 +1,13 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { t } from '@lingui/macro'
-import { InjectedConnector } from '@web3-react/injected-connector'
+import { initializeConnector } from '@web3-react/core'
+import { MetaMask } from '@web3-react/metamask'
 import { METAMASK_EXT_URL } from 'src/utils/routes'
 import { EVMWalletConnector, EVMWalletType } from '../types'
+
+const connector = initializeConnector<MetaMask>(
+  (actions) => new MetaMask({ actions }),
+)
 
 const beforeConnect = async () => {
   const { ethereum } = window
@@ -13,22 +18,21 @@ const beforeConnect = async () => {
   await ethereum.request({ method: 'eth_requestAccounts' })
 }
 
-const connector = new InjectedConnector({})
+const connect = () => connector[0].activate()
 
-export const metamaskConnector: EVMWalletConnector<InjectedConnector> = {
+const connectEagerly = () => connector[0].connectEagerly()
+
+export const metamaskConnector: EVMWalletConnector<MetaMask> = {
   type: 'Metamask',
   connector,
+  connect,
+  connectEagerly,
   beforeConnect,
 }
 
-export const connectIfAuthorized = (
-  connect: (type: EVMWalletType) => Promise<void>,
-) => {
-  metamaskConnector.connector.isAuthorized().then((isAuthorized) => {
-    if (!isAuthorized) return
-    connect('Metamask').catch((error) =>
-      console.error('Error occured on trying to connect MetaMask', error),
-    )
+export const connectIfAuthorized = () => {
+  metamaskConnector.connector[0].connectEagerly().catch((error) => {
+    console.error('Error occured on trying to connect MetaMask', error)
   })
 }
 
@@ -79,6 +83,8 @@ export const requestSwitchChain = async (
     return {}
   } catch (e: any) {
     if (e.code === 4902 && chainInfo) return requestAddEthereumChain(chainInfo)
+    if (e.code === -32002 && e.message?.includes('already pending'))
+      return { error: 'duplicate_request' }
     return { error: t`Your wallet needs to switch networks manually.` }
   }
 }

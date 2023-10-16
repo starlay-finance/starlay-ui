@@ -1,8 +1,11 @@
-import { EVM_CHAIN_ID } from 'src/libs/config/network'
-import { SafeConnector } from './safe-connector'
+import { initializeConnector } from '@web3-react/core'
+import { GnosisSafe } from '@web3-react/gnosis-safe'
 
 export { matchIsInSafeAppContext } from './utils'
 
-export const safeConnector = new SafeConnector({
-  supportedChainIds: [EVM_CHAIN_ID.astar],
-})
+export const safeConnector = initializeConnector<GnosisSafe>(
+  (actions) => new GnosisSafe({ actions }),
+)
+// export const safeConnector = new SafeConnector({
+//   supportedChainIds: [EVM_CHAIN_ID.astar],
+// })

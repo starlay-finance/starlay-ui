@@ -12,6 +12,7 @@ import {
   safeConnector,
 } from 'src/libs/wallet-provider-evm'
 import { EthereumAddress } from 'src/types/web3'
+import { DEFAULT_CHAIN_ID } from 'src/utils/env'
 import {
   setHasConnected,
   setLastConnectedNetwork,
@@ -23,11 +24,10 @@ type ActiveWallet = {
   onDisconnect?: VoidFunction
 }
 export type EVMWalletInterface = {
-  error: Error | undefined
   active: boolean
   chainId: number | undefined
   account: EthereumAddress | null | undefined
-  library: ethers.providers.Web3Provider | undefined
+  provider: ethers.providers.Web3Provider | undefined
   signer: ethers.providers.JsonRpcSigner | undefined
   activeWalletType: EVMWalletType | null | undefined
   connect: (type: EVMWalletType) => Promise<void>
@@ -43,56 +43,66 @@ export const useEVMWallet = (
   const { data: networkType } = useNetworkType()
   const isNetworkActive = networkType === 'EVM' || forceNetworkActive
 
-  const { library, error, account, active, chainId, activate, deactivate } =
-    useWeb3React<ethers.providers.Web3Provider>()
-
-  const signer = useMemo(() => library?.getSigner(), [library])
   const { data: activeWallet, mutate: mutateActiveWallet } = useActiveWallet()
   const { data: activeChain, mutate: mutateActiveChain } = useActiveChain()
+  const {
+    connector: [connector],
+  } = getConnector(activeWallet?.type || 'Metamask')
 
-  const connect = useCallback(
-    async (type: EVMWalletType) => {
-      const { connector, beforeConnect, onDisconnect, listen } =
-        getConnector(type)
-      if (beforeConnect) await beforeConnect()
-      await activate(
-        connector,
-        (err) => {
-          console.log(err)
-        },
-        true,
-      )
-      await mutateActiveWallet({ type, onDisconnect })
-      setLastConnectedNetwork('EVM')
-      setHasConnected('EVM')
-      if (listen) listen({ onChangeChain: mutateActiveChain })
+  const {
+    hooks: {
+      useSelectedAccount,
+      useSelectedChainId,
+      useSelectedIsActive,
+      useSelectedProvider,
     },
-    [activate],
-  )
+  } = useWeb3React<ethers.providers.Web3Provider>()
+
+  const account = useSelectedAccount(connector)
+  const chainId = useSelectedChainId(connector) || DEFAULT_CHAIN_ID
+  const active = useSelectedIsActive(connector)
+  const provider = useSelectedProvider(connector)
+
+  const signer = useMemo(() => provider?.getSigner(), [provider])
+
+  const connect = useCallback(async (type: EVMWalletType) => {
+    const { connect, beforeConnect, onDisconnect, listen } = getConnector(type)
+    if (beforeConnect) await beforeConnect()
+    await connect()
+    await mutateActiveWallet({ type, onDisconnect })
+    setLastConnectedNetwork('EVM')
+    setHasConnected('EVM')
+    if (listen) listen({ onChangeChain: mutateActiveChain })
+  }, [])
 
   const disconnect = useCallback(async () => {
-    if (activeWallet?.onDisconnect) activeWallet.onDisconnect()
+    if (!activeWallet) return
+    if (activeWallet.onDisconnect) activeWallet.onDisconnect()
+
+    const { disconnect } = getConnector(activeWallet.type)
     await mutateActiveWallet(null)
-    deactivate()
-  }, [activeWallet, deactivate])
+    if (disconnect) disconnect()
+  }, [activeWallet])
 
   const switchChain = useCallback(
     async (chainId: EVMChainId) => {
+      console.log('s')
       return metamask.requestSwitchChain(chainId, getEVMChainInfo(chainId))
     },
     [activeWallet],
   )
 
   useEffect(() => {
-    if (library && activeWallet?.type !== 'Metamask') return
+    if (provider && activeWallet?.type !== 'Metamask') return
     metamask.addListenersOnConnected(connect, disconnect)
     return metamask.removeAllListeners
-  }, [library, activeWallet, connect, disconnect])
+  }, [provider, activeWallet, connect, disconnect])
 
   useEffect(() => {
-    if (!connect || activeWallet?.type !== undefined) return
-    metamask.connectIfAuthorized(connect)
-  }, [connect, activeWallet])
+    if (!isNetworkActive || activeWallet) return
+    const { connectEagerly } = getConnector('Metamask')
+    if (connectEagerly) connectEagerly()
+  }, [activeWallet])
 
   useEffect(() => {
     if (activeWallet?.type === 'Safe') return undefined
@@ -104,24 +114,20 @@ export const useEVMWallet = (
             activeWallet.onDisconnect()
           }
 
-          await activate(safeConnector, undefined, true)
-          await mutateActiveWallet({
-            type: 'Safe',
-            onDisconnect: safeConnector.deactivate,
-          })
+          await safeConnector[0].activate()
+          await mutateActiveWallet({ type: 'Safe' })
         }
       } catch (error) {
         console.error('Error occurred on trying to connect Safe', error)
       }
     })()
-  }, [activate, activeWallet])
+  }, [activeWallet])
 
   return {
-    error,
     active,
     chainId: activeChain || chainId,
     account: account as EVMWalletInterface['account'],
-    library,
+    provider,
     signer,
     activeWalletType: activeWallet?.type,
     connect,

@@ -26,6 +26,7 @@ export type NetworkConfig<ADDRESS extends string, C extends string> = {
   privateJsonRPCWSUrl?: string
   publicJsonRPCUrl: string[]
   publicJsonRPCWSUrl?: string
+  walletConnectProjectId: string
   addresses: Record<C, ADDRESS>
   protocolDataUrl?: string
   cachingServerUrl?: string
@@ -81,6 +82,7 @@ export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
     publicJsonRPCUrl: ['https://evm.astar.network'],
     privateJsonRPCUrl:
       'https://astar.blastapi.io/b783cb07-7f1a-48dc-88fb-cedca75fafa0',
+    walletConnectProjectId: '7077959b8319331ea75408788eae93b5',
     addresses: {
       walletBalanceProvider: '0x449b5A2c9c75d77283253625C03aE6336c957a0c',
       uiPoolDataProvider: '0x97Fc9e6aFB9d7A9C9898a2b6F97Da43EB5f56331',
@@ -139,6 +141,7 @@ export const POLKADOT_NETWORK_CONFIG: Record<
     name: 'Shibuya Testnet / WASM',
     publicJsonRPCUrl: ['https://shibuya-rpc.dwellir.com'],
     publicJsonRPCWSUrl: 'wss://shibuya-rpc.dwellir.com',
+    walletConnectProjectId: '7077959b8319331ea75408788eae93b5',
     addresses: {
       lens: 'b7ZAWXs65EzkF1qnbbcARVFhB5z4WwuajzVqsKijigB4QdW',
       faucet: 'b3rWbCnVNCW9qkeGcUxafatV4TEoXBYVxf4wGbQgwyhJaZL',

@@ -1,7 +1,14 @@
-import { SafeConnector } from './safe-connector'
+const isServerSide = () => {
+  return typeof window === 'undefined'
+}
+
+const isInIframe = () => {
+  if (isServerSide()) return false
+  return window !== window.parent
+}
 
 export async function matchIsInSafeAppContext(): Promise<boolean> {
-  if (!SafeConnector.inIframe) {
+  if (!isInIframe()) {
     return false
   }
 
