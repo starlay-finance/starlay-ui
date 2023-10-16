@@ -14,6 +14,11 @@ export const connector = initializeConnector<WalletConnectV2>(
           .walletConnectProjectId,
         chains: [EVM_CHAIN_ID.astar],
         showQrModal: true,
+        rpcMap: {
+          [EVM_CHAIN_ID.astar]:
+            getNetworkConfigEVM(EVM_CHAIN_ID.astar).privateJsonRPCUrl ||
+            getNetworkConfigEVM(EVM_CHAIN_ID.astar).publicJsonRPCUrl,
+        },
       },
     }),
 )
