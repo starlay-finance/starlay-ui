@@ -2,6 +2,7 @@ import { transactionType } from '@starlay-finance/contract-helpers'
 import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { serializeError } from 'eth-rpc-errors'
 import { ethers } from 'ethers'
+import { isMobile } from 'react-device-detect'
 import { error } from 'src/hooks/useStarlay'
 import { TxItem } from 'src/types/starlay'
 import {
@@ -16,13 +17,13 @@ export const executeTx = async (
   recentGasPrice?: ethers.BigNumber,
 ) => {
   if (!signer) throw new Error('Unexpected state')
-  const gasPrice = getMultipliedGasPrice(signer, recentGasPrice)
+  const gasPrice = await getMultipliedGasPrice(signer, recentGasPrice)
   const tx = await item.tx()
   try {
     const txPromise = await signer.sendTransaction({
       ...tx,
       value: tx.value ? ethers.BigNumber.from(tx.value) : undefined,
-      gasPrice,
+      gasPrice: isMobile ? undefined : gasPrice,
     })
     return { wait: () => txPromise.wait(1) }
   } catch (e) {
