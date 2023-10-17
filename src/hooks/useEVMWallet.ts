@@ -9,7 +9,6 @@ import {
   getConnector,
   matchIsInSafeAppContext,
   metamask,
-  safeConnector,
 } from 'src/libs/wallet-provider-evm'
 import { EthereumAddress } from 'src/types/web3'
 import { DEFAULT_CHAIN_ID } from 'src/utils/env'
@@ -113,9 +112,7 @@ export const useEVMWallet = (
           if (activeWallet?.onDisconnect !== undefined) {
             activeWallet.onDisconnect()
           }
-
-          await safeConnector[0].activate()
-          await mutateActiveWallet({ type: 'Safe' })
+          connect('Safe')
         }
       } catch (error) {
         console.error('Error occurred on trying to connect Safe', error)
