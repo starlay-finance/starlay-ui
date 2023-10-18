@@ -7,19 +7,19 @@ import {
 import { ethers } from 'ethers'
 import { useMemo } from 'react'
 import { claimerContract } from 'src/libs/claimer'
-import { getNetworkConfig } from 'src/libs/config'
-import { StaticRPCProvider } from 'src/libs/pool-data-provider'
+import { getNetworkConfigEVM } from 'src/libs/config'
+import { StaticRPCProviderEVM } from 'src/libs/static-rpc-provider'
 import useSWR from 'swr'
 import useSWRImmutable from 'swr/immutable'
+import { useEVMWallet } from '../useEVMWallet'
 import { useMarketData } from '../useMarketData'
-import { useStaticRPCProvider } from '../useStaticRPCProvider'
+import { useStaticRPCProviderEVM } from '../useStaticRPCProviderEVM'
 import { useUserData } from '../useUserData'
-import { useWallet } from '../useWallet'
 import { useTxHandler } from './txHandler'
 
 export const useClaimer = () => {
-  const { data: provider } = useStaticRPCProvider()
-  const { account, signer } = useWallet()
+  const { data: provider } = useStaticRPCProviderEVM()
+  const { account, signer } = useEVMWallet()
   const { data: claimer } = useSWRImmutable(
     provider && ['claimer', provider.chainId],
     async () => init(provider!),
@@ -84,7 +84,7 @@ export const useClaimer = () => {
   }
 }
 
-const init = async (provider: StaticRPCProvider) => {
-  const { addresses } = getNetworkConfig(provider.chainId)
+const init = async (provider: StaticRPCProviderEVM) => {
+  const { addresses } = getNetworkConfigEVM(provider.chainId)
   return claimerContract(provider!, addresses.claimerAddress)
 }

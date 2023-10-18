@@ -4,22 +4,20 @@ import { IconArrowRight } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { GradientCtaButton, GradientCtaLink } from 'src/components/parts/Cta'
-import { useMessageModalGradient } from 'src/components/parts/Modal/MessageModalGradient'
+import { GradientCtaLink } from 'src/components/parts/Cta'
 import { ASSETS } from 'src/constants/assets'
 import { TOP_ASSETS } from 'src/constants/top'
+import { useMatchIsInSafeAppContext } from 'src/hooks/useMatchIsInSafeAppContext'
 import { secondary } from 'src/styles/colors'
 import { fontWeightRegular, fontWeightSemiBold } from 'src/styles/font'
 import { breakpoint, contentMaxWidthCssVar } from 'src/styles/mixins'
 import { APP, DOCS } from 'src/utils/routes'
 import styled from 'styled-components'
-import { useMatchIsInSafeAppContext } from 'src/hooks/useMatchIsInSafeAppContext'
-import { contentAnimation, headingAnimation } from './animation'
 import { Assets } from './Assets'
 import { AssetsMobile } from './AssetsMobile'
+import { contentAnimation, headingAnimation } from './animation'
 
 export const FirstView = asStyled(({ className }) => {
-  const { open } = useMessageModalGradient()
   const isInSafeAppContext = useMatchIsInSafeAppContext()
 
   return (
@@ -32,14 +30,6 @@ export const FirstView = asStyled(({ className }) => {
           <SubTitle>{t`The largest lending protocol in the Polkadot ecosystem`}</SubTitle>
           <Control>
             <GradientCtaLink href={APP} newTab={!isInSafeAppContext}>{t`Launch App`}</GradientCtaLink>
-            <GradientCtaButton
-              onClick={() =>
-                open({
-                  title: t`Sorry`,
-                  message: t`Starlay Finance does not support mobile access currently. Please connect to this website using your PC.`,
-                })
-              }
-            >{t`Launch App`}</GradientCtaButton>
             <Link href={DOCS}>
               {t`Explore the docs`} <IconArrowRight />
             </Link>
@@ -85,7 +75,7 @@ const Content = styled.div`
   position: relative;
   max-width: var(${contentMaxWidthCssVar});
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 48px;
 `
 const SubTitle = styled.p`
   margin-top: 16px;
@@ -107,9 +97,6 @@ const FirstViewSection = styled.section`
       ${headingAnimation};
       white-space: pre-wrap;
     }
-  }
-  ${GradientCtaLink} {
-    display: none;
   }
   ${SubTitle} {
     line-height: 1.75;
@@ -138,12 +125,6 @@ const FirstViewSection = styled.section`
       padding: 0;
     }
     text-align: left;
-    ${GradientCtaLink} {
-      display: block;
-    }
-    ${GradientCtaButton} {
-      display: none;
-    }
     ${SubTitle} {
       font-size: 20px;
       padding: 0;

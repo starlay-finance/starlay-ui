@@ -37,7 +37,7 @@ export const DonutChart = styled<FC<DonutChartProps & { className?: string }>>(
                 strokeWidth="4"
                 fill="none"
                 strokeDasharray={CIRCUMFERENCE}
-                strokeDashoffset={-CIRCUMFERENCE * (1 - ratio)}
+                strokeDashoffset={Math.floor(-CIRCUMFERENCE * (1 - ratio))}
                 stroke-mitterlimit="0"
               />
             </svg>
@@ -71,9 +71,9 @@ export const DonutChart2 = styled<
                 strokeWidth="4"
                 fill="none"
                 strokeDasharray={CIRCUMFERENCE}
-                strokeDashoffset={
-                  -CIRCUMFERENCE * (1 - ratio) * (idx === 0 ? 1 : -1)
-                }
+                strokeDashoffset={Math.floor(
+                  CIRCUMFERENCE * (1 - ratio * (idx === 0 ? -1 : 1)),
+                )}
                 stroke-mitterlimit="0"
               />
             </svg>

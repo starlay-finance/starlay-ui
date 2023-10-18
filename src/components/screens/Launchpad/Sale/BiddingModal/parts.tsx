@@ -51,6 +51,7 @@ export const AmountInput: FC<{
           onChange(formatAmt(v)),
         )
       }}
+      inputMode="decimal"
     />
     {maxAmount && (
       <MaxButton

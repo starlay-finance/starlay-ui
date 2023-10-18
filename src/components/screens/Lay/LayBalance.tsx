@@ -12,10 +12,10 @@ import { ASSETS_DICT } from 'src/constants/assets'
 import { useClaimer } from 'src/hooks/contracts/useClaimer'
 import { useTokenSaleVesting } from 'src/hooks/contracts/useTokenSaleVesting'
 import { useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
+import { useEVMWallet } from 'src/hooks/useEVMWallet'
 import { useLAYPrice } from 'src/hooks/useLAYPrice'
 import { useSwitchChainIfUnsupported } from 'src/hooks/useUnsupportedChainAlert'
 import { useVoteData } from 'src/hooks/useVoteData'
-import { useWallet } from 'src/hooks/useWallet'
 import { useWalletBalance } from 'src/hooks/useWalletBalance'
 import { darkGray, primary, purple, trueBlack } from 'src/styles/colors'
 import {
@@ -224,7 +224,7 @@ type LayBalanceProps = {
 }
 const LayBalance = styled<FC<LayBalanceProps & { className?: string }>>(
   ({ label, amount, actions, details, className }) => {
-    const { account } = useWallet()
+    const { account } = useEVMWallet()
     const { icon, name, symbol } = ASSETS_DICT.LAY
     const { data: priceInUSD = BN_ZERO } = useLAYPrice()
     return (
@@ -330,14 +330,14 @@ const Button = styled.button`
   width: 100%;
   border-radius: 4px;
   background-color: ${darkGray};
-  backdrop-filter: blur(16px) brightness(1.16);
+  backdrop-filter: blur(16px) brightness(1.08);
   text-align: center;
   transition: all 0.2s ease-in;
   :enabled:hover {
     background-color: ${purple};
   }
   :disabled {
-    background-color: rgba(255, 255, 255, 0.16);
+    background-color: rgba(255, 255, 255, 0.08);
     opacity: 0.32;
   }
 `
@@ -347,8 +347,8 @@ const LayBalanceDiv = styled.div`
   height: 420px;
   padding: 32px;
   border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(8px) brightness(1.16);
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px) brightness(1.08);
   p:first-child {
     font-size: 18px;
     font-weight: ${fontWeightMedium};

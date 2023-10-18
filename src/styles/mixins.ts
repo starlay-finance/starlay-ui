@@ -1,5 +1,5 @@
 import { css } from 'styled-components'
-import { darkRed, lightYellow, purple, skyBlue } from './colors'
+import { darkGray, darkRed, lightYellow, purple, skyBlue } from './colors'
 
 export const contentMaxWidthCssVar = '--content-max-width'
 
@@ -22,7 +22,7 @@ const size = {
   s: 428,
   m: 680,
   l: 960,
-  xl: 1224,
+  xl: 1280,
   xxl: 1724,
 }
 
@@ -34,6 +34,7 @@ export const breakpoint = {
   xxl: `screen and (min-width:${size.xxl}px)`,
   lts: `screen and (max-width:${size.s - 1}px)`,
   ltxs: `screen and (max-width:${size.xs - 1}px)`,
+  ltxl: `screen and (max-width:${size.xl - 1}px)`,
 }
 export const notTouchable = `only screen and (hover: hover) and (pointer: fine)`
 
@@ -54,3 +55,22 @@ export const makaiHoverGradients = [
   `${skyBlue}3d`,
   `${darkRed}3d`,
 ]
+
+export const iosLikeScrollBar = css`
+  ::-webkit-scrollbar-track {
+    border-radius: 99px;
+    width: 10px;
+    margin: 1px 0;
+  }
+  ::-webkit-scrollbar {
+    width: 3px;
+    border-radius: 99px;
+    scrollbar-width: thin;
+  }
+  ::-webkit-scrollbar-thumb {
+    width: 3px;
+    border-radius: 99px;
+    background-color: ${darkGray};
+    scrollbar-width: thin;
+  }
+`

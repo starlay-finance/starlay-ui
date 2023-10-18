@@ -8,9 +8,9 @@ import { useLaunchpadContext } from 'src/components/screens/Launchpad/LaunchpadC
 import { launchpadContract } from 'src/libs/launchpad'
 import { EthereumAddress } from 'src/types/web3'
 import useSWRImmutable from 'swr/immutable'
+import { useEVMWallet } from '../useEVMWallet'
 import { useLaunchpadBid } from '../useLaunchpadBid'
-import { useStaticRPCProvider } from '../useStaticRPCProvider'
-import { useWallet } from '../useWallet'
+import { useStaticRPCProviderEVM } from '../useStaticRPCProviderEVM'
 import { useTxHandler } from './txHandler'
 
 const ASSET_DECIMALS = 18
@@ -25,8 +25,8 @@ export const useLaunchpad = (params?: {
 }) => {
   const context = useLaunchpadContext()
   const launchpadAddress = params?.launchpadAddress || context.launchpadAddress
-  const { data: provider } = useStaticRPCProvider()
-  const { account, signer } = useWallet()
+  const { data: provider } = useStaticRPCProviderEVM()
+  const { account, signer } = useEVMWallet()
   const { data: currentBid, mutate: mutateBid } = useLaunchpadBid(params)
 
   const { data: launchpad } = useSWRImmutable(

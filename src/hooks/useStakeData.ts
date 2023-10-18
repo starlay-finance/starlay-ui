@@ -8,15 +8,15 @@ import { EthereumAddress } from 'src/types/web3'
 import { BN_ZERO } from 'src/utils/number'
 import useSWR from 'swr'
 import useSWRImmutable from 'swr/immutable'
-import { useStaticRPCProvider } from './useStaticRPCProvider'
-import { useWallet } from './useWallet'
+import { useEVMWallet } from './useEVMWallet'
+import { useStaticRPCProviderEVM } from './useStaticRPCProviderEVM'
 
 const EMPTY_STAKE_DATA: StakeData = {
   userIncentivesToClaim: BN_ZERO,
 }
 
 export const useStakeData = () => {
-  const { account } = useWallet()
+  const { account } = useEVMWallet()
   const { data: provider } = useStakeUiHelper()
   return useSWR(
     () => account && provider && ['stakedata', provider.chainId, account],
@@ -27,7 +27,7 @@ export const useStakeData = () => {
 }
 
 const useStakeUiHelper = () => {
-  const { data: provider } = useStaticRPCProvider()
+  const { data: provider } = useStaticRPCProviderEVM()
   return useSWRImmutable(
     provider && ['stakeuihelper', provider.chainId],
     () => ({

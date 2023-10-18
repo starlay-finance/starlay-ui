@@ -7,7 +7,7 @@ import {
   FormatUserSummaryResponse,
   normalize,
 } from '@starlay-finance/math-utils'
-import { NetworkConfig } from 'src/libs/config'
+import { EVMNetworkConfig } from 'src/libs/config'
 import { equals } from 'src/utils/address'
 import { PoolReservesData } from '../types'
 import { BASE_ASSET_DUMMY_ADDRESS } from './constants'
@@ -15,7 +15,7 @@ import { BASE_ASSET_DUMMY_ADDRESS } from './constants'
 export const formatUserReserves = (
   poolUserData: UserReserveDataHumanized[],
   poolReservesData: PoolReservesData,
-  baseAsset: NetworkConfig['baseAsset'],
+  baseAsset: EVMNetworkConfig['baseAsset'],
 ): FormatUserSummaryResponse => {
   const { timestamp, reservesData, baseCurrencyData } = poolReservesData
   const { networkBaseTokenPriceDecimals } = baseCurrencyData
@@ -52,7 +52,7 @@ const toUserSummary = (
   reserves: ReservesDataHumanized['reservesData'],
   baseCurrencyData: ReservesDataHumanized['baseCurrencyData'],
   currentTimestamp: number,
-  baseAsset: NetworkConfig['baseAsset'],
+  baseAsset: EVMNetworkConfig['baseAsset'],
 ) =>
   formatUserSummary({
     currentTimestamp,

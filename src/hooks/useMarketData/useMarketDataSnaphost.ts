@@ -1,23 +1,28 @@
-import { useStaticRPCProvider } from 'src/hooks/useStaticRPCProvider'
-import { ChainId } from 'src/libs/config'
+import { EVMChainId } from 'src/libs/config'
+import { MarketDataRawEVM } from 'src/libs/data-provider'
+import { toAssetMarketData } from 'src/libs/data-provider/utils'
 import { getPoolDataSnapshot } from 'src/libs/pool-data-provider/snapshots-provider'
+import { MarketData } from 'src/types/models'
 import { onlyListed } from 'src/utils/assets'
 import { utcStartOfDate } from 'src/utils/date'
 import useSWRImmutable from 'swr/immutable'
-import { toAssetMarketData } from './converters'
-import { MarketData, MarketDataRaw } from './types'
+import { useNetworkType } from '../useNetwork'
+import { useStaticRPCProviderEVM } from '../useStaticRPCProviderEVM'
 
 export const useMarketDataSnapshot = () => {
-  const { data } = useStaticRPCProvider()
+  const { data: network } = useNetworkType()
+  const { data } = useStaticRPCProviderEVM()
   return useSWRImmutable(
-    () => data && ['marketdatasnapshot', data?.chainId],
+    () => network === 'EVM' && data && ['marketdatasnapshot', data?.chainId],
     ([_key, chainId]) => getMarketDataSnapshot(chainId),
   )
 }
 
 const getMarketDataSnapshot = async (
-  chainId: ChainId,
-): Promise<Omit<MarketData, keyof MarketDataRaw> | undefined> => {
+  chainId: EVMChainId,
+): Promise<
+  Omit<MarketData & { chainId: EVMChainId }, keyof MarketDataRawEVM> | undefined
+> => {
   const timestamp = utcStartOfDate()
   const res = await getPoolDataSnapshot(chainId, timestamp)
   if (!res) return

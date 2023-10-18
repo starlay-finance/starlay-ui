@@ -1,8 +1,5 @@
-import {
-  DefaultModalContainer,
-  LoadingModalContainer,
-} from 'src/components/parts/Modal/base'
-import { createModal, ModalState } from 'src/hooks/useModal/ModalFactory'
+import { ResponsiveModalContainer } from 'src/components/parts/Modal/base'
+import { ModalState, createModal } from 'src/hooks/useModal/ModalFactory'
 import { useSWRLocal } from '../base/useSWRLocal'
 
 export type {
@@ -23,18 +20,18 @@ const createHandler = (key: string) => () => {
 
 const { useModal: useModalDialog, Modal: ModalDialog } = createModal(
   createHandler('dialog'),
-  DefaultModalContainer,
+  ResponsiveModalContainer,
 )
 
 const { useModal: useLoadingModal, Modal: LoadingModal } = createModal(
   createHandler(MODAL_KEY_LOADING),
-  LoadingModalContainer,
+  ResponsiveModalContainer,
   { inescapable: true },
 )
 
 const { useModal: useErrorModal, Modal: ErrorModal } = createModal(
   createHandler('error'),
-  DefaultModalContainer,
+  ResponsiveModalContainer,
   { inescapable: true },
 )
 

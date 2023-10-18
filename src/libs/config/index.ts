@@ -1,16 +1,34 @@
-import { CHAIN_MARKET_CONFIG, MarketDataType } from './market'
+import { CHAIN_MARKET_CONFIG, EVMMarketConfig } from './market'
 import {
-  ChainId,
+  EVMChainId,
+  EVMNetworkConfig,
+  EVM_NETWORK_CONFIG,
   isSupportedChain,
-  NetworkConfig,
-  NETWORK_CONFIG,
+  PolkadotChainId,
+  PolkadotNetworkConfig,
+  POLKADOT_NETWORK_CONFIG,
 } from './network'
 
-export type { ChainId, NetworkConfig, MarketDataType }
 export { isSupportedChain }
+export type { EVMChainId, EVMMarketConfig, EVMNetworkConfig }
 
-export const getNetworkConfig = (chainId: ChainId): NetworkConfig =>
-  NETWORK_CONFIG[chainId]
+export type NetworkType = 'EVM' | 'Polkadot'
 
-export const getMarketConfig = (chainId: ChainId): MarketDataType =>
+export const getNetworkConfig = <T extends NetworkType>(
+  network: T,
+  chainId: any,
+): T extends 'Polkadot' ? PolkadotNetworkConfig : EVMNetworkConfig =>
+  // @ts-ignore
+  network === 'Polkadot'
+    ? getNetworkConfigPolkadot(chainId)
+    : getNetworkConfigEVM(chainId)
+
+export const getNetworkConfigEVM = (chainId: EVMChainId): EVMNetworkConfig =>
+  EVM_NETWORK_CONFIG[chainId]
+
+export const getMarketConfigEVM = (chainId: EVMChainId): EVMMarketConfig =>
   CHAIN_MARKET_CONFIG[chainId]
+
+export const getNetworkConfigPolkadot = (
+  chainId: PolkadotChainId,
+): PolkadotNetworkConfig => POLKADOT_NETWORK_CONFIG[chainId]

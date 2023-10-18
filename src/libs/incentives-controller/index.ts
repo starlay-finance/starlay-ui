@@ -1,5 +1,6 @@
 import { IncentivesController } from '@starlay-finance/contract-helpers'
-import { StaticRPCProvider } from '../pool-data-provider'
+import { StaticRPCProviderEVM } from '../static-rpc-provider'
 
-export const incentivesControllerContract = ({ provider }: StaticRPCProvider) =>
-  new IncentivesController(provider)
+export const incentivesControllerContract = ({
+  provider,
+}: StaticRPCProviderEVM) => new IncentivesController(provider)

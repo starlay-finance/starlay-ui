@@ -2,10 +2,10 @@ import { FC } from 'react'
 import { requireSupportedChain } from 'src/components/hoc/requireSupportedChain'
 import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { AssetLabel } from 'src/components/parts/Modal/parts'
-import { useLendingPool } from 'src/hooks/contracts/useLendingPool'
+import { useLeverager } from 'src/hooks/contracts/useLeverager'
 import { ModalContentProps, useModalDialog } from 'src/hooks/useModal'
 import { useTracking } from 'src/hooks/useTracking'
-import { useWallet } from 'src/hooks/useWallet'
+import { EthereumAddress } from 'src/types/web3'
 import {
   loopingLeverageToLtv,
   significantLoopingCount,
@@ -15,8 +15,7 @@ import { LoopingModalBody, LoopingModalBodyProps } from './Body'
 export const Looping: FC<
   ModalContentProps<Omit<LoopingModalBodyProps, 'loop' | 'close'>>
 > = ({ close, ...props }) => {
-  const { account, signer } = useWallet()
-  const { loop, closeLoop } = useLendingPool(account, signer)
+  const { loop, closeLoop } = useLeverager()
   const { withTracking } = useTracking()
   const { asset } = props
 
@@ -31,16 +30,16 @@ export const Looping: FC<
           loop={(amount, leverage) =>
             loopWithTracking({
               amount,
-              underlyingAsset: asset.underlyingAsset,
-              debtToken: asset.vdTokenAddress,
+              asset: asset.underlyingAsset as EthereumAddress,
+              debtToken: asset.vdTokenAddress as EthereumAddress,
               borrowRatio: loopingLeverageToLtv(leverage),
               loopCount: significantLoopingCount(leverage),
             })
           }
           close={() =>
             closeLoop({
-              underlyingAsset: asset.underlyingAsset,
-              lToken: asset.lTokenAddress,
+              underlyingAsset: asset.underlyingAsset as EthereumAddress,
+              lToken: asset.lTokenAddress as EthereumAddress,
             })
           }
         />

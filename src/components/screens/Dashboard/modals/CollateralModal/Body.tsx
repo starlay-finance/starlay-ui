@@ -19,7 +19,7 @@ const TABS = ['collateral'] as const
 export type CollateralModalBodyProps = Omit<EstimationParam, 'amount'> & {
   setUsageAsCollateral: (
     enabled: boolean,
-  ) => Promise<{ error: number } | undefined>
+  ) => Promise<{ error: any } | undefined>
 }
 
 export const CollateralModalBody: FC<CollateralModalBodyProps> = ({
@@ -66,7 +66,10 @@ export const CollateralModalBody: FC<CollateralModalBodyProps> = ({
         onChangeActiveTab={() => {}}
       />
       <Action>
-        <NumberItems>
+        <NumberItems
+          onPointerMove={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+        >
           <NumberItemWithDiff
             label={t`Collateral_Amount`}
             current={totalCollateralInUSD}
@@ -91,7 +94,7 @@ export const CollateralModalBody: FC<CollateralModalBodyProps> = ({
           />
           <NumberItemWithDiff
             label={t`Health Factor`}
-            current={healthFactor.isPositive() ? healthFactor : undefined}
+            current={healthFactor?.isPositive() ? healthFactor : undefined}
             after={
               !estimation.healthFactor
                 ? undefined

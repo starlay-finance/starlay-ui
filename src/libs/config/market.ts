@@ -1,14 +1,14 @@
 import { EthereumAddress } from 'src/types/web3'
 import { ValueOf } from 'type-fest'
-import { ChainId, CHAIN_ID } from './network'
+import { EVMChainId, EVM_CHAIN_ID } from './network'
 
-export const CUSTOM_MARKET = {
+export const EVM_CUSTOM_MARKET = {
   proto_astar: 'proto_astar',
 } as const
-export type CustomMarket = ValueOf<typeof CUSTOM_MARKET>
+export type EVMCustomMarket = ValueOf<typeof EVM_CUSTOM_MARKET>
 
-export type MarketDataType = {
-  chainId: ChainId
+export type EVMMarketConfig = {
+  chainId: EVMChainId
   enabledFeatures?: {
     liquiditySwap?: boolean
     staking?: boolean
@@ -33,10 +33,10 @@ export type MarketDataType = {
 }
 
 export const MARKET_CONFIGS: {
-  [key in CustomMarket]: MarketDataType
+  [key in EVMCustomMarket]: EVMMarketConfig
 } = {
-  [CUSTOM_MARKET.proto_astar]: {
-    chainId: CHAIN_ID.astar,
+  [EVM_CUSTOM_MARKET.proto_astar]: {
+    chainId: EVM_CHAIN_ID.astar,
     enabledFeatures: {
       incentives: true,
     },
@@ -52,7 +52,7 @@ export const MARKET_CONFIGS: {
 } as const
 
 export const CHAIN_MARKET_CONFIG: {
-  [key in ChainId]: MarketDataType
+  [key in EVMChainId]: EVMMarketConfig
 } = {
-  [CHAIN_ID.astar]: MARKET_CONFIGS.proto_astar,
+  [EVM_CHAIN_ID.astar]: MARKET_CONFIGS.proto_astar,
 } as const

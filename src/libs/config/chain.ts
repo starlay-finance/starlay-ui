@@ -1,23 +1,23 @@
 import { BigNumber } from 'ethers'
-import { ChainId, CHAIN_ID, NETWORK_CONFIG } from './network'
+import { EVMChainId, EVM_CHAIN_ID, EVM_NETWORK_CONFIG } from './network'
 
-export const getChainInfo = (chainId: number) =>
+export const getEVMChainInfo = (chainId: number) =>
   // @ts-expect-error
   CHIAN_INFO[chainId]
 
 const toChainIdHex = (chainId: number) =>
-  `0x${(+BigNumber.from(chainId)).toString(16)}`
+  `${(+BigNumber.from(chainId)).toString(16)}`
 
-const CHIAN_INFO: Record<ChainId, AddEthereumChainParameter> = {
-  [CHAIN_ID.astar]: {
-    chainId: toChainIdHex(CHAIN_ID.astar),
-    chainName: NETWORK_CONFIG[CHAIN_ID.astar].name,
+const CHIAN_INFO: Record<EVMChainId, AddEthereumChainParameter> = {
+  [EVM_CHAIN_ID.astar]: {
+    chainId: toChainIdHex(EVM_CHAIN_ID.astar),
+    chainName: EVM_NETWORK_CONFIG[EVM_CHAIN_ID.astar].name,
     nativeCurrency: {
       name: 'Astar',
-      symbol: NETWORK_CONFIG[CHAIN_ID.astar].baseAsset.symbol,
+      symbol: EVM_NETWORK_CONFIG[EVM_CHAIN_ID.astar].baseAsset.symbol,
       decimals: 18,
     },
-    rpcUrls: [...NETWORK_CONFIG[CHAIN_ID.astar].publicJsonRPCUrl],
-    blockExplorerUrls: NETWORK_CONFIG[CHAIN_ID.astar].explorerLinks,
+    rpcUrls: [...EVM_NETWORK_CONFIG[EVM_CHAIN_ID.astar].publicJsonRPCUrl],
+    blockExplorerUrls: EVM_NETWORK_CONFIG[EVM_CHAIN_ID.astar].explorerLinks,
   },
 }

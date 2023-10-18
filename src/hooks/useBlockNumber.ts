@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { useSWRLocal } from './base/useSWRLocal'
 import { useMarketData } from './useMarketData'
-import { useStaticRPCProvider } from './useStaticRPCProvider'
+import { useStaticRPCProviderEVM } from './useStaticRPCProviderEVM'
 
 export const useBlockNumber = () => {
   const { data: blockNumber, mutate } = useSWRLocal<number>('blocknumber')
-  const { data: provider } = useStaticRPCProvider()
+  const { data: provider } = useStaticRPCProviderEVM()
   const { data } = useMarketData()
   useEffect(() => {
     if (!data || !provider) return

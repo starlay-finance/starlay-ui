@@ -10,6 +10,7 @@
     "test": "jest --watch",
     "test:once": "jest",
     "postinstall": "yarn i18n:extract && yarn i18n:compile",
+    "prebuild": "./prebuild.sh",
     "postbuild": "next-sitemap",
     "i18n:extract": "lingui extract",
     "i18n:compile": "lingui compile",
@@ -23,12 +24,23 @@
   "dependencies": {
     "@lingui/macro": "^3.17.2",
     "@lingui/react": "^3.17.2",
+    "@polkadot/api": "^9.13.14",
+    "@polkadot/api-contract": "^9.13.14",
+    "@polkadot/extension-dapp": "^0.45.1",
+    "@polkadot/keyring": "^11.0.1",
+    "@polkadot/wasm-crypto": "^7.0.2",
+    "@react-spring/web": "^9.7.2",
     "@safe-global/safe-apps-provider": "^0.18.0",
     "@safe-global/safe-apps-sdk": "^8.1.0",
     "@starlay-finance/contract-helpers": "0.0.18",
     "@starlay-finance/math-utils": "0.0.18",
-    "@web3-react/core": "^6.1.9",
+    "@use-gesture/react": "^10.2.27",
+    "@web3-react/core": "^8.2.3",
+    "@web3-react/gnosis-safe": "^8.2.4",
     "@web3-react/injected-connector": "^6.0.7",
+    "@web3-react/metamask": "^8.2.4",
+    "@web3-react/types": "^8.2.3",
+    "@web3-react/walletconnect-v2": "^8.5.1",
     "chroma-js": "^2.4.2",
     "dayjs": "^1.11.7",
     "eth-rpc-errors": "^4.0.3",
@@ -52,6 +64,7 @@
     "web3": "^1.8.2"
   },
   "devDependencies": {
+    "@727-ventures/typechain-types": "^0.0.23",
     "@graphql-codegen/cli": "^3.2.2",
     "@graphql-codegen/schema-ast": "^3.0.1",
     "@graphql-codegen/typescript": "^3.0.2",
@@ -97,7 +110,7 @@
     "storycap": "^4.0.0",
     "ts-jest": "^29.0.5",
     "type-fest": "^3.6.1",
-    "typescript": "4.9.5"
+    "typescript": "5.0.2"
   },
   "msw": {
     "workerDirectory": ".storybook"

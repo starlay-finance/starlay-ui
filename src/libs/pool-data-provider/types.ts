@@ -9,9 +9,7 @@ import {
   FormatUserSummaryResponse,
   ReserveIncentiveDict,
 } from '@starlay-finance/math-utils'
-import { ethers } from 'ethers'
 import { EthereumAddress } from 'src/types/web3'
-import { ChainId } from '../config'
 
 export type FormattedReserveData = ReserveDataHumanized & FormatReserveResponse
 
@@ -49,9 +47,4 @@ export type PoolReservesData = {
   baseCurrencyData: PoolBaseCurrencyHumanized
   reserveIncentivesData: ReserveIncentiveWithFeedsResponse[]
   timestamp: number
-}
-
-export type StaticRPCProvider = {
-  chainId: ChainId
-  provider: ethers.providers.Provider
 }

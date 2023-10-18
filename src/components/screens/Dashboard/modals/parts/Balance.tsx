@@ -1,6 +1,6 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { trueBlack } from 'src/styles/colors'
+import { offWhite } from 'src/styles/colors'
 import { formatAmt } from 'src/utils/number'
 import styled from 'styled-components'
 
@@ -22,6 +22,6 @@ const BalanceDiv = styled.div`
   display: flex;
   justify-content: space-between;
   span:last-child {
-    color: ${trueBlack};
+    color: ${offWhite};
   }
 `

@@ -157,6 +157,7 @@ const StyledFooter = styled.footer`
   ${Content} {
     max-width: var(${contentMaxWidthCssVar});
     margin: 0 auto;
+    padding: 0 24px;
   }
   ${Nav} {
     margin-top: 40px;

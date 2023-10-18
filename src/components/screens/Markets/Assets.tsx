@@ -12,8 +12,9 @@ import {
 } from 'src/components/parts/Number/PercentageChange'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useMarketDataSnapshot } from 'src/hooks/useMarketData/useMarketDataSnaphost'
-import { darkRed, skyBlue } from 'src/styles/colors'
+import { darkRed, lightBlack, skyBlue } from 'src/styles/colors'
 import { fontWeightMedium } from 'src/styles/font'
+import { breakpoint } from 'src/styles/mixins'
 import { AssetMarketData } from 'src/types/models'
 import { symbolSorter } from 'src/utils/market'
 import { formatPct, formatUSDShort } from 'src/utils/number'
@@ -40,7 +41,7 @@ export const Assets = asStyled(({ className }) => {
   const { open } = useAssetMarketDetailsModal()
   return (
     <DetailsSection className={className}>
-      <TableContainer>
+      <AssetsTableContainer>
         <MarketTable
           caption={t`Markets`}
           columns={DETAILS_COLUMNS}
@@ -55,10 +56,29 @@ export const Assets = asStyled(({ className }) => {
           )}
           hoverGradients={[`${darkRed}3d`, `${skyBlue}3d`, `${darkRed}3d`]}
         />
-      </TableContainer>
+      </AssetsTableContainer>
     </DetailsSection>
   )
 })``
+
+const AssetsTableContainer = styled(TableContainer)`
+  overflow-x: auto;
+  table {
+    min-width: 560px;
+    caption,
+    th:first-child,
+    td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      background-color: ${lightBlack};
+    }
+    caption {
+      width: fit-content;
+      background-color: unset;
+    }
+  }
+`
 
 const detailsRow = ({
   asset,
@@ -155,8 +175,11 @@ const ValuesTd = styled.div`
   display: flex;
   flex-direction: column;
   ${PercentageChange} {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: ${fontWeightMedium};
+  }
+  @media ${breakpoint.xl} {
+    font-size: 14px;
   }
 `
 

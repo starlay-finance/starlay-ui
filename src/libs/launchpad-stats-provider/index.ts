@@ -2,7 +2,7 @@ import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import { GraphQLClient } from 'graphql-request'
 import { Bid, Market } from 'src/components/screens/Launchpad/types'
 import { BN_ZERO } from 'src/utils/number'
-import { ChainId, getNetworkConfig } from '../config'
+import { EVMChainId, getNetworkConfigEVM } from '../config'
 import { getSdk } from './__generated__/graphql'
 
 const graphqlClient = (endpoint: string, apiKey?: string) =>
@@ -13,10 +13,10 @@ const graphqlClient = (endpoint: string, apiKey?: string) =>
   )
 
 export const getCurrentStats = async (
-  chainId: ChainId,
+  chainId: EVMChainId,
   id: string,
 ): Promise<(Partial<Market> & { numOfBids: BigNumber }) | undefined> => {
-  const { launchpadDataProvider } = getNetworkConfig(chainId)
+  const { launchpadDataProvider } = getNetworkConfigEVM(chainId)
   if (!launchpadDataProvider) return undefined
   const client = graphqlClient(
     launchpadDataProvider.endpoint,
@@ -42,11 +42,11 @@ export const getCurrentStats = async (
 }
 
 export const getBid = async (
-  chainId: ChainId,
+  chainId: EVMChainId,
   projectId: string,
   account: string,
 ): Promise<Bid | undefined> => {
-  const { launchpadDataProvider } = getNetworkConfig(chainId)
+  const { launchpadDataProvider } = getNetworkConfigEVM(chainId)
   if (!launchpadDataProvider) return undefined
   const client = graphqlClient(
     launchpadDataProvider.endpoint,

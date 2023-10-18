@@ -9,7 +9,7 @@ import {
   normalize,
   normalizeBN,
 } from '@starlay-finance/math-utils'
-import { NetworkConfig } from 'src/libs/config'
+import { EVMNetworkConfig } from 'src/libs/config'
 import { equals } from 'src/utils/address'
 import { BASE_ASSET_DUMMY_ADDRESS } from './constants'
 
@@ -17,7 +17,7 @@ export const formatReserves = (
   protocolData: ReservesDataHumanized,
   reserveIncentives: ReserveIncentiveWithFeedsResponse[],
   currentTimestamp: number,
-  baseAsset: NetworkConfig['baseAsset'],
+  baseAsset: EVMNetworkConfig['baseAsset'],
   rewardUndelyingAssetDict?: Record<string, string>,
 ) => {
   const {

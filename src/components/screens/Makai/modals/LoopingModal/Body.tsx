@@ -11,6 +11,7 @@ import {
 import { RatioControl } from 'src/components/parts/Modal/parts/RatioControl'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { blue, darkRed, lightYellow, purple } from 'src/styles/colors'
+import { breakpoint } from 'src/styles/mixins'
 import { EstimationParam, estimateLooping } from 'src/utils/estimationHelper'
 import {
   BN_ONE,
@@ -100,9 +101,12 @@ export const LoopingModalBody: FC<LoopingModalBodyProps> = ({
         activeTab={activeTab}
         onChangeActiveTab={setActiveTab}
       />
-      <Action>
+      <LoopingAction>
         {isLooping && (
-          <NumberItems>
+          <NumberItems
+            onPointerMove={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
+          >
             <RatioControl
               label={t`Leverage`}
               options={RATIO_LIST.concat({ value: maxLeverage.toNumber() })}
@@ -112,6 +116,13 @@ export const LoopingModalBody: FC<LoopingModalBodyProps> = ({
               sliderColors={[blue, lightYellow, darkRed]}
               customLabel={t`Custom Leverage`}
             />
+            <Note>
+              <p>{t`"Makai Loops" is an experimental feature.`}</p>
+              <Trans
+                id="Please <0>read our docs</0> and understand how it works before using it."
+                components={[<Link key={'0'} href={DOCS_MAKAI} />]}
+              />
+            </Note>
             <NumberItem
               label={t`Net APY`}
               num={estimation.depositAPY.minus(estimation.borrowAPY)}
@@ -131,7 +142,7 @@ export const LoopingModalBody: FC<LoopingModalBodyProps> = ({
             />
             <NumberItemWithDiff
               label={t`Health Factor`}
-              current={healthFactor.isPositive() ? healthFactor : undefined}
+              current={healthFactor?.isPositive() ? healthFactor : undefined}
               after={
                 !estimation.healthFactor
                   ? undefined
@@ -181,7 +192,7 @@ export const LoopingModalBody: FC<LoopingModalBodyProps> = ({
             symbol={displaySymbol || symbol}
           />
         )}
-      </Action>
+      </LoopingAction>
     </ContentDiv>
   )
 }
@@ -197,5 +208,26 @@ const Note = styled.p`
   line-height: 1.5;
   a {
     color: ${purple};
+  }
+`
+
+const LoopingAction = styled(Action)`
+  ${NumberItems} {
+    > ${Note} {
+      margin-bottom: 16px;
+    }
+  }
+  > ${Note} {
+    display: none;
+  }
+  @media ${breakpoint.l} {
+    ${NumberItems} {
+      > ${Note} {
+        display: none;
+      }
+    }
+    > ${Note} {
+      display: block;
+    }
   }
 `

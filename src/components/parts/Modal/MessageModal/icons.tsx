@@ -1,8 +1,14 @@
 import { IconAlert, IconSuccess } from 'src/assets/svgs'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { drawStroke, showInsetClipped } from 'src/styles/animation'
+import { showInsetClipped } from 'src/styles/animation'
 import { attention } from 'src/styles/colors'
 import { keyframes } from 'styled-components'
+
+const drawStrokeCircle = keyframes`
+  100% {
+      stroke-dashoffset: 804px;
+  }
+`
 
 export const AnimatedSuccess = asStyled(({ className }) => (
   <div className={className}>
@@ -12,8 +18,8 @@ export const AnimatedSuccess = asStyled(({ className }) => (
   svg {
     circle {
       stroke-dasharray: 402px;
-      stroke-dashoffset: -400px;
-      animation: ${drawStroke} 0.75s forwards;
+      stroke-dashoffset: 402px;
+      animation: ${drawStrokeCircle} 0.75s forwards;
     }
     path {
       clip-path: inset(0 100% 0 0);

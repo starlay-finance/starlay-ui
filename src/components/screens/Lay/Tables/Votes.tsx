@@ -220,7 +220,7 @@ const votingRow = ({
           remaining={1 - currentVotingTotal}
           disabled={
             !assetWeight ||
-            (asset.isFrozen && votingWeight === 0) ||
+            (asset.isBorrowInactive && votingWeight === 0) ||
             !votingData ||
             !votingPowerAvailable
           }

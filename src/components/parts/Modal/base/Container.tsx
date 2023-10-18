@@ -1,11 +1,31 @@
-import React, { forwardRef } from 'react'
+import { forwardRef, useEffect } from 'react'
+import { isMobile } from 'react-device-detect'
 import { ModalContainerProps, ModalHandler } from 'src/hooks/useModal'
 import { trueBlack } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import { Color } from 'src/styles/types'
+import { disablePageScroll, enablePageScroll } from 'src/utils/handleScroll'
 import { Z_MODAL } from 'src/utils/zIndex'
 import styled, { css } from 'styled-components'
+import { SwipeableModalContainer } from './SwipeableModalContainer'
 
+export const ResponsiveModalContainer = forwardRef<
+  ModalHandler,
+  ModalContainerProps
+>((props, ref) => {
+  useEffect(() => {
+    if (props.isOpen) disablePageScroll()
+    else enablePageScroll()
+    return () => {
+      enablePageScroll()
+    }
+  }, [props.isOpen])
+  return isMobile ? (
+    <SwipeableModalContainer {...props} ref={ref} />
+  ) : (
+    <DefaultModalContainer {...props} ref={ref} />
+  )
+})
 export const DefaultModalContainer = forwardRef<
   ModalHandler,
   ModalContainerProps
@@ -57,5 +77,4 @@ const Contents = styled.div`
   margin: 0 24px;
   width: 100%;
   position: relative;
-  overflow: auto;
 `

@@ -15,7 +15,7 @@ import {
   UserReserveCalculationData,
 } from '@starlay-finance/math-utils'
 import { ethers } from 'ethers'
-import { NetworkConfig } from 'src/libs/config'
+import { EVMNetworkConfig } from 'src/libs/config'
 import { EthereumAddress } from 'src/types/web3'
 import { equals } from 'src/utils/address'
 import { BN_ZERO } from 'src/utils/number'
@@ -27,7 +27,7 @@ export class RPCClient implements PoolDataProviderInterface {
     private uiPoolDataProvider: UiPoolDataProviderInterface,
     private uiIncentiveDataProvider: UiIncentiveDataProviderInterface,
     private lendingPoolAddressProvider: EthereumAddress,
-    private baseAsset: NetworkConfig['baseAsset'],
+    private baseAsset: EVMNetworkConfig['baseAsset'],
     private rewardToken: EthereumAddress,
     private rewardUndelyingAssetDict: Record<string, string>,
   ) {}
@@ -37,7 +37,7 @@ export class RPCClient implements PoolDataProviderInterface {
     uiIncentiveDataProvider: EthereumAddress
     lendingPoolAddressProvider: EthereumAddress
     priceAggregatorAdapterAddress: EthereumAddress
-    baseAsset: NetworkConfig['baseAsset']
+    baseAsset: EVMNetworkConfig['baseAsset']
     provider: ethers.providers.Provider
     rewardToken: EthereumAddress
     rewardUndelyingAssetDict: Record<string, string>

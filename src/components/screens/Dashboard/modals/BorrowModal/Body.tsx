@@ -50,7 +50,7 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
     variableBorrowIncentiveAPR,
     liquidity,
     borrowingEnabled,
-    isFrozen,
+    isBorrowInactive,
     decimals,
     icon,
     name,
@@ -58,7 +58,7 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
   const { totalBorrowedInUSD, borrowLimitUsed, healthFactor } = userSummary
   const { borrowed } = userAssetBalance
 
-  const borrowable = borrowingEnabled && !isFrozen
+  const borrowable = borrowingEnabled && !isBorrowInactive
   const [activeTab, setActiveTab] = useState<TabType>(
     borrowable ? 'borrow' : 'repay',
   )
@@ -117,7 +117,10 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
         onChangeActiveTab={setActiveTab}
       />
       <Action>
-        <NumberItems>
+        <NumberItems
+          onPointerMove={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+        >
           <NumberItem
             label={t`Borrow APY`}
             num={variableBorrowAPY}
@@ -144,7 +147,7 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
           />
           <NumberItemWithDiff
             label={t`Health Factor`}
-            current={healthFactor.isPositive() ? healthFactor : undefined}
+            current={healthFactor?.isPositive() ? healthFactor : undefined}
             after={
               !estimation.healthFactor
                 ? undefined

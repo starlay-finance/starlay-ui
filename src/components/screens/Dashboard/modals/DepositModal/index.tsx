@@ -11,8 +11,8 @@ import { DepositModalBody, DepositModalBodyProps } from './Body'
 export const Deposit: FC<
   ModalContentProps<Omit<DepositModalBodyProps, 'deposit' | 'withdraw'>>
 > = ({ close, ...props }) => {
-  const { account, signer } = useWallet()
-  const { deposit, withdraw } = useLendingPool(account, signer)
+  const { account } = useWallet()
+  const { deposit, withdraw } = useLendingPool(account)
 
   const { withTracking } = useTracking()
   const depositWithTracking = withTracking('deposit', deposit)
@@ -28,14 +28,18 @@ export const Deposit: FC<
           deposit={(amount) =>
             depositWithTracking({
               amount,
-              underlyingAsset: asset.underlyingAsset,
+              pool: asset.pool,
+              asset: asset.underlyingAsset,
+              decimals: asset.decimals,
             })
           }
           withdraw={(amount, all) =>
             withdrawWithTracking({
               amount,
-              underlyingAsset: asset.underlyingAsset,
-              lTokenAddress: asset.lTokenAddress,
+              pool: asset.pool,
+              asset: asset.underlyingAsset,
+              decimals: asset.decimals,
+              collateral: asset.lTokenAddress,
               all,
             })
           }

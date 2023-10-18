@@ -1,46 +1,44 @@
 import { AssetSymbol } from 'src/types/models'
-import { EthereumAddress } from 'src/types/web3'
+import { EthereumAddress, PolkadotAddress } from 'src/types/web3'
 import { ValueOf } from 'type-fest'
 
-export const CHAIN_ID = {
+export const EVM_CHAIN_ID = {
   astar: 592,
 } as const
+export type EVMChainId = ValueOf<typeof EVM_CHAIN_ID>
 
-export type ChainId = ValueOf<typeof CHAIN_ID>
+export const POLKADOT_CHAIN_ID = {
+  // astar: "Astar",
+  shibuya: 'Shibuya Testnet',
+  // local: 'Development',
+} as const
+export type PolkadotChainId = ValueOf<typeof POLKADOT_CHAIN_ID>
+export const DEFAULT_CHAIN_ID_POLKADOT = POLKADOT_CHAIN_ID.shibuya
 
-export const isSupportedChain = (arg: any): arg is ChainId =>
-  Object.values(CHAIN_ID).includes(arg)
+export const isSupportedChain = (arg: any): arg is EVMChainId =>
+  Object.values(EVM_CHAIN_ID).includes(arg)
+export const supportedChainOr = (arg: any, _default: EVMChainId): EVMChainId =>
+  isSupportedChain(arg) ? arg : _default
 
-export type NetworkConfig = {
+export type NetworkConfig<ADDRESS extends string, C extends string> = {
   name: string
   privateJsonRPCUrl?: string
   privateJsonRPCWSUrl?: string
   publicJsonRPCUrl: string[]
   publicJsonRPCWSUrl?: string
-  addresses: {
-    walletBalanceProvider: EthereumAddress
-    uiPoolDataProvider: EthereumAddress
-    uiIncentiveDataProvider: EthereumAddress
-    stakeUiHelper: EthereumAddress
-    priceAggregatorAdapterAddress: EthereumAddress
-    voterAddress: EthereumAddress
-    votingEscrowAddress: EthereumAddress
-    claimerAddress: EthereumAddress
-    idoVestingAddress: EthereumAddress
-    tokenSaleVestingAddress: EthereumAddress
-    multicallAddress: EthereumAddress
-  }
+  walletConnectProjectId: string
+  addresses: Record<C, ADDRESS>
   protocolDataUrl?: string
   cachingServerUrl?: string
   cachingWSServerUrl?: string
   baseAsset: {
     symbol: AssetSymbol
-    wrapperAddress: EthereumAddress
+    wrapperAddress: ADDRESS
   }
   rewardToken: {
     symbol: string
-    address: EthereumAddress
-    underlyingAsset: EthereumAddress
+    address: ADDRESS
+    underlyingAsset: ADDRESS
     decimals: number
   }
   snapshotProvider?: {
@@ -63,12 +61,28 @@ export type NetworkConfig = {
   isTestnet?: boolean
 }
 
-export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
-  [CHAIN_ID.astar]: {
-    name: 'Astar Network',
-    publicJsonRPCUrl: ['https://astar.public.blastapi.io'],
+export type EVMNetworkConfig = NetworkConfig<
+  EthereumAddress,
+  | 'walletBalanceProvider'
+  | 'uiPoolDataProvider'
+  | 'uiIncentiveDataProvider'
+  | 'stakeUiHelper'
+  | 'priceAggregatorAdapterAddress'
+  | 'voterAddress'
+  | 'votingEscrowAddress'
+  | 'claimerAddress'
+  | 'idoVestingAddress'
+  | 'tokenSaleVestingAddress'
+  | 'multicallAddress'
+>
+
+export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
+  [EVM_CHAIN_ID.astar]: {
+    name: 'Astar Mainnet / EVM',
+    publicJsonRPCUrl: ['https://evm.astar.network'],
     privateJsonRPCUrl:
       'https://astar.blastapi.io/b783cb07-7f1a-48dc-88fb-cedca75fafa0',
+    walletConnectProjectId: '7077959b8319331ea75408788eae93b5',
     addresses: {
       walletBalanceProvider: '0x449b5A2c9c75d77283253625C03aE6336c957a0c',
       uiPoolDataProvider: '0x97Fc9e6aFB9d7A9C9898a2b6F97Da43EB5f56331',
@@ -111,5 +125,39 @@ export const NETWORK_CONFIG: Record<ChainId, NetworkConfig> = {
       endpoint: 'https://arthswap-graphql.starlay.finance/api/graphql',
     },
     explorerLinks: ['https://blockscout.com/astar'],
+  },
+}
+
+export type PolkadotNetworkConfig = NetworkConfig<
+  PolkadotAddress,
+  'controller' | 'lens' | 'faucet'
+>
+
+export const POLKADOT_NETWORK_CONFIG: Record<
+  PolkadotChainId,
+  PolkadotNetworkConfig
+> = {
+  [POLKADOT_CHAIN_ID.shibuya]: {
+    name: 'Shibuya Testnet / WASM',
+    publicJsonRPCUrl: ['https://shibuya-rpc.dwellir.com'],
+    publicJsonRPCWSUrl: 'wss://shibuya-rpc.dwellir.com',
+    walletConnectProjectId: '7077959b8319331ea75408788eae93b5',
+    addresses: {
+      lens: 'b7ZAWXs65EzkF1qnbbcARVFhB5z4WwuajzVqsKijigB4QdW',
+      faucet: 'b3rWbCnVNCW9qkeGcUxafatV4TEoXBYVxf4wGbQgwyhJaZL',
+      controller: 'X2vJWQUXZMyKc81JDdJkRxroUE6TFkqDd5EnXcjpmA5F8XA',
+    },
+    baseAsset: {
+      symbol: 'ASTR',
+      wrapperAddress: '',
+    },
+    rewardToken: {
+      symbol: '',
+      address: '',
+      underlyingAsset: '',
+      decimals: 0,
+    },
+    explorerLinks: ['https://blockscout.com/astar'],
+    isTestnet: true,
   },
 }

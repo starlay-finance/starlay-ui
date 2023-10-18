@@ -1,9 +1,8 @@
 import { BigNumber } from '@starlay-finance/math-utils'
 import { Dayjs } from 'dayjs'
 import { LISTED_ASSET_SYMBOLS } from 'src/constants/assets'
-import { EthereumAddress } from './web3'
 
-export type AssetSymbol = typeof LISTED_ASSET_SYMBOLS[number]
+export type AssetSymbol = typeof LISTED_ASSET_SYMBOLS[number] | 'WASTR' | 'WSDN'
 
 export type Asset = {
   symbol: AssetSymbol
@@ -13,15 +12,30 @@ export type Asset = {
   borrowUnsupported?: boolean
   makaiUnsupported?: boolean
 }
+
+export type AssetMetadata = {
+  address: string
+  symbol: AssetSymbol
+  decimals: number
+}
+
 export type ERC20Asset = {
   symbol: AssetSymbol
   icon: StaticImageData
   name: string
-  address: EthereumAddress
+  address: string
   decimals: number
 }
 
+export type MarketData = {
+  assets: AssetMarketData[]
+  marketReferenceCurrencyPriceInUSD: BigNumber
+  marketReferenceCurrencyDecimals: number
+  marketTimestamp: number
+}
+
 export type AssetMarketData = Asset & {
+  pool: string
   depositAPY: BigNumber
   variableBorrowAPY: BigNumber
   depositIncentiveAPR: BigNumber
@@ -36,12 +50,13 @@ export type AssetMarketData = Asset & {
   usageAsCollateralEnabled: boolean
   reserveFactor: BigNumber
   liquidationPenalty: BigNumber
-  underlyingAsset: EthereumAddress
+  underlyingAsset: string
   decimals: number
-  lTokenAddress: EthereumAddress
-  vdTokenAddress: EthereumAddress
+  lTokenAddress: string
+  vdTokenAddress: string
   isActive: boolean
-  isFrozen: boolean
+  isDepositInactive: boolean
+  isBorrowInactive: boolean
   borrowingEnabled: boolean
 }
 
@@ -64,8 +79,8 @@ export type User = {
     [key in AssetSymbol]: Omit<UserAssetBalance, 'inWallet'>
   }
   rewards: {
-    address: EthereumAddress
-    underlyingAsset: EthereumAddress
+    address: string
+    underlyingAsset: string
     unclaimedBalance: BigNumber
   }
 }
@@ -79,7 +94,7 @@ export type UserSummary = {
   borrowLimitInUSD: BigNumber
   borrowLimitUsed?: BigNumber
   currentLiquidationThreshold: BigNumber
-  healthFactor: BigNumber
+  healthFactor?: BigNumber
   netAPY: BigNumber
 }
 

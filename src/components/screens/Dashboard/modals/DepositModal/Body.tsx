@@ -48,13 +48,18 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
   ...estimationParams
 }) => {
   const { asset, userSummary, userAssetBalance } = estimationParams
-  const { symbol, displaySymbol, depositAPY, depositIncentiveAPR, isFrozen } =
-    asset
+  const {
+    symbol,
+    displaySymbol,
+    depositAPY,
+    depositIncentiveAPR,
+    isDepositInactive,
+  } = asset
   const { availableBorrowsInUSD, borrowLimitUsed, healthFactor } = userSummary
   const { inWallet, deposited } = userAssetBalance
 
   const [activeTab, setActiveTab] = useState<TabType>(
-    !isFrozen ? 'deposit' : 'withdraw',
+    !isDepositInactive ? 'deposit' : 'withdraw',
   )
   const [depositAmount, setDepositAmount] = useState('')
   const [withdrawalAmount, setWithdrawalAmount] = useState('')
@@ -102,14 +107,17 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
       <ActionTab
         tabs={TABS}
         contents={{
-          deposit: { label: t`Deposit`, disabled: isFrozen },
+          deposit: { label: t`Deposit`, disabled: isDepositInactive },
           withdraw: { label: t`Withdraw` },
         }}
         activeTab={activeTab}
         onChangeActiveTab={setActiveTab}
       />
       <Action>
-        <NumberItems>
+        <NumberItems
+          onPointerMove={(e) => e.stopPropagation()}
+          onTouchMove={(e) => e.stopPropagation()}
+        >
           <NumberItem
             label={t`Deposit APY`}
             num={depositAPY}
@@ -136,7 +144,7 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
           />
           <NumberItemWithDiff
             label={t`Health Factor`}
-            current={healthFactor.isPositive() ? healthFactor : undefined}
+            current={healthFactor?.isPositive() ? healthFactor : undefined}
             after={
               !estimation.healthFactor
                 ? undefined
@@ -211,7 +219,6 @@ const NoCollateralMessage = styled.p`
     background-color: ${darkPurple}80;
   }
   p {
-    color: ${trueWhite};
     position: relative;
     text-align: center;
     line-height: 1.5;

@@ -55,18 +55,18 @@ const ClaimButton = styled.button`
   width: 100%;
   border-radius: 4px;
   background-color: ${purple};
-  backdrop-filter: blur(16px) brightness(1.16);
+  backdrop-filter: blur(16px) brightness(1.08);
   text-align: center;
   :disabled {
-    background-color: rgba(255, 255, 255, 0.16);
+    background-color: rgba(255, 255, 255, 0.08);
     opacity: 0.32;
   }
 `
 const UnclaimedRewardDiv = styled.div`
   padding: 32px;
   border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(8px) brightness(1.16);
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px) brightness(1.08);
   p:first-child {
     font-size: 18px;
     font-weight: ${fontWeightMedium};

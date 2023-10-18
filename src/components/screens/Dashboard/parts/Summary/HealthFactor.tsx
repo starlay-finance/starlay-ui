@@ -5,6 +5,7 @@ import { asStyled } from 'src/components/hoc/asStyled'
 import { Barometer } from 'src/components/parts/Chart/Barometer'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { blue, darkRed, lightYellow } from 'src/styles/colors'
+import { breakpoint } from 'src/styles/mixins'
 import { formatAmtShort } from 'src/utils/number'
 import styled, { css } from 'styled-components'
 
@@ -17,13 +18,14 @@ const healthFactorRatio = (healthFactor: BigNumber) => {
 
 export const HealthFactor = asStyled<{
   healthFactor: BigNumber | undefined
-}>(({ healthFactor, className }) => {
+  shouldShow: boolean
+}>(({ healthFactor, shouldShow, className }) => {
   const [show, setShow] = useState(false)
   useEffect(() => {
     setTimeout(() => {
-      setShow(!!healthFactor?.isPositive())
+      setShow(shouldShow)
     }, 100)
-  }, [healthFactor])
+  }, [shouldShow])
   return (
     <HealthFactorDiv show={show} className={className}>
       {healthFactor && (
@@ -39,8 +41,8 @@ export const HealthFactor = asStyled<{
 })``
 const HealthFactorDiv = styled.div<{ show: boolean }>`
   transition: all 0.2s ease-out;
-  padding: 24px 104px;
   height: 0;
+  margin-top: 16px;
   > figure {
     transition: all 1s ease-in;
     opacity: 0;
@@ -52,6 +54,10 @@ const HealthFactorDiv = styled.div<{ show: boolean }>`
         clip-path: circle(0%);
       }
     }
+  }
+  @media ${breakpoint.m} {
+    margin-top: 0px;
+    padding: 24px 104px;
   }
   ${({ show }) =>
     show &&

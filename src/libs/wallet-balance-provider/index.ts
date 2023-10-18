@@ -1,11 +1,15 @@
 import { WalletBalanceProvider } from '@starlay-finance/contract-helpers'
 import { BigNumber } from 'ethers'
 import { EthereumAddress } from 'src/types/web3'
-import { getMarketConfig, getNetworkConfig, NetworkConfig } from '../config'
-import { StaticRPCProvider } from '../pool-data-provider'
+import {
+  EVMNetworkConfig,
+  getMarketConfigEVM,
+  getNetworkConfigEVM,
+} from '../config'
+import { StaticRPCProviderEVM } from '../static-rpc-provider'
 
 export const walletBalanceProviderContract = (
-  provider: StaticRPCProvider,
+  provider: StaticRPCProviderEVM,
 ): WalletBalanceProviderInterface => WalletBalanceProviderWrapper.new(provider)
 
 export type WalletBalanceProviderInterface = {
@@ -19,17 +23,17 @@ class WalletBalanceProviderWrapper implements WalletBalanceProviderInterface {
   constructor(
     private proivder: WalletBalanceProvider,
     private lendingPoolAddressProvider: EthereumAddress,
-    private baseAsset: NetworkConfig['baseAsset'],
+    private baseAsset: EVMNetworkConfig['baseAsset'],
   ) {}
 
-  static new = ({ chainId, provider }: StaticRPCProvider) => {
+  static new = ({ chainId, provider }: StaticRPCProviderEVM) => {
     const {
       addresses: { walletBalanceProvider },
       baseAsset,
-    } = getNetworkConfig(chainId)
+    } = getNetworkConfigEVM(chainId)
     const {
       addresses: { LENDING_POOL_ADDRESS_PROVIDER },
-    } = getMarketConfig(chainId)
+    } = getMarketConfigEVM(chainId)
     return new WalletBalanceProviderWrapper(
       new WalletBalanceProvider({
         walletBalanceProviderAddress: walletBalanceProvider,

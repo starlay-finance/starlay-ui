@@ -9,6 +9,7 @@ import {
   fontWeightMedium,
   fontWeightSemiBold,
 } from 'src/styles/font'
+import { breakpoint } from 'src/styles/mixins'
 import { Color } from 'src/styles/types'
 import { Asset } from 'src/types/models'
 import styled, { css } from 'styled-components'
@@ -36,10 +37,9 @@ export const MarketTable = styled(
 
 const StyledTable = styled(Table)<StyleProps>`
   caption {
-    padding: 24px 32px 0;
-    font-size: 20px;
+    padding: 20px;
+    font-size: 16px;
     font-weight: ${fontWeightHeavy};
-    padding-bottom: 24px;
   }
   thead > tr {
     height: 56px !important;
@@ -54,7 +54,7 @@ const StyledTable = styled(Table)<StyleProps>`
   }
   th {
     color: ${secondary};
-    font-size: 14px;
+    font-size: 12px;
     font-weight: ${fontWeightMedium};
     :nth-child(n + 2) {
       > div {
@@ -69,7 +69,7 @@ const StyledTable = styled(Table)<StyleProps>`
     }
   }
   td {
-    font-size: 16px;
+    font-size: 12px;
     font-weight: ${fontWeightSemiBold};
     white-space: nowrap;
   }
@@ -79,10 +79,10 @@ const StyledTable = styled(Table)<StyleProps>`
     padding: 16px 0;
     vertical-align: middle;
     :first-child {
-      padding-left: 32px;
+      padding-left: 20px;
     }
     :last-child {
-      padding-right: 32px;
+      padding-right: 20px;
     }
     :nth-child(n + 2) {
       text-align: right;
@@ -93,19 +93,45 @@ const StyledTable = styled(Table)<StyleProps>`
     hoverGradients &&
     css`
       tbody > tr {
-        :hover {
-          background: linear-gradient(90deg, ${hoverGradients.join(',')});
-          background-size: ${hoverGradients.length}00%;
-          animation: ${hoverBackgroundKeyframes(hoverGradients.length)}
-            ${(hoverGradients.length * 5) / 3}s infinite linear;
+        @media ${breakpoint.xl} {
+          :hover {
+            background: linear-gradient(90deg, ${hoverGradients.join(',')});
+            background-size: ${hoverGradients.length}00%;
+            animation: ${hoverBackgroundKeyframes(hoverGradients.length)}
+              ${(hoverGradients.length * 5) / 3}s infinite linear;
+          }
         }
       }
     `}
+
+  @media ${breakpoint.xl} {
+    caption {
+      padding: 24px 32px;
+      font-size: 20px;
+    }
+    th {
+      font-size: 14px;
+    }
+    td {
+      font-size: 16px;
+    }
+    th,
+    td {
+      :first-child {
+        padding-left: 32px;
+      }
+      :last-child {
+        padding-right: 32px;
+      }
+    }
+  }
 `
 
 export const AssetTd: FC<Pick<Asset, 'icon' | 'name'>> = ({ icon, name }) => (
   <AssetDiv>
-    <Image src={icon} alt={name} width={32} height={32} />
+    <div>
+      <Image src={icon} alt={name} fill />
+    </div>
     {name}
   </AssetDiv>
 )
@@ -113,12 +139,24 @@ export const AssetTd: FC<Pick<Asset, 'icon' | 'name'>> = ({ icon, name }) => (
 const AssetDiv = styled.div`
   display: flex;
   align-items: center;
-  column-gap: 16px;
+  column-gap: 8px;
+  > div:first-child {
+    position: relative;
+    width: 28px;
+    height: 28px;
+  }
+  @media ${breakpoint.xl} {
+    column-gap: 16px;
+    > div:first-child {
+      width: 32px;
+      height: 32px;
+    }
+  }
 `
 
 export const TableContainer = styled.div`
   border-radius: 8px;
-  backdrop-filter: blur(8px) brightness(1.16);
-  background-color: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px) brightness(1.08);
+  background-color: rgba(255, 255, 255, 0.08);
   overflow: hidden;
 `

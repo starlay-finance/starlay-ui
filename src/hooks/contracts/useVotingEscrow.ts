@@ -4,18 +4,18 @@ import {
 } from '@starlay-finance/contract-helpers'
 import {
   BigNumber,
-  normalizeBN,
   WEI_DECIMALS,
+  normalizeBN,
 } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
 import { ethers } from 'ethers'
-import { getNetworkConfig } from 'src/libs/config'
-import { StaticRPCProvider } from 'src/libs/pool-data-provider'
+import { getNetworkConfigEVM } from 'src/libs/config'
+import { StaticRPCProviderEVM } from 'src/libs/static-rpc-provider'
 import { votingEscrowContract } from 'src/libs/voting-escrow'
 import { SECONDS_OF_WEEK } from 'src/utils/date'
 import useSWRImmutable from 'swr/immutable'
-import { useStaticRPCProvider } from '../useStaticRPCProvider'
-import { useWallet } from '../useWallet'
+import { useEVMWallet } from '../useEVMWallet'
+import { useStaticRPCProviderEVM } from '../useStaticRPCProviderEVM'
 import { useTxHandler } from './txHandler'
 
 export const TERM_UNIT = SECONDS_OF_WEEK * 2
@@ -23,8 +23,8 @@ export const useVotingEscrow = (offset = 0) => {
   const term =
     Math.ceil(dayjs().unix() / TERM_UNIT) * TERM_UNIT + TERM_UNIT * offset
 
-  const { data: provider } = useStaticRPCProvider()
-  const { account, signer } = useWallet()
+  const { data: provider } = useStaticRPCProviderEVM()
+  const { account, signer } = useEVMWallet()
   const { data: votingEscrow } = useSWRImmutable(
     provider && ['votingescrow', provider.chainId],
     async () => init(provider!),
@@ -126,8 +126,8 @@ export const useVotingEscrow = (offset = 0) => {
   }
 }
 
-const init = async (provider: StaticRPCProvider) => {
-  const { addresses, rewardToken } = getNetworkConfig(provider.chainId)
+const init = async (provider: StaticRPCProviderEVM) => {
+  const { addresses, rewardToken } = getNetworkConfigEVM(provider.chainId)
   return votingEscrowContract(
     provider!,
     addresses.votingEscrowAddress,

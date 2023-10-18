@@ -1,8 +1,8 @@
 import { StaticImageData } from 'next/image'
 import { Image } from 'src/components/elements/Image'
 import { asStyled } from 'src/components/hoc/asStyled'
-import { darkPurple } from 'src/styles/colors'
-import { flexCenter } from 'src/styles/mixins'
+import { lightPurple } from 'src/styles/colors'
+import { breakpoint, flexCenter } from 'src/styles/mixins'
 import { Asset } from 'src/types/models'
 import styled, { css } from 'styled-components'
 
@@ -33,7 +33,9 @@ export const ItemLabel = asStyled<ItemLabelProps>(
   ({ label, note, image, IconSVG, className }) => (
     <LabelDiv className={className}>
       {image && (
-        <Image src={image.src} alt={image.alt} width={32} height={32} />
+        <ImageContainerDiv>
+          <Image src={image.src} alt={image.alt} fill />
+        </ImageContainerDiv>
       )}
       {IconSVG && <IconSVG />}
       <TextDiv withNote={!!note}>
@@ -90,7 +92,7 @@ const TextDiv = styled.div<{ withNote?: boolean }>`
     withNote &&
     css`
       p:first-child {
-        color: ${darkPurple};
+        color: ${lightPurple};
       }
       p:last-child {
         font-size: 12px;
@@ -98,7 +100,23 @@ const TextDiv = styled.div<{ withNote?: boolean }>`
     `}
 `
 
+const ImageContainerDiv = styled.div``
 const LabelDiv = styled.div`
   ${flexCenter};
   column-gap: 16px;
+  > ${ImageContainerDiv} {
+    position: relative;
+    width: 28px;
+    height: 28px;
+  }
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+  @media ${breakpoint.xl} {
+    > ${ImageContainerDiv}, svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
 `

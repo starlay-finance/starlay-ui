@@ -15,8 +15,8 @@ export const Borrow: FC<
     }
   >
 > = ({ close, openSuggestModal, ...props }) => {
-  const { account, signer } = useWallet()
-  const { borrow, repay } = useLendingPool(account, signer)
+  const { account } = useWallet()
+  const { borrow, repay } = useLendingPool(account)
 
   const { withTracking } = useTracking()
   const borrowWithTracking = withTracking('borrow', borrow)
@@ -32,15 +32,19 @@ export const Borrow: FC<
           borrow={(amount) =>
             borrowWithTracking({
               amount,
-              underlyingAsset: asset.underlyingAsset,
-              vdTokenAddress: asset.vdTokenAddress,
+              pool: asset.pool,
+              asset: asset.underlyingAsset,
+              decimals: asset.decimals,
+              debt: asset.vdTokenAddress,
               onSucceeded: openSuggestModal,
             })
           }
           repay={(amount, all) =>
             repayWithTracking({
               amount,
-              underlyingAsset: asset.underlyingAsset,
+              pool: asset.pool,
+              asset: asset.underlyingAsset,
+              decimals: asset.decimals,
               all,
             })
           }

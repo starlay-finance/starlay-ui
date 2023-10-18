@@ -1,24 +1,29 @@
-import { ChainId, getMarketConfig, getNetworkConfig } from 'src/libs/config'
+import {
+  EVMChainId,
+  getMarketConfigEVM,
+  getNetworkConfigEVM,
+} from 'src/libs/config'
 import { EthereumAddress } from 'src/types/web3'
+import { StaticRPCProviderEVM } from '../static-rpc-provider'
 import { RPCClient } from './providers'
-import { PoolDataProviderInterface, StaticRPCProvider } from './types'
+import { PoolDataProviderInterface } from './types'
 
 export * from './converters'
 export * from './types'
 
 export type PoolDataProvider = {
-  chainId: ChainId
+  chainId: EVMChainId
   provider: PoolDataProviderInterface
 }
 
 export const getPoolDataProvider = ({
   chainId,
   provider,
-}: StaticRPCProvider): PoolDataProvider => {
-  const { addresses, baseAsset, rewardToken } = getNetworkConfig(chainId)
+}: StaticRPCProviderEVM): PoolDataProvider => {
+  const { addresses, baseAsset, rewardToken } = getNetworkConfigEVM(chainId)
   const {
     addresses: { LENDING_POOL_ADDRESS_PROVIDER },
-  } = getMarketConfig(chainId)
+  } = getMarketConfigEVM(chainId)
   const {
     uiPoolDataProvider,
     uiIncentiveDataProvider,

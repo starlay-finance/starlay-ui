@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { AsStyledProps } from 'src/components/hoc/asStyled'
 import { Reel } from 'src/components/parts/Number/Reel'
 import { trueWhite } from 'src/styles/colors'
+import { breakpoint } from 'src/styles/mixins'
 import { Color } from 'src/styles/types'
 import { formatPct } from 'src/utils/number'
 import styled, { css } from 'styled-components'
@@ -77,7 +78,7 @@ const BarChartDiv = styled.div<BarChartStyleProps>`
       background-size: 200%;
       background-position: ${100 - ratio}%;
       span {
-        font-size: 14px;
+        font-size: 12px;
         color: ${$color};
         background-color: ${filled};
         left: min(calc(${ratio}%), calc(100% - 4em));
@@ -85,6 +86,11 @@ const BarChartDiv = styled.div<BarChartStyleProps>`
         border-radius: 6px;
         > div {
           margin-top: 1px;
+        }
+      }
+      @media ${breakpoint.xl} {
+        span {
+          font-size: 14px;
         }
       }
     `
