@@ -7,15 +7,5 @@
   "javascript.format.enable": false,
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-<<<<<<< Updated upstream
   "files.insertFinalNewline": true
-=======
-  "files.insertFinalNewline": true,
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
->>>>>>> Stashed changes
 }

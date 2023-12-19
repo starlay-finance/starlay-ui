@@ -69,20 +69,20 @@ export const Borrow = asStyled<BorrowProps>(
           tabs={
             isMobile
               ? {
-                  items: user?.summary.totalDepositedInUSD.gt(BN_ZERO)
-                    ? BORROW_TABS
-                    : [BORROW_TABS[0]],
-                  activeTab: activeTab || BORROW_TABS[0].id,
-                  setTab,
-                }
+                items: user?.summary.totalDepositedInUSD.gt(BN_ZERO)
+                  ? BORROW_TABS
+                  : [BORROW_TABS[0]],
+                activeTab: activeTab || BORROW_TABS[0].id,
+                setTab,
+              }
               : undefined
           }
           columns={
             !isMobile
               ? BORROW_COLUMNS
               : activeTab === 'position'
-              ? BORROW_POSITION_COLUMNS
-              : BORROW_MARKET_COLUMNS
+                ? BORROW_POSITION_COLUMNS
+                : BORROW_MARKET_COLUMNS
           }
           placeholderLength={3}
           rowDisabledStyle={rowDisabledStyle}
@@ -117,6 +117,7 @@ const borrowRows = ({
         variableBorrowAPY,
         variableBorrowIncentiveAPR,
         borrowUnsupported,
+        isBorrowInactive
       } = asset
       const apy = formatPct(variableBorrowAPY)
       const apr = formatPct(variableBorrowIncentiveAPR)
@@ -126,6 +127,7 @@ const borrowRows = ({
         hasPosition: user?.balanceByAsset[asset.symbol].borrowed.gt(BN_ZERO),
         hasPositionDeposited:
           user?.balanceByAsset[asset.symbol].deposited.gt(BN_ZERO),
+        isBorrowInactive,
         data: {
           asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
           apr: borrowUnsupported ? (
@@ -142,17 +144,17 @@ const borrowRows = ({
             borrowUnsupported || !account
               ? '-'
               : user
-              ? formatAmt(user.balanceByAsset[asset.symbol].borrowed, {
+                ? formatAmt(user.balanceByAsset[asset.symbol].borrowed, {
                   symbol: displaySymbol || symbol,
                   shorteningThreshold: 6,
                 })
-              : undefined,
+                : undefined,
         },
         disabled: borrowUnsupported,
       }
     })
     .filter((row) => {
-      if (['BUSD', 'aSEED'].includes(row.id)) {
+      if (row.isBorrowInactive) {
         return row.hasPosition || row.hasPositionDeposited
       }
       return true

@@ -130,7 +130,7 @@ const depositRows = ({
 }) =>
   markets
     .map((asset) => {
-      const { symbol, displaySymbol, icon, depositAPY, depositIncentiveAPR } =
+      const { symbol, displaySymbol, icon, depositAPY, depositIncentiveAPR, isDepositInactive } =
         asset
       const apy = formatPct(depositAPY)
       const apr = formatPct(depositIncentiveAPR)
@@ -140,6 +140,7 @@ const depositRows = ({
         hasPosition: user?.balanceByAsset[asset.symbol].deposited.gt(BN_ZERO),
         hasPositionBorrowed:
           user?.balanceByAsset[asset.symbol].borrowed.gt(BN_ZERO),
+        isDepositInactive,
         data: {
           asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
           apr: <BlinkWrapper value={apr}>{apr}</BlinkWrapper>,
@@ -177,7 +178,7 @@ const depositRows = ({
       }
     })
     .filter((row) => {
-      if (['BUSD', 'aSEED'].includes(row.id)) {
+      if (row.isDepositInactive) {
         return row.hasPosition || row.hasPositionBorrowed
       }
       return true
