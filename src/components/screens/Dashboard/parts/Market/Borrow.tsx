@@ -108,46 +108,55 @@ const borrowRows = ({
   user: User | undefined
   onClickRow: (asset: AssetMarketData) => void
 }) =>
-  markets.map((asset) => {
-    const {
-      symbol,
-      displaySymbol,
-      icon,
-      variableBorrowAPY,
-      variableBorrowIncentiveAPR,
-      borrowUnsupported,
-    } = asset
-    const apy = formatPct(variableBorrowAPY)
-    const apr = formatPct(variableBorrowIncentiveAPR)
-    return {
-      id: symbol,
-      onClick: () => onClickRow(asset),
-      hasPosition: user?.balanceByAsset[asset.symbol].borrowed.gt(BN_ZERO),
-      data: {
-        asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
-        apr: borrowUnsupported ? (
-          'Coming soon'
-        ) : (
-          <BlinkWrapper value={apr}>{apr}</BlinkWrapper>
-        ),
-        apy: borrowUnsupported ? (
-          '-'
-        ) : (
-          <BlinkWrapper value={apy}>{apy}</BlinkWrapper>
-        ),
-        borrowed:
-          borrowUnsupported || !account
-            ? '-'
-            : user
-            ? formatAmt(user.balanceByAsset[asset.symbol].borrowed, {
-                symbol: displaySymbol || symbol,
-                shorteningThreshold: 6,
-              })
-            : undefined,
-      },
-      disabled: borrowUnsupported,
-    }
-  })
+  markets
+    .map((asset) => {
+      const {
+        symbol,
+        displaySymbol,
+        icon,
+        variableBorrowAPY,
+        variableBorrowIncentiveAPR,
+        borrowUnsupported,
+      } = asset
+      const apy = formatPct(variableBorrowAPY)
+      const apr = formatPct(variableBorrowIncentiveAPR)
+      return {
+        id: symbol,
+        onClick: () => onClickRow(asset),
+        hasPosition: user?.balanceByAsset[asset.symbol].borrowed.gt(BN_ZERO),
+        hasPositionDeposited:
+          user?.balanceByAsset[asset.symbol].deposited.gt(BN_ZERO),
+        data: {
+          asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
+          apr: borrowUnsupported ? (
+            'Coming soon'
+          ) : (
+            <BlinkWrapper value={apr}>{apr}</BlinkWrapper>
+          ),
+          apy: borrowUnsupported ? (
+            '-'
+          ) : (
+            <BlinkWrapper value={apy}>{apy}</BlinkWrapper>
+          ),
+          borrowed:
+            borrowUnsupported || !account
+              ? '-'
+              : user
+              ? formatAmt(user.balanceByAsset[asset.symbol].borrowed, {
+                  symbol: displaySymbol || symbol,
+                  shorteningThreshold: 6,
+                })
+              : undefined,
+        },
+        disabled: borrowUnsupported,
+      }
+    })
+    .filter((row) => {
+      if (['BUSD', 'aSEED'].includes(row.id)) {
+        return row.hasPosition || row.hasPositionDeposited
+      }
+      return true
+    })
 
 const rowDisabledStyle = css`
   opacity: 0.32;
