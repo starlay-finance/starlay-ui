@@ -1,8 +1,8 @@
 import { StaticImageData } from 'next/image'
 import {
   SymbolArsw,
+  SymbolAseed,
   SymbolAstr,
-  SymbolAusd,
   SymbolBnb,
   SymbolBusd,
   SymbolDai,
@@ -111,9 +111,9 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
   },
   aSEED: {
     symbol: 'aSEED',
-    displaySymbol: 'aUSD',
-    name: 'Acalla Dollar',
-    icon: SymbolAusd,
+    displaySymbol: 'aSEED',
+    name: 'Acala Dollar',
+    icon: SymbolAseed,
   },
   BNB: {
     symbol: 'BNB',
