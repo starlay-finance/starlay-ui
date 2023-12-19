@@ -111,8 +111,7 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
   },
   aSEED: {
     symbol: 'aSEED',
-    displaySymbol: 'aSEED',
-    name: 'Acala Dollar',
+    name: 'aUSD SEED',
     icon: SymbolAseed,
   },
   BNB: {
