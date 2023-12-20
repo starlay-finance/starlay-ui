@@ -83,29 +83,27 @@ export const VotesTable: FC<VotesTableProps> = ({
               .format('DD/MM/YYYY HH:mm')}`}
           </span>
           <span>
-            {t`Voting Power Used: ${
-              userData
-                ? `${formatAmtShort(
-                    touched
-                      ? userData.votingPower.times(currentVotingTotal)
-                      : userVoteData?.votedTotal || BN_ZERO,
-                  )}/${formatAmtShort(userData.votingPower)}`
-                : '-/-'
-            }`}
+            {t`Voting Power Used: ${userData
+              ? `${formatAmtShort(
+                touched
+                  ? userData.votingPower.times(currentVotingTotal)
+                  : userVoteData?.votedTotal || BN_ZERO,
+              )}/${formatAmtShort(userData.votingPower)}`
+              : '-/-'
+              }`}
             <TooltipMessage
               message={t`The fraction of voting power you use and you have. To apply on-chain, you must use 100% of the voting power and click "Apply."`}
             />
           </span>
           <span>
-            {t`Expiry: ${
-              userVoteData &&
+            {t`Expiry: ${userVoteData &&
               userVoteData.expiry.unix() > 0 &&
               votingPowerAvailable
-                ? userVoteData.expiry.isAfter(nextTermDayjs)
-                  ? userVoteData.expiry.format('DD/MM/YYYY')
-                  : `Expired`
-                : '-'
-            }`}
+              ? userVoteData.expiry.isAfter(nextTermDayjs)
+                ? userVoteData.expiry.format('DD/MM/YYYY')
+                : `Expired`
+              : '-'
+              }`}
             <TooltipMessage
               message={t`Your voting ranges will be applied until the Expiry. All ranges will become 0 after that.`}
             />
@@ -114,18 +112,18 @@ export const VotesTable: FC<VotesTableProps> = ({
             onClick={
               votingData
                 ? () =>
-                    // TODO warn if voting for frozen assets
-                    vote(
-                      Object.keys(votingData).reduce(
-                        (res, key) => ({
-                          ...res,
-                          [key]: valueToBigNumber(votingData[key]!).shiftedBy(
-                            WEIGHT_DECIMALS,
-                          ),
-                        }),
-                        {},
-                      ),
-                    )
+                  // TODO warn if voting for frozen assets
+                  vote(
+                    Object.keys(votingData).reduce(
+                      (res, key) => ({
+                        ...res,
+                        [key]: valueToBigNumber(votingData[key]!).shiftedBy(
+                          WEIGHT_DECIMALS,
+                        ),
+                      }),
+                      {},
+                    ),
+                  )
                 : undefined
             }
             disabled={
@@ -163,7 +161,12 @@ export const VotesTable: FC<VotesTableProps> = ({
           votingPower: userData?.votingPower,
           votingPowerAvailable,
         }),
-      )}
+      ).filter((row) => {
+        if (row.isDepositInactive || row.isBorrowInactive) {
+          return row.hasPositionVoted
+        }
+        return true
+      })}
       hoverGradients={[`${darkRed}3d`, `${skyBlue}3d`, `${darkRed}3d`]}
       placeholderLength={3}
     />
@@ -189,29 +192,32 @@ const votingRow = ({
   votingPower: BigNumber | undefined
   votingPowerAvailable: boolean | undefined
 }) => {
-  const { symbol, displaySymbol, icon, lTokenAddress } = asset
+  const { symbol, displaySymbol, icon, lTokenAddress, isDepositInactive, isBorrowInactive } = asset
   const assetWeight = voteData?.data[lTokenAddress.toLowerCase()]?.weight
   const userAssetVoteData = userVoteData?.data[lTokenAddress.toLowerCase()]
   const votingWeight = votingData && votingData[lTokenAddress.toLowerCase()]
   return {
     id: symbol,
+    isDepositInactive,
+    isBorrowInactive,
+    hasPositionVoted: userAssetVoteData?.vote.gt(BN_ZERO),
     data: {
       asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
       totalWeight: !voteData
         ? undefined
         : assetWeight
-        ? `${formatAmtShort(assetWeight)}(${formatPct(
+          ? `${formatAmtShort(assetWeight)}(${formatPct(
             voteData.total.gt(BN_ZERO) ? assetWeight.div(voteData.total) : 0,
           )})`
-        : '-',
+          : '-',
       votedWeight: userAssetVoteData
         ? formatAmtShort(userAssetVoteData.vote)
         : '-',
       voting:
         votingPower && votingWeight != null
           ? `${formatAmtShort(votingPower.times(votingWeight))}(${formatPct(
-              votingWeight,
-            )})`
+            votingWeight,
+          )})`
           : '-',
       votingSlider: (
         <Slider

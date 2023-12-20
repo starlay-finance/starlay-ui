@@ -94,9 +94,8 @@ export const StatsTable: FC<StatsTableProps> = ({
       tabs={{ items: TABS, setTab: changeTab, activeTab: 'stats' }}
       control={
         <Control>
-          <span>{t`Total Claimable: ${
-            userVoteData ? formatUSD(userVoteData.claimableTotalInUSD) : '-'
-          }`}</span>
+          <span>{t`Total Claimable: ${userVoteData ? formatUSD(userVoteData.claimableTotalInUSD) : '-'
+            }`}</span>
           <button
             onClick={switchChainIfUnsupported(claim)}
             disabled={!userVoteData?.claimableTotalInUSD.gt(BN_ZERO)}
@@ -106,8 +105,19 @@ export const StatsTable: FC<StatsTableProps> = ({
       // TODO
       columns={STATS_COLUMNS as any}
       rows={markets.map((asset) =>
-        statsRow({ asset, voteData, userVoteData, layPrice, lastTermVoteData }),
-      )}
+        statsRow({
+          asset,
+          voteData,
+          userVoteData,
+          layPrice,
+          lastTermVoteData,
+        }),
+      ).filter((row) => {
+        if (row.isDepositInactive || row.isBorrowInactive) {
+          return row.hasPositionVoted
+        }
+        return true
+      })}
       hoverGradients={[`${darkRed}3d`, `${skyBlue}3d`, `${darkRed}3d`]}
       placeholderLength={3}
     />
@@ -127,56 +137,66 @@ const statsRow = ({
   userVoteData: UserVoteData | undefined
   layPrice: BigNumber | undefined
 }) => {
-  const { symbol, displaySymbol, icon, lTokenAddress } = asset
+  const {
+    symbol,
+    displaySymbol,
+    icon,
+    lTokenAddress,
+    isDepositInactive,
+    isBorrowInactive,
+  } = asset
   const assetVoteData = voteData?.data[lTokenAddress.toLowerCase()]
   const userAssetVoteData = userVoteData?.data[lTokenAddress.toLowerCase()]
   const lastTermAssetVoteData =
     lastTermVoteData?.data[lTokenAddress.toLowerCase()]
   return {
     id: symbol,
+    isDepositInactive,
+    isBorrowInactive,
+    hasPositionVoted: userAssetVoteData?.vote.gt(BN_ZERO),
     data: {
       asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
       revenue: !voteData
         ? undefined
         : assetVoteData
-        ? formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 })
-        : '-',
+          ? formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 })
+          : '-',
       lastTermWeight: !lastTermVoteData
         ? undefined
         : lastTermAssetVoteData && lastTermVoteData.total.gt(BN_ZERO)
-        ? formatPct(lastTermAssetVoteData.weight.div(lastTermVoteData.total))
-        : '-',
+          ? formatPct(lastTermAssetVoteData.weight.div(lastTermVoteData.total))
+          : '-',
       apr: !voteData
         ? undefined
         : assetVoteData && layPrice
-        ? formatPct(
+          ? formatPct(
             assetVoteData.weight.gt(BN_ZERO)
               ? assetVoteData.lastWeekRevenueInUSD
-                  .div(14)
-                  .times(365)
-                  .div(assetVoteData.weight.times(layPrice))
+                .div(14)
+                .times(365)
+                .div(assetVoteData.weight.times(layPrice))
               : 0,
           )
-        : '-',
+          : '-',
       totalWeight: !voteData
         ? undefined
         : assetVoteData && voteData.total.gt(BN_ZERO)
-        ? `${formatAmtShort(assetVoteData.weight)}(${formatPct(
+          ? `${formatAmtShort(assetVoteData.weight)}(${formatPct(
             assetVoteData.weight.div(voteData.total),
           )})`
-        : '-',
+          : '-',
       weight:
         userAssetVoteData && assetVoteData
           ? `${formatAmtShort(userAssetVoteData.vote)}(${formatPct(
-              assetVoteData.weight.isZero()
-                ? BN_ZERO
-                : userAssetVoteData.vote.div(assetVoteData.weight),
-            )})`
+            assetVoteData.weight.isZero()
+              ? BN_ZERO
+              : userAssetVoteData.vote.div(assetVoteData.weight),
+          )})`
           : '-',
       claimable: userAssetVoteData
         ? formatUSD(userAssetVoteData.claimableInUSD, {
-            decimalPlaces: 2,
-          })
+          decimalPlaces: 2,
+        })
         : '-',
     },
   }
