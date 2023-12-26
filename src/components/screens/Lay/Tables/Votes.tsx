@@ -9,6 +9,7 @@ import {
 import { TooltipMessage } from 'src/components/parts/ToolTip'
 import { useVoter } from 'src/hooks/contracts/useVoter'
 import { TERM_UNIT, useVotingEscrow } from 'src/hooks/contracts/useVotingEscrow'
+import { useSwitchChainIfUnsupported } from 'src/hooks/useUnsupportedChainAlert'
 import { darkRed, skyBlue } from 'src/styles/colors'
 import { AssetMarketData, UserVoteData, VoteData } from 'src/types/models'
 import { BN_ZERO, formatAmtShort, formatPct } from 'src/utils/number'
@@ -62,6 +63,7 @@ export const VotesTable: FC<VotesTableProps> = ({
 }) => {
   const { userData, term } = useVotingEscrow()
   const { vote } = useVoter()
+  const { switchChainIfUnsupported } = useSwitchChainIfUnsupported()
 
   const currentVotingTotal =
     (votingData &&
@@ -112,9 +114,9 @@ export const VotesTable: FC<VotesTableProps> = ({
           </span>
           <button
             onClick={
+              // TODO warn if voting for frozen assets
               votingData
-                ? () =>
-                    // TODO warn if voting for frozen assets
+                ? switchChainIfUnsupported(() =>
                     vote(
                       Object.keys(votingData).reduce(
                         (res, key) => ({
@@ -125,7 +127,8 @@ export const VotesTable: FC<VotesTableProps> = ({
                         }),
                         {},
                       ),
-                    )
+                    ),
+                  )
                 : undefined
             }
             disabled={
