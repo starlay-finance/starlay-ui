@@ -12,12 +12,13 @@ import {
 } from 'src/components/parts/Number/PercentageChange'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { useMarketDataSnapshot } from 'src/hooks/useMarketData/useMarketDataSnaphost'
+import { useUserData } from 'src/hooks/useUserData'
 import { darkRed, lightBlack, skyBlue } from 'src/styles/colors'
 import { fontWeightMedium } from 'src/styles/font'
 import { breakpoint } from 'src/styles/mixins'
-import { AssetMarketData } from 'src/types/models'
+import { AssetMarketData, User } from 'src/types/models'
 import { symbolSorter } from 'src/utils/market'
-import { formatPct, formatUSDShort } from 'src/utils/number'
+import { BN_ZERO, formatPct, formatUSDShort } from 'src/utils/number'
 import styled from 'styled-components'
 import { useAssetMarketDetailsModal } from './modals/AssetMarketDetailsModal'
 
@@ -33,6 +34,7 @@ const DETAILS_COLUMNS = [
 
 export const Assets = asStyled(({ className }) => {
   const { data: marketData } = useMarketData()
+  const { data: user } = useUserData()
   const { data: marketDataSnapshot } = useMarketDataSnapshot()
   const { assets, marketReferenceCurrencyPriceInUSD } = marketData || {}
   const markets = (assets || [])
@@ -48,12 +50,20 @@ export const Assets = asStyled(({ className }) => {
           rows={markets.map((asset) =>
             detailsRow({
               asset,
+              user,
               snapshot: marketDataSnapshot?.assets.find(
                 (each) => each.symbol === asset.symbol,
               ),
               onClick: () => open({ asset, marketReferenceCurrencyPriceInUSD }),
             }),
-          )}
+          ).filter((row) => {
+            if (row.isDepositInactive) {
+              return row.hasPositionDeposited
+            } else if (row.isBorrowInactive) {
+              return row.hasPositionBorrowed
+            }
+            return true
+          })}
           hoverGradients={[`${darkRed}3d`, `${skyBlue}3d`, `${darkRed}3d`]}
         />
       </AssetsTableContainer>
@@ -82,10 +92,12 @@ const AssetsTableContainer = styled(TableContainer)`
 
 const detailsRow = ({
   asset,
+  user,
   snapshot = {},
   onClick,
 }: {
   asset: AssetMarketData
+  user: User | undefined
   snapshot?: Partial<AssetMarketData>
   onClick: VoidFunction
 }) => {
@@ -100,9 +112,14 @@ const detailsRow = ({
     totalBorrowedInUSD,
     variableBorrowAPY,
     variableBorrowIncentiveAPR,
+    isBorrowInactive,
+    isDepositInactive
   } = asset
   return {
     id: symbol,
+    hasPositionDeposited: user?.balanceByAsset[asset.symbol].deposited.gt(BN_ZERO),
+    hasPositionBorrowed:
+      user?.balanceByAsset[asset.symbol].borrowed.gt(BN_ZERO),
     onClick,
     data: {
       asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
@@ -159,6 +176,8 @@ const detailsRow = ({
         />
       ),
     },
+    isBorrowInactive,
+    isDepositInactive
   }
 }
 

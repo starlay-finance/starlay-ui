@@ -147,26 +147,33 @@ export const VotesTable: FC<VotesTableProps> = ({
         </Control>
       }
       columns={VOTES_COLUMNS}
-      rows={markets.map((asset) =>
-        votingRow({
-          asset,
-          voteData,
-          userVoteData,
-          votingData,
-          setWeight: (key, weight) => {
-            touch()
-            setVotingData({
-              ...votingData,
-              [key]: valueToBigNumber(weight)
-                .decimalPlaces(4, BigNumber.ROUND_FLOOR)
-                .toNumber(),
-            })
-          },
-          currentVotingTotal,
-          votingPower: userData?.votingPower,
-          votingPowerAvailable,
-        }),
-      )}
+      rows={markets
+        .map((asset) =>
+          votingRow({
+            asset,
+            voteData,
+            userVoteData,
+            votingData,
+            setWeight: (key, weight) => {
+              touch()
+              setVotingData({
+                ...votingData,
+                [key]: valueToBigNumber(weight)
+                  .decimalPlaces(4, BigNumber.ROUND_FLOOR)
+                  .toNumber(),
+              })
+            },
+            currentVotingTotal,
+            votingPower: userData?.votingPower,
+            votingPowerAvailable,
+          }),
+        )
+        .filter((row) => {
+          if (row.isDepositInactive || row.isBorrowInactive) {
+            return row.hasPositionVoted
+          }
+          return true
+        })}
       hoverGradients={[`${darkRed}3d`, `${skyBlue}3d`, `${darkRed}3d`]}
       placeholderLength={3}
     />
@@ -192,12 +199,22 @@ const votingRow = ({
   votingPower: BigNumber | undefined
   votingPowerAvailable: boolean | undefined
 }) => {
-  const { symbol, displaySymbol, icon, lTokenAddress } = asset
+  const {
+    symbol,
+    displaySymbol,
+    icon,
+    lTokenAddress,
+    isDepositInactive,
+    isBorrowInactive,
+  } = asset
   const assetWeight = voteData?.data[lTokenAddress.toLowerCase()]?.weight
   const userAssetVoteData = userVoteData?.data[lTokenAddress.toLowerCase()]
   const votingWeight = votingData && votingData[lTokenAddress.toLowerCase()]
   return {
     id: symbol,
+    isDepositInactive,
+    isBorrowInactive,
+    hasPositionVoted: userAssetVoteData?.vote.gt(BN_ZERO),
     data: {
       asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
       totalWeight: !voteData
