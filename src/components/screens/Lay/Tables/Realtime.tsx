@@ -83,7 +83,12 @@ export const RealtimeTable: FC<RealtimeTableProps> = ({
       columns={REALTIME_COLUMNS as any}
       rows={markets.map((asset) =>
         realtimeRow({ asset, voteData, userVoteData }),
-      )}
+      ).filter((row) => {
+        if (row.isDepositInactive || row.isBorrowInactive) {
+          return row.hasPositionVoted
+        }
+        return true
+      })}
       hoverGradients={[`${darkRed}3d`, `${skyBlue}3d`, `${darkRed}3d`]}
       placeholderLength={3}
     />
@@ -99,7 +104,7 @@ const realtimeRow = ({
   voteData: VoteData | undefined
   userVoteData: UserVoteData | undefined
 }) => {
-  const { symbol, displaySymbol, icon, lTokenAddress } = asset
+  const { symbol, displaySymbol, icon, lTokenAddress, isBorrowInactive, isDepositInactive } = asset
   const assetVoteData = voteData?.data[lTokenAddress.toLowerCase()]
   const userAssetVoteData = userVoteData?.data[lTokenAddress.toLowerCase()]
   const userShare =
@@ -110,29 +115,32 @@ const realtimeRow = ({
       : userAssetVoteData.vote.div(assetVoteData.weight))
   return {
     id: symbol,
+    isBorrowInactive,
+    isDepositInactive,
+    hasPositionVoted: userAssetVoteData?.vote.gt(BN_ZERO),
     data: {
       asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
       revenue: !voteData
         ? undefined
         : assetVoteData
-        ? formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 })
-        : '-',
+          ? formatUSD(assetVoteData.lastWeekRevenueInUSD, { decimalPlaces: 2 })
+          : '-',
       totalWeight: !voteData
         ? undefined
         : assetVoteData
-        ? `${formatAmtShort(assetVoteData.weight)}(${formatPct(
+          ? `${formatAmtShort(assetVoteData.weight)}(${formatPct(
             voteData.total.gt(BN_ZERO)
               ? assetVoteData.weight.div(voteData.total)
               : 0,
           )})`
-        : '-',
+          : '-',
       weight: userShare
         ? `${formatAmtShort(userAssetVoteData.vote)}(${formatPct(userShare)})`
         : '-',
       rewards: userShare
         ? formatUSD(assetVoteData.lastWeekRevenueInUSD.times(userShare), {
-            decimalPlaces: 2,
-          })
+          decimalPlaces: 2,
+        })
         : '-',
     },
   }

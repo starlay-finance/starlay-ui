@@ -76,19 +76,24 @@ export const MakaiMarkets = asStyled(({ className }) => {
               balance: balances[asset.symbol],
               onClick: userData
                 ? () =>
-                    openLoopingModal({
-                      asset,
-                      marketReferenceCurrencyPriceInUSD,
-                      marketReferenceCurrencyDecimals,
-                      userSummary: userData.summary,
-                      userAssetBalance: {
-                        ...userData.balanceByAsset[asset.symbol],
-                        inWallet: balances[asset.symbol],
-                      },
-                    })
+                  openLoopingModal({
+                    asset,
+                    marketReferenceCurrencyPriceInUSD,
+                    marketReferenceCurrencyDecimals,
+                    userSummary: userData.summary,
+                    userAssetBalance: {
+                      ...userData.balanceByAsset[asset.symbol],
+                      inWallet: balances[asset.symbol],
+                    },
+                  })
                 : openWalletModal,
             }),
-          )}
+          ).filter((row) => {
+            if (row.isDepositInactive || row.isBorrowInactive) {
+              return false
+            }
+            return true
+          })}
           hoverGradients={makaiHoverGradients}
           rowDisabledStyle={rowDisabledStyle}
         />
@@ -130,6 +135,8 @@ const marketRow = ({
   })
   return {
     id: symbol,
+    isDepositInactive,
+    isBorrowInactive,
     onClick,
     disabled:
       borrowUnsupported ||

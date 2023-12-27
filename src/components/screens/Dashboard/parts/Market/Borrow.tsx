@@ -69,20 +69,20 @@ export const Borrow = asStyled<BorrowProps>(
           tabs={
             isMobile
               ? {
-                  items: user?.summary.totalDepositedInUSD.gt(BN_ZERO)
-                    ? BORROW_TABS
-                    : [BORROW_TABS[0]],
-                  activeTab: activeTab || BORROW_TABS[0].id,
-                  setTab,
-                }
+                items: user?.summary.totalDepositedInUSD.gt(BN_ZERO)
+                  ? BORROW_TABS
+                  : [BORROW_TABS[0]],
+                activeTab: activeTab || BORROW_TABS[0].id,
+                setTab,
+              }
               : undefined
           }
           columns={
             !isMobile
               ? BORROW_COLUMNS
               : activeTab === 'position'
-              ? BORROW_POSITION_COLUMNS
-              : BORROW_MARKET_COLUMNS
+                ? BORROW_POSITION_COLUMNS
+                : BORROW_MARKET_COLUMNS
           }
           placeholderLength={3}
           rowDisabledStyle={rowDisabledStyle}
@@ -108,46 +108,57 @@ const borrowRows = ({
   user: User | undefined
   onClickRow: (asset: AssetMarketData) => void
 }) =>
-  markets.map((asset) => {
-    const {
-      symbol,
-      displaySymbol,
-      icon,
-      variableBorrowAPY,
-      variableBorrowIncentiveAPR,
-      borrowUnsupported,
-    } = asset
-    const apy = formatPct(variableBorrowAPY)
-    const apr = formatPct(variableBorrowIncentiveAPR)
-    return {
-      id: symbol,
-      onClick: () => onClickRow(asset),
-      hasPosition: user?.balanceByAsset[asset.symbol].borrowed.gt(BN_ZERO),
-      data: {
-        asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
-        apr: borrowUnsupported ? (
-          'Coming soon'
-        ) : (
-          <BlinkWrapper value={apr}>{apr}</BlinkWrapper>
-        ),
-        apy: borrowUnsupported ? (
-          '-'
-        ) : (
-          <BlinkWrapper value={apy}>{apy}</BlinkWrapper>
-        ),
-        borrowed:
-          borrowUnsupported || !account
-            ? '-'
-            : user
-            ? formatAmt(user.balanceByAsset[asset.symbol].borrowed, {
-                symbol: displaySymbol || symbol,
-                shorteningThreshold: 6,
-              })
-            : undefined,
-      },
-      disabled: borrowUnsupported,
-    }
-  })
+  markets
+    .map((asset) => {
+      const {
+        symbol,
+        displaySymbol,
+        icon,
+        variableBorrowAPY,
+        variableBorrowIncentiveAPR,
+        borrowUnsupported,
+        isBorrowInactive
+      } = asset
+      const apy = formatPct(variableBorrowAPY)
+      const apr = formatPct(variableBorrowIncentiveAPR)
+      return {
+        id: symbol,
+        onClick: () => onClickRow(asset),
+        hasPosition: user?.balanceByAsset[asset.symbol].borrowed.gt(BN_ZERO),
+        hasPositionDeposited:
+          user?.balanceByAsset[asset.symbol].deposited.gt(BN_ZERO),
+        isBorrowInactive,
+        data: {
+          asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
+          apr: borrowUnsupported ? (
+            'Coming soon'
+          ) : (
+            <BlinkWrapper value={apr}>{apr}</BlinkWrapper>
+          ),
+          apy: borrowUnsupported ? (
+            '-'
+          ) : (
+            <BlinkWrapper value={apy}>{apy}</BlinkWrapper>
+          ),
+          borrowed:
+            borrowUnsupported || !account
+              ? '-'
+              : user
+                ? formatAmt(user.balanceByAsset[asset.symbol].borrowed, {
+                  symbol: displaySymbol || symbol,
+                  shorteningThreshold: 6,
+                })
+                : undefined,
+        },
+        disabled: borrowUnsupported,
+      }
+    })
+    .filter((row) => {
+      if (row.isBorrowInactive) {
+        return row.hasPosition || row.hasPositionDeposited
+      }
+      return true
+    })
 
 const rowDisabledStyle = css`
   opacity: 0.32;

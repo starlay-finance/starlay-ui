@@ -86,20 +86,20 @@ export const Deposit = asStyled<DepositProps>(
           tabs={
             isMobile
               ? {
-                  items: user?.summary.totalDepositedInUSD.gt(BN_ZERO)
-                    ? DEPOSIT_TABS
-                    : [DEPOSIT_TABS[0]],
-                  activeTab: activeTab || DEPOSIT_TABS[0].id,
-                  setTab,
-                }
+                items: user?.summary.totalDepositedInUSD.gt(BN_ZERO)
+                  ? DEPOSIT_TABS
+                  : [DEPOSIT_TABS[0]],
+                activeTab: activeTab || DEPOSIT_TABS[0].id,
+                setTab,
+              }
               : undefined
           }
           columns={
             !isMobile
               ? DEPOSIT_COLUMNS
               : activeTab === 'position'
-              ? DEPOSIT_POSITION_COLUMNS
-              : DEPOSIT_MARKET_COLUMNS
+                ? DEPOSIT_POSITION_COLUMNS
+                : DEPOSIT_MARKET_COLUMNS
           }
           placeholderLength={3}
           rows={
@@ -128,49 +128,61 @@ const depositRows = ({
   onClickRow: (asset: AssetMarketData) => void
   onClickCollateral: ((asset: AssetMarketData) => void) | undefined
 }) =>
-  markets.map((asset) => {
-    const { symbol, displaySymbol, icon, depositAPY, depositIncentiveAPR } =
-      asset
-    const apy = formatPct(depositAPY)
-    const apr = formatPct(depositIncentiveAPR)
-    return {
-      id: symbol,
-      onClick: () => onClickRow(asset),
-      hasPosition: user?.balanceByAsset[asset.symbol].deposited.gt(BN_ZERO),
-      data: {
-        asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
-        apr: <BlinkWrapper value={apr}>{apr}</BlinkWrapper>,
-        apy: <BlinkWrapper value={apy}>{apy}</BlinkWrapper>,
-        deposited: !account
-          ? '-'
-          : user
-          ? formatAmt(user.balanceByAsset[asset.symbol].deposited, {
-              symbol: displaySymbol || symbol,
-              shorteningThreshold: 6,
-            })
-          : undefined,
-        collateral: !account ? (
-          '-'
-        ) : user ? (
-          user.balanceByAsset[asset.symbol].deposited.isZero() ? (
-            <Toggle checked={false} />
-          ) : (
-            <ClickDisableWrapper onClick={(e) => e.stopPropagation()}>
-              <Toggle
-                checked={
-                  user.balanceByAsset[asset.symbol].usageAsCollateralEnabled
-                }
-                onClick={
-                  onClickCollateral ? () => onClickCollateral(asset) : undefined
-                }
-                disabled={networkType !== 'EVM'}
-              />
-            </ClickDisableWrapper>
-          )
-        ) : undefined,
-      },
-    }
-  })
+  markets
+    .map((asset) => {
+      const { symbol, displaySymbol, icon, depositAPY, depositIncentiveAPR, isDepositInactive } =
+        asset
+      const apy = formatPct(depositAPY)
+      const apr = formatPct(depositIncentiveAPR)
+      return {
+        id: symbol,
+        onClick: () => onClickRow(asset),
+        hasPosition: user?.balanceByAsset[asset.symbol].deposited.gt(BN_ZERO),
+        hasPositionBorrowed:
+          user?.balanceByAsset[asset.symbol].borrowed.gt(BN_ZERO),
+        isDepositInactive,
+        data: {
+          asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
+          apr: <BlinkWrapper value={apr}>{apr}</BlinkWrapper>,
+          apy: <BlinkWrapper value={apy}>{apy}</BlinkWrapper>,
+          deposited: !account
+            ? '-'
+            : user
+              ? formatAmt(user.balanceByAsset[asset.symbol].deposited, {
+                symbol: displaySymbol || symbol,
+                shorteningThreshold: 6,
+              })
+              : undefined,
+          collateral: !account ? (
+            '-'
+          ) : user ? (
+            user.balanceByAsset[asset.symbol].deposited.isZero() ? (
+              <Toggle checked={false} />
+            ) : (
+              <ClickDisableWrapper onClick={(e) => e.stopPropagation()}>
+                <Toggle
+                  checked={
+                    user.balanceByAsset[asset.symbol].usageAsCollateralEnabled
+                  }
+                  onClick={
+                    onClickCollateral
+                      ? () => onClickCollateral(asset)
+                      : undefined
+                  }
+                  disabled={networkType !== 'EVM'}
+                />
+              </ClickDisableWrapper>
+            )
+          ) : undefined,
+        },
+      }
+    })
+    .filter((row) => {
+      if (row.isDepositInactive) {
+        return row.hasPosition || row.hasPositionBorrowed
+      }
+      return true
+    })
 
 const ClickDisableWrapper = styled.div`
   position: absolute;
