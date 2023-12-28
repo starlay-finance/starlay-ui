@@ -9,6 +9,7 @@ import {
 } from 'src/types/models'
 import { DataProvider } from 'src/types/starlay'
 import { PolkadotAddress } from 'src/types/web3'
+import { filterFalsy } from 'src/utils/array'
 import {
   EMPTY_BALANCE_BY_ASSET,
   assetFromSymbolAndAddress,
@@ -53,54 +54,58 @@ export class DataProviderPolkadot implements DataProvider {
       marketTimestamp,
       marketReferenceCurrencyDecimals: 0,
       marketReferenceCurrencyPriceInUSD: BN_ONE,
-      assets: metadata.map((data, idx) => {
-        const { address, symbol, decimals } = this.underlyingOf(
-          data.pool as string,
-        )
-        const priceInMarketReferenceCurrency = toBigNumber(
-          prices[idx].underlyingPrice,
-        )
-        return {
-          pool: data.pool as string,
-          ...assetFromSymbolAndAddress(symbol, address),
-          decimals,
-          depositAPY: toAPY(data.supplyRatePerMsec),
-          variableBorrowAPY: toAPY(data.borrowRatePerMsec),
-          liquidity: toBigNumber(data.totalCash, -decimals),
-          liquidityInUSD: toBigNumber(data.totalCash, -decimals).times(
-            priceInMarketReferenceCurrency,
-          ),
-          totalDepositedInUSD: toBigNumber(data.totalSupply, -decimals).times(
-            priceInMarketReferenceCurrency,
-          ),
-          totalBorrowedInUSD: toBigNumber(data.totalBorrows, -decimals).times(
-            priceInMarketReferenceCurrency,
-          ),
-          baseLTVasCollateral: toBigNumber(data.collateralFactorMantissa),
-          priceInMarketReferenceCurrency: toBigNumber(
+      assets: metadata
+        .map((data, idx) => {
+          const { address, symbol, decimals } = this.underlyingOf(
+            data.pool as string,
+          )
+          const priceInMarketReferenceCurrency = toBigNumber(
             prices[idx].underlyingPrice,
-          ),
-          reserveLiquidationThreshold: toBigNumber(
-            data.collateralFactorMantissa,
-          ),
-          reserveFactor: toBigNumber(data.reserveFactorMantissa),
-          liquidationPenalty: toBigNumber(
-            configuration.liquidationIncentiveMantissa,
-          ),
-          underlyingAsset: data.underlyingAssetAddress as string,
-          lTokenAddress: data.pool as string,
-          vdTokenAddress: '',
-          // TODO
-          usageAsCollateralEnabled: true,
-          isActive: true,
-          isDepositInactive: data.mintGuardianPaused,
-          isBorrowInactive: data.borrowGuardianPaused,
-          borrowingEnabled: true,
-          // incentives
-          depositIncentiveAPR: BN_ZERO,
-          variableBorrowIncentiveAPR: BN_ZERO,
-        }
-      }),
+          )
+          const asset = assetFromSymbolAndAddress(symbol, address)
+          if (!asset) return
+          return {
+            pool: data.pool as string,
+            ...asset,
+            decimals,
+            depositAPY: toAPY(data.supplyRatePerMsec),
+            variableBorrowAPY: toAPY(data.borrowRatePerMsec),
+            liquidity: toBigNumber(data.totalCash, -decimals),
+            liquidityInUSD: toBigNumber(data.totalCash, -decimals).times(
+              priceInMarketReferenceCurrency,
+            ),
+            totalDepositedInUSD: toBigNumber(data.totalSupply, -decimals).times(
+              priceInMarketReferenceCurrency,
+            ),
+            totalBorrowedInUSD: toBigNumber(data.totalBorrows, -decimals).times(
+              priceInMarketReferenceCurrency,
+            ),
+            baseLTVasCollateral: toBigNumber(data.collateralFactorMantissa),
+            priceInMarketReferenceCurrency: toBigNumber(
+              prices[idx].underlyingPrice,
+            ),
+            reserveLiquidationThreshold: toBigNumber(
+              data.collateralFactorMantissa,
+            ),
+            reserveFactor: toBigNumber(data.reserveFactorMantissa),
+            liquidationPenalty: toBigNumber(
+              configuration.liquidationIncentiveMantissa,
+            ),
+            underlyingAsset: data.underlyingAssetAddress as string,
+            lTokenAddress: data.pool as string,
+            vdTokenAddress: '',
+            // TODO
+            usageAsCollateralEnabled: true,
+            isActive: true,
+            isDepositInactive: data.mintGuardianPaused,
+            isBorrowInactive: data.borrowGuardianPaused,
+            borrowingEnabled: true,
+            // incentives
+            depositIncentiveAPR: BN_ZERO,
+            variableBorrowIncentiveAPR: BN_ZERO,
+          }
+        })
+        .filter(filterFalsy),
       raw: {},
     }
   }
@@ -137,17 +142,21 @@ export class DataProviderPolkadot implements DataProvider {
       (
         res,
         { pool, underlyingAssetAddress, underlyingSymbol, underlyingDecimals },
-      ) => ({
-        ...res,
-        [pool as string]: {
-          address: underlyingAssetAddress as string,
-          symbol: assetFromSymbolAndAddress(
-            toString(underlyingSymbol) as AssetSymbol,
-            underlyingAssetAddress as string,
-          ).symbol,
-          decimals: underlyingDecimals,
-        },
-      }),
+      ) => {
+        const asset = assetFromSymbolAndAddress(
+          toString(underlyingSymbol) as AssetSymbol,
+          underlyingAssetAddress as string,
+        )
+        if (!asset) return res
+        return {
+          ...res,
+          [pool as string]: {
+            address: underlyingAssetAddress as string,
+            symbol: asset.symbol,
+            decimals: underlyingDecimals,
+          },
+        }
+      },
       {},
     )
     this.pools = Object.keys(this.poolUnderlyingDict)

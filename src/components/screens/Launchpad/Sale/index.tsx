@@ -35,7 +35,7 @@ export const Sale: FC<SaleProps> = ({
       maxAmount,
       biddingAssets: sale.biddingAssets.map((asset) => ({
         ...asset,
-        icon: assetFromSymbolAndAddress(asset.symbol, asset.address).icon,
+        icon: assetFromSymbolAndAddress(asset.symbol, asset.address)?.icon,
       })),
       currentEstimatedPrice: market?.currentPriceInUSD,
       boostedRaisedAmount: market?.boostedRaisedAmountInUSD,
