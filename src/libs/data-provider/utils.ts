@@ -130,15 +130,21 @@ export const toUser = (
 
 const toBalanceByAsset = (userReservesData: ComputedUserReserve[]) =>
   userReservesData.reduce(
-    (prev, { reserve: { symbol, underlyingAsset }, ...userReserve }) => ({
-      ...prev,
-      [assetFromSymbolAndAddress(symbol as AssetSymbol, underlyingAsset)
-        .symbol]: {
-        deposited: valueToBigNumber(userReserve.underlyingBalance),
-        borrowed: valueToBigNumber(userReserve.totalBorrows),
-        usageAsCollateralEnabled: userReserve.usageAsCollateralEnabledOnUser,
-      },
-    }),
+    (prev, { reserve: { symbol, underlyingAsset }, ...userReserve }) => {
+      const asset = assetFromSymbolAndAddress(
+        symbol as AssetSymbol,
+        underlyingAsset,
+      )
+      if (!asset) return prev
+      return {
+        ...prev,
+        [asset.symbol]: {
+          deposited: valueToBigNumber(userReserve.underlyingBalance),
+          borrowed: valueToBigNumber(userReserve.totalBorrows),
+          usageAsCollateralEnabled: userReserve.usageAsCollateralEnabledOnUser,
+        },
+      }
+    },
     EMPTY_BALANCE_BY_ASSET,
   )
 
