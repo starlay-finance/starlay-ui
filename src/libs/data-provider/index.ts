@@ -7,6 +7,7 @@ import dayjs from 'dayjs'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { DataProvider } from 'src/types/starlay'
 import { EthereumAddress } from 'src/types/web3'
+import { filterFalsy } from 'src/utils/array'
 import { onlyListed } from 'src/utils/assets'
 import { BN_ZERO } from 'src/utils/number'
 import { EVMChainId, getNetworkConfigEVM } from '../config'
@@ -67,6 +68,7 @@ export class DataProviderEVM implements DataProvider<MarketDataRawEVM> {
           incentivesByUnderlyingAsset[reserve.underlyingAsset],
         ),
       )
+      .filter(filterFalsy)
     return {
       assets,
       marketReferenceCurrencyPriceInUSD,

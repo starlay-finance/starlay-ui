@@ -35,7 +35,7 @@ export const toAssetMarketData = (
   marketReferenceCurrencyPriceInUSD: BigNumber,
   reserve: Omit<FormattedReserveData, 'symbol'> & { symbol: AssetSymbol },
   incentive: ValueOf<ReserveIncentiveDict> = EMPTY_INCENTIVE,
-): AssetMarketData => {
+): AssetMarketData | undefined => {
   const [liquidityInUSD, totalDepositedInUSD, totalBorrowedInUSD] =
     convertToUSDBulk(
       valueToBigNumber(reserve.priceInMarketReferenceCurrency),
@@ -44,9 +44,14 @@ export const toAssetMarketData = (
       valueToBigNumber(reserve.totalLiquidity),
       valueToBigNumber(reserve.totalVariableDebt).plus(reserve.totalStableDebt),
     )
+  const asset = assetFromSymbolAndAddress(
+    reserve.symbol,
+    reserve.underlyingAsset,
+  )
+  if (!asset) return
   return {
     pool: '', // unused
-    ...assetFromSymbolAndAddress(reserve.symbol, reserve.underlyingAsset),
+    ...asset,
     underlyingAsset: reserve.underlyingAsset.toLowerCase() as EthereumAddress,
     depositAPY: valueToBigNumber(reserve.supplyAPY),
     variableBorrowAPY: valueToBigNumber(reserve.variableBorrowAPY),

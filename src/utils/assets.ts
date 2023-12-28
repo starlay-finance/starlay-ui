@@ -17,7 +17,8 @@ export const onlyListed = <P extends { symbol: any }>(
 export const assetFromSymbolAndAddress = (
   symbol: AssetSymbol,
   underlyingAsset: string,
-): Asset => ASSETS_BY_ADDRESS_DICT[underlyingAsset] || ASSETS_DICT[symbol]
+): Asset | undefined =>
+  ASSETS_BY_ADDRESS_DICT[underlyingAsset] || ASSETS_DICT[symbol]
 
 export const generateSymbolDict = <T>(value: T): { [key in AssetSymbol]: T } =>
   ASSETS.reduce(

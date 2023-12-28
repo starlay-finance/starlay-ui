@@ -137,11 +137,6 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     icon: SymbolLay,
     borrowUnsupported: true,
   },
-  nASTR: {
-    symbol: 'nASTR',
-    name: 'Liquid ASTR',
-    icon: SymbolAstr,
-  },
 } as const
 
 export const ASSETS_BY_ADDRESS_DICT: Partial<Record<string, Asset>> = {
