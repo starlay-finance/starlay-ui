@@ -9,6 +9,7 @@ import {
   SymbolDot,
   SymbolLay,
   SymbolMatic,
+  SymbolNAstr,
   SymbolUsdc,
   SymbolUsdt,
   SymbolWbtc,
@@ -140,7 +141,7 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
   nASTR: {
     symbol: 'nASTR',
     name: 'Liquid ASTR',
-    icon: SymbolAstr,
+    icon: SymbolNAstr,
   },
 } as const
 
