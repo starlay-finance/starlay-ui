@@ -33,7 +33,6 @@ export const LISTED_ASSET_SYMBOLS = [
   'SDN',
   'ARSW',
   'LAY',
-  'nASTR',
 ] as const
 
 export const SYMBOL_ORDER: Record<AssetSymbol, number> =
