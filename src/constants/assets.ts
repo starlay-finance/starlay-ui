@@ -9,6 +9,7 @@ import {
   SymbolDot,
   SymbolLay,
   SymbolMatic,
+  SymbolNAstr,
   SymbolUsdc,
   SymbolUsdt,
   SymbolWbtc,
@@ -33,6 +34,7 @@ export const LISTED_ASSET_SYMBOLS = [
   'SDN',
   'ARSW',
   'LAY',
+  'nASTR',
 ] as const
 
 export const SYMBOL_ORDER: Record<AssetSymbol, number> =
@@ -135,6 +137,11 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     name: 'Starlay Token',
     icon: SymbolLay,
     borrowUnsupported: true,
+  },
+  nASTR: {
+    symbol: 'nASTR',
+    name: 'Liquid ASTR',
+    icon: SymbolNAstr,
   },
 } as const
 
