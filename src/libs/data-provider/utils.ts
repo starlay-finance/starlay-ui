@@ -35,7 +35,7 @@ export const toAssetMarketData = (
   marketReferenceCurrencyPriceInUSD: BigNumber,
   reserve: Omit<FormattedReserveData, 'symbol'> & { symbol: AssetSymbol },
   incentive: ValueOf<ReserveIncentiveDict> = EMPTY_INCENTIVE,
-): AssetMarketData => {
+): AssetMarketData | undefined => {
   const [liquidityInUSD, totalDepositedInUSD, totalBorrowedInUSD] =
     convertToUSDBulk(
       valueToBigNumber(reserve.priceInMarketReferenceCurrency),
@@ -44,9 +44,14 @@ export const toAssetMarketData = (
       valueToBigNumber(reserve.totalLiquidity),
       valueToBigNumber(reserve.totalVariableDebt).plus(reserve.totalStableDebt),
     )
+  const asset = assetFromSymbolAndAddress(
+    reserve.symbol,
+    reserve.underlyingAsset,
+  )
+  if (!asset) return
   return {
     pool: '', // unused
-    ...assetFromSymbolAndAddress(reserve.symbol, reserve.underlyingAsset),
+    ...asset,
     underlyingAsset: reserve.underlyingAsset.toLowerCase() as EthereumAddress,
     depositAPY: valueToBigNumber(reserve.supplyAPY),
     variableBorrowAPY: valueToBigNumber(reserve.variableBorrowAPY),
@@ -130,15 +135,21 @@ export const toUser = (
 
 const toBalanceByAsset = (userReservesData: ComputedUserReserve[]) =>
   userReservesData.reduce(
-    (prev, { reserve: { symbol, underlyingAsset }, ...userReserve }) => ({
-      ...prev,
-      [assetFromSymbolAndAddress(symbol as AssetSymbol, underlyingAsset)
-        .symbol]: {
-        deposited: valueToBigNumber(userReserve.underlyingBalance),
-        borrowed: valueToBigNumber(userReserve.totalBorrows),
-        usageAsCollateralEnabled: userReserve.usageAsCollateralEnabledOnUser,
-      },
-    }),
+    (prev, { reserve: { symbol, underlyingAsset }, ...userReserve }) => {
+      const asset = assetFromSymbolAndAddress(
+        symbol as AssetSymbol,
+        underlyingAsset,
+      )
+      if (!asset) return prev
+      return {
+        ...prev,
+        [asset.symbol]: {
+          deposited: valueToBigNumber(userReserve.underlyingBalance),
+          borrowed: valueToBigNumber(userReserve.totalBorrows),
+          usageAsCollateralEnabled: userReserve.usageAsCollateralEnabledOnUser,
+        },
+      }
+    },
     EMPTY_BALANCE_BY_ASSET,
   )
 

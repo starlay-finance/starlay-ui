@@ -3,6 +3,7 @@ import { MarketDataRawEVM } from 'src/libs/data-provider'
 import { toAssetMarketData } from 'src/libs/data-provider/utils'
 import { getPoolDataSnapshot } from 'src/libs/pool-data-provider/snapshots-provider'
 import { MarketData } from 'src/types/models'
+import { filterFalsy } from 'src/utils/array'
 import { onlyListed } from 'src/utils/assets'
 import { utcStartOfDate } from 'src/utils/date'
 import useSWRImmutable from 'swr/immutable'
@@ -41,6 +42,7 @@ const getMarketDataSnapshot = async (
         incentivesByUnderlyingAsset[reserve.underlyingAsset.toLowerCase()],
       ),
     )
+    .filter(filterFalsy)
   return {
     assets,
     marketReferenceCurrencyPriceInUSD,
