@@ -23,13 +23,13 @@ import styled from 'styled-components'
 import { useAssetMarketDetailsModal } from './modals/AssetMarketDetailsModal'
 
 const DETAILS_COLUMNS = [
-  { id: 'asset', name: t`Asset`, widthRatio: 4 },
+  { id: 'asset', name: t`Asset`, widthRatio: 2 },
   { id: 'totalDeposited', name: t`Total Deposited`, widthRatio: 2 },
   { id: 'depositAPY', name: t`Deposit APY`, widthRatio: 2 },
-  { id: 'depositAPR', name: t`Deposit Reward APR`, widthRatio: 3 },
+  // { id: 'depositAPR', name: t`Deposit Reward APR`, widthRatio: 3 },
   { id: 'totalBorrowed', name: t`Total Borrowed`, widthRatio: 2 },
   { id: 'borrowAPY', name: t`Borrow APY`, widthRatio: 2 },
-  { id: 'borrowAPR', name: t`Borrow Reward APR`, widthRatio: 3 },
+  // { id: 'borrowAPR', name: t`Borrow Reward APR`, widthRatio: 3 },
 ]
 
 export const Assets = asStyled(({ className }) => {
@@ -138,14 +138,14 @@ const detailsRow = ({
           isPercentage
         />
       ),
-      depositAPR: (
-        <ValueWithPercentageChange
-          value={formatPct(depositIncentiveAPR)}
-          current={depositIncentiveAPR}
-          previous={snapshot.depositIncentiveAPR}
-          isPercentage
-        />
-      ),
+      // depositAPR: (
+      //   <ValueWithPercentageChange
+      //     value={formatPct(depositIncentiveAPR)}
+      //     current={depositIncentiveAPR}
+      //     previous={snapshot.depositIncentiveAPR}
+      //     isPercentage
+      //   />
+      // ),
       totalBorrowed: borrowUnsupported ? (
         'Coming soon'
       ) : (
@@ -165,16 +165,16 @@ const detailsRow = ({
           isPercentage
         />
       ),
-      borrowAPR: borrowUnsupported ? (
-        '-'
-      ) : (
-        <ValueWithPercentageChange
-          value={formatPct(variableBorrowIncentiveAPR)}
-          current={variableBorrowIncentiveAPR}
-          previous={snapshot.variableBorrowIncentiveAPR}
-          isPercentage
-        />
-      ),
+      // borrowAPR: borrowUnsupported ? (
+      //   '-'
+      // ) : (
+      //   <ValueWithPercentageChange
+      //     value={formatPct(variableBorrowIncentiveAPR)}
+      //     current={variableBorrowIncentiveAPR}
+      //     previous={snapshot.variableBorrowIncentiveAPR}
+      //     isPercentage
+      //   />
+      // ),
     },
     isBorrowInactive,
     isDepositInactive
