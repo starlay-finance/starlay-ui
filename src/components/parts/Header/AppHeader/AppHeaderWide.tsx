@@ -79,7 +79,7 @@ export const AppHeaderWide = styled(({ className }) => {
           {account ? shortenAddress(account) : t`Connect`}
         </MenuButton>
         <MenuButtonSmall
-          onClick={() => openRewardModal()}
+          // onClick={() => openRewardModal()}
           disabled={!user || network !== 'EVM'}
         >
           <Image src={SymbolAca} alt="ACA" width={20} height={20} />
