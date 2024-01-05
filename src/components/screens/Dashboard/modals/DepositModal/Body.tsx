@@ -8,7 +8,6 @@ import {
   NumberItem,
   NumberItemWithDiff,
 } from 'src/components/parts/Modal/parts'
-import { ASSETS_DICT } from 'src/constants/assets'
 import { darkPurple, purple, trueWhite } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import {
@@ -124,12 +123,12 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
             image={{ src: asset.icon, alt: asset.name }}
             format={formatPct}
           />
-          <NumberItem
+          {/* <NumberItem
             label={t`Deposit APR`}
             num={depositIncentiveAPR}
             image={{ src: ASSETS_DICT.DOT.icon, alt: ASSETS_DICT.DOT.name }}
             format={formatPct}
-          />
+          /> */}
           <NumberItemWithDiff
             label={t`Borrow Available`}
             current={availableBorrowsInUSD}
