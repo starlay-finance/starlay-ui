@@ -77,7 +77,7 @@ export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
     walletConnectProjectId: '7077959b8319331ea75408788eae93b5',
     addresses: {
       walletBalanceProvider: '0x59300Abd7e80076EC2b361769aeEb4fb041a5435',
-      uiPoolDataProvider: '0xf69aE83c5610F84A988637fD752D7ce475EFED3C',
+      uiPoolDataProvider: '0x7A305Ea702987D2dbc20E794d095E21fAe94e568',
       uiIncentiveDataProvider: '0xDDB5114C69791e366398287f0510fe87f7571cF7',
       priceAggregatorAdapterAddress:
         '0x0493895d637A8500e3d7cB35AdabF57d32198ba8',
