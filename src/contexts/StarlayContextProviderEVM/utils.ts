@@ -10,7 +10,7 @@ export const executeTx = async (
   recentGasPrice?: ethers.BigNumber,
 ) => {
   if (!signer) throw new Error('Unexpected state')
-  const tx = await item.tx()
+  const { gasLimit, ...tx } = await item.tx()
   try {
     const txPromise = await signer.sendTransaction({
       ...tx,
