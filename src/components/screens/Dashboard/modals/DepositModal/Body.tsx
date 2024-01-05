@@ -8,7 +8,6 @@ import {
   NumberItem,
   NumberItemWithDiff,
 } from 'src/components/parts/Modal/parts'
-import { ASSETS_DICT } from 'src/constants/assets'
 import { darkPurple, purple, trueWhite } from 'src/styles/colors'
 import { flexCenter } from 'src/styles/mixins'
 import {
@@ -124,12 +123,12 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
             image={{ src: asset.icon, alt: asset.name }}
             format={formatPct}
           />
-          <NumberItem
+          {/* <NumberItem
             label={t`Deposit APR`}
             num={depositIncentiveAPR}
-            image={{ src: ASSETS_DICT.LAY.icon, alt: ASSETS_DICT.LAY.name }}
+            image={{ src: ASSETS_DICT.DOT.icon, alt: ASSETS_DICT.DOT.name }}
             format={formatPct}
-          />
+          /> */}
           <NumberItemWithDiff
             label={t`Borrow Available`}
             current={availableBorrowsInUSD}
@@ -149,8 +148,8 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
               !estimation.healthFactor
                 ? undefined
                 : estimation.healthFactor.isPositive()
-                ? estimation.healthFactor
-                : '-'
+                  ? estimation.healthFactor
+                  : '-'
             }
             formatter={formatAmtShort}
           />
@@ -171,12 +170,10 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
           <SimpleCtaButton
             onClick={() => deposit(depositAmountBn!)}
             disabled={
-              asset.symbol === 'aSEED' || !!estimation.unavailableReason
+              !!estimation.unavailableReason
             }
           >
-            {asset.symbol === 'aSEED'
-              ? t`Suspended`
-              : estimation.unavailableReason || t`Deposit`}
+            {estimation.unavailableReason || t`Deposit`}
           </SimpleCtaButton>
         ) : (
           <SimpleCtaButton

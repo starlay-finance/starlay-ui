@@ -1,12 +1,12 @@
 import { disableLoadingDecorator, modalDecorator } from '.storybook/decorators'
 import { useEffect } from 'react'
-import { DefaultModalContainer } from 'src/components/parts/Modal/base'
-import { ASSETS_DICT } from 'src/constants/assets'
-import { BN_HUNDRED, BN_ZERO } from 'src/utils/number'
 import { MOCK_ASSET_MARKET } from 'src/__mocks__/dashboard'
 import { MOCK_USER_ASSET_BALANCE, MOCK_USER_SUMMARY } from 'src/__mocks__/user'
 import { VIEWPORT_ALL } from 'src/__tests__/config/storybook'
 import { disableSVGAnimation } from 'src/__tests__/utils/disableAnimation'
+import { DefaultModalContainer } from 'src/components/parts/Modal/base'
+import { ASSETS_DICT } from 'src/constants/assets'
+import { BN_HUNDRED, BN_ZERO } from 'src/utils/number'
 import { isScreenshot } from 'storycap'
 import { Dashboard } from '.'
 import { Borrow } from './modals/BorrowModal'
@@ -19,7 +19,7 @@ export default {
   decorators: [disableLoadingDecorator, modalDecorator],
 }
 
-export { DashboardScreen, DepositModal, BorrowModal, SuggestModal }
+export { BorrowModal, DashboardScreen, DepositModal, SuggestModal }
 
 const DashboardScreen = () => {
   useEffect(() => {
@@ -36,7 +36,7 @@ const DepositModal = () => (
       userAssetBalance={MOCK_USER_ASSET_BALANCE}
       marketReferenceCurrencyPriceInUSD={BN_ZERO}
       marketReferenceCurrencyDecimals={0}
-      close={() => {}}
+      close={() => { }}
     />
   </DefaultModalContainer>
 )
@@ -49,8 +49,8 @@ const BorrowModal = () => (
       userAssetBalance={MOCK_USER_ASSET_BALANCE}
       marketReferenceCurrencyPriceInUSD={BN_ZERO}
       marketReferenceCurrencyDecimals={0}
-      close={() => {}}
-      openSuggestModal={() => {}}
+      close={() => { }}
+      openSuggestModal={() => { }}
     />
   </DefaultModalContainer>
 )
@@ -65,9 +65,9 @@ const SuggestModal = () => (
         url: '',
       }}
       inWallet={BN_HUNDRED}
-      close={() => {}}
-      openDeposit={() => {}}
-      openMakai={() => {}}
+      close={() => { }}
+      openDeposit={() => { }}
+      openMakai={() => { }}
     />
   </DefaultModalContainer>
 )

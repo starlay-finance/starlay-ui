@@ -15,14 +15,14 @@ import { css } from 'styled-components'
 
 const BORROW_COLUMNS = [
   { id: 'asset', name: t`Asset`, widthRatio: 4 },
-  { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
+  // { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
   { id: 'apy', name: t`APY_Borrow`, widthRatio: 3 },
   { id: 'borrowed', name: t`Borrowed`, widthRatio: 6 },
 ]
 
 const BORROW_MARKET_COLUMNS = [
   { id: 'asset', name: t`Asset`, widthRatio: 4 },
-  { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
+  // { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
   { id: 'apy', name: t`APY_Borrow`, widthRatio: 3 },
 ]
 
@@ -130,11 +130,11 @@ const borrowRows = ({
         isBorrowInactive,
         data: {
           asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
-          apr: borrowUnsupported ? (
-            'Coming soon'
-          ) : (
-            <BlinkWrapper value={apr}>{apr}</BlinkWrapper>
-          ),
+          // apr: borrowUnsupported ? (
+          //   'Coming soon'
+          // ) : (
+          //   <BlinkWrapper value={apr}>{apr}</BlinkWrapper>
+          // ),
           apy: borrowUnsupported ? (
             '-'
           ) : (

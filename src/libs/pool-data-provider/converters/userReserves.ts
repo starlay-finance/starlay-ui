@@ -3,8 +3,8 @@ import {
   UserReserveDataHumanized,
 } from '@starlay-finance/contract-helpers'
 import {
-  formatUserSummary,
   FormatUserSummaryResponse,
+  formatUserSummary,
   normalize,
 } from '@starlay-finance/math-utils'
 import { EVMNetworkConfig } from 'src/libs/config'

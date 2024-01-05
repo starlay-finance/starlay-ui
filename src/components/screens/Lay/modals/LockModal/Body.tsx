@@ -115,8 +115,8 @@ export const LockModalBody: FC<LockModalBodyProps> = ({
               activeTab !== 'wallet' && vesting
                 ? vesting[activeTab].vestingEnd.diff(dayjs(), 's')
                 : current
-                ? current?.lockedEnd.diff(dayjs(), 's') + TERM_UNIT
-                : undefined
+                  ? current?.lockedEnd.diff(dayjs(), 's') + TERM_UNIT
+                  : undefined
             }
             max={valueToBigNumber(
               DURATION_LIST[DURATION_LIST.length - 1].value,
@@ -149,7 +149,7 @@ export const LockModalBody: FC<LockModalBodyProps> = ({
         <Balance
           label={t`Available`}
           balance={lockable}
-          symbol={ASSETS_DICT.LAY.symbol}
+          symbol={ASSETS_DICT.DOT.symbol}
         />
       </Action>
     </ContentDiv>

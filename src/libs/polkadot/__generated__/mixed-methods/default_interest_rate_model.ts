@@ -1,3 +1,7 @@
+// @ts-nocheck
+// @ts-nocheck
+// @ts-nocheck
+// @ts-nocheck
 /* This file is auto-generated */
 
 import type { ContractPromise } from '@polkadot/api-contract';

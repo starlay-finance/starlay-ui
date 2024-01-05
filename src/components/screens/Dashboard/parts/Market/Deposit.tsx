@@ -17,15 +17,15 @@ import { BN_ZERO, formatAmt, formatPct } from 'src/utils/number'
 import styled from 'styled-components'
 
 const DEPOSIT_COLUMNS = [
-  { id: 'asset', name: t`Asset`, widthRatio: 4 },
-  { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
+  { id: 'asset', name: t`Asset`, widthRatio: 3 },
+  // { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
   { id: 'apy', name: t`APY_Deposit`, widthRatio: 2.5 },
   { id: 'deposited', name: t`Deposited`, widthRatio: 3.5 },
   { id: 'collateral', name: t`Collateral`, widthRatio: 3 },
 ]
 const DEPOSIT_MARKET_COLUMNS = [
   { id: 'asset', name: t`Asset`, widthRatio: 4 },
-  { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
+  // { id: 'apr', name: t`Reward APR`, widthRatio: 3 },
   { id: 'apy', name: t`APY_Deposit`, widthRatio: 2.5 },
 ]
 const DEPOSIT_POSITION_COLUMNS = [
@@ -133,7 +133,7 @@ const depositRows = ({
       const { symbol, displaySymbol, icon, depositAPY, depositIncentiveAPR, isDepositInactive } =
         asset
       const apy = formatPct(depositAPY)
-      const apr = formatPct(depositIncentiveAPR)
+      // const apr = formatPct(depositIncentiveAPR)
       return {
         id: symbol,
         onClick: () => onClickRow(asset),
@@ -143,7 +143,7 @@ const depositRows = ({
         isDepositInactive,
         data: {
           asset: <AssetTd icon={icon} name={displaySymbol || symbol} />,
-          apr: <BlinkWrapper value={apr}>{apr}</BlinkWrapper>,
+          // apr: <BlinkWrapper value={apr}>{apr}</BlinkWrapper>,
           apy: <BlinkWrapper value={apy}>{apy}</BlinkWrapper>,
           deposited: !account
             ? '-'

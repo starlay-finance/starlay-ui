@@ -39,7 +39,7 @@ export const Sale: FC<SaleProps> = ({
       })),
       currentEstimatedPrice: market?.currentPriceInUSD,
       boostedRaisedAmount: market?.boostedRaisedAmountInUSD,
-      receivingAsset: ASSETS_DICT.LAY,
+      receivingAsset: ASSETS_DICT.DOT,
     })
 
   return (

@@ -2,7 +2,9 @@ import { t } from '@lingui/macro'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
 import { useRouter } from 'next/router'
 import { FC, useState } from 'react'
+import { SymbolAca, SymbolAstr } from 'src/assets/images'
 import { IconArrowRight, IconProtocol } from 'src/assets/svgs'
+import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import { MenuProps, MobileMenu } from 'src/components/parts/MobileMenu'
@@ -19,11 +21,9 @@ import { gray } from 'src/styles/colors'
 import { BN_ZERO, formatAmt, formatUSD } from 'src/utils/number'
 import {
   APP_ROOT,
-  MAKAI,
   MARKETS,
   byNetwork,
-  evmOnly,
-  matchPath,
+  matchPath
 } from 'src/utils/routes'
 import styled from 'styled-components'
 
@@ -59,13 +59,23 @@ const MenuItems: FC<{ showClaim: VoidFunction }> = ({ showClaim }) => {
       <Link
         href={matchPath(pathname, MARKETS) ? '' : byNetwork(MARKETS, network)}
       >{t`Markets`}</Link>
-      <Link
+      {/* <Link
         href={matchPath(pathname, MAKAI) ? '' : evmOnly(MAKAI, network)}
-      >{t`Makai`}</Link>
-      <Link href="">{t`LAY/veLAY`}</Link>
+      >{t`Makai`}</Link> */}
+      {/* <Link href="">{t`LAY/veLAY`}</Link>
       <button onClick={showClaim} disabled={!account || network !== 'EVM'}>
         Claim LAY
-      </button>
+      </button> */}
+      <div style={{ borderStyle: "solid", borderWidth: "1px", width: "100%" }}></div>
+      <h3>Switch Network</h3>
+      <NetworkDiv>
+        <Image src={SymbolAstr} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
+        <Link href="https://starlay.finance">{t`Astar`}</Link>
+      </NetworkDiv>
+      <NetworkDiv>
+        <Image src={SymbolAca} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
+        <Link href="">{t`Acala`}</Link>
+      </NetworkDiv>
     </>
   )
 }
@@ -87,9 +97,9 @@ const ClaimLAY = () => {
   const { data: balance } = useWalletBalance()
   const { data, claim } = useClaimer()
 
-  const { symbol } = ASSETS_DICT.LAY
+  const { symbol } = ASSETS_DICT.DOT
   const unclaimed = data?.total || BN_ZERO
-  const inWallet = balance?.LAY || BN_ZERO
+  const inWallet = balance?.DOT || BN_ZERO
   const total = unclaimed.plus(inWallet)
   const priceInUSD = (
     marketData?.marketReferenceCurrencyPriceInUSD || BN_ZERO
@@ -151,4 +161,10 @@ const TitleDiv = styled.div`
     height: 28px;
     width: 28px;
   }
+`
+
+const NetworkDiv = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
 `

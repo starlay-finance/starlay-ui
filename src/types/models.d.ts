@@ -2,7 +2,7 @@ import { BigNumber } from '@starlay-finance/math-utils'
 import { Dayjs } from 'dayjs'
 import { LISTED_ASSET_SYMBOLS } from 'src/constants/assets'
 
-export type AssetSymbol = typeof LISTED_ASSET_SYMBOLS[number] | 'WASTR' | 'WSDN'
+export type AssetSymbol = typeof LISTED_ASSET_SYMBOLS[number]
 
 export type Asset = {
   symbol: AssetSymbol

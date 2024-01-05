@@ -1,39 +1,12 @@
-import { StaticImageData } from 'next/image'
 import {
-  SymbolArsw,
-  SymbolAseed,
-  SymbolAstr,
-  SymbolBnb,
-  SymbolBusd,
-  SymbolDai,
+  SymbolAca,
   SymbolDot,
-  SymbolLay,
-  SymbolMatic,
-  SymbolUsdc,
-  SymbolUsdt,
-  SymbolWbtc,
-  SymbolWeth,
-  SymbolWsdn,
+  SymbolLdot,
+  SymbolUsdcet,
 } from 'src/assets/images'
 import { Asset, AssetSymbol } from 'src/types/models'
 
-export const LISTED_ASSET_SYMBOLS = [
-  'ASTR',
-  'DOT',
-  'aSEED',
-  'DAI',
-  'USDC',
-  'USDT',
-  'ceUSDT',
-  'BUSD',
-  'WETH',
-  'WBTC',
-  'MATIC',
-  'BNB',
-  'SDN',
-  'ARSW',
-  'LAY',
-] as const
+export const LISTED_ASSET_SYMBOLS = ['ACA', 'LDOT', 'USDC', 'DOT'] as const
 
 export const SYMBOL_ORDER: Record<AssetSymbol, number> =
   LISTED_ASSET_SYMBOLS.reduce(
@@ -45,112 +18,34 @@ export const SYMBOL_ORDER: Record<AssetSymbol, number> =
   ) as Record<AssetSymbol, number>
 
 export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
-  ASTR: {
-    symbol: 'ASTR',
-    name: 'Astar',
-    icon: SymbolAstr,
+  ACA: {
+    symbol: 'ACA',
+    name: 'Acala',
+    icon: SymbolAca,
+  },
+  LDOT: {
+    symbol: 'LDOT',
+    name: 'Liquid DOT',
+    icon: SymbolLdot,
+  },
+  USDC: {
+    symbol: 'USDC',
+    name: 'USD Coin (Portal from Ethereum)',
+    icon: SymbolUsdcet,
   },
   DOT: {
     symbol: 'DOT',
     name: 'Polkadot',
     icon: SymbolDot,
-    // borrowUnsupported: true,
-    // makaiUnsupported: true,
-  },
-  WETH: {
-    symbol: 'WETH',
-    name: 'Wrapped Ether',
-    icon: SymbolWeth,
-  },
-  WBTC: {
-    symbol: 'WBTC',
-    name: 'Wrapped BTC',
-    icon: SymbolWbtc,
-  },
-  SDN: {
-    symbol: 'SDN',
-    displaySymbol: 'WSDN',
-    name: 'Wrapped SDN',
-    icon: SymbolWsdn,
-  },
-  WASTR: {
-    symbol: 'ASTR',
-    name: 'Astar',
-    icon: SymbolAstr,
-  },
-  WSDN: {
-    symbol: 'SDN',
-    displaySymbol: 'WSDN',
-    name: 'Wrapped SDN',
-    icon: SymbolWsdn,
-  },
-  USDC: {
-    symbol: 'USDC',
-    name: 'USD Coin',
-    icon: SymbolUsdc,
-  },
-  USDT: {
-    symbol: 'USDT',
-    name: 'Tether USD',
-    icon: SymbolUsdt,
-  },
-  ceUSDT: {
-    symbol: 'ceUSDT',
-    name: 'Celer USDT',
-    icon: SymbolUsdt,
-  },
-  DAI: {
-    symbol: 'DAI',
-    name: 'DAI',
-    icon: SymbolDai,
-  },
-  BUSD: {
-    symbol: 'BUSD',
-    name: 'Binance USD',
-    icon: SymbolBusd,
-  },
-  aSEED: {
-    symbol: 'aSEED',
-    name: 'aUSD SEED',
-    icon: SymbolAseed,
-  },
-  BNB: {
-    symbol: 'BNB',
-    name: 'Binance Coin',
-    icon: SymbolBnb,
-  },
-  MATIC: {
-    symbol: 'MATIC',
-    name: 'Polygon Matic',
-    icon: SymbolMatic,
-  },
-  ARSW: {
-    symbol: 'ARSW',
-    name: 'ArthSwap Token',
-    icon: SymbolArsw,
-    borrowUnsupported: true,
-  },
-  LAY: {
-    symbol: 'LAY',
-    name: 'Starlay Token',
-    icon: SymbolLay,
-    borrowUnsupported: true,
   },
 } as const
 
 export const ASSETS_BY_ADDRESS_DICT: Partial<Record<string, Asset>> = {
-  '0x3795c36e7d12a8c252a20c5a7b455f7c57b60283': {
-    symbol: 'ceUSDT',
-    name: 'Celer USDT',
-    icon: SymbolUsdt,
+  '0xA666dD28059deF0B45505c1f1a5f49fAd2e03c11': {
+    symbol: 'USDC',
+    name: 'USD Coin (Portal from Ethereum)',
+    icon: SymbolUsdcet,
   },
 } as const
 
 export const ASSETS: Asset[] = Object.values(ASSETS_DICT)
-
-export const ARTHSWAP_ASSETS_DICT: {
-  [key in string]: { symbol: string; icon: StaticImageData }
-} = {
-  ...ASSETS_DICT,
-  WSDN: ASSETS_DICT.SDN,
-} as const

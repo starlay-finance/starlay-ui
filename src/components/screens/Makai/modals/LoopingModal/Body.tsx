@@ -132,7 +132,7 @@ export const LoopingModalBody: FC<LoopingModalBodyProps> = ({
             <NumberItem
               label={t`Reward APR`}
               num={estimation.rewardAPR}
-              image={{ src: ASSETS_DICT.LAY.icon, alt: ASSETS_DICT.LAY.name }}
+              image={{ src: ASSETS_DICT.DOT.icon, alt: ASSETS_DICT.DOT.name }}
               format={formatter}
             />
             <NumberItem
@@ -147,8 +147,8 @@ export const LoopingModalBody: FC<LoopingModalBodyProps> = ({
                 !estimation.healthFactor
                   ? undefined
                   : estimation.healthFactor.isPositive()
-                  ? estimation.healthFactor
-                  : '-'
+                    ? estimation.healthFactor
+                    : '-'
               }
               formatter={formatAmtShort}
             />
@@ -165,18 +165,16 @@ export const LoopingModalBody: FC<LoopingModalBodyProps> = ({
           onClick={
             isLooping
               ? () =>
-                  loop(formattedToBigNumber(depositAmount) || BN_ZERO, leverage)
+                loop(formattedToBigNumber(depositAmount) || BN_ZERO, leverage)
               : close
           }
           disabled={
             isLooping &&
-            (asset.symbol === 'aSEED' || !!estimation.unavailableReason)
+            (!!estimation.unavailableReason)
           }
         >
           {isLooping
-            ? asset.symbol === 'aSEED'
-              ? t`Suspended`
-              : estimation.unavailableReason || t`Start loops`
+            ? estimation.unavailableReason || t`Start loops`
             : t`Close loops`}
         </SimpleCtaButton>
         {isLooping ? (
