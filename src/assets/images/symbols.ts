@@ -1,6 +1,6 @@
 // import SymbolArsw from 'public/assets/images/symbols/symbol_arsw.png'
 // import SymbolAseed from 'public/assets/images/symbols/symbol_aseed.png'
-// import SymbolAstr from 'public/assets/images/symbols/symbol_astr.png'
+import SymbolAstr from 'public/assets/images/symbols/symbol_astr.png'
 // import SymbolAusd from 'public/assets/images/symbols/symbol_ausd.png'
 // import SymbolBnb from 'public/assets/images/symbols/symbol_bnb.png'
 // import SymbolBusd from 'public/assets/images/symbols/symbol_busd.png'
@@ -23,7 +23,7 @@ export {
   SymbolAca,
   // SymbolArsw,
   // SymbolAseed,
-  // SymbolAstr,
+  SymbolAstr,
   // SymbolAusd,
   // SymbolBnb,
   // SymbolBusd,

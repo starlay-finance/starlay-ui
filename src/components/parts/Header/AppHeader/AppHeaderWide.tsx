@@ -1,7 +1,7 @@
 import { t } from '@lingui/macro'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { SymbolAca } from 'src/assets/images'
+import { SymbolAca, SymbolAstr } from 'src/assets/images'
 import { LogoProtocol } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
@@ -78,24 +78,26 @@ export const AppHeaderWide = styled(({ className }) => {
         >
           {account ? shortenAddress(account) : t`Connect`}
         </MenuButton>
-        <MenuButtonSmall
-          // onClick={() => openRewardModal()}
+        {/* <MenuButtonSmall
+          onClick={() => openRewardModal()}
           disabled={!user || network !== 'EVM'}
         >
           <Image src={SymbolAca} alt="ACA" width={20} height={20} />
-        </MenuButtonSmall>
-        {/* <div>
+        </MenuButtonSmall> */}
+        <div>
           <MenuButtonSmall onClick={() => setIsSettingsOpen(!isSetingsOpen)}>
-            <IconSettings />
+            <Image src={SymbolAca} alt="ACA" width={20} height={20} />
           </MenuButtonSmall>
           <SettingsContainer $isOpen={isSetingsOpen}>
             <SettingsDiv as="div">
-              <Link href={SWAP}>{t`Swap`}</Link>
+              <Image src={SymbolAstr} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
+              <Link href="https://starlay.finance">{t`Astar`}</Link>
             </SettingsDiv>
             <SettingsDiv as="div">
-              <Link href={evmOnly(LAUNCHPAD, network)}>{t`Launchpad`}</Link>
+              <Image src={SymbolAca} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
+              <Link href="">{t`Acala`}</Link>
             </SettingsDiv>
-            <SettingsDiv>
+            {/* <SettingsDiv>
               <button
                 onClick={(e) => {
                   e.stopPropagation()
@@ -110,9 +112,9 @@ export const AppHeaderWide = styled(({ className }) => {
               <SettingsDiv>
                 <button onClick={mint} disabled={!mint}>{t`Faucet`}</button>
               </SettingsDiv>
-            )}
+            )} */}
           </SettingsContainer>
-        </div> */}
+        </div>
       </Menu>
     </HeaderContainer>
   )
@@ -127,10 +129,10 @@ const Menu = styled.div`
 `
 const SettingsDiv = styled.div`
   display: flex;
-  flex-direction: column;
-  > a,
-  button {
-    display: block;
+  flex-direction: row;
+  align-items: center;
+  /* > * {
+    display: block; */
     padding: 12px 16px;
     white-space: nowrap;
     background-color: ${lightBlack};
@@ -142,7 +144,7 @@ const SettingsDiv = styled.div`
     :disabled {
       color: ${trueWhite}80;
     }
-  }
+  /* } */
 `
 
 const SettingsContainer = styled.div<{ $isOpen: boolean }>`
