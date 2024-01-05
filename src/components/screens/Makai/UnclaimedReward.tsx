@@ -19,7 +19,7 @@ export const UnclaimedReward = asStyled(({ className }) => {
   const { switchChainIfUnsupported } = useSwitchChainIfUnsupported()
   const { data, claim } = useClaimer()
 
-  const { icon, name, symbol } = ASSETS_DICT.LAY
+  const { icon, name, symbol } = ASSETS_DICT.DOT
   const unclaimed = data?.total || BN_ZERO
   const { data: layPrice } = useLAYPrice()
   return (

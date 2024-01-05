@@ -39,7 +39,7 @@ const EMTPY_DATA = {
   tokenSale: BN_ZERO,
 }
 export const UnclaimedLAY = asStyled(({ className }) => {
-  const { symbol } = ASSETS_DICT.LAY
+  const { symbol } = ASSETS_DICT.DOT
   const { data, claim } = useClaimer()
   const { rewards, ido, tokenSale } = data || EMTPY_DATA
 
@@ -75,11 +75,11 @@ export const UnclaimedLAY = asStyled(({ className }) => {
 })``
 
 export const WalletBalance = asStyled(({ className }) => {
-  const { symbol } = ASSETS_DICT.LAY
+  const { symbol } = ASSETS_DICT.DOT
   const { data: balances } = useWalletBalance(false)
   const { userData, isValidating } = useVotingEscrow()
   const { userData: vestingData } = useTokenSaleVesting()
-  const inWallet = balances && balances[ASSETS_DICT.LAY.symbol]
+  const inWallet = balances && balances[ASSETS_DICT.DOT.symbol]
   const lockable =
     inWallet &&
     vestingData &&
@@ -178,31 +178,31 @@ export const LockedLAY = asStyled(({ className }) => {
       actions={
         !expired
           ? [
-              {
-                label: t`Add`,
-                onClick: () => open({ mode: 'amount', current: userData }),
-                disabled: !userData,
-              },
-              {
-                label: t`Extend`,
-                onClick: () => open({ mode: 'duration', current: userData }),
-                disabled: !userData,
-              },
-            ]
+            {
+              label: t`Add`,
+              onClick: () => open({ mode: 'amount', current: userData }),
+              disabled: !userData,
+            },
+            {
+              label: t`Extend`,
+              onClick: () => open({ mode: 'duration', current: userData }),
+              disabled: !userData,
+            },
+          ]
           : [
-              {
-                label: t`Withdraw`,
-                onClick: claimable
-                  ? () =>
-                      openMessageModal({
-                        title: t`Please Claim Rewards Before Withdrawing LAY`,
-                        message: t`You need to claim rewards before withdrawing unlocked LAY.`,
-                        type: 'Alert',
-                      })
-                  : withdraw,
-                disabled: !voteData,
-              },
-            ]
+            {
+              label: t`Withdraw`,
+              onClick: claimable
+                ? () =>
+                  openMessageModal({
+                    title: t`Please Claim Rewards Before Withdrawing LAY`,
+                    message: t`You need to claim rewards before withdrawing unlocked LAY.`,
+                    type: 'Alert',
+                  })
+                : withdraw,
+              disabled: !voteData,
+            },
+          ]
       }
     />
   )
@@ -225,7 +225,7 @@ type LayBalanceProps = {
 const LayBalance = styled<FC<LayBalanceProps & { className?: string }>>(
   ({ label, amount, actions, details, className }) => {
     const { account } = useEVMWallet()
-    const { icon, name, symbol } = ASSETS_DICT.LAY
+    const { icon, name, symbol } = ASSETS_DICT.DOT
     const { data: priceInUSD = BN_ZERO } = useLAYPrice()
     return (
       <LayBalanceDiv className={className}>

@@ -9,15 +9,15 @@ const toChainIdHex = (chainId: number) =>
   `${(+BigNumber.from(chainId)).toString(16)}`
 
 const CHIAN_INFO: Record<EVMChainId, AddEthereumChainParameter> = {
-  [EVM_CHAIN_ID.astar]: {
-    chainId: toChainIdHex(EVM_CHAIN_ID.astar),
-    chainName: EVM_NETWORK_CONFIG[EVM_CHAIN_ID.astar].name,
+  [EVM_CHAIN_ID.mandala]: {
+    chainId: toChainIdHex(EVM_CHAIN_ID.mandala),
+    chainName: EVM_NETWORK_CONFIG[EVM_CHAIN_ID.mandala].name,
     nativeCurrency: {
-      name: 'Astar',
-      symbol: EVM_NETWORK_CONFIG[EVM_CHAIN_ID.astar].baseAsset.symbol,
+      name: 'ACA',
+      symbol: EVM_NETWORK_CONFIG[EVM_CHAIN_ID.mandala].baseAsset.symbol,
       decimals: 18,
     },
-    rpcUrls: [...EVM_NETWORK_CONFIG[EVM_CHAIN_ID.astar].publicJsonRPCUrl],
-    blockExplorerUrls: EVM_NETWORK_CONFIG[EVM_CHAIN_ID.astar].explorerLinks,
+    rpcUrls: [...EVM_NETWORK_CONFIG[EVM_CHAIN_ID.mandala].publicJsonRPCUrl],
+    blockExplorerUrls: EVM_NETWORK_CONFIG[EVM_CHAIN_ID.mandala].explorerLinks,
   },
 }

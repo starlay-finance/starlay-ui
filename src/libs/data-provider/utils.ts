@@ -7,7 +7,6 @@ import {
   valueToBigNumber,
 } from '@starlay-finance/math-utils'
 import { ethers } from 'ethers'
-import { ASSETS_DICT } from 'src/constants/assets'
 import { FormattedReserveData } from 'src/libs/pool-data-provider'
 import {
   AssetMarketData,
@@ -179,9 +178,9 @@ export const toWalletBalance = async (
 
   return {
     ...balances,
-    [ASSETS_DICT.LAY.symbol]: normalizeBN(
-      rewardBalance.toString(),
-      rewardToken.decimals,
-    ),
+    // [ASSETS_DICT.DOT.symbol]: normalizeBN(
+    //   rewardBalance.toString(),
+    //   rewardToken.decimals,
+    // ),
   }
 }

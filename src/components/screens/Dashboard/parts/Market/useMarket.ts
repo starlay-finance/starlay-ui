@@ -30,7 +30,6 @@ export const useMarket = () => {
   const { open: openCollateralModal } = useCollateralModal()
   const { open: openWalletModal } = useWalletModal()
   const { open: openSuggestModal } = useSuggestModal()
-
   const deposit = (user: User, asset: AssetMarketData) => {
     openDepositModal({
       asset,

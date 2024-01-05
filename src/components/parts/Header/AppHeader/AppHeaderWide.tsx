@@ -1,8 +1,8 @@
 import { t } from '@lingui/macro'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { SymbolLay } from 'src/assets/images'
-import { IconSettings, LogoProtocol } from 'src/assets/svgs'
+import { SymbolAca } from 'src/assets/images'
+import { LogoProtocol } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
@@ -12,7 +12,6 @@ import { useFaucet } from 'src/hooks/contracts/useFaucet'
 import { useNetworkType } from 'src/hooks/useNetwork'
 import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
-import { getNetworkConfig } from 'src/libs/config'
 import { lightBlack, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
 import { flexCenter } from 'src/styles/mixins'
@@ -20,14 +19,9 @@ import { shortenAddress } from 'src/utils/address'
 import {
   APP,
   APP_ROOT,
-  LAUNCHPAD,
-  LAY_VELAY,
-  MAKAI,
   MARKETS,
-  SWAP,
   byNetwork,
-  evmOnly,
-  matchPath,
+  matchPath
 } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import { useAccountsModal } from '../../Modal/AccountsModal'
@@ -61,12 +55,12 @@ export const AppHeaderWide = styled(({ className }) => {
         <Tab $active={matchPath(pathname, MARKETS)}>
           <Link href={byNetwork(MARKETS, network)}>{t`Markets`}</Link>
         </Tab>
-        <Tab $active={matchPath(pathname, MAKAI)}>
+        {/* <Tab $active={matchPath(pathname, MAKAI)}>
           <Link href={evmOnly(MAKAI, network)}>{t`Makai`}</Link>
         </Tab>
         <Tab $active={matchPath(pathname, LAY_VELAY)}>
           <Link href={evmOnly(LAY_VELAY, network)}>{t`LAY/veLAY`}</Link>
-        </Tab>
+        </Tab> */}
       </Nav>
       <Menu>
         {/* <MenuButtonSmall onClick={() => openNetworkModal()}>
@@ -77,8 +71,8 @@ export const AppHeaderWide = styled(({ className }) => {
             !account
               ? openWalletModal()
               : network === 'Polkadot'
-              ? openAccountsModal()
-              : {}
+                ? openAccountsModal()
+                : {}
           }
           disabled={!!account && network !== 'Polkadot'}
         >
@@ -88,9 +82,9 @@ export const AppHeaderWide = styled(({ className }) => {
           onClick={() => openRewardModal()}
           disabled={!user || network !== 'EVM'}
         >
-          <Image src={SymbolLay} alt="LAY" width={20} height={20} />
+          <Image src={SymbolAca} alt="ACA" width={20} height={20} />
         </MenuButtonSmall>
-        <div>
+        {/* <div>
           <MenuButtonSmall onClick={() => setIsSettingsOpen(!isSetingsOpen)}>
             <IconSettings />
           </MenuButtonSmall>
@@ -118,7 +112,7 @@ export const AppHeaderWide = styled(({ className }) => {
               </SettingsDiv>
             )}
           </SettingsContainer>
-        </div>
+        </div> */}
       </Menu>
     </HeaderContainer>
   )

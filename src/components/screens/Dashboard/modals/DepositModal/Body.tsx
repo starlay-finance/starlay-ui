@@ -127,7 +127,7 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
           <NumberItem
             label={t`Deposit APR`}
             num={depositIncentiveAPR}
-            image={{ src: ASSETS_DICT.LAY.icon, alt: ASSETS_DICT.LAY.name }}
+            image={{ src: ASSETS_DICT.DOT.icon, alt: ASSETS_DICT.DOT.name }}
             format={formatPct}
           />
           <NumberItemWithDiff
@@ -149,8 +149,8 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
               !estimation.healthFactor
                 ? undefined
                 : estimation.healthFactor.isPositive()
-                ? estimation.healthFactor
-                : '-'
+                  ? estimation.healthFactor
+                  : '-'
             }
             formatter={formatAmtShort}
           />
@@ -171,12 +171,10 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
           <SimpleCtaButton
             onClick={() => deposit(depositAmountBn!)}
             disabled={
-              asset.symbol === 'aSEED' || !!estimation.unavailableReason
+              !!estimation.unavailableReason
             }
           >
-            {asset.symbol === 'aSEED'
-              ? t`Suspended`
-              : estimation.unavailableReason || t`Deposit`}
+            {estimation.unavailableReason || t`Deposit`}
           </SimpleCtaButton>
         ) : (
           <SimpleCtaButton

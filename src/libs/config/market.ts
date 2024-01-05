@@ -3,7 +3,7 @@ import { ValueOf } from 'type-fest'
 import { EVMChainId, EVM_CHAIN_ID } from './network'
 
 export const EVM_CUSTOM_MARKET = {
-  proto_astar: 'proto_astar',
+  proto_mandala: 'proto_mandala',
 } as const
 export type EVMCustomMarket = ValueOf<typeof EVM_CUSTOM_MARKET>
 
@@ -35,18 +35,16 @@ export type EVMMarketConfig = {
 export const MARKET_CONFIGS: {
   [key in EVMCustomMarket]: EVMMarketConfig
 } = {
-  [EVM_CUSTOM_MARKET.proto_astar]: {
-    chainId: EVM_CHAIN_ID.astar,
+  [EVM_CUSTOM_MARKET.proto_mandala]: {
+    chainId: EVM_CHAIN_ID.mandala,
     enabledFeatures: {
       incentives: true,
     },
     addresses: {
       LENDING_POOL_ADDRESS_PROVIDER:
-        '0x4c37A76Bf49c01f91E275d5257a228dad1b74EF9',
-      INCENTIVES_CONTROLLER: '0x97Ab79B80E8904214413D8219E8B04373D1030AD',
-      LENDING_POOL: '0x90384334333f3356eFDD5b20016350843b90f182',
-      WETH_GATEWAY: '0xf630b6d8EB75d3DC9153AAB9e4b6666d4561D6e5',
-      LEVERAGER: '0x8D2f5CDe2ABe0A8F96F28c892accBE3BC7C43d45',
+        '0x5Ec3d1411c20A24809ab0B72FBe746874b6E72a0',
+      INCENTIVES_CONTROLLER: '0x5919be3B0Fce25A9500EE2548782C2c4C246a36C',
+      LENDING_POOL: '0x5475fa29efA24d61D6BAF689191a5b1f7B3a4B2B',
     },
   },
 } as const
@@ -54,5 +52,5 @@ export const MARKET_CONFIGS: {
 export const CHAIN_MARKET_CONFIG: {
   [key in EVMChainId]: EVMMarketConfig
 } = {
-  [EVM_CHAIN_ID.astar]: MARKET_CONFIGS.proto_astar,
+  [EVM_CHAIN_ID.mandala]: MARKET_CONFIGS.proto_mandala,
 } as const

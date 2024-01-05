@@ -12,21 +12,10 @@ import { TopProps } from 'src/components/screens/Top'
 import { ASSETS_DICT } from './assets'
 
 export const TOP_ASSETS = [
-  ASSETS_DICT.ASTR,
-  ASSETS_DICT.SDN,
-  ASSETS_DICT.USDT,
-  //
+  ASSETS_DICT.DOT,
+  ASSETS_DICT.LDOT,
+  ASSETS_DICT.ACA,
   ASSETS_DICT.USDC,
-  ASSETS_DICT.ARSW,
-  ASSETS_DICT.WETH,
-  //
-  ASSETS_DICT.USDT,
-  ASSETS_DICT.WBTC,
-  ASSETS_DICT.USDC,
-  //
-  ASSETS_DICT.WETH,
-  ASSETS_DICT.LAY,
-  ASSETS_DICT.SDN,
 ]
 
 export const TOP_BACKERS: TopProps['backers'] = [

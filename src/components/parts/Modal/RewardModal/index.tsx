@@ -32,7 +32,7 @@ const RewardModalBody = () => {
   const { data: balance } = useWalletBalance()
   const { data, claim } = useClaimer()
 
-  const { icon, name, symbol } = ASSETS_DICT.LAY
+  const { icon, name, symbol } = ASSETS_DICT.DOT
   const unclaimed = data?.total || BN_ZERO
   const inWallet = balance?.LAY || BN_ZERO
   const total = unclaimed.plus(inWallet)

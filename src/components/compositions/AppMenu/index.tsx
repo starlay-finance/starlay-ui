@@ -19,11 +19,9 @@ import { gray } from 'src/styles/colors'
 import { BN_ZERO, formatAmt, formatUSD } from 'src/utils/number'
 import {
   APP_ROOT,
-  MAKAI,
   MARKETS,
   byNetwork,
-  evmOnly,
-  matchPath,
+  matchPath
 } from 'src/utils/routes'
 import styled from 'styled-components'
 
@@ -59,13 +57,13 @@ const MenuItems: FC<{ showClaim: VoidFunction }> = ({ showClaim }) => {
       <Link
         href={matchPath(pathname, MARKETS) ? '' : byNetwork(MARKETS, network)}
       >{t`Markets`}</Link>
-      <Link
+      {/* <Link
         href={matchPath(pathname, MAKAI) ? '' : evmOnly(MAKAI, network)}
-      >{t`Makai`}</Link>
-      <Link href="">{t`LAY/veLAY`}</Link>
+      >{t`Makai`}</Link> */}
+      {/* <Link href="">{t`LAY/veLAY`}</Link>
       <button onClick={showClaim} disabled={!account || network !== 'EVM'}>
         Claim LAY
-      </button>
+      </button> */}
     </>
   )
 }
@@ -87,9 +85,9 @@ const ClaimLAY = () => {
   const { data: balance } = useWalletBalance()
   const { data, claim } = useClaimer()
 
-  const { symbol } = ASSETS_DICT.LAY
+  const { symbol } = ASSETS_DICT.DOT
   const unclaimed = data?.total || BN_ZERO
-  const inWallet = balance?.LAY || BN_ZERO
+  const inWallet = balance?.DOT || BN_ZERO
   const total = unclaimed.plus(inWallet)
   const priceInUSD = (
     marketData?.marketReferenceCurrencyPriceInUSD || BN_ZERO

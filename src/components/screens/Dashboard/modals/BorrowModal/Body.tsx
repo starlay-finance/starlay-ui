@@ -130,7 +130,7 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
           <NumberItem
             label={t`Borrow APR`}
             num={variableBorrowIncentiveAPR}
-            image={{ src: ASSETS_DICT.LAY.icon, alt: ASSETS_DICT.LAY.name }}
+            image={{ src: ASSETS_DICT.DOT.icon, alt: ASSETS_DICT.DOT.name }}
             format={formatPct}
           />
           <NumberItemWithDiff
@@ -152,8 +152,8 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
               !estimation.healthFactor
                 ? undefined
                 : estimation.healthFactor.isPositive()
-                ? estimation.healthFactor
-                : '-'
+                  ? estimation.healthFactor
+                  : '-'
             }
             formatter={formatAmtShort}
           />
@@ -166,13 +166,10 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
         {activeTab === 'borrow' ? (
           <SimpleCtaButton
             onClick={() => borrow(valueToBigNumber(borrowingAmountBn!))}
-            disabled={
-              asset.symbol === 'aSEED' || !!estimation.unavailableReason
+            disabled={!!estimation.unavailableReason
             }
           >
-            {asset.symbol === 'aSEED'
-              ? t`Suspended`
-              : estimation.unavailableReason || t`Borrow`}
+            {estimation.unavailableReason || t`Borrow`}
           </SimpleCtaButton>
         ) : (
           <SimpleCtaButton

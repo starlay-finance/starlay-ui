@@ -3,7 +3,7 @@ import { EthereumAddress, PolkadotAddress } from 'src/types/web3'
 import { ValueOf } from 'type-fest'
 
 export const EVM_CHAIN_ID = {
-  astar: 592,
+  mandala: 595,
 } as const
 export type EVMChainId = ValueOf<typeof EVM_CHAIN_ID>
 
@@ -66,65 +66,34 @@ export type EVMNetworkConfig = NetworkConfig<
   | 'walletBalanceProvider'
   | 'uiPoolDataProvider'
   | 'uiIncentiveDataProvider'
-  | 'stakeUiHelper'
   | 'priceAggregatorAdapterAddress'
-  | 'voterAddress'
-  | 'votingEscrowAddress'
-  | 'claimerAddress'
-  | 'idoVestingAddress'
-  | 'tokenSaleVestingAddress'
-  | 'multicallAddress'
 >
 
 export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
-  [EVM_CHAIN_ID.astar]: {
-    name: 'Astar Mainnet / EVM',
-    publicJsonRPCUrl: ['https://evm.astar.network'],
-    privateJsonRPCUrl:
-      'https://astar.blastapi.io/b783cb07-7f1a-48dc-88fb-cedca75fafa0',
+  [EVM_CHAIN_ID.mandala]: {
+    name: 'Acala Testnet / EVM',
+    publicJsonRPCUrl: ['https://eth-rpc-tc9.aca-staging.network'],
+    privateJsonRPCUrl: 'https://eth-rpc-tc9.aca-staging.network',
     walletConnectProjectId: '7077959b8319331ea75408788eae93b5',
     addresses: {
-      walletBalanceProvider: '0x449b5A2c9c75d77283253625C03aE6336c957a0c',
-      uiPoolDataProvider: '0x97Fc9e6aFB9d7A9C9898a2b6F97Da43EB5f56331',
-      uiIncentiveDataProvider: '0x08ba69145938dD3CB0EE94c0D59EF6364059956B',
-      stakeUiHelper: '0xa6FAB9Dfd104a6582c049266E7eCCB0b908c55E4',
+      walletBalanceProvider: '0x59300Abd7e80076EC2b361769aeEb4fb041a5435',
+      uiPoolDataProvider: '0xf69aE83c5610F84A988637fD752D7ce475EFED3C',
+      uiIncentiveDataProvider: '0xDDB5114C69791e366398287f0510fe87f7571cF7',
       priceAggregatorAdapterAddress:
-        '0xbB5893E0f744b3d6305D49B1da6bc04fE922AC15',
-      voterAddress: '0xB45Ae34e16D97D87c021DAf03a15142935cFB177',
-      votingEscrowAddress: '0xDf32D28c1BdF25c457E82797316d623C2fcB29C8',
-      claimerAddress: '0x05aed49d7979D50cA2D76479a63d5560EeDf243A',
-      idoVestingAddress: '0x54F5002b5F44E2ef5a98761b6fa97a2eF4437099',
-      tokenSaleVestingAddress: '0xFb5504e1F1F147c7Db1bd9B47dD0465DF3C16310',
-      multicallAddress: '0x7D6046156df81EF335E7e765d3bc714960B73207',
+        '0x0493895d637A8500e3d7cB35AdabF57d32198ba8',
     },
     baseAsset: {
-      symbol: 'ASTR',
-      wrapperAddress: '0xAeaaf0e2c81Af264101B9129C00F4440cCF0F720',
+      symbol: 'ACA',
+      wrapperAddress: '0x',
     },
     rewardToken: {
-      symbol: 'stkLAY',
-      address: '0x6FD65f71B3FB5Aa9d794f010AFc65F174012994F',
-      underlyingAsset: '0xc4335B1b76fA6d52877b3046ECA68F6E708a27dd',
+      symbol: '',
+      address: '0x',
+      underlyingAsset: '0x0000000000000000000000000000000000000000',
       decimals: 18,
     },
-    snapshotProvider: {
-      endpoint:
-        'https://33ikriwlbzcxpp76t242xedcvu.appsync-api.us-east-1.amazonaws.com/graphql',
-      apiKey: 'da2-vfzww7t765hfla6tdrzx6w4pvq',
-    },
-    launchpadDataProvider: {
-      endpoint:
-        'https://launchpad-subgraph.decartel.xyz/subgraphs/name/starlay/starlay-launchpad',
-    },
-    launchpadHistoricalDataProvider: {
-      endpoint:
-        'https://urdn7gyh2bfgbh4cg72eddclrq.appsync-api.us-east-1.amazonaws.com/graphql',
-      apiKey: 'da2-eeucjwshhbh3vg44ovhg27x54m',
-    },
-    arthswapDataProvider: {
-      endpoint: 'https://arthswap-graphql.starlay.finance/api/graphql',
-    },
-    explorerLinks: ['https://blockscout.com/astar'],
+    explorerLinks: ['https://blockscout.mandala.aca-staging.network/'],
+    isTestnet: true,
   },
 }
 
@@ -148,7 +117,7 @@ export const POLKADOT_NETWORK_CONFIG: Record<
       controller: 'X2vJWQUXZMyKc81JDdJkRxroUE6TFkqDd5EnXcjpmA5F8XA',
     },
     baseAsset: {
-      symbol: 'ASTR',
+      symbol: 'ACA',
       wrapperAddress: '',
     },
     rewardToken: {

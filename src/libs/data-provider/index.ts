@@ -4,12 +4,12 @@ import {
 } from '@starlay-finance/contract-helpers'
 import { ReserveIncentiveWithFeedsResponse } from '@starlay-finance/math-utils'
 import dayjs from 'dayjs'
+import { ethers } from 'ethers'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { DataProvider } from 'src/types/starlay'
 import { EthereumAddress } from 'src/types/web3'
 import { filterFalsy } from 'src/utils/array'
 import { onlyListed } from 'src/utils/assets'
-import { BN_ZERO } from 'src/utils/number'
 import { EVMChainId, getNetworkConfigEVM } from '../config'
 import {
   PoolDataProviderInterface,
@@ -42,23 +42,14 @@ export class DataProviderEVM implements DataProvider<MarketDataRawEVM> {
       walletBalanceProviderContract(provider!),
     )
 
-  getMarketData: DataProvider['getMarketData'] = async ({
-    layPriceInUSD = BN_ZERO,
-  } = {}) => {
+  getMarketData: DataProvider['getMarketData'] = async () => {
     const currentTimestamp = dayjs().unix()
-    const { rewardToken } = getNetworkConfigEVM(this.chainId)
     const {
       reservesData,
       incentivesByUnderlyingAsset,
       marketReferenceCurrencyPriceInUSD,
       ...rawData
-    } = await this.poolDataProvider.getReservesWithIncentives(
-      currentTimestamp,
-      {
-        address: rewardToken.underlyingAsset,
-        priceInUSD: layPriceInUSD,
-      },
-    )
+    } = await this.poolDataProvider.getReservesWithIncentives(currentTimestamp)
     const assets = reservesData
       .filter(onlyListed)
       .map((reserve) =>
@@ -103,13 +94,9 @@ export class DataProviderEVM implements DataProvider<MarketDataRawEVM> {
     const { rewardToken } = getNetworkConfigEVM(this.chainId)
     const balancesDict =
       await this.walletBalanceProvider.getBeforeNormalizedWalletBalance(account)
-
-    const rewardBalance = await this.walletBalanceProvider.getBalance(
-      account,
-      rewardToken.underlyingAsset,
-    )
+    const rewardBalance = ethers.BigNumber.from(0)
     return toWalletBalance(balancesDict, rewardBalance, assets, {
-      symbol: ASSETS_DICT.LAY.symbol,
+      symbol: ASSETS_DICT.DOT.symbol,
       address: rewardToken.underlyingAsset,
       decimals: rewardToken.decimals,
     })

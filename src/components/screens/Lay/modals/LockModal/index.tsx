@@ -2,8 +2,8 @@ import { t } from '@lingui/macro'
 import { FC } from 'react'
 import { requireSupportedChain } from 'src/components/hoc/requireSupportedChain'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
-import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
+import { DefaultModalContent } from 'src/components/parts/Modal/base'
 import { AssetLabel } from 'src/components/parts/Modal/parts'
 import { ASSETS_DICT } from 'src/constants/assets'
 import { useTokenSaleVesting } from 'src/hooks/contracts/useTokenSaleVesting'
@@ -47,7 +47,7 @@ export const Lock: FC<
   }
   return (
     <DefaultModalContent
-      headerNode={<AssetLabel asset={ASSETS_DICT.LAY} label={t`Lock LAY`} />}
+      headerNode={<AssetLabel asset={ASSETS_DICT.DOT} label={t`Lock LAY`} />}
       bodyNode={
         <LockModalBody
           {...props}
@@ -61,7 +61,7 @@ export const Lock: FC<
               suggestPokeOnVotingPowerIncreased,
             )
           }}
-          inWallet={wallet[ASSETS_DICT.LAY.symbol]}
+          inWallet={wallet[ASSETS_DICT.DOT.symbol]}
           vesting={userData}
         />
       }
