@@ -6,7 +6,6 @@ import {
   NumberItem,
   NumberItemWithDiff,
 } from 'src/components/parts/Modal/parts'
-import { ASSETS_DICT } from 'src/constants/assets'
 import {
   EstimationParam,
   estimateBorrow,
@@ -127,12 +126,12 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
             image={{ src: icon, alt: name }}
             format={formatPct}
           />
-          <NumberItem
+          {/* <NumberItem
             label={t`Borrow APR`}
             num={variableBorrowIncentiveAPR}
             image={{ src: ASSETS_DICT.DOT.icon, alt: ASSETS_DICT.DOT.name }}
             format={formatPct}
-          />
+          /> */}
           <NumberItemWithDiff
             label={t`Borrowed`}
             current={totalBorrowedInUSD}
