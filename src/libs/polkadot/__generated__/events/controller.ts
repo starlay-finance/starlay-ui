@@ -1,3 +1,7 @@
+// @ts-nocheck
+// @ts-nocheck
+// @ts-nocheck
+// @ts-nocheck
 import type * as EventTypes from '../event-types/controller';
 import type {ContractPromise} from "@polkadot/api-contract";
 import type {ApiPromise} from "@polkadot/api";

@@ -1,3 +1,7 @@
+// @ts-nocheck
+// @ts-nocheck
+// @ts-nocheck
+// @ts-nocheck
 import {CodePromise} from "@polkadot/api-contract";
 import type {KeyringPair} from "@polkadot/keyring/types";
 import type {ApiPromise} from "@polkadot/api";

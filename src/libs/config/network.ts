@@ -66,7 +66,14 @@ export type EVMNetworkConfig = NetworkConfig<
   | 'walletBalanceProvider'
   | 'uiPoolDataProvider'
   | 'uiIncentiveDataProvider'
+  | 'stakeUiHelper'
   | 'priceAggregatorAdapterAddress'
+  | 'voterAddress'
+  | 'votingEscrowAddress'
+  | 'claimerAddress'
+  | 'idoVestingAddress'
+  | 'tokenSaleVestingAddress'
+  | 'multicallAddress'
 >
 
 export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
@@ -81,6 +88,13 @@ export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
       uiIncentiveDataProvider: '0xDDB5114C69791e366398287f0510fe87f7571cF7',
       priceAggregatorAdapterAddress:
         '0x0493895d637A8500e3d7cB35AdabF57d32198ba8',
+      stakeUiHelper: '0x',
+      voterAddress: '0x',
+      votingEscrowAddress: '0x',
+      claimerAddress: '0x',
+      idoVestingAddress: '0x',
+      tokenSaleVestingAddress: '0x',
+      multicallAddress: '0x',
     },
     baseAsset: {
       symbol: 'ACA',

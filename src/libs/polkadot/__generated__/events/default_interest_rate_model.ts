@@ -1,3 +1,7 @@
+// @ts-nocheck
+// @ts-nocheck
+// @ts-nocheck
+// @ts-nocheck
 import type * as EventTypes from '../event-types/default_interest_rate_model';
 import type {ContractPromise} from "@polkadot/api-contract";
 import type {ApiPromise} from "@polkadot/api";

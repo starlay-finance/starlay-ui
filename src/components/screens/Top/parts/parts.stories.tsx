@@ -1,8 +1,8 @@
 import { boolean, withKnobs } from '@storybook/addon-knobs'
+import { bignumber } from 'src/__tests__/utils/knobsHelper'
 import { ASSETS } from 'src/constants/assets'
 import { MarketComposition } from 'src/types/models'
 import { BN_ZERO } from 'src/utils/number'
-import { bignumber } from 'src/__tests__/utils/knobsHelper'
 import { AssetsComponent } from './Assets'
 import { CurrentMarketsComponent } from './CurrentMarkets'
 
@@ -23,10 +23,10 @@ export const Assets = () => {
         loading
           ? []
           : ASSETS.map(({ symbol }) => ({
-              symbol,
-              depositAPY,
-              variableBorrowAPY,
-            }))
+            symbol,
+            depositAPY,
+            variableBorrowAPY,
+          }))
       }
     />
   )
@@ -41,9 +41,9 @@ export const CurrentMarkets = () => {
   const market = {
     totalInUSD,
     amountByAssets: [
-      { symbol: 'LAY', amountInUSD: amountInUSD1 },
-      { symbol: 'WETH', amountInUSD: amountInUSD2 },
-      { symbol: 'WBTC', amountInUSD: amountInUSD3 },
+      { symbol: 'DOT', amountInUSD: amountInUSD1 },
+      { symbol: 'LDOT', amountInUSD: amountInUSD2 },
+      { symbol: 'USDC', amountInUSD: amountInUSD3 },
     ],
   } as MarketComposition
   return (
