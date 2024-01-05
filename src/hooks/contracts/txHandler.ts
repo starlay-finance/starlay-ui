@@ -3,17 +3,10 @@ import {
   eEthereumTxType,
   EthereumTransactionTypeExtended,
 } from '@starlay-finance/contract-helpers'
-import { valueToBigNumber } from '@starlay-finance/math-utils'
 import { serializeError } from 'eth-rpc-errors'
 import { BigNumber, ethers } from 'ethers'
 import { useMessageModal } from 'src/components/parts/Modal/MessageModal'
-import {
-  getGasPriceMultiplier,
-  getManualGasPrice,
-} from 'src/utils/localStorage'
-import { BN_ONE } from 'src/utils/number'
 import { useMarketData } from '../useMarketData'
-import { useRecentGasPrice } from '../useRecentGasPrice'
 import { useUserData } from '../useUserData'
 import { useWalletBalance } from '../useWalletBalance'
 
@@ -28,7 +21,6 @@ export const useTxHandler = () => {
   const { mutate: mutateMarketData } = useMarketData()
   const { mutate: mutateUserData } = useUserData()
   const { mutate: mutateWalletBalance } = useWalletBalance()
-  const { getRecentGasPrice } = useRecentGasPrice()
   const revalidate = () => {
     mutateMarketData()
     mutateUserData()
@@ -48,7 +40,6 @@ export const useTxHandler = () => {
 
     const { actionTx, erc20ApprovalTx, debtErc20ApprovalTx } =
       pickLendingPoolTxs(txs)
-    const gasPrice = getMultipliedGasPrice(signer, await getRecentGasPrice())
 
     try {
       if (erc20ApprovalTx) {
@@ -58,7 +49,7 @@ export const useTxHandler = () => {
           message: t`Approve sending your asset...`,
         })
         const tx = await erc20ApprovalTx.tx()
-        const approveRes = await signer.sendTransaction({ ...tx, gasPrice })
+        const approveRes = await signer.sendTransaction({ ...tx })
         open({
           type: 'Loading',
           title: t`Transaction Pending`,
@@ -73,7 +64,7 @@ export const useTxHandler = () => {
           message: t`Approve the contract to borrow ERC-20 assets on your credit.`,
         })
         const tx = await debtErc20ApprovalTx.tx()
-        const approveRes = await signer.sendTransaction({ ...tx, gasPrice })
+        const approveRes = await signer.sendTransaction({ ...tx })
         open({
           type: 'Loading',
           title: t`Transaction Pending`,
@@ -91,7 +82,6 @@ export const useTxHandler = () => {
         const depostRes = await signer.sendTransaction({
           ...tx,
           value: tx.value ? BigNumber.from(tx.value) : undefined,
-          gasPrice,
         })
         open({
           type: 'Loading',
@@ -138,17 +128,3 @@ const pickLendingPoolTxs = (txs: EthereumTransactionTypeExtended[]) =>
       return { ...prev, debtErc20ApprovalTx: current }
     return { ...prev, actionTx: current }
   }, {})
-
-const getMultipliedGasPrice = async (
-  signer: ethers.Signer,
-  latestGasPrice?: BigNumber,
-) => {
-  const baseGasPrice = latestGasPrice || (await signer.getGasPrice())
-  const gasPriceMultiplier = getGasPriceMultiplier()
-  const manualGasPrice = getManualGasPrice()
-  if (manualGasPrice) return BigNumber.from(+manualGasPrice * 10 ** 9)
-  const gasPrice = valueToBigNumber(baseGasPrice.toString())
-    .times(gasPriceMultiplier || BN_ONE)
-    .toFixed(0)
-  return BigNumber.from(gasPrice)
-}

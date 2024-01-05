@@ -1,7 +1,6 @@
 import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
-import { utils } from 'ethers'
 import { FC, useState } from 'react'
 import { Link } from 'src/components/elements/Link'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
@@ -27,7 +26,6 @@ export type GasSettingsModalBodyProps = {
     multiplier: BigNumber | undefined,
     manual: BigNumber | undefined,
   ) => void
-  baseGasPrice: BigNumber | undefined
 }
 
 export const GasSettingsModalBody: FC<GasSettingsModalBodyProps> = ({
@@ -36,7 +34,6 @@ export const GasSettingsModalBody: FC<GasSettingsModalBodyProps> = ({
   save,
   inWallet,
   symbol,
-  baseGasPrice,
 }) => {
   const [multiplier, setMultiplier] = useState(currentMultiplier)
   const [manualValue, setManualValue] = useState(currentManualValue)
@@ -84,17 +81,7 @@ The higher Gas Fee, the more chance for your transaction to be confirmed.`}
           )}
           <Item
             label={!manualValue ? t`Current Gas Fee` : t`Manual Gas Fee`}
-            value={
-              baseGasPrice
-                ? `${utils.formatUnits(
-                    (
-                      manualValue?.shiftedBy(9) ||
-                      baseGasPrice.times(multiplier || BN_ONE)
-                    ).toString(),
-                    'gwei',
-                  )} GWEI`
-                : '-'
-            }
+            value={'-'}
           />
         </NumberItems>
         <SimpleCtaButton

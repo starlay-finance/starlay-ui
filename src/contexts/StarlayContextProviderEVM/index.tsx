@@ -3,7 +3,6 @@ import { Web3ReactProvider } from '@web3-react/core'
 import { FC, ReactElement, useCallback } from 'react'
 import { useEVMWallet } from 'src/hooks/useEVMWallet'
 import { ModalPortal } from 'src/hooks/useModal'
-import { useRecentGasPrice } from 'src/hooks/useRecentGasPrice'
 import { StarlayContext } from 'src/hooks/useStarlay'
 import { useStaticRPCProviderEVM } from 'src/hooks/useStaticRPCProviderEVM'
 import { DataProviderEVM } from 'src/libs/data-provider'
@@ -28,7 +27,6 @@ export const StarlayContextProviderEVM: FC<{
   const { data: provider } = useStaticRPCProviderEVM()
   const { signer } = useEVMWallet(true)
 
-  const { getRecentGasPrice } = useRecentGasPrice()
   const { data: lendingPool } = useSWRImmutable<LendingPool>(
     provider && ['evm', 'lendingpool', provider.chainId],
     () => LendingPoolEVM.new(provider!),
@@ -41,8 +39,8 @@ export const StarlayContextProviderEVM: FC<{
   const txExecutor = useCallback(
     async (item: TxItem<transactionType>) =>
       // TODO optimize
-      executeTx(item, signer, await getRecentGasPrice()),
-    [signer, getRecentGasPrice],
+      executeTx(item, signer),
+    [signer],
   )
 
   return (
