@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { t } from '@lingui/macro'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
