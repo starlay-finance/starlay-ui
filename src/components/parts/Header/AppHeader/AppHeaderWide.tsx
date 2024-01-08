@@ -89,11 +89,11 @@ export const AppHeaderWide = styled(({ className }) => {
             <Image src={SymbolAca} alt="ACA" width={20} height={20} />
           </MenuButtonSmall>
           <SettingsContainer $isOpen={isSetingsOpen}>
-            <SettingsDiv as="div">
+            <SettingsDiv as="div" onClick={() => setIsSettingsOpen(!isSetingsOpen)}>
               <Image src={SymbolAstr} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
-              <Link href="https://starlay.finance">{t`Astar`}</Link>
+              <Link href="https://starlay.finance/app/evm">{t`Astar`}</Link>
             </SettingsDiv>
-            <SettingsDiv as="div">
+            <SettingsDiv as="div" onClick={() => setIsSettingsOpen(!isSetingsOpen)}>
               <Image src={SymbolAca} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
               <Link href="">{t`Acala`}</Link>
             </SettingsDiv>

@@ -3,7 +3,6 @@ import { BigNumber } from '@starlay-finance/math-utils'
 import { FC, ReactNode } from 'react'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import { NumberItem } from 'src/components/parts/Modal/parts'
-import { Item } from 'src/components/parts/Modal/parts/Item'
 // import { ARTHSWAP_ASSETS_DICT } from 'src/constants/assets'
 import { hoverBackgroundKeyframes, hoveredRow } from 'src/styles/animation'
 import { purple } from 'src/styles/colors'
@@ -73,20 +72,20 @@ export const SuggestModalBody: FC<SuggestModalBodyProps> = ({
       ),
     },
   ]
-  if (!makaiUnsupported || !openMakai)
-    actions.push({
-      apr: makaiAPR,
-      node: (
-        <SuggestItemMakai key="loop" onClick={openMakai}>
-          <Item
-            label={t`Makai on Starlay Finance`}
-            note={t`Loop ${symbol}`}
-            value={displayMakaiAPR}
-            image={{ src: icon, alt: name }}
-          />
-        </SuggestItemMakai>
-      ),
-    })
+  // if (!makaiUnsupported || !openMakai)
+  //   actions.push({
+  //     apr: makaiAPR,
+  //     node: (
+  //       <SuggestItemMakai key="loop" onClick={openMakai}>
+  //         <Item
+  //           label={t`Makai on Starlay Finance`}
+  //           note={t`Loop ${symbol}`}
+  //           value={displayMakaiAPR}
+  //           image={{ src: icon, alt: name }}
+  //         />
+  //       </SuggestItemMakai>
+  //     ),
+  //   })
   // if (arthswapPair) {
   //   const {
   //     apr,

@@ -70,7 +70,7 @@ const MenuItems: FC<{ showClaim: VoidFunction }> = ({ showClaim }) => {
       <h3>Switch Network</h3>
       <NetworkDiv>
         <Image src={SymbolAstr} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
-        <Link href="https://starlay.finance">{t`Astar`}</Link>
+        <Link href="https://starlay.finance/app/evm">{t`Astar`}</Link>
       </NetworkDiv>
       <NetworkDiv>
         <Image src={SymbolAca} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
