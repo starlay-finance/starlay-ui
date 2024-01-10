@@ -1,5 +1,6 @@
 import { t } from '@lingui/macro'
 import { BigNumber, valueToBigNumber } from '@starlay-finance/math-utils'
+import debounce from 'debounce'
 import { FC, useState } from 'react'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
 import {
@@ -164,7 +165,7 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
         )}
         {activeTab === 'borrow' ? (
           <SimpleCtaButton
-            onClick={() => borrow(valueToBigNumber(borrowingAmountBn!))}
+            onClick={debounce(() => borrow(valueToBigNumber(borrowingAmountBn!)), 2000, { immediate: true })}
             disabled={!!estimation.unavailableReason
             }
           >
@@ -172,7 +173,7 @@ export const BorrowModalBody: FC<BorrowModalBodyProps> = ({
           </SimpleCtaButton>
         ) : (
           <SimpleCtaButton
-            onClick={() => repay(valueToBigNumber(repaymentAmountBn!), all)}
+            onClick={debounce(() => repay(valueToBigNumber(repaymentAmountBn!), all), 2000, { immediate: true })}
             disabled={!!estimation.unavailableReason}
           >
             {estimation.unavailableReason || t`Repay`}
