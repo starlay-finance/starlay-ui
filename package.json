@@ -43,6 +43,7 @@
     "@web3-react/walletconnect-v2": "^8.5.1",
     "chroma-js": "^2.4.2",
     "dayjs": "^1.11.7",
+    "debounce": "^2.0.0",
     "eth-rpc-errors": "^4.0.3",
     "ethers": "^5.7.2",
     "graphql": "^16.6.0",

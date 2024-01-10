@@ -1,6 +1,7 @@
 import { t } from '@lingui/macro'
 import { Trans } from '@lingui/react'
 import { BigNumber } from '@starlay-finance/math-utils'
+import debounce from 'debounce'
 import { FC, useState } from 'react'
 import { Link } from 'src/components/elements/Link'
 import { SimpleCtaButton } from 'src/components/parts/Cta'
@@ -168,16 +169,16 @@ export const DepositModalBody: FC<DepositModalBodyProps> = ({
         </NumberItems>
         {activeTab === 'deposit' ? (
           <SimpleCtaButton
-            onClick={() => deposit(depositAmountBn!)}
-            disabled={
-              !!estimation.unavailableReason
-            }
+            onClick={debounce(() => deposit(depositAmountBn!), 2000, {
+              immediate: true,
+            })}
+            disabled={!!estimation.unavailableReason}
           >
             {estimation.unavailableReason || t`Deposit`}
           </SimpleCtaButton>
         ) : (
           <SimpleCtaButton
-            onClick={() => withdraw(withdrawalAmountBn!, all)}
+            onClick={debounce(() => withdraw(withdrawalAmountBn!, all), 2000, { immediate: true })}
             disabled={!!estimation.unavailableReason}
           >
             {estimation.unavailableReason || t`Withdraw`}
