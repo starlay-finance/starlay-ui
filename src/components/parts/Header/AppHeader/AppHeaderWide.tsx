@@ -3,15 +3,12 @@ import { t } from '@lingui/macro'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { SymbolAca, SymbolAstr } from 'src/assets/images'
-import { LogoProtocol } from 'src/assets/svgs'
+import { IconSettings, LogoProtocol } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
 import { IconLink } from 'src/components/parts/Link'
-import { useRewardModal } from 'src/components/parts/Modal/RewardModal'
 import { useWalletModal } from 'src/components/parts/Modal/WalletModal'
-import { useFaucet } from 'src/hooks/contracts/useFaucet'
 import { useNetworkType } from 'src/hooks/useNetwork'
-import { useUserData } from 'src/hooks/useUserData'
 import { useWallet } from 'src/hooks/useWallet'
 import { lightBlack, purple, trueWhite } from 'src/styles/colors'
 import { fontWeightHeavy } from 'src/styles/font'
@@ -26,30 +23,27 @@ import {
 } from 'src/utils/routes'
 import styled, { css } from 'styled-components'
 import { useAccountsModal } from '../../Modal/AccountsModal'
-import { useGasSettingsModal } from '../../Modal/GasSettingsModal'
-import { useNetworkModal } from '../../Modal/NetworkModal'
 import { MenuButton, MenuButtonSmall } from './styles'
 
 export const AppHeaderWide = styled(({ className }) => {
   const { pathname } = useRouter()
   const { data: network } = useNetworkType()
-  const { account, chainId } = useWallet(network)
-  const { data: user } = useUserData()
-  const { mint } = useFaucet()
-  const [isSetingsOpen, setIsSettingsOpen] = useState(false)
+  const { account } = useWallet(network)
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [isNetworkOpen, setIsNetworkOpen] = useState(false)
+  const networkContainerRef = useRef(null);
   const settingsContainerRef = useRef(null);
-  const { open: openRewardModal } = useRewardModal()
-  const { open: openNetworkModal } = useNetworkModal()
   const { open: openWalletModal } = useWalletModal()
   const { open: openAccountsModal } = useAccountsModal()
-  const { open: openGasSettingsModal } = useGasSettingsModal()
   const handleClickOutside = (event: { target: any }) => {
     if (
-      settingsContainerRef.current &&
-      !settingsContainerRef.current.contains(event.target)
+      (networkContainerRef.current &&
+        !networkContainerRef.current.contains(event.target)) || (settingsContainerRef.current &&
+          !settingsContainerRef.current.contains(event.target))
     ) {
       // Clicked outside the SettingsContainer, so close the menu
       setIsSettingsOpen(false);
+      setIsNetworkOpen(false);
     }
   };
   useEffect(() => {
@@ -61,7 +55,11 @@ export const AppHeaderWide = styled(({ className }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []); // Empty dependency array ensures this effect runs once on mount
-  const handleMenuItemClick = () => {
+  const handleNetworkClick = () => {
+    // Close the menu when a menu item is clicked
+    setIsNetworkOpen(false);
+  };
+  const handleSettingsClick = () => {
     // Close the menu when a menu item is clicked
     setIsSettingsOpen(false);
   };
@@ -102,41 +100,29 @@ export const AppHeaderWide = styled(({ className }) => {
         >
           {account ? shortenAddress(account) : t`Connect`}
         </MenuButton>
-        {/* <MenuButtonSmall
-          onClick={() => openRewardModal()}
-          disabled={!user || network !== 'EVM'}
-        >
-          <Image src={SymbolAca} alt="ACA" width={20} height={20} />
-        </MenuButtonSmall> */}
         <div>
-          <MenuButtonSmall onClick={() => setIsSettingsOpen(!isSetingsOpen)}>
+          <MenuButtonSmall onClick={() => setIsNetworkOpen(!isNetworkOpen)}>
             <Image src={SymbolAca} alt="ACA" width={20} height={20} />
           </MenuButtonSmall>
-          <SettingsContainer $isOpen={isSetingsOpen} ref={settingsContainerRef}>
-            <SettingsDiv as="div" onClick={handleMenuItemClick}>
+          <SettingsContainer $isOpen={isNetworkOpen} ref={networkContainerRef}>
+            <SettingsDiv as="div" onClick={handleNetworkClick}>
               <Image src={SymbolAstr} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
               <Link href="https://starlay.finance/app/evm">{t`Astar`}</Link>
             </SettingsDiv>
-            <SettingsDiv as="div" onClick={handleMenuItemClick}>
+            <SettingsDiv as="div" onClick={handleNetworkClick}>
               <Image src={SymbolAca} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
               <Link href="">{t`Acala`}</Link>
             </SettingsDiv>
-            {/* <SettingsDiv>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  openGasSettingsModal({
-                    afterClose: () => setIsSettingsOpen(false),
-                  })
-                }}
-                disabled={network !== 'EVM'}
-              >{t`Set Gas Fee`}</button>
+          </SettingsContainer>
+        </div>
+        <div>
+          <MenuButtonSmall onClick={() => setIsSettingsOpen(!isSettingsOpen)}>
+            <IconSettings />
+          </MenuButtonSmall>
+          <SettingsContainer $isOpen={isSettingsOpen} ref={settingsContainerRef}>
+            <SettingsDiv as="div">
+              <Link href="https://apps.acala.network/swap">{t`Swap`}</Link>
             </SettingsDiv>
-            {getNetworkConfig(network, chainId)?.isTestnet && (
-              <SettingsDiv>
-                <button onClick={mint} disabled={!mint}>{t`Faucet`}</button>
-              </SettingsDiv>
-            )} */}
           </SettingsContainer>
         </div>
       </Menu>

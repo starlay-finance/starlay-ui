@@ -59,6 +59,8 @@ const MenuItems: FC<{ showClaim: VoidFunction }> = ({ showClaim }) => {
       <Link
         href={matchPath(pathname, MARKETS) ? '' : byNetwork(MARKETS, network)}
       >{t`Markets`}</Link>
+      <Link href="https://apps.acala.network/swap">{t`Swap`}</Link>
+
       {/* <Link
         href={matchPath(pathname, MAKAI) ? '' : evmOnly(MAKAI, network)}
       >{t`Makai`}</Link> */}
