@@ -106,7 +106,7 @@ export const AppHeaderWide = styled(({ className }) => {
           </MenuButtonSmall>
           <SettingsContainer $isOpen={isNetworkOpen} ref={networkContainerRef}>
             <SettingsDiv as="div" onClick={handleNetworkClick}>
-              <Image src={SymbolAstr} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
+              <Image src={SymbolAstr} alt="ASTR" width={20} height={20} style={{ marginRight: '10px' }} />
               <Link href="https://starlay.finance/app/evm">{t`Astar`}</Link>
             </SettingsDiv>
             <SettingsDiv as="div" onClick={handleNetworkClick}>
@@ -120,7 +120,7 @@ export const AppHeaderWide = styled(({ className }) => {
             <IconSettings />
           </MenuButtonSmall>
           <SettingsContainer $isOpen={isSettingsOpen} ref={settingsContainerRef}>
-            <SettingsDiv as="div">
+            <SettingsDiv as="div" onclick={handleSettingsClick}>
               <Link href="https://apps.acala.network/swap">{t`Swap`}</Link>
             </SettingsDiv>
           </SettingsContainer>
