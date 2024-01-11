@@ -37,8 +37,8 @@ msgid "Support"
 msgstr "Support"
 
 #: src/components/parts/Footer/TopFooter.tsx
-msgid "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
-msgstr "Starlay Finance is the largest lending protocol in the Polkadot ecosystem."
+msgid "Starlay Finance is a leading Polkadot Ecosystem protocol for secure and innovative lending."
+msgstr "Starlay Finance is a leading Polkadot Ecosystem protocol for secure and innovative lending."
 
 #: src/components/parts/Footer/TopFooter.tsx
 #: src/components/screens/Top/Menu.tsx
@@ -1121,12 +1121,12 @@ msgid "The more funds that will be borrowed, the higher the interest rate will b
 msgstr "The more funds that will be borrowed, the higher the interest rate will be"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "Low Risk Farming on Astar Network"
-msgstr "Low Risk Farming on Astar Network"
+msgid "Expanding the Frontier of DeFi on Multiple Networks with Starlay Finance"
+msgstr "Expanding the Frontier of DeFi on Multiple Networks with Starlay Finance"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "The largest lending protocol in the Polkadot ecosystem"
-msgstr "The largest lending protocol in the Polkadot ecosystem"
+msgid "A Leading Polkadot Ecosystem Protocol for Secure and Innovative Lending"
+msgstr "A Leading Polkadot Ecosystem Protocol for Secure and Innovative Lending"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "Explore the docs"
