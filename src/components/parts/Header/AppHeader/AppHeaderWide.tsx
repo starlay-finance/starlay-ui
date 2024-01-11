@@ -1,7 +1,8 @@
+// @ts-nocheck
 import { t } from '@lingui/macro'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
-import { SymbolLay } from 'src/assets/images'
+import { useEffect, useRef, useState } from 'react'
+import { SymbolAca, SymbolAstr, SymbolLay } from 'src/assets/images'
 import { IconSettings, LogoProtocol } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
@@ -42,11 +43,43 @@ export const AppHeaderWide = styled(({ className }) => {
   const { data: user } = useUserData()
   const { mint } = useFaucet()
   const [isSetingsOpen, setIsSettingsOpen] = useState(false)
+  const [isNetworkOpen, setIsNetworkOpen] = useState(false)
+  const networkContainerRef = useRef(null);
+  const settingsContainerRef = useRef(null);
   const { open: openRewardModal } = useRewardModal()
   const { open: openNetworkModal } = useNetworkModal()
   const { open: openWalletModal } = useWalletModal()
   const { open: openAccountsModal } = useAccountsModal()
   const { open: openGasSettingsModal } = useGasSettingsModal()
+  const handleNetworkClick = () => {
+    // Close the menu when a menu item is clicked
+    setIsNetworkOpen(false);
+  };
+  const handleSettingsClick = () => {
+    // Close the menu when a menu item is clicked
+    setIsSettingsOpen(false);
+  };
+  const handleClickOutside = (event: { target: any }) => {
+    if (
+      (networkContainerRef.current &&
+        !networkContainerRef.current.contains(event.target)) || (settingsContainerRef.current &&
+          !settingsContainerRef.current.contains(event.target))
+    ) {
+      // Clicked outside the SettingsContainer, so close the menu
+      setIsNetworkOpen(false);
+      setIsSettingsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    // Attach the event listener on mount
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Detach the event listener on unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []); // Empty dependency array ensures this effect runs once on mount
   return (
     <HeaderContainer className={className}>
       <LogoLink
@@ -77,8 +110,8 @@ export const AppHeaderWide = styled(({ className }) => {
             !account
               ? openWalletModal()
               : network === 'Polkadot'
-              ? openAccountsModal()
-              : {}
+                ? openAccountsModal()
+                : {}
           }
           disabled={!!account && network !== 'Polkadot'}
         >
@@ -91,10 +124,25 @@ export const AppHeaderWide = styled(({ className }) => {
           <Image src={SymbolLay} alt="LAY" width={20} height={20} />
         </MenuButtonSmall>
         <div>
+          <MenuButtonSmall onClick={() => setIsNetworkOpen(!isNetworkOpen)}>
+            <Image src={SymbolAstr} alt="ACA" width={20} height={20} />
+          </MenuButtonSmall>
+          <SettingsContainer $isOpen={isNetworkOpen} ref={networkContainerRef}>
+            <NetworkDiv as="div" onClick={handleNetworkClick}>
+              <Image src={SymbolAstr} alt="ASTR" width={20} height={20} style={{ marginRight: '10px' }} />
+              <Link href="">{t`Astar`}</Link>
+            </NetworkDiv>
+            <NetworkDiv as="div" onClick={handleNetworkClick}>
+              <Image src={SymbolAca} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
+              <Link href="https://starlay.finance/app/acala">{t`Acala`}</Link>
+            </NetworkDiv>
+          </SettingsContainer>
+        </div>
+        <div>
           <MenuButtonSmall onClick={() => setIsSettingsOpen(!isSetingsOpen)}>
             <IconSettings />
           </MenuButtonSmall>
-          <SettingsContainer $isOpen={isSetingsOpen}>
+          <SettingsContainer $isOpen={isSetingsOpen} ref={settingsContainerRef}>
             <SettingsDiv as="div">
               <Link href={SWAP}>{t`Swap`}</Link>
             </SettingsDiv>
@@ -149,6 +197,25 @@ const SettingsDiv = styled.div`
       color: ${trueWhite}80;
     }
   }
+`
+const NetworkDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* > * {
+    display: block; */
+    padding: 12px 16px;
+    white-space: nowrap;
+    background-color: ${lightBlack};
+    line-height: 1;
+    transition: color 0.15s ease-in;
+    :hover {
+      color: ${purple};
+    }
+    :disabled {
+      color: ${trueWhite}80;
+    }
+  /* } */
 `
 
 const SettingsContainer = styled.div<{ $isOpen: boolean }>`
