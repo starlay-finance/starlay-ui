@@ -1119,10 +1119,8 @@ msgid "The more funds that will be borrowed, the higher the interest rate will b
 msgstr "Astar Network最大の流動性を誇るレンディングマーケット"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "Low Risk Farming on Astar Network"
-msgstr ""
-"Astar Networkの\n"
-"流動性を創出する"
+msgid "Expanding the Frontier of DeFi on Multiple Networks with Starlay Finance"
+msgstr "Expanding the Frontier of DeFi on Multiple Networks with Starlay Finance"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "The largest lending protocol in the Polkadot ecosystem"
