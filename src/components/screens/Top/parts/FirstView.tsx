@@ -24,7 +24,7 @@ export const FirstView = asStyled(({ className }) => {
     <FirstViewSection className={className}>
       <Content>
         <h2>
-          <div>{t`Low Risk Farming on Astar Network`}</div>
+          <div>{t`Low Risk Farming on Astar and Acala Network`}</div>
         </h2>
         <div>
           <SubTitle>{t`The largest lending protocol in the Polkadot ecosystem`}</SubTitle>

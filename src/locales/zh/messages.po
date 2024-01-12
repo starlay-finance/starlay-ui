@@ -1117,7 +1117,7 @@ msgid "The more funds that will be borrowed, the higher the interest rate will b
 msgstr "被借出的金额越多，利息就越高。"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "Low Risk Farming on Astar Network"
+msgid "Low Risk Farming on Astar and Acala Network"
 msgstr "Astar Network上的低风险挖矿"
 
 #: src/components/screens/Top/parts/FirstView.tsx
