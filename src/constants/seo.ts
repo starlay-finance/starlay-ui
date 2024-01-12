@@ -5,5 +5,5 @@ export const COMMON_SEO_DATA: SEOProps = {
   author: 'Starlay Finance',
   siteUrl: 'https://starlay.finance',
   image: 'assets/images/ogimage.png',
-  description: `Low Risk Farming on Astar Network - Starlay Finance is the largest lending protocol in the Polkadot ecosystem.`,
+  description: `Expanding the Frontier of DeFi on Multiple Networks with Starlay Finance - Starlay Finance is a leading Polkadot Ecosystem protocol for secure and innovative lending.`,
 }

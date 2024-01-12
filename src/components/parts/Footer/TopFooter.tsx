@@ -32,7 +32,7 @@ export const TopFooter = asStyled(({ className }) => (
         <LogoDiv>
           <LogoProtocol />
         </LogoDiv>
-        <Note>{t`Starlay Finance is the largest lending protocol in the Polkadot ecosystem.`}</Note>
+        <Note>{t`Starlay Finance is a leading Polkadot Ecosystem protocol for secure and innovative lending.`}</Note>
         <IconLinks>
           <IconLink Icon={IconTwitter} href={TWITTER} aria-label={t`Twitter`} />
           <IconLink Icon={IconDiscord} href={DISCORD} aria-label={t`Discord`} />
