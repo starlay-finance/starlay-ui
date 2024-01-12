@@ -78,7 +78,7 @@ export type EVMNetworkConfig = NetworkConfig<
 
 export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
   [EVM_CHAIN_ID.mandala]: {
-    name: 'Acala Testnet / EVM',
+    name: 'Acala Mandala TC9',
     publicJsonRPCUrl: ['https://eth-rpc-tc9.aca-staging.network'],
     privateJsonRPCUrl: 'https://eth-rpc-tc9.aca-staging.network',
     walletConnectProjectId: '7077959b8319331ea75408788eae93b5',
@@ -97,7 +97,7 @@ export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
       multicallAddress: '0x',
     },
     baseAsset: {
-      symbol: 'ACA',
+      symbol: 'mACA',
       wrapperAddress: '0x',
     },
     rewardToken: {
@@ -131,7 +131,7 @@ export const POLKADOT_NETWORK_CONFIG: Record<
       controller: 'X2vJWQUXZMyKc81JDdJkRxroUE6TFkqDd5EnXcjpmA5F8XA',
     },
     baseAsset: {
-      symbol: 'ACA',
+      symbol: 'mACA',
       wrapperAddress: '',
     },
     rewardToken: {

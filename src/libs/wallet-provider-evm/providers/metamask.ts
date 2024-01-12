@@ -82,6 +82,7 @@ export const requestSwitchChain = async (
     })
     return {}
   } catch (e: any) {
+    console.log('chainInfo', chainInfo)
     if (e.code === 4902 && chainInfo) return requestAddEthereumChain(chainInfo)
     if (e.code === -32002 && e.message?.includes('already pending'))
       return { error: 'duplicate_request' }
