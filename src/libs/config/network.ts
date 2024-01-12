@@ -97,7 +97,7 @@ export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
       multicallAddress: '0x',
     },
     baseAsset: {
-      symbol: 'ACA',
+      symbol: 'mACA',
       wrapperAddress: '0x',
     },
     rewardToken: {
@@ -131,7 +131,7 @@ export const POLKADOT_NETWORK_CONFIG: Record<
       controller: 'X2vJWQUXZMyKc81JDdJkRxroUE6TFkqDd5EnXcjpmA5F8XA',
     },
     baseAsset: {
-      symbol: 'ACA',
+      symbol: 'mACA',
       wrapperAddress: '',
     },
     rewardToken: {
