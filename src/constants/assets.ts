@@ -1,6 +1,5 @@
 import { StaticImageData } from 'next/image'
 import {
-  SymbolArsw,
   SymbolAseed,
   SymbolAstr,
   SymbolBnb,
@@ -32,7 +31,7 @@ export const LISTED_ASSET_SYMBOLS = [
   'MATIC',
   'BNB',
   'SDN',
-  'ARSW',
+  // 'ARSW',
   'LAY',
   'nASTR',
 ] as const
@@ -125,12 +124,6 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     symbol: 'MATIC',
     name: 'Polygon Matic',
     icon: SymbolMatic,
-  },
-  ARSW: {
-    symbol: 'ARSW',
-    name: 'ArthSwap Token',
-    icon: SymbolArsw,
-    borrowUnsupported: true,
   },
   LAY: {
     symbol: 'LAY',
