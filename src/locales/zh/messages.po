@@ -1117,8 +1117,8 @@ msgid "The more funds that will be borrowed, the higher the interest rate will b
 msgstr "被借出的金额越多，利息就越高。"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "Expanding the Frontier of DeFi on Multiple Networks with Starlay Finance"
-msgstr "Expanding the Frontier of DeFi on Multiple Networks with Starlay Finance"
+msgid "Low Risk Farming on Astar Network"
+msgstr "Astar Network上的低风险挖矿"
 
 #: src/components/screens/Top/parts/FirstView.tsx
 msgid "The largest lending protocol in the Polkadot ecosystem"

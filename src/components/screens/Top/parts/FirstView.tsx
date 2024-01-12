@@ -24,10 +24,10 @@ export const FirstView = asStyled(({ className }) => {
     <FirstViewSection className={className}>
       <Content>
         <h2>
-          <div>{t`Expanding the Frontier of DeFi on Multiple Networks with Starlay Finance`}</div>
+          <div>{t`Low Risk Farming on Astar Network`}</div>
         </h2>
         <div>
-          <SubTitle>{t`A Leading Polkadot Ecosystem Protocol for Secure and Innovative Lending`}</SubTitle>
+          <SubTitle>{t`The largest lending protocol in the Polkadot ecosystem`}</SubTitle>
           <Control>
             <GradientCtaLink href={APP} newTab={!isInSafeAppContext}>{t`Launch App`}</GradientCtaLink>
             <Link href={DOCS}>
