@@ -3,7 +3,7 @@ import { ValueOf } from 'type-fest'
 import { EVMChainId, EVM_CHAIN_ID } from './network'
 
 export const EVM_CUSTOM_MARKET = {
-  proto_mandala: 'proto_mandala',
+  proto_acala: 'proto_acala',
 } as const
 export type EVMCustomMarket = ValueOf<typeof EVM_CUSTOM_MARKET>
 
@@ -35,16 +35,16 @@ export type EVMMarketConfig = {
 export const MARKET_CONFIGS: {
   [key in EVMCustomMarket]: EVMMarketConfig
 } = {
-  [EVM_CUSTOM_MARKET.proto_mandala]: {
-    chainId: EVM_CHAIN_ID.mandala,
+  [EVM_CUSTOM_MARKET.proto_acala]: {
+    chainId: EVM_CHAIN_ID.acala,
     enabledFeatures: {
       incentives: true,
     },
     addresses: {
       LENDING_POOL_ADDRESS_PROVIDER:
-        '0x5Ec3d1411c20A24809ab0B72FBe746874b6E72a0',
-      INCENTIVES_CONTROLLER: '0x5919be3B0Fce25A9500EE2548782C2c4C246a36C',
-      LENDING_POOL: '0x5475fa29efA24d61D6BAF689191a5b1f7B3a4B2B',
+        '0x5AA0f1456dA50828F6eFb5B751F51a402bB25bBD',
+      INCENTIVES_CONTROLLER: '0x6b26AB9ABB4f8c2354EB0360602490d72a187907',
+      LENDING_POOL: '0x2669ff3a081ddA63E7c353b6dF64fA33050A9D6D',
     },
   },
 } as const
@@ -52,5 +52,5 @@ export const MARKET_CONFIGS: {
 export const CHAIN_MARKET_CONFIG: {
   [key in EVMChainId]: EVMMarketConfig
 } = {
-  [EVM_CHAIN_ID.mandala]: MARKET_CONFIGS.proto_mandala,
+  [EVM_CHAIN_ID.acala]: MARKET_CONFIGS.proto_acala,
 } as const
