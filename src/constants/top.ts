@@ -12,12 +12,7 @@ import {
 import { TopProps } from 'src/components/screens/Top'
 import { ASSETS_DICT } from './assets'
 
-export const TOP_ASSETS = [
-  ASSETS_DICT.DOT,
-  ASSETS_DICT.LDOT,
-  ASSETS_DICT.ACA,
-  ASSETS_DICT.USDC,
-]
+export const TOP_ASSETS = [ASSETS_DICT.DOT, ASSETS_DICT.LDOT, ASSETS_DICT.USDC]
 
 export const TOP_BACKERS: TopProps['backers'] = [
   { name: 'Astar Network', Svg: LogoAstar, url: 'https://astar.network' },

@@ -37,6 +37,7 @@ export const FirstView = asStyled(({ className }) => {
           <PoweredBy>
             <span>{t`Powered by`}</span>
             <Image src={LogoAstar} alt={t`ASTAR`} height={32} width={101} />
+            <span></span>
             <Image src={LogoAcala} alt={t`ACALA`} height={32} width={83} />
           </PoweredBy>
         </div>
@@ -50,9 +51,19 @@ export const FirstView = asStyled(({ className }) => {
 const PoweredBy = styled.p`
   display: flex;
   align-items: center;
+  flex-direction: column;
   color: ${secondary};
   font-size: 16px;
   column-gap: 16px;
+  span {
+    margin-bottom: 8px;
+  }
+  @media ${breakpoint.xl} {
+    flex-direction: row;
+    span {
+      margin-bottom: 0px;
+    }
+  }
 `
 
 const Control = styled.div`
