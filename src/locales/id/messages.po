@@ -1117,7 +1117,7 @@ msgid "The more funds that will be borrowed, the higher the interest rate will b
 msgstr "Semakin banyak dana yang akan dipinjam, semakin tinggi tingkat bunganya"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "Low Risk Farming on Astar Network"
+msgid "Low Risk Farming on Astar and Acala Network"
 msgstr "Farming dengan Risiko Rendah di Astar Network"
 
 #: src/components/screens/Top/parts/FirstView.tsx

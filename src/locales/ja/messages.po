@@ -1119,7 +1119,7 @@ msgid "The more funds that will be borrowed, the higher the interest rate will b
 msgstr "Astar Network最大の流動性を誇るレンディングマーケット"
 
 #: src/components/screens/Top/parts/FirstView.tsx
-msgid "Low Risk Farming on Astar Network"
+msgid "Low Risk Farming on Astar and Acala Network"
 msgstr ""
 "Astar Networkの\n"
 "流動性を創出する"
