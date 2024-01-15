@@ -23,9 +23,9 @@ export const FirstView = asStyled(({ className }) => {
   return (
     <FirstViewSection className={className}>
       <Content>
-        <h2>
+        <h1>
           <div>{t`Low Risk Farming on Astar and Acala Network`}</div>
-        </h2>
+        </h1>
         <div>
           <SubTitle>{t`The largest lending protocol in the Polkadot ecosystem`}</SubTitle>
           <Control>
@@ -102,7 +102,7 @@ const FirstViewSection = styled.section`
   margin: 0 -24px;
   overflow: hidden;
   text-align: center;
-  h2 {
+  h1 {
     max-width: 720px;
     min-height: 2.4em;
     div {
