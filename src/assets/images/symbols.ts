@@ -11,6 +11,7 @@ import SymbolMatic from 'public/assets/images/symbols/symbol_matic.png'
 import SymbolNAstr from 'public/assets/images/symbols/symbol_nastr.png'
 import SymbolUsdc from 'public/assets/images/symbols/symbol_usdc.png'
 import SymbolUsdt from 'public/assets/images/symbols/symbol_usdt.png'
+import SymbolVDot from 'public/assets/images/symbols/symbol_vdot.png'
 import SymbolWbtc from 'public/assets/images/symbols/symbol_wbtc.png'
 import SymbolWeth from 'public/assets/images/symbols/symbol_weth.png'
 import SymbolWsdn from 'public/assets/images/symbols/symbol_wsdn.png'
@@ -29,6 +30,7 @@ export {
   SymbolNAstr,
   SymbolUsdc,
   SymbolUsdt,
+  SymbolVDot,
   SymbolWbtc,
   SymbolWeth,
   SymbolWsdn,

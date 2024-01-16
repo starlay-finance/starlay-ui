@@ -11,6 +11,7 @@ import {
   SymbolNAstr,
   SymbolUsdc,
   SymbolUsdt,
+  SymbolVDot,
   SymbolWbtc,
   SymbolWeth,
   SymbolWsdn,
@@ -34,6 +35,7 @@ export const LISTED_ASSET_SYMBOLS = [
   // 'ARSW',
   'LAY',
   'nASTR',
+  'vDOT',
 ] as const
 
 export const SYMBOL_ORDER: Record<AssetSymbol, number> =
@@ -135,6 +137,11 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     symbol: 'nASTR',
     name: 'Liquid ASTR',
     icon: SymbolNAstr,
+  },
+  vDOT: {
+    symbol: 'vDOT',
+    name: 'Voucher DOT',
+    icon: SymbolVDot,
   },
 } as const
 
