@@ -85,8 +85,10 @@ export const useEVMWallet = (
 
   const switchChain = useCallback(
     async (chainId: EVMChainId) => {
-      console.log('s')
-      return metamask.requestSwitchChain(chainId, getEVMChainInfo(chainId))
+      return metamask.requestSwitchChain(
+        chainId,
+        getEVMChainInfo(DEFAULT_CHAIN_ID),
+      )
     },
     [activeWallet],
   )
@@ -129,6 +131,7 @@ export const useEVMWallet = (
     activeWalletType: activeWallet?.type,
     connect,
     disconnect,
-    switchChain: activeWallet?.type === 'Metamask' ? switchChain : undefined,
+    switchChain:
+      provider?.connection.url === 'metamask' ? switchChain : undefined,
   }
 }

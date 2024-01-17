@@ -6,7 +6,7 @@ export const getEVMChainInfo = (chainId: number) =>
   CHIAN_INFO[chainId]
 
 const toChainIdHex = (chainId: number) =>
-  `${(+BigNumber.from(chainId)).toString(16)}`
+  `0x${(+BigNumber.from(chainId)).toString(16)}`
 
 const CHIAN_INFO: Record<EVMChainId, AddEthereumChainParameter> = {
   [EVM_CHAIN_ID.acala]: {
