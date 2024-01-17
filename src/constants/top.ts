@@ -15,7 +15,7 @@ import { ASSETS_DICT } from './assets'
 export const TOP_ASSETS = [
   ASSETS_DICT.DOT,
   ASSETS_DICT.LDOT,
-  ASSETS_DICT.mACA,
+  ASSETS_DICT.ACA,
   ASSETS_DICT.USDC,
 ]
 
