@@ -1,9 +1,5 @@
-import {
-  SymbolAca,
-  SymbolDot,
-  SymbolLdot,
-  SymbolUsdcet,
-} from 'src/assets/images'
+import _ from 'lodash'
+import { SymbolAca, SymbolDot, SymbolLdot, SymbolUsdc } from 'src/assets/images'
 import { Asset, AssetSymbol } from 'src/types/models'
 
 export const LISTED_ASSET_SYMBOLS = ['ACA', 'LDOT', 'USDC', 'DOT'] as const
@@ -30,8 +26,8 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
   },
   USDC: {
     symbol: 'USDC',
-    name: 'USD Coin (Portal from Ethereum)',
-    icon: SymbolUsdcet,
+    name: 'USD Coin',
+    icon: SymbolUsdc,
   },
   DOT: {
     symbol: 'DOT',
@@ -41,11 +37,11 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
 } as const
 
 export const ASSETS_BY_ADDRESS_DICT: Partial<Record<string, Asset>> = {
-  '0xA666dD28059deF0B45505c1f1a5f49fAd2e03c11': {
+  '0x07DF96D1341A7d16Ba1AD431E2c847d978BC2bCe': {
     symbol: 'USDC',
-    name: 'USD Coin (Portal from Ethereum)',
-    icon: SymbolUsdcet,
+    name: 'USD Coin',
+    icon: SymbolUsdc,
   },
 } as const
 
-export const ASSETS: Asset[] = Object.values(ASSETS_DICT)
+export const ASSETS: Asset[] = Object.values(_.omit(ASSETS_DICT, 'ACA'))

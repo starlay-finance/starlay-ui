@@ -3,7 +3,7 @@ import { EthereumAddress, PolkadotAddress } from 'src/types/web3'
 import { ValueOf } from 'type-fest'
 
 export const EVM_CHAIN_ID = {
-  mandala: 595,
+  acala: 787,
 } as const
 export type EVMChainId = ValueOf<typeof EVM_CHAIN_ID>
 
@@ -77,17 +77,17 @@ export type EVMNetworkConfig = NetworkConfig<
 >
 
 export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
-  [EVM_CHAIN_ID.mandala]: {
-    name: 'Acala Mandala TC9',
-    publicJsonRPCUrl: ['https://eth-rpc-tc9.aca-staging.network'],
-    privateJsonRPCUrl: 'https://eth-rpc-tc9.aca-staging.network',
+  [EVM_CHAIN_ID.acala]: {
+    name: 'Acala Network',
+    publicJsonRPCUrl: ['https://eth-rpc-acala.aca-staging.network'],
+    privateJsonRPCUrl: 'https://eth-rpc-acala.aca-staging.network',
     walletConnectProjectId: '7077959b8319331ea75408788eae93b5',
     addresses: {
-      walletBalanceProvider: '0x59300Abd7e80076EC2b361769aeEb4fb041a5435',
-      uiPoolDataProvider: '0x7A305Ea702987D2dbc20E794d095E21fAe94e568',
-      uiIncentiveDataProvider: '0xDDB5114C69791e366398287f0510fe87f7571cF7',
+      walletBalanceProvider: '0x56CCF32DDe657F382303cf93Bc31915DBD1a7744',
+      uiPoolDataProvider: '0xEcC925257315864Ba9f4B61D00A7b157C29c6B4C',
+      uiIncentiveDataProvider: '0x36485844f383D0f243fBD71ba1e824546C5aaE4E',
       priceAggregatorAdapterAddress:
-        '0x0493895d637A8500e3d7cB35AdabF57d32198ba8',
+        '0xAD4198af7D56cfbA5D8bdCe3cd9A013EB1ffd521',
       stakeUiHelper: '0x',
       voterAddress: '0x',
       votingEscrowAddress: '0x',
@@ -106,7 +106,7 @@ export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
       underlyingAsset: '0x0000000000000000000000000000000000000000',
       decimals: 18,
     },
-    explorerLinks: ['https://blockscout.mandala.aca-staging.network/'],
+    explorerLinks: ['https://blockscout.acala.network/'],
     isTestnet: true,
   },
 }
