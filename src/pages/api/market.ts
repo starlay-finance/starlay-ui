@@ -1,4 +1,3 @@
-import { getLAYPrice } from 'src/libs/arthswap-data-provider'
 import { DataProviderEVM } from 'src/libs/data-provider'
 import { getProvider } from 'src/libs/static-rpc-provider'
 import { asHandler, cacheControl } from 'src/utils/api'
@@ -8,11 +7,7 @@ const getMarketDataForAPI = async () => {
   const chainId = DEFAULT_CHAIN_ID
   const provider = getProvider(chainId)
   const poolDataProvider = DataProviderEVM.new({ chainId, provider })
-  const layPriceInUSD = await getLAYPrice(chainId)
-  if (!layPriceInUSD) throw new Error('Failed to fetch the price of LAY.')
-  const { assets, marketTimestamp } = await poolDataProvider.getMarketData({
-    layPriceInUSD,
-  })
+  const { assets, marketTimestamp } = await poolDataProvider.getMarketData({})
   return {
     timestamp: marketTimestamp,
     assets: assets
