@@ -134,7 +134,7 @@ export const AppHeaderWide = styled(({ className }) => {
             </NetworkDiv>
             <NetworkDiv as="div" onClick={handleNetworkClick}>
               <Image src={SymbolAca} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
-              <Link href="https://starlay.finance/app/acala">{t`Acala`}</Link>
+              <Link href="https://acala.starlay.finance/app/evm">{t`Acala`}</Link>
             </NetworkDiv>
           </SettingsContainer>
         </div>
