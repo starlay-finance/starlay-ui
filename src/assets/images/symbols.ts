@@ -1,3 +1,4 @@
+import SymbolAca from 'public/assets/images/symbols/symbol_aca.png'
 import SymbolArsw from 'public/assets/images/symbols/symbol_arsw.png'
 import SymbolAseed from 'public/assets/images/symbols/symbol_aseed.png'
 import SymbolAstr from 'public/assets/images/symbols/symbol_astr.png'
@@ -17,6 +18,7 @@ import SymbolWeth from 'public/assets/images/symbols/symbol_weth.png'
 import SymbolWsdn from 'public/assets/images/symbols/symbol_wsdn.png'
 
 export {
+  SymbolAca,
   SymbolArsw,
   SymbolAseed,
   SymbolAstr,
