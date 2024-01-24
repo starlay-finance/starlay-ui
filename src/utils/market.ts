@@ -50,10 +50,26 @@ const addToMarketComposition = (
   symbol: AssetSymbol,
   amountInUSD: BigNumber,
   market: MarketComposition,
-) => ({
-  totalInUSD: market.totalInUSD.plus(amountInUSD),
-  amountByAssets: market.amountByAssets.concat({
-    symbol,
-    amountInUSD: amountInUSD,
-  }),
-})
+) => {
+  let existing = false
+  const amountByAssets = market.amountByAssets.map((value) => {
+    if (value.symbol == symbol) {
+      existing = true
+      return {
+        symbol,
+        amountInUSD: value.amountInUSD.plus(amountInUSD),
+      }
+    }
+    return value
+  })
+
+  return {
+    totalInUSD: market.totalInUSD.plus(amountInUSD),
+    amountByAssets: existing
+      ? amountByAssets
+      : amountByAssets.concat({
+          symbol,
+          amountInUSD: amountInUSD,
+        }),
+  }
+}
