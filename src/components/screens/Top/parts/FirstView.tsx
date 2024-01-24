@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { LogoAstar } from 'src/assets/images'
+import { LogoAcala, LogoAstar } from 'src/assets/images'
 import { IconArrowRight } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
@@ -24,7 +24,7 @@ export const FirstView = asStyled(({ className }) => {
     <FirstViewSection className={className}>
       <Content>
         <h1>
-          <div>{t`Low Risk Farming on Astar Network`}</div>
+          <div>{t`Low Risk Farming on Astar and Acala`}</div>
         </h1>
         <div>
           <SubTitle>{t`The largest lending protocol in the Polkadot ecosystem`}</SubTitle>
@@ -37,6 +37,7 @@ export const FirstView = asStyled(({ className }) => {
           <PoweredBy>
             <span>{t`Powered by`}</span>
             <Image src={LogoAstar} alt={t`ASTAR`} height={32} width={101} />
+            <Image src={LogoAcala} alt={t`ACALA`} height={32} width={83} />
           </PoweredBy>
         </div>
         <AssetsMobile assets={ASSETS} />

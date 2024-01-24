@@ -1,6 +1,5 @@
 import { StaticImageData } from 'next/image'
 import {
-  SymbolArsw,
   SymbolAseed,
   SymbolAstr,
   SymbolBnb,
@@ -12,6 +11,7 @@ import {
   SymbolNAstr,
   SymbolUsdc,
   SymbolUsdt,
+  SymbolVDot,
   SymbolWbtc,
   SymbolWeth,
   SymbolWsdn,
@@ -32,9 +32,10 @@ export const LISTED_ASSET_SYMBOLS = [
   'MATIC',
   'BNB',
   'SDN',
-  'ARSW',
+  // 'ARSW',
   'LAY',
   'nASTR',
+  'vDOT',
 ] as const
 
 export const SYMBOL_ORDER: Record<AssetSymbol, number> =
@@ -126,12 +127,6 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     name: 'Polygon Matic',
     icon: SymbolMatic,
   },
-  ARSW: {
-    symbol: 'ARSW',
-    name: 'ArthSwap Token',
-    icon: SymbolArsw,
-    borrowUnsupported: true,
-  },
   LAY: {
     symbol: 'LAY',
     name: 'Starlay Token',
@@ -142,6 +137,11 @@ export const ASSETS_DICT: { [key in AssetSymbol]: Asset } = {
     symbol: 'nASTR',
     name: 'Liquid ASTR',
     icon: SymbolNAstr,
+  },
+  vDOT: {
+    symbol: 'vDOT',
+    name: 'Voucher DOT',
+    icon: SymbolVDot,
   },
 } as const
 
