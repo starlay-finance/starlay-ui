@@ -1,5 +1,5 @@
 import { t } from '@lingui/macro'
-import { LogoAcala, LogoAstar } from 'src/assets/images'
+import { LogoAstar } from 'src/assets/images'
 import { IconArrowRight } from 'src/assets/svgs'
 import { Image } from 'src/components/elements/Image'
 import { Link } from 'src/components/elements/Link'
@@ -37,7 +37,7 @@ export const FirstView = asStyled(({ className }) => {
           <PoweredBy>
             <span>{t`Powered by`}</span>
             <Image src={LogoAstar} alt={t`ASTAR`} height={32} width={101} />
-            <Image src={LogoAcala} alt={t`ACALA`} height={32} width={83} />
+            {/* <Image src={LogoAcala} alt={t`ACALA`} height={32} width={83} /> */}
           </PoweredBy>
         </div>
         <AssetsMobile assets={ASSETS} />

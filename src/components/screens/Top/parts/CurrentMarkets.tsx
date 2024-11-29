@@ -5,7 +5,6 @@ import { AssetBarChartWithPlaceholder } from 'src/components/compositions/Market
 import { asStyled } from 'src/components/hoc/asStyled'
 import { BlinkWrapper } from 'src/components/parts/Number/Blink'
 import { Reel } from 'src/components/parts/Number/Reel'
-import { useAcalaMarketData } from 'src/hooks/useAcalaMarketData'
 import { useMarketData } from 'src/hooks/useMarketData'
 import { darkRed, skyBlue, trueWhite } from 'src/styles/colors'
 import { fontWeightBlack, fontWeightSemiBold } from 'src/styles/font'
@@ -17,10 +16,11 @@ import styled from 'styled-components'
 
 export const CurrentMarkets = asStyled(({ className }) => {
   const { data: astarData } = useMarketData()
-  const { data: acalaData } = useAcalaMarketData()
+  // const { data: acalaData } = useAcalaMarketData()
 
   const astarMarkets = astarData?.assets || []
-  const acalaMarkets = acalaData?.assets || []
+  // const acalaMarkets = acalaData?.assets || []
+  const acalaMarkets = [] as typeof astarMarkets
   const markets = [...astarMarkets, ...acalaMarkets]
   const compositions = toMarketCompositions(markets)
   const [ref, touched] = useInView({

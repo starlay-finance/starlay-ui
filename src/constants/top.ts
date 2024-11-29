@@ -1,5 +1,4 @@
 import {
-  LogoAcala,
   LogoArthSwap,
   LogoAstar,
   LogoAstarDegens,
@@ -63,12 +62,12 @@ export const TOP_BACKERS: TopProps['backers'] = [
     url: 'https://au21.capital',
     containerStyle: { maxHeight: '140px' },
   },
-  {
-    name: 'Acala Network',
-    Svg: LogoAcala,
-    url: 'https://acala.network',
-    containerStyle: { maxHeight: '180px' },
-  },
+  // {
+  //   name: 'Acala Network',
+  //   Svg: LogoAcala,
+  //   url: 'https://acala.network',
+  //   containerStyle: { maxHeight: '180px' },
+  // },
 ]
 
 export const TOP_PROPS: TopProps = {

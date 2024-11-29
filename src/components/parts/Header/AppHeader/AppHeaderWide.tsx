@@ -129,12 +129,27 @@ export const AppHeaderWide = styled(({ className }) => {
           </MenuButtonSmall>
           <SettingsContainer $isOpen={isNetworkOpen} ref={networkContainerRef}>
             <NetworkDiv as="div" onClick={handleNetworkClick}>
-              <Image src={SymbolAstr} alt="ASTR" width={20} height={20} style={{ marginRight: '10px' }} />
+              <Image
+                src={SymbolAstr}
+                alt="ASTR"
+                width={20}
+                height={20}
+                style={{ marginRight: '10px' }}
+              />
               <Link href="">{t`Astar`}</Link>
             </NetworkDiv>
-            <NetworkDiv as="div" onClick={handleNetworkClick}>
-              <Image src={SymbolAca} alt="ACA" width={20} height={20} style={{ marginRight: '10px' }} />
-              <Link href="https://acala.starlay.finance/app/evm">{t`Acala`}</Link>
+            <NetworkDiv as="div" onClick={handleNetworkClick} disabled>
+              <Image
+                src={SymbolAca}
+                alt="ACA"
+                width={20}
+                height={20}
+                style={{ marginRight: '10px' }}
+              />
+              {/* <Link href="https://acala.starlay.finance/app/evm">{t`Acala`}</Link> */}
+              <Link>
+                <s>{t`Acala`}</s>
+              </Link>
             </NetworkDiv>
           </SettingsContainer>
         </div>
@@ -204,17 +219,14 @@ const NetworkDiv = styled.div`
   align-items: center;
   /* > * {
     display: block; */
-    padding: 12px 16px;
-    white-space: nowrap;
-    background-color: ${lightBlack};
-    line-height: 1;
-    transition: color 0.15s ease-in;
-    :hover {
-      color: ${purple};
-    }
-    :disabled {
-      color: ${trueWhite}80;
-    }
+  padding: 12px 16px;
+  white-space: nowrap;
+  background-color: ${lightBlack};
+  line-height: 1;
+  transition: color 0.15s ease-in;
+  :disabled {
+    color: ${trueWhite}80;
+  }
   /* } */
 `
 
