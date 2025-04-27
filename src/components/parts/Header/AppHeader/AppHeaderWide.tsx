@@ -21,7 +21,6 @@ import { shortenAddress } from 'src/utils/address'
 import {
   APP,
   APP_ROOT,
-  LAUNCHPAD,
   LAY_VELAY,
   MAKAI,
   MARKETS,
@@ -160,9 +159,6 @@ export const AppHeaderWide = styled(({ className }) => {
           <SettingsContainer $isOpen={isSetingsOpen} ref={settingsContainerRef}>
             <SettingsDiv as="div">
               <Link href={SWAP}>{t`Swap`}</Link>
-            </SettingsDiv>
-            <SettingsDiv as="div">
-              <Link href={evmOnly(LAUNCHPAD, network)}>{t`Launchpad`}</Link>
             </SettingsDiv>
             <SettingsDiv>
               <button
