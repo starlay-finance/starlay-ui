@@ -80,8 +80,6 @@ export const EVM_NETWORK_CONFIG: Record<EVMChainId, EVMNetworkConfig> = {
   [EVM_CHAIN_ID.astar]: {
     name: 'Astar Mainnet / EVM',
     publicJsonRPCUrl: ['https://evm.astar.network'],
-    privateJsonRPCUrl:
-      'https://astar.blastapi.io/b783cb07-7f1a-48dc-88fb-cedca75fafa0',
     walletConnectProjectId: '7077959b8319331ea75408788eae93b5',
     addresses: {
       walletBalanceProvider: '0x449b5A2c9c75d77283253625C03aE6336c957a0c',
